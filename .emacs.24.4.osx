@@ -34,6 +34,7 @@
   (variable-pitch-mode t)
   (text-scale-increase 0.5)
   )
+
 ;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; font size adjustment
@@ -185,9 +186,14 @@
   (add-hook 'c-mode-common-hook 'hl-sexp-mode)
   (add-hook 'sh-mode-hook 'hl-sexp-mode)
 
+
 ;; ------------------------------------------------------------
-;;; Auto Completion for Programming Environment
+;;; Configurations for Programming Environment
 ;; ------------------------------------------------------------
+
+;; =======================================
+;; Minior Modes for various completions
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /Yasnippet/ A template system
 (require 'popup)
@@ -240,6 +246,8 @@
 (setq ac-show-menu-immediately-on-auto-complete t)    ;; new
 ;; select candidates in ac-menu
 (setq ac-use-menu-map t)
+;; ;; set the width of popup menu to fix bugs
+;; (setq ac-max-width 0.5)
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 (define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
@@ -285,12 +293,29 @@
 (add-hook 'matlab-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'c-mode-common-hook 'linum-mode)
-(add-hook 'makefile-gmake-mode-hook 'linum-mode)
+(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
+(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
    (bash-completion-setup)
+
+; =======================================
+;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
+(cond
+ ((string-equal system-type "darwin")
+  (require 'dash-at-point)
+  (global-set-key "\C-cd" 'dash-at-point)
+  (global-set-key "\C-ce" 'dash-at-point-with-docset)
+  ; specify docsets to search in different modes
+  (set 'dash-at-point-mode-alist
+    '((c-mode . "c,gsl,gl4")
+      (c++-mode . "cpp,eigen,boost,gsl")
+      (python-mode . "python,numpy,scipy,matplotlib,pandas")
+      (ess-mode . "r")
+      (sh-mode . "bash")
+      ))))
 
 ; =======================================
 ;; Programming Environment and Useful Minor Modes for /HTML, js/
@@ -342,11 +367,11 @@
 (require 'auto-complete-clang)
 (setq ac-auto-start nil)
 (setq ac-quick-help-delay 0.5)
-
+;
 ;; ;; /auto-complete-clang-async/: clang completion for C/C++ [install clang]
 ;; (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
 ;; (require 'auto-complete-clang-async)
-
+;
 (cond 
  ((string-equal system-type "gnu/linux")
   ;(setq ac-clang-flags       ;; for /emacs-clang-complete
@@ -369,19 +394,20 @@
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
+ /usr/local/include/eigen3
+ /usr/local/include/c++
  /usr/local/include/c
- /usr/local/include/c++/4.2.1
- /usr/local/include/opengl
  /usr/local/include
- /usr/include
                  ")))
+  ;; LIBRARYIES: openmpi, gsl, Eigen, boost, opengl; followed by "/", e.g., <gsl/gsl_math.h>
+  ;;
   ;; /usr/local/include/c++-xcode/v1
   ;; /usr/local/include/c/sys
   ;; /usr/local/include/clang
-
+  ;
   ;; adding for cflags for clang:
   ;(setq ac-clang-cflags (append '("-std=c++11") ac-clang-cflags))
-  
+  ;
   ;; ;; way 2:
   ;;  (setq ac-clang-cflags (list
   ;;                        "-std=c++11"
@@ -415,19 +441,24 @@
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
     (ac-clang-launch-completion-process))
    ((string-equal system-type "darwin")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c++/v1")
+    (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
+    (add-to-list 'achead:include-directories '"/usr/local/include/c++")
     (add-to-list 'achead:include-directories '"/usr/local/include/c")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c/opengl")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c/sys")
-;    (add-to-list 'achead:include-directories '"/usr/local/include/clang")
+    (add-to-list 'achead:include-directories '"/usr/local/include")
     (ac-clang-launch-completion-process))
    )
 )
 (add-hook 'c-mode-hook 'oy-ac-clang-config)
 (add-hook 'c++-mode-hook 'oy-ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-;(global-auto-complete-mode t)
-
+(add-hook 'c-mode-common-hook 
+          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in gnome
+(add-hook 'makefile-gmake-mode-hook
+          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in Mac OS X
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
 
 ; =======================================
 ;; Programming Environment for /Python/
@@ -453,7 +484,8 @@
 (setq jedi:complete-on-dot t)     ; optional
 (cond
  ((string-equal system-type "darwin")
-  (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
+  ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
+  (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20150528.2022/jediepcserver.py"))))
 
 (defun python-mode-ac-popup-width ()
   (setq-local ac-max-width 0.5))
