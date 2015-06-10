@@ -1,0 +1,19 @@
+set gui=none
+
+map <C-Up> :set gui=none<CR>
+map <C-Down> :set gui=tabs,navigation<CR>
+
+noremap U u
+noremap x d
+
+map J <C-f>
+map K <C-b>
+map u <C-u>
+map d <C-d>
+
+noremap j 3j
+noremap k 3k
+
+noremap H gT
+noremap L gt
+

@@ -1,0 +1,27 @@
+[user]
+	name = oracleyue
+	email = oracleyue@gmail.com
+[credential]
+	helper = cache --timeout=3600000
+[core]
+	editor = vim
+[color]
+	ui = true
+[alias]
+	graph = log --graph --oneline --decorate
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+        uncommit = reset --hard HEAD~1
+	last = log -1 HEAD -U1 --word-diff
+	oneline = log --pretty=oneline
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	up = remote update
+        uno = status -uno
+[push]
+	default = matching
+[merge]
+	tool = vimdiff

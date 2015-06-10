@@ -1,0 +1,549 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(custom-safe-themes (quote ("769370c478110f9edca5f27bb2e6ff1b39c37a5a851f6510d403b18b3e931831" "5a2eb56fde1d85694d1f79dfddc27bcd0f09c76350d55e9bbeab4e9519988816" default)))
+ '(fill-column 72)
+ '(inhibit-startup-screen t)
+ '(linum-format " %3i ")
+ '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
+ '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
+ '(scroll-bar-mode nil)
+ '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+ '(tool-bar-mode nil))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+
+;; Setting size of frames
+(when window-system (set-frame-size (selected-frame) 86 28))
+;; Setting font set for Chinese
+(if(display-graphic-p)
+ (dolist (charset '(kana han symbol cjk-misc bopomofo))
+   (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                     (font-spec :family "WenQuanYi Micro Hei" :size 12)))
+)
+;; Various one line commands/config, like "TAB"
+(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
+(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
+
+;; Setting the url brower for emacs
+(setq browse-url-browser-function 'browse-url-firefox
+         browse-url-new-window-flag  t
+         browse-url-firefox-new-window-is-tab t)
+
+;; Spell Checking for some modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+
+;; oracleyue's inital path setting
+;(cd "~/Public/Dropbox/oracleyue/OrgNote/")
+;(cd "~/Public/Dropbox/Academia/Reports/")
+;(cd "~/Workspace/python/")
+;(cd "~/Workspace/matlab/Feng_prj_HPC/")
+    ;; For Ubuntu@LCSB 
+    (setq default-directory "~/Workspace/matlab/Feng_prj_HPC/")
+
+;; oracleyue's env. variables and alias
+;;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
+;; (setenv "yPATHprj" "~/Workspace/matlab/Feng_prj_HPC")
+;; (setenv "yPATHorgnote" "~/Public/Dropbox/oracleyue/OrgNote")
+;; (setenv "yPATHgitarch" "~/FileArchives/Arch")
+;; (setenv "yPATHgithub" "~/Workspace/github.com/")
+    ; For Ubuntu@LCSB
+    (setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk-amd64/jre")
+    ;; (setenv "yPATHprj" "~/Workspace/Fang_prj/")
+    ;; (setenv "yPATHgithub" "~/Workspace/github.com/")
+    ;; (setenv "yPATHorgnote" "~/Public/Dropbox/oracleyue/OrgNote/")
+
+;; oracleyue's line wrapping settings
+(define-key global-map [f4] 'toggle-truncate-lines)
+
+;; oracleyue's key bindings
+(global-set-key (kbd "C-c C-=") 'comment-region)
+(global-set-key (kbd "C-c C-+") 'uncomment-region)
+
+;;; ---------- Settings of Emacs Package System -------------
+;; For Package Management by ELPA
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    ;; Any add to list for package-archives (to add marmalade or melpa) goes here
+    ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+    ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+)
+
+;; Using default theme
+   ;;(load-theme 'deeper-blue t)
+   ;; (load-theme 'adwaita t)       ;grey
+;; Using oracleyue's theme
+   (add-to-list 'load-path "~/.emacs.d/themes")
+   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+   ;(load-theme 'oracleyue t)   ;(load-theme 'my t)
+   (load-theme 'oracleyuecode t)  
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; -------------------- Settings of Modes -----------------------
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Matching a pair of braces and hightlight the contents
+(show-paren-mode t)
+;; (setq show-paren-style 'expression)
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'hl-sexp)
+  (add-hook 'lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
+  (add-hook 'python-mode-hook 'hl-sexp-mode)
+  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
+  (add-hook 'sh-mode-hook 'hl-sexp-mode)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /auto-complete/ 
+(require 'auto-complete)
+(add-to-list 'ac-modes 'matlab-mode 'python-mode)
+
+(require 'auto-complete-config)
+(ac-config-default)
+;; start after 3 characters were typed
+(setq ac-auto-start 3)
+;; show menu immediately...
+(setq ac-auto-show-menu t)
+(setq ac-show-menu-immediately-on-auto-complete t)
+;; explicit call to auto-complete
+(define-key ac-mode-map [(meta return)] 'auto-complete)
+;; set dictionary
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140515.1959/dict/")
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Yasnippet/ A template system
+(require 'popup)
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas-global-mode 1)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
+; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator-1.83")
+; (require 'fill-column-indicator)
+; (define-globalized-minor-mode
+;    global-fci-mode fci-mode (lambda () (fci-mode 1)))
+; (add-hook 'python-mode-hook 'fci-mode)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Insert Parenthesis/Brackets by /Pair/
+(electric-pair-mode 1)
+;; make electric-pair-mode work on more brackets
+(setq electric-pair-pairs '(
+                            (?\" . ?\")
+                            (?\{ . ?\})
+                           ; (?\< . ?\>)
+                            (?\' . ?\')
+                            ) )
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;; Enable /linum/ in nlinum lib
+;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
+;(require 'linum)
+    ;(global-linum-mode 1)
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'matlab-mode-hook 'linum-mode)
+(add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'sh-mode-hook 'linum-mode)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Settings for /bash-completion/: TAB complete alias and functions
+(require 'bash-completion)
+   (bash-completion-setup)
+
+; =======================================
+;; Programming Environment for /C C++/
+(setq-default c-basic-offset 4)
+
+; =======================================
+;; Programming Environment for /Python/
+; using /emacs-for-python/
+(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
+; use IPython
+(epy-setup-ipython)
+; use flymake checker
+(epy-setup-checker "pyflakes %f")
+; hightlight indentation
+(require 'highlight-indentation)
+(add-hook 'python-mode-hook 'highlight-indentation)
+
+; =======================================
+;; Programming Environment for /R/
+(require 'ess-site)
+
+; =======================================
+;; For /MATLAB-Mode/
+(require 'matlab)
+(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+(add-to-list
+ 'auto-mode-alist
+ '("\\.m$" . matlab-mode))
+(setq matlab-indent-function t)
+(setq matlab-shell-command "matlab")
+(load-library "matlab-load")
+;; Enable CEDET feature support for MATLAB code
+; (matlab-cedet-setup)
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For GDB/debugging in general
+(global-set-key (kbd "<f7>") 'gud-step);; equiv matlab step in
+(global-set-key (kbd "<f8>") 'gud-next) ;; equiv matlab step 1 
+(global-set-key (kbd "<f9>") 'gud-cont)
+(global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
+
+
+; ===================================================================
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Enable /evil-mode/
+(require 'evil-leader)
+   (global-evil-leader-mode)
+(require 'evil)
+   (evil-mode 1)
+   ;; Enable default emacs keybindings
+   (define-key evil-insert-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-normal-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-visual-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-insert-state-map "\C-y" 'yank)
+   (define-key evil-normal-state-map "\C-y" 'yank)
+   (define-key evil-insert-state-map "\C-n" 'next-line)
+   (define-key evil-normal-state-map "\C-n" 'next-line)
+   (define-key evil-visual-state-map "\C-n" 'next-line)
+   (define-key evil-insert-state-map "\C-p" 'previous-line)
+   (define-key evil-normal-state-map "\C-p" 'previous-line)
+   (define-key evil-visual-state-map "\C-p" 'previous-line)
+   (define-key evil-normal-state-map [up] 'previous-line)
+   (define-key evil-normal-state-map [down] 'next-line)
+   (define-key evil-normal-state-map [left] 'left-char)
+   (define-key evil-normal-state-map [right] 'right-char)
+   (define-key evil-insert-state-map (kbd "C-S-d") 'evil-shift-left-line)
+   (define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+   (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+   (define-key evil-normal-state-map "\M-." nil)
+   (define-key evil-normal-state-map "\M-?" nil)
+   ;; For keybindings defined by /evil-leader/			
+   (evil-leader/set-key 
+     "cc" 'comment-region
+     "cu" 'uncomment-region
+   )
+;; Some modes that not using Evil-mode
+(add-hook 'shell-mode-hook 'evil-emacs-state)
+;(add-hook 'matlab-shell-mode-hook 'evil-emacs-state)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /Icomplete Mode/
+(icomplete-mode 1)    ; Turn on icomplete-mode
+;; For /ido, ido-ubiquitous, flx-ido, smex Modes/
+(require 'ido)
+(require 'ido-ubiquitous)
+(require 'flx-ido)
+
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-max-prospects 10
+      ido-save-directory-list-file "~/.emacs.d/user/ido.hist"
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
+(ido-mode +1)
+(ido-ubiquitous-mode +1)
+
+;;; smarter fuzzy matching for ido
+(flx-ido-mode +1)
+;; disable ido faces to see flx highlights
+(setq ido-use-faces nil)
+
+;;; smex, remember recently and most frequently used commands
+(require 'smex)
+(setq smex-save-file "~/.emacs.d/user/.smex-items")
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;; http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
+(require 'ido-hacks nil t)
+(if (commandp 'ido-vertical-mode) 
+    (progn
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Settings for /Org-mode/
+;; Activation
+;(add-hook 'org-mode-hook 'turn-on-font-lock)
+(global-font-lock-mode 1)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+;(setq org-startup-indented t)
+;(add-hook 'org-mode-hook (lambda()  (visual-line-mode t)))
+
+;; HTML Export Settings
+(setq org-export-html-style-extra "<style type=\"text/css\">\n  html {\n  font-family: sans-serif;\n  font-size: 10pt;\n  }\n  em { font-style: normal; font-weight: bold;}\n pre { \n  font-family: monospace;\n  font-size: 90%;\n } \n </style>") 
+
+;; Easy-Templates for LaTeX macros
+(eval-after-load 'org
+ '(progn
+   (add-to-list 'org-structure-template-alist '("eq" "\\begin{equation}\n?\n\\end{equation}")) 
+   (add-to-list 'org-structure-template-alist '("eqa" "\\begin{equation}\n \\begin{array}{}\n?\n \\end{array}\n\\end{equation}")) 
+   (add-to-list 'org-structure-template-alist '("bm" "\\begin{bmatrix}\n?\n\\end{bmatrix}")) 
+   (add-to-list 'org-structure-template-alist '("p" ":PROPERTIES:\n:CUSTOM_ID:?\n:END:")) 
+   (add-to-list 'org-structure-template-alist '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]")) 
+   (add-to-list 'org-structure-template-alist '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|")) 
+   (add-to-list 'org-structure-template-alist '("suml" "#+BEGIN_SRC plantuml :file files/dia#.png :exports results\n?\n#+END_SRC")) 
+))
+;; Setup of Babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)
+   (latex . t)
+   (ditaa . t)
+   (plantuml . t)
+  )) 
+(setq org-export-babel-evaluate nil)
+(setq org-plantuml-jar-path
+  (expand-file-name "/usr/share/emacs/24.3/lisp/contrib/scripts/plantuml.jar"))
+
+;; use syntax highlighting in org-file code blocks
+(setq org-src-fontify-natively t)
+;; no extra indentation
+(setq org-src-preserve-indentation t)
+;; set default exports to both code and results
+(setq org-babel-default-header-args
+      (cons '(:exports . "both")
+             (assq-delete-all :exports org-babel-default-header-args)))
+
+;; Setting for /org-article/ for LaTeX
+(require 'org-latex)
+(setq org-export-latex-listings t)
+(setq org-export-latex-packages-alist 
+   '(("AUTO" "inputenc" t)
+; font type settings:
+    ("" "mathptmx" t)
+    ("scaled=0.8" "DejaVuSansMono" t)
+; math symbols and figures:
+    ("" "latexsym" t)
+    ("" "amssymb" t)
+    ("" "amsmath" t) 
+    ("" "amsthm" t)
+    ("" "graphicx" t)
+    ("" "epsfig" t)
+; others    
+    ("usenames" "color" t)
+    ("" "csquotes" t)
+    ("" "hyperref" t)
+))
+
+;; do not put in \hypersetup use your own
+;; \hypersetup{pdfkeywords={%s},\n pdfsubject={%s},\n pdfcreator={%s}
+(setq org-latex-with-hyperref nil)
+
+(add-to-list 'org-export-latex-classes
+          '("org-article"
+             "\\documentclass{article}
+ \\usepackage[top=1in, bottom=1in, left=1.2in, right=1.2in]{geometry}
+
+ [NO-DEFAULT-PACKAGES]
+ [PACKAGES]
+
+ [EXTRA]"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /ERC/
+(setq erc-default-coding-system '(utf-8 . utf-8))
+(setq erc-nick "oracleyue"
+     erc-user-full-name "oracleyue")
+;(erc-autojoin-mode 1)
+;(setq erc-autojoin-channels-alist
+     ;'(("irc.freenode.net"                
+        ;"#archlinux"
+        ;"#archlinux-cn"
+        ;"#ubuntu"
+        ;"#ubuntu-cn")))
+
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /tabbar-ruler/
+(setq tabbar-ruler-global-tabbar t) ; If you want tabbar
+(setq tabbar-ruler-global-ruler t) ; if you want a global ruler
+;(setq tabbar-ruler-popup-menu t) ; If you want a popup menu.
+;; (setq tabbar-ruler-popup-toolbar t) ; If you want a popup toolbar
+;; (setq tabbar-ruler-popup-scrollbar t) ; If you want to only show the scroll bar when your mouse is moving.
+
+(require 'cl)
+(require 'tabbar-ruler)
+
+(global-set-key (kbd "C-c t") 'tabbar-ruler-move)
+(define-key evil-normal-state-map "gT" 'tabbar-ruler-backward) ;prev tab
+(define-key evil-normal-state-map "gt" 'tabbar-ruler-forward) ;next tab
+(define-key evil-normal-state-map (kbd "C-w t") 'tabbar-ruler-up) ;up
+  (defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+(define-key evil-normal-state-map (kbd "C-w x") 'kill-this-buffer)
+(define-key evil-normal-state-map (kbd "C-w X") 'kill-other-buffers)
+;; !! Remember the follow two keybindings CONFLICT with /org-mode/
+;; Failed in /org-mode/: default to "org-force-cycle-archived" & "..."
+;; (global-set-key [(control tab)] 'tabbar-ruler-forward)          ; eqiv. "gt"
+;; (global-set-key [(control shift tab)] 'tabbar-ruler-backward)     ; eqiv. "gT"
+
+;; hide for special buffers
+  ;; special buffers that start with "*" 
+(setq tabbar-buffer-list-function
+      (lambda ()
+        (remove-if
+         (lambda(buffer)
+           (find (aref (buffer-name buffer) 0) " *"))
+         (buffer-list))))
+  ;; special buffers that user-defined 
+;;  (setq *tabbar-ignore-buffers* '("BufferName 1" "BufferName 2" "BufferName 3"))
+;;  (setq tabbar-buffer-list-function
+;;        (lambda ()
+;;          (remove-if
+;;           (lambda (buffer)
+;;             (and (not (eq (current-buffer) buffer)) ; Always include the current buffer.
+;;                  (loop for name in *tabbar-ignore-buffers* ;remove buffer name in this list.
+;;                        thereis (string-equal (buffer-name buffer) name))))
+;;           (buffer-list))))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For tags-update, using =ctags -e=, NOT etags!
+(defun oy-build-ctags ()
+  (interactive)
+  (message ">> building project tags ...")
+  (let ((root "~/Workspace/"))
+        (shell-command (concat "ctags -e -R --extra=+fq --exclude=db --exclude=test --exclude=.git --exclude=public -f " root "TAGS " root)))
+  (oy-visit-project-tags)
+  (message ">> tags built successfully!"))
+(defun oy-visit-project-tags ()
+  (interactive)
+  (let ((tags-file (concat "~/Workspace/" "TAGS")))
+        (visit-tags-table tags-file)
+        (message (concat "Loaded " tags-file))))
+
+(define-key evil-normal-state-map (kbd "C-w u") 'oy-build-ctags) ;up
+(evil-leader/set-key "up" 'oy-build-ctags)
+
+;; For /etags-table/
+(require 'etags-table)
+(setq etags-table-search-up-depth 10)
+(setq tags-table-list '("~/Workspace/TAGS" "~/Documents/Reports_LCSB/TAGS"))
+
+;; For /etags-select/
+;;;; [SOURCE]: https://github.com/emacsmirror/etags-select
+(add-to-list 'load-path "~/.emacs.d/git/etags-select")
+(load "etags-select.el")
+(require 'etags-select)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
+;; Setting key bindings to close etags-select window
+(define-key etags-select-mode-map (kbd "C-g") 'etags-select-quit)
+        ;; Also quit etags-select when cursor moves to another window
+(define-key etags-select-mode-map (kbd "C-x o") 'etags-select-quit)
+;; (define-key etags-select-mode-map (kbd "C-p") 'etags-select-previous-tag)
+;; (define-key etags-select-mode-map (kbd "C-n") 'etags-select-next-tag)
+;; default etags-select bindings
+        ;; Return -> 'etags-select-goto-tag
+        ;; M-Return -> 'etags-select-goto-tag-other-window
+        ;; p -> 'etags-select-previous-tag
+        ;; n -> 'etags-select-next-tag
+        ;; q -> 'etags-select-quit
+        ;; 0 -> (etags-select-by-tag-number "0")
+        ;; 1 -> (etags-select-by-tag-number "1")
+        ;; .. ..
+        ;; 9 -> (etags-select-by-tag-number "9")
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /srSpeedbar/
+; Change speedbar font size   "WenQuanYi Micro Hei Mono"
+(defun oy-speedbar-face ()
+        (interactive)
+        (setq buffer-face-mode-face '(:family "DejaVu Sans Mono" :height 92 :width semi-condensed :weight bold :slant normal))
+        (buffer-face-mode))
+(add-hook 'speedbar-mode-hook 'oy-speedbar-face)
+(require 'sr-speedbar)
+;(sr-speedbar-open)		; open speedbar by default
+(setq speedbar-use-images nil)
+(global-set-key (kbd "<f6>") 'sr-speedbar-toggle);; equiv matlab step in
+;; Fix width
+;; (with-current-buffer sr-speedbar-buffer-name
+;;    (setq window-size-fixed 'width))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /folding-mode/ 
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'folding)
+(load "folding" 'nomessage 'noerror)
+(folding-mode-add-find-file-hook)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;; For /CEDET/
+;(require 'cedet)
+;; (global-ede-mode 1)                      ; Enable the Project management system
+
+;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+
+;; (require 'semantic/ia)
+
+;;; Turn on /sematic-mode/ /ede-mode/ in /matlab-mode/
+;; (semantic-mode 1)
+    ;; -------------------------------------------------------------------------
+    ;; !!! if want to use (matlab-cedet-setup), uncomment the next two lines.
+    ;  (add-hook 'matlab-mode-hook (lambda() (interactive) (semantic-mode 1)))
+    ;  (add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
+    ;; -------------------------------------------------------------------------
+
+;; (require 'semantic/sb)
+;; (require 'semantic/bovine/gcc)
+
+;;; (semantic-add-system-include "/usr/include/mpi/" 'c++-mode)
+
+                     ;;; ;; For /C-mode/: Class suggest improvement
+                     ;;; (defun oy-c-mode-cedet-hook ()
+                     ;;;  (local-set-key "." 'semantic-complete-self-insert)
+                     ;;;  (local-set-key ">" 'semantic-complete-self-insert))
+                     ;;; (add-hook 'c-mode-common-hook 'oy-c-mode-cedet-hook)
+
+                     ;; ;; For /C-mode/ 
+                     ;; (defun oy-cedet-hook ()
+                     ;;   (add-to-list 'ac-sources 'ac-source-semantic))
+                     ;; (add-hook 'c-mode-common-hook 'oy-cedet-hook)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;; For /ECB/
+;;; [SOURCE]: https://github.com/emacsmirror/ecb
+;; (add-to-list 'load-path "~/.emacs.d/git/ecb")
+;; (require 'ecb)
+
+;; ;(global-set-key (kbd "<f12>") 'ecb-activate)
+;; ;;; ;; Turn on /ecb-mode/ /ede-mode/ and /semantic-mode/ when needed
+;; (global-set-key (kbd "<f12>") (lambda() (interactive) (ecb-activate) (global-ede-mode) (semantic-mode)))
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,15 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# /dev/sda7
+UUID=49a384b8-20d6-4490-b736-9387e1035fb5	/         	ext4      	rw,relatime,data=ordered	0 1
+
+# /dev/sda9
+UUID=b2be8611-82fc-4af8-baab-e6eaaf9468a6	/home     	ext4      	rw,relatime,data=ordered	0 2
+
+# /dev/sda8
+UUID=8a8e62f1-d177-471b-a017-8328dd54bfd4	none      	swap      	defaults  	0 0
+
+# smb://atlas/users/zuogong.yue : LCSB ATLAS Remote Folders
+//atlas.uni.lux/users/zuogong.yue /home/oracleyue/Public/ATLAS cifs noauto,uid=oracleyue,dir_mode=0750,file_mode=0600,credentials=/etc/samba/sambacreds 0 0

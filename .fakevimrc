@@ -1,0 +1,7 @@
+imap <C-A> <Home>
+imap <C-E> <End>
+imap <C-F> <Right>
+imap <C-B> <Left>
+imap <C-N> <Down>
+imap <C-P> <Up>
+imap <C-K> <Esc>d$a

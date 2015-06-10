@@ -1,0 +1,61 @@
+# copy .profle to .bashrc in Mac OS X, which will be used by emacs for its term, xterm, etc.
+# the system of OS X use .profile to configure its console
+
+# set the locale
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+
+# To color the bash
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# adding user's local bin as preference
+export PATH=/usr/local/bin:${PATH}
+# adding the texlive bin to PATH
+export PATH=${PATH}:/usr/local/texlive/2014/bin/x86_64-darwin
+
+# oracleyue-defained alias
+alias ll='ls -Alh'
+alias view='vim -R'
+alias rm='rm -i'
+alias cp='cp -r -i'
+alias du='du -h -d 1'
+alias df='df -h'
+alias rsync='rsync -aP'
+
+
+# oracleyue-defined environment variables
+export EDITOR="vim"
+
+# oracleyue: setting shortcuts for working paths
+export prj=~/Workspace/matlab/Feng_prj_HPC
+export orgnote=~/Public/Dropbox/oracleyue/OrgNote
+#export gitrepo=~/FileArchives/arch
+#export ATLAS=~/Public/ATLAS/prj.backup
+export gaiapath=gaia:/work/users/zyue/matlab/Feng_prj_HPC
+
+
+# oracleyue: Using /less/ to colorize man page
+# man() {
+#	env \
+#		LESS_TERMCAP_mb=$(printf "\e[1;37m") \
+#		LESS_TERMCAP_md=$(printf "\e[1;37m") \
+#		LESS_TERMCAP_me=$(printf "\e[0m") \
+#		LESS_TERMCAP_se=$(printf "\e[0m") \
+#		LESS_TERMCAP_so=$(printf "\e[1;47;30m") \
+#		LESS_TERMCAP_ue=$(printf "\e[0m") \
+#		LESS_TERMCAP_us=$(printf "\e[0;36m") \
+#			man "$@"
+# }
+    # Using /less/ colored output
+export LESS=-R
+export LESS_TERMCAP_me=$(printf '\e[0m')
+export LESS_TERMCAP_se=$(printf '\e[0m')
+export LESS_TERMCAP_ue=$(printf '\e[0m')
+export LESS_TERMCAP_mb=$(printf '\e[1;32m')
+export LESS_TERMCAP_md=$(printf '\e[1;34m')
+export LESS_TERMCAP_us=$(printf '\e[1;32m')
+export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
+    # Enable /less/ code syntax coloring
+export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"

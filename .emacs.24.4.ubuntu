@@ -1,0 +1,922 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+ '(column-number-mode t)
+ '(ecb-options-version "2.40")
+ '(fill-column 72)
+ '(inhibit-startup-screen t)
+ '(linum-format " %3i ")
+ '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
+ '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+ '(tool-bar-mode nil))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 105 :width normal))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal)))))
+
+
+;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
+(cond 
+ ((string-equal system-type "darwin")
+  ;(setq mac-command-modifier 'control)  ; use Command key also as Control
+  ;(setq mac-option-modifier 'meta)
+  )
+)
+;; fix $PATH for emacs in Mac OS X
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell 
+      (replace-regexp-in-string "[[:space:]\n]*$" "" 
+        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
+
+;; Settings for graphic or terminal modes
+(if (display-graphic-p)
+    (menu-bar-mode 1))
+(if (not (display-graphic-p))
+    (menu-bar-mode -1))
+
+;; setting size of frames
+;(when window-system (set-frame-size (selected-frame) 104 38))
+(when window-system (set-frame-size (selected-frame) 100 34))
+;; Setting font set for Chinese
+(if(display-graphic-p)
+ (dolist (charset '(kana han symbol cjk-misc bopomofo))
+   (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                     (font-spec :family "WenQuanYi Micro Hei" :size 12)))
+)
+;; Various one line commands/config, like "TAB"
+(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
+(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
+
+(setq backup-inhibited t)  ;; disable backup file creation
+
+(fset 'yes-or-no-p 'y-or-n-p) ; answer with y/n instead of yes/no
+
+;; Disable all version control. makes startup and opening files much faster
+;(setq vc-handled-backends nil)
+
+;; Setting the url brower for emacs
+(setq browse-url-browser-function 'browse-url-firefox
+      browse-url-new-window-flag  t
+      browse-url-firefox-new-window-is-tab t)
+
+;; Set default major mode to text-mode
+(setq-default major-mode 'text-mode)
+
+;; Spell Checking for some modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;; (setq ispell-dictionary "british")
+(setq ispell-dictionary "american")
+(add-hook 'LaTeX-mode-hook 'ispell)
+
+
+;; oracleyue's inital path setting
+;(cd "~/Public/Dropbox/oracleyue/OrgNote")
+;(cd "~/Public/Dropbox/Academia/matlab")
+;(cd "~/Public/Dropbox/Academia/Manuscripts/DSF")
+;(cd "~/Workspace/matlab")
+    ;; For Ubuntu@LCSB 
+    ;(setq default-directory "~/Workspace/matlab/Feng_prj_HPC")
+     (setq default-directory "~")
+
+;; oracleyue's env. variables and alias
+;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
+    ; For Ubuntu@LCSB
+    ; (setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk-amd64/jre")
+(setenv "orgnote" "~/Public/Dropbox/oracleyue/OrgNote")
+(setenv "gitdoc" "~/Public/Dropbox/Academia/Manuscripts")
+(setenv "github" "~/Worksapce/github.com")
+(setenv "gitrepo" "~/Worksapce/gitrepo")
+
+;; oracleyue's line wrapping settings
+(define-key global-map [f4] 'toggle-truncate-lines)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+;; oracleyue's key bindings
+;; (global-set-key (kbd "C-c C-=") 'comment-region)
+;; (global-set-key (kbd "C-c C-+") 'uncomment-region)
+;; (global-set-key "\C-xh" 'help-command)
+
+;;; ---------- Settings of Emacs Package System -------------
+;; For Package Management by ELPA
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    ;; Any add to list for package-archives (to add marmalade or melpa) goes here
+    ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+    ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+)
+
+;; Using default theme
+   ;(load-theme 'deeper-blue t)
+   ;(load-theme 'adwaita t)       ;grey
+;; Using oracleyue's theme
+   (add-to-list 'load-path "~/.emacs.d/themes")
+   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+   (load-theme 'ymonokai t)
+   ;(load-theme 'yadwaita t)
+   ;(load-theme 'monokai t)
+;; Fringe setting (right-only)
+   (fringe-mode '(0 . nil))
+
+;; Globally enable /hl-line-mode/ for /monokai/ theme
+;; in other themes, only enabled when python-mode starts
+(cond 
+ ((string-equal 'custom-enabled-themes "ymonokai")
+  (global-hl-line-mode t)
+  (set-face-background 'hl-line "gray27") 
+  (set-face-attribute hl-line-face nil :underline nil)))
+
+
+; ----------------------------------------------------------------
+;; -------------------- Settings of Modes -----------------------
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Matching a pair of braces and hightlight the contents
+(show-paren-mode t)
+;; (setq show-paren-style 'expression)
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'hl-sexp)
+  (add-hook 'lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
+  (add-hook 'python-mode-hook 'hl-sexp-mode)
+  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
+  (add-hook 'sh-mode-hook 'hl-sexp-mode)
+
+;; ------------------------------------------------------------
+;;; Auto Completion for Programming Environment
+;; ------------------------------------------------------------
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Yasnippet/ A template system
+;(require 'popup)
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas-global-mode 1)
+(setq-default mode-require-final-newline nil)
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /auto-complete/ 
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
+;; setting of pop-up boxes
+(setq ac-quick-help-delay 0.2)
+;(setq ac-candidate-limit 100)    ;; new
+;(setq ac-menu-height 20)    ;; new
+;(setq ac-quick-help-height 20)    ;; new
+;; starting type
+(setq ac-expand-on-auto-complete t)    ;; new
+;1; default auto start complete when type 2 characters
+;(setq ac-auto-start 3)
+;2; explicit call to auto-complete, using trigger-key or auto-complete func
+(setq ac-auto-start nil)
+(ac-set-trigger-key "TAB")    ;; new
+(define-key ac-mode-map [(control tab)] 'auto-complete)
+;3; explicit call to stop auto-complete
+;(define-key ac-completing-map [(meta return)] 'ac-stop)
+;; show menu immediately...
+(setq ac-auto-show-menu t)    ;; new
+(setq ac-show-menu-immediately-on-auto-complete t)    ;; new
+;; select candidates in ac-menu
+(setq ac-use-menu-map t)
+(define-key ac-menu-map "\C-n" 'ac-next)
+(define-key ac-menu-map "\C-p" 'ac-previous)
+;; set dictionary
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140515.1959/dict/")
+;; list for auto-complete
+(set-default 'ac-sources '(ac-source-abbrev
+                           ac-source-dictionary
+                           ac-source-filename    ;; new
+                           ac-source-yasnippet
+                           ac-source-words-in-same-mode-buffers))
+; Notes: other settings are in different programming languages' parts. See C/C++.
+;; ------------------------------------------------------------
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
+; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator-1.83")
+; (require 'fill-column-indicator)
+; (define-globalized-minor-mode
+;    global-fci-mode fci-mode (lambda () (fci-mode 1)))
+; (add-hook 'python-mode-hook 'fci-mode)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Insert Parenthesis/Brackets by /Pair/
+(electric-pair-mode 1)
+;; make electric-pair-mode work on more brackets
+(defvar y-electric-pair-pairs '(
+                                (?\" . ?\")
+                                (?\{ . ?\})
+                                        ; (?\< . ?\>)
+                                        ; (?\' . ?\')
+                                        ; (?\$ . ?\$)
+                                ))
+(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;; Enable /linum/ in nlinum lib
+;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
+;(require 'linum)
+    ;(global-linum-mode 1)
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'sh-mode-hook 'linum-mode)
+(add-hook 'matlab-mode-hook 'linum-mode)
+(add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'c-mode-common-hook 'linum-mode)
+(add-hook 'makefile-gmake-mode-hook 'linum-mode)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Settings for /bash-completion/: TAB complete alias and functions
+(require 'bash-completion)
+   (bash-completion-setup)
+
+; =======================================
+;; Programming Environment and Useful Minor Modes for /HTML, js/
+
+;; ;; /iedit/: edit all occurrences in a buffer
+;; ; fix iedit bug, due to C-; has been bound to open clipboard by gnome
+;; (define-key global-map (kbd "C-c ;") 'iedit-mode)
+
+;; /multiple-cursors/: edit with multiple cursors
+(require 'multiple-cursors)
+;; mark many occurrences in region
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;; mark one more occurrence by regexp match
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; mouse events
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+;; specials
+(global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
+;; fix "C-j" for AucTeX mode
+(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
+
+;; /expand-region/: increase the selected region by semantic units
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+; =======================================
+;; Programming Environment for /C C++/
+(require 'cc-mode)
+;; ;; Having defined in /google-c-style/
+;; (setq-default c-default-style "linux")
+;; (setq-default c-basic-offset 4)
+;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+
+;; /google-c-style/
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; /xcscope/: source cross-referencing tool [install cscope]
+(add-to-list 'load-path "~/.emacs.d/git/xcscope")
+(require 'xcscope)
+(cscope-setup)
+
+;; /auto-complete-clang-async/: clang completion for C/C++ [install clang]
+(add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
+(require 'auto-complete-clang-async)
+(setq ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item))
+              (split-string
+"
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
+ /usr/local/include
+ /usr/include
+")))
+
+(defun oy-ac-clang-config ()
+;  (setq ac-sources (append '(ac-source-clang) ac-sources)))  ;; for auto-complete-clang
+  ;; auto-complete C/C++ headers
+  (require 'auto-complete-c-headers)
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
+  (setq ac-sources '(ac-source-clang-async 
+                     ac-source-c-headers
+                     ac-source-words-in-same-mode-buffers))
+  ;; auto-complete C/C++ headers
+  (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
+  (ac-clang-launch-completion-process))
+(add-hook 'c-mode-hook 'oy-ac-clang-config)
+(add-hook 'c++-mode-hook 'oy-ac-clang-config)
+(add-hook 'auto-complete-mode-hook 'ac-common-setup)
+
+
+; =======================================
+;; Programming Environment for /Python/
+; using /emacs-for-python/
+(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
+; use IPython
+(epy-setup-ipython)
+; use flymake checker
+(epy-setup-checker "pyflakes %f")
+; hightlight indentation
+(require 'highlight-indentation)
+(add-hook 'python-mode-hook 'highlight-indentation)
+; line highlighting
+(defun hl-line-config ()
+  (global-hl-line-mode t)
+  (set-face-background 'hl-line "gray27") 
+  (set-face-attribute hl-line-face nil :underline nil))
+(add-hook 'python-mode-hook 'hl-line-config)
+; disabling ropemacs
+(setq epy-enable-ropemacs nil)
+; auto-completion by Jedi.el
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)     ; optional
+(cond
+ ((string-equal system-type "darwin")
+  (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
+
+
+; =======================================
+;; Programming Environment for /R/
+(add-to-list 'load-path "~/.emacs.d/git/ess-14.09/lisp/")
+(require 'ess-site)
+
+; =======================================
+;; Programming Environment for /MATLAB/
+(require 'matlab)
+(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+(add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
+(setq matlab-indent-function t)
+(setq matlab-shell-command "/usr/local/bin/matlab")
+(load-library "matlab-load")
+;; Enable CEDTE feature support for MATLAB code
+(matlab-cedet-setup)
+
+(add-hook 'matlab-shell-mode-hook 'evil-emacs-state)
+; ~~~
+;; For GDB/debugging in general
+(global-set-key (kbd "<f7>") 'gud-step);; equiv matlab step in
+(global-set-key (kbd "<f8>") 'gud-next) ;; equiv matlab step 1 
+(global-set-key (kbd "<f9>") 'gud-cont)
+(global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
+
+; =======================================
+;; For /AUCTeX-Mode/
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(setq-default TeX-PDF-mode t)    ; default for pdf and forward search
+(setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
+(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+; More pair-mode in LaTeX
+(add-hook 'LaTeX-mode-hook
+	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
+			  (cons "$" "$"))))
+(setq-default LaTeX-electric-left-right-brace t)
+; More math-mode in LaTeX
+(setq LaTeX-math-list
+      '(("<"   "preccurlyeq" "Relational" nil)
+        (">"   "succcurlyeq" "Relational" nil)
+        ("="   "triangleq"   "Relational" nil)
+        ("v =" "coloneqq"    "Relational" nil)
+        ("v ~" "thicksim"    "Relational" nil)
+        ))
+;; So that RefTeX finds my bibliography
+(setq reftex-default-bibliography '("./ref/library.bib"))
+; Adding -shell-escape in pdflatex for mint
+(eval-after-load "tex" 
+  '(setcdr (assoc "LaTeX" TeX-command-list)
+          '("%`%l%(mode) -shell-escape%' %t"
+          TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
+(eval-after-load 'latex 
+  '(setq LaTeX-clean-intermediate-suffixes
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("Rubber" "rubber -fd %t" TeX-run-command nil t) t))
+;; (eval-after-load "tex"
+;;    '(add-to-list 'TeX-command-list
+;;                  '("Rubber-clean" "rubber --clean %t" TeX-run-command nil t) t))
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("Convert to PNG" "convert -density 300 formula.pdf -quality 90 formula.png" TeX-run-command nil t) t))
+
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
+
+
+(cond 
+ ((string-equal system-type "gnu/linux")
+  ; Use Evince as viewer, enable source <-> PDF sync
+  (setq TeX-output-view-style
+        (quote  (("^pdf$" "." "evince -f %o")
+                 ("^html?$" "." "firefox %o"))))
+  )
+ ((string-equal system-type "darwin")
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background
+  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+  (setq TeX-view-program-list
+     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))
+     ;; '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  )
+)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Enable /evil-mode/
+(require 'evil-leader)
+   (global-evil-leader-mode)
+(require 'evil)
+   (evil-mode 1)
+   ;; Enable default emacs keybindings
+   (define-key evil-insert-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-normal-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-visual-state-map "\C-e" 'org-end-of-line)
+   (define-key evil-insert-state-map "\C-y" 'yank)
+   (define-key evil-normal-state-map "\C-y" 'yank)
+   (define-key evil-insert-state-map "\C-n" 'next-line)
+   (define-key evil-normal-state-map "\C-n" 'next-line)
+   (define-key evil-visual-state-map "\C-n" 'next-line)
+   (define-key evil-insert-state-map "\C-p" 'previous-line)
+   (define-key evil-normal-state-map "\C-p" 'previous-line)
+   (define-key evil-visual-state-map "\C-p" 'previous-line)
+   (define-key evil-normal-state-map [up] 'previous-line)
+   (define-key evil-normal-state-map [down] 'next-line)
+   (define-key evil-normal-state-map [left] 'left-char)
+   (define-key evil-normal-state-map [right] 'right-char)
+   (define-key evil-insert-state-map (kbd "C-S-d") 'evil-shift-left-line)
+   (define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+   (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+   (define-key evil-normal-state-map "\M-." nil)
+   (define-key evil-normal-state-map "\M-?" nil)
+   ;; For keybindings defined by /evil-leader/			
+   (evil-leader/set-key 
+     "cc" 'comment-region
+     "cu" 'uncomment-region
+   )
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /Icomplete Mode/
+(icomplete-mode 1)    ; Turn on icomplete-mode
+;; For /ido, ido-ubiquitous, flx-ido, smex Modes/
+(require 'ido)
+(require 'ido-ubiquitous)
+(require 'flx-ido)
+
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-max-prospects 10
+      ido-save-directory-list-file "~/.emacs.d/userdata/ido.hist"
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
+(ido-mode +1)
+(ido-ubiquitous-mode +1)
+
+;;; smarter fuzzy matching for ido
+(flx-ido-mode +1)
+;; disable ido faces to see flx highlights
+(setq ido-use-faces nil)
+
+;;; smex, remember recently and most frequently used commands
+(require 'smex)
+(setq smex-save-file "~/.emacs.d/userdata/.smex-items")
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+;; http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/
+(require 'ido-hacks nil t)
+(if (commandp 'ido-vertical-mode) 
+    (progn
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Settings for /Org-mode/
+;; Activation
+;(add-hook 'org-mode-hook 'turn-on-font-lock)
+(global-font-lock-mode 1)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+;; set font face
+(add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+(add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
+
+;(setq org-startup-indented t)
+;(add-hook 'org-mode-hook (lambda()  (visual-line-mode t)))
+
+;; HTML Export Settings
+(setq org-export-html-style-extra "<style type=\"text/css\">\n  html {\n  font-family: sans-serif;\n  font-size: 10pt;\n  }\n  em { font-style: normal; font-weight: bold;}\n pre { \n  font-family: monospace;\n  font-size: 90%;\n } \n </style>") 
+
+;; Easy-Templates for LaTeX macros
+(eval-after-load 'org
+ '(progn
+   ;(add-to-list 'org-structure-template-alist '("eq" "\\begin{equation}\n?\n\\end{equation}")) 
+   ;(add-to-list 'org-structure-template-alist '("eqa" "\\begin{equation}\n \\begin{array}{}\n?\n \\end{array}\n\\end{equation}")) 
+   ;(add-to-list 'org-structure-template-alist '("bm" "\\begin{bmatrix}\n?\n\\end{bmatrix}")) 
+   (add-to-list 'org-structure-template-alist '("p" ":PROPERTIES:\n:AUTHOR:\n:CUSTOM_ID:\n:LABEL: sec:?\n:END:")) 
+   ;(add-to-list 'org-structure-template-alist '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]")) 
+   ;(add-to-list 'org-structure-template-alist '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|")) 
+   (add-to-list 'org-structure-template-alist '("uml" "#+BEGIN_SRC plantuml :file files/dia#.png :exports results\n?\n#+END_SRC")) 
+))
+;; Setup of Babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)
+   (latex . t)
+   (ditaa . t)
+   (plantuml . t)
+  )) 
+(setq org-babel-python-command "python2")
+(setq org-export-babel-evaluate nil)
+(setq org-plantuml-jar-path
+  (expand-file-name "/usr/share/emacs/24.3/lisp/contrib/scripts/plantuml.jar"))
+
+;; use syntax highlighting in org-file code blocks
+(setq org-src-fontify-natively t)
+; fix bug to load org-block settings in themes by re-enabling it
+(defface org-block-begin-line
+  '((t (:slant italic)))
+   "Face used for the line delimiting the begin of source blocks.")
+(defface org-block-end-line
+  '((t (:slant italic)))
+  "Face used for the line delimiting the end of source blocks.")
+;; no extra indentation
+(setq org-src-preserve-indentation t)
+;; set default exports to both code and results
+(setq org-babel-default-header-args
+      (cons '(:exports . "both")
+             (assq-delete-all :exports org-babel-default-header-args)))
+
+;;; Setting for /org-article/ for LaTeX
+(require 'org-latex)
+(setq org-export-latex-listings 'minted)
+(setq org-export-latex-minted-options
+           '(("frame" "lines")
+             ("fontsize" "\\scriptsize")
+             ("linenos" "")
+;             ("bgcolor" "bg")   ; uncomment if using "monokai" style
+))
+
+(setq org-export-latex-packages-alist 
+   '(("AUTO" "inputenc" t)
+; font type settings:
+    ("" "mathptmx" t)
+    ("scaled=0.8" "DejaVuSansMono" t)
+; math symbols and figures:
+    ("" "latexsym" t)
+    ("" "amssymb" t)
+    ("" "amsmath" t) 
+    ("" "amsthm" t)
+    ("" "graphicx" t)
+    ("" "subfigure" t)
+    ("" "epsfig" t)
+    ("normalem" "ulem" t)
+; others    
+    ("usenames" "color" t)
+    ("" "csquotes" t)
+	("" "minted" nil)
+    ("" "hyperref" t)
+))
+
+;; do not put in \hypersetup use your own
+;; \hypersetup{pdfkeywords={%s},\n pdfsubject={%s},\n pdfcreator={%s}
+(setq org-latex-with-hyperref nil)
+
+(add-to-list 'org-export-latex-classes '("org-article" 
+"\\documentclass{org-article}
+\\usepackage[top=1in, bottom=1in, left=1.2in, right=1.2in]{geometry}
+
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+
+\\definecolor{bg}{RGB}{39,40,34}
+[EXTRA]"
+("\\section{%s}" . "\\section*{%s}")
+("\\subsection{%s}" . "\\subsection*{%s}")
+("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+("\\paragraph{%s}" . "\\paragraph*{%s}")
+("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+)
+
+;; For minted you must run latex with -shell-escape because it calls pygmentize as an external program
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+        "bibtex %b"
+        "makeindex %b"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;; For /Multi-Term/
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/bash")
+;; (add-hook 'term-mode-hook 'evil-emacs-state)
+;; (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
+;; ;; key bindings for delicated term
+;; (add-to-list 'term-bind-key-alist '("C-=" . multi-term-next))
+;; (global-set-key (kbd "C-x t") 'multi-term-dedicated-toggle)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;; For /ERC/
+;; (setq erc-default-coding-system '(utf-8 . utf-8))
+;; (setq erc-nick "oracleyue"
+;;      erc-user-full-name "oracleyue")
+
+;; ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;; For /w3m/ web browser
+;; ;(setq browse-url-browser-function 'w3m-browse-url)
+;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;;     ;; optional keyboard short-cut
+;;     ;(global-set-key "\C-xm" 'browse-url-at-point)
+;; (setq w3m-use-cookies t)
+;; (setq w3m-coding-system 'utf-8
+;;       w3m-file-coding-system 'utf-8
+;;       w3m-file-name-coding-system 'utf-8
+;;       w3m-input-coding-system 'utf-8
+;;       w3m-output-coding-system 'utf-8
+;;       w3m-terminal-coding-system 'utf-8)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;; For /tabbar-ruler/
+;; (setq tabbar-ruler-global-tabbar t) ; If you want tabbar
+;; (setq tabbar-ruler-global-ruler t) ; if you want a global ruler
+;; ;(setq tabbar-ruler-popup-menu t) ; If you want a popup menu.
+;; ;; (setq tabbar-ruler-popup-toolbar t) ; If you want a popup toolbar
+;; ;; (setq tabbar-ruler-popup-scrollbar t) ; If you want to only show the scroll bar when your mouse is moving.
+
+;; (require 'cl)
+;; (require 'tabbar-ruler)
+
+;; (global-set-key (kbd "C-c t") 'tabbar-ruler-move)
+;; (define-key evil-normal-state-map "gT" 'tabbar-ruler-backward) ;prev tab
+;; (define-key evil-normal-state-map "gt" 'tabbar-ruler-forward) ;next tab
+;; (define-key evil-normal-state-map (kbd "C-w t") 'tabbar-ruler-up) ;up
+;;   (defun kill-other-buffers ()
+;;     "Kill all other buffers."
+;;     (interactive)
+;;     (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
+;; (define-key evil-normal-state-map (kbd "C-w x") 'kill-this-buffer)
+;; (define-key evil-normal-state-map (kbd "C-w X") 'kill-other-buffers)
+;; ;; !! Remember the follow two keybindings CONFLICT with /org-mode/
+;; ;; Failed in /org-mode/: default to "org-force-cycle-archived" & "..."
+;; ;; (global-set-key [(control tab)] 'tabbar-ruler-forward)          ; eqiv. "gt"
+;; ;; (global-set-key [(control shift tab)] 'tabbar-ruler-backward)     ; eqiv. "gT"
+
+;; ;; hide for special buffers
+;;   ;; special buffers that start with "*" 
+;; (setq tabbar-buffer-list-function
+;;       (lambda ()
+;;         (remove-if
+;;          (lambda(buffer)
+;;            (find (aref (buffer-name buffer) 0) " *"))
+;;          (buffer-list))))
+;;   ;; special buffers that user-defined 
+;; ;;  (setq *tabbar-ignore-buffers* '("BufferName 1" "BufferName 2" "BufferName 3"))
+;; ;;  (setq tabbar-buffer-list-function
+;; ;;        (lambda ()
+;; ;;          (remove-if
+;; ;;           (lambda (buffer)
+;; ;;             (and (not (eq (current-buffer) buffer)) ; Always include the current buffer.
+;; ;;                  (loop for name in *tabbar-ignore-buffers* ;remove buffer name in this list.
+;; ;;                        thereis (string-equal (buffer-name buffer) name))))
+;; ;;           (buffer-list))))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For tags-update, using =ctags -e=, NOT etags!
+(defun oy-build-ctags ()
+  (interactive)
+  (message ">> building project tags ...")
+  ;(let ((root "~/Workspace/"))
+  (let ((root default-directory))
+        (shell-command (concat "ctags -e -R --extra=+fq --exclude=db --exclude=test --exclude=.git --exclude=public -f " root "TAGS " default-directory)))
+  (oy-visit-project-tags)
+  (message ">> tags built successfully!"))
+(defun oy-visit-project-tags ()
+  (interactive)
+  (let ((tags-file (concat default-directory "TAGS")))
+        (visit-tags-table tags-file)
+        (message (concat "Loaded " tags-file))))
+
+;(define-key evil-normal-state-map (kbd "C-w u") 'oy-build-ctags) ;up
+(global-set-key (kbd "C-c u") 'oy-build-ctags)
+;(evil-leader/set-key "up" 'oy-build-ctags)
+
+;; For /etags-table/
+(require 'etags-table)
+(setq etags-table-search-up-depth 10)
+(setq tags-table-list '("~/Workspace/TAGS" "~/tmp/TAGS"))
+
+;; For /etags-select/
+;;;; [SOURCE]: https://github.com/emacsmirror/etags-select
+(add-to-list 'load-path "~/.emacs.d/git/etags-select")
+(load "etags-select.el")
+(require 'etags-select)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
+;; Setting key bindings to close etags-select window
+(define-key etags-select-mode-map (kbd "C-g") 'etags-select-quit)
+        ;; Also quit etags-select when cursor moves to another window
+(define-key etags-select-mode-map (kbd "C-x o") 'etags-select-quit)
+;; (define-key etags-select-mode-map (kbd "C-p") 'etags-select-previous-tag)
+;; (define-key etags-select-mode-map (kbd "C-n") 'etags-select-next-tag)
+;; default etags-select bindings
+        ;; Return -> 'etags-select-goto-tag
+        ;; M-Return -> 'etags-select-goto-tag-other-window
+        ;; p -> 'etags-select-previous-tag
+        ;; n -> 'etags-select-next-tag
+        ;; q -> 'etags-select-quit
+        ;; 0 -> (etags-select-by-tag-number "0")
+        ;; 1 -> (etags-select-by-tag-number "1")
+        ;; .. ..
+        ;; 9 -> (etags-select-by-tag-number "9")
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /Speedbar/
+;; Disable hierarchy 
+(setq speedbar-tag-hierarchy-method nil)
+;; Show all files
+(setq speedbar-show-unknown-files t)
+
+;; For /srSpeedbar/   
+;; ; Change speedbar font size   "WenQuanYi Micro Hei Mono"
+    ;; (defun y-speedbar-face ()
+    ;;         (interactive)
+    ;;         (setq buffer-face-mode-face '(:family "DejaVu Sans Mono" :height 92 :width semi-condensed :weight bold :slant normal))
+    ;;         (buffer-face-mode))
+    ;; (add-hook 'speedbar-mode-hook 'y-speedbar-face)
+;; ; Fix for emacs 24.4
+    ;(defun ad-advised-definition-p (definition)
+      ;"Return non-nil if DEFINITION was generated from advice information."
+      ;(if (or (ad-lambda-p definition)
+          ;(macrop definition)
+          ;(ad-compiled-p definition))
+          ;(let ((docstring (ad-docstring definition)))
+        ;(and (stringp docstring)
+             ;(get-text-property 0 'dynamic-docstring-function docstring)))))
+(require 'sr-speedbar)
+;; (sr-speedbar-open)		; open speedbar by default
+;(setq speedbar-use-images nil)    ; use asicii symbols
+(global-set-key (kbd "<f6>") 'sr-speedbar-toggle);; equiv matlab step in
+;; Fix width
+;; (with-current-buffer sr-speedbar-buffer-name
+;;    (setq window-size-fixed 'width))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /folding-mode/ 
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'folding)
+(load "folding" 'nomessage 'noerror)
+(folding-mode-add-find-file-hook)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;;; For /CEDET/
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; (load-file "~/.emacs.d/git/cedet/cedet-devel-load.el")
+;; (load-file "~/.emacs.d/git/cedet/contrib/cedet-contrib-load.el")
+
+;; ;; ;; setting of /semantic/
+;; ;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; ;; (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+;; ;(require 'semantic/ia)
+;; ;; (require 'semantic/bovine/gcc)
+;; ;; (defun oy-semantic-imenu-hook ()
+;; ;;   (imenu-add-to-menubar "TAGS"))
+;; ;; (add-hook 'semantic-init-hooks 'oy-semantic-imenu-hook)
+;; ;; ;; ; enable support for gnu global
+;; ;; ;; (when (cedet-gnu-global-version-check t)
+;; ;; ;;   (semanticdb-enable-gnu-global-databases 'c-mode)
+;; ;; ;;   (semanticdb-enable-gnu-global-databases 'c++-mode))
+;; ;; ;; ;; enable ctags 
+;; ;; ;; (when (cedet-ectag-version-check t)
+;; ;; ;;   (semantic-load-enable-primary-ectags-support))
+;; (add-hook 'c-mode-common-hook 'semantic-mode)
+;; ;; ;(semantic-mode 1)
+
+;; ;; ;; settings of /EDE/
+;; ;; ;(global-ede-mode t) 
+;; ;; (add-hook 'c-mode-common-hook 'global-ede-mode)
+;; ;; (ede-cpp-root-project "cproj"
+;; ;;                 :name "cpp project"
+;; ;;                 :file "~/Workspace/cpp/Makefile"
+;; ;;                 :include-path '("/"
+;; ;;                                 "/src"
+;; ;;                                 "/lib"
+;; ;;                                 "/common"
+;; ;;                                )
+;; ;;                 :system-include-path '("/usr/include")
+;; ;;                 :spp-table '(("isUnix" . "")
+;; ;;                              ("BOOST_TEST_DYN_LINK" . "")))
+;; ;; ;; include symbol in boost
+;; ;; (setq boost-base-dir "/usr/include/boost")
+;; ;; (semantic-add-system-include boost-base-dir 'c++-mode)
+;; ;; (add-to-list 'auto-mode-alist (cons boost-base-dir 'c++-mode))
+;; ;; ;; include symbol in Qt4
+;; ;; ;(setq qt4-base-dir "/usr/include/qt4")
+;; ;; ;(semantic-add-system-include qt4-base-dir 'c++-mode)
+;; ;; ;(add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
+;; ;; ;(defvar semantic-lex-c-preprocessor-symbol-file '())
+;; ;; ;(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
+;; ;; ;(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
+;; ;; ;(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+
+;; ;; ;; folding codes
+;; ;; (load-library "contrib/semantic-tag-folding.el")
+;; ;; (defun do-after-decorate () (semantic-tag-folding-mode t) )
+;; ;; (add-hook 'semantic-decoration-mode-hook 'do-after-decorate)
+
+;; ;; work with semantic
+;; (require 'eassist)
+;; (defun oy-eassist-cedet-hook ()
+;;   (add-to-list 'ac-sources 'ac-source-gtags)
+;;   (add-to-list 'ac-sources 'ac-source-semantic)
+;;   ;; pressing bindng for "./>" not needed, having been enabled in auto-complete
+;;   ;; (local-set-key "." 'semantic-complete-self-insert) 
+;;   ;; (local-set-key ">" 'semantic-complete-self-insert)
+;;   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+;;   (local-set-key "\C-c?" 'semantic-ia-fast-jump) ; return back by using /semantic-mrub-switch-tag/ or (C-x B)
+;;   ;; (local-set-key "\C-c>" 'semantic-analyze-proto-impl-toggle) ; not work
+;;   (local-set-key "\C-cv" 'semantic-decoration-include-visit)
+;;   (local-set-key "\C-cr" 'semantic-symref-symbol)
+;;   (local-set-key "\C-c\C-r" 'semantic-symref)
+;; ;; usage of /semantic-symref popup window
+;; ;    Tab         forward-button 可多按几次tab进行跳转，
+;; ;    (           semantic-symref-list-create-macro-on-open-hit 这个不常用 ,跟宏录制相关
+;; ;    +           semantic-symref-list-toggle-showing  toogle展开与否
+;; ;    R           semantic-symref-list-rename-open-hits 可以进行批量重命名
+;; ;    C-c C-e     semantic-symref-list-expand-all 展开所有，
+;; ;    C-c C-r     semantic-symref-list-contract-all 折叠所有
+;; ;    Enter       回车中转到相应代码处
+;;   (local-set-key "\C-co" 'eassist-switch-h-cpp)
+;;   (local-set-key "\C-cm" 'eassist-list-methods)
+;; ;; (local-set-key "\C-c+" 'semantic-tag-folding-show-block)
+;; ;; (local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
+;; ;; (local-set-key "\C-c\C-x+" 'semantic-tag-folding-show-all)
+;; ;; (local-set-key "\C-c\C-x-" 'semantic-tag-folding-fold-all)
+;; )
+;; (add-hook 'c-mode-hook 'oy-eassist-cedet-hook)
+;; (add-hook 'c++-mode-hook 'oy-eassist-cedet-hook)
+
+;; ;; ;; ;; Turn on /sematic-mode/ /ede-mode/ in /matlab-mode/
+;; ;; ;; (semantic-mode 1)
+;; ;; ;;     ;; =======================================================================
+;; ;; ;;     ;; !!! if want to use (matlab-cedet-setup), uncomment the next two lines.
+;; ;; ;;     ; (add-hook 'matlab-mode-hook (lambda() (interactive) (semantic-mode 1)))
+;; ;; ;;     ; (add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
+;; ;; ;;     ;; =======================================================================
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ;; For /ECB/
+;; ;; [SOURCE]: https://github.com/emacsmirror/ecb
+(add-to-list 'load-path "~/.emacs.d/git/ecb")
+(require 'ecb)
+(require 'ecb-autoloads)
+(setq ecb-windows-width 0.16)
+(setq ede-project-directories (quote ("~/Workspace/cpp")))
+(setq ecb-source-path '(;"~/Workspace/cpp/src"
+                        ;"~/Workspace/cpp/lib"
+                        "~/tmp/cpp"))
+(setq ecb-tip-of-the-day nil)
+(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+
+;; (add-hook 'c-mode-hook 'ecb-activate)
+;; (add-hook 'c++-mode-hook 'ecb-activate)
+;; (add-hook 'matlab-mode-hook 'ecb-activate)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

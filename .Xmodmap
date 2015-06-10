@@ -1,0 +1,26 @@
+!
+! Swap Alt and Control 
+! Map Meta to win
+! Swap Esc and CapsLock
+!
+clear control
+clear mod1
+clear mod4
+remove lock = Caps_Lock
+
+! Swap Alt and Control
+keycode 37 = Super_L
+keycode 105 = Print Sys_Req Print Sys_Req
+keycode 64 = Control_L
+keycode 108 = Control_R
+!! Map win to Meta, PrtSc to Meta
+keycode 133 = Alt_L
+keycode 107 = Alt_R
+! Swap Esc and CapsLock
+keycode 9 = Caps_Lock
+keycode 66 = Escape
+
+add control = Control_L Control_R
+add mod1 = Alt_L Alt_R Meta_L 
+add mod4 = Super_L Super_R Super_L Hyper_L
+add lock = Caps_Lock
