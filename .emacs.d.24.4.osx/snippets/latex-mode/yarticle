@@ -215,7 +215,7 @@ $0
 % --------------- BIBLIOGRAPHY --------------
 % \bibliographystyle{plainnat}
 \bibliographystyle{abbrvnat}
-{\small
+{\footnotesize
 \bibliography{./ref/library}}
 
 \end{document}

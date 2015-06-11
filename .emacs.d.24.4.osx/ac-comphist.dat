@@ -1,4 +1,6 @@
-((("(_InputIterator __first, _InputIterator __last, _Tp __init, _BinaryOperation __binary_op)" .
+((("index" .
+   [2 0 0 0 1])
+  ("(_InputIterator __first, _InputIterator __last, _Tp __init, _BinaryOperation __binary_op)" .
    [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
   ("(_InputIterator __first, _InputIterator __last, _Tp __init)" .
    [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
@@ -205,7 +207,7 @@
   ("second_func" .
    [0 0 0 0 1 0 0 0 0 0 0])
   ("name" .
-   [4 1 0 0])
+   [4 1 0 1])
   ("string" .
    [1 0 0 1 0 1])
   ("oy-ia-cedet-hook" .

@@ -16,7 +16,7 @@
  ("/Users/oracleyue/Workspace/gitrepo/" . "scripts/")
  ("/Users/oracleyue/tmp/prj/" . "src/")
  ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/" . "figures/")
- ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" . "figures/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" . "ref/")
  ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/MLSP2015/" . "ref/")
  ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/" . "DSF/")
  ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/snippets/" . "latex-mode/")
@@ -24,7 +24,7 @@
  ("/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/" . "figures/")
  ("/Users/oracleyue/tmp/rubber-1.1/data/" . "modules/")
  ("/Users/oracleyue/tmp/rubber-1.1/" . "src/")
- ("/Users/oracleyue/tmp/" . "doxygen/")
+ ("/Users/oracleyue/tmp/" . "py/")
  ("/Users/oracleyue/Library/texmf/tex/" . "latex/")
  ("/Users/oracleyue/Library/texmf/" . "tex/")
  ("/Users/oracleyue/Library/" . "texmf/")
@@ -38,7 +38,7 @@
  ("/Users/oracleyue/Public/Dropbox/Academia/matlab/DSFToolbox/" . "dataproc/")
  ("/Users/oracleyue/Public/Dropbox/Academia/matlab/" . "DSFToolbox/")
  ("/Users/oracleyue/Workspace/projects/" . "caltech/")
- ("/Users/oracleyue/.emacs.d/snippets/" . "cc-mode/")
+ ("/Users/oracleyue/.emacs.d/snippets/" . "latex-mode/")
  ("/Users/oracleyue/Workspace/github.com/" . "dotfiles/")
  ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/" . "org-article/")
  ("/" . "Users/")
@@ -50,7 +50,7 @@
  ("/Users/oracleyue/Public/Gaia/matlab/" . "Feng_prj_HPC/")
  ("/Users/oracleyue/Public/Gaia/" . "matlab/")
  ("/Users/oracleyue/.emacs.d/elpa/" . "yasnippet-20150413.1403/")
- ("/Users/oracleyue/.emacs.d/" . "themes/")
+ ("/Users/oracleyue/.emacs.d/" . "snippets/")
  ("/Users/" . "oracleyue/")
  ("/Users/oracleyue/Public/Dropbox/oracleyue/" . "OrgNote/")
  ("/Users/oracleyue/Public/Dropbox/Academia/" . "Manuscripts/")
@@ -62,15 +62,17 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/oracleyue/tmp/py/"
+ "/Users/oracleyue/.emacs.d/snippets/latex-mode/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/ref/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/"
  "/Users/oracleyue/"
  "/Users/oracleyue/tmp/doxygen/"
  "/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/"
- "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/"
  "/Users/oracleyue/tmp/eigen/"
  "/Users/oracleyue/.emacs.d/themes/"
  "/Users/oracleyue/.emacs.d/snippets/cc-mode/"
  "/Users/oracleyue/tmp/"
- "/Users/oracleyue/.emacs.d/snippets/latex-mode/"
  "/Users/oracleyue/.emacs.d/snippets/"
  "/Users/oracleyue/tmp/gsl/src/"
  "/Users/oracleyue/Workspace/gitrepo/scripts/"
@@ -110,49 +112,51 @@
  "/Users/oracleyue/Documents/TikZ/"
  "/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/figures/"
  "/Users/oracleyue/.emacs.d/"
- "/Users/oracleyue/.emacs.d/eshell/"
- "/Users/oracleyue/Workspace/github.com/goldendict/"
 )
 
 ;; ----- ido-work-file-list -----
 (
+ "hello.py"
+ "ydraft"
+ "yarticle"
+ "library.bib"
+ "NR_Part_II_Computation.tex"
+ "NR_Part_I_Definitions.tex"
  ".emacs"
  "eg_qt.cc"
  "CS.org"
- "NR_Part_I_Definitions.tex"
  "first.cpp"
- "ymonokai-theme.el"
- "Doxyfile"
- "doxy-cc-brief"
- "doxy-c-member"
- "doxy-c-full"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/oracleyue/" (21881 36359 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".fontconfig/" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".anyconnect" ".adobe/" "../" "./")
+ ("/Users/oracleyue/tmp/py/" (21881 31437 0 0) "hello.py" "../" "./")
+
+ ("/Users/oracleyue/tmp/" (21881 42946 0 0) "ropemode/" "ropemacs/" "rope/" "py/" "prj/" "gsl/" "eigen/" "doxygen/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/snippets/latex-mode/" (21881 42421 0 0) "ytikz" "yformula" "ydraft" "ybeamer" "yarticle" "number" "note" "norm" "ieeetran" "endpf" "automatica" "abs" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/" (21881 36415 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "init.el" "git/" "eshell/" "eproject.lst" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/" (21881 40076 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".fontconfig/" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".anyconnect" ".adobe/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" (21881 42353 0 0) "userdef-mathsymb.tex" "titlepage.tex" "texbackup.sh" "ref/" "NR_Part_II_Computation.toc" "NR_Part_II_Computation.tex" "NR_Part_II_Computation.synctex.gz" "NR_Part_II_Computation.pyg" "NR_Part_II_Computation.pdf" "NR_Part_II_Computation.out" "NR_Part_II_Computation.log" "NR_Part_II_Computation.blg" "NR_Part_II_Computation.bbl" "NR_Part_II_Computation.aux" "NR_Part_I_Definitions.toc" "NR_Part_I_Definitions.tex" "NR_Part_I_Definitions.synctex.gz" "NR_Part_I_Definitions.pyg" "NR_Part_I_Definitions.pdf" "NR_Part_I_Definitions.out" "NR_Part_I_Definitions.log" "NR_Part_I_Definitions.blg" "NR_Part_I_Definitions.bbl" "NR_Part_I_Definitions.aux" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "missfont.log" "figures/" "cover-page.tex" "cover-page.pdf" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/ref/" (21833 45585 0 0) "library.bib.sha1" "library.bib" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/tmp/eigen/" (21881 33459 0 0) "run" "obj/" "Makefile" "first.cpp" "../" "./")
-
- ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" (21881 35970 0 0) "userdef-mathsymb.tex" "titlepage.tex" "texbackup.sh" "ref/" "NR_Part_II_Computation.toc" "NR_Part_II_Computation.tex" "NR_Part_II_Computation.synctex.gz" "NR_Part_II_Computation.pyg" "NR_Part_II_Computation.pdf" "NR_Part_II_Computation.out" "NR_Part_II_Computation.log" "NR_Part_II_Computation.blg" "NR_Part_II_Computation.bbl" "NR_Part_II_Computation.aux" "NR_Part_I_Definitions.toc" "NR_Part_I_Definitions.tex" "NR_Part_I_Definitions.synctex.gz" "NR_Part_I_Definitions.pyg" "NR_Part_I_Definitions.pdf" "NR_Part_I_Definitions.out" "NR_Part_I_Definitions.log" "NR_Part_I_Definitions.blg" "NR_Part_I_Definitions.bbl" "NR_Part_I_Definitions.aux" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "missfont.log" "figures/" "cover-page.tex" "cover-page.pdf" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/" (21881 24699 0 0) "PhD.org" "org-article/" "MATH.org" "ltxpng/" "js/" "files/" "css/" "CS.org" "cleaner.sh" "backup/" "auto/" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/themes/" (21806 26000 0 0) "yspolsky-theme.el" "ymonokai-theme.el" "yadwaita-theme.el" "monokai-theme.el" "../" "./")
 
- ("/Users/oracleyue/tmp/" (21881 31437 0 0) "py/" "prj/" "gsl/" "eigen/" "doxygen/" ".DS_Store" "../" "./")
-
  ("/Users/oracleyue/tmp/doxygen/" (21881 31338 0 0) "latex/" "html/" "eg_qt.cc" "Doxyfile" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/snippets/cc-mode/" (21881 26960 0 0) "doxy-cc-member" "doxy-cc-brief" "doxy-c-member" "doxy-c-full" "doxy-c-detail" "../" "./")
 
- ("/Users/oracleyue/.emacs.d/" (21881 26446 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "init.el" "git/" "eshell/" "eproject.lst" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
-
  ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/org-article/" (21602 20353 0 0) "src/" "org_latex_headers.org" "org-article.example.org" "ltxpng/" "img/" "clean.sh" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/snippets/" (21881 20304 0 0) "python-mode/" "org-mode/" "latex-mode/" "cc-mode/" "../" "./")
-
- ("/Users/oracleyue/.emacs.d/snippets/latex-mode/" (21873 53251 0 0) "ytikz" "yformula" "ydraft" "ybeamer" "yarticle" "number" "note" "norm" "ieeetran" "endpf" "automatica" "abs" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/snippets/cc-mode/" (21805 34734 0 0) "while" "typedef" "ternary" "struct" "once" "math" "main" "inc.1" "inc" "ifdef" "if" "for" "do" "../" "./")
 
@@ -327,10 +331,6 @@
  ("/Users/oracleyue/Library/texmf/" (21695 48141 0 0) "tex/" "doc/" "bibtex/" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/Library/" (21698 23554 0 0) "Workflows/" "WebKit/" "Voices/" "VirtualBox/" "TeXShop/" "texmf.osx.tar.xz" "texmf/" "SyncedPreferences/" "Spelling/" "Sounds/" "Services/" "Scripts/" "Screen Savers/" "Saved Application State/" "Safari/" "PubSub/" "Printers/" "Preferences/" "PreferencePanes/" "PhotoshopCrashes/" "PDF Services/" "Mobile Documents/" "Messages/" "Mail/" "Logs/" "LaunchAgents/" "LanguageModeling/" "Keychains/" "Keyboard Layouts/" "iTunes/" "Internet Plug-Ins/" "Input Methods/" "iMovie/" "IdentityServices/" "Icons/" "Group Containers/" "GameKit/" "Fonts/" "FontCollections/" "Favorites/" "Dictionaries/" "Developer/" "Cookies/" "Containers/" "Compositions/" "com.apple.nsurlsessiond/" "ColorSync/" "Colors/" "ColorPickers/" "Calendars/" "Caches/" "Autosave Information/" "Audio/" "Assistants/" "Application Support/" "Application Scripts/" "Address Book Plug-Ins/" "Accounts/" ".localized" ".DS_Store" "../" "./")
-
- ("/Users/oracleyue/Workspace/github.com/rubber-1.1/" (21705 12704 0 0) "src/" "setup.py" "rubber.spec.in" "rubber-pipe" "rubber-info" "rubber" "README" "PKG-INFO" "NEWS" "MANIFEST.in" "Makefile.in" "fixed_bug_list" "doc/" "data/" "COPYING" "configure" ".git/" ".#README" "../" "./")
-
- ("/Users/oracleyue/.emacs.d/elpa/auctex-11.88/" (21603 14513 0 0) "toolbar-x.elc" "toolbar-x.el" "texmathp.elc" "texmathp.el" "tex.elc" "tex.el" "tex-wizard.elc" "tex-wizard.el" "tex-style.elc" "tex-style.el" "tex-site.elc" "tex-site.el" "tex-mik.elc" "tex-mik.el" "tex-jp.elc" "tex-jp.el" "tex-info.elc" "tex-info.el" "tex-font.elc" "tex-font.el" "tex-fold.elc" "tex-fold.el" "tex-buf.elc" "tex-buf.el" "tex-bar.elc" "tex-bar.el" "tests/" "style/" "RELEASE" "README.GIT" "README" "prv-xemacs.elc" "prv-xemacs.el" "prv-emacs.elc" "prv-emacs.el" "preview.elc" "preview.el" "preview-latex.info" "plain-tex.elc" "plain-tex.el" "multi-prompt.elc" "multi-prompt.el" "latex.elc" "latex.el" "latex/" "images/" "GNUmakefile" "font-latex.elc" "font-latex.el" "doc/" "dir" "COPYING" "context.elc" "context.el" "context-nl.elc" "context-nl.el" "context-en.elc" "context-en.el" "circ.tex" "ChangeLog-preview.1" "ChangeLog-preview" "ChangeLog" "bib-cite.elc" "bib-cite.el" "auctex.info" "auctex.elc" "auctex.el" "auctex-pkg.elc" "auctex-pkg.el" "auctex-autoloads.el" ".elpaignore" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

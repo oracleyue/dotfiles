@@ -108,7 +108,7 @@ $0
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
 % \bibliographystyle{plainnat}
-% {\small
+% {\footnotesize
 % \bibliography{./ref/library}}
 
 \end{document}

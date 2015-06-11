@@ -28,19 +28,20 @@
 
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;; use variable-width font types in text-mode
-(defun y-variable-width-text-mode ()
-  (interactive)
-  (variable-pitch-mode t)
-  (text-scale-increase 0.5)
-  )
-
+;;; use variable-width font types in text-mode
+;; (defun y-variable-width-text-mode ()
+;;   (interactive)
+;;   (variable-pitch-mode t)
+;;   (text-scale-increase 0.5)
+;;   )
+;
 ;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; font size adjustment
 ;; C-x C-0 : return to default size
-(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
-(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
+;;; use C-x C-0 first, then use +/- to tune the size.
+;; (global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
+;; (global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 
 ;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
@@ -247,7 +248,8 @@
 ;; select candidates in ac-menu
 (setq ac-use-menu-map t)
 ;; ;; set the width of popup menu to fix bugs
-;; (setq ac-max-width 0.5)
+(setq ac-max-width 0.5)
+;; keystokes
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
 (define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
@@ -306,8 +308,8 @@
 (cond
  ((string-equal system-type "darwin")
   (require 'dash-at-point)
-  (global-set-key "\C-cd" 'dash-at-point)
-  (global-set-key "\C-ce" 'dash-at-point-with-docset)
+  (global-set-key "\C-cd" 'dash-at-point) ; default \C-cd, conflicts with /doxyemacs/
+  ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
   ; specify docsets to search in different modes
   (set 'dash-at-point-mode-alist
     '((c-mode . "c,gsl,gl4")
@@ -459,6 +461,16 @@
 ;; default mode for Makefile in Mac OS X
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+
+;; ;; use /doxymacs/ to manipulate doxygen documentations
+;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
+;; (require 'doxymacs)
+;; (add-hook 'c-mode-common-hook 'doxymacs-mode)
+;; ; fontify the doxygen keywords
+;; (defun my-doxymacs-font-lock-hook ()
+;;   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+;;       (doxymacs-font-lock)))
+;; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 
 ; =======================================
 ;; Programming Environment for /Python/
