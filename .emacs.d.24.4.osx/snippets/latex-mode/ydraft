@@ -108,7 +108,8 @@ $0
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
 % \bibliographystyle{plainnat}
-% \bibliography{./ref/library}
+% {\small
+% \bibliography{./ref/library}}
 
 \end{document}
 
