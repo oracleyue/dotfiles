@@ -1,0 +1,13 @@
+;;; etags-table-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+
+
+(provide 'etags-table-autoloads)
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; etags-table-autoloads.el ends here

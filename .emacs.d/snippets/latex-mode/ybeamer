@@ -1,0 +1,154 @@
+# -*- mode: snippet -*-
+# name: yBeamer Header
+# key: yb
+# expand-env: ((yas-indent-line 'fixed))
+# --
+%\documentclass[compress,blue]{beamer}
+\documentclass{beamer}
+%\mode<presentation>
+
+% set theme
+% \usetheme[compress]{Berlin}
+% \usetheme{CambridgeUS}
+\usetheme{Madrid}
+% set fonts 
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+% \usefonttheme{serif} % default family is serif
+    % \setmainfont{Times New Roman}
+
+% Theme for beamer presentation.
+%\usepackage{beamerthemesplit} 
+% Other themes include: beamerthemebars, beamerthemelined, 
+%                       beamerthemetree, beamerthemetreebars  
+
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{items}[ball]
+%\setbeamertemplate{navigation symbols}{}
+%\setbeamercolor{title}{bg=red!65!black, fg=white}
+
+% include packages
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+% \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
+% \usepackage{amsthm}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{tikz}	
+% \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,intersections}
+\usepackage{calc}
+
+% %% theorem style given by /amsthm/
+% \theoremstyle{plain}% default
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem*{corollary}{Corollary}
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{conjecture}{Conjecture}[section]
+% \newtheorem{example}{Example}[section]
+% \theoremstyle{remark}
+% \newtheorem*{remark}{Remark}
+% \newtheorem*{note}{Note}
+% \newtheorem{case}{Case}
+
+
+% General Settings
+\setcounter{footnote}{0}% Reset footnote counter
+\let\SMALL\footnotesize
+\renewcommand*{\footnotesize}{\SMALL\tiny}
+% color definition for xcolor
+\definecolor{olive}{rgb}{0.3, 0.4, .1}
+\definecolor{fore}{RGB}{249,242,215}
+\definecolor{back}{RGB}{51,51,51}
+\definecolor{title}{RGB}{255,0,90}
+\definecolor{dgreen}{rgb}{0.,0.6,0.}
+\definecolor{gold}{rgb}{1.,0.84,0.}
+\definecolor{JungleGreen}{cmyk}{0.99,0,0.52,0}
+\definecolor{BlueGreen}{cmyk}{0.85,0,0.33,0}
+\definecolor{RawSienna}{cmyk}{0,0.72,1,0.45}
+\definecolor{Magenta}{cmyk}{0,1,0,0}
+
+% PDF info
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfsubject={Presentation Slides},
+  pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+
+% coordinates for logo in titlepage
+\newlength{\logoX}
+\newlength{\logoY}
+\newcommand{\coordinateWidth}{0.7cm}
+\newcommand{\coordinateHeight}{1.1cm}
+  
+% Title Page
+\title[${2:abbrev title}]{${1:title}}
+\subtitle{${3:}}
+\author{Zuogong YUE}
+\institute[LCSB \& FSTC]{{\scriptsize supervised by}\\\ \vspace{.2cm}{\SMALL Professor Jorge Gon\c{c}alves}\\\ \vspace{.60cm} Faculty of Science, Technology and Communication\\\ Luxembourg Centre for Systems Biomedicine\\\ \smallskip University of Luxembourg}
+\date[\today]{}
+
+
+\begin{document}
+
+% Creates title page of slide show using above information
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+    \setlength{\logoX}{\coordinateWidth}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=.7cm,yshift=1.1cm] at (current page.south west) 
+          {\includegraphics[height=1cm]{figures/lcsb-logo}};
+    \setlength{\logoX}{-\coordinateWidth-1cm}
+    \setlength{\logoY}{\coordinateHeight-0.1cm}
+      \node[xshift=-1.7cm,yshift=1.0cm] at (current page.south east) 
+          {\includegraphics[height=.7cm]{figures/unilu-logo}};
+    \setlength{\logoX}{\coordinateWidth+6.2cm}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=6.9cm,yshift=1.1cm] at (current page.south west) 
+          {\includegraphics[scale=1]{figures/lcsb-ppt-template-line}};
+  \end{tikzpicture}
+
+  \titlepage
+\end{frame}
+                           
+% add logo in slide template
+\addtobeamertemplate{frametitle}{}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,yshift=2pt] at (current page.north east)
+      {\includegraphics[height=0.8cm]{figures/lcsb-logo}};
+\end{tikzpicture}}
+
+%\section[Outline]{}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+
+% ---- Main Part ----
+
+$0
+
+
+
+% ---- Thanks Frame ----
+\section*{Thanks}
+
+\begin{frame}
+    \vspace*{1cm}
+    {\Huge \bf \textcolor{Magenta}{Thank you!}} \\\
+    \bigskip
+    \bigskip
+    \includegraphics[width=10cm]{figures/unix_happy.jpg}
+\end{frame}
+
+
+\end{document}

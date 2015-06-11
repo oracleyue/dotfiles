@@ -1,0 +1,114 @@
+# -*- mode: snippet -*-
+# name: yDraft Header
+# key: yd
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper,10pt]{article}
+% \documentclass[a4paper,11pt,onecolumn,twoside,compsoc]{IEEEtran}  % change to the /article/ class if you don't have /IEEEtran/ cls file
+\usepackage[text={360pt, 595pt},centering]{geometry}     % latex /article.cls/ default layout
+\usepackage{setspace}
+  \onehalfspacing
+  % \doublespacing
+
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}  % using Helvet as sans serif font
+\usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
+\usepackage[scaled=0.8]{DejaVuSansMono}
+
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage[usenames]{color}
+\usepackage{minted}
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
+  \usemintedstyle{pastie}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage{natbib}
+
+
+%% theorem style given by /amsthm/
+\theoremstyle{plain}% default
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+
+\setcounter{tocdepth}{3}
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfsubject={Technical Report},
+  pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+
+
+\title{\sffamily \LARGE \bfseries ${1:title}}
+\author{Zuogong YUE \vspace*{1mm} \\
+\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\ \small Universit\'{e} du Luxembourg
+}
+\date{\small \today}
+
+
+
+\begin{document}
+
+\maketitle
+    \thispagestyle{empty}
+    % \vspace*{1cm}
+    \pagenumbering{Roman}
+\tableofcontents
+    % \thispagestyle{empty}
+\newpage
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+
+
+% ----------------- MAIN --------------------
+
+$0
+
+
+
+
+
+
+
+
+
+
+
+% \newpage
+% % --------------- APPENDIX --------------
+% \appendix
+% % \section*{Appendices}                                % comment when using /IEEEtran/
+% % \addcontentsline{toc}{section}{List of appendices}   % comment when using /IEEEtran/
+% \renewcommand{\thesubsection}{\Alph{subsection}}
+%     Appendix here ...
+
+% \subsection{appendix 1}
+
+
+
+% \newpage
+% % --------------- BIBLIOGRAPHY --------------
+% \bibliographystyle{plainnat}
+% \bibliography{./ref/library}
+
+\end{document}
+

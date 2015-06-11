@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: notes in color
+# key: note
+# --
+({\color{${1:red}} $0})

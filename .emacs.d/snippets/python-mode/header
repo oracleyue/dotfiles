@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: simple header
+# key: head
+# group: templates
+# --
+#!/usr/bin/python2 -tt
+# -*- coding: utf-8 -*-
+# Scripts for "Learn Python the Hard Way"

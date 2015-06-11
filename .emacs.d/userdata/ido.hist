@@ -1,0 +1,337 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/snippets/" . "cc-mode/")
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/" . "snippets/")
+ ("/usr/local/" . "bin/")
+ ("/usr/" . "local/")
+ ("/Users/oracleyue/tmp/gsl/" . "src/")
+ ("/Users/oracleyue/Papers/" . "BibTeX_sync/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/drafts/" . "ref/")
+ ("/Users/oracleyue/Public/Dropbox/Shared/Wei_n_Zuogong/" . "papers/")
+ ("/Users/oracleyue/Public/Dropbox/Shared/" . "Wei_n_Zuogong/")
+ ("/Users/oracleyue/Files/uni.lu/" . "PHD/")
+ ("/Users/oracleyue/Files/" . "uni.lu/")
+ ("/Users/oracleyue/Workspace/gitrepo/" . "scripts/")
+ ("/Users/oracleyue/tmp/prj/" . "src/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/" . "figures/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" . "figures/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/MLSP2015/" . "ref/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/" . "DSF/")
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/snippets/" . "latex-mode/")
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/" . "snippets/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/" . "figures/")
+ ("/Users/oracleyue/tmp/rubber-1.1/data/" . "modules/")
+ ("/Users/oracleyue/tmp/rubber-1.1/" . "src/")
+ ("/Users/oracleyue/tmp/" . "doxygen/")
+ ("/Users/oracleyue/Library/texmf/tex/" . "latex/")
+ ("/Users/oracleyue/Library/texmf/" . "tex/")
+ ("/Users/oracleyue/Library/" . "texmf/")
+ ("/Users/oracleyue/Downloads/articles/elsarticle/" . "doc/")
+ ("/Users/oracleyue/Downloads/articles/" . "elsarticle/")
+ ("/Users/oracleyue/Downloads/" . "articles/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Reports/" . "DSF/")
+ ("/Users/oracleyue/Documents/" . "TikZ/")
+ ("/Users/oracleyue/Public/Dropbox/_others/" . "org-tex/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/Courses/" . "Exercises/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/matlab/DSFToolbox/" . "dataproc/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/matlab/" . "DSFToolbox/")
+ ("/Users/oracleyue/Workspace/projects/" . "caltech/")
+ ("/Users/oracleyue/.emacs.d/snippets/" . "cc-mode/")
+ ("/Users/oracleyue/Workspace/github.com/" . "dotfiles/")
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/" . "org-article/")
+ ("/" . "Users/")
+ ("/Users/oracleyue/Workspace/matlab/Feng_prj_HPC/dataproc/" . "hpcres2nd3/")
+ ("/Users/oracleyue/Workspace/matlab/Feng_prj_HPC/" . "dataproc/")
+ ("/Users/oracleyue/Workspace/matlab/" . "temp/")
+ ("/Users/oracleyue/Workspace/" . "gitrepo/")
+ ("/Users/oracleyue/Public/Gaia/matlab/Feng_prj_HPC/" . "dataproc/")
+ ("/Users/oracleyue/Public/Gaia/matlab/" . "Feng_prj_HPC/")
+ ("/Users/oracleyue/Public/Gaia/" . "matlab/")
+ ("/Users/oracleyue/.emacs.d/elpa/" . "yasnippet-20150413.1403/")
+ ("/Users/oracleyue/.emacs.d/" . "themes/")
+ ("/Users/" . "oracleyue/")
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/" . "OrgNote/")
+ ("/Users/oracleyue/Public/Dropbox/Academia/" . "Manuscripts/")
+ ("/Users/oracleyue/Public/Dropbox/" . "oracleyue/")
+ ("/Users/oracleyue/Public/" . "Dropbox/")
+ ("/Users/oracleyue/" . "tmp/")
+ ("/home/" . "oracleyue/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/oracleyue/"
+ "/Users/oracleyue/tmp/doxygen/"
+ "/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/"
+ "/Users/oracleyue/tmp/eigen/"
+ "/Users/oracleyue/.emacs.d/themes/"
+ "/Users/oracleyue/.emacs.d/snippets/cc-mode/"
+ "/Users/oracleyue/tmp/"
+ "/Users/oracleyue/.emacs.d/snippets/latex-mode/"
+ "/Users/oracleyue/.emacs.d/snippets/"
+ "/Users/oracleyue/tmp/gsl/src/"
+ "/Users/oracleyue/Workspace/gitrepo/scripts/"
+ "/usr/local/bin/"
+ "/Users/oracleyue/.emacs.d/git/"
+ "/Users/oracleyue/.emacs.d/elpa/dash-at-point-20140626.35/"
+ "/Users/oracleyue/Workspace/R/"
+ "/Users/oracleyue/tmp/gsl/"
+ "/Users/oracleyue/tmp/gsl/include/"
+ "/Users/oracleyue/tmp/prj/"
+ "/Users/oracleyue/Workspace/cpp/"
+ "/Users/oracleyue/Public/Dropbox/Academia/bibtex_sync/"
+ "/Users/oracleyue/Papers/BibTeX_sync/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/drafts/ref/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/drafts/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/"
+ "/Users/oracleyue/Downloads/"
+ "/Users/oracleyue/Files/uni.lu/PHD/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/figures/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/figures/"
+ "/Users/oracleyue/Public/Dropbox/Academia/TikZ-demos/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CDC2015/"
+ "/Users/oracleyue/.emacs.d/elpa/auctex-11.88.4/"
+ "/Users/oracleyue/Workspace/gitrepo/dotfiles/"
+ "/Users/oracleyue/tmp/cpp/"
+ "/Users/oracleyue/tmp/prj/src/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/TikZ/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Slides/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/MLSP2015/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/AFR/"
+ "/Users/oracleyue/Desktop/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/"
+ "/Users/oracleyue/Documents/"
+ "/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/snippets/latex-mode/"
+ "/Users/oracleyue/Documents/TikZ/"
+ "/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/figures/"
+ "/Users/oracleyue/.emacs.d/"
+ "/Users/oracleyue/.emacs.d/eshell/"
+ "/Users/oracleyue/Workspace/github.com/goldendict/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".emacs"
+ "eg_qt.cc"
+ "CS.org"
+ "NR_Part_I_Definitions.tex"
+ "first.cpp"
+ "ymonokai-theme.el"
+ "Doxyfile"
+ "doxy-cc-brief"
+ "doxy-c-member"
+ "doxy-c-full"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/oracleyue/" (21881 36359 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".fontconfig/" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".anyconnect" ".adobe/" "../" "./")
+
+ ("/Users/oracleyue/tmp/eigen/" (21881 33459 0 0) "run" "obj/" "Makefile" "first.cpp" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" (21881 35970 0 0) "userdef-mathsymb.tex" "titlepage.tex" "texbackup.sh" "ref/" "NR_Part_II_Computation.toc" "NR_Part_II_Computation.tex" "NR_Part_II_Computation.synctex.gz" "NR_Part_II_Computation.pyg" "NR_Part_II_Computation.pdf" "NR_Part_II_Computation.out" "NR_Part_II_Computation.log" "NR_Part_II_Computation.blg" "NR_Part_II_Computation.bbl" "NR_Part_II_Computation.aux" "NR_Part_I_Definitions.toc" "NR_Part_I_Definitions.tex" "NR_Part_I_Definitions.synctex.gz" "NR_Part_I_Definitions.pyg" "NR_Part_I_Definitions.pdf" "NR_Part_I_Definitions.out" "NR_Part_I_Definitions.log" "NR_Part_I_Definitions.blg" "NR_Part_I_Definitions.bbl" "NR_Part_I_Definitions.aux" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "missfont.log" "figures/" "cover-page.tex" "cover-page.pdf" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/" (21881 24699 0 0) "PhD.org" "org-article/" "MATH.org" "ltxpng/" "js/" "files/" "css/" "CS.org" "cleaner.sh" "backup/" "auto/" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/themes/" (21806 26000 0 0) "yspolsky-theme.el" "ymonokai-theme.el" "yadwaita-theme.el" "monokai-theme.el" "../" "./")
+
+ ("/Users/oracleyue/tmp/" (21881 31437 0 0) "py/" "prj/" "gsl/" "eigen/" "doxygen/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/tmp/doxygen/" (21881 31338 0 0) "latex/" "html/" "eg_qt.cc" "Doxyfile" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/snippets/cc-mode/" (21881 26960 0 0) "doxy-cc-member" "doxy-cc-brief" "doxy-c-member" "doxy-c-full" "doxy-c-detail" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/" (21881 26446 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "init.el" "git/" "eshell/" "eproject.lst" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/OrgNote/org-article/" (21602 20353 0 0) "src/" "org_latex_headers.org" "org-article.example.org" "ltxpng/" "img/" "clean.sh" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/snippets/" (21881 20304 0 0) "python-mode/" "org-mode/" "latex-mode/" "cc-mode/" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/snippets/latex-mode/" (21873 53251 0 0) "ytikz" "yformula" "ydraft" "ybeamer" "yarticle" "number" "note" "norm" "ieeetran" "endpf" "automatica" "abs" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/snippets/cc-mode/" (21805 34734 0 0) "while" "typedef" "ternary" "struct" "once" "math" "main" "inc.1" "inc" "ifdef" "if" "for" "do" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/snippets/" (21805 34764 0 0) "yaml-mode/" "udev-mode/" "typerex-mode" "tuareg-mode/" "text-mode/" "sql-mode/" "snippet-mode/" "sh-mode/" "scala-mode/" "ruby-mode/" "rst-mode/" "rename_add_contr.py" "README.md" "python-mode/" "prog-mode/" "perl-mode/" "org-mode/" "octave-mode/" "nxml-mode/" "nsis-mode/" "nesc-mode/" "ned-mode/" "markdown-mode/" "makefile-mode/" "makefile-gmake-mode/" "makefile-bsdmake-mode/" "makefile-automake-mode/" "m4-mode/" "lua-mode/" "lisp-interaction-mode/" "LICENSE" "latex-mode/" "js2-mode/" "js-mode/" "java-mode/" "html-mode/" "haskell-mode/" "groovy-mode/" "go-mode/" "git-commit-mode/" "fundamental-mode/" "f90-mode/" "erlang-mode/" "erc-mode/" "ensime-mode" "enh-ruby-mode" "emacs-lisp-mode/" "css-mode/" "csharp-mode/" "cpp-omnet-mode/" "cperl-mode/" "CONTRIBUTORS.txt" "conf-unix-mode/" "cmake-mode/" "chef-mode/" "cc-mode/" "c-mode/" "c++-mode/" "applescript-mode/" "antlr-mode/" ".nosearch" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/" (21879 32372 0 0) "yasnippet-20150413.1403/" "xcscope-20140510.1437/" "undo-tree-20140509.522/" "tabbar-ruler-20150114.615/" "tabbar-20141109.143/" "sr-speedbar-20141004.532/" "smex-20141210.1422/" "python-environment-20150310.153/" "popup-20150315.612/" "multiple-cursors-20150307.2322/" "multi-term-20150220.1320/" "matlab-mode-20141227.1244/" "magit-20150411.1731/" "jedi-core-20150528.2022/" "jedi-20150528.2011/" "iedit-20150108.1653/" "ido-ubiquitous-20150412.1842/" "ido-hacks-20150331.1209/" "ido-completing-read+-20150412.1842/" "htmlize-20130207.1202/" "goto-chg-20131228.1459/" "gnupg/" "git-rebase-mode-20150122.1114/" "git-commit-mode-20150330.1048/" "flx-ido-20140821.2033/" "flx-20140921.739/" "fill-column-indicator-20140509.1101/" "expand-region-20150414.908/" "evil-leader-20140606.543/" "evil-20150413.0/" "etags-table-20130824.1157/" "ess-20150409.1221/" "epc-20140609.2234/" "deferred-20150309.2052/" "dash-at-point-20140626.35.txt" "ctable-20140304.1659/" "csv-mode-1.3.signed" "csv-mode-1.3/" "concurrent-20150309.2052/" "bash-completion-20150328.837/" "auto-complete-clang-20140409.52/" "auto-complete-c-headers-20140325.835/" "auto-complete-20150408.1132/" "auctex-11.88.4.signed" "auctex-11.88.4/" "archives/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Workspace/gitrepo/scripts/" (21864 55542 0 0) "sub-rename.sh" "LICENSE" "csv_transpose_4.sh" "csv_transpose_3.py" "csv_transpose_2.py" "csv_transpose.py" ".git/" "../" "./")
+
+ ("/Users/oracleyue/Workspace/gitrepo/" (21879 3018 0 0) "scripts/" "rubber-1.1/" "org-article/" "dotfiles/" "Dash-User-Contributions/" "biolyapunov/" ".DS_Store" "../" "./")
+
+ ("/usr/local/bin/" (21878 42919 0 0) "xzmore" "xzless" "xzgrep" "xzfgrep" "xzegrep" "xzdiff" "xzdec" "xzcmp" "xzcat" "xz" "wrjpgcom" "word-list-compress" "wish8.6" "wget" "wftopfa" "watchgnupg" "Wand-config" "vtwrapper" "vtunify-mpi" "vtunify" "vtsetup.jar" "vtsetup" "vtrun" "vtfort" "vtfiltergen-mpi" "vtfiltergen" "vtfilter-mpi" "vtfilter" "vtf90" "vtf77" "vtcxx" "vtcc" "vtc++" "virtualenv-3.4" "virtualenv" "unxz" "unrar" "unlzma" "unix2mac" "unix2dos" "unix-lpr.sh" "tree" "trash" "tmux" "tiffsplit" "tiffset" "tiffmedian" "tiffinfo" "tiffdump" "tiffdither" "tiffcrop" "tiffcp" "tiffcmp" "tiff2rgba" "tiff2ps" "tiff2pdf" "tiff2bw" "thumbnail" "texdist" "tclsh8.6" "symcryptrun" "stream" "smtpd2.py" "smtpd2.7.py" "smtpd.py" "sip" "sdl2-config" "run-with-aspell" "rubber-pipe" "rubber-info" "rubber" "rgb2ycbcr" "rename" "rdjpgcom" "raw2tiff" "ras2tiff" "pyuic4" "pythonw2.7" "pythonw2" "pythonw" "python2.7-config" "python2.7" "python2-config" "python2" "python-config" "python" "pyrcc4" "pylupdate4" "pygmentize" "pyflakes" "pydoc2.7" "pydoc2" "pydoc" "pth-config" "pspell-config" "ps2ps2" "ps2ps" "ps2pdfwr" "ps2pdf14" "ps2pdf13" "ps2pdf12" "ps2pdf" "ps2epsi" "ps2ascii" "printafm" "prezip-bin" "prezip" "preunzip" "prename" "precat" "ppm2tiff" "pphs" "pngfix" "png-fix-itxt" "pkg-config" "pip2.7" "pip2" "pip" "pinentry-curses" "pinentry" "pfbtopfa" "pf2afm" "pdftk" "pdf2ps" "pdf2dsc" "par2" "pal2rgb" "otfshrink" "otfprofile-mpi" "otfprofile" "otfprint" "otfmerge-mpi" "otfmerge" "otfinfo" "otfdecompress" "otfconfig" "otfcompress" "otfaux" "orterun" "orted" "ortecc" "orte-top" "orte-server" "orte-ps" "orte-info" "orte-clean" "opal_wrapper" "ompi_info" "ompi-top" "ompi-server" "ompi-ps" "ompi-clean" "nosetests-2.7" "nosetests" "mpirun" "mpifort-vt" "mpifort" "mpif90-vt" "mpif90" "mpif77-vt" "mpif77" "mpiexec" "mpicxx-vt" "mpicxx" "mpicc-vt" "mpicc" "mpicalc" "mpic++-vt" "mpic++" "montage" "mogrify" "mlint" "mbuild" "matlab" "mame" "makedepend" "MagickWand-config" "MagickCore-config" "Magick-config" "Magick++-config" "mac2unix" "lzmore" "lzmainfo" "lzmadec" "lzma" "lzless" "lzgrep" "lzfgrep" "lzegrep" "lzdiff" "lzcmp" "lzcat" "lprsetup.sh" "llvm-config" "libusb-config" "libpng16-config" "libpng-config" "libgcrypt-config" "libassuan-config" "ksba-config" "kbxutil" "jpegtran" "jediepcserver" "ipython2" "ipython" "iptest2" "iptest" "ipengine2" "ipengine" "ipcontroller2" "ipcontroller" "ipcluster2" "ipcluster" "import" "ifnames" "idle2.7" "idle2" "idle" "identify" "htop" "hmac256" "gyes" "gwhoami" "gwho" "gwc" "gvdir" "gusers" "guptime" "gunlink" "guniq" "gunexpand" "guname" "gtty" "gtsort" "gtruncate" "gtrue" "gtr" "gtouch" "gtimeout" "gtester-report" "gtester" "gtest" "gtee" "gtail" "gtac" "gsync" "gsum" "gstty" "gstdbuf" "gstat" "gsplit" "gsort" "gsnd" "gslp" "gslj" "gsleep" "gsl-randist" "gsl-histogram" "gsl-config" "gshuf" "gshred" "gsha512sum" "gsha384sum" "gsha256sum" "gsha224sum" "gsha1sum" "gsettings" "gseq" "gsdj500" "gsdj" "gsbj" "gs-X11" "gs-noX11" "gs" "gruncon" "grmdir" "grm" "gresource" "grep-changelog" "grealpath" "greadlink" "gpwd" "gptx" "gprintf" "gprintenv" "gpr" "gpinky" "gpgv2" "gpgsm-gencert.sh" "gpgsm" "gpgparsemail" "gpgkey2ssh" "gpgconf" "gpg2" "gpg-error-config" "gpg-error" "gpg-connect-agent" "gpg-agent" "gpg" "gpathchk" "gpaste" "god" "gobject-query" "gnumfmt" "gnproc" "gnohup" "gnl" "gnice" "gmv" "gmktemp" "gmknod" "gmkfifo" "gmkdir" "gmd5sum" "gls" "glogname" "gln" "glink" "glibtoolize" "glibtool" "glib-mkenums" "glib-gettextize" "glib-genmarshal" "glib-compile-schemas" "glib-compile-resources" "gkill" "gjoin" "gio-querymodules" "ginstall" "gif2tiff" "gid" "ghostid" "ghead" "ggroups" "gfold" "gfmt" "gfalse" "gfactor" "gexpr" "gexpand" "genv" "gecho" "gdu" "gdirname" "gdircolors" "gdir" "gdf" "gdd" "gdbus-codegen" "gdbus" "gdbmtool" "gdbm_load" "gdbm_dump" "gdate" "gcut" "gcsplit" "gcp" "gcomm" "gcksum" "gchroot" "gchown" "gchmod" "gchgrp" "gchcon" "gcat" "gbasename" "gbase64" "gapplication" "gaia-sshfs" "g[" "freetype-config" "font2c" "fax2tiff" "fax2ps" "f2py" "event_rpcgen.py" "etags" "eps2eps" "emacsclient" "emacs-24.4" "emacs" "ebrowse" "easy_install-2.7" "easy_install" "dvipdf" "dumpsexp" "doxygen" "dos2unix" "djpeg" "display" "dirmngr-client" "dirmngr" "curve_keygen" "ctest" "ctags" "cpack" "convert" "conjure" "composite" "compare" "cmakexbuild" "cmake" "cjpeg" "ccmake" "brew-cask.rb" "brew" "bmp2tiff" "autoupdate" "autoscan" "autoreconf" "automake-1.14" "automake" "autom4te" "autoheader" "autoconf" "atlas" "aspell-import" "aspell" "applygnupgdefaults" "animate" "addgnupghome" "aclocal-1.14" "aclocal" "7zr" "7za" "7z" "2to3-2.7" "2to3-2" "2to3" "../" "./")
+
+ ("/usr/local/" (21808 15137 0 0) "var/" "texlive/" "SUPPORTERS.md" "src/" "share/" "README.md" "Qt4.8/" "opt/" "man/" "MacGPG2/" "LICENSE.txt" "Library/" "lib/" "info/" "include/" "Frameworks/" "etc/" "CODEOFCONDUCT.md" "Cellar/" "bin/" ".yardopts" ".gitignore" ".git/" "../" "./")
+
+ ("/usr/" (21632 31993 0 0) "X11R6/" "X11/" "texbin/" "standalone/" "share/" "sbin/" "local/" "libexec/" "lib/" "include/" "bin/" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/git/" (21879 32767 0 0) "hl-sexp.el" "google-c-style.el" "folding.el" "etags-select/" "emacs-for-python/" "ecb/" "dash-at-point.el" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/dash-at-point-20140626.35/" (21879 26487 0 0) "Readme.md" "dash-at-point.elc" "dash-at-point.el" "dash-at-point-pkg.elc" "dash-at-point-pkg.el" "dash-at-point-autoloads.el" "../" "./")
+
+ ("/Users/oracleyue/tmp/gsl/src/" (21879 28278 0 0) "func.c" "eigen.c" ".DS_Store" "../" "./")
+
+ ("/usr/local/Cellar/emacs/24.4/share/emacs/24.4/lisp/progmodes/" (21652 29082 0 0) "xscheme.elc" "xscheme.el.gz" "which-func.elc" "which-func.el.gz" "vhdl-mode.elc" "vhdl-mode.el.gz" "verilog-mode.elc" "verilog-mode.el.gz" "vera-mode.elc" "vera-mode.el.gz" "tcl.elc" "tcl.el.gz" "subword.elc" "subword.el.gz" "sql.elc" "sql.el.gz" "simula.elc" "simula.el.gz" "sh-script.elc" "sh-script.el.gz" "scheme.elc" "scheme.el.gz" "ruby-mode.elc" "ruby-mode.el.gz" "python.elc" "python.el.gz" "ps-mode.elc" "ps-mode.el.gz" "prolog.elc" "prolog.el.gz" "prog-mode.elc" "prog-mode.el.gz" "perl-mode.elc" "perl-mode.el.gz" "pascal.elc" "pascal.el.gz" "opascal.elc" "opascal.el.gz" "octave.elc" "octave.el.gz" "modula2.elc" "modula2.el.gz" "mixal-mode.elc" "mixal-mode.el.gz" "meta-mode.elc" "meta-mode.el.gz" "mantemp.elc" "mantemp.el.gz" "make-mode.elc" "make-mode.el.gz" "m4-mode.elc" "m4-mode.el.gz" "ld-script.elc" "ld-script.el.gz" "js.elc" "js.el.gz" "inf-lisp.elc" "inf-lisp.el.gz" "idlwave.elc" "idlwave.el.gz" "idlw-toolbar.elc" "idlw-toolbar.el.gz" "idlw-shell.elc" "idlw-shell.el.gz" "idlw-help.elc" "idlw-help.el.gz" "idlw-complete-structtag.elc" "idlw-complete-structtag.el.gz" "icon.elc" "icon.el.gz" "hideshow.elc" "hideshow.el.gz" "hideif.elc" "hideif.el.gz" "gud.elc" "gud.el.gz" "grep.elc" "grep.el.gz" "glasses.elc" "glasses.el.gz" "gdb-mi.elc" "gdb-mi.el.gz" "fortran.elc" "fortran.el.gz" "flymake.elc" "flymake.el.gz" "f90.elc" "f90.el.gz" "executable.elc" "executable.el.gz" "etags.elc" "etags.el.gz" "ebrowse.elc" "ebrowse.el.gz" "ebnf2ps.elc" "ebnf2ps.el.gz" "ebnf-yac.elc" "ebnf-yac.el.gz" "ebnf-otz.elc" "ebnf-otz.el.gz" "ebnf-iso.elc" "ebnf-iso.el.gz" "ebnf-ebx.elc" "ebnf-ebx.el.gz" "ebnf-dtd.elc" "ebnf-dtd.el.gz" "ebnf-bnf.elc" "ebnf-bnf.el.gz" "ebnf-abn.elc" "ebnf-abn.el.gz" "dcl-mode.elc" "dcl-mode.el.gz" "cwarn.elc" "cwarn.el.gz" "cpp.elc" "cpp.el.gz" "cperl-mode.elc" "cperl-mode.el.gz" "compile.elc" "compile.el.gz" "cmacexp.elc" "cmacexp.el.gz" "cfengine.elc" "cfengine.el.gz" "cc-vars.elc" "cc-vars.el.gz" "cc-styles.elc" "cc-styles.el.gz" "cc-mode.elc" "cc-mode.el.gz" "cc-menus.elc" "cc-menus.el.gz" "cc-langs.elc" "cc-langs.el.gz" "cc-guess.elc" "cc-guess.el.gz" "cc-fonts.elc" "cc-fonts.el.gz" "cc-engine.elc" "cc-engine.el.gz" "cc-defs.elc" "cc-defs.el.gz" "cc-compat.elc" "cc-compat.el.gz" "cc-cmds.elc" "cc-cmds.el.gz" "cc-bytecomp.elc" "cc-bytecomp.el.gz" "cc-awk.elc" "cc-awk.el.gz" "cc-align.elc" "cc-align.el.gz" "cap-words.elc" "cap-words.el.gz" "bug-reference.elc" "bug-reference.el.gz" "bat-mode.elc" "bat-mode.el.gz" "autoconf.elc" "autoconf.el.gz" "asm-mode.elc" "asm-mode.el.gz" "antlr-mode.elc" "antlr-mode.el.gz" "ada-xref.elc" "ada-xref.el.gz" "ada-stmt.elc" "ada-stmt.el.gz" "ada-prj.elc" "ada-prj.el.gz" "ada-mode.elc" "ada-mode.el.gz" "../" "./")
+
+ ("/Users/oracleyue/tmp/gsl/" (21877 42015 0 0) "src/" "run" "README" "obj/" "Makefile" "include/" "../" "./")
+
+ ("/Users/oracleyue/Workspace/R/" (21827 61657 0 0) "ch9.Rmd" "ch9.html" "ch8.Rmd" "ch8.html" "ch7.Rmd" "ch7.html" "ch6.Rmd" "ch6.html" "ch5.R" "ch4.R" "ch3.y.R" "ch3.R" "ch2.R" "ch10.Rmd" "ch10.html" ".Rhistory" ".RData" "../" "./")
+
+ ("/Users/oracleyue/Workspace/" (21879 2312 0 0) "xcode/" "src/" "scripts/" "R/" "qt/" "mpi/" "matlab/" "gitrepo/" "github.com/" "dev-doc/" "cpp/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/tmp/gsl/include/" (21876 54520 0 0) "eigen.h" "../" "./")
+
+ ("/Users/oracleyue/tmp/prj/" (21876 53739 0 0) "src/" "run" "obj/" "Makefile" "include/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Workspace/cpp/" (21603 30764 0 0) "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Matlab/" (21831 46104 0 0) "examples/" "DSFToolbox/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/drafts/" (21873 24259 0 0) "texbackup.sh" "srcbackup.sh" "sol_xueji_exam.tex" "sol_xueji_exam.synctex.gz" "sol_xueji_exam.pyg" "sol_xueji_exam.pdf" "sol_xueji_exam.out" "sol_xueji_exam.log" "sol_xueji_exam.blg" "sol_xueji_exam.bbl" "sol_xueji_exam.aux" "ref/" "notes-gc.tex" "notes-gc.synctex.gz" "notes-gc.pyg" "notes-gc.pdf" "notes-gc.out" "notes-gc.log" "notes-gc.blg" "notes-gc.bbl" "notes-gc.aux" "figures/" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Papers/BibTeX_sync/" (21871 5350 0 0) "System_Id.bib" "Switching_Control.bib" "Statistics.bib" "SpotWelding.bib" "Spot_Welding.bib" "Sliding_Mode.bib" "Signals_Systems.bib" "Robust_Control.bib" "Physics.bib" "Optimization.bib" "Network_Inference.bib" "Math_books.bib" "Math.bib" "Markov_Processes.bib" "Machine_Learning.bib" "library.bib" "Hybrid_Systems.bib" "Fractals.bib" "Econometrics.bib" "Adaptive_Control.bib" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Papers/" (21858 12030 0 0) "Time_Series_Analysis/" "Thesis/" "System_Id/" "Summer_Schools/" "Statistics/" "Signals_Systems/" "Sean.Warnick/" "Robust_Control/" "Physics/" "Optimization/" "Network_Inference/" "ME/" "Math/" "Machine_Learning/" "Lectures/" "LCSB.Jorge/" "LCSB.Fleming/" "Econometrics/" "Discentrised_Control/" "Data_Mining/" "CS/" "Convex_Optimization/" "Control_Theory/" "Compressive_Sensing/" "Biology/" "Bioinformatics/" "BibTeX_sync/" "Articles_Math/" "Articles_CS/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/bibtex_sync/" (21871 3802 0 0) "readme" "library.bib" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/drafts/ref/" (21871 3284 0 0) "library.bib.sha1" "library.bib" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/" (21816 60980 0 0) "titlepage.tex" "tikzbackup.sh" "texbackup.sh" "srcbackup.sh" "pptbackup.sh" "layout-info.tex" "layout-info.pdf" "init.sh" "figures/" "cover_NR_Part_I_style2.pdf" "cover_NR_Part_I_style1.pdf" "cover-page_II.tex" "cover-page_I.tex" "cleaner.sh" "bibupdate.sh" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/" (21871 3718 0 0) "TikZ/" "Slides/" "Matlab/" "Manuscripts/" "cpp/" "Courses/" "Books/" "bibtex_sync/" "backup/" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Downloads/" (21868 7750 0 0) "uni.lu/" "papers/" "articles/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/figures/" (21824 45090 0 0) "venn-diagram.tex" "venn-diagram.synctex.gz" "venn-diagram.pdf" "venn-diagram.log" "venn-diagram.aux" "unilu-logo.pdf" "sim-rlc.pdf" "sim-rlc.eps" "schemabloc.tex" "schemabloc.synctex.gz" "schemabloc.pdf" "schemabloc.log" "schemabloc.aux" "diagram.tex" "diagram.synctex.gz" "diagram.pdf" "diagram.log" "diagram.aux" "circuit-graph.tex" "circuit-graph.synctex.gz" "circuit-graph.pdf" "circuit-graph.log" "circuit-graph.aux" "circuit-graph-2.tex" "circuit-graph-2.synctex.gz" "circuit-graph-2.pdf" "circuit-graph-2.log" "circuit-graph-2.aux" "circuit-graph-1b.tex" "circuit-graph-1b.synctex.gz" "circuit-graph-1b.pdf" "circuit-graph-1b.log" "circuit-graph-1b.aux" "circuit-graph-1a.tex" "circuit-graph-1a.synctex.gz" "circuit-graph-1a.pdf" "circuit-graph-1a.log" "circuit-graph-1a.aux" "circuit-example.tex" "circuit-example.synctex.gz" "circuit-example.pdf" "circuit-example.log" "circuit-example.aux" "auto/" "../" "./")
+
+ ("/Users/oracleyue/Documents/" (21845 63681 0 0) "TikZ_demos/" "Templates/" "Microsoft User Data/" "Manuscripts/" "docs/" "backup/" "Aspyr/" "Adobe/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/" (21848 43727 0 0) "Shared/" "Public/" "oracleyue/" "Icon
+" "git_repo/" "Academia/" "_others/" ".DS_Store" ".dropbox.cache/" ".dropbox" ".directory" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/" (21845 57819 0 0) "YUEZuogong_CET1_150324-125654_11.pdf" "YUEZuogong_CET1_150324-125654_11-sign-request-ex.pdf" "YUEZuogong_CET1_150324-125654_11-1-signed.pdf" "uni.lu/" "soft/" "scripts/" "OrgNote/" "OneNote/" "notes/" "info/" "docs/" "doc_tmpl/" "dicts/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Shared/Wei_n_Zuogong/papers/" (21785 22837 0 0) "Kernel methods in system identification, machine learning and function estimation-A survey.pdf" "Identification of switched linear systems via sparse optimization.pdf" "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides-Design Patterns_ Elements of Reusable Object-Oriented Software  -AW (1994).pdf" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Shared/Wei_n_Zuogong/" (21818 31044 0 0) "wei_drafts/" "ppt/" "papers/" "Icon
+" "books/" ".DS_Store" ".dropbox" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Shared/" (21785 57889 0 0) "Yichuan_n_Zuogong/" "Wei_Ye_n_Zuogong/" "Wei_n_Zuogong/" "Wanyang_n_Zuogong/" "System_Control_Group/" "Ruijie_n_Zuogong/" "Qian_SHAO/" "Johan_n_Zuogong/" "20150327-211717-PhD-Defense/" ".DS_Store" ".directory" "../" "./")
+
+ ("/Users/oracleyue/Files/uni.lu/PHD/" (21824 1337 0 0) "YUEZuogong_CET1_150324-125654_11.pdf" "procedure_soutenance_2014-15GB - internet.pdf" "procedure_soutenance_2014-15FR -internet.pdf" "NARAYANASAMYShaman_CET2_150224-132744_02_signed.pdf" "CET1_Evaluation_Comments" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Files/uni.lu/" (21809 24059 0 0) "re-enrollment/" "PHD/" "Orders/" "Official_Docs/" "LCSB_Templates/" "LCSB_5year_Event/" "ILL/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Files/" (21809 24047 0 0) "uni.lu/" "Notes/" "LaTeX/" "HPC/" "Guidelines/" "Friends/" "AFR_2_2014/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/" (21821 927 0 0) "srcbackup.sh" "ref/" "formula.tex" "formula.synctex.gz" "formula.pdf" "formula.log" "formula.aux" "figures/" "cleaner.sh" "CET2015-v4.pptx" "CET2015-v1.pptx" "bibupdate.sh" "auto/" "archived/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CET/figures/" (21816 64519 0 0) "venn-diagram.pdf" "venn-diagram-ppt.tex" "venn-diagram-ppt.synctex.gz" "venn-diagram-ppt.pdf" "venn-diagram-ppt.log" "venn-diagram-ppt.aux" "unix_happy.jpg" "unilu-logo.pdf" "spurious-causality.tex" "spurious-causality.synctex.gz" "spurious-causality.pdf" "spurious-causality.log" "spurious-causality.aux" "spurious-causality-I.tex" "spurious-causality-I.synctex.gz" "spurious-causality-I.pdf" "spurious-causality-I.log" "spurious-causality-I.aux" "simple-network.tex" "simple-network.synctex.gz" "simple-network.pdf" "simple-network.log" "simple-network.aux" "simple-network-wv.tex" "simple-network-wv.synctex.gz" "simple-network-wv.pdf" "simple-network-wv.log" "simple-network-wv.aux" "simple-network-qp.tex" "simple-network-qp.synctex.gz" "simple-network-qp.pdf" "simple-network-qp.log" "simple-network-qp.aux" "simple-network-3f.tex" "simple-network-3f.synctex.gz" "simple-network-3f.pdf" "simple-network-3f.log" "simple-network-3f.aux" "simple-network-3e.tex" "simple-network-3e.synctex.gz" "simple-network-3e.png" "simple-network-3e.pdf" "simple-network-3e.log" "simple-network-3e.aux" "simple-network-3d.tex" "simple-network-3d.synctex.gz" "simple-network-3d.pdf" "simple-network-3d.log" "simple-network-3d.aux" "simple-network-3c.tex" "simple-network-3c.synctex.gz" "simple-network-3c.pdf" "simple-network-3c.log" "simple-network-3c.aux" "simple-network-3b.tex" "simple-network-3b.synctex.gz" "simple-network-3b.pdf" "simple-network-3b.log" "simple-network-3b.aux" "simple-network-3.tex" "simple-network-3.synctex.gz" "simple-network-3.pdf" "simple-network-3.log" "simple-network-3.aux" "simple-network-2.tex" "simple-network-2.synctex.gz" "simple-network-2.pdf" "simple-network-2.log" "simple-network-2.aux" "sim-rlc.fig" "sim-rlc.eps" "network-diagnosis-spec-1.tex" "network-diagnosis-spec-1.synctex.gz" "network-diagnosis-spec-1.pdf" "network-diagnosis-spec-1.log" "network-diagnosis-spec-1.aux" "network-diagnosis-alg-4.tex" "network-diagnosis-alg-4.synctex.gz" "network-diagnosis-alg-4.pdf" "network-diagnosis-alg-4.log" "network-diagnosis-alg-4.aux" "network-diagnosis-alg-3.tex" "network-diagnosis-alg-3.synctex.gz" "network-diagnosis-alg-3.pdf" "network-diagnosis-alg-3.log" "network-diagnosis-alg-3.aux" "network-diagnosis-alg-2b.tex" "network-diagnosis-alg-2b.synctex.gz" "network-diagnosis-alg-2b.pdf" "network-diagnosis-alg-2b.log" "network-diagnosis-alg-2b.aux" "network-diagnosis-alg-2.tex" "network-diagnosis-alg-2.synctex.gz" "network-diagnosis-alg-2.pdf" "network-diagnosis-alg-2.log" "network-diagnosis-alg-2.aux" "network-diagnosis-alg-1.tex" "network-diagnosis-alg-1.synctex.gz" "network-diagnosis-alg-1.pdf" "network-diagnosis-alg-1.log" "network-diagnosis-alg-1.aux" "network-diagnosis-alg-0.tex" "network-diagnosis-alg-0.synctex.gz" "network-diagnosis-alg-0.pdf" "network-diagnosis-alg-0.log" "network-diagnosis-alg-0.aux" "network-diagnosis-4.tex" "network-diagnosis-4.synctex.gz" "network-diagnosis-4.pdf" "network-diagnosis-4.log" "network-diagnosis-4.aux" "network-diagnosis-3.tex" "network-diagnosis-3.synctex.gz" "network-diagnosis-3.pdf" "network-diagnosis-3.log" "network-diagnosis-3.aux" "network-diagnosis-2.tex" "network-diagnosis-2.synctex.gz" "network-diagnosis-2.pdf" "network-diagnosis-2.log" "network-diagnosis-2.aux" "network-diagnosis-1.tex" "network-diagnosis-1.synctex.gz" "network-diagnosis-1.pdf" "network-diagnosis-1.log" "network-diagnosis-1.aux" "lcsb-ppt-template-line.tex" "lcsb-ppt-template-line.pdf" "lcsb-logo.pdf" "Internet_map.jpg" "granger_postcard.jpg" "complete-graph.pdf" "circuit-graph.tex" "circuit-graph.synctex.gz" "circuit-graph.pdf" "circuit-graph.log" "circuit-graph.aux" "circuit-graph-2.tex" "circuit-graph-2.synctex.gz" "circuit-graph-2.pdf" "circuit-graph-2.log" "circuit-graph-2.aux" "circuit-graph-1b.tex" "circuit-graph-1b.synctex.gz" "circuit-graph-1b.pdf" "circuit-graph-1b.log" "circuit-graph-1b.aux" "circuit-graph-1a.tex" "circuit-graph-1a.synctex.gz" "circuit-graph-1a.pdf" "circuit-graph-1a.log" "circuit-graph-1a.aux" "circuit-example.tex" "circuit-example.synctex.gz" "circuit-example.pdf" "circuit-example.log" "circuit-example.aux" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/" (21809 44726 0 0) "MLSP2015/" "Feng-Project/" "DSF/" "drafts/" "CV/" "CET/" "CDC2015/" "archive/" "AFR/" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/git/ecb/" (21494 65392 0 0) "tree-buffer.elc" "tree-buffer.el" "TODO.org" "TODO" "silentcomp.elc" "silentcomp.el" "RELEASE_NOTES" "README" "NEWS" "Makefile.conf.template" "Makefile" "make.bat" "info-help/" "html-help/" "ecb2/" "ecb.texi" "ecb.elc" "ecb.el" "ecb-winman-support.elc" "ecb-winman-support.el" "ecb-util.elc" "ecb-util.el" "ecb-upgrade.elc" "ecb-upgrade.el" "ecb-tod.elc" "ecb-tod.el" "ecb-symboldef.elc" "ecb-symboldef.el" "ecb-speedbar.elc" "ecb-speedbar.el" "ecb-semantic.elc" "ecb-semantic.el" "ecb-semantic-wrapper.elc" "ecb-semantic-wrapper.el" "ecb-navigate.elc" "ecb-navigate.el" "ecb-multiframe.elc" "ecb-multiframe.el" "ecb-mode-line.elc" "ecb-mode-line.el" "ecb-method-browser.elc" "ecb-method-browser.el" "ecb-makedef.mk" "ecb-layout.elc" "ecb-layout.el" "ecb-layout-defs.elc" "ecb-layout-defs.el" "ecb-jde.elc" "ecb-jde.el" "ecb-images/" "ecb-help.elc" "ecb-help.el" "ecb-file-browser.elc" "ecb-file-browser.el" "ecb-face.elc" "ecb-face.el" "ecb-examples.elc" "ecb-examples.el" "ecb-eshell.elc" "ecb-eshell.el" "ecb-cycle.elc" "ecb-cycle.el" "ecb-create-layout.elc" "ecb-create-layout.el" "ecb-compilation.elc" "ecb-compilation.el" "ecb-compatibility.elc" "ecb-compatibility.el" "ecb-common-browser.elc" "ecb-common-browser.el" "ecb-cedet-wrapper.elc" "ecb-cedet-wrapper.el" "ecb-buffertab.elc" "ecb-buffertab.el" "ecb-autoloads.el~" "ecb-autoloads.el" "ecb-autogen.elc" "ecb-autogen.el" "ecb-analyse.elc" "ecb-analyse.el" "ecb-advice-test.elc" "ecb-advice-test.el" "CYCLE_PROPOSAL" ".gitignore" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/TikZ-demos/" (21809 8928 0 0) "venn-diagram.tex" "venn-diagram-eg3.tex" "venn-diagram-eg2.tex" "simple-graph.tex" "schemabloc.tex" "noise-shaper.tex" "induction-machine.tex" "graph.tex" "fluor-energy-levels.tex" "fluor-energy-levels.pdf" "fir-filter.tex" "FIR-filter-eg2.tex" "control-system-principles.tex" "clean" "auto/" "../" "./")
+
+ ("/Users/" (21604 38156 0 0) "Shared/" "oracleyue/" "Guest/" "admin/" ".localized" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/auctex-11.88.4/" (21807 47460 0 0) "toolbar-x.elc" "toolbar-x.el" "texmathp.elc" "texmathp.el" "tex.elc" "tex.el" "tex-wizard.elc" "tex-wizard.el" "tex-style.elc" "tex-style.el" "tex-site.elc" "tex-site.el" "tex-mik.elc" "tex-mik.el" "tex-jp.elc" "tex-jp.el" "tex-info.elc" "tex-info.el" "tex-font.elc" "tex-font.el" "tex-fold.elc" "tex-fold.el" "tex-buf.elc" "tex-buf.el" "tex-bar.elc" "tex-bar.el" "tests/" "style/" "RELEASE" "README.GIT" "README" "prv-xemacs.elc" "prv-xemacs.el" "prv-emacs.elc" "prv-emacs.el" "preview.elc" "preview.el" "preview-latex.info" "plain-tex.elc" "plain-tex.el" "multi-prompt.elc" "multi-prompt.el" "latex.elc" "latex.el.oy" "latex.el" "latex/" "images/" "GNUmakefile" "font-latex.elc" "font-latex.el" "doc/" "dir" "COPYING" "context.elc" "context.el" "context-nl.elc" "context-nl.el" "context-en.elc" "context-en.el" "circ.tex" "ChangeLog-preview.1" "ChangeLog-preview" "ChangeLog" "bib-cite.elc" "bib-cite.el" "auctex.info" "auctex.elc" "auctex.el" "auctex-pkg.elc" "auctex-pkg.el" "auctex-autoloads.el" ".elpaignore" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/auto-complete-20150408.1132/" (21805 34844 0 0) "dict/" "auto-complete.elc" "auto-complete.el" "auto-complete-pkg.el" "auto-complete-config.elc" "auto-complete-config.el" "auto-complete-autoloads.el" "../" "./")
+
+ ("/Users/oracleyue/Workspace/gitrepo/dotfiles/" (21807 55061 0 0) "ymonokai-theme.el" "yadwaita-theme.el" "win7.emacs" "texmf.osx.tar.xz" "snippets.tar.xz" "snippets.osx.tar.xz" "README.md" "qtcreator_config.tar.xz" "Pro.MacOSX.oracleyue.terminal" "oracleyue.el" "makefile-template.tar.xz" "jmax.user.oracleyue.el" "fstab" "color-theme-6.6.0.tar.gz" "alfred-workflows/" ".y_keymap" ".Xresources" ".Xmodmap" ".vimrc" ".vimperatorrc" ".vim.tar.gz" ".tmux.conf" ".screenrc" ".profile_mac" ".profile.osx" ".gtkrc-2.0" ".gitconfig" ".git/" ".fakevimrc" ".emacs_win7" ".emacs.ubuntu" ".emacs.d.24.4.tar.lzma" ".emacs.d.24.4.osx.tar.xz" ".emacs.d.24.3.tar.lzma" ".emacs.24.4.ubuntu" ".emacs.24.4.osx" ".emacs.24.4" ".emacs.24.3" ".emacs" ".ctags" ".bashrc.ubuntu" ".bashrc" ".bash_profile.ubuntu" ".bash_profile" "../" "./")
+
+ ("/Users/oracleyue/tmp/cpp/" (21806 47252 0 0) "main.c" "calc.cpp" "a.out" "../" "./")
+
+ ("/Users/oracleyue/tmp/prj/src/" (21764 53016 0 0) "main.c" "func.c" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20150413.1403/" (21805 34769 0 0) "yasnippet.elc" "yasnippet.el" "yasnippet-pkg.el" "yasnippet-autoloads.el" "snippets/" "../" "./")
+
+ ("/Users/oracleyue/tmp/src/" (21705 6637 0 0) "qtcreator_config.tar.xz" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/backup/" (21796 1196 0 0) "yreport.cls" "understand_dsf_cdc_draft.tex.sha1" "understand_dsf_cdc_draft.tex" "titlepage.tex.sha1" "titlepage.tex" "texbackup.sh" "NR_Part_I_Definitions.tex.sha1" "NR_Part_I_Definitions.tex" "Network_Inference.tex.sha1" "Network_Inference.tex" "initialisation.tex.sha1" "initialisation.tex" "Feng_Project.org" "DSF_on_Granger_Causality.tex.sha1" "DSF_on_Granger_Causality.tex" "cover-page_II.tex.sha1" "cover-page_II.tex" "cover-page_I.tex.sha1" "cover-page_I.tex" "cover-page.tex.sha1" "cover-page.tex" "comp_LTI_network.tex.sha1" "comp_LTI_network.tex" "cleaner.sh" "CET2015.tex.sha1" "CET2015.tex" "cdc2015.tex.sha1" "cdc2015.tex" "bibupdate.sh" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/CDC2015/" (21798 39944 0 0) "texbackup.sh" "submission/" "ref/" "figures/" "cdc2015.tex" "cdc2015.synctex.gz" "cdc2015.pyg" "cdc2015.pdf" "cdc2015.out" "cdc2015.log" "cdc2015.blg" "cdc2015.bbl" "cdc2015.aux" "bibupdate.sh" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/TikZ/" (21798 23405 0 0) "texbackup.sh" "ref/" "figures/" "cleaner.sh" "bibupdate.sh" "archive/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/MLSP2015/" (21796 1234 0 0) "texbackup.sh" "template.pdf" "ref/" "mlspconf.sty" "initialisation.tex" "IEEEbib.bst" "figures/" "comp_LTI_network.tex" "comp_LTI_network.synctex.gz" "comp_LTI_network.pyg" "comp_LTI_network.pdf" "comp_LTI_network.out" "comp_LTI_network.nlo" "comp_LTI_network.log" "comp_LTI_network.blg" "comp_LTI_network.bbl" "comp_LTI_network.aux" "cleaner.sh" "bibupdate.sh" "auto/" "archive/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Slides/" (21795 63315 0 0) "img/" "emacs-inro-phdclub.tex" "emacs-inro-phdclub.pdf" "cleaner.sh" "CET2015.toc" "CET2015.tex" "CET2015.synctex.gz" "CET2015.snm" "CET2015.pdf" "CET2015.out" "CET2015.nav" "CET2015.log" "CET2015.aux" "backup/" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/MLSP2015/ref/" (21795 59308 0 0) "library.bib.sha1" "library.bib" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/AFR/" (21785 28881 0 0) "texbackup.sh" "Report-Mar2015.toc" "Report-Mar2015.tex" "Report-Mar2015.synctex.gz" "Report-Mar2015.pyg" "Report-Mar2015.pdf" "Report-Mar2015.out" "Report-Mar2015.log" "Report-Mar2015.blg" "Report-Mar2015.bbl" "Report-Mar2015.aux" "ref/" "figures/" "cleaner.sh" "bibupdate.sh" "auto/" "archive/" "../" "./")
+
+ ("/Users/oracleyue/Desktop/" (21784 22196 0 0) "email" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/" (21777 22199 0 0) "understand_dsf_cdc_draft.tex" "understand_dsf_cdc_draft.synctex.gz" "understand_dsf_cdc_draft.pyg" "understand_dsf_cdc_draft.pdf" "understand_dsf_cdc_draft.out" "understand_dsf_cdc_draft.log" "understand_dsf_cdc_draft.blg" "understand_dsf_cdc_draft.bbl" "understand_dsf_cdc_draft.aux" "texbackup.sh" "ref/" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "figures/" "DSF_on_Granger_Causality.tex" "DSF_on_Granger_Causality.synctex.gz" "DSF_on_Granger_Causality.spl" "DSF_on_Granger_Causality.pyg" "DSF_on_Granger_Causality.pdf" "DSF_on_Granger_Causality.out" "DSF_on_Granger_Causality.log" "DSF_on_Granger_Causality.blg" "DSF_on_Granger_Causality.bbl" "DSF_on_Granger_Causality.aux" "cleaner.sh" "bibupdate.sh" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/snippets/latex-mode/" (21621 43747 0 0) "usepackage" "textbf" "subsec" "subfigure" "subf" "section" "question" "python" "note" "newglossaryentry" "newcommand" "movie" "listing" "label" "itemize" "item" "includegraphics" "if" "glspl" "gls" "frame" "frac" "figure" "emph" "columns" "code" "cite" "caption" "capgls" "block" "begin" "alg" "alertblock" "acronym" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/snippets/" (21621 43756 0 0) "yaml-mode/" "udev-mode/" "typerex-mode" "tuareg-mode/" "text-mode/" "sql-mode/" "snippet-mode/" "sh-mode/" "scala-mode/" "ruby-mode/" "rst-mode/" "rename_add_contr.py" "README.md" "python-mode/" "prog-mode/" "perl-mode/" "org-mode/" "octave-mode/" "nxml-mode/" "nsis-mode/" "nesc-mode/" "ned-mode/" "markdown-mode/" "makefile-mode/" "makefile-gmake-mode/" "makefile-bsdmake-mode/" "makefile-automake-mode/" "m4-mode/" "lua-mode/" "lisp-interaction-mode/" "LICENSE" "latex-mode/" "js2-mode/" "js-mode/" "java-mode/" "html-mode/" "haskell-mode/" "groovy-mode/" "go-mode/" "git-commit-mode/" "fundamental-mode/" "f90-mode/" "erlang-mode/" "erc-mode/" "ensime-mode" "enh-ruby-mode" "emacs-lisp-mode/" "css-mode/" "csharp-mode/" "cpp-omnet-mode/" "cperl-mode/" "CONTRIBUTORS.txt" "conf-unix-mode/" "cmake-mode/" "chef-mode/" "cc-mode/" "c-mode/" "c++-mode/" "applescript-mode/" "antlr-mode/" ".nosearch" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/yasnippet-20141117.327/" (21621 43761 0 0) "yasnippet.elc" "yasnippet.el" "yasnippet-pkg.el" "yasnippet-autoloads.el" "snippets/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Reports/DSF/figures/" (21770 63868 0 0) "venn-diagram.tex" "venn-diagram.synctex.gz" "venn-diagram.pdf" "venn-diagram.log" "venn-diagram.aux" "schemabloc.tex" "schemabloc.synctex.gz" "schemabloc.pdf" "schemabloc.log" "schemabloc.aux" "diagram.tex" "diagram.synctex.gz" "diagram.pdf" "diagram.log" "diagram.aux" "auto/" "../" "./")
+
+ ("/Users/oracleyue/Documents/TikZ/" (21770 56185 0 0) "venn-diagram.tex" "venn-diagram-eg2.tex" "simple-graph.tex" "schemabloc.tex" "noise-shaper.tex" "induction-machine.tex" "fir-filter.tex" "FIR-filter-eg2.tex" "control-system-principles.tex" "clean" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Reports/" (21769 21990 0 0) "Feng-Project/" "DSF/" "backup/" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Workspace/github.com/dotfiles/" (21762 61508 0 0) "ymonokai-theme.el" "yadwaita-theme.el" "win7.emacs" "texmf.osx.tar.xz" "snippets.tar.xz" "snippets.osx.tar.xz" "README.md" "qtcreator_config.tar.xz" "Pro.MacOSX.oracleyue.terminal" "oracleyue.el" "jmax.user.oracleyue.el" "fstab" "color-theme-6.6.0.tar.gz" "alfred-workflows/" ".y_keymap" ".Xresources" ".Xmodmap" ".vimrc" ".vimperatorrc" ".vim.tar.gz" ".tmux.conf" ".screenrc" ".profile_mac" ".profile.osx" ".gtkrc-2.0" ".gitconfig" ".git/" ".fakevimrc" ".emacs_win7" ".emacs.ubuntu" ".emacs.d.24.4.tar.lzma" ".emacs.d.24.4.osx.tar.xz" ".emacs.d.24.3.tar.lzma" ".emacs.24.4.mac" ".emacs.24.4" ".emacs.24.3" ".emacs" ".ctags" ".bashrc.ubuntu" ".bashrc" ".bash_profile.ubuntu" ".bash_profile" "../" "./")
+
+ ("/Users/oracleyue/Workspace/github.com/" (21762 49239 0 0) "rubber-1.1/" "google-fonts.zip" "goldendict/" "emacskeys/" "dotfiles/" "diy_pwd/" "alfred-workflows-master.zip" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/eshell/" (21762 62225 0 0) "lastdir" "history" "alias" "../" "./")
+
+ ("/Users/oracleyue/Workspace/github.com/goldendict/" (21608 56853 0 0) "zipsounds.hh" "zipsounds.cc" "zipfile.hh" "zipfile.cc" "zim.hh" "zim.cc" "xdxf2html.hh" "xdxf2html.cc" "xdxf.hh" "xdxf.cc" "x64.hh" "x64.cc" "wstring_qt.hh" "wstring_qt.cc" "wstring.hh" "wstring.cc" "wordlist.hh" "wordlist.cc" "wordfinder.hh" "wordfinder.cc" "wordbyauto.hh" "wordbyauto.cc" "winlibs/" "website.hh" "website.cc" "webmultimediadownload.hh" "webmultimediadownload.cc" "voiceengines.hh" "voiceengines.cc" "version.txt" "utf8.hh" "utf8.cc" "uiauto.hh" "ufile.hh" "ufile.cc" "transliteration.hh" "transliteration.cc" "translatebox.hh" "translatebox.cc" "tiff.hh" "tiff.cc" "texttospeechsource.ui" "texttospeechsource.hh" "texttospeechsource.cc" "termination.hh" "termination.cc" "stylescombobox.hh" "stylescombobox.cc" "stardict.hh" "stardict.cc" "sptr.hh" "sphelper.hh" "speechhlp.hh" "speechhlp.cc" "speechclient_win.cc" "speechclient_mac.mm" "speechclient.hh" "sources.ui" "sources.hh" "sources.cc" "sounddir.hh" "sounddir.cc" "searchpanewidget.hh" "sdict.hh" "sdict.cc" "scanpopup.ui" "scanpopup.hh" "scanpopup.cc" "sapi.hh" "russiantranslit.hh" "russiantranslit.cc" "romaji.hh" "romaji.cc" "resources.qrc" "redist/" "README.md" "qtsingleapplication/" "qt-style.css" "qt-style-st-modern.css" "qt-style-st-lingvo.css" "qt-style-st-lingoes-blue.css" "qt-style-st-babylon.css" "qt-style-macos.css" "programs.hh" "programs.cc" "processwrapper.hh" "processwrapper.cc" "preferences.ui" "preferences.hh" "preferences.cc" "parsecmdline.hh" "parsecmdline.cc" "orderandprops.ui" "orderandprops.hh" "orderandprops.cc" "options.ui" "nsis/" "myInfo.plist" "mutex.hh" "mutex.cc" "MSBuild/" "mruqmenu.hh" "mruqmenu.cc" "mouseover_win32/" "mouseover.hh" "mouseover.cc" "mediawiki.hh" "mediawiki.cc" "mdx.hh" "mdx.cc" "mdictparser.hh" "mdictparser.cc" "Makefile" "mainwindow.ui" "mainwindow.hh" "mainwindow.cc" "maintabwidget.hh" "maintabwidget.cc" "mainstatusbar.hh" "mainstatusbar.cc" "main.cc" "macmouseover.mm" "macmouseover.hh" "maclibs/" "machotkeywrapper.mm" "lsa.hh" "lsa.cc" "locale/" "loaddictionaries.hh" "loaddictionaries.cc" "lionsupport.mm" "lionsupport.h" "LICENSE.txt" "language.hh" "language.cc" "langcoder.hh" "langcoder.cc" "keyboardstate.hh" "keyboardstate.cc" "instances.hh" "instances.cc" "initializing.ui" "initializing.hh" "initializing.cc" "Info.plist" "indexedzip.hh" "indexedzip.cc" "inc_diacritic_folding.hh" "inc_case_folding.hh" "iconv.hh" "iconv.cc" "icons/" "hunspell.hh" "hunspell.cc" "htmlescape.hh" "htmlescape.cc" "hotkeywrapper.hh" "hotkeywrapper.cc" "hotkeyedit.hh" "hotkeyedit.cc" "historypanewidget.hh" "historypanewidget.cc" "history.hh" "history.cc" "helpwindow.hh" "helpwindow.cc" "help/" "guids.c" "groupselectorwidget.ui" "groups_widgets.hh" "groups_widgets.cc" "groups.ui" "groups.hh" "groups.cc" "groupcombobox.hh" "groupcombobox.cc" "greektranslit.hh" "greektranslit.cc" "goldendict.vcxproj.filters" "goldendict.vcxproj" "goldendict.sln" "goldendict.rc" "goldendict.pro.user" "goldendict.pro" "GoldenDict.exe.manifest" "GoldenDict.dmg" "GoldenDict.app/" "gestures.hh" "gestures.cc" "german.hh" "german.cc" "generators/" "gddebug.hh" "gddebug.cc" "gdappstyle.hh" "gdappstyle.cc" "fulltextsearch.ui" "fulltextsearch.hh" "fulltextsearch.cc" "ftshelpers.hh" "ftshelpers.cc" "fsencoding.hh" "fsencoding.cc" "forvo.hh" "forvo.cc" "folding.hh" "folding.cc" "flags.qrc" "flags/" "fixx11h.h" "filetype.hh" "filetype.cc" "file.hh" "file.cc" "ffmpegaudio.hh" "ffmpegaudio.cc" "extlineedit.hh" "extlineedit.cc" "externalviewer.hh" "externalviewer.cc" "ex.hh" "epwing_charmap.hh" "epwing_charmap.cc" "epwing_book.hh" "epwing_book.cc" "epwing.hh" "epwing.cc" "editdictionaries.ui" "editdictionaries.hh" "editdictionaries.cc" "dsl_details.hh" "dsl_details.cc" "dsl.hh" "dsl.cc" "dictzip.h" "dictzip.c" "dictspanewidget.hh" "dictserver.hh" "dictserver.cc" "dictionarybar.hh" "dictionarybar.cc" "dictionary.hh" "dictionary.cc" "dictinfo.ui" "dictinfo.hh" "dictinfo.cc" "dictheadwords.ui" "dictheadwords.hh" "dictheadwords.cc" "dictgroupwidget.ui" "dictdfiles.hh" "dictdfiles.cc" "delegate.hh" "delegate.cc" "decompress.hh" "decompress.cc" "CREDITS.txt" "country.hh" "country.cc" "configure" "config.hh" "config.cc" "chunkedstorage.hh" "chunkedstorage.cc" "btreeidx.hh" "btreeidx.cc" "broken_xrecord.hh" "broken_xrecord.cc" "bgl_babylon.hh" "bgl_babylon.cc" "bgl.hh" "bgl.cc" "belarusiantranslit.hh" "belarusiantranslit.cc" "authentication.ui" "audiolink.hh" "audiolink.cc" "atomic_rename.hh" "atomic_rename.cc" "articlewebview.hh" "articlewebview.cc" "articleview.ui" "articleview.hh" "articleview.cc" "articleinspector.hh" "articleinspector.cc" "article_netmgr.hh" "article_netmgr.cc" "article_maker.hh" "article_maker.cc" "article-style.css" "article-style-st-modern.css" "article-style-st-lingvo.css" "article-style-st-lingoes.css" "article-style-st-lingoes-blue.css" "article-style-st-babylon.css" "article-style-print.css" "about.ui" "about.hh" "about.cc" "aard.hh" "aard.cc" ".gitmodules" ".gitignore" ".git/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.ssh/" (21603 28574 0 0) "known_hosts" "id_dsa.pub" "id_dsa" "config" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/TikZ/" (21749 54316 0 0) "simple_block_diagram.tex" "simple_block_diagram.synctex.gz" "simple_block_diagram.pdf" "simple_block_diagram.log" "simple_block_diagram.aux" "auto/" "../" "./")
+
+ ("/Users/oracleyue/Public/" (21729 64476 0 0) "OneDrive/" "Gaia/" "Dropbox/" "ATLAS/" "360yun/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/tmp/rubber-1.1/src/" (21705 6617 0 0) "version.py.in" "util.py" "tex.py" "latex_modules/" "depend.py" "converters/" "convert.py" "cmdline.py" "cmd_pipe.py" "cmd_info.py" "__init__.py" "../" "./")
+
+ ("/Users/oracleyue/tmp/rubber-1.1/data/modules/" (21705 6617 0 0) "revtex4.rub" "omega.rub" "ntheorem.rub" "minitoc-hyper.rub" "hyperref.rub" "etex.rub" "beamer.rub" "aleph.rub" "../" "./")
+
+ ("/Users/oracleyue/tmp/rubber-1.1/data/" (21705 6617 0 0) "rules.ini" "modules/" "_rubber" "../" "./")
+
+ ("/Users/oracleyue/tmp/rubber-1.1/" (21705 6617 0 0) "src/" "setup.py" "rubber.spec.in" "rubber-pipe" "rubber-info" "rubber" "README" "PKG-INFO" "NEWS" "MANIFEST.in" "Makefile.in" "fixed_bug_list" "doc/" "data/" "COPYING" "configure" ".git/" "../" "./")
+
+ ("/Users/oracleyue/Documents/DSF/" (21716 48809 0 0) "ref/" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.aux" "metadata" "DSF_on_Granger_Causality.tex" "DSF_on_Granger_Causality.synctex.gz" "DSF_on_Granger_Causality.spl" "DSF_on_Granger_Causality.pyg" "DSF_on_Granger_Causality.pdf" "DSF_on_Granger_Causality.out" "DSF_on_Granger_Causality.log" "DSF_on_Granger_Causality.blg" "DSF_on_Granger_Causality.bbl" "DSF_on_Granger_Causality.aux" "cleaner.sh" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/snippets/python-mode/" (21561 43203 0 0) "header" "full_header" "body" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/oracleyue/OneNote/" (21602 20348 0 0) "Unfiled Notes.one" "MATH/" "Lab_Notes/" "EE/" "CS/" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/git/emacs-for-python/" (21489 41400 0 0) "scripts/" "README.org" "python-libs/" "extensions/" "epy-setup.el" "epy-python.el" "epy-nose.el" "epy-init.el" "epy-editing.el" "epy-completion.el" "epy-bindings.el" "doc/" "COPYING" "CONTRIBUTORS" "ChangeLog" ".gitignore" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/git/emacs-for-python/extensions/" (21489 41379 0 0) "virtualenv.el" "snippet-helpers.el" "smart-operator.el" "python.el" "pymacs.el" "open-next-line.el" "nose.el" "highlight-indentation.el" "flymake-patch.el" "flymake-cursor.el" "epy-project.el" "eproject/" "cython-mode.el" "autopair.el" "auto-complete/" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/git/emacs-for-python/extensions/auto-complete/" (21420 14578 0 0) "popup.el" "fuzzy.el" "dict/" "COPYING.GPLv3.txt" "COPYING.FDL.txt" "auto-complete.el" "auto-complete-config.el" "../" "./")
+
+ ("/Users/oracleyue/Library/texmf/tex/latex/" (21707 42038 0 0) "yreport.cls" "org-article/" "IEEEtran/" "ieeeconf/" "elsarticle/" "autosam/" "auto/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Library/texmf/tex/" (21697 1925 0 0) "latex/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Library/texmf/" (21695 48141 0 0) "tex/" "doc/" "bibtex/" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Library/" (21698 23554 0 0) "Workflows/" "WebKit/" "Voices/" "VirtualBox/" "TeXShop/" "texmf.osx.tar.xz" "texmf/" "SyncedPreferences/" "Spelling/" "Sounds/" "Services/" "Scripts/" "Screen Savers/" "Saved Application State/" "Safari/" "PubSub/" "Printers/" "Preferences/" "PreferencePanes/" "PhotoshopCrashes/" "PDF Services/" "Mobile Documents/" "Messages/" "Mail/" "Logs/" "LaunchAgents/" "LanguageModeling/" "Keychains/" "Keyboard Layouts/" "iTunes/" "Internet Plug-Ins/" "Input Methods/" "iMovie/" "IdentityServices/" "Icons/" "Group Containers/" "GameKit/" "Fonts/" "FontCollections/" "Favorites/" "Dictionaries/" "Developer/" "Cookies/" "Containers/" "Compositions/" "com.apple.nsurlsessiond/" "ColorSync/" "Colors/" "ColorPickers/" "Calendars/" "Caches/" "Autosave Information/" "Audio/" "Assistants/" "Application Support/" "Application Scripts/" "Address Book Plug-Ins/" "Accounts/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/Workspace/github.com/rubber-1.1/" (21705 12704 0 0) "src/" "setup.py" "rubber.spec.in" "rubber-pipe" "rubber-info" "rubber" "README" "PKG-INFO" "NEWS" "MANIFEST.in" "Makefile.in" "fixed_bug_list" "doc/" "data/" "COPYING" "configure" ".git/" ".#README" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/elpa/auctex-11.88/" (21603 14513 0 0) "toolbar-x.elc" "toolbar-x.el" "texmathp.elc" "texmathp.el" "tex.elc" "tex.el" "tex-wizard.elc" "tex-wizard.el" "tex-style.elc" "tex-style.el" "tex-site.elc" "tex-site.el" "tex-mik.elc" "tex-mik.el" "tex-jp.elc" "tex-jp.el" "tex-info.elc" "tex-info.el" "tex-font.elc" "tex-font.el" "tex-fold.elc" "tex-fold.el" "tex-buf.elc" "tex-buf.el" "tex-bar.elc" "tex-bar.el" "tests/" "style/" "RELEASE" "README.GIT" "README" "prv-xemacs.elc" "prv-xemacs.el" "prv-emacs.elc" "prv-emacs.el" "preview.elc" "preview.el" "preview-latex.info" "plain-tex.elc" "plain-tex.el" "multi-prompt.elc" "multi-prompt.el" "latex.elc" "latex.el" "latex/" "images/" "GNUmakefile" "font-latex.elc" "font-latex.el" "doc/" "dir" "COPYING" "context.elc" "context.el" "context-nl.elc" "context-nl.el" "context-en.elc" "context-en.el" "circ.tex" "ChangeLog-preview.1" "ChangeLog-preview" "ChangeLog" "bib-cite.elc" "bib-cite.el" "auctex.info" "auctex.elc" "auctex.el" "auctex-pkg.elc" "auctex-pkg.el" "auctex-autoloads.el" ".elpaignore" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: end of proof
+# key: end
+# --
+\qed

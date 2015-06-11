@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: yFormula Header
+# key: yf
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[class=scrreprt]{standalone}
+\usepackage{varwidth} 
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\KOMAoptions{fontsize=24pt}
+
+\usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
+\usepackage{graphics, setspace}
+
+\input{../DSF/userdef-mathsymb.tex}
+
+
+\begin{document}
+   \begin{varwidth}{10in}
+        \begin{equation*}
+          \begin{aligned}
+            % insert equation here:
+            % Equation #1
+            $0
+          \end{aligned}
+        \end{equation*}
+   \end{varwidth}
+\end{document}

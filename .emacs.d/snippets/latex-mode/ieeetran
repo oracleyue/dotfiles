@@ -1,0 +1,127 @@
+# -*- mode: snippet -*-
+# name: IEEE Transaction Header
+# key: ye
+# expand-env: ((yas-indent-line 'fixed))
+# --
+% \documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\documentclass[a4paper,onecolumn,compsoc]{IEEEtran}        % use "draft" option for more features
+% latex default article layout 
+% \usepackage[text={360pt, 595pt},centering]{geometry}     % latex /article.cls/ default layout
+% \usepackage{setspace}
+%   \onehalfspacing
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+
+% \IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                            % you want to use the \thanks command
+
+% \overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%\usepackage{mathptmx} % assumes new math font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage[scaled=0.8]{DejaVuSansMono}
+
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+% \usepackage{mathabx}
+\usepackage{mathtools}
+    \let\IEEEproof\proof
+    \let\IEEEendproof\endproof
+    \let\proof\relax
+    \let\endproof\relax
+\usepackage{amsthm}     % To use proof in ieeeconf by default, uncomment the following 4 lines
+    % \let\proof\relax
+    % \let\endproof\relax
+    % \let\proof\IEEEproof
+    % \let\endproof\IEEEendproof
+% \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure}
+% \usepackage{epsfig}
+\usepackage{comment}
+% \usepackage[normalem]{ulem}
+% \usepackage{csquotes}
+\usepackage{color}
+% \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{cite}
+\makeatletter
+\let\NAT@parse\undefined
+\makeatother
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage{minted}
+% \definecolor{bg}{RGB}{39,40,34}
+% \usemintedstyle{monokai}
+\usemintedstyle{pastie}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}   %% having been defined
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\def\dashline{\ensuremath{\operatorname{-}\operatorname{-}}}
+\def\linearrow{\ensuremath{\operatorname{---}}}
+
+\title{\LARGE \bf
+  Understanding Dynamic Structure Function in the Context of Granger Causality
+}
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfsubject={Technical Report},
+  pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+
+
+\author{Zuogong Yue$^{1}$ and Jorge Gon\c{c}alves$^{2}$% <-this % stops a space
+  \thanks{$^{1}$ Zuogong Yue with  
+    Luxembourg Centre for Systems Biomedicine, and  Facult'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
+    7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
+    \href{mailto:zuogong.yue@uni.lu}{\tt zuogong.yue@uni.lu}}%
+  \thanks{$^{2}$ Jorge Gon\c{c}alves with 
+    Department of Engineering, University of Cambridge, CB2 1PZ, UK,
+    and Luxembourg Centre for Systems Biomedicine, and  Facult'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
+    7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
+    \href{mailto:jorge.goncalves@uni.lu}{\tt jorge.goncalves@uni.lu}}%
+}
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+This electronic document is a ÒliveÓ template. The various components of your paper [title, text, heads, etc.] are already defined on the style sheet, as illustrated by the portions given in this document.
+
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{$0}
+
+
+
+
+% --------------- APPENDIX --------------
+\appendix[appdendixname]
+
+
+% --------------- BIBLIOGRAPHY --------------
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,./ref/library}
+
+\end{document}

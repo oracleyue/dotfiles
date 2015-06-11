@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: equation number label
+# key: nu
+# --
+% Equation #${1:number}:
+% --------
+% & 
+$0

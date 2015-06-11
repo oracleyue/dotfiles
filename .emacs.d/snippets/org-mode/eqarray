@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: equation arrays
+# key: eqa
+# --
+\begin{equation}
+    \begin{array}{${1:ccc}}
+        ${2:v1 & v2} \\
+        $0
+    \end{array}
+\end{equation}
