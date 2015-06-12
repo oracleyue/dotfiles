@@ -23,7 +23,7 @@
  ;; If there is more than one, they won't work right.
  ;; '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 127 :width normal))))
  '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
- '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))) ; setting the value different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
  )
 
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message

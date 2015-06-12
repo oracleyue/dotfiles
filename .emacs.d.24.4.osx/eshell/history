@@ -1,14 +1,3 @@
-make
-make obj
-ls obj/
-make
-make
-ls
-makdir src
-mkdir src
-mv eigen.c src/
-ls
-make
 cd include/
 ls
 make
@@ -125,4 +114,15 @@ doxygen Doxyfile
 open .
 doxygen Doxyfile 
 cd ../eigen/
+./run 
+./run
+ls
+./run 
+ls
+mkdir src
+mv first.cc second.cc src/
+mkdir include
+ls
+ls src/
+./run 
 ./run 
