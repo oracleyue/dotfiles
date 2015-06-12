@@ -40,8 +40,8 @@
 ;; font size adjustment
 ;; C-x C-0 : return to default size
 ;;; use C-x C-0 first, then use +/- to tune the size.
-;; (global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
-;; (global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
+(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
+(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 
 ;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 

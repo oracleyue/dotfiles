@@ -1,26 +1,26 @@
 
 ;; ----- smex-history -----
 (
- eval-buffer
+ byte-recompile-directory
  list-packages
- magit-status
  align
+ eval-buffer
+ magit-status
  run-python
  variable-pitch-mode
- eshell
 )
 
 ;; ----- smex-data -----
 (
  (package-list-packages . 12)
  (shell . 39)
- (eval-buffer . 250)
+ (eval-buffer . 251)
  (evil-mode . 96)
  (customize . 3)
  (load-theme . 24)
  (evil-indent . 1)
  (erc . 5)
- (list-packages . 37)
+ (list-packages . 38)
  (python-shell-completion-complete-or-indent . 3)
  (py-shell-complete . 1)
  (python-mode . 2)
@@ -93,8 +93,9 @@
  (TeX-error-overview . 2)
  (customize-group . 1)
  (ess-sos . 1)
- (align . 9)
+ (align . 11)
  (byte-compile-file . 3)
  (variable-pitch-mode . 3)
  (run-python . 1)
+ (byte-recompile-directory . 2)
 )

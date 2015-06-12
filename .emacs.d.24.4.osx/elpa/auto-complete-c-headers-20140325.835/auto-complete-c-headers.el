@@ -1,11 +1,11 @@
 ;;; auto-complete-c-headers.el --- An auto-complete source for C/C++ header files
-;; Version: 20140325.835
 
 ;; Copyright (C) 2013  Masafumi Oyamada
 
 ;; Author: Masafumi Oyamada <stillpedant@gmail.com>
 ;; Package-Requires: ((auto-complete "1.4"))
 ;; Keywords: c
+;; Package-Version: 20140325.835
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
