@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(ecb-options-version "2.40")
- '(fill-column 72)
+ '(fill-column 80)
  '(inhibit-startup-screen t)
  '(linum-format " %3i ")
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
@@ -23,7 +23,7 @@
  ;; If there is more than one, they won't work right.
  ;; '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 127 :width normal))))
  '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
- '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
  )
 
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
@@ -160,7 +160,7 @@
    ;(load-theme 'yadwaita t)
    ;(load-theme 'monokai t)
 ;; Fringe setting (right-only)
-   (fringe-mode '(0 . nil))
+;   (fringe-mode '(0 . nil))
 
 ;; Globally enable /hl-line-mode/ for /monokai/ theme
 ;; in other themes, only enabled when python-mode starts
@@ -227,11 +227,6 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
-;; setting of pop-up boxes
-(setq ac-quick-help-delay 0.2)
-;(setq ac-candidate-limit 100)    ;; new
-;(setq ac-menu-height 20)    ;; new
-;(setq ac-quick-help-height 20)    ;; new
 ;; starting type
 (setq ac-expand-on-auto-complete t)    ;; new
 ;1; default auto start complete when type 3 characters
@@ -242,6 +237,11 @@
 (define-key ac-mode-map [(control tab)] 'auto-complete)
 ;3; explicit call to stop auto-complete
 ;(define-key ac-completing-map [(meta return)] 'ac-stop)
+;; setting of pop-up boxes
+(setq ac-quick-help-delay 0.2)
+;(setq ac-candidate-limit 100)    ;; new
+;(setq ac-menu-height 20)    ;; new
+;(setq ac-quick-help-height 20)    ;; new
 ;; show menu immediately...
 (setq ac-auto-show-menu t)    ;; new
 (setq ac-show-menu-immediately-on-auto-complete t)    ;; new
@@ -288,8 +288,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;; Enable /linum/ in nlinum lib
 ;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
-;(require 'linum)
-    ;(global-linum-mode 1)
+;; (global-linum-mode 1)
 (add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'sh-mode-hook 'linum-mode)
 (add-hook 'matlab-mode-hook 'linum-mode)
@@ -430,9 +429,10 @@
 (defun oy-ac-clang-config ()
   ;; auto-complete C/C++ sources and headers
   (require 'auto-complete-c-headers)
-  ;(setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")   ;; for /emacs-clang-complete-async/
+     ;;(setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")   ;; for /emacs-clang-complete-async/
   (setq ac-sources '(;ac-source-clang-async 
                      ac-source-clang
+                     ac-source-semantic
                      ac-source-c-headers
                      ac-source-words-in-same-mode-buffers))
   ;(ac-clang-launch-completion-process)      ;; for /emacs-clang-complete-async/
@@ -453,6 +453,7 @@
 (add-hook 'c-mode-hook 'oy-ac-clang-config)
 (add-hook 'c++-mode-hook 'oy-ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+;; setup compile command 
 (add-hook 'c-mode-common-hook 
           (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
 ;; default mode for Makefile in gnome
@@ -498,10 +499,10 @@
  ((string-equal system-type "darwin")
   ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
   (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20150528.2022/jediepcserver.py"))))
-
-(defun python-mode-ac-popup-width ()
-  (setq-local ac-max-width 0.5))
-(add-hook 'python-mode-hook 'python-mode-ac-popup-width)
+;; ;; set max width to fix bug in popup menu in jedi (having set globally)
+;; (defun python-mode-ac-popup-width ()
+;;   (setq-local ac-max-width 0.5))
+;; (add-hook 'python-mode-hook 'python-mode-ac-popup-width)
 
 ; =======================================
 ;; Programming Environment for /R/
@@ -1073,16 +1074,19 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; ;; For /ECB/
 ;; ;; [SOURCE]: https://github.com/emacsmirror/ecb
-(add-to-list 'load-path "~/.emacs.d/git/ecb")
-(require 'ecb)
-(require 'ecb-autoloads)
-(setq ecb-windows-width 0.16)
-(setq ede-project-directories (quote ("~/Workspace/cpp")))
-(setq ecb-source-path '(;"~/Workspace/cpp/src"
-                        ;"~/Workspace/cpp/lib"
-                        "~/tmp/cpp"))
-(setq ecb-tip-of-the-day nil)
-(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+
+; (add-to-list 'load-path "~/.emacs.d/git/ecb")
+; (require 'ecb)
+; (require 'ecb-autoloads)
+; (setq ecb-windows-width 0.16)
+; (setq ede-project-directories (quote ("~/Workspace/cpp")))
+; (setq ecb-source-path '(
+;                         "~/Workspace/c-prj/src"
+;                         "~/Workspace/c-prj/lib"
+;                         ;"~/tmp/eign"
+;                         ))
+; (setq ecb-tip-of-the-day nil)
+; (setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
 
 ;; (add-hook 'c-mode-hook 'ecb-activate)
 ;; (add-hook 'c++-mode-hook 'ecb-activate)
