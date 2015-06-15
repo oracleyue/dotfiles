@@ -139,10 +139,11 @@ Takes and optional `FRAME' as reference."
 
          ;; Adaptive colors
          (ymonokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
-         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#32352C"))  ; oracleyue: modified; #33352D
+         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified 
          ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
-         ;; (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
-         (ymonokai-hl-line  (if (in-terminal) "#303030" "#3E3D31"))  ; oracleyue: modified
+         (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
+         (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
+         ;; (ymonokai-hl-line-y   (if (in-terminal) "#212121" "#595959"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
          (ymonokai-hl       (if (in-terminal) "#303030" "#49483E"))
          (ymonokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
          (ymonokai-comments (if (in-terminal) "#8B8878" "#75715E"))
@@ -178,7 +179,8 @@ Takes and optional `FRAME' as reference."
          (s-mode-line-fg (if ymonokai-high-contrast-mode-line
                              ymonokai-bg ymonokai-fg))
          (s-mode-line-bg (if ymonokai-high-contrast-mode-line
-                             ymonokai-fg ymonokai-hl-line))
+                             ymonokai-fg ymonokai-hl-line))  
+                             ;; ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
          (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
                                        'unspecified green))
          (s-mode-line-inactive-fg (if ymonokai-high-contrast-mode-line
@@ -220,9 +222,6 @@ Takes and optional `FRAME' as reference."
      `(fringe
        ((,class (:foreground ,ymonokai-fg
                              :background ,s-fringe-bg))))
-     `(fringehl
-       ((,class (:foreground ,ymonokai-fg
-                             :background ,ymonokai-hl-line))))
 
      `(highlight
        ((,class (:background ,ymonokai-hl))))
@@ -579,7 +578,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-keyword-face
        ((,class (:foreground ,red
-                             :weight bold))))   ; oracleyue: default "normal"
+                             :weight normal))))   
 
      `(font-lock-negation-char-face
        ((,class (:foreground ,yellow
@@ -2023,7 +2022,8 @@ Takes and optional `FRAME' as reference."
 
      ;; linum-mode
      `(linum
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,ymonokai-line-num
+                 ;:foreground ,ymonokai-comments
                              :background ,s-fringe-bg))))
 
      ;; lusty-explorer
