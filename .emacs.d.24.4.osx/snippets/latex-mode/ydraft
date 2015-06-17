@@ -30,6 +30,13 @@
   % \definecolor{bg}{RGB}{39,40,34}
   % \usemintedstyle{monokai}
   \usemintedstyle{pastie}
+  \fvset{
+    frame=lines,
+    % framerule=1pt,
+    framesep=2mm,
+    baselinestretch=1.2,
+    fontsize=\small,
+  }
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage{natbib}
 

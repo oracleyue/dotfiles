@@ -85,18 +85,18 @@
 
 (fset 'yes-or-no-p 'y-or-n-p) ; answer with y/n instead of yes/no
 
-;; Disable all version control. makes startup and opening files much faster
+;;; Disable all version control. makes startup and opening files much faster
 ;(setq vc-handled-backends nil)
 
-;; Setting the url brower for emacs
-(setq browse-url-browser-function 'browse-url-firefox
-      browse-url-new-window-flag  t
-      browse-url-firefox-new-window-is-tab t)
+;;; Setting the url brower for emacs
+;; (setq browse-url-browser-function 'browse-url-firefox
+;;       browse-url-new-window-flag  t
+;;       browse-url-firefox-new-window-is-tab t)
 
 ;; Set default major mode to text-mode
 (setq-default major-mode 'text-mode)
 
-;; Spell Checking for some modes
+;;; Spell Checking for some modes
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 ;; (setq ispell-dictionary "british")
@@ -528,6 +528,35 @@
 (global-set-key (kbd "<f8>") 'gud-next) ;; equiv matlab step 1 
 (global-set-key (kbd "<f9>") 'gud-cont)
 (global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
+
+
+; =======================================
+;; Editing Mode for /Markdown/
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+; configure markdown
+(setq markdown-command "/usr/local/bin/multimarkdown")
+(add-hook 'markdown-mode-hook (lambda()
+          ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style.css")
+          (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/github.mini.css")
+          (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/github-markdown.css")
+          ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/normalize.css")
+))
+;; Preview using /livedown.el/
+(require 'livedown)
+(setq livedown:autostart nil) ; automatically open preview when opening markdown files 
+(setq livedown:open t)        ; automatically open the browser window
+(setq livedown:port 1337)     ; port for livedown server
+; use livedown to preview markdown
+(add-hook 'markdown-mode-hook (lambda()
+          (define-key markdown-mode-map (kbd "C-c C-c o") 'livedown:preview)
+          ))
+;; (global-set-key (kbd "C-c C-S-o") 'livedown:preview)
+
 
 ; =======================================
 ;; For /AUCTeX-Mode/
