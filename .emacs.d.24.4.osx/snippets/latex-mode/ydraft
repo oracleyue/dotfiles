@@ -26,6 +26,8 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage[usenames]{color}
+\usepackage{mdframed}   % to box theorem statements
+    \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}
   % \definecolor{bg}{RGB}{39,40,34}
   % \usemintedstyle{monokai}

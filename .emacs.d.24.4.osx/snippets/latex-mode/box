@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: boxed statements
+# key: box
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{mdframed}[style=yue]
+    $0
+\end{mdframed}

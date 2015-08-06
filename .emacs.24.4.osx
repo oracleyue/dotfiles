@@ -1,8 +1,4 @@
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(ecb-options-version "2.40")
  '(fill-column 80)
@@ -17,13 +13,10 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- ;; '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 127 :width normal))))
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
- '(fixed-pitch ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))) ; setting the value different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
+ '(default ((t (:family "Menlo" :foundry "unknown" :slant normal :weight normal :height 135 :width normal))))
+ '(fixed-pitch ((t (:family "Menlo"))))
+; '(fixed-pitch ((t (:family "Menlo" :foundry "unknown" :slant normal :weight normal :height 135 :width normal)))) ; setting the value different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
+ ;;; :family "DejaVu Sans Mono"
  )
 
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
@@ -68,8 +61,8 @@
     (menu-bar-mode -1))
 
 ;; setting size of frames
-;(when window-system (set-frame-size (selected-frame) 104 38))
-(when window-system (set-frame-size (selected-frame) 90 34))
+;(when window-system (set-frame-size (selected-frame) 94 34))
+(when window-system (set-frame-size (selected-frame) 100 34))
 ;; Setting font set for Chinese
 (if(display-graphic-p)
  (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -328,7 +321,7 @@
 ;; /multiple-cursors/: edit with multiple cursors
 (require 'multiple-cursors)
 ;; mark many occurrences in region
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
 ;; mark one more occurrence by regexp match
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
@@ -541,10 +534,11 @@
 ; configure markdown
 (setq markdown-command "/usr/local/bin/multimarkdown")
 (add-hook 'markdown-mode-hook (lambda()
-          ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style.css")
-          (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/github.mini.css")
-          (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/github-markdown.css")
-          ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/vendor/normalize.css")
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style.css")
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap.min.css")
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap-responsive.min.css")
+    ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style-2.css")
+    ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap.min-2.css")
 ))
 ;; Preview using /livedown.el/
 (require 'livedown)
@@ -583,6 +577,7 @@
         ("="   "triangleq"   "Relational" nil)
         ("v =" "coloneqq"    "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
+        ("v 0" "varnothing"    "Misc Symbol" nil)
         ))
 ; More math-font in LaTeX
 (setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: math symbol - norm (||*||) 
-# key: norm
-# --
-\left\lVert $0 \right\rVert

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: math symbol - abs (|*|)
-# key: abs
-# --
-\left\lvert $0 \right\rvert
