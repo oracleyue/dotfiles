@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: matrix norm
+# key: norm
+# --
+\left\| $1 \right\|$0

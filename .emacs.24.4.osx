@@ -278,7 +278,7 @@
                                 ))
 (setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; =======================================
 ;;; Enable /linum/ in nlinum lib
 ;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
 ;; (global-linum-mode 1)
@@ -290,34 +290,12 @@
 (add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
 (add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; =======================================
 ;; Settings for /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
    (bash-completion-setup)
 
 ; =======================================
-;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(cond
- ((string-equal system-type "darwin")
-  (require 'dash-at-point)
-  (global-set-key "\C-cd" 'dash-at-point) ; default \C-cd, conflicts with /doxyemacs/
-  ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
-  ; specify docsets to search in different modes
-  (set 'dash-at-point-mode-alist
-    '((c-mode . "c,gsl,gl4")
-      (c++-mode . "cpp,eigen,boost,gsl")
-      (python-mode . "python,numpy,scipy,matplotlib,pandas")
-      (ess-mode . "r")
-      (sh-mode . "bash")
-      ))))
-
-; =======================================
-;; Programming Environment and Useful Minor Modes for /HTML, js/
-
-;; ;; /iedit/: edit all occurrences in a buffer
-;; ; fix iedit bug, due to C-; has been bound to open clipboard by gnome
-;; (define-key global-map (kbd "C-c ;") 'iedit-mode)
-
 ;; /multiple-cursors/: edit with multiple cursors
 (require 'multiple-cursors)
 ;; mark many occurrences in region
@@ -337,6 +315,30 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+; =======================================
+;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
+(cond
+ ((string-equal system-type "darwin")
+  (require 'dash-at-point)
+  (global-set-key "\C-cd" 'dash-at-point) ; default \C-cd, conflicts with /doxyemacs/
+  ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
+  ; specify docsets to search in different modes
+  (set 'dash-at-point-mode-alist
+    '((c-mode . "c,gsl,gl4")
+      (c++-mode . "cpp,eigen,boost,gsl")
+      (python-mode . "python,numpy,scipy,matplotlib,pandas")
+      (ess-mode . "r")
+      (sh-mode . "bash")
+      ))))
+
+; =======================================
+;; Project Management for Programming
+(add-to-list 'load-path "~/.emacs.d/git/eproject")
+(require 'eproject)
+
+; =======================================
+;; Programming Environment for /HTML, js/
+
 
 ; =======================================
 ;; Programming Environment for /C C++/
@@ -347,7 +349,7 @@
 ;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;; /google-c-style/
-(add-to-list 'load-path "~/.emacs.d/git")
+;(add-to-list 'load-path "~/.emacs.d/git")
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -991,7 +993,7 @@
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ; For /folding-mode/ 
-(add-to-list 'load-path "~/.emacs.d/git")
+;(add-to-list 'load-path "~/.emacs.d/git")
 (require 'folding)
 (load "folding" 'nomessage 'noerror)
 (folding-mode-add-find-file-hook)

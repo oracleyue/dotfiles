@@ -35,7 +35,7 @@
   (setq yas/wrap-around-region 'cua))
 
 ;; Eproject project management with emacs
-(require 'eproject)
+;(require 'eproject)   ; having loaded globally in emacs; by oracleyue
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)

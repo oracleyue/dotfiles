@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vector norm
+# key: norm
+# --
+\left| $1 \right|$0

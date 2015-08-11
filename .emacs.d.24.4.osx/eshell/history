@@ -1,5 +1,3 @@
-make
-make
 ./run 
 ls
 make
@@ -126,3 +124,5 @@ cd
 cd .emacs.d/snippets/latex-mode/
 ls
 mv algo algorithm
+ls
+trash endpf 
