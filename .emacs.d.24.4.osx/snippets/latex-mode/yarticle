@@ -35,21 +35,22 @@
 \usepackage{amsfonts}
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{amsthm}
 % \usepackage{mathabx}  % Warning: changing the default math font
 % \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
-\usepackage{amsthm}
 % \usepackage{txfonts}
 % \usepackage{lmodern}  % to use symbols in /txfonts/, but use default math fonts
 % \usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \usepackage{graphicx}
 \usepackage{subfigure}
 % \usepackage{epsfig}
-% \usepackage{float}
-% \usepackage[normalem]{ulem}
-% \usepackage{csquotes}
-\usepackage[usenames]{color}
-\usepackage{mdframed}   % to box theorem statements
+% \usepackage[usenames]{color}
+\usepackage[usenames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}
   % \definecolor{bg}{RGB}{39,40,34}
@@ -89,13 +90,19 @@
 % theorem style given by /amsthm/
 % -----
 \theoremstyle{plain}% default
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{theorem}{Theorem}[section]
+\newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+\newmdtheoremenv[backgroundcolor=gray!0]{lemma}[theorem]{Lemma}
+\newtheorem{assumption}{Assumption}[section]
+% \newtheorem{proposition}[theorem]{Proposition}
+\newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
 \newtheorem*{corollary}{Corollary}
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{conjecture}{Conjecture}[section]
+% \newtheorem{definition}{Definition}[section]
+\newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+% \newtheorem{conjecture}{Conjecture}[section]
+\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
 \newtheorem{example}{Example}[section]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
@@ -103,31 +110,9 @@
 \newtheorem{case}{Case}
 
 % ----------------------------------------------------
-% command definitions for math symbols
+% command definitions for math symbols (snippet: mathsymb)
 % -----
-% math field/space symbols
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\E}{\mathbb{E}}
 
-% math bold face symbols 
-\newcommand{\by}{\mathbf{y}}
-\newcommand{\bx}{\mathbf{x}}
-\newcommand{\bw}{\mathbf{w}}
-\newcommand{\bPhi}{\boldsymbol{\Phi}}
-\newcommand{\dic}{\mathbf{A}}
-\newcommand{\bI}{\mathbf{I}}
-\newcommand{\bgamma}{\boldsymbol{\gamma}}
-\newcommand{\bGamma}{\boldsymbol{\Gamma}}
-
-% math operator names 
-\newcommand{\diag}{\operatorname{diag}}
-\newcommand{\blkdiag}{\operatorname{blkdiag}}
-\newcommand{\trace}{\operatorname{Tr}}
-
-% macros
-\newcommand{\yue}[1]{{\color{red}  \text{[Zuogong: #1]}}}
- 
 % ----------------------------------------------------
 
 

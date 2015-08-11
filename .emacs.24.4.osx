@@ -568,7 +568,7 @@
 ; More pair-mode in LaTeX
 (add-hook 'LaTeX-mode-hook
 	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
-			  (cons "$" "$"))))
+                      (cons "$" "$"))))
 (setq-default LaTeX-electric-left-right-brace t)
 ; More math-mode in LaTeX
 (setq LaTeX-math-list
@@ -578,6 +578,7 @@
         ("v =" "coloneqq"    "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
+        ("T"   "top"    "Misc Symbol" nil)
         ))
 ; More math-font in LaTeX
 (setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))

@@ -23,10 +23,13 @@
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}
 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \usepackage{graphicx}
 \usepackage{subfigure}
-\usepackage[usenames]{color}
-\usepackage{mdframed}   % to box theorem statements
+\usepackage[usenames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}
   % \definecolor{bg}{RGB}{39,40,34}
@@ -45,13 +48,17 @@
 
 %% theorem style given by /amsthm/
 \theoremstyle{plain}% default
-\newtheorem{theorem}{Theorem}[section]
+% \newtheorem{theorem}{Theorem}[section]
+\newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{proposition}[theorem]{Proposition}
+\newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
 \newtheorem*{corollary}{Corollary}
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{conjecture}{Conjecture}[section]
+% \newtheorem{definition}{Definition}[section]
+\newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+% \newtheorem{conjecture}{Conjecture}[section]
+\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
 \newtheorem{example}{Example}[section]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
