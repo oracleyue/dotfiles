@@ -73,8 +73,8 @@
 (setq helm-locate-fuzzy-match t)
 
 ;; use helm to show "occur"
-;; -keybinding: C-x c M-s o
-;(global-set-key (kbd "C-c h o") 'helm-occur)
+;; - keybinding: C-x c M-s o
+(global-set-key (kbd "C-c h o") 'helm-occur)
 
 ;; use helm to show help doc "C-h a"
 ;; - keybinding: C-x c a
@@ -117,12 +117,13 @@
 ;;       [M-p]      sort by ~cpu usage~
 ;;       [M-u]      sort by ~user~
 ;;       [M-m]      sort by ~memory~
-;; fast Unix comand line interface to popular WWW search engines
+
+;; fast Unix comand /surfraw/ line interface to popular WWW search engines
 ;; - keybinding: C-x c s
 
 ;; interactively search Google in helm buffer
 ;; - keybinding: C-x c C-c g
-;(global-set-key (kbd "C-c h g") 'helm-google-suggest)
+(global-set-key (kbd "C-c h g") 'helm-google-suggest)
 
 ;; quickly view and copy hexadecimal values of colors
 ;; - keybinding: C-x c c
