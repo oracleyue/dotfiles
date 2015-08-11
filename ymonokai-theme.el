@@ -139,10 +139,11 @@ Takes and optional `FRAME' as reference."
 
          ;; Adaptive colors
          (ymonokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
-         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#32352C"))  ; oracleyue: modified; #33352D
+         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified 
          ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
-         ;; (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
-         (ymonokai-hl-line  (if (in-terminal) "#303030" "#3E3D31"))  ; oracleyue: modified
+         (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
+         (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
+         ;; (ymonokai-hl-line-y   (if (in-terminal) "#212121" "#595959"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
          (ymonokai-hl       (if (in-terminal) "#303030" "#49483E"))
          (ymonokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
          (ymonokai-comments (if (in-terminal) "#8B8878" "#75715E"))
@@ -178,7 +179,8 @@ Takes and optional `FRAME' as reference."
          (s-mode-line-fg (if ymonokai-high-contrast-mode-line
                              ymonokai-bg ymonokai-fg))
          (s-mode-line-bg (if ymonokai-high-contrast-mode-line
-                             ymonokai-fg ymonokai-hl-line))
+                             ymonokai-fg ymonokai-hl-line))  
+                             ;; ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
          (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
                                        'unspecified green))
          (s-mode-line-inactive-fg (if ymonokai-high-contrast-mode-line
@@ -220,9 +222,6 @@ Takes and optional `FRAME' as reference."
      `(fringe
        ((,class (:foreground ,ymonokai-fg
                              :background ,s-fringe-bg))))
-     `(fringehl
-       ((,class (:foreground ,ymonokai-fg
-                             :background ,ymonokai-hl-line))))
 
      `(highlight
        ((,class (:background ,ymonokai-hl))))
@@ -515,8 +514,8 @@ Takes and optional `FRAME' as reference."
                                 :background ,s-mode-line-bg
                                 :box (:line-width 1
                                                   :color ,s-mode-line-bg
-                                                  :style unspecified)))))
-
+                                                  ;; :style unspecified)))))
+                                                  :style released-button))))) ;oracleyue, added.
      `(mode-line-buffer-id
        ((,class (:foreground ,s-mode-line-buffer-id-fg
                              :weight bold))))
@@ -564,7 +563,8 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,ymonokai-comments))))
 
      `(font-lock-comment-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:inherit 'fixed-pitch             ; oracleyue: added
+                          :foreground ,ymonokai-comments))))
 
      `(font-lock-constant-face
        ((,class (:foreground ,violet))))
@@ -578,7 +578,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-keyword-face
        ((,class (:foreground ,red
-                             :weight bold))))   ; oracleyue: default "normal"
+                             :weight normal))))   
 
      `(font-lock-negation-char-face
        ((,class (:foreground ,yellow
@@ -1891,7 +1891,7 @@ Takes and optional `FRAME' as reference."
 
      ;; ido-mode
      `(ido-first-match
-       ((,class (:foreground ,yellow
+       ((,class (:foreground ,red      ; oracleyue: "yellow" by default
                              :weight normal))))
 
      `(ido-only-match
@@ -2022,7 +2022,8 @@ Takes and optional `FRAME' as reference."
 
      ;; linum-mode
      `(linum
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,ymonokai-line-num
+                 ;:foreground ,ymonokai-comments
                              :background ,s-fringe-bg))))
 
      ;; lusty-explorer
@@ -2508,7 +2509,19 @@ Takes and optional `FRAME' as reference."
 
      `(org-archived
        ((,class (:foreground ,ymonokai-comments
+                             :inherit 'fixed-pitch             ; oracleyue: added
                              :weight normal))))
+
+     `(org-latex-and-export-specials    ; oracleyue: added
+       ((,class (:foreground ,ymonokai-comments
+                             :inherit 'fixed-pitch))))            ; oracleyue: added
+                             
+     `(org-document-info     ; oracleyue: added
+       ((,class (:foreground ,ymonokai-comments
+                             :inherit 'fixed-pitch))))             ; oracleyue: added
+     `(org-document-info-keyword     ; oracleyue: added
+       ((,class (:foreground ,ymonokai-comments
+                             :inherit 'fixed-pitch))))             ; oracleyue: added
 
      `(org-block
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
@@ -2625,6 +2638,7 @@ Takes and optional `FRAME' as reference."
 
      `(org-special-keyword
        ((,class (:foreground ,ymonokai-comments
+                             :inherit 'fixed-pitch             ; oracleyue: added
                              :weight bold))))
 
      `(org-table
@@ -2792,10 +2806,10 @@ Takes and optional `FRAME' as reference."
      `(popup-scroll-bar-foreground-face
        ((,class (:background ,ymonokai-emph))))
 
-     ;; ;; oracleyue: commented
-     ;; `(popup-tip-face
-     ;;   ((,class (:background ,ymonokai-hl
-     ;;                         :foreground ,ymonokai-fg))))
+     ;; oracleyue: commented
+     `(popup-tip-face
+       ((,class (:background ,ymonokai-hl
+                             :foreground ,ymonokai-fg))))
 
      ;; powerline
      `(powerline-active1
