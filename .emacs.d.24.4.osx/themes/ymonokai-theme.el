@@ -1891,7 +1891,7 @@ Takes and optional `FRAME' as reference."
 
      ;; ido-mode
      `(ido-first-match
-       ((,class (:foreground ,yellow
+       ((,class (:foreground ,red      ; oracleyue: "yellow" by default
                              :weight normal))))
 
      `(ido-only-match
