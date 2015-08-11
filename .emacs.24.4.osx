@@ -335,6 +335,8 @@
 ;; Project Management for Programming
 (add-to-list 'load-path "~/.emacs.d/git/eproject")
 (require 'eproject)
+; Disable automatic addition/removal of files from projects. Optional.
+(setq prj-autotracking nil)
 
 ; =======================================
 ;; Programming Environment for /HTML, js/
@@ -515,8 +517,6 @@
 (load-library "matlab-load")
 ;; Enable CEDTE feature support for MATLAB code
 ;(matlab-cedet-setup)
-
-(add-hook 'matlab-shell-mode-hook 'evil-emacs-state)
 ; ~~~
 ;; For GDB/debugging in general
 (global-set-key (kbd "<f7>") 'gud-step);; equiv matlab step in
@@ -680,6 +680,9 @@
      "cc" 'comment-region
      "cu" 'uncomment-region
    )
+;; Modes initialized by emacs-state
+(add-hook 'matlab-shell-mode-hook 'evil-emacs-state)
+(add-hook 'dired-mode-hook 'evil-emacs-state)
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; For /Icomplete Mode/
@@ -1110,8 +1113,8 @@
 ; (setq ecb-windows-width 0.16)
 ; (setq ede-project-directories (quote ("~/Workspace/cpp")))
 ; (setq ecb-source-path '(
-;                         "~/Workspace/c-prj/src"
-;                         "~/Workspace/c-prj/lib"
+;                         "~/Workspace/c/src"
+;                         "~/Workspace/c/include"
 ;                         ;"~/tmp/eign"
 ;                         ))
 ; (setq ecb-tip-of-the-day nil)
