@@ -225,7 +225,7 @@ Takes and optional `FRAME' as reference."
 
      `(highlight
        ((,class (:background ,ymonokai-hl))))
-
+          
      `(link
        ((,class (:foreground ,blue
                              :underline t
@@ -514,8 +514,8 @@ Takes and optional `FRAME' as reference."
                                 :background ,s-mode-line-bg
                                 :box (:line-width 1
                                                   :color ,s-mode-line-bg
-                                                  :style unspecified)))))
-
+                                                  ;; :style unspecified)))))
+                                                  :style released-button))))) ;oracleyue, added.
      `(mode-line-buffer-id
        ((,class (:foreground ,s-mode-line-buffer-id-fg
                              :weight bold))))
@@ -540,7 +540,7 @@ Takes and optional `FRAME' as reference."
 
      `(region
        ;; ((,class (:background ,ymonokai-hl
-       ((,class (:background ,region-bg
+       ((,class (:background ,region-bg        ;oracleyue, modified
                              :inherit t))))
 
      `(secondary-selection
@@ -1732,10 +1732,14 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,green))))
 
      `(helm-grep-lineno
-       ((,class (:foreground ,orange))))
+       ((,class (:foreground ,green))))      ;oracleyue, modified; default "orange"
 
      `(helm-grep-match
-       ((,class (:inherit match))))
+       ;((,class (:inherit match))))
+       ;((,class (:inherit isearch))))   ;oracleyue, modified
+       ;((,class (:inherit lazy-highlight))))      ;oracleyue, modified
+       ((,class (:foreground ,red
+                             :background ,ymonokai-bg))))      ;oracleyue, modified
 
      `(helm-grep-running
        ((,class (:foreground ,red))))
@@ -1756,15 +1760,18 @@ Takes and optional `FRAME' as reference."
                              :underline t))))
 
      `(helm-moccur-buffer
-       ((,class (:foreground ,cyan
+       ((,class (:foreground ,cyan       ;oracleyue, modified; default "cyan"
                              :underline t))))
 
      `(helm-match
        ((,class (:inherit match))))
+       ;((,class (:inherit lazy-highlight))))      ;oracleyue, modified
 
      `(helm-selection
-       ((,class (:background ,ymonokai-hl
-                             :underline t))))
+       ((,class (;:background ,ymonokai-hl    ;oracleyue, commented
+                 :foreground ,red           ;oracleyue, added
+                             :bold nil      ;oracleyue, added
+                             :underline t))))    ;oracleyue, modified, default "t"
 
      `(helm-selection-line
        ((,class (:background ,ymonokai-hl

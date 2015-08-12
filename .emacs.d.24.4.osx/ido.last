@@ -2,6 +2,7 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/Conferences/" . "CDC2015/")
  ("/Users/oracleyue/tmp/" . "py/")
  ("/Users/oracleyue/" . "tmp/")
 )
@@ -18,12 +19,16 @@
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/oracleyue/" (21962 11230 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".WebIde80/" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spyder2/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".PyCharm40/" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".npm/" ".node-gyp/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".gem/" ".fontconfig/" ".emacs.expr" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".default-css/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".atom/" ".anyconnect" ".adobe/" "../" "./")
+ ("/Users/oracleyue/" (21963 14318 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".WebIde80/" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spyder2/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".PyCharm40/" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".npm/" ".node-gyp/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".gem/" ".fontconfig/" ".emacs.expr" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".default-css/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".atom/" ".anyconnect" ".adobe/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/" (21963 1071 0 0) "Shared/" "Public/" "Prague/" "oracleyue/" "Icon
+" "git_repo/" "Academia/" "_others/" ".DS_Store" ".dropbox.cache/" ".dropbox" ".directory" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/Conferences/CDC2015/" (21937 63497 0 0) "texbackup.sh" "submission/" "ref/" "figures/" "cdc2015.tex" "cdc2015.synctex.gz" "cdc2015.pyg" "cdc2015.pdf" "cdc2015.out" "cdc2015.log" "cdc2015.blg" "cdc2015.bbl" "cdc2015.aux" "bibupdate.sh" "auto/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/Conferences/" (21937 63487 0 0) "MLSP2015/" "CDC2015/" "../" "./")
 
  ("/Users/oracleyue/Public/" (21729 64476 0 0) "OneDrive/" "Gaia/" "Dropbox/" "ATLAS/" "360yun/" ".DS_Store" "../" "./")
-
- ("/Users/oracleyue/Public/Dropbox/" (21961 48144 0 0) "Shared/" "Public/" "Prague/" "oracleyue/" "Icon
-" "git_repo/" "Academia/" "_others/" ".DS_Store" ".dropbox.cache/" ".dropbox" ".directory" "../" "./")
 
  ("/Users/oracleyue/Public/Dropbox/Academia/" (21871 3718 0 0) "TikZ/" "Slides/" "Matlab/" "Manuscripts/" "cpp/" "Courses/" "Books/" "bibtex_sync/" "backup/" ".git/" ".DS_Store" "../" "./")
 
