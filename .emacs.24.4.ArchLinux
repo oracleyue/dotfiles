@@ -1,0 +1,874 @@
+(custom-set-variables
+ '(column-number-mode t)
+ '(ecb-options-version "2.40")
+ '(fill-column 80)
+ '(inhibit-startup-screen t)
+ '(linum-format " %3i ")
+ '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
+ ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
+ '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+ '(tool-bar-mode nil))
+
+(custom-set-faces
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
+ ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
+ ;; (:family "DejaVu Sans Mono")
+ )
+
+(setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
+
+;;; use variable-width font types in text-mode
+;; (defun y-variable-width-text-mode ()
+;;   (interactive)
+;;   (variable-pitch-mode t)
+;;   (text-scale-increase 0.5)
+;;   )
+;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
+
+;; set cursor type
+(setq-default cursor-type 'bar) 
+
+;; font size adjustment
+;; C-x C-0 : return to default size
+;;; use C-x C-0 first, then use +/- to tune the size.
+(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
+(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
+
+
+;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
+(cond 
+ ((string-equal system-type "darwin")
+  ;(setq mac-command-modifier 'control)  ; use Command key also as Control
+  ;(setq mac-option-modifier 'meta)
+  )
+)
+;; fix $PATH for emacs in Mac OS X
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell 
+      (replace-regexp-in-string "[[:space:]\n]*$" "" 
+        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
+
+;; Settings for graphic or terminal modes
+(if (display-graphic-p)
+    (menu-bar-mode 1))
+(if (not (display-graphic-p))
+    (menu-bar-mode -1))
+
+;; setting size of frames
+;(when window-system (set-frame-size (selected-frame) 94 34))
+(when window-system (set-frame-size (selected-frame) 100 34))
+;; Setting font set for Chinese
+(if(display-graphic-p)
+ (dolist (charset '(kana han symbol cjk-misc bopomofo))
+   (set-fontset-font (frame-parameter nil 'font)
+                      charset
+                     (font-spec :family "WenQuanYi Micro Hei" :size 12)))
+)
+;; Various one line commands/config, like "TAB"
+(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
+(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
+
+(setq backup-inhibited t)  ;; disable backup file creation
+
+(fset 'yes-or-no-p 'y-or-n-p) ; answer with y/n instead of yes/no
+
+;;; Disable all version control. makes startup and opening files much faster
+;(setq vc-handled-backends nil)
+
+;;; Setting the url brower for emacs
+;; (setq browse-url-browser-function 'browse-url-firefox
+;;       browse-url-new-window-flag  t
+;;       browse-url-firefox-new-window-is-tab t)
+
+;; Set default major mode to text-mode
+(setq-default major-mode 'text-mode)
+
+;;; Spell Checking for some modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;; (setq ispell-dictionary "british")
+(setq ispell-dictionary "american")
+(add-hook 'LaTeX-mode-hook 'ispell)
+
+
+;; oracleyue's inital path setting
+;(cd "~/Public/Dropbox/oracleyue/OrgNote")
+;(cd "~/Public/Dropbox/Academia/matlab")
+(cd "~/Public/Dropbox/Academia/Manuscripts/DSF")
+;(cd "~/Workspace/matlab")
+    ;; For Ubuntu@LCSB 
+    ;(setq default-directory "~/Workspace/matlab/Feng_prj_HPC")
+
+;; oracleyue's env. variables and alias
+;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
+    ; For Ubuntu@LCSB
+    ; (setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk-amd64/jre")
+(setenv "orgnote" "~/Public/Dropbox/oracleyue/OrgNote")
+(setenv "gitdoc" "~/Public/Dropbox/Academia/Manuscripts")
+(setenv "github" "~/Worksapce/github.com")
+(setenv "gitrepo" "~/Worksapce/gitrepo")
+
+;; oracleyue's env. variables to control shell
+;; Shell mode
+(setq ansi-color-names-vector ; better contrast colors
+      ["black" "red4" "green4" "yellow4"
+       "blue3" "magenta4" "cyan4" "white"])
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+
+;; oracleyue's line wrapping settings
+;(define-key global-map [f4] 'toggle-truncate-lines)
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+;; oracleyue's key bindings
+(global-set-key (kbd "C-c C-=") 'comment-region)
+(global-set-key (kbd "C-c C-+") 'uncomment-region)
+;; (global-set-key "\C-xh" 'help-command)
+
+;;; ---------- Settings of Emacs Package System -------------
+;; For Package Management by ELPA
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    ;; Any add to list for package-archives (to add marmalade or melpa) goes here
+    ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+    ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+)
+
+;; Using default theme
+   ;(load-theme 'deeper-blue t)
+   ;(load-theme 'adwaita t)       ;grey
+;; Using oracleyue's theme
+   (add-to-list 'load-path "~/.emacs.d/themes")
+   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+   (load-theme 'ymonokai t)
+   ;(load-theme 'yadwaita t)
+   ;(load-theme 'monokai t)
+;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
+;   (fringe-mode '(0 . nil))
+
+;; Configure /hl-line-mode/ for /monokai/, only enabled when python-mode starts
+;; To hightlight the single row where the cursor is.
+(cond 
+ ((string-equal 'custom-enabled-themes "ymonokai")
+  ;(global-hl-line-mode t)
+  (set-face-background 'hl-line "gray27") 
+  (set-face-attribute hl-line-face nil :underline nil)))
+
+
+; ----------------------------------------------------------------
+;; -------------------- Settings of Modes -----------------------
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Fixing for /Dired/ in osx
+(cond 
+ ((string-equal system-type "darwin")
+  (setq insert-directory-program "/usr/local/bin/gls")
+  ;(setq dired-use-ls-dired nil)
+  (setq dired-listing-switches "-ahl --color=always --group-directories-first")))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Matching a pair of braces and hightlight the contents
+(show-paren-mode t)
+;; (setq show-paren-style 'expression)
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'hl-sexp)
+  (add-hook 'lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
+  (add-hook 'python-mode-hook 'hl-sexp-mode)
+  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
+  (add-hook 'sh-mode-hook 'hl-sexp-mode)
+
+
+;; ------------------------------------------------------------
+;;; Configurations for Programming Environment
+;; ------------------------------------------------------------
+
+;; =======================================
+;; Minior Modes for various completions
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Yasnippet/ A template system
+(require 'popup)
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas-global-mode 1)
+(setq-default mode-require-final-newline nil)
+;; use popup in yasnippet
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+;; use ido in yasnippet popup menu
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-x-prompt yas-no-prompt))   ; note that yas-dropdown-prompt needs /dropdown-list/ to be installed!
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /auto-complete/ 
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
+;; starting type
+(setq ac-expand-on-auto-complete t)    ;; new
+;1; default auto start complete when type 3 characters
+;(setq ac-auto-start 3)
+;2; explicit call to auto-complete, using trigger-key or auto-complete func
+(setq ac-auto-start nil)
+(ac-set-trigger-key "TAB")    ;; new
+(define-key ac-mode-map [(control tab)] 'auto-complete)
+;3; explicit call to stop auto-complete
+;(define-key ac-completing-map [(meta return)] 'ac-stop)
+;; setting of pop-up boxes
+(setq ac-quick-help-delay 0)    ;; default "0.2"
+;(setq ac-candidate-limit 100)    ;; new
+;(setq ac-menu-height 20)    ;; new
+;(setq ac-quick-help-height 20)    ;; new
+;; show menu immediately...
+(setq ac-auto-show-menu t)    ;; new
+(setq ac-show-menu-immediately-on-auto-complete t)    ;; new
+;; select candidates in ac-menu
+(setq ac-use-menu-map t)
+;; ;; set the width of popup menu to fix bugs
+(setq ac-max-width 0.5)
+;; keystokes
+(define-key ac-menu-map "\C-n" 'ac-next)
+(define-key ac-menu-map "\C-p" 'ac-previous)
+(define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
+;; set dictionary
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140515.1959/dict/")
+;; list for auto-complete
+(set-default 'ac-sources '(ac-source-abbrev
+                           ac-source-dictionary
+                           ac-source-filename    ;; new
+                           ac-source-yasnippet
+                           ac-source-words-in-same-mode-buffers))
+; Notes: other settings are in different programming languages' parts. See C/C++.
+;; ------------------------------------------------------------
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
+; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator-1.83")
+; (require 'fill-column-indicator)
+; (define-globalized-minor-mode
+;    global-fci-mode fci-mode (lambda () (fci-mode 1)))
+; (add-hook 'python-mode-hook 'fci-mode)
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Insert Parenthesis/Brackets by /Pair/
+(electric-pair-mode 1)
+;; make electric-pair-mode work on more brackets
+(defvar y-electric-pair-pairs '(
+                                (?\" . ?\")
+                                (?\{ . ?\})
+                                        ; (?\< . ?\>)
+                                        ; (?\' . ?\')
+                                        ; (?\$ . ?\$)
+                                ))
+(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+
+; =======================================
+;;; Enable /linum/ in nlinum lib
+;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
+;;; (global-linum-mode 1)
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'sh-mode-hook 'linum-mode)
+(add-hook 'matlab-mode-hook 'linum-mode)
+(add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'c-mode-common-hook 'linum-mode)
+(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
+(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
+ 
+; =======================================
+;; Settings for /bash-completion/: TAB complete alias and functions
+(require 'bash-completion)
+   (bash-completion-setup)
+
+; =======================================
+;; /multiple-cursors/: edit with multiple cursors
+(require 'multiple-cursors)
+;; mark many occurrences in region
+(global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
+;; mark one more occurrence by regexp match
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; mouse events
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+;; specials
+(global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
+;; fix "C-j" for AucTeX mode
+(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
+
+;; /expand-region/: increase the selected region by semantic units
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+; =======================================
+;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
+(cond
+ ((string-equal system-type "darwin")
+  (require 'dash-at-point)
+  (global-set-key "\C-cd" 'dash-at-point) ; default \C-cd, conflicts with /doxyemacs/
+  ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
+  ; specify docsets to search in different modes
+  (set 'dash-at-point-mode-alist
+    '((c-mode . "c,gsl,gl4")
+      (c++-mode . "cpp,eigen,boost,gsl")
+      (python-mode . "python,numpy,scipy,matplotlib,pandas")
+      (ess-mode . "r")
+      (sh-mode . "bash")
+      ))))
+
+
+; =======================================
+;; Project Management for Programming
+(add-to-list 'load-path "~/.emacs.d/git/eproject")
+(require 'eproject)
+; Disable automatic addition/removal of files from projects. Optional.
+(setq prj-autotracking nil)
+
+
+; =======================================
+;; Programming Environment for /HTML, js/
+
+
+; =======================================
+;; Programming Environment for /C C++/
+(require 'cc-mode)
+;; ;; Having defined in /google-c-style/
+;; (setq-default c-default-style "linux")
+;; (setq-default c-basic-offset 4)
+;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+
+;; /google-c-style/
+;(add-to-list 'load-path "~/.emacs.d/git")
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; /xcscope/: source cross-referencing tool [install cscope]
+;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
+(require 'xcscope)
+(cscope-setup)
+
+;; auto-complete C/C++ sources and headers
+(require 'auto-complete-c-headers)
+;; /auto-complete-clang/: clang completion for C/C++ [For Mac OS X]
+;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
+(cond 
+ ((string-equal system-type "gnu/linux")
+  (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
+  (require 'auto-complete-clang-async)
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
+  (setq ac-clang-cflags    ;; for /emacs-clang-complete-async
+        (mapcar (lambda (item)(concat "-I" item))
+                (split-string
+                 "
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
+ /usr/local/include
+ /usr/include
+                 ")))
+  )
+ ((string-equal system-type "darwin")
+  (require 'auto-complete-clang)
+  (setq ac-auto-start nil)
+  (setq ac-clang-flags       ;; for /emacs-clang-complete
+        (mapcar (lambda (item)(concat "-I" item))
+                (split-string
+                 "
+ /usr/local/include/eigen3
+ /usr/local/include/c++
+ /usr/local/include/c
+ /usr/local/include
+                 ")))
+  ;; LIBRARYIES: openmpi, gsl, Eigen, boost, opengl; followed by "/", e.g., <gsl/gsl_math.h>
+  ;;
+  ;; /usr/local/include/c++-xcode/v1
+  ;; /usr/local/include/c/sys
+  ;; /usr/local/include/clang
+  ;
+  ;; adding for cflags for clang:
+  ;(setq ac-clang-cflags (append '("-std=c++11") ac-clang-cflags))
+  ;
+  ;; ;; way 2:
+  ;;  (setq ac-clang-cflags (list
+  ;;                        "-std=c++11"
+  ;;                        "-stdlib=libc++"
+  ;;                        "-frtti"
+  ;;                        "-fexceptions"
+  ;;                        "-DUSE_GLEW"
+  ;;                        "-I/usr/local/include/c++/v1"
+  ;;                        "-I/usr/local/include/c"
+  ;;                        "-I/usr/local/include/c/sys"
+  ;;                        ;; (concat "-I" (expand-file-name "~/Documents/fmesh_engine/engine/lib/package"))
+  ;;                        "-I/usr/local/include"
+  ;;                        "-I/usr/include"
+  ;;                        ))
+  )
+ )
+
+(defun oy-ac-clang-config ()
+  ;; auto-complete C/C++ headers
+  (cond 
+   ((string-equal system-type "gnu/linux")
+    (setq ac-sources '(ac-source-clang-async 
+                       ac-source-semantic
+                       ac-source-c-headers
+                       ac-source-words-in-same-mode-buffers))
+    (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
+    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
+    (ac-clang-launch-completion-process))
+   ((string-equal system-type "darwin")
+    (setq ac-sources '(ac-source-clang
+                       ac-source-semantic
+                       ac-source-c-headers
+                       ac-source-words-in-same-mode-buffers))
+    (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
+    (add-to-list 'achead:include-directories '"/usr/local/include/c++")
+    (add-to-list 'achead:include-directories '"/usr/local/include/c")
+    (add-to-list 'achead:include-directories '"/usr/local/include")
+    (ac-clang-launch-completion-process))
+   )
+)
+(add-hook 'c-mode-hook 'oy-ac-clang-config)
+(add-hook 'c++-mode-hook 'oy-ac-clang-config)
+(add-hook 'auto-complete-mode-hook 'ac-common-setup)
+;; setup compile command 
+(add-hook 'c-mode-common-hook 
+          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in gnome
+(add-hook 'makefile-gmake-mode-hook
+          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in Mac OS X
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+
+;; ;; use /doxymacs/ to manipulate doxygen documentations
+;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
+;; (require 'doxymacs)
+;; (add-hook 'c-mode-common-hook 'doxymacs-mode)
+;; ; fontify the doxygen keywords
+;; (defun my-doxymacs-font-lock-hook ()
+;;   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+;;       (doxymacs-font-lock)))
+;; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+; =======================================
+;; Programming Environment for /Python/
+; using /emacs-for-python/
+(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
+; use *IPython*
+(epy-setup-ipython)
+; use *flymake* checker
+(epy-setup-checker "pyflakes %f")
+; *indentation and line highlight*
+(defun epy-edit-hl-config()
+  ;; setting in "epy-editing.el" by /emacs-for-python/ NOT working
+  ;; * highlight indentation  ;; not working well with popup.el
+  ;(require 'indent-guide)
+  ;(indent-guide-mode t)
+  ;(setq indent-guide-recursive t)  ; to show all guide lines, default only one
+  ;; * highlight line; the face for hl-line-mode has been set globally
+  (hl-line-mode t))
+(add-hook 'python-mode-hook 'epy-edit-hl-config)
+; disabling *ropemacs*
+(setq epy-enable-ropemacs nil)
+;
+; auto-completion by *Jedi*
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)     ; optional
+(cond
+ ((string-equal system-type "darwin")
+  ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
+  (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20150528.2022/jediepcserver.py"))))
+;; ;; set max width to fix bug in popup menu in jedi (having set globally)
+;; (defun python-mode-ac-popup-width ()
+;;   (setq-local ac-max-width 0.5))
+;; (add-hook 'python-mode-hook 'python-mode-ac-popup-width)
+
+; =======================================
+;; Programming Environment for /R/
+(require 'ess-site)
+
+; =======================================
+;; Programming Environment for /MATLAB/
+(require 'matlab)
+(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
+(add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
+(setq matlab-indent-function t)
+(setq matlab-shell-command "/usr/local/bin/matlab")
+(load-library "matlab-load")
+;; Enable CEDTE feature support for MATLAB code
+;(matlab-cedet-setup)
+; ~~~
+;; For GDB/debugging in general
+(global-set-key (kbd "<f7>") 'gud-step);; equiv matlab step in
+(global-set-key (kbd "<f8>") 'gud-next) ;; equiv matlab step 1 
+(global-set-key (kbd "<f9>") 'gud-cont)
+(global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
+
+
+; =======================================
+;; Editing Mode for /Markdown/
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+; configure markdown
+(setq markdown-command "/usr/local/bin/multimarkdown")
+(add-hook 'markdown-mode-hook (lambda()
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style.css")
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap.min.css")
+    (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap-responsive.min.css")
+    ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/style-2.css")
+    ;; (add-to-list 'markdown-css-paths "/Users/oracleyue/.default-css/bootstrap.min-2.css")
+))
+;; Preview using /livedown.el/
+(require 'livedown)
+(setq livedown:autostart nil) ; automatically open preview when opening markdown files 
+(setq livedown:open t)        ; automatically open the browser window
+(setq livedown:port 1337)     ; port for livedown server
+; use livedown to preview markdown
+(add-hook 'markdown-mode-hook (lambda()
+          (define-key markdown-mode-map (kbd "C-c C-c o") 'livedown:preview)
+          ))
+;; (global-set-key (kbd "C-c C-S-o") 'livedown:preview)
+
+
+; =======================================
+;; For /AUCTeX-Mode/
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(setq-default TeX-PDF-mode t)    ; default for pdf and forward search
+(setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
+(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+; More pair-mode in LaTeX
+(add-hook 'LaTeX-mode-hook
+	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
+                      (cons "$" "$"))))
+(setq-default LaTeX-electric-left-right-brace t)
+; More math-mode in LaTeX
+(setq LaTeX-math-list
+      '(("<"   "preceq" "Relational" 10927)
+        (">"   "succeq" "Relational" 10928)
+        ("="   "triangleq"   "Relational" nil)
+        ("v =" "coloneqq"    "Relational" nil)
+        ("v ~" "thicksim"    "Relational" nil)
+        ("v 0" "varnothing"    "Misc Symbol" nil)
+        ("T"   "top"    "Misc Symbol" nil)
+        ))
+; More math-font in LaTeX
+(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+
+;; So that RefTeX finds my bibliography
+(setq reftex-default-bibliography '("./ref/library.bib"))
+; Adding -shell-escape in pdflatex for mint
+(eval-after-load "tex" 
+  '(setcdr (assoc "LaTeX" TeX-command-list)
+          '("%`%l%(mode) -shell-escape%' %t"
+          TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
+(eval-after-load 'latex 
+  '(setq LaTeX-clean-intermediate-suffixes
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("XeLaTeX" "xelatex -shell-escape %t" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("Rubber" "rubber -fd %t" TeX-run-command nil t) t))
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
+;; (eval-after-load "tex"
+;;    '(add-to-list 'TeX-command-list
+;;                  '("Rubber-clean" "rubber --clean %t" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("convert to png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("update bib library" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/bibupdate.sh" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("backup doc files" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/srcbackup.sh" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("backup tex files" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/texbackup.sh" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("Git regular push" "git add --all && git ci -m \"regular update\" && git push" TeX-run-command nil t) t))
+
+
+(cond 
+ ((string-equal system-type "gnu/linux")
+  ; Use Evince as viewer, enable source <-> PDF sync
+  (setq TeX-output-view-style
+        (quote  (("^pdf$" "." "evince -f %o")
+                 ("^html?$" "." "firefox %o"))))
+  )
+ ((string-equal system-type "darwin")
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background
+  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+  (setq TeX-view-program-list
+     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))
+     ;; '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  )
+)
+
+; --------------------------------
+;; Settings for /evil-mode/
+(load "~/.emacs.d/emacs-init-evil")
+
+; --------------------------------
+;; ;; Settings for /Icomplete Mode/
+;; ;(load "~/.emacs.d/emacs-init-ido")
+
+; --------------------------------
+;; Setting for /golden-ratio/
+(require 'golden-ratio)
+(golden-ratio-mode t)
+(setq golden-ratio-auto-scale t) 
+
+; --------------------------------
+;; Setting for /Helm/ and plus
+(load "~/.emacs.d/emacs-init-helm")
+(load "~/.emacs.d/emacs-init-helm-swoop")
+
+; --------------------------------
+;; Setting for /neotree/
+(require 'neotree)
+(global-set-key [f6] 'neotree-toggle)
+(setq neo-theme 'nerd)  ;classic, ascii, arrow, nerd
+(neotree-dir "~/Public/Dropbox/Academia/Manuscripts")
+(neotree-hide)
+
+; --------------------------------
+;; Settings for /Org-mode/
+;; Activation
+;(add-hook 'org-mode-hook 'turn-on-font-lock)
+(global-font-lock-mode 1)
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+;; set font face
+(add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+(add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
+
+;(setq org-startup-indented t)
+;(add-hook 'org-mode-hook (lambda()  (visual-line-mode t)))
+
+;; HTML Export Settings
+(setq org-export-html-style-extra "<style type=\"text/css\">\n  html {\n  font-family: sans-serif;\n  font-size: 10pt;\n  }\n  em { font-style: normal; font-weight: bold;}\n pre { \n  font-family: monospace;\n  font-size: 90%;\n } \n </style>") 
+
+;; Easy-Templates for LaTeX macros
+(eval-after-load 'org
+ '(progn
+   ;(add-to-list 'org-structure-template-alist '("eq" "\\begin{equation}\n?\n\\end{equation}")) 
+   ;(add-to-list 'org-structure-template-alist '("eqa" "\\begin{equation}\n \\begin{array}{}\n?\n \\end{array}\n\\end{equation}")) 
+   ;(add-to-list 'org-structure-template-alist '("bm" "\\begin{bmatrix}\n?\n\\end{bmatrix}")) 
+   (add-to-list 'org-structure-template-alist '("p" ":PROPERTIES:\n:AUTHOR:\n:CUSTOM_ID:\n:LABEL: sec:?\n:END:")) 
+   ;(add-to-list 'org-structure-template-alist '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]")) 
+   ;(add-to-list 'org-structure-template-alist '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|")) 
+   (add-to-list 'org-structure-template-alist '("uml" "#+BEGIN_SRC plantuml :file files/dia#.png :exports results\n?\n#+END_SRC")) 
+))
+;; Setup of Babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)
+   (latex . t)
+   (ditaa . t)
+   (plantuml . t)
+  )) 
+(setq org-babel-python-command "python2")
+(setq org-export-babel-evaluate nil)
+(setq org-plantuml-jar-path
+  (expand-file-name "/usr/share/emacs/24.3/lisp/contrib/scripts/plantuml.jar"))
+
+;; use syntax highlighting in org-file code blocks
+(setq org-src-fontify-natively t)
+; fix bug to load org-block settings in themes by re-enabling it
+(defface org-block-begin-line
+  '((t (:slant italic)))
+   "Face used for the line delimiting the begin of source blocks.")
+(defface org-block-end-line
+  '((t (:slant italic)))
+  "Face used for the line delimiting the end of source blocks.")
+;; no extra indentation
+(setq org-src-preserve-indentation t)
+;; set default exports to both code and results
+(setq org-babel-default-header-args
+      (cons '(:exports . "both")
+             (assq-delete-all :exports org-babel-default-header-args)))
+
+;; Setting for /org-article/ for LaTeX
+(require 'ox-latex)
+(setq org-export-latex-listings 'minted)
+(setq org-export-latex-minted-options
+           '(("frame" "lines")
+             ("fontsize" "\\scriptsize")
+             ("linenos" "")))
+
+(setq org-export-latex-packages-alist 
+   '(("AUTO" "inputenc" t)
+; font type settings:
+    ("" "mathptmx" t)
+    ("scaled=0.8" "DejaVuSansMono" t)
+; math symbols and figures:
+    ("" "latexsym" t)
+    ("" "amssymb" t)
+    ("" "amsmath" t) 
+    ("" "amsthm" t)
+    ("" "graphicx" t)
+    ("" "subfigure" t)
+    ("" "epsfig" t)
+; others    
+    ("usenames" "color" t)
+    ("" "csquotes" t)
+	("" "minted" t) ; nil by default
+    ("" "hyperref" t)
+))
+
+;; do not put in \hypersetup use your own
+;; \hypersetup{pdfkeywords={%s},\n pdfsubject={%s},\n pdfcreator={%s}
+(setq org-latex-with-hyperref nil)
+
+(add-to-list 'org-latex-classes '("org-article" 
+"\\documentclass{org-article}
+\\usepackage[top=1in, bottom=1in, left=1.2in, right=1.2in]{geometry}
+
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+
+[EXTRA]"
+("\\section{%s}" . "\\section*{%s}")
+("\\subsection{%s}" . "\\subsection*{%s}")
+("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+("\\paragraph{%s}" . "\\paragraph*{%s}")
+("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+)
+
+;;; Seem not required in new version
+;; for minted you must run latex with -shell-escape because it calls pygmentize as an external program
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+;;         "bibtex %b"
+;;         "makeindex %b"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"))
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For tags-update, using =ctags -e=, NOT etags!
+(defun oy-build-ctags ()
+  (interactive)
+  (message ">> building project tags ...")
+  ;(let ((root "~/Workspace/"))
+  (let ((root default-directory))
+        (shell-command (concat "ctags -e -R --extra=+fq --exclude=db --exclude=test --exclude=.git --exclude=public -f " root "TAGS " default-directory)))
+  (oy-visit-project-tags)
+  (message ">> tags built successfully!"))
+(defun oy-visit-project-tags ()
+  (interactive)
+  (let ((tags-file (concat default-directory "TAGS")))
+        (visit-tags-table tags-file)
+        (message (concat "Loaded " tags-file))))
+
+;(define-key evil-normal-state-map (kbd "C-w u") 'oy-build-ctags) ;up
+(global-set-key (kbd "C-c u") 'oy-build-ctags)
+;(evil-leader/set-key "up" 'oy-build-ctags)
+
+;; For /etags-table/
+(require 'etags-table)
+(setq etags-table-search-up-depth 10)
+(setq tags-table-list '("~/Workspace/TAGS" "~/tmp/TAGS"))
+
+;; For /etags-select/
+;;;; [SOURCE]: https://github.com/emacsmirror/etags-select
+(add-to-list 'load-path "~/.emacs.d/git/etags-select")
+(load "etags-select.el")
+(require 'etags-select)
+(global-set-key "\M-?" 'etags-select-find-tag-at-point)
+(global-set-key "\M-." 'etags-select-find-tag)
+;; Setting key bindings to close etags-select window
+(define-key etags-select-mode-map (kbd "C-g") 'etags-select-quit)
+        ;; Also quit etags-select when cursor moves to another window
+(define-key etags-select-mode-map (kbd "C-x o") 'etags-select-quit)
+;; (define-key etags-select-mode-map (kbd "C-p") 'etags-select-previous-tag)
+;; (define-key etags-select-mode-map (kbd "C-n") 'etags-select-next-tag)
+;; default etags-select bindings
+        ;; Return -> 'etags-select-goto-tag
+        ;; M-Return -> 'etags-select-goto-tag-other-window
+        ;; p -> 'etags-select-previous-tag
+        ;; n -> 'etags-select-next-tag
+        ;; q -> 'etags-select-quit
+        ;; 0 -> (etags-select-by-tag-number "0")
+        ;; 1 -> (etags-select-by-tag-number "1")
+        ;; .. ..
+        ;; 9 -> (etags-select-by-tag-number "9")
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; For /ECB/
+;; [SOURCE]: https://github.com/emacsmirror/ecb
+
+;(add-to-list 'load-path "~/.emacs.d/git/ecb")
+;(require 'ecb)
+;(require 'ecb-autoloads)
+;(setq ecb-windows-width 0.16)
+;(setq ede-project-directories (quote ("~/Workspace/c")))
+;(setq ecb-source-path '(
+;                        "~/Workspace/c/src"
+;                        "~/Workspace/c/include"
+;                        ;"~/tmp/eign"
+;                        ))
+;(setq ecb-tip-of-the-day nil)
+;(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+
+;; (add-hook 'c-mode-hook 'ecb-activate)
+;; (add-hook 'c++-mode-hook 'ecb-activate)
+;; (add-hook 'matlab-mode-hook 'ecb-activate)
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
