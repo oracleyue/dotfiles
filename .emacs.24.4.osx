@@ -27,8 +27,10 @@
 ;;   (variable-pitch-mode t)
 ;;   (text-scale-increase 0.5)
 ;;   )
-;
 ;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
+
+;; set cursor type
+(setq-default cursor-type 'bar) 
 
 ;; font size adjustment
 ;; C-x C-0 : return to default size
@@ -168,6 +170,14 @@
 ;; -------------------- Settings of Modes -----------------------
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Fixing for /Dired/ in osx
+(cond 
+ ((string-equal system-type "darwin")
+  (setq insert-directory-program "/usr/local/bin/gls")
+  ;(setq dired-use-ls-dired nil)
+  (setq dired-listing-switches "-ahl --color=always --group-directories-first")))
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
 (show-paren-mode t)
 ;; (setq show-paren-style 'expression)
@@ -231,7 +241,7 @@
 ;3; explicit call to stop auto-complete
 ;(define-key ac-completing-map [(meta return)] 'ac-stop)
 ;; setting of pop-up boxes
-(setq ac-quick-help-delay 0.2)
+(setq ac-quick-help-delay 0)    ;; default "0.2"
 ;(setq ac-candidate-limit 100)    ;; new
 ;(setq ac-menu-height 20)    ;; new
 ;(setq ac-quick-help-height 20)    ;; new
@@ -480,15 +490,15 @@
 (epy-setup-ipython)
 ; use *flymake* checker
 (epy-setup-checker "pyflakes %f")
-; *hightlight indentation*
-; *line highlight*
+; *indentation and line highlight*
 (defun epy-edit-hl-config()
   ;; setting in "epy-editing.el" by /emacs-for-python/ NOT working
-  (require 'highlight-indentation)
-  (highlight-indentation-mode t)
-  ;; the face for hl-line-mode has been set globally
-  (hl-line-mode t)
-  )
+  ;; * highlight indentation  ;; not working well with popup.el
+  ;(require 'indent-guide)
+  ;(indent-guide-mode t)
+  ;(setq indent-guide-recursive t)  ; to show all guide lines, default only one
+  ;; * highlight line; the face for hl-line-mode has been set globally
+  (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)
 ; disabling *ropemacs*
 (setq epy-enable-ropemacs nil)

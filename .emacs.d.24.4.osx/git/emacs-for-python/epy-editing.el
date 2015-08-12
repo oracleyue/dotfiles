@@ -174,6 +174,7 @@ original" (interactive)
 ;; Highlight indentation
 ;; (require 'highlight-indentation)
 ;; (add-hook 'python-mode-hook 'highlight-indentation)
+;; oraclyue: (highlight-indentation-mode t)
 
 ;; Line numbering
 ;;(setq linum-format "%4d")
