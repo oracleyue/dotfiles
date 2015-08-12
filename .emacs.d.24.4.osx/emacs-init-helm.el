@@ -28,10 +28,10 @@
 ;; auto-resize buffer to fit candidates
 (helm-autoresize-mode t)
 ;; if using /golden-ratio/
-;(defun pl/helm-alive-p ()
-;  (if (boundp 'helm-alive-p)
-;      (symbol-value 'helm-alive-p)))
-;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+(defun pl/helm-alive-p ()
+  (if (boundp 'helm-alive-p)
+      (symbol-value 'helm-alive-p)))
+(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 
 ;; use helm to fire M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -76,7 +76,7 @@
 
 ;; use helm to show "occur"
 ;; - keybinding: C-x c M-s o
-;(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c h O") 'helm-occur)
 
 ;; use helm to show help doc "C-h a"
 ;; - keybinding: C-x c a

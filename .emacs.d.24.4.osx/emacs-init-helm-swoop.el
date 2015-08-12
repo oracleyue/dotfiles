@@ -40,7 +40,7 @@
 (setq helm-swoop-split-direction 'split-window-vertically)
 
 ;; If nil, you can slightly boost invoke speed in exchange for text color
-(setq helm-swoop-speed-or-color nil)
+(setq helm-swoop-speed-or-color t)
 
 ;; ;; Go to the opposite side of line from the end or beginning of line
 (setq helm-swoop-move-to-line-cycle t)

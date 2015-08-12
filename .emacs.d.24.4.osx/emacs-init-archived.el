@@ -1,4 +1,11 @@
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; For /folding-mode/ 
+;(add-to-list 'load-path "~/.emacs.d/git")
+;(require 'folding)
+;(load "folding" 'nomessage 'noerror)
+;(folding-mode-add-find-file-hook)
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; ;; For /Multi-Term/
 ;; (require 'multi-term)
 ;; (setq multi-term-program "/bin/bash")

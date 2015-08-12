@@ -658,6 +658,12 @@
 ;; ;(load "~/.emacs.d/emacs-init-ido")
 
 ; --------------------------------
+;; Setting for /golden-ratio/
+(require 'golden-ratio)
+(golden-ratio-mode t)
+(setq golden-ratio-auto-scale t) 
+
+; --------------------------------
 ;; Setting for /Helm/ and plus
 (load "~/.emacs.d/emacs-init-helm")
 (load "~/.emacs.d/emacs-init-helm-swoop")
@@ -836,14 +842,6 @@
         ;; 1 -> (etags-select-by-tag-number "1")
         ;; .. ..
         ;; 9 -> (etags-select-by-tag-number "9")
-
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; For /folding-mode/ 
-;(add-to-list 'load-path "~/.emacs.d/git")
-(require 'folding)
-(load "folding" 'nomessage 'noerror)
-(folding-mode-add-find-file-hook)
 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
