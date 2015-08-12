@@ -649,23 +649,20 @@
   )
 )
 
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; --------------------------------
 ;; Settings for /evil-mode/
 (load "~/.emacs.d/emacs-init-evil")
 
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; --------------------------------
 ;; ;; Settings for /Icomplete Mode/
 ;; ;(load "~/.emacs.d/emacs-init-ido")
 
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Setting for /Helm-mode/
+; --------------------------------
+;; Setting for /Helm/ and plus
 (load "~/.emacs.d/emacs-init-helm")
+(load "~/.emacs.d/emacs-init-helm-swoop")
 
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; --------------------------------
 ;; Setting for /neotree/
 (require 'neotree)
 (global-set-key [f6] 'neotree-toggle)
@@ -673,7 +670,7 @@
 (neotree-dir "~/Public/Dropbox/Academia/Manuscripts")
 (neotree-hide)
 
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; --------------------------------
 ;; Settings for /Org-mode/
 ;; Activation
 ;(add-hook 'org-mode-hook 'turn-on-font-lock)

@@ -6,6 +6,7 @@
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
 ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+;; Keybinding: "C-o" to switch between Helm sources (e.g. jump from the historical list to the current list)
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
@@ -34,6 +35,7 @@
 
 ;; use helm to fire M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
 ;; use helm to show kill-ring (basically, C-y cycle the kill ring)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -74,7 +76,7 @@
 
 ;; use helm to show "occur"
 ;; - keybinding: C-x c M-s o
-(global-set-key (kbd "C-c h o") 'helm-occur)
+;(global-set-key (kbd "C-c h o") 'helm-occur)
 
 ;; use helm to show help doc "C-h a"
 ;; - keybinding: C-x c a
@@ -92,7 +94,7 @@
 
 ;; view the local/global mark rings in helm
 ;; - keybinding: C-x c C-c SPC
-(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+(global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
 
 ;; use helm to build regexp, test them interactively
 ;; - keybinding: C-x c r
@@ -154,18 +156,19 @@
 ;; Summary of keybindings
 ;  M-x 	        helm-M-x 	                        List commands
 ;  M-y 	        helm-show-kill-ring 	            Shows the content of the kill ring
-;  C-x b 	        helm-mini 	                        Shows open buffers, recently opened files
+;  C-x b        helm-mini 	                        Shows open buffers, recently opened files
 ;  C-x C-f 	    helm-find-files 	                The helm version for find-file
 ;  C-s 	        helm-ff-run-grep 	                Run grep from within helm-find-files
+;  C-o                                              Switch between Helm sources in helm session
 ;  C-c h i 	    helm-semantic-or-imenu 	            Helm interface to semantic/imenu
 ;  C-c h m 	    helm-man-woman 	                    Jump to any man entry
 ;  C-c h / 	    helm-find 	                        Helm interface to find
 ;  C-c h l 	    helm-locate 	                    Helm interface to locate
 ;  C-c h o 	    helm-occur 	                        Similar to occur
 ;  C-c h a 	    helm-apropos 	                    Describes commands, functions, variables, …
-;  C-c h h g 	    helm-info-gnus 	 
-;  C-c h h i 	    helm-info-at-point 	 
-;  C-c h h r 	    helm-info-emacs 	 
+;  C-c h h g 	helm-info-gnus 	 
+;  C-c h h i 	helm-info-at-point 	 
+;  C-c h h r 	helm-info-emacs 	 
 ;  C-c h <tab> 	helm-lisp-completion-at-point 	    Provides a list of available functions
 ;  C-c h b 	    helm-resume 	                    Resumes a previous helm session
 ;  C-h SPC 	    helm-all-mark-rings 	            Views content of local and global mark rings
@@ -175,8 +178,8 @@
 ;  C-c h s 	    helm-surfraw 	                    Command line interface to many web search engines
 ;  C-c h g 	    helm-google-suggest 	            Interactively enter search terms and get results from Google in helm buffer
 ;  C-c h c 	    helm-color 	                        Lists all available faces
-;  C-c h M-: 	    helm-eval-expression-with-eldoc 	Get instant results for emacs lisp expressions in the helm buffer
-;  C-c h C-, 	    helm-calcul-expression 	            Helm interface to calc
+;  C-c h M-: 	helm-eval-expression-with-eldoc 	Get instant results for emacs lisp expressions in the helm buffer
+;  C-c h C-, 	helm-calcul-expression 	            Helm interface to calc
 ;  C-c C-l 	    helm-eshell-history 	            Interface to eshell history
 ;  C-c C-l 	    helm-comint-input-ring 	            Interface to shell history
 ;  C-c C-l 	    helm-mini-buffer-history 	        Interface to mini-buffer history

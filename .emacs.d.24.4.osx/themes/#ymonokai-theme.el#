@@ -1793,12 +1793,8 @@ Takes and optional `FRAME' as reference."
        ((,class (:background ,ymonokai-hl))))
 
      `(helm-swoop-target-word-face
-       ((,class (:foreground ,red    ;oracleyue, modified; default "magenta"
-                             ;:background unspecified))))
-                             :background ,ymonokai-bg))))    ;oracleyue, added
-     
-     `(helm-swoop-line-number-face    ;oracleyue, added
-       ((,class(:foreground ,green))))
+       ((,class (:foreground ,magenta
+                             :background unspecified))))
 
      `(helm-time-zone-current
        ((,class (:foreground ,green))))
