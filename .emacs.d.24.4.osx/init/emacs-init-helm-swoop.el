@@ -11,8 +11,8 @@
 ;; Change the keybinds to whatever you like :)
 (global-set-key (kbd "C-c h o") 'helm-swoop)  ; default "M-i"
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point) ;default "M-I"
-(global-set-key (kbd "C-c M-i") 'helm-multi-swoop) ;default "C-c M-i"
-(global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
+(global-set-key (kbd "C-c h O") 'helm-multi-swoop) ;default "C-c M-i"
+(global-set-key (kbd "C-c h M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
 
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)

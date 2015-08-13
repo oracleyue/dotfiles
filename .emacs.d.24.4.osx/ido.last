@@ -2,7 +2,7 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/Users/oracleyue/.emacs.d/" . "git/")
+ ("/Users/oracleyue/.emacs.d/" . "init/")
  ("/Users/oracleyue/Public/Dropbox/Academia/" . "Manuscripts/")
  ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/Conferences/" . "CDC2015/")
  ("/Users/oracleyue/tmp/" . "py/")
@@ -11,6 +11,7 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/oracleyue/.emacs.d/init/"
  "/Users/oracleyue/.emacs.d/git/"
  "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/"
  "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/"
@@ -24,15 +25,17 @@
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/Users/oracleyue/.emacs.d/init/" (21964 54704 0 0) "emacs-init-helm.el" "emacs-init-helm-swoop.el" "emacs-init-evil.el" "emacs-init-cc.el" "emacs-init-backup.el" "emacs-init-archived.el" "../" "./")
+
+ ("/Users/oracleyue/.emacs.d/" (21964 54957 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "recentf" "init/" "ido.last" "git/" "eshell/" "eproject.lst" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
+
+ ("/Users/oracleyue/" (21964 55142 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".WebIde80/" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spyder2/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".PyCharm40/" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".npm/" ".node-gyp/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".gem/" ".fontconfig/" ".emacs.expr" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".default-css/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".atom/" ".anyconnect" ".adobe/" "../" "./")
+
+ ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" (21964 46124 0 0) "userdef-mathsymb.tex" "titlepage.tex" "texbackup.sh" "ref/" "NR_Part_II_Computation.toc" "NR_Part_II_Computation.tex" "NR_Part_II_Computation.synctex.gz" "NR_Part_II_Computation.pyg" "NR_Part_II_Computation.pdf" "NR_Part_II_Computation.out" "NR_Part_II_Computation.log" "NR_Part_II_Computation.blg" "NR_Part_II_Computation.bbl" "NR_Part_II_Computation.aux" "NR_Part_I_Definitions.toc" "NR_Part_I_Definitions.tex" "NR_Part_I_Definitions.synctex.gz" "NR_Part_I_Definitions.pyg" "NR_Part_I_Definitions.pdf" "NR_Part_I_Definitions.out" "NR_Part_I_Definitions.log" "NR_Part_I_Definitions.blg" "NR_Part_I_Definitions.bbl" "NR_Part_I_Definitions.aux" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "missfont.log" "figures/" "cover-page.tex" "cover-page.pdf" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" "_region_.tex" ".DS_Store" "../" "./")
+
  ("/Users/oracleyue/tmp/py/" (21963 35632 0 0) "hello.py" ".DS_Store" ".#hello.py" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/git/" (21963 34285 0 0) "livedown.el" "indent-guide.el" "hl-sexp.el" "highlight-indentation.el" "google-c-style.el" "folding.el" "etags-select/" "eproject/" "emacs-for-python/" "ecb/" "doxymacs-1.8.0/" "dash-at-point.el" ".DS_Store" "../" "./")
-
- ("/Users/oracleyue/.emacs.d/" (21963 33447 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "recentf" "init.el" "ido.last" "git/" "eshell/" "eproject.lst" "emacs-init-ido.el" "emacs-init-helm.el" "emacs-init-helm-swoop.el" "emacs-init-evil.el" "emacs-init-archived.el" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
-
- ("/Users/oracleyue/" (21963 34477 0 0) "Workspace/" "VirtualBox VMs/" "tmp/" "Software/" "Research/" "Public/" "Programs/" "Pictures/" "Papers/" "Music/" "Movies/" "Library/" "Files/" "Downloads/" "Documents/" "Desktop/" "Courses/" "Books/" "Applications/" ".yunpan/" ".Xresources" ".Xauthority" ".WebIde80/" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmux.conf" ".TeXmacs/" ".subversion/" ".ssh/" ".spyder2/" ".spss/" ".screenrc" ".Rprofile" ".rnd" ".Rhistory" ".Renviron" ".Rapp.history" ".PyCharm40/" ".profile.osx" ".profile" ".pip/" ".oracleyue/" ".npm/" ".node-gyp/" ".matplotlib/" ".matlab/" ".mame/" ".local/" ".lesshst" ".ipython/" ".InstallAnywhere/" ".inkscape-etc/" ".htoprc" ".goldendict/" ".gnupg/" ".gnome2/" ".gitconfig_backup" ".gitconfig" ".git-credential-cache/" ".git/" ".gem/" ".fontconfig/" ".emacs.expr" ".emacs.d.backup.tar.xz" ".emacs.d.24.4.osx.tar.xz" ".emacs.d/" ".emacs.backup" ".emacs.24.4.osx" ".emacs" ".eclipse_keyring" ".DS_Store" ".dropbox/" ".designer/" ".default-css/" ".cups/" ".ctags" ".config/" ".CFUserTextEncoding" ".cache/" ".bzr.log" ".bashrc.backup" ".bash_history" ".atom/" ".anyconnect" ".adobe/" ".#.emacs" "../" "./")
-
- ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/DSF/" (21963 33619 0 0) "userdef-mathsymb.tex" "titlepage.tex" "texbackup.sh" "ref/" "NR_Part_II_Computation.toc" "NR_Part_II_Computation.tex" "NR_Part_II_Computation.synctex.gz" "NR_Part_II_Computation.pyg" "NR_Part_II_Computation.pdf" "NR_Part_II_Computation.out" "NR_Part_II_Computation.log" "NR_Part_II_Computation.blg" "NR_Part_II_Computation.bbl" "NR_Part_II_Computation.aux" "NR_Part_I_Definitions.toc" "NR_Part_I_Definitions.tex" "NR_Part_I_Definitions.synctex.gz" "NR_Part_I_Definitions.pyg" "NR_Part_I_Definitions.pdf" "NR_Part_I_Definitions.out" "NR_Part_I_Definitions.log" "NR_Part_I_Definitions.blg" "NR_Part_I_Definitions.bbl" "NR_Part_I_Definitions.aux" "Network_Inference.toc" "Network_Inference.tex" "Network_Inference.synctex.gz" "Network_Inference.pyg" "Network_Inference.pdf" "Network_Inference.out" "Network_Inference.log" "Network_Inference.blg" "Network_Inference.bbl" "Network_Inference.aux" "missfont.log" "figures/" "cover-page.tex" "cover-page.pdf" "cleaner.sh" "bibupdate.sh" "auto/" "archived/" "_region_.tex" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/Public/Dropbox/" (21963 1071 0 0) "Shared/" "Public/" "Prague/" "oracleyue/" "Icon
 " "git_repo/" "Academia/" "_others/" ".DS_Store" ".dropbox.cache/" ".dropbox" ".directory" "../" "./")

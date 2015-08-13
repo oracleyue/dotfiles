@@ -78,7 +78,7 @@
 
 ;; use helm to show "occur"
 ;; - keybinding: C-x c M-s o
-(global-set-key (kbd "C-c h O") 'helm-occur)
+;(global-set-key (kbd "C-c h o") 'helm-occur)
 
 ;; use helm to show help doc "C-h a"
 ;; - keybinding: C-x c a

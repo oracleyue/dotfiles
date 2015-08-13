@@ -21,6 +21,9 @@
 
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
+;; global variables for configuration useage
+(setq y-init-path-prefix "~/.emacs.d/init/")
+
 ;;; use variable-width font types in text-mode
 ;; (defun y-variable-width-text-mode ()
 ;;   (interactive)
@@ -29,8 +32,8 @@
 ;;   )
 ;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
-;; set cursor type
-(setq-default cursor-type 'bar) 
+;; set cursor type; default "box"
+;(setq-default cursor-type 'bar) 
 
 ;; font size adjustment
 ;; C-x C-0 : return to default size
@@ -196,77 +199,8 @@
 ;; ------------------------------------------------------------
 
 ;; =======================================
-;; Minior Modes for various completions
-
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; /Yasnippet/ A template system
-(require 'popup)
-(require 'yasnippet) ;; not yasnippet-bundle
-(yas-global-mode 1)
-(setq-default mode-require-final-newline nil)
-;; use popup in yasnippet
-(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
-(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
-(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
-;; use ido in yasnippet popup menu
-(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
-  (when (featurep 'popup)
-    (popup-menu*
-     (mapcar
-      (lambda (choice)
-        (popup-make-item
-         (or (and display-fn (funcall display-fn choice))
-             choice)
-         :value choice))
-      choices)
-     :prompt prompt
-     ;; start isearch mode immediately
-     :isearch t
-     )))
-(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-x-prompt yas-no-prompt))   ; note that yas-dropdown-prompt needs /dropdown-list/ to be installed!
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; For /auto-complete/ 
-(require 'auto-complete-config)
-(ac-config-default)
-(setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
-;; starting type
-(setq ac-expand-on-auto-complete t)    ;; new
-;; different ways to start ac-complete
-    ;1; default auto start complete when type 4 characters
-    (setq ac-auto-start 4)
-    ;2; explicit call to auto-complete, using trigger-key or auto-complete func
-    ;(setq ac-auto-start nil)
-;; set keys to control ac-complete behaviors
-(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
-(define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
-;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
-;; setting of pop-up boxes
-(setq ac-quick-help-delay 0)    ;; default "0.2"
-;(setq ac-candidate-limit 100)    ;; new
-;(setq ac-menu-height 20)    ;; new
-;(setq ac-quick-help-height 20)    ;; new
-;; show menu immediately...
-(setq ac-auto-show-menu t)    ;; new
-(setq ac-show-menu-immediately-on-auto-complete t)    ;; new
-;; select candidates in ac-menu
-(setq ac-use-menu-map t)
-;; ;; set the width of popup menu to fix bugs
-(setq ac-max-width 0.5)
-;; keystokes
-(define-key ac-menu-map "\C-n" 'ac-next)
-(define-key ac-menu-map "\C-p" 'ac-previous)
-(define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
-;; set dictionary
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140515.1959/dict/")
-;; list for auto-complete
-(set-default 'ac-sources '(ac-source-abbrev
-                           ac-source-dictionary
-                           ac-source-filename    ;; new
-                           ac-source-yasnippet
-                           ac-source-words-in-same-mode-buffers))
-; Notes: other settings are in different programming languages' parts. See C/C++.
-;; ------------------------------------------------------------
+;; Minior modes (yas, auto-complete, popup) for completion
+(load (concat y-init-path-prefix "emacs-init-ac"))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
@@ -357,128 +291,8 @@
 
 ; =======================================
 ;; Programming Environment for /C C++/
-(require 'cc-mode)
-;; ;; Having defined in /google-c-style/
-;; (setq-default c-default-style "linux")
-;; (setq-default c-basic-offset 4)
-;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+(load (concat y-init-path-prefix "emacs-init-cc"))
 
-;; /google-c-style/
-;(add-to-list 'load-path "~/.emacs.d/git")
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-;; /xcscope/: source cross-referencing tool [install cscope]
-;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
-(require 'xcscope)
-(cscope-setup)
-
-;; auto-complete C/C++ sources and headers
-(require 'auto-complete-c-headers)
-;; /auto-complete-clang/: clang completion for C/C++ [For Mac OS X]
-;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
-(cond 
- ((string-equal system-type "gnu/linux")
-  (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
-  (require 'auto-complete-clang-async)
-  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
-  (setq ac-clang-cflags    ;; for /emacs-clang-complete-async
-        (mapcar (lambda (item)(concat "-I" item))
-                (split-string
-                 "
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
- /usr/local/include
- /usr/include
-                 ")))
-  )
- ((string-equal system-type "darwin")
-  (require 'auto-complete-clang)
-  ;;(setq ac-auto-start nil)   ;; globally set in Line 229
-  (setq ac-clang-flags       ;; for /emacs-clang-complete
-        (mapcar (lambda (item)(concat "-I" item))
-                (split-string
-                 "
- /usr/local/include/eigen3
- /usr/local/include/c++
- /usr/local/include/c
- /usr/local/include
-                 ")))
-  ;; LIBRARYIES: openmpi, gsl, Eigen, boost, opengl; followed by "/", e.g., <gsl/gsl_math.h>
-  ;;
-  ;; /usr/local/include/c++-xcode/v1
-  ;; /usr/local/include/c/sys
-  ;; /usr/local/include/clang
-  ;
-  ;; adding for cflags for clang:
-  ;(setq ac-clang-cflags (append '("-std=c++11") ac-clang-cflags))
-  ;
-  ;; ;; way 2:
-  ;;  (setq ac-clang-cflags (list
-  ;;                        "-std=c++11"
-  ;;                        "-stdlib=libc++"
-  ;;                        "-frtti"
-  ;;                        "-fexceptions"
-  ;;                        "-DUSE_GLEW"
-  ;;                        "-I/usr/local/include/c++/v1"
-  ;;                        "-I/usr/local/include/c"
-  ;;                        "-I/usr/local/include/c/sys"
-  ;;                        ;; (concat "-I" (expand-file-name "~/Documents/fmesh_engine/engine/lib/package"))
-  ;;                        "-I/usr/local/include"
-  ;;                        "-I/usr/include"
-  ;;                        ))
-  )
- )
-
-(defun oy-ac-clang-config ()
-  ;; auto-complete C/C++ headers
-  (cond 
-   ((string-equal system-type "gnu/linux")
-    (setq ac-sources '(ac-source-clang-async 
-                       ac-source-semantic
-                       ac-source-c-headers
-                       ac-source-words-in-same-mode-buffers))
-    (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
-    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
-    (ac-clang-launch-completion-process))
-   ((string-equal system-type "darwin")
-    (setq ac-sources '(ac-source-clang
-                       ac-source-semantic
-                       ac-source-c-headers
-                       ac-source-words-in-same-mode-buffers))
-    (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c++")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c")
-    (add-to-list 'achead:include-directories '"/usr/local/include")
-    (ac-clang-launch-completion-process))
-   )
-)
-(add-hook 'c-mode-hook 'oy-ac-clang-config)
-(add-hook 'c++-mode-hook 'oy-ac-clang-config)
-(add-hook 'auto-complete-mode-hook 'ac-common-setup)
-;; setup compile command 
-(add-hook 'c-mode-common-hook 
-          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
-;; default mode for Makefile in gnome
-(add-hook 'makefile-gmake-mode-hook
-          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
-;; default mode for Makefile in Mac OS X
-(add-hook 'makefile-bsdmake-mode-hook
-          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
-
-;; ;; use /doxymacs/ to manipulate doxygen documentations
-;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
-;; (require 'doxymacs)
-;; (add-hook 'c-mode-common-hook 'doxymacs-mode)
-;; ; fontify the doxygen keywords
-;; (defun my-doxymacs-font-lock-hook ()
-;;   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-;;       (doxymacs-font-lock)))
-;; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 
 ; =======================================
 ;; Programming Environment for /Python/
@@ -659,11 +473,11 @@
 
 ; --------------------------------
 ;; Settings for /evil-mode/
-(load "~/.emacs.d/init/emacs-init-evil")
+(load (concat y-init-path-prefix "emacs-init-evil"))
 
 ; --------------------------------
 ;; ;; Settings for /Icomplete Mode/
-;; ;(load "~/.emacs.d/init/emacs-init-ido")
+;; ;; in "emacs-init-archived.el"
 
 ; --------------------------------
 ;; Setting for /golden-ratio/
@@ -673,8 +487,8 @@
 
 ; --------------------------------
 ;; Setting for /Helm/ and plus
-(load "~/.emacs.d/init/emacs-init-helm")
-(load "~/.emacs.d/init/emacs-init-helm-swoop")
+(load (concat y-init-path-prefix "emacs-init-helm"))
+(load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 
 ; --------------------------------
 ;; Setting for /neotree/
