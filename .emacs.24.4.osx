@@ -13,8 +13,8 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "Menlo" :foundry "unknown" :slant normal :weight normal :height 135 :width normal))))
- '(fixed-pitch ((t (:family "Menlo"))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
+ '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
  ;; (:family "DejaVu Sans Mono")
  )
@@ -64,7 +64,7 @@
 
 ;; setting size of frames
 ;(when window-system (set-frame-size (selected-frame) 94 34))
-(when window-system (set-frame-size (selected-frame) 100 34))
+(when window-system (set-frame-size (selected-frame) 100 36))
 ;; Setting font set for Chinese
 (if(display-graphic-p)
  (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -232,14 +232,15 @@
 (setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
 ;; starting type
 (setq ac-expand-on-auto-complete t)    ;; new
-;1; default auto start complete when type 3 characters
-;(setq ac-auto-start 3)
-;2; explicit call to auto-complete, using trigger-key or auto-complete func
-(setq ac-auto-start nil)
-(ac-set-trigger-key "TAB")    ;; new
-(define-key ac-mode-map [(control tab)] 'auto-complete)
-;3; explicit call to stop auto-complete
-;(define-key ac-completing-map [(meta return)] 'ac-stop)
+;; different ways to start ac-complete
+    ;1; default auto start complete when type 4 characters
+    (setq ac-auto-start 4)
+    ;2; explicit call to auto-complete, using trigger-key or auto-complete func
+    ;(setq ac-auto-start nil)
+;; set keys to control ac-complete behaviors
+(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
+(define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
+;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
 ;; setting of pop-up boxes
 (setq ac-quick-help-delay 0)    ;; default "0.2"
 ;(setq ac-candidate-limit 100)    ;; new
@@ -373,18 +374,15 @@
 (require 'xcscope)
 (cscope-setup)
 
-;; /auto-complete-clang/: clang completion for C/C++
-(require 'auto-complete-clang)
-(setq ac-auto-start nil)
-(setq ac-quick-help-delay 0.5)
-;
-;; ;; /auto-complete-clang-async/: clang completion for C/C++ [install clang]
-;; (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
-;; (require 'auto-complete-clang-async)
-;
+;; auto-complete C/C++ sources and headers
+(require 'auto-complete-c-headers)
+;; /auto-complete-clang/: clang completion for C/C++ [For Mac OS X]
+;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
 (cond 
  ((string-equal system-type "gnu/linux")
-  ;(setq ac-clang-flags       ;; for /emacs-clang-complete
+  (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
+  (require 'auto-complete-clang-async)
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
   (setq ac-clang-cflags    ;; for /emacs-clang-complete-async
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
@@ -399,8 +397,9 @@
                  ")))
   )
  ((string-equal system-type "darwin")
+  (require 'auto-complete-clang)
+  ;;(setq ac-auto-start nil)   ;; globally set in Line 229
   (setq ac-clang-flags       ;; for /emacs-clang-complete
-  ;(setq ac-clang-cflags    ;; for /emacs-clang-complete-async
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
@@ -436,22 +435,21 @@
  )
 
 (defun oy-ac-clang-config ()
-  ;; auto-complete C/C++ sources and headers
-  (require 'auto-complete-c-headers)
-     ;;(setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")   ;; for /emacs-clang-complete-async/
-  (setq ac-sources '(;ac-source-clang-async 
-                     ac-source-clang
-                     ac-source-semantic
-                     ac-source-c-headers
-                     ac-source-words-in-same-mode-buffers))
-  ;(ac-clang-launch-completion-process)      ;; for /emacs-clang-complete-async/
   ;; auto-complete C/C++ headers
   (cond 
    ((string-equal system-type "gnu/linux")
+    (setq ac-sources '(ac-source-clang-async 
+                       ac-source-semantic
+                       ac-source-c-headers
+                       ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
     (ac-clang-launch-completion-process))
    ((string-equal system-type "darwin")
+    (setq ac-sources '(ac-source-clang
+                       ac-source-semantic
+                       ac-source-c-headers
+                       ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
     (add-to-list 'achead:include-directories '"/usr/local/include/c++")
     (add-to-list 'achead:include-directories '"/usr/local/include/c")
@@ -661,11 +659,11 @@
 
 ; --------------------------------
 ;; Settings for /evil-mode/
-(load "~/.emacs.d/emacs-init-evil")
+(load "~/.emacs.d/init/emacs-init-evil")
 
 ; --------------------------------
 ;; ;; Settings for /Icomplete Mode/
-;; ;(load "~/.emacs.d/emacs-init-ido")
+;; ;(load "~/.emacs.d/init/emacs-init-ido")
 
 ; --------------------------------
 ;; Setting for /golden-ratio/
@@ -675,8 +673,8 @@
 
 ; --------------------------------
 ;; Setting for /Helm/ and plus
-(load "~/.emacs.d/emacs-init-helm")
-(load "~/.emacs.d/emacs-init-helm-swoop")
+(load "~/.emacs.d/init/emacs-init-helm")
+(load "~/.emacs.d/init/emacs-init-helm-swoop")
 
 ; --------------------------------
 ;; Setting for /neotree/
