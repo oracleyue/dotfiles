@@ -284,6 +284,14 @@
 ; Disable automatic addition/removal of files from projects. Optional.
 (setq prj-autotracking nil)
 
+; =======================================
+;; Programming Environment for /Lisp, Elisp, Lisp Interaction/
+; To make "C-x C-e" pretty-print; output is shown in minibuffer
+(global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
+; To make "M-:" pretty-print; both input and output are in minibuffer
+(global-set-key [remap eval-expression] 'pp-eval-expression)
+; Use "C-j" in *scratch*; output is in the buffer under the sexp
+
 
 ; =======================================
 ;; Programming Environment for /HTML, js/
