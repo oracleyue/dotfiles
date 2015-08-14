@@ -1,0 +1,1480 @@
+;; Object pthread/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "pthread/"
+  :tables
+  (list
+    (semanticdb-table "pthread.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_PTHREAD_H" variable (:constant-flag t) nil [1990 2000])
+            ("_types.h" include (:system-flag t) nil [2002 2021])
+            ("pthread/pthread_impl.h" include (:system-flag t) nil [2044 2077])
+            ("pthread/sched.h" include (:system-flag t) nil [2085 2111])
+            ("time.h" include (:system-flag t) nil [2112 2129])
+            ("sys/_pthread/_pthread_types.h" include (:system-flag t) nil [2130 2170])
+            ("sys/_pthread/_pthread_attr_t.h" include (:system-flag t) nil [2171 2212])
+            ("sys/_pthread/_pthread_cond_t.h" include (:system-flag t) nil [2213 2254])
+            ("sys/_pthread/_pthread_condattr_t.h" include (:system-flag t) nil [2255 2300])
+            ("sys/_pthread/_pthread_key_t.h" include (:system-flag t) nil [2301 2341])
+            ("sys/_pthread/_pthread_mutex_t.h" include (:system-flag t) nil [2342 2384])
+            ("sys/_pthread/_pthread_mutexattr_t.h" include (:system-flag t) nil [2385 2431])
+            ("sys/_pthread/_pthread_once_t.h" include (:system-flag t) nil [2432 2473])
+            ("sys/_pthread/_pthread_rwlock_t.h" include (:system-flag t) nil [2474 2517])
+            ("sys/_pthread/_pthread_rwlockattr_t.h" include (:system-flag t) nil [2518 2565])
+            ("sys/_pthread/_pthread_t.h" include (:system-flag t) nil [2566 2602])
+            ("pthread/qos.h" include (:system-flag t) nil [2604 2628])
+            ("sys/_types/_mach_port_t.h" include (:system-flag t) nil [2719 2755])
+            ("sys/_types/_sigset_t.h" include (:system-flag t) nil [2756 2789])
+            ("sys/cdefs.h" include (:system-flag t) nil [3338 3360])
+            ("Availability.h" include (:system-flag t) nil [3361 3386])
+            ("pthread_yield_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "void"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [17997 18002]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17975 18003])
+            ("pthread_sigmask" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [17855 17859])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("sigset_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17860 17877])
+                    ("" variable
+                       (:pointer 1
+                        :type ("sigset_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17878 17889]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17835 17922])
+            ("pthread_from_mach_thread_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("pthread_t" type (:type "class") nil nil)
+                :arguments 
+                  ( ("" variable (:type ("mach_port_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [17769 17781]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17731 17782])
+            ("pthread_kill" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [17662 17672])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [17673 17677]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17645 17678])
+            ("pthread_create_suspended_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17526 17538])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17539 17562])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [17565 17574])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [17584 17591]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17494 17592])
+            ("pthread_cond_timedwait_relative_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17316 17333])
+                    ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17334 17352])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("timespec" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [17355 17379]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17277 17380])
+            ("pthread_cond_signal_thread_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [17133 17150])
+                    ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [17151 17161]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [17099 17162])
+            ("pthread_get_stackaddr_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "void"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16962 16972]))                  
+                :pointer 1
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16931 16973])
+            ("pthread_get_stacksize_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("size_t" type (:type "class") nil nil)
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16867 16877]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16835 16878])
+            ("pthread_mach_thread_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("mach_port_t" type (:type "class") nil nil)
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16771 16781]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16736 16782])
+            ("pthread_main_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16627 16632]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16607 16633])
+            ("pthread_setname_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [16477 16489]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16454 16490])
+            ("pthread_getname_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16377 16387])
+                    ("" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [16387 16393])
+                    ("" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16393 16400]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16354 16401])
+            ("pthread_threadid_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16242 16252])
+                    ("" variable
+                       (:pointer 1
+                        :type ("__uint64_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [16252 16264]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16218 16265])
+            ("pthread_is_threaded_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [16159 16164]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [16132 16165])
+            ("pthread_testcancel" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "void"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [15875 15880]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15851 15916])
+            ("pthread_setspecific" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_key_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15768 15783])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [15784 15797]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15744 15798])
+            ("pthread_setschedparam" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15647 15657])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [15658 15662])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("sched_param" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [15663 15690]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15621 15691])
+            ("pthread_setconcurrency" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [15563 15567]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15536 15568])
+            ("pthread_setcanceltype" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [15432 15437])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [15438 15444]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15406 15483])
+            ("pthread_setcancelstate" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [15301 15306])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [15307 15313]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15274 15353])
+            ("pthread_self" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("pthread_t" type (:type "class") nil nil)
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [15215 15220]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15192 15221])
+            ("pthread_rwlockattr_setpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlockattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [15110 15133])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [15134 15138]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [15076 15139])
+            ("pthread_rwlockattr_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlockattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14999 15022]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14971 15023])
+            ("pthread_rwlockattr_getpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_rwlockattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14857 14897])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [14900 14917]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14823 14918])
+            ("pthread_rwlockattr_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlockattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14746 14769]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14715 14770])
+            ("pthread_rwlock_unlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14604 14623]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14578 14662])
+            ("pthread_rwlock_wrlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14467 14486]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14441 14525])
+            ("pthread_rwlock_trywrlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14327 14346]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14298 14388])
+            ("pthread_rwlock_tryrdlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14184 14203]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14155 14245])
+            ("pthread_rwlock_rdlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14044 14063]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [14018 14102])
+            ("pthread_rwlock_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13855 13885])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_rwlockattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13888 13928]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13831 13965])
+            ("pthread_rwlock_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_rwlock_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13718 13738]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13691 13778])
+            ("pthread_once" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_once_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13604 13621])
+                    ("" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [13631 13636]))                          
+                        :type "void")
+                        nil nil))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13587 13638])
+            ("pthread_mutexattr_settype" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13506 13528])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [13529 13533]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13476 13534])
+            ("pthread_mutexattr_setpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13395 13417])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [13418 13422]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13362 13423])
+            ("pthread_mutexattr_setprotocol" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13281 13303])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [13304 13308]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13247 13309])
+            ("pthread_mutexattr_setprioceiling" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13166 13188])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [13189 13193]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13129 13194])
+            ("pthread_mutexattr_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [13053 13075]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [13026 13076])
+            ("pthread_mutexattr_gettype" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12913 12952])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [12955 12972]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12883 12973])
+            ("pthread_mutexattr_getpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12770 12809])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [12812 12829]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12737 12830])
+            ("pthread_mutexattr_getprotocol" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12624 12663])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [12666 12683]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12590 12684])
+            ("pthread_mutexattr_getprioceiling" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12477 12516])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [12519 12536]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12440 12537])
+            ("pthread_mutexattr_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12322 12344]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12292 12387])
+            ("pthread_mutex_unlock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12220 12238]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12195 12239])
+            ("pthread_mutex_trylock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12123 12141]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [12097 12142])
+            ("pthread_mutex_setprioceiling" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11989 12018])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [12019 12023])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [12026 12043]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11956 12044])
+            ("pthread_mutex_lock" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11884 11902]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11861 11903])
+            ("pthread_mutex_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11736 11765])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutexattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11768 11807]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11713 11808])
+            ("pthread_mutex_getprioceiling" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11604 11639])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [11642 11659]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11571 11660])
+            ("pthread_mutex_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11499 11517]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11473 11518])
+            ("pthread_key_delete" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_key_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11405 11419]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11382 11420])
+            ("pthread_key_create" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_key_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [11294 11310])
+                    ("" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [11320 11327]))                          
+                        :type "void")
+                        nil nil))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11271 11329])
+            ("pthread_join" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11166 11177])
+                    ("" variable
+                       (:pointer 2
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [11178 11186]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11149 11218])
+            ("pthread_getspecific" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "void"
+                :arguments 
+                  ( ("" variable (:type ("pthread_key_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11081 11095]))                  
+                :pointer 1
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [11055 11096])
+            ("pthread_getschedparam" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10937 10948])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [10949 10966])
+                    ("" variable
+                       (:pointer 1
+                        :type ("sched_param" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [10969 11001]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10911 11002])
+            ("pthread_getconcurrency" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [10852 10857]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10825 10858])
+            ("pthread_exit" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "void"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [10756 10763]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10738 10772])
+            ("pthread_equal" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10663 10673])
+                    ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10674 10684]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10645 10685])
+            ("pthread_detach" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10581 10591]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10562 10592])
+            ("pthread_create" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [10410 10433])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [10434 10468])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [10471 10480])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [10490 10508]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10391 10509])
+            ("pthread_condattr_setpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_condattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [10311 10332])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [10333 10337]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10279 10338])
+            ("pthread_condattr_getpshared" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_condattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [10167 10205])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [10208 10225]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10135 10226])
+            ("pthread_condattr_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_condattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [10060 10081]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [10034 10082])
+            ("pthread_condattr_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_condattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9959 9980]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9930 9981])
+            ("pthread_cond_wait" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9780 9808])
+                    ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9811 9840]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9758 9877])
+            ("pthread_cond_timedwait" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9567 9595])
+                    ("" variable
+                       (:pointer 1
+                        :type ("pthread_mutex_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9596 9625])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("timespec" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [9628 9663]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9540 9705])
+            ("pthread_cond_signal" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9469 9486]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9445 9487])
+            ("pthread_cond_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9288 9316])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_condattr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9319 9357]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9266 9392])
+            ("pthread_cond_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9195 9212]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9170 9213])
+            ("pthread_cond_broadcast" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_cond_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [9099 9116]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9072 9117])
+            ("pthread_cancel" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8977 8987]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8958 9019])
+            ("pthread_attr_setstacksize" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8879 8896])
+                    ("" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8897 8904]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8849 8905])
+            ("pthread_attr_setstackaddr" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8770 8787])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8788 8795]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8740 8796])
+            ("pthread_attr_setstack" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8653 8670])
+                    ("" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [8671 8678])
+                    ("" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8679 8686]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8627 8687])
+            ("pthread_attr_setscope" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8551 8568])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [8569 8573]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8525 8574])
+            ("pthread_attr_setschedpolicy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8449 8466])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [8467 8471]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8417 8472])
+            ("pthread_attr_setschedparam" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8294 8322])
+                    ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("sched_param" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [8325 8363]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8263 8364])
+            ("pthread_attr_setinheritsched" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8187 8204])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [8205 8209]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8154 8210])
+            ("pthread_attr_setguardsize" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8075 8092])
+                    ("" variable (:type ("size_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8093 8100]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8045 8101])
+            ("pthread_attr_setdetachstate" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7969 7986])
+                    ("" variable (:type "int") (reparse-symbol arg-sub-list) [7987 7991]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7937 7992])
+            ("pthread_attr_init" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7866 7883]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7844 7884])
+            ("pthread_attr_getstacksize" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7735 7769])
+                    ("" variable
+                       (:pointer 1
+                        :type ("size_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7770 7790]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7705 7791])
+            ("pthread_attr_getstackaddr" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7597 7631])
+                    ("" variable
+                       (:pointer 2
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7632 7651]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7567 7652])
+            ("pthread_attr_getstack" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7436 7470])
+                    ("" variable
+                       (:pointer 2
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [7471 7490])
+                    ("" variable
+                       (:pointer 1
+                        :type ("size_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7493 7513]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7410 7514])
+            ("pthread_attr_getscope" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7304 7338])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [7339 7356]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7278 7357])
+            ("pthread_attr_getschedpolicy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7172 7206])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [7207 7224]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [7140 7225])
+            ("pthread_attr_getschedparam" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7017 7051])
+                    ("" variable
+                       (:pointer 1
+                        :type ("sched_param" type
+                             (:prototype t
+                              :type "struct")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [7054 7086]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6986 7087])
+            ("pthread_attr_getinheritsched" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6880 6914])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [6915 6932]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6847 6933])
+            ("pthread_attr_getguardsize" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6738 6772])
+                    ("" variable
+                       (:pointer 1
+                        :type ("size_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6773 6793]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6708 6794])
+            ("pthread_attr_getdetachstate" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6624 6647])
+                    ("" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [6648 6654]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6592 6655])
+            ("pthread_attr_destroy" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6521 6538]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6496 6539])
+            ("pthread_atfork" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [6404 6409]))                          
+                        :type "void")
+                        nil nil)
+                    ("" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [6420 6425]))                          
+                        :type "void")
+                        nil nil)
+                    ("" function
+                       (:function-pointer t
+                        :arguments 
+                          ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [6436 6441]))                          
+                        :type "void")
+                        nil nil))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [6376 6443])
+            ("PTHREAD_ONCE_INIT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [6228 6245])
+            ("PTHREAD_COND_INITIALIZER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [6113 6137])
+            ("PTHREAD_MUTEX_INITIALIZER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5433 5458])
+            ("PTHREAD_RWLOCK_INITIALIZER" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5339 5365])
+            ("PTHREAD_MUTEX_DEFAULT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5259 5280])
+            ("PTHREAD_MUTEX_RECURSIVE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5224 5247])
+            ("PTHREAD_MUTEX_ERRORCHECK" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5189 5213])
+            ("PTHREAD_MUTEX_NORMAL" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5157 5177])
+            ("PTHREAD_PRIO_PROTECT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5085 5105])
+            ("PTHREAD_PRIO_INHERIT" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5046 5066])
+            ("PTHREAD_PRIO_NONE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [5007 5024])
+            ("PTHREAD_PROCESS_PRIVATE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4929 4952])
+            ("PTHREAD_PROCESS_SHARED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4888 4910])
+            ("PTHREAD_SCOPE_PROCESS" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4802 4823])
+            ("PTHREAD_SCOPE_SYSTEM" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4763 4783])
+            ("PTHREAD_CANCELED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4676 4692])
+            ("PTHREAD_CANCEL_ASYNCHRONOUS" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4533 4560])
+            ("PTHREAD_CANCEL_DEFERRED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4446 4469])
+            ("PTHREAD_CANCEL_DISABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4380 4402])
+            ("PTHREAD_CANCEL_ENABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4285 4306])
+            ("PTHREAD_EXPLICIT_SCHED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4245 4267])
+            ("PTHREAD_INHERIT_SCHED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4206 4227])
+            ("PTHREAD_CREATE_DETACHED" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4166 4189])
+            ("PTHREAD_CREATE_JOINABLE" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [4127 4150])
+            ("pthread_cleanup_pop" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [3872 3891])
+            ("pthread_cleanup_push" variable
+               (:typemodifiers ("extern" "\"C\"")
+                :constant-flag t)
+                (reparse-symbol extern-c-contents) [3561 3581]))          
+      :file "pthread.h"
+      :pointmax 18111
+      :fsize 18110
+      :lastmodtime '(21550 12825 0 0)
+      :unmatched-syntax '((semantic-list 17948 . 17974) (symbol 17924 . 17948) (semantic-list 17808 . 17834) (symbol 17784 . 17808) (semantic-list 17704 . 17730) (symbol 17680 . 17704) (semantic-list 17618 . 17644) (symbol 17594 . 17618) (semantic-list 17574 . 17582) (semantic-list 17571 . 17574) (semantic-list 17467 . 17493) (symbol 17443 . 17467) (semantic-list 17250 . 17276) (symbol 17226 . 17250) (semantic-list 17072 . 17098) (symbol 17048 . 17072) (semantic-list 16904 . 16930) (symbol 16880 . 16904) (semantic-list 16808 . 16834) (symbol 16784 . 16808) (semantic-list 16709 . 16735) (symbol 16685 . 16709) (semantic-list 16580 . 16606) (symbol 16556 . 16580) (semantic-list 16427 . 16453) (symbol 16403 . 16427) (semantic-list 16327 . 16353) (symbol 16303 . 16327) (semantic-list 16191 . 16217) (symbol 16167 . 16191) (semantic-list 16105 . 16131) (symbol 16081 . 16105) (semantic-list 15824 . 15850) (symbol 15800 . 15824) (semantic-list 15717 . 15743) (symbol 15693 . 15717) (semantic-list 15594 . 15620) (symbol 15570 . 15594) (semantic-list 15509 . 15535) (symbol 15485 . 15509) (semantic-list 15379 . 15405) (symbol 15355 . 15379) (semantic-list 15247 . 15273) (symbol 15223 . 15247) (semantic-list 15165 . 15191) (symbol 15141 . 15165) (semantic-list 15049 . 15075) (symbol 15025 . 15049) (semantic-list 14944 . 14970) (symbol 14920 . 14944) (semantic-list 14796 . 14822) (symbol 14772 . 14796) (semantic-list 14688 . 14714) (symbol 14664 . 14688) (semantic-list 14551 . 14577) (symbol 14527 . 14551) (semantic-list 14414 . 14440) (symbol 14390 . 14414) (semantic-list 14271 . 14297) (symbol 14247 . 14271) (semantic-list 14128 . 14154) (symbol 14104 . 14128) (semantic-list 13991 . 14017) (symbol 13967 . 13991) (semantic-list 13804 . 13830) (symbol 13780 . 13804) (semantic-list 13664 . 13690) (symbol 13640 . 13664) (semantic-list 13560 . 13586) (symbol 13536 . 13560) (semantic-list 13449 . 13475) (symbol 13425 . 13449) (semantic-list 13335 . 13361) (symbol 13311 . 13335) (semantic-list 13220 . 13246) (symbol 13196 . 13220) (semantic-list 13102 . 13128) (symbol 13078 . 13102) (semantic-list 12999 . 13025) (symbol 12975 . 12999) (semantic-list 12856 . 12882) (symbol 12832 . 12856) (semantic-list 12710 . 12736) (symbol 12686 . 12710) (semantic-list 12563 . 12589) (symbol 12539 . 12563) (semantic-list 12413 . 12439) (symbol 12389 . 12413) (semantic-list 12265 . 12291) (symbol 12241 . 12265) (semantic-list 12168 . 12194) (symbol 12144 . 12168) (semantic-list 12070 . 12096) (symbol 12046 . 12070) (semantic-list 11929 . 11955) (symbol 11905 . 11929) (semantic-list 11834 . 11860) (symbol 11810 . 11834) (semantic-list 11686 . 11712) (symbol 11662 . 11686) (semantic-list 11544 . 11570) (symbol 11520 . 11544) (semantic-list 11446 . 11472) (symbol 11422 . 11446) (semantic-list 11355 . 11381) (symbol 11331 . 11355) (semantic-list 11244 . 11270) (symbol 11220 . 11244) (semantic-list 11122 . 11148) (symbol 11098 . 11122) (semantic-list 11028 . 11054) (symbol 11004 . 11028) (semantic-list 10884 . 10910) (symbol 10860 . 10884) (semantic-list 10798 . 10824) (symbol 10774 . 10798) (semantic-list 10711 . 10737) (symbol 10687 . 10711) (semantic-list 10618 . 10644) (symbol 10594 . 10618) (semantic-list 10535 . 10561) (symbol 10511 . 10535) (semantic-list 10480 . 10488) (semantic-list 10477 . 10480) (semantic-list 10364 . 10390) (symbol 10340 . 10364) (semantic-list 10252 . 10278) (symbol 10228 . 10252) (semantic-list 10108 . 10134) (symbol 10084 . 10108) (semantic-list 10007 . 10033) (symbol 9983 . 10007) (semantic-list 9903 . 9929) (symbol 9879 . 9903) (semantic-list 9731 . 9757) (symbol 9707 . 9731) (semantic-list 9513 . 9539) (symbol 9489 . 9513) (semantic-list 9418 . 9444) (symbol 9394 . 9418) (semantic-list 9239 . 9265) (symbol 9215 . 9239) (semantic-list 9143 . 9169) (symbol 9119 . 9143) (semantic-list 9045 . 9071) (symbol 9021 . 9045) (semantic-list 8931 . 8957) (symbol 8907 . 8931) (semantic-list 8822 . 8848) (symbol 8798 . 8822) (semantic-list 8713 . 8739) (symbol 8689 . 8713) (semantic-list 8600 . 8626) (symbol 8576 . 8600) (semantic-list 8498 . 8524) (symbol 8474 . 8498) (semantic-list 8390 . 8416) (symbol 8366 . 8390) (semantic-list 8236 . 8262) (symbol 8212 . 8236) (semantic-list 8127 . 8153) (symbol 8103 . 8127) (semantic-list 8018 . 8044) (symbol 7994 . 8018) (semantic-list 7910 . 7936) (symbol 7886 . 7910) (semantic-list 7817 . 7843) (symbol 7793 . 7817) (semantic-list 7678 . 7704) (symbol 7654 . 7678) (semantic-list 7540 . 7566) (symbol 7516 . 7540) (semantic-list 7383 . 7409) (symbol 7359 . 7383) (semantic-list 7251 . 7277) (symbol 7227 . 7251) (semantic-list 7113 . 7139) (symbol 7089 . 7113) (semantic-list 6959 . 6985) (symbol 6935 . 6959) (semantic-list 6820 . 6846) (symbol 6796 . 6820) (semantic-list 6681 . 6707) (symbol 6657 . 6681) (semantic-list 6565 . 6591) (symbol 6541 . 6565) (semantic-list 6469 . 6495) (symbol 6445 . 6469) (semantic-list 6349 . 6375) (symbol 6325 . 6349))
+      :lexical-table 
+        '(("PTHREAD_CREATE_DETACHED" . ((number "2" 4195 . 4196)))
+          ("PTHREAD_INHERIT_SCHED" . ((number "1" 4235 . 4236)))
+          ("PTHREAD_PRIO_INHERIT" . ((number "1" 5075 . 5076)))
+          ("PTHREAD_MUTEX_RECURSIVE" . ((number "2" 5249 . 5250)))
+          ("PTHREAD_PROCESS_PRIVATE" . ((number "2" 4960 . 4961)))
+          ("PTHREAD_CANCEL_ASYNCHRONOUS" . ((number "0x00" 4562 . 4566)))
+          ("PTHREAD_CANCELED" . ((semantic-list "((void *) 1)" 4698 . 4710)))
+          ("PTHREAD_COND_INITIALIZER" . ((semantic-list "{_PTHREAD_COND_SIG_init, {0}}" 6138 . 6167)))
+          ("PTHREAD_EXPLICIT_SCHED" . ((number "2" 4274 . 4275)))
+          ("PTHREAD_MUTEX_NORMAL" . ((number "0" 5179 . 5180)))
+          ("PTHREAD_MUTEX_ERRORCHECK" . ((number "1" 5214 . 5215)))
+          ("PTHREAD_MUTEX_INITIALIZER" . ((semantic-list "{_PTHREAD_MUTEX_SIG_init, {0}}" 5459 . 5489)))
+          ("PTHREAD_ONCE_INIT" . ((semantic-list "{_PTHREAD_ONCE_SIG_init, {0}}" 6246 . 6275)))
+          ("pthread_cleanup_push" (spp-arg-list ("func" "val") 3581 . 3592) . 
+              ((open-paren "{" 3598 . 3599) (STRUCT "struct" 3608 . 3614) (symbol "__darwin_pthread_handler_rec" 3615 . 3643) (symbol "__handler" 3644 . 3653) (punctuation ";" 3653 . 3654) (symbol "pthread_t" 3663 . 3672) (symbol "__self" 3673 . 3679) (punctuation "=" 3680 . 3681) (symbol "pthread_self" 3682 . 3694) (semantic-list "()" 3694 . 3696) (punctuation ";" 3696 . 3697) (symbol "__handler" 3706 . 3715) (punctuation "." 3715 . 3716) (symbol "__routine" 3716 . 3725) (punctuation "=" 3726 . 3727) (symbol "func" 3728 . 3732) (punctuation ";" 3732 . 3733) (symbol "__handler" 3742 . 3751) (punctuation "." 3751 . 3752) (symbol "__arg" 3752 . 3757) (punctuation "=" 3758 . 3759) (symbol "val" 3760 . 3763) (punctuation ";" 3763 . 3764) (symbol "__handler" 3773 . 3782) (punctuation "." 3782 . 3783) (symbol "__next" 3783 . 3789) (punctuation "=" 3790 . 3791) (symbol "__self" 3792 . 3798) (punctuation "-" 3798 . 3799) (punctuation ">" 3799 . 3800) (symbol "__cleanup_stack" 3800 . 3815) (punctuation ";" 3815 . 3816) (symbol "__self" 3825 . 3831) (punctuation "-" 3831 . 3832) (punctuation ">" 3832 . 3833) (symbol "__cleanup_stack" 3833 . 3848) (punctuation "=" 3849 . 3850) (punctuation "&" 3851 . 3852) (symbol "__handler" 3852 . 3861) (punctuation ";" 3861 . 3862)))
+          ("PTHREAD_PRIO_NONE" . ((number "0" 5036 . 5037)))
+          ("PTHREAD_RWLOCK_INITIALIZER" . ((semantic-list "{_PTHREAD_RWLOCK_SIG_init, {0}}" 5366 . 5397)))
+          ("PTHREAD_CANCEL_DEFERRED" . ((number "0x02" 4475 . 4479)))
+          ("PTHREAD_PROCESS_SHARED" . ((number "1" 4919 . 4920)))
+          ("pthread_cleanup_pop" (spp-arg-list ("execute") 3891 . 3900) . 
+              ((symbol "__self" 3977 . 3983) (punctuation "-" 3983 . 3984) (punctuation ">" 3984 . 3985) (symbol "__cleanup_stack" 3985 . 4000) (punctuation "=" 4001 . 4002) (symbol "__handler" 4003 . 4012) (punctuation "." 4012 . 4013) (symbol "__next" 4013 . 4019) (punctuation ";" 4019 . 4020) (IF "if" 4029 . 4031) (semantic-list "(execute)" 4032 . 4041) (semantic-list "(__handler.__routine)" 4042 . 4063) (semantic-list "(__handler.__arg)" 4063 . 4080) (punctuation ";" 4080 . 4081) (close-paren "}" 4087 . 4088)))
+          ("PTHREAD_CANCEL_ENABLE" . ((number "0x01" 4314 . 4318)))
+          ("PTHREAD_CANCEL_DISABLE" . ((number "0x00" 4409 . 4413)))
+          ("PTHREAD_MUTEX_DEFAULT" . ((symbol "PTHREAD_MUTEX_NORMAL" 5282 . 5302)))
+          ("PTHREAD_PRIO_PROTECT" . ((number "2" 5114 . 5115)))
+          ("_PTHREAD_H")
+          ("PTHREAD_SCOPE_PROCESS" . ((number "2" 4831 . 4832)))
+          ("PTHREAD_CREATE_JOINABLE" . ((number "1" 4156 . 4157)))
+          ("PTHREAD_SCOPE_SYSTEM" . ((number "1" 4792 . 4793)))
+          )
+)
+    (semanticdb-table "pthread_impl.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_PTHREAD_IMPL_H_" variable (:constant-flag t) nil [1019 1035])
+            ("_PTHREAD_MUTEX_SIG_init" variable (:constant-flag t) nil [1228 1251])
+            ("_PTHREAD_ERRORCHECK_MUTEX_SIG_init" variable (:constant-flag t) nil [1273 1307])
+            ("_PTHREAD_RECURSIVE_MUTEX_SIG_init" variable (:constant-flag t) nil [1332 1365])
+            ("_PTHREAD_FIRSTFIT_MUTEX_SIG_init" variable (:constant-flag t) nil [1391 1423])
+            ("_PTHREAD_COND_SIG_init" variable (:constant-flag t) nil [1450 1472])
+            ("_PTHREAD_ONCE_SIG_init" variable (:constant-flag t) nil [1493 1515])
+            ("_PTHREAD_RWLOCK_SIG_init" variable (:constant-flag t) nil [1536 1560])
+            ("SCHED_OTHER" variable (:constant-flag t) nil [1620 1631])
+            ("SCHED_FIFO" variable (:constant-flag t) nil [1657 1667])
+            ("SCHED_RR" variable (:constant-flag t) nil [1694 1702])
+            ("__SCHED_PARAM_SIZE__" variable (:constant-flag t) nil [1732 1752]))          
+      :file "pthread_impl.h"
+      :pointmax 1820
+      :fsize 1819
+      :lastmodtime '(21550 12825 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_PTHREAD_ONCE_SIG_init" . ((number "0x30B1BCBA" 1517 . 1527)))
+          ("__SCHED_PARAM_SIZE__" . ((number "4" 1759 . 1760)))
+          ("_PTHREAD_FIRSTFIT_MUTEX_SIG_init" . ((number "0x32AAABA3" 1430 . 1440)))
+          ("_PTHREAD_RWLOCK_SIG_init" . ((number "0x2DA8B3B4" 1564 . 1574)))
+          ("_PTHREAD_COND_SIG_init" . ((number "0x3CB0B1BB" 1474 . 1484)))
+          ("_PTHREAD_IMPL_H_")
+          ("SCHED_RR" . ((number "2" 1721 . 1722)))
+          ("_PTHREAD_ERRORCHECK_MUTEX_SIG_init" . ((number "0x32AAABA1" 1313 . 1323)))
+          ("_PTHREAD_RECURSIVE_MUTEX_SIG_init" . ((number "0x32AAABA2" 1372 . 1382)))
+          ("_PTHREAD_MUTEX_SIG_init" . ((number "0x32AAABA7" 1253 . 1263)))
+          ("SCHED_OTHER" . ((number "1" 1647 . 1648)))
+          ("SCHED_FIFO" . ((number "4" 1684 . 1685)))
+          )
+)
+    (semanticdb-table "sched.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_SCHED_H_" variable (:constant-flag t) nil [1012 1021])
+            ("pthread_impl.h" include (:system-flag t) nil [1023 1048])
+            ("sys/cdefs.h" include (:system-flag t) nil [1049 1071])
+            ("sched_get_priority_max" function
+               (:type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [1334 1338]))                  
+                :typemodifiers ("extern" "\"C\"" "extern")
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [1300 1339])
+            ("sched_get_priority_min" function
+               (:type "int"
+                :arguments 
+                  ( ("" variable (:type "int") (reparse-symbol arg-sub-list) [1294 1298]))                  
+                :typemodifiers ("extern" "\"C\"" "extern")
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [1260 1299])
+            ("sched_yield" function
+               (:type "int"
+                :arguments 
+                  ( ("" variable (:type "void") (reparse-symbol arg-sub-list) [1253 1258]))                  
+                :typemodifiers ("extern" "\"C\"" "extern")
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [1230 1259])
+            ("sched_param" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "struct"
+                :members 
+                  ( ("sched_priority" variable (:type "int") (reparse-symbol classsubparts) [1161 1180])
+                    ("__opaque" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol classsubparts) [1182 1218]))                  )
+                (reparse-symbol extern-c-contents) [1140 1221]))          
+      :file "sched.h"
+      :pointmax 1377
+      :fsize 1376
+      :lastmodtime '(21550 12825 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_SCHED_H_")
+          )
+)
+    (semanticdb-table "qos.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_PTHREAD_QOS_H" variable (:constant-flag t) nil [1004 1018])
+            ("sys/cdefs.h" include (:system-flag t) nil [1020 1042])
+            ("Availability.h" include (:system-flag t) nil [1043 1068])
+            ("sys/qos.h" include (:system-flag t) nil [1111 1131])
+            ("pthread_override_qos_class_end_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("__override" variable (:type ("pthread_override_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [9876 9906]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [9838 9907])
+            ("pthread_override_qos_class_start_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type ("pthread_override_t" type (:type "class") nil nil)
+                :arguments 
+                  ( ("__pthread" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8896 8916])
+                    ("__qos_class" variable (:type ("qos_class_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8919 8943])
+                    ("__relative_priority" variable (:type "int") (reparse-symbol arg-sub-list) [8944 8968]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [8841 8969])
+            ("pthread_override_t" type
+               (:typemodifiers ("extern" "\"C\"")
+                :type "typedef"
+                :pointer 1
+                :typedef ("pthread_override_s" type
+                     (:prototype t
+                      :type "struct")
+                      nil nil))
+                (reparse-symbol extern-c-contents) [6682 6736])
+            ("pthread_get_qos_class_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("__pthread" variable (:type ("pthread_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5776 5796])
+                    ("__qos_class" variable
+                       (:pointer 1
+                        :type ("qos_class_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5799 5836])
+                    ("__relative_priority" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [5839 5876]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [5747 5877])
+            ("pthread_set_qos_class_self_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("__qos_class" variable (:type ("qos_class_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4954 4978])
+                    ("__relative_priority" variable (:type "int") (reparse-symbol arg-sub-list) [4981 5005]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [4920 5006])
+            ("pthread_attr_get_qos_class_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("__attr" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3428 3463])
+                    ("__qos_class" variable
+                       (:pointer 1
+                        :type ("qos_class_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3466 3503])
+                    ("__relative_priority" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3506 3543]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [3394 3544])
+            ("pthread_attr_set_qos_class_np" function
+               (:typemodifiers ("extern" "\"C\"")
+                :type "int"
+                :arguments 
+                  ( ("__attr" variable
+                       (:pointer 1
+                        :type ("pthread_attr_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2550 2573])
+                    ("__qos_class" variable (:type ("qos_class_t" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2576 2600])
+                    ("__relative_priority" variable (:type "int") (reparse-symbol arg-sub-list) [2601 2625]))                  
+                :prototype-flag t)
+                (reparse-symbol extern-c-contents) [2516 2626]))          
+      :file "qos.h"
+      :pointmax 10012
+      :fsize 10011
+      :lastmodtime '(21550 12825 0 0)
+      :unmatched-syntax '((semantic-list 9810 . 9837) (symbol 9786 . 9810) (semantic-list 8813 . 8840) (symbol 8789 . 8813) (semantic-list 5719 . 5746) (symbol 5695 . 5719) (semantic-list 4892 . 4919) (symbol 4868 . 4892) (semantic-list 3366 . 3393) (symbol 3342 . 3366) (semantic-list 2488 . 2515) (symbol 2464 . 2488))
+      :lexical-table 
+        '(("_PTHREAD_QOS_H")
+          )
+))
+  :file "!Applications!Xcode.app!Contents!Developer!Platforms!MacOSX.platform!Developer!SDKs!MacOSX10.10.sdk!usr!include!pthread!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -225,6 +225,7 @@ Takes and optional `FRAME' as reference."
 
      `(highlight
        ((,class (:background ,ymonokai-hl))))
+                 ;:inherit lazy-highlight))))    ;oracleyue, modified
           
      `(link
        ((,class (:foreground ,blue
@@ -1738,7 +1739,7 @@ Takes and optional `FRAME' as reference."
        ;((,class (:inherit match))))
        ;((,class (:inherit isearch))))   ;oracleyue, modified
        ;((,class (:inherit lazy-highlight))))      ;oracleyue, modified
-       ((,class (:foreground ,red
+       ((,class (:foreground ,magenta
                              :background ,ymonokai-bg))))      ;oracleyue, modified
 
      `(helm-grep-running
@@ -1765,7 +1766,7 @@ Takes and optional `FRAME' as reference."
 
      `(helm-match                ; used for M-x match
        ;((,class (:inherit match))))                ;oracleyue, commented
-       ((,class (:foreground ,red
+       ((,class (:foreground ,magenta
                              :background ,ymonokai-bg))))      ;oracleyue, modified
        
      `(helm-selection

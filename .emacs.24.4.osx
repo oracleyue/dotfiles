@@ -1,6 +1,5 @@
 (custom-set-variables
  '(column-number-mode t)
- '(ecb-options-version "2.40")
  '(fill-column 80)
  '(inhibit-startup-screen t)
  '(linum-format " %3i ")
@@ -17,12 +16,18 @@
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
  ;; (:family "DejaVu Sans Mono")
+ '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 
+;; version settings
+(setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
 ;; global variables for configuration useage
 (setq y-init-path-prefix "~/.emacs.d/init/")
+
+;; fundemental configrations
+(setq gc-cons-threshold (* 20 1024 1024))
 
 ;;; use variable-width font types in text-mode
 ;; (defun y-variable-width-text-mode ()
@@ -198,7 +203,7 @@
 ;;; Configurations for Programming Environment
 ;; ------------------------------------------------------------
 
-;; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Minior modes (yas, auto-complete, popup) for completion
 (load (concat y-init-path-prefix "emacs-init-ac"))
 
@@ -279,10 +284,15 @@
 
 ; =======================================
 ;; Project Management for Programming
-(add-to-list 'load-path "~/.emacs.d/git/eproject")
-(require 'eproject)
-; Disable automatic addition/removal of files from projects. Optional.
-(setq prj-autotracking nil)
+;;; using /eproject/
+;(add-to-list 'load-path "~/.emacs.d/git/eproject")
+;(require 'eproject)
+;; Disable automatic addition/removal of files from projects. Optional.
+;(setq prj-autotracking nil)
+;;; using /projectile/
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 ; =======================================
 ;; Programming Environment for /Lisp, Elisp, Lisp Interaction/

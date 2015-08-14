@@ -1,0 +1,121 @@
+;; Object i386/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "i386/"
+  :tables
+  (list
+    (semanticdb-table "_types.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_BSD_I386__TYPES_H_" variable (:constant-flag t) nil [1376 1395])
+            ("__int8_t" type
+               (:typedef ("signed char")
+                :type "typedef")
+                nil [1560 1592])
+            ("__uint8_t" type
+               (:typedef ("unsigned char")
+                :type "typedef")
+                nil [1663 1696])
+            ("__int16_t" type
+               (:typedef ("short")
+                :type "typedef")
+                nil [1697 1723])
+            ("__uint16_t" type
+               (:typedef ("unsigned short")
+                :type "typedef")
+                nil [1724 1759])
+            ("__int32_t" type
+               (:typedef ("int")
+                :type "typedef")
+                nil [1760 1784])
+            ("__uint32_t" type
+               (:typedef ("unsigned int")
+                :type "typedef")
+                nil [1785 1818])
+            ("__int64_t" type
+               (:typedef ("long long")
+                :type "typedef")
+                nil [1819 1848])
+            ("__uint64_t" type
+               (:typedef ("unsigned long long")
+                :type "typedef")
+                nil [1849 1887])
+            ("__darwin_intptr_t" type
+               (:typedef ("long")
+                :type "typedef")
+                nil [1889 1922])
+            ("__darwin_natural_t" type
+               (:typedef ("unsigned int")
+                :type "typedef")
+                nil [1923 1964])
+            ("__darwin_ct_rune_t" type
+               (:typedef ("int")
+                :type "typedef")
+                nil [2967 3000])
+            ("__mbstate_t" type
+               (:typedef ("" type
+                     (:members 
+                        ( ("__mbstate8" variable
+                             (:dereference 1
+                              :type "char")
+                              (reparse-symbol classsubparts) [3195 3217])
+                          ("_mbstateL" variable (:type "long long") (reparse-symbol classsubparts) [3219 3239]))                        
+                      :type "union")
+                      nil nil)
+                :type "typedef")
+                nil [3178 3276])
+            ("__darwin_mbstate_t" type
+               (:typedef ("__mbstate_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [3278 3318])
+            ("__darwin_ptrdiff_t" type
+               (:typedef ("long")
+                :type "typedef")
+                nil [3453 3487])
+            ("__darwin_size_t" type
+               (:typedef ("unsigned long")
+                :type "typedef")
+                nil [3675 3714])
+            ("__darwin_va_list" type
+               (:typedef ("__builtin_va_list" type (:type "class") nil nil)
+                :type "typedef")
+                nil [3757 3800])
+            ("__darwin_wchar_t" type
+               (:typedef ("int")
+                :type "typedef")
+                nil [3906 3947])
+            ("__darwin_rune_t" type
+               (:typedef ("__darwin_wchar_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [4035 4076])
+            ("__darwin_wint_t" type
+               (:typedef ("int")
+                :type "typedef")
+                nil [4118 4157])
+            ("__darwin_clock_t" type
+               (:typedef ("unsigned long")
+                :type "typedef")
+                nil [4242 4282])
+            ("__darwin_socklen_t" type
+               (:typedef ("__uint32_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [4297 4336])
+            ("__darwin_ssize_t" type
+               (:typedef ("long")
+                :type "typedef")
+                nil [4359 4391])
+            ("__darwin_time_t" type
+               (:typedef ("long")
+                :type "typedef")
+                nil [4418 4449]))          
+      :file "_types.h"
+      :pointmax 4497
+      :fsize 4496
+      :lastmodtime '(21776 25147 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_BSD_I386__TYPES_H_")
+          )
+))
+  :file "!Applications!Xcode.app!Contents!Developer!Platforms!MacOSX.platform!Developer!SDKs!MacOSX10.10.sdk!usr!include!i386!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

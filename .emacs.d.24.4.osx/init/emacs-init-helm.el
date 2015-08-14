@@ -64,6 +64,19 @@
 ;; - keybinding: C-x c i
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
+;; restore UI
+(with-eval-after-load 'helm-semantic
+  (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  ;(push '(c-mode . semantic-format-tag-name) helm-semantic-display-style)
+  ;(push '(c-mode . semantic-format-tag-prototype) helm-semantic-display-style)
+  (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
+;; dependency config
+;; enable /Imenu/ rescan for helm-semantic-or-imenu
+(setq imenu-auto-rescan t)
+;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
+(semantic-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+(global-semanticdb-minor-mode 1)
 
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m

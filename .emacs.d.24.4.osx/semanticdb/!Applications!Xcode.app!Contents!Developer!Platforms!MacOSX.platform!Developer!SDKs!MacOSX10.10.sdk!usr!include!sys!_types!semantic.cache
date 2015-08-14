@@ -1,0 +1,218 @@
+;; Object _types/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "_types/"
+  :tables
+  (list
+    (semanticdb-table "_null.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("NULL" variable (:constant-flag t) nil [1352 1356]))          
+      :file "_null.h"
+      :pointmax 1391
+      :fsize 1390
+      :lastmodtime '(21776 25161 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("NULL" . ((symbol "__DARWIN_NULL" 1358 . 1371)))
+          )
+)
+    (semanticdb-table "_size_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_SIZE_T" variable (:constant-flag t) nil [1355 1362])
+            ("size_t" type
+               (:typedef ("__darwin_size_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1402]))          
+      :file "_size_t.h"
+      :pointmax 1426
+      :fsize 1425
+      :lastmodtime '(21776 25164 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_SIZE_T")
+          )
+)
+    (semanticdb-table "_mbstate_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_MBSTATE_T" variable (:constant-flag t) nil [1353 1363])
+            ("mbstate_t" type
+               (:typedef ("__darwin_mbstate_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1401]))          
+      :file "_mbstate_t.h"
+      :pointmax 1426
+      :fsize 1425
+      :lastmodtime '(21776 25160 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_MBSTATE_T")
+          )
+)
+    (semanticdb-table "_ct_rune_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_CT_RUNE_T" variable (:constant-flag t) nil [1353 1363])
+            ("ct_rune_t" type
+               (:typedef ("__darwin_ct_rune_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1401]))          
+      :file "_ct_rune_t.h"
+      :pointmax 1426
+      :fsize 1425
+      :lastmodtime '(21776 25156 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_CT_RUNE_T")
+          )
+)
+    (semanticdb-table "_rune_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_RUNE_T" variable (:constant-flag t) nil [1350 1357])
+            ("rune_t" type
+               (:typedef ("__darwin_rune_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1359 1390]))          
+      :file "_rune_t.h"
+      :pointmax 1413
+      :fsize 1412
+      :lastmodtime '(21776 25163 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_RUNE_T")
+          )
+)
+    (semanticdb-table "_wchar_t.h"
+      :major-mode 'c-mode
+      :tags nil
+      :file "_wchar_t.h"
+      :pointmax 1501
+      :fsize 1500
+      :lastmodtime '(21776 25166 0 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "_va_list.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_VA_LIST_T" variable (:constant-flag t) nil [1353 1363])
+            ("va_list" type
+               (:typedef ("__darwin_va_list" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1397]))          
+      :file "_va_list.h"
+      :pointmax 1422
+      :fsize 1421
+      :lastmodtime '(21776 25165 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_VA_LIST_T")
+          )
+)
+    (semanticdb-table "_clock_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_CLOCK_T" variable (:constant-flag t) nil [1355 1363])
+            ("clock_t" type
+               (:typedef ("__darwin_clock_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1404]))          
+      :file "_clock_t.h"
+      :pointmax 1427
+      :fsize 1426
+      :lastmodtime '(21776 25156 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_CLOCK_T")
+          )
+)
+    (semanticdb-table "_time_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_TIME_T" variable (:constant-flag t) nil [1355 1362])
+            ("time_t" type
+               (:typedef ("__darwin_time_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1364 1396]))          
+      :file "_time_t.h"
+      :pointmax 1420
+      :fsize 1419
+      :lastmodtime '(21776 25164 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_TIME_T")
+          )
+)
+    (semanticdb-table "_timespec.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_STRUCT_TIMESPEC" variable (:constant-flag t) nil [1363 1379])
+            ("timespec" type
+               (:members 
+                  ( ("tv_sec" variable (:type ("__darwin_time_t" type (:type "class") nil nil)) (reparse-symbol classsubparts) [1416 1439])
+                    ("tv_nsec" variable (:type "long") (reparse-symbol classsubparts) [1441 1465]))                  
+                :type "struct")
+                nil [1396 1468]))          
+      :file "_timespec.h"
+      :pointmax 1499
+      :fsize 1498
+      :lastmodtime '(21776 25164 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_STRUCT_TIMESPEC" . ((STRUCT "struct" 1380 . 1386) (symbol "timespec" 1387 . 1395)))
+          )
+)
+    (semanticdb-table "_wint_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_WINT_T" variable (:constant-flag t) nil [1350 1357])
+            ("wint_t" type
+               (:typedef ("__darwin_wint_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1358 1389]))          
+      :file "_wint_t.h"
+      :pointmax 1411
+      :fsize 1410
+      :lastmodtime '(21776 25166 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_WINT_T")
+          )
+)
+    (semanticdb-table "_mach_port_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_MACH_PORT_T" variable (:constant-flag t) nil [1979 1991])
+            ("mach_port_t" type
+               (:typedef ("__darwin_mach_port_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1992 2033]))          
+      :file "_mach_port_t.h"
+      :pointmax 2060
+      :fsize 2059
+      :lastmodtime '(21776 25160 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_MACH_PORT_T")
+          )
+)
+    (semanticdb-table "_sigset_t.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("_SIGSET_T" variable (:constant-flag t) nil [1357 1366])
+            ("sigset_t" type
+               (:typedef ("__darwin_sigset_t" type (:type "class") nil nil)
+                :type "typedef")
+                nil [1368 1404]))          
+      :file "_sigset_t.h"
+      :pointmax 1429
+      :fsize 1428
+      :lastmodtime '(21776 25163 0 0)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("_SIGSET_T")
+          )
+))
+  :file "!Applications!Xcode.app!Contents!Developer!Platforms!MacOSX.platform!Developer!SDKs!MacOSX10.10.sdk!usr!include!sys!_types!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

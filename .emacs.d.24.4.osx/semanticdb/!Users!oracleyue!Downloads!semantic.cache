@@ -1,0 +1,16 @@
+;; Object Downloads/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Downloads/"
+  :tables
+  (list
+    (semanticdb-table "c-aux-info.c"
+      :major-mode 'c-mode
+      :tags nil
+      :file "c-aux-info.c"
+      :pointmax 139361
+      :fsize 139360
+      :lastmodtime '(21965 43191 0 0)
+      :unmatched-syntax nil))
+  :file "!Users!oracleyue!Downloads!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

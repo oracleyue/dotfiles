@@ -1,13 +1,28 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 ;; ;; Having defined in /google-c-style/
 ;; (setq-default c-default-style "linux")
 ;; (setq-default c-basic-offset 4)
 ;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
+;; Fix /iedit/ bug in Mac; default key "C-c ;"
+(require 'iedit)
+
+;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
+; let's define a function for flymake initialization
+(defun y:flymake-google-init () 
+  (require 'flymake-google-cpplint)
+  (custom-set-variables
+   '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
+  (flymake-google-cpplint-load)
+)
+(add-hook 'c-mode-hook 'y:flymake-google-init)
+(add-hook 'c++-mode-hook 'y:flymake-google-init)
+
 ;; /google-c-style/
-;(add-to-list 'load-path "~/.emacs.d/git")
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -17,7 +32,9 @@
 (require 'xcscope)
 (cscope-setup)
 
-;; auto-complete C/C++ sources and headers
+
+;; configure /auto-complete/ for C/C++ sources and headers
+;; -------------------BEGIN-------------------------------
 (require 'auto-complete-c-headers)
 ;; /auto-complete-clang/: clang completion for C/C++ [For Mac OS X]
 ;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
@@ -99,8 +116,8 @@
   (cond 
    ((string-equal system-type "gnu/linux")
     (setq ac-sources '(ac-source-clang-async 
-                       ac-source-semantic
                        ac-source-c-headers
+                       ;ac-source-semantic
                        ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
@@ -110,15 +127,15 @@
      ((string-equal y-clang-complete-type "clang-complete")
           ;;; use /emacs-clang-complete-clang/
       (setq ac-sources '(ac-source-clang
-                         ac-source-semantic
                          ac-source-c-headers
+                         ;ac-source-semantic
                          ac-source-words-in-same-mode-buffers))
       )
      ((string-equal y-clang-complete-type "clang-complete-async")
           ;;; use /emacs-clang-complete-clang-async/
       (setq ac-sources '(ac-source-clang-async 
-                         ac-source-semantic
                          ac-source-c-headers
+                         ;ac-source-semantic
                          ac-source-words-in-same-mode-buffers))
       )
      )
@@ -141,6 +158,7 @@
 ;; default mode for Makefile in Mac OS X
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+;; ------------------------END----------------------------
 
 ;; ;; use /doxymacs/ to manipulate doxygen documentations
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
