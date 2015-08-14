@@ -9,6 +9,7 @@
 .emacs.d.24.4.osx/srecode-map.el
 .emacs.d.24.4.osx/ac-comphist.dat
 .emacs.d.24.4.osx/elpa/*.txt
+.emacs.d.24.4.osx/semanticdb
 **/*.elc
 .*~
 
