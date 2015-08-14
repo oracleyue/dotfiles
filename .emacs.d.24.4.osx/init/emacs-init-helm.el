@@ -49,7 +49,7 @@
       helm-recentf-fuzzy-match    t)
 
 ;; use helm to find/open files
-;; -keybinding: C-x c C-x C-f 
+;; -keybinding: C-x c C-x C-f; in this session, "C-c i" will insert the current absolute path into the current buffer.
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; use live grep in helm

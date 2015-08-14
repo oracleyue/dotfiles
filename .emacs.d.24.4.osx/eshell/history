@@ -1,10 +1,6 @@
 make clean
 make
 ls
-ls src/
-make clean
-make
-ls
 mv eigen.c src/
 mv include/eigen.h.bk include/eigen.h
 make clean
@@ -126,3 +122,7 @@ clc
 cls
 clear
 ls
+ls
+cd ../include/
+ls
+mv mylib.h mylib.hh

@@ -11,6 +11,9 @@
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/oracleyue/Workspace/cpp/"
+ "/Users/oracleyue/tmp/"
+ "/Users/oracleyue/tmp/eigen/"
  "/Users/oracleyue/.emacs.d/init/"
  "/Users/oracleyue/"
  "/Users/oracleyue/.emacs.d/"
@@ -28,6 +31,14 @@
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/Users/oracleyue/tmp/" (21966 12322 0 0) "test/" "StatL-ipadUpload-scripts/" "py/" "prj/" "latex/" "ipad-upload/" "gsl/" "eigen/" "doxygen/" "backup/" ".DS_Store" ".clang-complete-async-project.el" "../" "./")
+
+ ("/Users/oracleyue/Workspace/cpp/" (21966 12906 0 0) "mpi_lasso/" ".DS_Store" ".ac-clang-project.el" "../" "./")
+
+ ("/Users/oracleyue/tmp/eigen/" (21883 11221 0 0) "src/" "run" "obj/" "Makefile" "include/" "../" "./")
+
+ ("/Users/oracleyue/tmp/eigen/src/" (21966 12374 0 0) "third.cc" "second.cc" "first.cc" ".dir-local.el" ".#third.cc" "../" "./")
+
  ("/Users/oracleyue/.emacs.d/init/" (21965 47067 0 0) "emacs-init-helm.el" "emacs-init-helm-swoop.el" "emacs-init-evil.el" "emacs-init-cpp.el" "emacs-init-cc.el" "emacs-init-backup.el" "emacs-init-archived.el" "emacs-init-ac.el" "../" "./")
 
  ("/Users/oracleyue/.emacs.d/" (21965 45904 0 0) "userdata/" "themes/" "srecode-map.el" "snippets/" "semanticdb/" "recentf" "projectile-bookmarks.eld" "init/" "ido.last" "git/" "eshell/" "eproject.lst" "elpa/" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".python-environments/" ".org-id-locations" ".mc-lists.el" ".DS_Store" "../" "./")
@@ -52,8 +63,6 @@
  ("/Users/oracleyue/Public/Dropbox/Academia/" (21871 3718 0 0) "TikZ/" "Slides/" "Matlab/" "Manuscripts/" "cpp/" "Courses/" "Books/" "bibtex_sync/" "backup/" ".git/" ".DS_Store" "../" "./")
 
  ("/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/" (21937 63487 0 0) "Journals/" "Feng-Project/" "DSF/" "drafts/" "CV/" "Conferences/" "CET/" "archive/" "AFR/" ".gitignore" ".git/" ".DS_Store" "../" "./")
-
- ("/Users/oracleyue/tmp/" (21955 17464 0 0) "test/" "StatL-ipadUpload-scripts/" "py/" "prj/" "latex/" "ipad-upload/" "gsl/" "eigen/" "doxygen/" "backup/" ".DS_Store" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

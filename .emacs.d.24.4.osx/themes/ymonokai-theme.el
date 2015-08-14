@@ -575,7 +575,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-function-name-face
        ((,class (:foreground ,green
-                             :bold t))))       ;oracleyue: no this entry
+                             :bold nil))))       ;oracleyue: no this entry
 
      `(font-lock-keyword-face
        ((,class (:foreground ,red
@@ -601,7 +601,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-type-face
        ((,class (:foreground ,blue
-                             :bold t          ; oracleyue: no this entry
+                             ;:bold t          ; oracleyue: no this entry
                              :italic t))))
 
      `(font-lock-variable-name-face

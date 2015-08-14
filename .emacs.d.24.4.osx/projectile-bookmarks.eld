@@ -1,1 +1,1 @@
-("~/" "/usr/local/")
+("~/" "/usr/local/" "~/Public/Dropbox/Academia/Manuscripts/")

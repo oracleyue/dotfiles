@@ -69,11 +69,7 @@
  /usr/local/include/c++
  /usr/local/include/c
  /usr/local/include
- ../include
- .
                  ")))
-  ;(setq ac-clang-cflags (append ac-clang-cflags '("-I../include"))) 
-  ;; configuration start
   (cond
    ((string-equal y-clang-complete-type "clang-complete-async")
         ;;; use /emacs-clang-complete-async/

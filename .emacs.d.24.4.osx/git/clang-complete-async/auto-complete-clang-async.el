@@ -213,12 +213,14 @@ set new cflags for ac-clang from shell command output"
 
 
 (defface ac-clang-candidate-face
-  '((t (:background "lightgray" :foreground "navy")))
+  ;'((t (:background "lightgray" :foreground "navy")))
+  '((t (:inherit ac-candidate-face)))
   "Face for clang candidate"
   :group 'auto-complete)
 
 (defface ac-clang-selection-face
-  '((t (:background "navy" :foreground "white")))
+  ;'((t (:background "navy" :foreground "white")))
+  '((t (:inherit ac-selection-face)))
   "Face for the clang selected candidate."
   :group 'auto-complete)
 
