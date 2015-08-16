@@ -1,0 +1,1 @@
+((c++-mode . ((project-local-include-path . ("-I./include" "-I./src")))))

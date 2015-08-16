@@ -606,7 +606,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-variable-name-face
        ((,class (:foreground ,orange  
-                             :italic t))))    ; oracleyue: no this entry
+                             :italic nil))))    ; oracleyue: no this entry
 
      `(font-lock-warning-face
        ((,class (:foreground ,orange

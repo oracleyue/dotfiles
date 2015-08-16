@@ -12,10 +12,10 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
- ;; (:family "DejaVu Sans Mono")
+ ;; (:family "DejaVu Sans Mono") ;(:height 130)
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 
@@ -184,7 +184,16 @@
  ((string-equal system-type "darwin")
   (setq insert-directory-program "/usr/local/bin/gls")
   ;(setq dired-use-ls-dired nil)
-  (setq dired-listing-switches "-ahl --color=always --group-directories-first")))
+  (setq dired-listing-switches "-ahl --color=always --group-directories-first")
+  ))
+(add-hook 'dired-load-hook
+          (lambda ()
+            (load "dired-x")
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")))
+            ;(setq dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$"))))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode 1)))
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
@@ -267,6 +276,20 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ; =======================================
+;; Setting for /golden-ratio/
+(require 'golden-ratio)
+;(golden-ratio-mode t)
+;(setq golden-ratio-auto-scale t) 
+
+; =======================================
+;; Setting for /Helm/ and plus
+(load (concat y-init-path-prefix "emacs-init-helm"))
+(load (concat y-init-path-prefix "emacs-init-helm-swoop"))
+; ------
+;; Project Management
+(load (concat y-init-path-prefix "emacs-init-helm-proj"))
+
+; =======================================
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (cond
  ((string-equal system-type "darwin")
@@ -284,18 +307,6 @@
 
 
 ; =======================================
-;; Project Management for Programming
-;;; using /eproject/
-;(add-to-list 'load-path "~/.emacs.d/git/eproject")
-;(require 'eproject)
-;; Disable automatic addition/removal of files from projects. Optional.
-;(setq prj-autotracking nil)
-;;; using /projectile/
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
-; =======================================
 ;; Programming Environment for /Lisp, Elisp, Lisp Interaction/
 ; To make "C-x C-e" pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
@@ -311,7 +322,7 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (load (concat y-init-path-prefix "emacs-init-cc"))
-;(load (concat y-init-path-prefix "emacs-init-cpp-test"))
+;(load (concat y-init-path-prefix "emacs-init-cc-test"))
 
 ; =======================================
 ;; Programming Environment for /Python/
@@ -381,17 +392,6 @@
 ; in "emacs-init-archived.el"
 
 ; --------------------------------
-;; Setting for /golden-ratio/
-(require 'golden-ratio)
-(golden-ratio-mode t)
-(setq golden-ratio-auto-scale t) 
-
-; --------------------------------
-;; Setting for /Helm/ and plus
-(load (concat y-init-path-prefix "emacs-init-helm"))
-(load (concat y-init-path-prefix "emacs-init-helm-swoop"))
-
-; --------------------------------
 ;; Setting for /neotree/
 (require 'neotree)
 (global-set-key [f6] 'neotree-toggle)
@@ -407,6 +407,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; For support of /tags.../
 ;(load (concat y-init-path-prefix "emacs-init-tags"))
+
 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

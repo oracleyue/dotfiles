@@ -1,6 +1,0 @@
-alias ll   ls -Alh $*
-alias cp   /bin/cp -r -i $*
-alias mv   /bin/mv -i $*
-alias rm   /bin/rm -i $*
-alias grep /usr/bin/grep -Hn --color=always $*
-alias tar  COPYFILE_DISABLE=1 /usr/bin/tar $*

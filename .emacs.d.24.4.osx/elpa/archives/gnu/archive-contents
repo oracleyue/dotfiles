@@ -468,6 +468,13 @@
        nil "Open Sound Control protocol library" single
        ((:url . "http://elpa.gnu.org/packages/osc.html")
 	(:keywords "comm" "processes" "multimedia"))])
+ (other-frame-window .
+		     [(1 0 0)
+		      ((emacs
+			(24 4)))
+		      "Minor mode to enable global prefix keys for other frame/window buffer placement" single
+		      ((:url . "http://elpa.gnu.org/packages/other-frame-window.html")
+		       (:keywords "frame" "window"))])
  (pabbrev .
 	  [(4 2 1)
 	   nil "Predictive abbreviation expansion" single

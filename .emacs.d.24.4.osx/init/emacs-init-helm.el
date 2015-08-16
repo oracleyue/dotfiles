@@ -2,6 +2,7 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
+(setq y-enable-semantic-flag "yes")
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -24,6 +25,9 @@
       helm-ff-file-name-history-use-recentf t)
 
 (helm-mode 1)
+
+;; default way to split window 
+;(setq helm-split-window-default-side 'right)
 
 ;; auto-resize buffer to fit candidates
 (helm-autoresize-mode t)
@@ -72,12 +76,12 @@
   (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
 ;; dependency config
 ;; enable /Imenu/ rescan for helm-semantic-or-imenu
-(setq imenu-auto-rescan t)
+;(setq imenu-auto-rescan t)
 ;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
-(semantic-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(global-semanticdb-minor-mode 1)
-
+(cond ((string-equal y-enable-semantic-flag "yes")
+       (semantic-mode 1)
+       (global-semantic-idle-scheduler-mode 1)
+       (global-semanticdb-minor-mode 1)))
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)

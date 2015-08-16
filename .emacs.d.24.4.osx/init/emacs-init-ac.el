@@ -5,7 +5,7 @@
 (yas-global-mode 1)
 (setq-default mode-require-final-newline nil)
 ;; use popup in yasnippet
-(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+;(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
 (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
 (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
 ;; use ido in yasnippet popup menu
@@ -33,15 +33,15 @@
 ;; starting type
 (setq ac-expand-on-auto-complete t)    ;; new
 ;; different ways to start ac-complete
-    ;1; default auto start complete when type 4 characters
-    (setq ac-auto-start 4)
+    ;1; default auto start complete when type 3 characters
+    (setq ac-auto-start 3)
     ;2; explicit call to auto-complete, using trigger-key or auto-complete func
     ;(setq ac-auto-start nil)
+    ;(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
     ;3; certain modes enable/disable ac-auto-start
     ; cc-mode disable ac-auto-start in "emacs-init-cc.el"
-    (add-hook 'emacs-lisp-mode-hook (lambda () (setq ac-auto-start 4)))
+    (add-hook 'emacs-lisp-mode-hook (lambda () (setq ac-auto-start 3)))
 ;; set keys to control ac-complete behaviors
-(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
 (define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
 ;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
 ;; setting of pop-up boxes
@@ -59,7 +59,7 @@
 ;; keystokes
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)
-(define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
+;(define-key ac-menu-map (kbd "<backtab>") 'ac-previous)
 ;; set dictionary
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20140515.1959/dict/")
 ;; list for auto-complete

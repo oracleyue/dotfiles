@@ -2,6 +2,7 @@
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(setq y-enable-function-args-flag "yes")
 
 ;; ;; Having defined in /google-c-style/
 ;; (setq-default c-default-style "linux")
@@ -29,8 +30,8 @@
 
 ;; /xcscope/: source cross-referencing tool [install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
-(require 'xcscope)
-(cscope-setup)
+;(require 'xcscope)
+;(cscope-setup)
 
 
 ;; configure /auto-complete/ for C/C++ sources and headers
@@ -69,10 +70,24 @@
  /usr/local/include/c++
  /usr/local/include/c
  /usr/local/include
- ../include
- .
                  ")))
-  ;(setq ac-clang-cflags (append ac-clang-cflags '("-I../include"))) 
+  ;; default local include-paths relative to projects' "src" folder
+  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I.")))
+  ;; read in project-level include-paths via ".dir-locals.el"
+  ;; an example of ".dir-locals.el":
+  ;;    ((c++-mode . ((project-local-include-path . ("-I./include" "-I./src")))))
+  (defun y:readin-dir-local-path ()
+    (cond ((boundp 'project-local-include-path)
+           (setq ac-clang-cflags (append ac-clang-cflags project-local-include-path))
+           (ac-clang-update-cmdlineargs))))
+  ;; hook function defined generally to read in per-directory variables
+  (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+  (defun run-local-vars-mode-hook ()
+    "Run a hook for the major-mode after the local variables have been processed."
+    (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+  ;; use for c/c++-mode to readin include-path defined under project roots
+  (add-hook 'c++-mode-local-vars-hook 'y:readin-dir-local-path)
+  (add-hook 'c-mode-local-vars-hook 'y:readin-dir-local-path)
   ;; configuration start
   (cond
    ((string-equal y-clang-complete-type "clang-complete-async")
@@ -122,6 +137,7 @@
     (setq ac-sources '(ac-source-clang-async 
                        ac-source-c-headers
                        ;ac-source-semantic
+                       ac-source-yasnippet
                        ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
@@ -133,6 +149,7 @@
       (setq ac-sources '(ac-source-clang
                          ac-source-c-headers
                          ;ac-source-semantic
+                         ac-source-yasnippet
                          ac-source-words-in-same-mode-buffers))
       )
      ((string-equal y-clang-complete-type "clang-complete-async")
@@ -140,6 +157,7 @@
       (setq ac-sources '(ac-source-clang-async 
                          ac-source-c-headers
                          ;ac-source-semantic
+                         ac-source-yasnippet
                          ac-source-words-in-same-mode-buffers))
       )
      )
@@ -164,6 +182,26 @@
           (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
 ;; ------------------------END----------------------------
 
+
+;; Package: /function-args/
+;; - keybinding: fa-show =M-i=; moo-complete =M-o=
+(cond ((string-equal y-enable-function-args-flag "yes")
+       (require 'function-args)
+       (add-hook 'c-mode-hook 'fa-config-default)
+       (add-hook 'c++-mode-hook 'fa-config-default)
+       ;; enable case-insensitive searching
+       (set-default 'semantic-case-fold t)
+       ;; put c++-mode as default for .h files
+       (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+       ;; improve the parse of macro-heavy code 
+       (require 'semantic/bovine/c)
+       (add-to-list 'semantic-lex-c-preprocessor-symbol-file
+       "
+       /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
+       ")))
+
+
+;;; -------------------------------------------
 ;; ;; use /doxymacs/ to manipulate doxygen documentations
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
 ;; (require 'doxymacs)
