@@ -1,1 +1,0 @@
-("~/tmp/eigen/" "/usr/local/" "~/tmp/gsl/" "~/Downloads/emacs-clang-complete-async-master/" "~/Workspace/c/" "~/tmp/prj/" "~/Public/Dropbox/Academia/Manuscripts/" "~/Workspace/c" "~/Workspace/cpp" "~/Workspace/mpi")
