@@ -7,9 +7,15 @@
     ;(setq prj-autotracking nil)
 
 ;;; using /projectile/
+(require 'projectile)
 (projectile-global-mode)
-(setq projectile-completion-system 'helm)
+(setq projectile-enable-caching t)
+
+;;; using /helm-projectile/
+(require 'helm-projectile)
 (helm-projectile-on)
+(setq projectile-completion-system 'helm)
+(setq projectile-enable-caching 'alien)
 
 ;; globally ignore files in project
 ;
@@ -95,7 +101,6 @@
 (add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
 
 ;; Caching
-;(setq projectile-enable-caching t)
 ;; - command: projectile-invalidate-cache =C-c p i=
 ;; - command: projectile-cache-current-file =C-c p z=
 ;; - command: projectile-purge-file-from-cache

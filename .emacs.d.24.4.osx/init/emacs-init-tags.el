@@ -1,51 +1,100 @@
 ;; ========================================
 ;; Settings for tags support
 
-;; For /built-in tags-update/, using =ctags -e=, NOT etags!
-(defun oy-build-ctags ()
-  (interactive)
-  (message ">> building project tags ...")
-  ;(let ((root "~/Workspace/"))
-  (let ((root default-directory))
-        (shell-command (concat "ctags -e -R --extra=+fq --exclude=db --exclude=test --exclude=.git --exclude=public -f " root "TAGS " default-directory)))
-  (oy-visit-project-tags)
-  (message ">> tags built successfully!"))
-(defun oy-visit-project-tags ()
-  (interactive)
-  (let ((tags-file (concat default-directory "TAGS")))
-        (visit-tags-table tags-file)
-        (message (concat "Loaded " tags-file))))
-(global-set-key (kbd "C-c u") 'oy-build-ctags)
-;(define-key evil-normal-state-map (kbd "C-w u") 'oy-build-ctags) ;up
-;(evil-leader/set-key "up" 'oy-build-ctags)
+;; Package: /ggtags/
+;(require 'ggtags)
+;(add-hook 'c-mode-common-hook (lambda ()
+;            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode) (ggtags-mode 1))))
+;(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 
 
-;; For /etags-table/
-(require 'etags-table)
-(setq etags-table-search-up-depth 10)
-(setq tags-table-list '("~/Workspace/TAGS" "~/tmp/TAGS"))
+;; Package: GNU Global (Unix) + /helm-gtags/
+;; Prefix config
+(setq
+ helm-gtags-ignore-case t
+ helm-gtags-auto-update t
+ helm-gtags-use-input-at-cursor t
+ helm-gtags-pulse-at-cursor t
+ helm-gtags-prefix-key "\C-cg"
+ ;helm-gtags-suggested-key-mapping t
+ helm-gtags-auto-update t
+ ;helm-gtags-cache-select-result t
+ )
+(require 'helm-gtags)
+;; Enable helm-gtags-mode
+(add-hook 'dired-mode-hook 'helm-gtags-mode)
+(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'asm-mode-hook 'helm-gtags-mode)
+;; Keybindings
+(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+(define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
+(define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
+(define-key helm-gtags-mode-map (kbd "C-c g p") 'helm-gtags-parse-file)
+;(define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+;(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+;; in the list of helm-gtags-suggested-key-mapping
+(define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag)
+(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)
 
 
-;; For /etags-select/
-;;;; [SOURCE]: https://github.com/emacsmirror/etags-select
-(add-to-list 'load-path "~/.emacs.d/git/etags-select")
-(load "etags-select.el")
-(require 'etags-select)
-(global-set-key "\M-?" 'etags-select-find-tag-at-point)
-(global-set-key "\M-." 'etags-select-find-tag)
-;; Setting key bindings to close etags-select window
-(define-key etags-select-mode-map (kbd "C-g") 'etags-select-quit)
-        ;; Also quit etags-select when cursor moves to another window
-(define-key etags-select-mode-map (kbd "C-x o") 'etags-select-quit)
-;; (define-key etags-select-mode-map (kbd "C-p") 'etags-select-previous-tag)
-;; (define-key etags-select-mode-map (kbd "C-n") 'etags-select-next-tag)
-;; default etags-select bindings
-        ;; Return -> 'etags-select-goto-tag
-        ;; M-Return -> 'etags-select-goto-tag-other-window
-        ;; p -> 'etags-select-previous-tag
-        ;; n -> 'etags-select-next-tag
-        ;; q -> 'etags-select-quit
-        ;; 0 -> (etags-select-by-tag-number "0")
-        ;; 1 -> (etags-select-by-tag-number "1")
-        ;; .. ..
-        ;; 9 -> (etags-select-by-tag-number "9")
+;; Usages
+;; + run =gtags= under your project root before use
+;; - a DEFINITION of a tag is where a tag is implemented
+;; - a REFERENCE of a tag is where a tag is used in a source tree, but not where it is defined
+;; ---------------------------
+;;;; Basic movements:
+;; + =forward-sexp= C-M-f:
+;;   move forward over a balanced expression that can be a pair or a symbol
+;; + =backward-sexp= C-M-b:
+;;   move backward ...
+;; + =kill-sexp= C-M-k:
+;;   kill balaced expression forward that can be a pair or a symbol
+;; + =mark-sexp= C-M-<SPC> or C-M-@:
+;;   put mark after following expression that can be a pair or a symbol
+;; + =beginning-of-defun= C-M-a:
+;;   move point to beginning of a function
+;; + =end-of-defun= C-M-e:
+;;   move point to end of a function
+;; + =mark-defun= C-M-h:
+;;   put a region around whole current or following function
+;; ---------------------------
+;;;; Basic concepts of tag
+;; + GTAGS: definition database
+;; + GRTAGS: reference database
+;; + GPATH: path name database
+;; Find definitions in current buffer:
+;; + use =moo-jump-local= from /function-args/; use it as an outline tree
+;;; Find definitions in project, use /helm-gtags/: 
+;; + =helm-gtags-dwim= M-.:
+;;   jump to a reference/tag definition/header
+;; + =tags-loop-continue= M-,:
+;;   jump back to original location
+;; + =helm-gtags-select= C-j:
+;;   use helm to display all available tags in a project and incrementally filtering
+;;; Find references in project, use /helm-gtags/:
+;; + =helm-gtags-dwim= or =helm-gtags-find-rtags= "C-c g r"
+;;    find references to funcitons only
+;; + =helm-gtags-find-symbol= "C-c g s"
+;;    find references to variables
+;;; Find functions that current functions call
+;; + =helm-gtags-tags-in-this-function= "C-c g a"
+;;    list all the functions that the current function - the function that point is inside - calls
+;;; Find files in project
+;; + =helm-gtags-find-files=
+;;    find files matching regexp. If point is on an included header file, =helm-gtags-dwim= automatically jumps to files
+;;; View visited tags with tag stack
+;; + =helm-gtags-show-stack=
+;;    show visited tags from newest to oldest, from top to bottom.
+
+
+
+
+
+
+
+

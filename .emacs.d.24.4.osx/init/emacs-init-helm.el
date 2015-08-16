@@ -2,6 +2,7 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
+(require 'helm-grep)
 (setq y-enable-semantic-flag "yes")
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
@@ -22,7 +23,10 @@
       helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
       helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t)
+      helm-ff-file-name-history-use-recentf t
+      ;helm-candidate-number-limit           500
+      ;helm-move-to-line-cycle-in-source     t      
+      )
 
 (helm-mode 1)
 
@@ -81,7 +85,11 @@
 (cond ((string-equal y-enable-semantic-flag "yes")
        (semantic-mode 1)
        (global-semantic-idle-scheduler-mode 1)
-       (global-semanticdb-minor-mode 1)))
+       (global-semanticdb-minor-mode 1)
+       ;; setting include paths
+       ;(semantic-add-system-include "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/")
+       ;(semantic-add-system-include "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/")
+       ))
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)

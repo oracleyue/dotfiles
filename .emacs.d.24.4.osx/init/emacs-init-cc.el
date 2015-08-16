@@ -187,18 +187,22 @@
 ;; - keybinding: fa-show =M-i=; moo-complete =M-o=
 (cond ((string-equal y-enable-function-args-flag "yes")
        (require 'function-args)
-       (add-hook 'c-mode-hook 'fa-config-default)
-       (add-hook 'c++-mode-hook 'fa-config-default)
        ;; enable case-insensitive searching
        (set-default 'semantic-case-fold t)
+       ;; set selection interface
+       (setq moo-select-method 'helm)
+       ;; enable function-args
+       (add-hook 'c-mode-hook 'fa-config-default)
+       (add-hook 'c++-mode-hook 'fa-config-default)
        ;; put c++-mode as default for .h files
        (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
        ;; improve the parse of macro-heavy code 
-       (require 'semantic/bovine/c)
-       (add-to-list 'semantic-lex-c-preprocessor-symbol-file
-       "
-       /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
-       ")))
+       ;(require 'semantic/bovine/c)
+       ;(add-to-list 'semantic-lex-c-preprocessor-symbol-file
+       ;"
+       ;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
+       ;")
+       ))
 
 
 ;;; -------------------------------------------

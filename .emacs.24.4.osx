@@ -285,9 +285,18 @@
 ;; Setting for /Helm/ and plus
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
+;; using tuhdo's config
+;(setq helm-gtags-prefix-key "\C-cg")
+;(add-to-list 'load-path "~/.emacs.d/init/custom")
+;(require 'setup-helm)
+;(require 'setup-helm-gtags)
 ; ------
 ;; Project Management
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
+
+; =======================================
+;; For support of /tags.../
+(load (concat y-init-path-prefix "emacs-init-tags"))
 
 ; =======================================
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
@@ -402,11 +411,6 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Org-mode/
 (load (concat y-init-path-prefix "emacs-init-orgmode"))
-
-
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; For support of /tags.../
-;(load (concat y-init-path-prefix "emacs-init-tags"))
 
 
 
