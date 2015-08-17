@@ -189,8 +189,8 @@
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")))
-            ;(setq dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$"))))
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")
+            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
