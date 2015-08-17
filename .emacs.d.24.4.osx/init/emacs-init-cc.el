@@ -4,17 +4,25 @@
 (setq y-enable-function-args-flag "yes")
 (setq y-enable-cedet-source-info "yes")
 
-;; /google-c-style/
+;; Package: /google-c-style/
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-;; editing configurations (having set in /google-c-style/)
-;(setq-default c-default-style "linux")
-;(setq-default c-basic-offset 4)
-;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+;; Editing Configurations (having set in /google-c-style/)
+    ;(setq-default c-default-style "linux")
+    ;(setq-default c-basic-offset 4)
+    ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+;; Package: /smartparens/
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
+(smartparens-global-mode 1)
+;; when you press RET, the curly braces automatically add another newline
+(sp-with-modes '(c-mode c++-mode)
+  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC") ("* ||\n[i]" "RET"))))
 
-;; Fix /iedit/ bug in Mac; default key "C-c ;"
+;; Package: /iedit/; default key "C-c ;"
 (require 'iedit)
 
 ;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
