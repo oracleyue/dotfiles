@@ -139,8 +139,8 @@
     (setq ac-sources '(ac-source-clang-async 
                        ac-source-c-headers
                        ;ac-source-semantic
-                       ac-source-yasnippet
-                       ac-source-words-in-same-mode-buffers))
+                       ac-source-yasnippet))
+                       ;ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include")
     (add-to-list 'achead:include-directories '"/usr/local/include")
     (add-to-list 'achead:include-directories '"/usr/include/c++/5.2.0")
@@ -157,16 +157,16 @@
       (setq ac-sources '(ac-source-clang
                          ac-source-c-headers
                          ;ac-source-semantic
-                         ac-source-yasnippet
-                         ac-source-words-in-same-mode-buffers))
+                         ac-source-yasnippet))
+                         ;ac-source-words-in-same-mode-buffers))
       )
      ((string-equal y-clang-complete-type "clang-complete-async")
           ;;; use /emacs-clang-complete-clang-async/
       (setq ac-sources '(ac-source-clang-async 
                          ac-source-c-headers
                          ;ac-source-semantic
-                         ac-source-yasnippet
-                         ac-source-words-in-same-mode-buffers))
+                         ac-source-yasnippet))
+                         ;ac-source-words-in-same-mode-buffers))
       )
      )
     (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
