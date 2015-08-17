@@ -46,11 +46,11 @@
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/x86_64-unknown-linux-gnu
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
- /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0/x86_64-unknown-linux-gnu
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/../../../../include/c++/5.2.0/backward
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include
+ /usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include-fixed
  /usr/include/eigen3
  /usr/include
  /usr/local/include
@@ -141,8 +141,14 @@
                        ;ac-source-semantic
                        ac-source-yasnippet
                        ac-source-words-in-same-mode-buffers))
-    (add-to-list 'achead:include-directories '"/usr/include/c++/4.9.1")
-    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include")
+    (add-to-list 'achead:include-directories '"/usr/include")
+    (add-to-list 'achead:include-directories '"/usr/local/include")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/5.2.0")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/5.2.0/backward")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/5.2.0/x86_64-unknown-linux-gnu")
+    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include")
+    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-unknown-linux-gnu/5.2.0/include-fixed")
+    (add-to-list 'achead:include-directories '"/usr/include/eigen3")
     (ac-clang-launch-completion-process))
    ((string-equal system-type "darwin")
     (cond
