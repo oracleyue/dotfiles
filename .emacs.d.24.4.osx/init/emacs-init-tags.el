@@ -47,6 +47,17 @@
 ;; - a DEFINITION of a tag is where a tag is implemented
 ;; - a REFERENCE of a tag is where a tag is used in a source tree, but not where it is defined
 ;; ---------------------------
+;; + CEDET semantic symref (symbol references)
+;;   =semantic-symref-symbol sym=   "C-,-g"
+;;   =semantic-symref=              "C-,-G"
+;;   IN the buffer:
+;;   + "C-c C-e" semantic-symref-list-expand-all
+;;   + "C-c C-r" semantic-symref-list-contract-all
+;;   + "Tab", "n", "p"     forward-butoon
+;;   + "Enter"   jump to codes
+;;   + "+"       semantic-symref-list-toggle-showing
+;;   + "R"       semantic-symref-list-rename-open-hits
+;; ---------------------------
 ;;;; Basic movements:
 ;; + =forward-sexp= C-M-f:
 ;;   move forward over a balanced expression that can be a pair or a symbol

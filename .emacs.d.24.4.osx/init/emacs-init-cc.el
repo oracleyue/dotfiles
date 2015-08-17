@@ -189,7 +189,7 @@
        ;; enable case-insensitive searching
        (set-default 'semantic-case-fold t)
        ;; set selection interface
-       (setq moo-select-method 'helm)  ;; ivy
+       (setq moo-select-method 'ivy)  ;; ivy, helm, helm-fuzzy
        ;; enable function-args
        (add-hook 'c-mode-hook 'fa-config-default)
        (add-hook 'c++-mode-hook 'fa-config-default)

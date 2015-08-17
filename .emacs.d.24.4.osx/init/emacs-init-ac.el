@@ -37,7 +37,7 @@
     (setq ac-auto-start 3)
     ;2; explicit call to auto-complete, using trigger-key or auto-complete func
     ;(setq ac-auto-start nil)
-    ;(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
+    (ac-set-trigger-key "TAB")    ; trigger to start ac-complete
     ;3; certain modes enable/disable ac-auto-start
     ; cc-mode disable ac-auto-start in "emacs-init-cc.el"
     (add-hook 'emacs-lisp-mode-hook (lambda () (setq ac-auto-start 3)))
