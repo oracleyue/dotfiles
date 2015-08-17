@@ -2,7 +2,6 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
-;(require 'helm-grep)
 (setq y-enable-semantic-flag "yes")
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.

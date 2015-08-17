@@ -2,11 +2,17 @@
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
 (setq y-enable-function-args-flag "yes")
+(setq y-enable-cedet-source-info "yes")
 
-;; ;; Having defined in /google-c-style/
-;; (setq-default c-default-style "linux")
-;; (setq-default c-basic-offset 4)
-;; (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+;; /google-c-style/
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; editing configurations (having set in /google-c-style/)
+;(setq-default c-default-style "linux")
+;(setq-default c-basic-offset 4)
+;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;; Fix /iedit/ bug in Mac; default key "C-c ;"
 (require 'iedit)
@@ -21,11 +27,6 @@
 )
 (add-hook 'c-mode-hook 'y:flymake-google-init)
 (add-hook 'c++-mode-hook 'y:flymake-google-init)
-
-;; /google-c-style/
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 ;; /xcscope/: source cross-referencing tool [install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
@@ -205,6 +206,17 @@
        ;; put c++-mode as default for .h files
        ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
        ))
+
+;; Package: /CEDET (part)/
+;; - usage: source code information
+(cond ((string-equal y-enable-cedet-source-info "yes")
+       ;; display function interface in the minibuffer
+       (global-semantic-idle-summary-mode 1)
+       ;; show the function at the first line of the current buffer
+       (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+       (require 'stickyfunc-enhance)
+       ))
+
 
 
 ;;; -------------------------------------------
