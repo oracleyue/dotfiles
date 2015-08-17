@@ -42,8 +42,6 @@
 (cond 
  ((string-equal system-type "gnu/linux")
   (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
-  (require 'auto-complete-clang-async)
-  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
   (setq ac-clang-cflags    ;; for /emacs-clang-complete-async
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
@@ -53,9 +51,14 @@
  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/../../../../include/c++/4.9.1/backward
  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include
  /usr/lib/gcc/x86_64-unknown-linux-gnu/4.9.1/include-fixed
- /usr/local/include
+ /usr/include/eigen3
  /usr/include
+ /usr/local/include
                  ")))
+  ;; default local include-paths relative to projects' "src" folder
+  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I.")))
+  (require 'auto-complete-clang-async)
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
   )
  ((string-equal system-type "darwin")
   ;; choose the clang-complete packages
