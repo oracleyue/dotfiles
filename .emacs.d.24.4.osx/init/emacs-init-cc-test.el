@@ -18,25 +18,26 @@
 (global-semantic-idle-scheduler-mode 1)
 (semantic-mode 1)
 ;; setting include paths
-(semantic-add-system-include "/usr/local/include/boost" 'c++-mode)
-(semantic-add-system-include "/usr/local/include" 'c++-mode)
+;(semantic-add-system-include "/usr/local/include/boost" 'c++-mode)
+;(semantic-add-system-include "/usr/local/include" 'c++-mode)
 
 
 ;; Package: /function-args/
 ;; - keybinding: fa-show =M-i=; moo-complete =M-o=
 (require 'function-args)
-(add-hook 'c-mode-hook 'fa-config-default)
-(add-hook 'c++-mode-hook 'fa-config-default)
+(fa-config-default)
+;(add-hook 'c-mode-hook 'fa-config-default)
+;(add-hook 'c++-mode-hook 'fa-config-default)
 ;; enable case-insensitive searching
 (set-default 'semantic-case-fold t)
 ;; put c++-mode as default for .h files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; improve the parse of macro-heavy code 
-(require 'semantic/bovine/c)
-(add-to-list 'semantic-lex-c-preprocessor-symbol-file
-    "
-/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
-")
+;(require 'semantic/bovine/c)
+;(add-to-list 'semantic-lex-c-preprocessor-symbol-file
+;    "
+;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
+;")
 
 
 ;; Package: /company-mode/

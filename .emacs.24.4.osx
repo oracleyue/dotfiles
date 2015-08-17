@@ -286,10 +286,7 @@
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 ;; using tuhdo's config
-;(setq helm-gtags-prefix-key "\C-cg")
-;(add-to-list 'load-path "~/.emacs.d/init/custom")
-;(require 'setup-helm)
-;(require 'setup-helm-gtags)
+;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
 ; ------
 ;; Project Management
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))

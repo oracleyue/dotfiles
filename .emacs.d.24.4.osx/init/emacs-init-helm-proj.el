@@ -15,10 +15,7 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 (setq projectile-completion-system 'helm)
-(setq projectile-enable-caching 'alien)
 
-;; globally ignore files in project
-;
 
 ;; List of most used commands
 ;; ----------------

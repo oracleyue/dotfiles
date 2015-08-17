@@ -1,7 +1,6 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (setq y-enable-function-args-flag "yes")
 
 ;; ;; Having defined in /google-c-style/
@@ -190,18 +189,12 @@
        ;; enable case-insensitive searching
        (set-default 'semantic-case-fold t)
        ;; set selection interface
-       (setq moo-select-method 'helm)
+       (setq moo-select-method 'helm)  ;; ivy
        ;; enable function-args
        (add-hook 'c-mode-hook 'fa-config-default)
        (add-hook 'c++-mode-hook 'fa-config-default)
        ;; put c++-mode as default for .h files
-       (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-       ;; improve the parse of macro-heavy code 
-       ;(require 'semantic/bovine/c)
-       ;(add-to-list 'semantic-lex-c-preprocessor-symbol-file
-       ;"
-       ;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/stddef.h
-       ;")
+       ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
        ))
 
 

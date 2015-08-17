@@ -2,7 +2,7 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
-(require 'helm-grep)
+;(require 'helm-grep)
 (setq y-enable-semantic-flag "yes")
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
@@ -81,18 +81,21 @@
 ;; dependency config
 ;; enable /Imenu/ rescan for helm-semantic-or-imenu
 ;(setq imenu-auto-rescan t)
-;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
+;;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
 (cond ((string-equal y-enable-semantic-flag "yes")
-       (semantic-mode 1)
+       (require 'semantic)
        (global-semantic-idle-scheduler-mode 1)
        (global-semanticdb-minor-mode 1)
+       (semantic-mode 1)
        ;; setting include paths
-       ;(semantic-add-system-include "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/")
-       ;(semantic-add-system-include "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/")
+       (semantic-add-system-include "/usr/local/include/c++" 'c++-mode)
+       (semantic-add-system-include "/usr/local/include/c" 'c-mode)
+       ;(add-hook 'c++-mode-hook
+       ;          (add-hook 'semantic-init-hooks 'semantic-reset-system-include))
        ))
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
-(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+;(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
 ;; use Unix "find" in helm interface
 ;; - keybinding: C-x c /
