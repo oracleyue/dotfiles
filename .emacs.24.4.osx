@@ -12,7 +12,7 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 125 :width normal))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
  ;; (:family "DejaVu Sans Mono") ;(:height 130)
@@ -189,8 +189,8 @@
 (add-hook 'dired-load-hook
           (lambda ()
             (load "dired-x")
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")))
-            ;(setq dired-omit-files (concat dired-omit-files "\\|\\.DS_Store$"))))
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")
+            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
@@ -278,8 +278,8 @@
 ; =======================================
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
-;(golden-ratio-mode t)
-;(setq golden-ratio-auto-scale t) 
+(golden-ratio-mode t)
+(setq golden-ratio-auto-scale t) 
 
 ; =======================================
 ;; Setting for /Helm/ and plus
@@ -324,11 +324,16 @@
 ; =======================================
 ;; Programming Environment for /HTML, js/
 
-
 ; =======================================
 ;; Programming Environment for /C C++/
 (load (concat y-init-path-prefix "emacs-init-cc"))
 ;(load (concat y-init-path-prefix "emacs-init-cc-test"))
+;; Enable to fire "C-c C-c" to compile, when in cc-mode buffers
+;; OR use projectile compile "C-c p c"
+(defun y:set-compile-command ()
+  (set (make-local-variable 'compile-command) "cd .. && make -k && cd -"))
+(add-hook 'c-mode-hook 'y:set-compile-command)
+(add-hook 'c++-mode-hook 'y:set-compile-command)
 
 ; =======================================
 ;; Programming Environment for /Python/

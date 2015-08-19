@@ -227,6 +227,11 @@
 
 ;;; Bindings
 
+; oracleyue, added: BEGIN
+(add-to-list 'load-path "~/.emacs.d/git")
+(require 'dash-at-point)
+; oracleyue, added: END
+
 (defvar python-mode-map
   (let ((map (make-sparse-keymap)))
     ;; Movement
@@ -253,13 +258,15 @@
     ;; Shell interaction
     (define-key map "\C-c\C-s" 'python-shell-send-string)
     (define-key map "\C-c\C-r" 'python-shell-send-region)
+    (define-key map "\C-c\C-l" 'python-shell-send-line)   ;oracleyue, added
     (define-key map "\C-\M-x" 'python-shell-send-defun)
     (define-key map "\C-c\C-c" 'python-shell-send-buffer)
-    (define-key map "\C-c\C-l" 'python-shell-send-file)
+    (define-key map "\C-c\C-f" 'python-shell-send-file)   ;oracleyue, modeified; C-c C-l
     (define-key map "\C-c\C-z" 'python-shell-switch-to-shell)
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
-    (define-key map "\C-c\C-f" 'python-eldoc-at-point)
+    (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
+    ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, commented
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
                                map global-map)
@@ -292,6 +299,10 @@
          :help "Eval buffer in inferior Python session"]
         ["Eval region" python-shell-send-region
          :help "Eval region in inferior Python session"]
+        ; oracleyue, added: BEGIN
+        ["Eval line" python-shell-send-line
+         :help "Eval current line or region in inferior Python session"]
+        ; oracleyue, added: END
         ["Eval defun" python-shell-send-defun
          :help "Eval defun in inferior Python session"]
         ["Eval file" python-shell-send-file
@@ -300,8 +311,10 @@
         "----"
         ["Check file" python-check
          :help "Check file for errors"]
-        ["Help on symbol" python-eldoc-at-point
-         :help "Get help on symbol at point"]
+;        ["Help on symbol" python-eldoc-at-point
+;         :help "Get help on symbol at point"]
+        ["Dash help on symbol" dash-at-point     ; oracleyue, added
+         :help "Get help on symbol at point by Dash"]   ; oracleyue, added
         ["Complete symbol" completion-at-point
          :help "Complete symbol before point"]))
     map)
@@ -1593,6 +1606,20 @@ Returns the output.  See `python-shell-send-string-no-output'."
   (interactive "r")
   (let ((deactivate-mark nil))
     (python-shell-send-string (buffer-substring start end) nil t)))
+
+;; oracleyue, added: -------BEGIN-------
+(defun python-shell-send-line (&optional beg end)
+  (interactive)
+  (let ((beg (cond (beg beg)
+                   ((region-active-p)
+                    (region-beginning))
+                   (t (line-beginning-position))))
+        (end (cond (end end)
+                   ((region-active-p)
+                    (copy-marker (region-end)))
+                   (t (line-end-position)))))
+    (python-shell-send-region beg end)))
+;; oracleyue, added: --------END--------
 
 (defun python-shell-send-buffer ()
   "Send the entire buffer to inferior Python process."
