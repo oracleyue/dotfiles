@@ -164,6 +164,8 @@ original" (interactive)
 ; delete seleted text when typing
 (delete-selection-mode 1)
 
+;; The following are disabled by oracleyue, since having been enabled globally
+
 ;; highlight current line
 ;;(global-hl-line-mode 1)
 ;;(set-face-background 'hl-line "seashell2") ;; Nice color
