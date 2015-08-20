@@ -12,7 +12,7 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 105 :width normal))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
  ;; (:family "DejaVu Sans Mono") ;(:height 130)
@@ -286,7 +286,7 @@
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 ;; using tuhdo's config
-;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
+;;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
 ; ------
 ;; Project Management
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
@@ -327,7 +327,7 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (load (concat y-init-path-prefix "emacs-init-cc"))
-;(load (concat y-init-path-prefix "emacs-init-cc-test"))
+;;(load (concat y-init-path-prefix "emacs-init-cc-test"))
 ;; Enable to fire "C-c C-c" to compile, when in cc-mode buffers
 ;; OR use projectile compile "C-c p c"
 (defun y:set-compile-command ()
