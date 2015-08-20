@@ -14,9 +14,9 @@
     ;(setq-default c-basic-offset 4)
     ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 ;; Package: /smartparens/
-(require 'smartparens-config)
-(show-smartparens-global-mode +1)
-(smartparens-global-mode 1)
+;; having enable globally in .emacs
+;; if not using /smartparens/ globally, uncomment the next line
+;(require 'smartparens)
 ;; when you press RET, the curly braces automatically add another newline
 (sp-with-modes '(c-mode c++-mode)
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))

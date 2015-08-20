@@ -11,12 +11,16 @@
 (setq-default TeX-PDF-mode t)    ; default for pdf and forward search
 (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
 (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
-; More pair-mode in LaTeX
-(add-hook 'LaTeX-mode-hook
-	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
-                      (cons "$" "$"))))
-(setq-default LaTeX-electric-left-right-brace t)
-; More math-mode in LaTeX
+
+;; More pair-mode in LaTeX
+;(add-hook 'LaTeX-mode-hook
+;	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
+;                      (cons "$" "$"))))
+;(setq-default LaTeX-electric-left-right-brace t)
+;; To use /smartparens/ to complete pairs; having enable globally in /.emacs/
+(setq-default LaTeX-electric-left-right-brace nil)
+
+;; More math-mode in LaTeX
 (setq LaTeX-math-list
       '(("<"   "preceq" "Relational" 10927)
         (">"   "succeq" "Relational" 10928)

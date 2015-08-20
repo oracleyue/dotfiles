@@ -227,16 +227,21 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Insert Parenthesis/Brackets by /Pair/
-(electric-pair-mode 1)
-;; make electric-pair-mode work on more brackets
-(defvar y-electric-pair-pairs '(
-                                (?\" . ?\")
-                                (?\{ . ?\})
-                                        ; (?\< . ?\>)
-                                        ; (?\' . ?\')
-                                        ; (?\$ . ?\$)
-                                ))
-(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+;(electric-pair-mode 1)
+;;; make electric-pair-mode work on more brackets
+;(defvar y-electric-pair-pairs '(
+;                                (?\" . ?\")
+;                                (?\{ . ?\})
+;                                        ; (?\< . ?\>)
+;                                        ; (?\' . ?\')
+;                                        ; (?\$ . ?\$)
+;                                ))
+;(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+;; Replaced advanced pkg: /smartparens/
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
+(smartparens-global-mode 1)
+
 
 ; =======================================
 ;;; Enable /linum/ in nlinum lib
