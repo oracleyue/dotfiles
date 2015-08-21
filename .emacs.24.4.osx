@@ -175,7 +175,7 @@
 
 ; =======================================
 ;; For support of /tags.../
-(load (concat y-init-path-prefix "emacs-init-tags"))
+;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
 
 ; =======================================
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)

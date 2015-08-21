@@ -1,5 +1,5 @@
 ;; ========================================
-;; Settings for tags support
+;; Settings for tags support in C/C++ programming
 
 ;; Package: /ggtags/
 ;(require 'ggtags)
@@ -22,11 +22,12 @@
  )
 (require 'helm-gtags)
 ;; Enable helm-gtags-mode
-(add-hook 'dired-mode-hook 'helm-gtags-mode)
-(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+;(add-hook 'dired-mode-hook 'helm-gtags-mode)
+;(add-hook 'eshell-mode-hook 'helm-gtags-mode)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook 'helm-gtags-mode)
+;(add-hook 'asm-mode-hook 'helm-gtags-mode)
 ;; Keybindings
 (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
@@ -48,6 +49,8 @@
 ;; - a REFERENCE of a tag is where a tag is used in a source tree, but not where it is defined
 ;; ---------------------------
 ;; + CEDET semantic symref (symbol references)
+;; - configuration: in "emacs-init-helm" with /semantic/ 
+;; - mostly only valid for small/medium project; use /helm-gtags/ for big/huge ones
 ;;   =semantic-symref-symbol sym=   "C-,-g"
 ;;   =semantic-symref=              "C-,-G"
 ;;   IN the buffer:

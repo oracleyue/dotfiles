@@ -91,6 +91,8 @@
        (semantic-add-system-include "/usr/local/include/c" 'c-mode)
        ;(add-hook 'c++-mode-hook
        ;          (add-hook 'semantic-init-hooks 'semantic-reset-system-include))
+       ;; setting GNU /global/ for /semantic-symref/
+       (setq semantic-symref-tool 'global)
        ))
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m

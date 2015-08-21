@@ -36,7 +36,7 @@
 (add-hook 'c-mode-hook 'y:flymake-google-init)
 (add-hook 'c++-mode-hook 'y:flymake-google-init)
 
-;; /xcscope/: source cross-referencing tool [install cscope]
+;; /xcscope/: source cross-referencing tool [need to install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
 ;(require 'xcscope)
 ;(cscope-setup)
@@ -199,6 +199,8 @@
           (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
 ;; ------------------------END----------------------------
 
+;; Package: /GNU global/ + /helm-gtags/ to support tags
+(load (concat y-init-path-prefix "emacs-init-cc-tags"))
 
 ;; Package: /function-args/
 ;; - keybinding: fa-show =M-i=; moo-complete =M-o=

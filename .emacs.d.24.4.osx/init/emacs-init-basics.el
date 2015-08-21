@@ -132,8 +132,8 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (uncomment-region beg end)))
-(global-set-key (kbd "C-c C-=") 'y:comment-line-or-region)
-(global-set-key (kbd "C-c C-+") 'y:uncomment-line-or-region)
+(global-set-key (kbd "C-\\") 'y:comment-line-or-region)    ; "C-c C-="
+(global-set-key (kbd "C-|") 'y:uncomment-line-or-region)  ; "C-c C-+"
 
 
 ;; Using default theme

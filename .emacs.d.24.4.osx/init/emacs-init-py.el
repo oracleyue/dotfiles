@@ -23,15 +23,19 @@
 ; disabling *ropemacs*
 (setq epy-enable-ropemacs nil)
 
-; Auto-completion by /Jedi/
+;;
+;; Auto-completion by /Jedi/
+;;
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)     ; optional
 ;;set wait time before showing funciton call signature tooltip in ms
 (setq jedi:get-in-function-call-delay 200)
-;; use jedi to show python doc of the object at point
+;; use jedi to show python doc of the object at point; =jedi:show-doc=
 ;; - keybinding: "C-c ?"
-;; use jedi to jump to the definition of the obj at point
+;; use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
 ;; - keybinding: "C-c ."
+;; go to the last point where =jedi:got-definition= was called
+;; - keybinding: "C-c ,"
 ;; reset jediepcserver backend for osx machines
 (cond
  ((string-equal system-type "darwin")
