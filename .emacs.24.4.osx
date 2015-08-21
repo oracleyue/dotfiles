@@ -19,14 +19,20 @@
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 
+;;
 ;; version settings
+;;
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;; global variables for configuration useage
+;;
+;; global variables for configuration loading
+;;
 (setq y-init-path-prefix "~/.emacs.d/init/")
 
+;;
 ;;; ---------- Settings of Emacs Package System -------------
+;;
 ;; For Package Management by ELPA
 (when (>= emacs-major-version 24)
     (require 'package)
@@ -39,15 +45,15 @@
     )
 ;;; ---------------------------------------------------------
 
-
-
+;;
 ;; Load basic configurations for Emacs
+;;
 (load (concat y-init-path-prefix "emacs-init-basics"))
 
-
-
+;;
 ;; -------------------- Settings of Modes -----------------------
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Fixing for /Dired/ in osx
 (cond 
  ((string-equal system-type "darwin")
@@ -64,7 +70,7 @@
           (lambda ()
             (dired-omit-mode 1)))
 
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
 (show-paren-mode t)
 ;; (setq show-paren-style 'expression)
@@ -145,13 +151,13 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
 (golden-ratio-mode t)
 (setq golden-ratio-auto-scale t) 
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /Helm/ and plus
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
@@ -160,9 +166,9 @@
 
 
 
-;; ------------------------------------------------------------
+;;
 ;;; Configurations for Programming Environment
-;; ------------------------------------------------------------
+;;
 ; =======================================
 ;; Project Management by /projectile/ and helm addons
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
@@ -187,7 +193,6 @@
       (sh-mode . "bash")
       ))))
 
-
 ; =======================================
 ;; Programming Environment for /Lisp, Elisp, Lisp Interaction/
 ; To make "C-x C-e" pretty-print; output is shown in minibuffer
@@ -196,9 +201,9 @@
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 ; Use "C-j" in *scratch*; output is in the buffer under the sexp
 
-
 ; =======================================
 ;; Programming Environment for /HTML, js/
+;; candidates: js2-mode, web-mode, emmet-mode
 
 ; =======================================
 ;; Programming Environment for /C C++/
@@ -236,7 +241,6 @@
 (global-set-key (kbd "<f9>") 'gud-cont)
 (global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
 
-
 ; =======================================
 ;; Editing Mode for /Markdown/
 (autoload 'markdown-mode "markdown-mode"
@@ -265,20 +269,22 @@
           ))
 ;; (global-set-key (kbd "C-c C-S-o") 'livedown:preview)
 
-
 ; =======================================
 ;; For /AUCTeX-Mode/
 (load (concat y-init-path-prefix "emacs-init-auctex"))
 
-; --------------------------------
+;;
+;; -------------------- Settings of Modes (cont.) -----------------------
+;;
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Evil-mode/
 (load (concat y-init-path-prefix "emacs-init-evil"))
 
-; --------------------------------
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Icomplete Mode/
 ; in "emacs-init-archived.el"
 
-; --------------------------------
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /neotree/
 (require 'neotree)
 (global-set-key [f6] 'neotree-toggle)
@@ -290,12 +296,10 @@
 ;; Settings for /Org-mode/
 (load (concat y-init-path-prefix "emacs-init-orgmode"))
 
-
-
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; For /ECB/
 ;; [SOURCE]: https://github.com/emacsmirror/ecb
-
+;;
 ;(add-to-list 'load-path "~/.emacs.d/git/ecb")
 ;(require 'ecb)
 ;(require 'ecb-autoloads)
