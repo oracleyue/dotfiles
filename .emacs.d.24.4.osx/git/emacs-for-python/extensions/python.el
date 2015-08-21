@@ -230,6 +230,7 @@
 ; oracleyue, added: BEGIN
 (add-to-list 'load-path "~/.emacs.d/git")
 (require 'dash-at-point)
+(require 'jedi-core)
 ; oracleyue, added: END
 
 (defvar python-mode-map
@@ -266,6 +267,7 @@
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
     (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
+    (define-key map "\C-c?" 'jedi:show-doc)
     ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, commented
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
@@ -313,6 +315,8 @@
          :help "Check file for errors"]
 ;        ["Help on symbol" python-eldoc-at-point
 ;         :help "Get help on symbol at point"]
+        ["Help on symbol" jedi:show-doc    ; oracleyue, added
+         :help "Get help on symbol at point"]    ; oracleyue, added
         ["Dash help on symbol" dash-at-point     ; oracleyue, added
          :help "Get help on symbol at point by Dash"]   ; oracleyue, added
         ["Complete symbol" completion-at-point

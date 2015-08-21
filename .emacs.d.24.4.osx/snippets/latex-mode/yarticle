@@ -16,10 +16,9 @@
 
 \usepackage[utf8]{inputenc}
 % \usepackage[T1]{fontenc}
-\usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
-    % \usepackage{mathptmx}  % using mathptmx for math font, instead of mathpt by default
-    % \usepackage{newtxtext} % a new alternative for times text and math font
-    % \usepackage{newtxmath}
+% \usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
+\usepackage{newtxmath}  % using new Times pkg
+\usepackage{newtxtext}
 \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
 \usepackage[scaled=0.8]{DejaVuSansMono}
 % \renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
@@ -33,6 +32,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{amsbsy}   % to use faked bold math Greek letter: \pmb{\beta}; or use \boldsymbol{}
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}
@@ -51,7 +51,7 @@
 % \usepackage[usenames]{color}
 \usepackage[usenames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
-    \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+    \mdfdefinestyle{yue}{backgroundcolor=gray!10}  % to use \begin{mdframed}[style=yue]
 \usepackage{minted}
   % \definecolor{bg}{RGB}{39,40,34}
   % \usemintedstyle{monokai}
