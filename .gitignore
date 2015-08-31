@@ -16,5 +16,6 @@
 .emacs.d.24.4.osx/recentf
 **/*.elc
 .*~
+*~
 
 **/.DS_Store
