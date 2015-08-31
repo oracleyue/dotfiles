@@ -12,13 +12,21 @@
 (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
 (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
 
-;; More pair-mode in LaTeX
+;;;; More pair-mode in LaTeX
+;;; Use /AucTeX/ default pairs
 ;(add-hook 'LaTeX-mode-hook
 ;	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
 ;                      (cons "$" "$"))))
 ;(setq-default LaTeX-electric-left-right-brace t)
-;; To use /smartparens/ to complete pairs; having enable globally in /.emacs/
+;;; Use /smartparens/ to complete pairs; having enable globally in /.emacs/
+;; disable AucTeX pair completion
 (setq-default LaTeX-electric-left-right-brace nil)
+;; user-defined pairs
+(sp-with-modes 'latex-mode
+  (sp-local-pair "\\|" "\\|"
+                 :trigger "\\|"
+                 :when '(sp-in-math-p)
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair)))
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list

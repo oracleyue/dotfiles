@@ -2,7 +2,7 @@
  '(column-number-mode t)
  '(fill-column 80)
  '(inhibit-startup-screen t)
- '(linum-format " %3i ")
+; '(linum-format " %3i ")
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
