@@ -12,10 +12,12 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal))))
+ ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
+ '(default ((t (:font "DejaVu Sans Mono-13"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
- ;; (:family "DejaVu Sans Mono") ;or use (:height 125)
+ '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
+ '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
+ ;; Note that set the font-size different from 'default will cause troubles on auto-completion when enabling linum-mode.
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 

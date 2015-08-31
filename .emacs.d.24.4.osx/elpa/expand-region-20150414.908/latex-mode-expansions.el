@@ -46,7 +46,8 @@ Skips past [] and {} arguments to the environment."
   (when (looking-at "\\\\begin{")
     (forward-sexp 2)
     ;; Assume these are arguments
-    (while (looking-at "[ \t\n]*[{[]")
+    ;; (while (looking-at "[ \t\n]*[{[]") ;default
+    (while (looking-at "[ \t\n]*[[]")  ;oracleyue, modified, to enable {}.
       (forward-sexp 1))
     ;; Go to next line if there is nothing interesting on this one
     (skip-syntax-forward " ") ;; newlines are ">" i.e. end comment

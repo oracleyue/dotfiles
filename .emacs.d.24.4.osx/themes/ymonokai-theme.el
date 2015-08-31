@@ -143,7 +143,7 @@ Takes and optional `FRAME' as reference."
          ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
          (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
          (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
-         ;; (ymonokai-hl-line-y   (if (in-terminal) "#212121" "#595959"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
+         (ymonokai-hl-line-y   (if (in-terminal) "#212121" "#585858"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
          (ymonokai-hl       (if (in-terminal) "#303030" "#49483E"))
          (ymonokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
          (ymonokai-comments (if (in-terminal) "#8B8878" "#75715E"))
@@ -179,8 +179,8 @@ Takes and optional `FRAME' as reference."
          (s-mode-line-fg (if ymonokai-high-contrast-mode-line
                              ymonokai-bg ymonokai-fg))
          (s-mode-line-bg (if ymonokai-high-contrast-mode-line
-                             ymonokai-fg ymonokai-hl-line))  
-                             ;; ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
+                             ;ymonokai-fg ymonokai-hl-line))  
+                             ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
          (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
                                        'unspecified green))
          (s-mode-line-inactive-fg (if ymonokai-high-contrast-mode-line
@@ -515,7 +515,7 @@ Takes and optional `FRAME' as reference."
                                 :background ,s-mode-line-bg
                                 :box (:line-width 1
                                                   :color ,s-mode-line-bg
-                                                  ;; :style unspecified)))))
+                                                  ;:style unspecified)))))
                                                   :style released-button))))) ;oracleyue, added.
      `(mode-line-buffer-id
        ((,class (:foreground ,s-mode-line-buffer-id-fg
@@ -603,7 +603,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,blue
                              ;:bold t          ; oracleyue: no this entry
                              :italic t))))
-
+     
      `(font-lock-variable-name-face
        ((,class (:foreground ,orange  
                              :italic nil))))    ; oracleyue: no this entry

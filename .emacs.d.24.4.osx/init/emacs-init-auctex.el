@@ -22,11 +22,26 @@
 ;; disable AucTeX pair completion
 (setq-default LaTeX-electric-left-right-brace nil)
 ;; user-defined pairs
+(defun sp-latex-point-after-backslash-left (id action context)
+  "Return t if point follows a backslash, nil otherwise."
+  (when (eq action 'insert)
+    (let ((trigger (sp-get-pair id :trigger)))
+      (looking-back (concat "\\\\l" (regexp-quote (if trigger trigger id)))))))
 (sp-with-modes 'latex-mode
   (sp-local-pair "\\|" "\\|"
                  :trigger "\\|"
+                 :unless '(sp-latex-point-after-backslash-left)
                  :when '(sp-in-math-p)
-                 :post-handlers '(sp-latex-insert-spaces-inside-pair)))
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+  (sp-local-pair "\\left|" "\\right|"
+                 :trigger "\\l|"
+                 :when '(sp-in-math-p)
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+  (sp-local-pair "\\left\\|" "\\right\\|"
+                 :trigger "\\l\\|"
+                 :when '(sp-in-math-p)
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+  )
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list
