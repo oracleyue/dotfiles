@@ -204,7 +204,7 @@
 (load (concat y-init-path-prefix "emacs-init-cc-tags"))
 
 ;; Package: /function-args/
-;; - keybinding: fa-show =M-S-i=; moo-complete =M-S-o=
+;; - keybinding: fa-show =C-c M-i=; moo-complete =C-c M-o=
 (cond ((string-equal y-enable-function-args-flag "yes")
        (require 'function-args)
        ;; enable case-insensitive searching
@@ -217,9 +217,13 @@
        ;; put c++-mode as default for .h files
        ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
        ;; keybindings
-       ;; the source file of /function-args/ has been modified so as to keep the original:
+       ;; the source file of /function-args/ has been modified (disable keybindings of "M-o" and "M-i"), so as to keep the original:
        ;; "M-o" :: =open-previous-line=
        ;; "M-i" :: =tab-to=tab-stop=
+       (define-key c-mode-map   (kbd "C-c M-o")  'moo-complete)
+       (define-key c++-mode-map (kbd "C-c M-o")  'moo-complete)
+       (define-key c-mode-map   (kbd "C-c M-i")  'fa-show)
+       (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
        ))
 
 ;; Package: /CEDET (part)/
