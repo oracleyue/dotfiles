@@ -193,8 +193,8 @@
   (fa-update-arg))
 
 (let ((map function-args-mode-map))
-  (define-key map (kbd "M-o") 'moo-complete)
-  (define-key map (kbd "M-i") 'fa-show)
+  (define-key map (kbd "M-S-o") 'moo-complete)  ;oracleyue, default "M-o"
+  (define-key map (kbd "M-S-i") 'fa-show)  ;oracleyue, default "M-i"
   (define-key map (kbd "M-n") 'fa-idx-cycle-down)
   (define-key map (kbd "M-h") 'fa-idx-cycle-up)
   (define-key map (kbd "M-u") 'fa-abort)
