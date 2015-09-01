@@ -2,7 +2,7 @@
  '(column-number-mode t)
  '(fill-column 80)
  '(inhibit-startup-screen t)
- '(linum-format " %3i ")
+ '(linum-format " %d ")   ;; not necessary; can be commented; original " %3i "
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
@@ -12,137 +12,29 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 105 :width normal))))
+ ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
+ '(default ((t (:font "DejaVu Sans Mono-10.5"))))
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- ;; setting the font-size different from 'default will cause troubles on linum-mode in doygen comments in c/c++ and elisp auto-completion.
- ;; (:family "DejaVu Sans Mono") ;(:height 130)
+ '(mode-line ((t (:font "DejaVu Sans Mono-10"))))
+ '(mode-line-inactive ((t (:font "DejaVu Sans Mono-10"))))
+ ;; Note that set the font-size different from 'default will cause troubles on auto-completion when enabling linum-mode.
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 
+;;
 ;; version settings
+;;
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;; global variables for configuration useage
+;;
+;; global variables for configuration loading
+;;
 (setq y-init-path-prefix "~/.emacs.d/init/")
 
-;;; fundemental configrations
-;; increase memeory for emacs to avoid garbage collections slow it down
-(setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
-
-;;; use variable-width font types in text-mode
-;; (defun y-variable-width-text-mode ()
-;;   (interactive)
-;;   (variable-pitch-mode t)
-;;   (text-scale-increase 0.5)
-;;   )
-;(add-hook 'text-mode-hook 'y-variable-width-text-mode)
-
-;; set cursor type; default "box"
-;(setq-default cursor-type 'bar) 
-
-;; font size adjustment
-;; C-x C-0 : return to default size
-;;; use C-x C-0 first, then use +/- to tune the size.
-(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
-(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
-
-
-;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
-(cond 
- ((string-equal system-type "darwin")
-  ;(setq mac-command-modifier 'control)  ; use Command key also as Control
-  ;(setq mac-option-modifier 'meta)
-  )
-)
-;; fix $PATH for emacs in Mac OS X
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell 
-      (replace-regexp-in-string "[[:space:]\n]*$" "" 
-        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
-
-;; Settings for graphic or terminal modes
-(if (display-graphic-p)
-    (menu-bar-mode 1))
-(if (not (display-graphic-p))
-    (menu-bar-mode -1))
-
-;; setting size of frames
-;(when window-system (set-frame-size (selected-frame) 94 34))
-(when window-system (set-frame-size (selected-frame) 100 36))
-;; Setting font set for Chinese
-(if(display-graphic-p)
- (dolist (charset '(kana han symbol cjk-misc bopomofo))
-   (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                     (font-spec :family "WenQuanYi Micro Hei" :size 12)))
-)
-;; Various one line commands/config, like "TAB"
-(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
-(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
-
-(setq backup-inhibited t)  ;; disable backup file creation
-
-(fset 'yes-or-no-p 'y-or-n-p) ; answer with y/n instead of yes/no
-
-;;; Disable all version control. makes startup and opening files much faster
-;(setq vc-handled-backends nil)
-
-;;; Setting the url brower for emacs
-;; (setq browse-url-browser-function 'browse-url-firefox
-;;       browse-url-new-window-flag  t
-;;       browse-url-firefox-new-window-is-tab t)
-
-;; Set default major mode to text-mode
-(setq-default major-mode 'text-mode)
-
-;;; Spell Checking for some modes
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;; (setq ispell-dictionary "british")
-(setq ispell-dictionary "american")
-(add-hook 'LaTeX-mode-hook 'ispell)
-
-
-;; oracleyue's inital path setting
-;(cd "~/Public/Dropbox/oracleyue/OrgNote")
-;(cd "~/Public/Dropbox/Academia/matlab")
-(cd "~/Public/Dropbox/Academia/Manuscripts/DSF")
-;(cd "~/Workspace/matlab")
-    ;; For Ubuntu@LCSB 
-    ;(setq default-directory "~/Workspace/matlab/Feng_prj_HPC")
-
-;; oracleyue's env. variables and alias
-;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
-    ; For Ubuntu@LCSB
-    ; (setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk-amd64/jre")
-(setenv "orgnote" "~/Public/Dropbox/oracleyue/OrgNote")
-(setenv "gitdoc" "~/Public/Dropbox/Academia/Manuscripts")
-(setenv "github" "~/Worksapce/github.com")
-(setenv "gitrepo" "~/Worksapce/gitrepo")
-
-;;; oracleyue's env. variables to control shell
-;; ;; Shell mode
-;; (setq ansi-color-names-vector ; better contrast colors
-;;       ["black" "red4" "green4" "yellow4"
-;;        "blue3" "magenta4" "cyan4" "white"])
-;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-
-;; oracleyue's line wrapping settings
-;(define-key global-map [f4] 'toggle-truncate-lines)
-(add-hook 'text-mode-hook 'visual-line-mode)
-
-;; oracleyue's key bindings
-(global-set-key (kbd "C-c C-=") 'comment-region)
-(global-set-key (kbd "C-c C-+") 'uncomment-region)
-;; (global-set-key "\C-xh" 'help-command)
-
+;;
 ;;; ---------- Settings of Emacs Package System -------------
+;;
 ;; For Package Management by ELPA
 (when (>= emacs-major-version 24)
     (require 'package)
@@ -152,33 +44,18 @@
     ;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
     (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-)
+    )
+;;; ---------------------------------------------------------
 
-;; Using default theme
-   ;(load-theme 'deeper-blue t)
-   ;(load-theme 'adwaita t)       ;grey
-;; Using oracleyue's theme
-   (add-to-list 'load-path "~/.emacs.d/themes")
-   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-   (load-theme 'ymonokai t)
-   ;(load-theme 'yadwaita t)
-   ;(load-theme 'monokai t)
-;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
-;   (fringe-mode '(0 . nil))
+;;
+;; Load basic configurations for Emacs
+;;
+(load (concat y-init-path-prefix "emacs-init-basics"))
 
-;; Configure /hl-line-mode/ for /monokai/, only enabled when python-mode starts
-;; To hightlight the single row where the cursor is.
-(cond 
- ((string-equal 'custom-enabled-themes "ymonokai")
-  ;(global-hl-line-mode t)
-  (set-face-background 'hl-line "gray27") 
-  (set-face-attribute hl-line-face nil :underline nil)))
-
-
-; ----------------------------------------------------------------
+;;
 ;; -------------------- Settings of Modes -----------------------
-
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Fixing for /Dired/ in osx
 (cond 
  ((string-equal system-type "darwin")
@@ -195,7 +72,7 @@
           (lambda ()
             (dired-omit-mode 1)))
 
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
 (show-paren-mode t)
 ;; (setq show-paren-style 'expression)
@@ -208,10 +85,6 @@
   (add-hook 'c-mode-common-hook 'hl-sexp-mode)
   (add-hook 'sh-mode-hook 'hl-sexp-mode)
 
-
-;; ------------------------------------------------------------
-;;; Configurations for Programming Environment
-;; ------------------------------------------------------------
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Minior modes (yas, auto-complete, popup) for completion
@@ -227,18 +100,23 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Insert Parenthesis/Brackets by /Pair/
-(electric-pair-mode 1)
-;; make electric-pair-mode work on more brackets
-(defvar y-electric-pair-pairs '(
-                                (?\" . ?\")
-                                (?\{ . ?\})
-                                        ; (?\< . ?\>)
-                                        ; (?\' . ?\')
-                                        ; (?\$ . ?\$)
-                                ))
-(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+;(electric-pair-mode 1)
+;;; make electric-pair-mode work on more brackets
+;(defvar y-electric-pair-pairs '(
+;                                (?\" . ?\")
+;                                (?\{ . ?\})
+;                                        ; (?\< . ?\>)
+;                                        ; (?\' . ?\')
+;                                        ; (?\$ . ?\$)
+;                                ))
+;(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
+;; Replaced advanced pkg: /smartparens/
+(require 'smartparens-config)
+(show-smartparens-global-mode +1)
+(smartparens-global-mode 1)
 
-; =======================================
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;; Enable /linum/ in nlinum lib
 ;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
 ;;; (global-linum-mode 1)
@@ -250,12 +128,12 @@
 (add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
 (add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
  
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
    (bash-completion-setup)
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /multiple-cursors/: edit with multiple cursors
 (require 'multiple-cursors)
 ;; mark many occurrences in region
@@ -275,25 +153,31 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
 (golden-ratio-mode t)
 (setq golden-ratio-auto-scale t) 
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /Helm/ and plus
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 ;; using tuhdo's config
-;;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
-; ------
-;; Project Management
+;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
+
+
+
+;;
+;;; Configurations for Programming Environment
+;;
+; =======================================
+;; Project Management by /projectile/ and helm addons
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
 
 ; =======================================
 ;; For support of /tags.../
-(load (concat y-init-path-prefix "emacs-init-tags"))
+;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
 
 ; =======================================
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
@@ -311,7 +195,6 @@
       (sh-mode . "bash")
       ))))
 
-
 ; =======================================
 ;; Programming Environment for /Lisp, Elisp, Lisp Interaction/
 ; To make "C-x C-e" pretty-print; output is shown in minibuffer
@@ -319,15 +202,23 @@
 ; To make "M-:" pretty-print; both input and output are in minibuffer
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 ; Use "C-j" in *scratch*; output is in the buffer under the sexp
-
+;; use /ParEdit/ mode
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ; =======================================
 ;; Programming Environment for /HTML, js/
+;; candidates: js2-mode, web-mode, emmet-mode
 
 ; =======================================
 ;; Programming Environment for /C C++/
 (load (concat y-init-path-prefix "emacs-init-cc"))
-;;(load (concat y-init-path-prefix "emacs-init-cc-test"))
+;(load (concat y-init-path-prefix "emacs-init-cc-test"))
 ;; Enable to fire "C-c C-c" to compile, when in cc-mode buffers
 ;; OR use projectile compile "C-c p c"
 (defun y:set-compile-command ()
@@ -360,7 +251,6 @@
 (global-set-key (kbd "<f9>") 'gud-cont)
 (global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
 
-
 ; =======================================
 ;; Editing Mode for /Markdown/
 (autoload 'markdown-mode "markdown-mode"
@@ -389,20 +279,22 @@
           ))
 ;; (global-set-key (kbd "C-c C-S-o") 'livedown:preview)
 
-
-; --------------------------------
+; =======================================
 ;; For /AUCTeX-Mode/
 (load (concat y-init-path-prefix "emacs-init-auctex"))
 
-; --------------------------------
-;; Settings for /evil-mode/
+;;
+;; -------------------- Settings of Modes (cont.) -----------------------
+;;
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; Settings for /Evil-mode/
 (load (concat y-init-path-prefix "emacs-init-evil"))
 
-; --------------------------------
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Icomplete Mode/
 ; in "emacs-init-archived.el"
 
-; --------------------------------
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /neotree/
 (require 'neotree)
 (global-set-key [f6] 'neotree-toggle)
@@ -414,12 +306,10 @@
 ;; Settings for /Org-mode/
 (load (concat y-init-path-prefix "emacs-init-orgmode"))
 
-
-
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; For /ECB/
 ;; [SOURCE]: https://github.com/emacsmirror/ecb
-
+;;
 ;(add-to-list 'load-path "~/.emacs.d/git/ecb")
 ;(require 'ecb)
 ;(require 'ecb-autoloads)
