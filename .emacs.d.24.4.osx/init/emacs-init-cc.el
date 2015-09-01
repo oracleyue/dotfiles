@@ -30,9 +30,10 @@
 (defun y:flymake-google-init () 
   (require 'flymake-google-cpplint)
   (custom-set-variables
-   '(flymake-google-cpplint-command "/usr/local/bin/cpplint"))
-  (flymake-google-cpplint-load)
-)
+   '(flymake-google-cpplint-command
+     (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
+       "/usr/bin/cpplint")))
+  (flymake-google-cpplint-load))
 (add-hook 'c-mode-hook 'y:flymake-google-init)
 (add-hook 'c++-mode-hook 'y:flymake-google-init)
 
