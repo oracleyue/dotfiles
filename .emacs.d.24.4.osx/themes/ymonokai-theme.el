@@ -3665,6 +3665,9 @@ Takes and optional `FRAME' as reference."
      `(ansi-color-names-vector [,ymonokai-bg ,red ,green ,yellow
                                             ,blue ,magenta ,cyan ,ymonokai-fg])
 
+     ;; oracleyue: added
+     ;`(linum-format " %d ")
+
      ;; compilation
      `(compilation-message-face 'default)
 

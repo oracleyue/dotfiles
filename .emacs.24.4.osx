@@ -2,7 +2,7 @@
  '(column-number-mode t)
  '(fill-column 80)
  '(inhibit-startup-screen t)
- '(linum-format " %d ")   ;; not necessary; can be commented; original " %3i "
+ '(linum-format " %d ")   ;; having added in the theme file; original " %3i "
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
@@ -14,10 +14,11 @@
 (custom-set-faces
  ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
  '(default ((t (:font "DejaVu Sans Mono-13"))))
+ ;; Note that set the font-size of fixed-pitch different from 'default will cause troubles on auto-completion when enabling linum-mode.
  '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
- '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
- ;; Note that set the font-size different from 'default will cause troubles on auto-completion when enabling linum-mode.
+ ;; mode-line with smaller font size
+; '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
+; '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  )
 
