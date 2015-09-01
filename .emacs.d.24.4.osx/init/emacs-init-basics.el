@@ -22,7 +22,7 @@
 ;;      - to place cursors in front of each lines:
 ;;        select multiple lines, then hit "C-S-l C-S-l" to place cursors
 ;;        OR
-;;        select nothing and hit "C->"
+;;        select nothing and hit "C->", then edit
 ;;      - use "C-S-SPC" to mark rectangular region (replace default "C-x r ..." operation)
 ;; ----------------------------------------------------------------------
 
@@ -243,16 +243,16 @@
 
 
 ;; Using default theme
-   ;(load-theme 'deeper-blue t)
-   ;(load-theme 'adwaita t)       ;grey
+;(load-theme 'deeper-blue t)
+;(load-theme 'adwaita t)       ;grey
 ;; Using oracleyue's theme
-   (add-to-list 'load-path "~/.emacs.d/themes")
-   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-   (load-theme 'ymonokai t)
-   ;(load-theme 'yadwaita t)
-   ;(load-theme 'monokai t)
+(add-to-list 'load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'ymonokai t)
+;(load-theme 'yadwaita t)
+;(load-theme 'monokai t)
 ;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
-;   (fringe-mode '(0 . nil))
+;(fringe-mode '(0 . nil))
 
 ;; Configure /hl-line-mode/ for /monokai/, only enabled when python-mode starts
 ;; To hightlight the single row where the cursor is.
