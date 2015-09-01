@@ -216,6 +216,16 @@
        (add-hook 'c++-mode-hook 'fa-config-default)
        ;; put c++-mode as default for .h files
        ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+       ;; keybindings
+       (define-key c-mode-map  (kbd "M-S-o") 'moo-complete)
+       (define-key c++-mode-map  (kbd "M-S-o") 'moo-complete)
+       (define-key c-mode-map  (kbd "M-S-i")  'fa-show)
+       (define-key c++-mode-map  (kbd "M-S-i")  'fa-show)
+       ;; recover keybindings that destoried by function-args
+       (define-key c-mode-map  (kbd "M-o") 'open-previous-line)
+       (define-key c++-mode-map  (kbd "M-o") 'open-previous-line)
+       (define-key c-mode-map  (kbd "M-i")  'tab-to-tab-stop)
+       (define-key c++-mode-map  (kbd "M-i")  'tab-to-tab-stop)
        ))
 
 ;; Package: /CEDET (part)/
