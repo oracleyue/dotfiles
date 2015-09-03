@@ -14,6 +14,9 @@
 .emacs.d.24.4.osx/projectile-bookmarks.eld
 .emacs.d.24.4.osx/projectile.cache
 .emacs.d.24.4.osx/recentf
+
+**/*.elc
+
 .*~
 *~
 *#

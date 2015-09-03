@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: full header
-# key: fhead
+# name: shell script header
+# key: head
 # group: templates
 # --
-#!/usr/bin/python2 -tt
+#!/bin/bash
 # -*- coding: utf-8 -*-
 # Copyright (c) ${1:2014-2017}, Zuogong YUE
 # Author: Zuogong YUE <oracleyue@gmail.com>
@@ -11,23 +11,6 @@
 # Licensed under the GNU General Public License
 # Released at ${2:01 Jan 2015}
 
-"""Description:
-$3
-"""
 
-
-
-# +++headers here+++
-$0
-
-
-
-# +++code here+++
-
-
-
-
-
-
-
-# +++__main__ body+++
+# Description:
+# $0

@@ -150,8 +150,9 @@
     (menu-bar-mode -1))
 
 ;; setting size of frames
-;(when window-system (set-frame-size (selected-frame) 94 34))
-(when window-system (set-frame-size (selected-frame) 100 36))
+;(when window-system (set-frame-size (selected-frame) 100 36))
+(add-to-list 'default-frame-alist '(height . 36))
+(add-to-list 'default-frame-alist '(width . 100))
 ;; Setting font set for Chinese
 (if(display-graphic-p)
  (dolist (charset '(kana han symbol cjk-misc bopomofo))
