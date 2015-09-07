@@ -95,9 +95,9 @@
    '(add-to-list 'TeX-command-list
                  '("backup tex files" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/texbackup.sh" TeX-run-command nil t) t))
 
-(eval-after-load "tex"
-   '(add-to-list 'TeX-command-list
-                 '("Git regular push" "git add --all && git ci -m \"regular update\" && git push" TeX-run-command nil t) t))
+;; (eval-after-load "tex"
+;;    '(add-to-list 'TeX-command-list
+;;                  '("Git regular push" "git add --all && git ci -m \"regular update\" && git push" TeX-run-command nil t) t))
 
 
 (cond 

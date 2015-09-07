@@ -34,7 +34,7 @@
 (setq y-init-path-prefix "~/.emacs.d/init/")
 
 ;;
-;;; ---------- Settings of Emacs Package System -------------
+;; ---------- Settings of Emacs Package System -------------
 ;;
 ;; For Package Management by ELPA
 (when (>= emacs-major-version 24)
@@ -100,9 +100,9 @@
 ; (add-hook 'python-mode-hook 'fci-mode)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Insert Parenthesis/Brackets by /Pair/
+;;; Insert Parenthesis/Brackets by /Pair/
 ;(electric-pair-mode 1)
-;;; make electric-pair-mode work on more brackets
+;; make electric-pair-mode work on more brackets
 ;(defvar y-electric-pair-pairs '(
 ;                                (?\" . ?\")
 ;                                (?\{ . ?\})
@@ -111,7 +111,9 @@
 ;                                        ; (?\$ . ?\$)
 ;                                ))
 ;(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
-;; Replaced advanced pkg: /smartparens/
+;;
+;;replaced advanced pkg: /smartparens/
+;;
 (require 'smartparens-config)
 (show-smartparens-global-mode +1)
 (smartparens-global-mode 1)
@@ -170,8 +172,12 @@
 
 
 ;;
-;;; Configurations for Programming Environment
+;; Configurations for Programming Environment
 ;;
+; =======================================
+;; /Magit/ for version control
+(global-set-key (kbd "C-c g") 'magit-status)
+
 ; =======================================
 ;; Project Management by /projectile/ and helm addons
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
@@ -268,7 +274,7 @@
 (setq livedown:port 1337)     ; port for livedown server
 ; use livedown to preview markdown
 (add-hook 'markdown-mode-hook (lambda()
-          (define-key markdown-mode-map (kbd "C-c C-c o") 'livedown:preview)
+          (define-key markdown-mode-map (kbd "C-c C-c") 'livedown:preview)
           ))
 ;; (global-set-key (kbd "C-c C-S-o") 'livedown:preview)
 
