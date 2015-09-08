@@ -24,7 +24,59 @@
 ;;        OR
 ;;        select nothing and hit "C->", then edit
 ;;      - use "C-S-SPC" to mark rectangular region (replace default "C-x r ..." operation)
+;; indent region in python-mode
+;;      - python-indent-shift-right "C-c >"
+;;      - python-indent-shift-left  "C-c <"
 ;; ----------------------------------------------------------------------
+
+;;
+;; Basic Emacs Operation Enhancement
+;;
+;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
+(defun y:kill-ring-save ()
+        (interactive)
+        (if (equal mark-active nil)
+            ;;(kill-ring-save (point) (line-end-position)) ; current point TO end of line
+            (kill-ring-save (line-beginning-position) (line-end-position))
+          (kill-ring-save (point) (mark))))
+(defun y:kill-region ()
+        (interactive)
+        (if (equal mark-active nil)
+            ;;(kill-region (point) (line-end-position)) ; current point TO end of line
+            (kill-region (line-beginning-position) (line-end-position))
+          (kill-region (point) (mark))))
+(global-set-key (kbd "M-w") 'y:kill-ring-save)
+(global-set-key (kbd "C-w") 'y:kill-region)
+;;
+(defun y:mark-current-line ()
+  "Select the current line"
+  (interactive)
+  (end-of-line) ; move to end of line
+  (set-mark (line-beginning-position)))
+;(global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
+;; "C-S-SPC" is reserved for =set-rectangular-region-anchor= in /multi-cursor/
+
+
+
+;;
+;; Face Enhancement
+;; 
+
+;; setting size of frames
+;(when window-system (set-frame-size (selected-frame) 100 36))
+(add-to-list 'default-frame-alist '(height . 36))
+(add-to-list 'default-frame-alist '(width . 100))
+
+;; Using default theme
+;(load-theme 'deeper-blue t)
+;(load-theme 'adwaita t)       ;grey
+;; Using oracleyue's theme
+(add-to-list 'load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'ymonokai t)
+;(load-theme 'monokai t)
+;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
+;(fringe-mode '(0 . nil))
 
 ;; set mode-line
 (make-face 'mode-line-linum-face-y)
@@ -105,6 +157,12 @@
     ;"%-" ;; fill with '-'
     ))
 
+
+
+;;
+;; other settings
+;;
+
 ;; increase memeory for emacs to avoid garbage collections slow it down
 (setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
 
@@ -149,10 +207,6 @@
 (if (not (display-graphic-p))
     (menu-bar-mode -1))
 
-;; setting size of frames
-;(when window-system (set-frame-size (selected-frame) 100 36))
-(add-to-list 'default-frame-alist '(height . 36))
-(add-to-list 'default-frame-alist '(width . 100))
 ;; Setting font set for Chinese
 (if(display-graphic-p)
  (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -242,18 +296,6 @@
 (global-set-key (kbd "C-\\") 'y:comment-line-or-region)    ; "C-c C-="
 (global-set-key (kbd "C-|") 'y:uncomment-line-or-region)  ; "C-c C-+"
 
-
-;; Using default theme
-;(load-theme 'deeper-blue t)
-;(load-theme 'adwaita t)       ;grey
-;; Using oracleyue's theme
-(add-to-list 'load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'ymonokai t)
-;(load-theme 'yadwaita t)
-;(load-theme 'monokai t)
-;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
-;(fringe-mode '(0 . nil))
 
 ;; Configure /hl-line-mode/ for /monokai/, only enabled when python-mode starts
 ;; To hightlight the single row where the cursor is.
