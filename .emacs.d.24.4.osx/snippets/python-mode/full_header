@@ -3,7 +3,7 @@
 # key: fhead
 # group: templates
 # --
-#!/usr/bin/python2 -tt
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright (c) ${1:2014-2017}, Zuogong YUE
 # Author: Zuogong YUE <oracleyue@gmail.com>

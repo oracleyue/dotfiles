@@ -3,6 +3,6 @@
 # key: head
 # group: templates
 # --
-#!/usr/bin/python2 -tt
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Scripts for "Learn Python the Hard Way"
