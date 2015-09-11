@@ -35,7 +35,7 @@
   (setq yas/wrap-around-region 'cua))
 
 ;; Eproject project management with emacs
-;(require 'eproject)   ; having loaded globally in emacs; by oracleyue
+(require 'eproject)
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)
@@ -164,19 +164,16 @@ original" (interactive)
 ; delete seleted text when typing
 (delete-selection-mode 1)
 
-;; The following are disabled by oracleyue, since having been enabled globally
-
 ;; highlight current line
 ;;(global-hl-line-mode 1)
 ;;(set-face-background 'hl-line "seashell2") ;; Nice color
 
 ; highlight brackets
-;; (show-paren-mode t)
+(show-paren-mode t)
 
 ;; Highlight indentation
-;; (require 'highlight-indentation)
-;; (add-hook 'python-mode-hook 'highlight-indentation)
-;; oraclyue: (highlight-indentation-mode t)
+;;(require 'highlight-indentation)
+;;(add-hook 'python-mode-hook 'highlight-indentation)
 
 ;; Line numbering
 ;;(setq linum-format "%4d")

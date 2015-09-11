@@ -20,6 +20,7 @@
 ; '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
 ; '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
+ '(highlight-indent-face ((t (:inherit 'highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
  )
 
 ;;

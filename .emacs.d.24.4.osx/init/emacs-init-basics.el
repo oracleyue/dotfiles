@@ -297,10 +297,15 @@
 (global-set-key (kbd "C-|") 'y:uncomment-line-or-region)  ; "C-c C-+"
 
 
-;; Configure /hl-line-mode/ for /monokai/, only enabled when python-mode starts
-;; To hightlight the single row where the cursor is.
-(cond 
- ((string-equal 'custom-enabled-themes "ymonokai")
-  ;(global-hl-line-mode t)
-  (set-face-background 'hl-line "gray27") 
-  (set-face-attribute hl-line-face nil :underline nil)))
+;; configure /hl-line-mode/ for /monokai/, enabled in python-mode
+    ;; to highlight the single row where the cursor is.
+;; configure /highlight-indentation/ for /monokai/, enabled in python-mode
+    ;; to highlight indentations
+;; NOT work! Having to be and having been set in .emacs
+; (cond 
+;  ((string-equal 'custom-enabled-themes "ymonokai")
+;   ;(global-hl-line-mode t)
+;   (set-face-background 'hl-line "gray27") 
+;   (set-face-attribute hl-line-face nil :underline nil)
+;   (set-face-background 'highlight-indent-face "gray27")
+;   ))

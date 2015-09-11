@@ -1,7 +1,20 @@
 ; =======================================
 ;; Programming Environment for /Python/
-; using /emacs-for-python/
-(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
+
+;;
+;; using /emacs-for-python/
+;;
+
+;; Load by default
+;(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
+;; custom load
+(add-to-list 'load-path "~/.emacs.d/git/emacs-for-python/")
+(require 'epy-setup)      ;; It will setup other loads, it is required!
+(require 'epy-python)     ;; If you want the python facilities [optional]
+;(require 'epy-completion) ;; If you want the autocompletion settings [optional] ;; use /jedi/
+(require 'epy-editing)    ;; For configurations related to editing [optional]
+;(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+(require 'epy-nose)       ;; For nose integration
 
 ; use *IPython*
 (epy-setup-ipython)
@@ -11,17 +24,28 @@
 
 ; Edit: *indentation and line highlight*
 (defun epy-edit-hl-config()
-  ;; setting in "epy-editing.el" by /emacs-for-python/ use /highlight-indentation/
+  ;; * /highlight-indentation/ in "epy-editing.el"; face configured in .emacs
+  (require 'highlight-indentation)
+  (highlight-indentation)
   ;; * highlight indentation by /indent-guide/  ;; not working well with popup.el
   ;(require 'indent-guide)
   ;(indent-guide-mode t)
   ;(setq indent-guide-recursive t)  ; to show all guide lines, default only one
-  ;; * highlight line; the face for hl-line-mode has been set globally
+  
+  ;; * highlight line; face by default
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)
 
+; disabling the auto-pairing of parenthesis by /emacs-for-python/; use /smartparen/ in .emacs
+(setq skeleton-pair nil)
+
 ; disabling *ropemacs*
 (setq epy-enable-ropemacs nil)
+
+; adding snippets in /emacs-for-python/ when use the default yasnippets
+;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/git/emacs-for-python/extensions/yasnippet/snippets")
+(yas-reload-all)
 
 ;;
 ;; Auto-completion by /Jedi/
@@ -41,7 +65,6 @@
  ((string-equal system-type "darwin")
   ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
   (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20150528.2022/jediepcserver-osx.py"))))
-
 
 ;;; set max width to fix bug in popup menu in jedi (having set globally)
 ;; (defun python-mode-ac-popup-width ()
