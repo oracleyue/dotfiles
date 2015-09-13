@@ -5,6 +5,14 @@
 ;; using /emacs-for-python/
 ;;
 
+;; USAGES:
+;; ------------------
+;; *debug*:
+;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
+;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts; then evaluate buffer in iPython
+
+
+
 ;; Load by default
 ;(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
 ;; custom load

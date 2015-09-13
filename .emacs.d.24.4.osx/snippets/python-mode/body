@@ -11,12 +11,21 @@
 # Licensed under the GNU General Public License
 # Released at ${2:01 Jan 2015}
 
-# +++headers here+++
-$0
 
 """Description:
 $3
 """
+
+
+# +++headers here+++
+$0
+
+# To perform debugging
+# import pdb
+# pdb.set_trace()
+
+
+
 
 # +++code here+++
 

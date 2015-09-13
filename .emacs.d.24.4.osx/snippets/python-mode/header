@@ -6,3 +6,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Scripts for "Learn Python the Hard Way"
+
+# To perform debugging
+# import pdb
+# pdb.set_trace()

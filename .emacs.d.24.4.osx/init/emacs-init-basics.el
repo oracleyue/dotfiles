@@ -184,22 +184,28 @@
 ;(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 
-;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
+;; Use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
 (cond 
  ((string-equal system-type "darwin")
   ;(setq mac-command-modifier 'control)  ; use Command key also as Control
   ;(setq mac-option-modifier 'meta)
-  )
-)
-;; fix $PATH for emacs in Mac OS X
-(defun set-exec-path-from-shell-PATH ()
+  ))
+
+;; Fix $PATH for emacs in Mac OS X
+(defun y-mac:set-exec-path-from-shell-PATH ()
   (let ((path-from-shell 
       (replace-regexp-in-string "[[:space:]\n]*$" "" 
         (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
+    ;; (setenv "PATH" path-from-shell)
+    (setenv "PATH" (concat "~/.emacs.d/bin:" path-from-shell))
     (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
+    ;; (setq exec-path (split-string path-from-shell path-separator))
+    (setq exec-path (split-string (getenv "PATH") path-separator))))
+(defun y-linux:set-exec-path-from-shell-PATH()
+  (setenv "PATH" (concat "~/.emacs.d/bin:" (getenv "PATH")))
+  (setq exec-path (split-string (getenv "PATH") path-separator)))
+(when (string-equal system-type "darwin") (y-mac:set-exec-path-from-shell-PATH))
+(when (string-equal system-type "gnu/linux") (y-linux:set-exec-path-from-shell-PATH))
 
 ;; Settings for graphic or terminal modes
 (if (display-graphic-p)
