@@ -1,8 +1,13 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
-(setq y-enable-function-args-flag "no")
-(setq y-enable-cedet-source-info "yes")
+;; Warning: semantic-mode causes "M-x gdb" hangs emacs in Mac OS X!
+;; (if (string-equal system-type "darwin")
+;;     (progn 
+;;     (setq y-enable-function-args-flag "no")
+;;     (setq y-enable-cedet-source-info "no"))
+;;   (setq y-enable-function-args-flag "yes")
+;;   (setq y-enable-cedet-source-info "yes"))
 
 ;; Package: /google-c-style/
 (require 'google-c-style)
@@ -203,6 +208,25 @@
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
 (load (concat y-init-path-prefix "emacs-init-cc-tags"))
 
+;; Package: /CEDET (part)/
+;; - usage: source code information
+(cond ((string-equal y-enable-cedet-source-info "yes")
+       ;; enable /semantic-mode/
+       (require 'semantic)
+       (global-semantic-idle-scheduler-mode 1)
+       (global-semanticdb-minor-mode 1)
+       ;; setting include paths
+       (semantic-add-system-include "/usr/local/include/c++" 'c++-mode)
+       (semantic-add-system-include "/usr/local/include/c" 'c-mode)
+       ;(add-hook 'c++-mode-hook
+       ;          (add-hook 'semantic-init-hooks 'semantic-reset-system-include))
+       ;; display function interface in the minibuffer
+       (global-semantic-idle-summary-mode 1)
+       ;; show the function at the first line of the current buffer
+       (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+       (require 'stickyfunc-enhance)
+       ))
+
 ;; Package: /function-args/
 ;; - keybinding: fa-show =C-c M-i=; moo-complete =C-c M-o=
 (cond ((string-equal y-enable-function-args-flag "yes")
@@ -224,17 +248,6 @@
        (define-key c++-mode-map (kbd "C-c M-o")  'moo-complete)
        (define-key c-mode-map   (kbd "C-c M-i")  'fa-show)
        (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
-       ))
-
-;; Package: /CEDET (part)/
-;; - usage: source code information
-(cond ((string-equal y-enable-cedet-source-info "yes")
-       (require 'semantic/ia)
-       ;; display function interface in the minibuffer
-       (global-semantic-idle-summary-mode 1)
-       ;; show the function at the first line of the current buffer
-       (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-       (require 'stickyfunc-enhance)
        ))
 
 

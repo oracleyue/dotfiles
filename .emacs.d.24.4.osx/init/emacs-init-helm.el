@@ -2,7 +2,10 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
-(setq y-enable-semantic-flag "yes")
+;; Warning: semantic-mode causes "M-x gdb" hangs emacs in Mac OS X!
+;; (if (string-equal system-type "darwin")
+;;     (setq y-enable-semantic-parse "no")
+;;   (setq y-enable-semantic-parse "yes"))
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -34,11 +37,11 @@
 
 ;; auto-resize buffer to fit candidates
 (helm-autoresize-mode t)
-;; if using /golden-ratio/
-(defun pl/helm-alive-p ()
-  (if (boundp 'helm-alive-p)
-      (symbol-value 'helm-alive-p)))
-(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+;; ;; if using /golden-ratio/
+;; (defun pl/helm-alive-p ()
+;;   (if (boundp 'helm-alive-p)
+;;       (symbol-value 'helm-alive-p)))
+;; (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 ;; adjust the max height for helm buffer
 (setq helm-autoresize-max-height 50)
 
@@ -81,16 +84,8 @@
 ;; enable /Imenu/ rescan for helm-semantic-or-imenu
 ;(setq imenu-auto-rescan t)
 ;;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
-(cond ((string-equal y-enable-semantic-flag "yes")
-       (require 'semantic)
-       (global-semantic-idle-scheduler-mode 1)
-       (global-semanticdb-minor-mode 1)
+(cond ((string-equal y-enable-semantic-parse "yes")
        (semantic-mode 1)
-       ;; setting include paths
-       (semantic-add-system-include "/usr/local/include/c++" 'c++-mode)
-       (semantic-add-system-include "/usr/local/include/c" 'c-mode)
-       ;(add-hook 'c++-mode-hook
-       ;          (add-hook 'semantic-init-hooks 'semantic-reset-system-include))
        ;; setting GNU /global/ for /semantic-symref/
        (setq semantic-symref-tool 'global)
        ))

@@ -37,6 +37,16 @@
 ;; global variables for configuration loading
 ;;
 (setq y-init-path-prefix "~/.emacs.d/init/")
+;; feature control
+(if (string-equal system-type "darwin")
+    (progn 
+      (setq y-enable-semantic-parse "no")
+      (setq y-enable-function-args-flag "no")
+      (setq y-enable-cedet-source-info "no"))
+  (setq y-enable-semantic-parse "yes")
+  (setq y-enable-function-args-flag "yes")
+  (setq y-enable-cedet-source-info "yes"))
+
 
 ;;
 ;; ---------- Settings of Emacs Package System -------------
@@ -221,10 +231,13 @@
 ;; - usages: "M-x pdb", "M-x gud-gdb"
 ;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
 ;; - notes: keybindings compatible with JetBrains
+(when (string-equal system-type "darwin")
+  (setq gdb-non-stop-setting nil))
 (global-set-key (kbd "<f7>") 'gud-step);; equiv step in
 (global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
 (global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
 (global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out 
+
 
 ;; Environments for Programming Languages:
 ;;
@@ -325,7 +338,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /neotree/
 (require 'neotree)
-(global-set-key [f6] 'neotree-toggle)
+(global-set-key (kbd "<f6>") 'neotree-toggle)
 (setq neo-theme 'nerd)  ;classic, ascii, arrow, nerd
 (neotree-dir "~/Public/Dropbox/Academia/Manuscripts")
 (neotree-hide)
