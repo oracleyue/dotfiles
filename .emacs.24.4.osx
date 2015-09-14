@@ -22,6 +22,8 @@
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  '(highlight-indent-face ((t (:inherit 'highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
  )
+;(when window-system (set-frame-size (selected-frame) 100 31))
+
 
 ;;
 ;; version settings
@@ -160,7 +162,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
-(golden-ratio-mode t)
+;(golden-ratio-mode t)
 (setq golden-ratio-auto-scale t) 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,11 +174,15 @@
 
 
 
+
 ;;
 ;; Configurations for Programming Environment
 ;;
+
+;; General Supports for Programming:
+;; 
 ; =======================================
-;; /Magit/ for version control
+;; Version Control by /Magit/
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ; =======================================
@@ -184,10 +190,11 @@
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
 
 ; =======================================
-;; For support of /tags.../
+;; Tag Support
 ;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
 
 ; =======================================
+;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (cond
  ((string-equal system-type "darwin")
@@ -204,12 +211,33 @@
       ))))
 
 ; =======================================
-;; Programming Environment for /Lisp, Elisp, Lisp Interaction/
+;; Debugging Support by /GUD/: gdb, pdb
+;; - usages: "M-x pdb", "M-x gud-gdb"
+;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
+;; - notes: keybindings compatible with JetBrains
+(global-set-key (kbd "<f7>") 'gud-step);; equiv step in
+(global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
+(global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
+(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out 
+
+;; Environments for Programming Languages:
+;;
+; =======================================
+;; Programming Environment for /Lisp/
 ; To make "C-x C-e" pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
 ; To make "M-:" pretty-print; both input and output are in minibuffer
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 ; Use "C-j" in *scratch*; output is in the buffer under the sexp
+;; ------
+;; use /ParEdit/ mode
+;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+;(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+;(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+;(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ; =======================================
 ;; Programming Environment for /HTML, js/
@@ -244,12 +272,6 @@
 (load-library "matlab-load")
 ;; Enable CEDTE feature support for MATLAB code
 ;(matlab-cedet-setup)
-; ~~~
-;; For GDB/debugging in general
-(global-set-key (kbd "<f7>") 'gud-step);; equiv matlab step in
-(global-set-key (kbd "<f8>") 'gud-next) ;; equiv matlab step 1 
-(global-set-key (kbd "<f9>") 'gud-cont)
-(global-set-key (kbd "<f10>") 'gud-finish) ;; equiv matlab step out 
 
 ; =======================================
 ;; Editing Mode for /Markdown/
