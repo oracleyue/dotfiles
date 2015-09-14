@@ -1,7 +1,7 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
-(setq y-enable-function-args-flag "yes")
+(setq y-enable-function-args-flag "no")
 (setq y-enable-cedet-source-info "yes")
 
 ;; Package: /google-c-style/
@@ -229,6 +229,7 @@
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
 (cond ((string-equal y-enable-cedet-source-info "yes")
+       (require 'semantic/ia)
        ;; display function interface in the minibuffer
        (global-semantic-idle-summary-mode 1)
        ;; show the function at the first line of the current buffer

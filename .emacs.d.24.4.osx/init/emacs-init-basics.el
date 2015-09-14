@@ -63,8 +63,8 @@
 
 ;; setting size of frames
 ;(when window-system (set-frame-size (selected-frame) 100 36))
-(add-to-list 'default-frame-alist '(height . 36))
-(add-to-list 'default-frame-alist '(width . 100))
+;(add-to-list 'default-frame-alist '(height . 36))
+;(add-to-list 'default-frame-alist '(width . 100))
 
 ;; Using default theme
 ;(load-theme 'deeper-blue t)

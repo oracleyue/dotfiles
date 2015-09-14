@@ -22,7 +22,9 @@
  '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
  '(highlight-indent-face ((t (:inherit 'highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
  )
-;(when window-system (set-frame-size (selected-frame) 100 31))
+;; Frame size
+(add-to-list 'default-frame-alist '(width . 100))
+(when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
 
 
 ;;
@@ -39,6 +41,10 @@
 ;;
 ;; ---------- Settings of Emacs Package System -------------
 ;;
+;; Loading packages installed by /homebrew/
+(when (string-equal system-type "darwin")
+  (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path)))
 ;; For Package Management by ELPA
 (when (>= emacs-major-version 24)
     (require 'package)

@@ -30,7 +30,7 @@
 ; For /auto-complete/ 
 (require 'auto-complete-config)
 (ac-config-default)
-(setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode)))
+(setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode makefile-bsdmake-mode)))
 ;; starting type
 (setq ac-expand-on-auto-complete t)    ;; new
 ;; different ways to start ac-complete
