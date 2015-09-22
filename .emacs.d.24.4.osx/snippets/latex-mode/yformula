@@ -9,8 +9,10 @@
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
 \KOMAoptions{fontsize=24pt}
+\usepackage{times}
 
 \usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
+\usepackage{algorithm, algpseudocode}
 \usepackage{graphics, setspace}
 
 \input{../DSF/userdef-mathsymb.tex}

@@ -16,9 +16,9 @@
 
 \usepackage[utf8]{inputenc}
 % \usepackage[T1]{fontenc}
-% \usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
-\usepackage{newtxmath}  % using new Times pkg
-\usepackage{newtxtext}
+\usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
+% \usepackage{newtxmath}  % using new Times pkg
+% \usepackage{newtxtext}
 \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
 \usepackage[scaled=0.8]{DejaVuSansMono}
 % \renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
@@ -30,6 +30,8 @@
 
 \usepackage{latexsym}
 \usepackage{amsmath}
+  \setlength{\abovedisplayskip}{3.5pt}
+  \setlength{\belowdisplayskip}{3.5pt}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsbsy}   % to use faked bold math Greek letter: \pmb{\beta}; or use \boldsymbol{}

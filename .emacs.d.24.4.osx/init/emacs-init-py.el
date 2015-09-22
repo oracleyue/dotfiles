@@ -10,6 +10,14 @@
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
 ;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts; then evaluate buffer in iPython
+;; *rope refactorings*:
+;;   - "C-x p o" open rope project
+;;   - "C-x p f" find file in rope project
+;;   - "C-c d" python doc for module/method
+;;   - "C-c g" go to definition
+;;   - "C-c f" find occurencies
+;;   - "C-c r r" refactoring rename
+;; *nose*:
 
 
 
@@ -21,7 +29,7 @@
 (require 'epy-python)     ;; If you want the python facilities [optional]
 ;(require 'epy-completion) ;; If you want the autocompletion settings [optional] ;; use /jedi/
 (require 'epy-editing)    ;; For configurations related to editing [optional]
-;(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+(require 'epy-bindings)   ;; For my suggested keybindings [optional]
 (require 'epy-nose)       ;; For nose integration
 
 ; use *IPython*
@@ -47,8 +55,8 @@
 ; disabling the auto-pairing of parenthesis by /emacs-for-python/; use /smartparen/ in .emacs
 (setq skeleton-pair nil)
 
-; disabling *ropemacs*
-(setq epy-enable-ropemacs nil)
+; disabling *ropemacs* (nil)
+(setq epy-enable-ropemacs t)
 
 ; adding snippets in /emacs-for-python/ when use the default yasnippets
 ;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again

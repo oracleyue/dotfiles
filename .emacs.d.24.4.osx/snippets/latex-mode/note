@@ -2,4 +2,4 @@
 # name: notes in color
 # key: note
 # --
-{\color{${1:red}} [Zuogong: $0]}
+{\color{${1:red}} $0 }

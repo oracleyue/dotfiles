@@ -33,6 +33,7 @@
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
+
 ;;
 ;; global variables for configuration loading
 ;;
@@ -40,9 +41,10 @@
 ;; feature control
 (if (string-equal system-type "darwin")
     (progn 
-      (setq y-enable-semantic-parse "no")
-      (setq y-enable-function-args-flag "no")
-      (setq y-enable-cedet-source-info "no"))
+      (setq y:flags "yes")
+      (setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
+      (setq y-enable-function-args-flag y:flags)  ; for /function-args/
+      (setq y-enable-cedet-source-info y:flags))  ; for /cedet-source-info/
   (setq y-enable-semantic-parse "yes")
   (setq y-enable-function-args-flag "yes")
   (setq y-enable-cedet-source-info "yes"))

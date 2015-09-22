@@ -45,10 +45,11 @@
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list
-      '(("<"   "preceq" "Relational" 10927)
-        (">"   "succeq" "Relational" 10928)
-        ("="   "triangleq"   "Relational" nil)
-        ("v =" "coloneqq"    "Relational" nil)
+      '(
+        ;; ("<"   "preceq" "Relational" 10927)
+        ;; (">"   "succeq" "Relational" 10928)
+        ("=" "coloneqq"    "Relational" nil)
+        ("v ="   "triangleq"   "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
         ("T"   "top"    "Misc Symbol" nil)
