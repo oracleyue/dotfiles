@@ -518,7 +518,7 @@ MINOR_MODE = """\
 shortcuts = [('M-/', 'rope-code-assist'),
              ('M-?', 'rope-lucky-assist'),
              ('C-c g', 'rope-goto-definition'),
-             ('C-c d', 'rope-show-doc'),
+             # ('C-c d', 'rope-show-doc'),
              ('C-c f', 'rope-find-occurrences')]
 
 

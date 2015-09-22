@@ -217,7 +217,7 @@
 (cond
  ((string-equal system-type "darwin")
   (require 'dash-at-point)
-  (global-set-key "\C-cd" 'dash-at-point) ; default \C-cd, conflicts with /doxyemacs/
+  (global-set-key (kbd "C-c d") 'dash-at-point) ; default "C-c d", conflicts with /doxyemacs/ and /ropemacs/ rope-show-doc (having been disabled in its python sources)
   ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
   ; specify docsets to search in different modes
   (set 'dash-at-point-mode-alist

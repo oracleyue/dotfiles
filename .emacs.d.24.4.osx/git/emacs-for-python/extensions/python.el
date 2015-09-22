@@ -267,8 +267,9 @@
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
     (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
-    (define-key map "\C-c?" 'jedi:show-doc)
-    ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, commented
+    (define-key map "\C-c?" 'jedi:show-doc)     ;oracleyue, added
+    ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue
+    ;(define-key map "\C-ce" 'rope-show-doc)     ;oracleyue, added
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
                                map global-map)
@@ -315,8 +316,10 @@
          :help "Check file for errors"]
 ;        ["Help on symbol" python-eldoc-at-point
 ;         :help "Get help on symbol at point"]
-        ["Help on symbol" jedi:show-doc    ; oracleyue, added
-         :help "Get help on symbol at point"]    ; oracleyue, added
+;        ["Rope help on symbol" rope-show-doc  ; oracleyue, added
+;         :help "Get help on symbol at point by Rope"]
+        ["Jedi help on symbol" jedi:show-doc     ; oracleyue, added
+         :help "Get help on symbol at point by Jedi"]    ; oracleyue, added
         ["Dash help on symbol" dash-at-point     ; oracleyue, added
          :help "Get help on symbol at point by Dash"]   ; oracleyue, added
         ["Complete symbol" completion-at-point
