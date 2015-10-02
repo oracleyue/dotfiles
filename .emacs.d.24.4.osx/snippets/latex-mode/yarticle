@@ -30,8 +30,8 @@
 
 \usepackage{latexsym}
 \usepackage{amsmath}
-  \setlength{\abovedisplayskip}{3.5pt}
-  \setlength{\belowdisplayskip}{3.5pt}
+%  \setlength{\abovedisplayskip}{3.5pt}
+%  \setlength{\belowdisplayskip}{3.5pt}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsbsy}   % to use faked bold math Greek letter: \pmb{\beta}; or use \boldsymbol{}

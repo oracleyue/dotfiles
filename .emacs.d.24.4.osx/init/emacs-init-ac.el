@@ -31,6 +31,8 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode makefile-bsdmake-mode)))
+;; fix switching when line number jumps to one digit due to popup
+(ac-linum-workaround)
 ;; starting type
 (setq ac-expand-on-auto-complete t)    ;; new
 ;; different ways to start ac-complete
@@ -57,7 +59,7 @@
 ;; select candidates in ac-menu
 (setq ac-use-menu-map t)
 ;; ;; set the width of popup menu to fix bugs
-(setq ac-max-width 0.5)
+(setq ac-max-width 0.4)
 ;; keystokes
 (define-key ac-menu-map "\C-n" 'ac-next)
 (define-key ac-menu-map "\C-p" 'ac-previous)

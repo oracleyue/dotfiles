@@ -2,7 +2,7 @@
  '(column-number-mode t)
  '(fill-column 80)
  '(inhibit-startup-screen t)
- '(linum-format " %d ")   ;; having added in the theme file; original " %3i "
+ ;'(linum-format " %d ")   ;; '(linum-format "%4d \u2502 ")
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
@@ -112,6 +112,7 @@
 ;; Minior modes (yas, auto-complete, popup) for completion
 (load (concat y-init-path-prefix "emacs-init-ac"))
 
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
 ; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator-1.83")
@@ -143,7 +144,13 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;; Enable /linum/ in nlinum lib
 ;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
-;;; (global-linum-mode 1)
+;;; (global-linum-mode 1)  ; linum-mode causes many bugs
+;; align line numbers to the right + padding
+(defun linum-format-func (line)
+  (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
+     (propertize (format (format " %%%dd " w) line) 'face 'linum)))
+(setq linum-format 'linum-format-func)
+;; enable linum-mode
 (add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'sh-mode-hook 'linum-mode)
 (add-hook 'matlab-mode-hook 'linum-mode)

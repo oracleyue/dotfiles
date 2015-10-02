@@ -13,7 +13,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
-\usepackage[scaled=0.8]{DejaVuSansMono}
+% \usepackage[scaled=0.8]{DejaVuSansMono}
 
 \usepackage{latexsym}
 \usepackage{amsmath}
@@ -75,8 +75,8 @@
 
 
 \title{\sffamily \LARGE \bfseries ${1:title}}
-\author{Zuogong YUE \vspace*{1mm} \\
-\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\ \small Universit\'{e} du Luxembourg
+\author{Zuogong YUE \vspace*{1mm} \\\
+\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\\ \small Universit\'{e} du Luxembourg
 }
 \date{\small \today}
 
@@ -85,14 +85,14 @@
 \begin{document}
 
 \maketitle
-    \thispagestyle{empty}
-    % \vspace*{1cm}
-    \pagenumbering{Roman}
-\tableofcontents
-    % \thispagestyle{empty}
-\newpage
-    \setcounter{page}{1}
-    \pagenumbering{arabic}
+%     \thispagestyle{empty}
+%     % \vspace*{1cm}
+%     \pagenumbering{Roman}
+% \tableofcontents
+%     % \thispagestyle{empty}
+% \newpage
+%     \setcounter{page}{1}
+%     \pagenumbering{arabic}
 
 
 % ----------------- MAIN --------------------
