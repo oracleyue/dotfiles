@@ -14,8 +14,9 @@
 ;;      - jump to previous mark :: "C-u C-SPC"
 ;;      - show mark ring and select to jump :: "C-c h SPC"
 ;; kill rings to yank:
-;;      - "C-w / M-w" to kill or copy; "C-y" to yank
+;;      - "C-w / M-w" to kill or copy the mark region or the current line; "C-y" to yank
 ;;      - show kill ring and select to yank :: "M-y"
+;; mark the whole buffer: "C-x h"
 ;; use iedit :: "C-;"
 ;; use multi-cursor:
 ;;      - select one word "C->", then hit "C-g" to place multiple cursors
