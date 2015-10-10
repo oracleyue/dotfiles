@@ -4,7 +4,7 @@
 
 
 "StatusLine settings
-hi StatusLine           color: #ffffff; background: #000000; "font-size: 8pt;
+hi StatusLine           color: #808080; background: #222222; "font-size: 8pt;
 
 "CmdLine settings excluding Gradient
 hi Normal               color: #afafaf; background: #222222;
