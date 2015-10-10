@@ -1,0 +1,16 @@
+" ==Vimperator_Color_Scheme==
+" name: Darkness
+" usage: Put them in =~/.vimperator/colors=, then type =:colorscheme theme-name= in Vimperator or add it in =.vimperatorrc=
+
+
+"StatusLine settings
+hi StatusLine           color: #ffffff; background: #000000; "font-size: 8pt;
+
+"CmdLine settings excluding Gradient
+hi Normal               color: #afafaf; background: #222222;
+hi CmdLine              background: #222222; color: #afafaf;
+hi CompDesc             color: #c6c6c6; 
+hi CompItem[selected]   background: #666666; color: #afafaf; 
+hi CompTitle            color: #afafaf; background: #222222; font-weight: bold;
+hi CompTitle>*          padding: 0 .5ex;
+hi Filter               font-weight: bold;color: #afafaf;

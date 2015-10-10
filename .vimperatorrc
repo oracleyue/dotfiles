@@ -1,5 +1,7 @@
-set gui=none
+"colorscheme darkness
+colorscheme oracleyue-dark
 
+"set gui=none
 map <C-Up> :set gui=none<CR>
 map <C-Down> :set gui=tabs,navigation<CR>
 
@@ -17,3 +19,4 @@ noremap k 3k
 noremap H gT
 noremap L gt
 
+noremap <C-q> :tabopen https://getpocket.com<CR>
