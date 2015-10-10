@@ -1,10 +1,12 @@
-"colorscheme darkness
+" Set color theme to fit Firefox dark themes
 colorscheme oracleyue-dark
 
+" Interface settings
 "set gui=none
 map <C-Up> :set gui=none<CR>
 map <C-Down> :set gui=tabs,navigation<CR>
 
+" Keybindings
 noremap U u
 noremap x d
 
