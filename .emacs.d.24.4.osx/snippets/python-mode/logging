@@ -7,7 +7,7 @@
 import logging
 root = logging.getLogger()
 root.setLevel(logging.DEBUG)
-# root.handlers = []  # clean handlers; fix bugs due to ipython caching
+root.handlers = []  # clean handlers; fix bugs due to ipython caching
 formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelname)s] :  %(message)s \n')
 fh = logging.FileHandler('debug.log', mode = 'w')   # by default, mode = 'a'
 fh.setLevel(logging.DEBUG)
