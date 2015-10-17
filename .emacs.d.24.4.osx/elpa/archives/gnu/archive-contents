@@ -48,7 +48,7 @@
 		     ((:url . "http://github.com/Malabarba/aggressive-indent-mode")
 		      (:keywords "indent" "lisp" "maint" "tools"))])
  (ahungry-theme .
-		[(1 0 10)
+		[(1 0 11)
 		 ((emacs
 		   (24)))
 		 "Ahungry color theme for Emacs.  Make sure to (load-theme 'ahungry)." tar
@@ -176,6 +176,11 @@
 	    "Remove visual distractions and focus on writing" single
 	    ((:url . "http://elpa.gnu.org/packages/darkroom.html")
 	     (:keywords "convenience" "emulations"))])
+ (dash .
+       [(2 12 0)
+	nil "A modern list library for Emacs" tar
+	((:keywords "lists")
+	 (:url . "http://elpa.gnu.org/packages/dash.html"))])
  (dbus-codegen .
 	       [(0 1)
 		((cl-lib
@@ -433,6 +438,13 @@
 	 "Retrieve and decode METAR weather information" single
 	 ((:url . "http://elpa.gnu.org/packages/metar.html")
 	  (:keywords "comm"))])
+ (midi-kbd .
+	   [(0 2)
+	    ((emacs
+	      (25)))
+	    "Create keyboard events from Midi input" single
+	    ((:url . "http://elpa.gnu.org/packages/midi-kbd.html")
+	     (:keywords "convenience" "hardware" "multimedia"))])
  (minibuffer-line .
 		  [(0 1)
 		   nil "Display status info in the minibuffer window" single
@@ -494,7 +506,7 @@
 	    ((:url . "http://elpa.gnu.org/packages/omn-mode.html")
 	     (:keywords))])
  (org .
-      [(20150929)
+      [(20151005)
        nil "Outline-based notes management and organizer" tar nil])
  (osc .
       [(0 1)
@@ -534,7 +546,7 @@
 	 ((:url . "http://www.dr-qubit.org/emacs.php")
 	  (:keywords "extensions" "data structures" "queue"))])
  (rainbow-mode .
-	       [(0 11)
+	       [(0 12)
 		nil "Colorize color names in buffers" single
 		((:url . "http://elpa.gnu.org/packages/rainbow-mode.html")
 		 (:keywords "faces"))])

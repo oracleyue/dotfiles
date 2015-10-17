@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: logging - full
+# key: logging
+# group: oracleyue
+# --
+## To performing logging
+import logging
+root = logging.getLogger()
+root.setLevel(logging.DEBUG)
+# root.handlers = []  # clean handlers; fix bugs due to ipython caching
+formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelname)s] :  %(message)s \n')
+fh = logging.FileHandler('debug.log', mode = 'w')   # by default, mode = 'a'
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+root.addHandler(fh)
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+ch.setFormatter(formatter)
+root.addHandler(ch)
+# ----
+logger = logging.getLogger('${1:FileName}')

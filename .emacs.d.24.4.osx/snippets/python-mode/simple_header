@@ -1,12 +1,17 @@
 # -*- mode: snippet -*-
 # name: simple header
 # key: head
-# group: templates
+# group: oracleyue
 # --
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Scripts for "Learn Python the Hard Way"
+
+"""$1
+"""
 
 # To perform debugging
 # import pdb
 # pdb.set_trace()
+
+
+$0

@@ -5,7 +5,7 @@
  ;'(linum-format " %d ")   ;; '(linum-format "%4d \u2502 ")
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
- '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "open %s"))))
+ '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "open %s") ("\\.pdf\\'" . "open %s"))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
@@ -13,14 +13,14 @@
 
 (custom-set-faces
  ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
- '(default ((t (:font "DejaVu Sans Mono-13"))))
+ '(default ((t (:font "DejaVu Sans Mono-12"))))   ;; 13
  ;; Note that set the font-size of fixed-pitch different from 'default will cause troubles on auto-completion when enabling linum-mode.
- '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
+ ;; '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; mode-line with smaller font size
 ; '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
 ; '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
- '(iedit-occurrence ((t (:inherit 'lazy-highlight))))
- '(highlight-indent-face ((t (:inherit 'highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
+ '(iedit-occurrence ((t (:inherit lazy-highlight))))
+ '(highlight-indent-face ((t (:inherit highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
  )
 ;; Frame size
 (add-to-list 'default-frame-alist '(width . 100))
@@ -187,7 +187,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
-;(golden-ratio-mode t)
+;; (golden-ratio-mode t)
 (setq golden-ratio-auto-scale t) 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -360,18 +360,18 @@
 ;; For /ECB/
 ;; [SOURCE]: https://github.com/emacsmirror/ecb
 ;;
-;(add-to-list 'load-path "~/.emacs.d/git/ecb")
-;(require 'ecb)
-;(require 'ecb-autoloads)
-;(setq ecb-windows-width 0.16)
-;(setq ede-project-directories (quote ("~/Workspace/c")))
-;(setq ecb-source-path '(
-;                        "~/Workspace/c/src"
-;                        "~/Workspace/c/include"
-;                        ;"~/tmp/eign"
-;                        ))
-;(setq ecb-tip-of-the-day nil)
-;(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+(add-to-list 'load-path "~/.emacs.d/git/ecb")
+(require 'ecb)
+(require 'ecb-autoloads)
+(setq ecb-windows-width 0.16)
+(setq ede-project-directories (quote ("~/Workspace/c")))
+(setq ecb-source-path '(
+                        "~/Workspace/c/src"
+                        "~/Workspace/c/include"
+                        ;"~/tmp/eign"
+                        ))
+(setq ecb-tip-of-the-day nil)
+(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
 
 ;; (add-hook 'c-mode-hook 'ecb-activate)
 ;; (add-hook 'c++-mode-hook 'ecb-activate)

@@ -242,8 +242,8 @@
 ;;; Spell Checking for some modes
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;; (setq ispell-dictionary "british")
-(setq ispell-dictionary "american")
+(setq ispell-dictionary "british")
+;(setq ispell-dictionary "american")
 (add-hook 'LaTeX-mode-hook 'ispell)
 
 

@@ -10,6 +10,7 @@
 (require 'projectile)
 (projectile-global-mode)
 (setq projectile-enable-caching t)
+;; use =C-c p i= to refresh the whole cache
 
 ;;; using /helm-projectile/
 (require 'helm-projectile)

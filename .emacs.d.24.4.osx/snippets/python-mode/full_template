@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: full header
-# key: fhead
-# group: templates
+# name: full template
+# key: templ
+# group: oracleyue
 # --
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -11,8 +11,8 @@
 # Licensed under the GNU General Public License
 # Released at ${2:01 Jan 2015}
 
-"""Description:
-$3
+"""
+${3:Description Here}
 """
 
 
@@ -20,9 +20,18 @@ $3
 # +++headers here+++
 $0
 
-# To perform debugging
+
+
+# ###### For DEBUGGING
+
+## To perform pdb debugging
 # import pdb
 # pdb.set_trace()
+
+## To performing logging
+# import logging
+# logger = logging.getLogger('${4:FileName}')
+
 
 
 
@@ -34,4 +43,6 @@ $0
 
 
 
-# +++__main__ body+++
+# Standard boilerplate to call the main() function
+if __name__ == '__main__':
+    main()

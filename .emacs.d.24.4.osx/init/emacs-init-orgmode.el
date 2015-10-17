@@ -9,8 +9,13 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-;; set font face
-(add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+;; Font faces
+;; use variable fonts, like sans-serif
+;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+;; force to use fixed-width fonts
+;(add-hook 'org-mode-hook
+;          (lambda () (face-remap-add-relative 'default :family "DejaVu Sans Mono")))
+;; set line space
 (add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
 
 ;(setq org-startup-indented t)

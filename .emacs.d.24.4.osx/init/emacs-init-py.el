@@ -43,10 +43,6 @@
   ;; * /highlight-indentation/ in "epy-editing.el"; face configured in .emacs
   (require 'highlight-indentation)
   (highlight-indentation)
-  ;; * highlight indentation by /indent-guide/  ;; not working well with popup.el
-  ;(require 'indent-guide)
-  ;(indent-guide-mode t)
-  ;(setq indent-guide-recursive t)  ; to show all guide lines, default only one
   
   ;; * highlight line; face by default
   (hl-line-mode t))

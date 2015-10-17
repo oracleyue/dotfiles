@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: logger.critical
+# key: log
+# group: oracleyue
+# --
+logger.critical('$0')

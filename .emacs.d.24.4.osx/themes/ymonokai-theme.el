@@ -564,7 +564,8 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,ymonokai-comments))))
 
      `(font-lock-comment-face
-       ((,class (:inherit 'fixed-pitch             ; oracleyue: added
+       ((,class (
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,ymonokai-comments))))
 
      `(font-lock-constant-face
@@ -1895,11 +1896,13 @@ Takes and optional `FRAME' as reference."
      ;; hl-line-mode
      `(hl-line
        ((,class (:background ,ymonokai-hl-line
-                             :inherit t))))
+                             ;; :inherit t      ;oracleyue: commented
+                             ))))
 
      `(hl-line-face
        ((,class (:background ,ymonokai-hl-line
-                             :inherit t))))
+                             ;; :inherit t    ;oracleyue: commented
+                             ))))
 
      ;; ido-mode
      `(ido-first-match
@@ -2521,37 +2524,40 @@ Takes and optional `FRAME' as reference."
 
      `(org-archived
        ((,class (:foreground ,ymonokai-comments
-                             :inherit 'fixed-pitch             ; oracleyue: added
+                             ;; :inherit 'fixed-pitch             ; oracleyue: added
                              :weight normal))))
 
      `(org-latex-and-export-specials    ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
-                             :inherit 'fixed-pitch))))            ; oracleyue: added
+                             ;; :inherit 'fixed-pitch     ; oracleyue: added
+                             ))))       
                              
      `(org-document-info     ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
-                             :inherit 'fixed-pitch))))             ; oracleyue: added
+                             ;; :inherit 'fixed-pitch     ; oracleyue: added
+                             ))))        
      `(org-document-info-keyword     ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
-                             :inherit 'fixed-pitch))))             ; oracleyue: added
+     ;; :inherit 'fixed-pitch           ; oracleyue: added
+                             ))))             
 
      `(org-block
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch             ; oracleyue: added
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,ymonokai-comments))))
 
-     `(org-block-background                    ; oracleyue: added
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch))))     ; oracleyue: added
+     ;; `(org-block-background                    ; oracleyue: added
+     ;;   ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
+     ;;             :inherit 'fixed-pitch))))     ; oracleyue: added
 
      `(org-block-begin-line
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch             ; oracleyue: added
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,ymonokai-comments
                           :slant italic))))
      `(org-block-end-line                              ; oracleyue: added
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch             ; oracleyue: added
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,ymonokai-comments
                           :slant italic))))
 
@@ -2563,11 +2569,11 @@ Takes and optional `FRAME' as reference."
      `(org-code
        ;; ((,class (:foreground ,ymonokai-comments))))
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch             ; oracleyue: added
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,green))))   ; oracleyue: modified, default as commented; for the coeds enclosed by "~"
      `(org-verbatim
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 :inherit 'fixed-pitch             ; oracleyue: added
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,blue))))    ; oracleyue: added; for the codes enclosed by "="
 
      `(org-date
@@ -2650,11 +2656,12 @@ Takes and optional `FRAME' as reference."
 
      `(org-special-keyword
        ((,class (:foreground ,ymonokai-comments
-                             :inherit 'fixed-pitch             ; oracleyue: added
+                             ;; :inherit 'fixed-pitch             ; oracleyue: added
                              :weight bold))))
 
      `(org-table
-       ((,class (:inherit 'fixed-pitch             ; oracleyue: added
+       ((,class (
+                 ;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,green))))
 
      `(org-tag
