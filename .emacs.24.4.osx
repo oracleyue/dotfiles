@@ -208,7 +208,7 @@
 ;; 
 ; =======================================
 ;; Version Control by /Magit/
-(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c h g") 'magit-status)
 
 ; =======================================
 ;; Project Management by /projectile/ and helm addons
@@ -221,19 +221,28 @@
 ; =======================================
 ;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(cond
- ((string-equal system-type "darwin")
+(when (string-equal system-type "darwin") 
   (require 'dash-at-point)
   (global-set-key (kbd "C-c d") 'dash-at-point) ; default "C-c d", conflicts with /doxyemacs/ and /ropemacs/ rope-show-doc (having been disabled in its python sources)
   ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
   ; specify docsets to search in different modes
   (set 'dash-at-point-mode-alist
-    '((c-mode . "c,gsl,gl4")
-      (c++-mode . "cpp,eigen,boost,gsl")
-      (python-mode . "python,numpy,scipy,matplotlib,pandas")
-      (ess-mode . "r")
-      (sh-mode . "bash")
-      ))))
+       '((c-mode . "c,gsl,gl4")
+         (c++-mode . "cpp,eigen,boost,gsl")
+         (python-mode . "python,numpy,scipy,matplotlib,pandas")
+         (ess-mode . "r")
+         (sh-mode . "bash")
+         )))
+;; Integration with /Zeal/ for quick refernce (available for Linux)
+(when (string-equal system-type "gnu/linux")
+  (require 'zeal-at-point)
+  (global-set-key (kbd "C-c d") 'zeal-at-point)
+  (set 'dash-at-point-mode-alist
+       '((c-mode . "c,gsl,gl4")
+         (c++-mode . "c++,eigen,boost,gsl")
+         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
+         (ess-mode . "r")
+         )))
 
 ; =======================================
 ;; Debugging Support by /GUD/: gdb, pdb

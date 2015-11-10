@@ -229,7 +229,7 @@
 
 ; oracleyue, added: BEGIN
 (add-to-list 'load-path "~/.emacs.d/git")
-(require 'dash-at-point)
+;; (require 'dash-at-point)
 (require 'jedi-core)
 ; oracleyue, added: END
 
@@ -266,7 +266,7 @@
     (define-key map "\C-c\C-z" 'python-shell-switch-to-shell)
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
-    (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
+    ;; (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
     (define-key map "\C-c?" 'jedi:show-doc)     ;oracleyue, added
     ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue
     ;(define-key map "\C-ce" 'rope-show-doc)     ;oracleyue, added
@@ -320,8 +320,8 @@
 ;         :help "Get help on symbol at point by Rope"]
         ["Jedi help on symbol" jedi:show-doc     ; oracleyue, added
          :help "Get help on symbol at point by Jedi"]    ; oracleyue, added
-        ["Dash help on symbol" dash-at-point     ; oracleyue, added
-         :help "Get help on symbol at point by Dash"]   ; oracleyue, added
+        ;; ["Dash help on symbol" dash-at-point     ; oracleyue, added
+        ;; :help "Get help on symbol at point by Dash"]   ; oracleyue, added
         ["Complete symbol" completion-at-point
          :help "Complete symbol before point"]))
     map)
