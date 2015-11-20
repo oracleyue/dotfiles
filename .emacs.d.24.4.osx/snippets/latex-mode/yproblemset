@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yProblem Set Header
 # key: yp
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[11pt,a4paper]{article}

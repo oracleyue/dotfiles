@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: Automatica Journal Header
 # key: yau
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[twocolumn]{autart}    % Enable this line and disable the 

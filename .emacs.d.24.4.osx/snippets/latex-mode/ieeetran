@@ -1,10 +1,11 @@
 # -*- mode: snippet -*-
 # name: IEEE Transaction Header
 # key: ye
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-% \documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
-\documentclass[a4paper,onecolumn,compsoc]{IEEEtran}        % use "draft" option for more features
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+%\documentclass[a4paper,onecolumn,compsoc]{IEEEtran}        % use "draft" option for more features
 % latex default article layout 
 % \usepackage[text={360pt, 595pt},centering]{geometry}     % latex /article.cls/ default layout
 % \usepackage{setspace}
@@ -13,12 +14,11 @@
 %\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
 
 
-% \IEEEoverridecommandlockouts                              % This command is only needed if 
-                                                            % you want to use the \thanks command
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
 
-% \overrideIEEEmargins                                      % Needed to meet printer requirements.
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
 
-%\usepackage{mathptmx} % assumes new math font selection scheme installed
 %\usepackage{times} % assumes new font selection scheme installed
 \usepackage[scaled=0.8]{DejaVuSansMono}
 
@@ -29,6 +29,7 @@
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 % \usepackage{mathabx}
+% \usepackage{mathptmx} % assumes new math font selection scheme installed
 \usepackage{mathtools}
     \let\IEEEproof\proof
     \let\IEEEendproof\endproof
@@ -39,7 +40,11 @@
     % \let\endproof\relax
     % \let\proof\IEEEproof
     % \let\endproof\IEEEendproof
-% \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
+ % \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
+\usepackage{empheq}     % to deal with parentheses + subfunctions  
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{subfigure}
@@ -47,8 +52,10 @@
 \usepackage{comment}
 % \usepackage[normalem]{ulem}
 % \usepackage{csquotes}
-\usepackage{color}
+\usepackage[usenames]{color}
 % \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{mdframed}   % to box theorem statements
+    \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{cite}
 \makeatletter
 \let\NAT@parse\undefined
@@ -68,11 +75,12 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
-\def\dashline{\ensuremath{\operatorname{-}\operatorname{-}}}
-\def\linearrow{\ensuremath{\operatorname{---}}}
+% command definitions for math symbols
+\input{userdef-mathsymb.tex}
+
 
 \title{\LARGE \bf
-  Understanding Dynamic Structure Function in the Context of Granger Causality
+  Understanding Dynamical Structure Function in the Context of Granger Causality
 }
 \hypersetup{
   pdftitle={},
@@ -81,17 +89,16 @@
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
 
 
-\author{Zuogong Yue$^{1}$ and Jorge Gon\c{c}alves$^{2}$% <-this % stops a space
-  \thanks{$^{1}$ Zuogong Yue with  
-    Luxembourg Centre for Systems Biomedicine, and  Facult'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
-    7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
-    \href{mailto:zuogong.yue@uni.lu}{\tt zuogong.yue@uni.lu}}%
-  \thanks{$^{2}$ Jorge Gon\c{c}alves with 
-    Department of Engineering, University of Cambridge, CB2 1PZ, UK,
-    and Luxembourg Centre for Systems Biomedicine, and  Facult'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
-    7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
-    \href{mailto:jorge.goncalves@uni.lu}{\tt jorge.goncalves@uni.lu}}%
+\author{Zuogong Yue$^{1}$ and Jorge Gon\c{c}alves$^{1,2}$% <-this % stops a space
+  \thanks{$^{1}$ Zuogong Yue and Jorge Gon\c{c}alves are with  
+    Luxembourg Centre for Systems Biomedicine, and  Facult\'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
+    7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg.}%
+  \thanks{$^{2}$ Jorge Gon\c{c}alves is with 
+    Department of Engineering, University of Cambridge, CB2 1PZ, UK.}%
+    \thanks{\hspace*{-3mm}Email: \{\href{mailto:zuogong.yue@uni.lu}{\tt
+        zuogong.yue},\href{mailto:jorge.goncalves@uni.lu}{\tt jorge.goncalves}\}{\tt @uni.lu}}%
 }
+
 
 
 \begin{document}

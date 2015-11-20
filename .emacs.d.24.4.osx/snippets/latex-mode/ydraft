@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yDraft Header
 # key: yd
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[a4paper,10pt]{article}

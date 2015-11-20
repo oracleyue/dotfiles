@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yLecture Note Header
 # key: yl
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[11pt,a4paper]{article}

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yArticle Header
 # key: ya
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 % \documentclass[a4paper,11pt]{article}

@@ -64,9 +64,9 @@
   '(setcdr (assoc "LaTeX" TeX-command-list)
           '("%`%l%(mode) -shell-escape%' %t"
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
-;; (eval-after-load 'latex 
-;;   '(setq LaTeX-clean-intermediate-suffixes
-;;      (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
+(eval-after-load 'latex 
+  '(setq LaTeX-clean-intermediate-suffixes
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list

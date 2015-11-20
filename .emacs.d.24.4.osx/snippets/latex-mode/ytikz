@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yTikZ Image Preview
 # key: yt
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass{article}

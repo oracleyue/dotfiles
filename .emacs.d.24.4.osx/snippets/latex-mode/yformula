@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: yFormula Header
+# name: yFormula Preview
 # key: yf
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[class=scrreprt]{standalone}

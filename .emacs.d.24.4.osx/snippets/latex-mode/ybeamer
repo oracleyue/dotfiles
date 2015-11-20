@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: yBeamer Header
 # key: yb
+# group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 %\documentclass[compress,blue]{beamer}

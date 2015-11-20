@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: algorithm environment
 # key: algo
+# group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{algorithm}
