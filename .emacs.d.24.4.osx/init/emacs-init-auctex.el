@@ -1,4 +1,13 @@
 ; =======================================
+;; Usages:
+;; 1. if AuxTeX fails to fontify the buffer on time, run "M-x font-lock-fontify-buffer"
+;; 2. "C-M-a" go to the beginning of the current environment;
+;;    "C-M-e" go to the end of the current environment;
+;; 3. "C-M-b/p" go to the beginning of the parenthesis
+;;    "C-M-f/n" go to the end of the parenthesis
+;; 4. "C-c ." mark the current environment, e.g. \section OR \begin ... \end
+;; 5. kill the sentence :: "M-k"; go the beginning/end of the sentence :: "M-a/e"
+
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -12,12 +21,20 @@
 (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
 (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
 
-;;;; More pair-mode in LaTeX
+;; More extensions in AUCTeX-mode
+ (setq auto-mode-alist
+     (append
+         '(("\\.tikz\\'" . latex-mode))
+          auto-mode-alist))
+
+;; More pair-mode in LaTeX
+;
 ;;; Use /AucTeX/ default pairs
 ;(add-hook 'LaTeX-mode-hook
 ;	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
 ;                      (cons "$" "$"))))
 ;(setq-default LaTeX-electric-left-right-brace t)
+;
 ;;; Use /smartparens/ to complete pairs; having enable globally in /.emacs/
 ;; disable AucTeX pair completion
 (setq-default LaTeX-electric-left-right-brace nil)
@@ -53,9 +70,30 @@
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
         ("T"   "top"    "Misc Symbol" nil)
+        ("C-p" "partial" "Misc Symbol" nil)
+        ("C-c" "circ" "Misc Symbol" nil)  ;overwrite \cos
+        ("C-t" "top" "Misc Symbol" nil)  ;overwirte \tan
+        ("C-S-f" "longrightarrow" "Arrows" nil)
+        ("C-S-b" "longleftarrow" "Arrows" nil)
+        ("C-m" "longmapsto" "Arrows" nil)
         ))
 ; More math-font in LaTeX
 (setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+
+;; More keywords/macro fontify
+(setq font-latex-match-textual-keywords
+      '(("smallskip" "")
+        ("medskip" "")
+        ("bigskip" "")
+        ("noindent" "")
+        ("indent" "")
+        ("pause")
+        ("makelecture" "")
+        ("makeproblemset" "")
+        ("solution" "")))
+(setq font-latex-match-variable-keywords
+      '(("column" "{")
+        ("yue" "{")))
 
 ;; So that RefTeX finds my bibliography
 (setq reftex-default-bibliography '("./ref/library.bib"))
@@ -86,15 +124,19 @@
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("update bib library" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/bibupdate.sh" TeX-run-command nil t) t))
+                 '("update bib library" "./bibupdate.sh" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("backup doc files" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/srcbackup.sh" TeX-run-command nil t) t))
+                 '("backup doc files" "./srcbackup.sh" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("backup tex files" "/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/texbackup.sh" TeX-run-command nil t) t))
+                 '("backup tex files" "./texbackup.sh" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("update userdef-mathsymb" "./mathsym_update.sh" TeX-run-command nil t) t))
 
 ;; (eval-after-load "tex"
 ;;    '(add-to-list 'TeX-command-list

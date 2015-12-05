@@ -20,7 +20,8 @@
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
 %\usepackage{times} % assumes new font selection scheme installed
-\usepackage[scaled=0.8]{DejaVuSansMono}
+% \usepackage[scaled=.8]{DejaVuSansMono}
+\usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym}
 \usepackage{amsmath}
@@ -45,10 +46,13 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
-\usepackage{graphicx}
 \usepackage{float}
-\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure} % deprecated
 % \usepackage{epsfig}
+
 \usepackage{comment}
 % \usepackage[normalem]{ulem}
 % \usepackage{csquotes}

@@ -13,7 +13,7 @@
 
 (custom-set-faces
  ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
- '(default ((t (:font "DejaVu Sans Mono-12"))))   ;; 13
+ '(default ((t (:font "DejaVu Sans Mono-13"))))   ;; 13
  ;; Note that set the font-size of fixed-pitch different from 'default will cause troubles on auto-completion when enabling linum-mode.
  ;; '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; mode-line with smaller font size
@@ -176,7 +176,7 @@
 ;; mouse events
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 ;; specials
-(global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
+(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
 ;; fix "C-j" for AucTeX mode
 (global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
 
@@ -187,7 +187,7 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
-;; (golden-ratio-mode t)
+(golden-ratio-mode t)
 (setq golden-ratio-auto-scale t) 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

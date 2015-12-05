@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: yArticle Header
+# name: Article Header
 # key: ya
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -21,7 +21,8 @@
 % \usepackage{newtxmath}  % using new Times pkg
 % \usepackage{newtxtext}
 \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
-\usepackage[scaled=0.8]{DejaVuSansMono}
+% \usepackage[scaled=.8]{DejaVuSansMono}
+\usepackage[scaled=0.95]{inconsolata}
 % \renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
     %% -- using XeLaTeX to compile --
     % \usepackage{fontspec}
@@ -49,10 +50,13 @@
 \usepackage{algpseudocode}
 
 \usepackage{graphicx}
-\usepackage{subfigure}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure} % deprecated
 % \usepackage{epsfig}
-% \usepackage[usenames]{color}
+\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 \usepackage[usenames]{xcolor}
+% \usepackage[usenames]{color}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}  % to use \begin{mdframed}[style=yue]
 \usepackage{minted}

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: yFormula Preview
+# name: Formula Preview
 # key: yf
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

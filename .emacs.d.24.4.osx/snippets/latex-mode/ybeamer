@@ -1,11 +1,12 @@
 # -*- mode: snippet -*-
-# name: yBeamer Header
+# name: Beamer Header
 # key: yb
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-%\documentclass[compress,blue]{beamer}
-\documentclass{beamer}
+\documentclass{beamer}    % "[handout]" option; by default [presentation]
+% \documentclass[handout]{beamer}
+% \documentclass[notes,handout]{beamer} % "[notes]" print notes
 %\mode<presentation>
 
 % set theme
@@ -14,8 +15,11 @@
 \usetheme{Madrid}
 % set fonts 
 \usefonttheme{professionalfonts} % using non standard fonts for beamer
+% \usefonttheme[onlymath]{serif} % use serif for math equations
 % \usefonttheme{serif} % default family is serif
-    % \setmainfont{Times New Roman}
+% set margins
+% \setbeamersize{text margin left=15pt,text margin right=15pt}
+
 
 % Theme for beamer presentation.
 %\usepackage{beamerthemesplit} 
@@ -33,14 +37,20 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{mathabx}
-% \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
-% \usepackage{amsthm}
-\usepackage{subfigure}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{hyperref}
 \usepackage{mathrsfs}
 \usepackage{txfonts}
+% \usepackage{amsthm}
+\usepackage{graphicx}
+% \usepackage{subfigure} % deprecated
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{/}
+\usepackage{hyperref}
 \usepackage{tikz}	
 % \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,intersections}
 \usepackage{calc}
@@ -64,7 +74,7 @@
 % General Settings
 \setcounter{footnote}{0}% Reset footnote counter
 \let\SMALL\footnotesize
-\renewcommand*{\footnotesize}{\SMALL\tiny}
+\renewcommand*{\footnotesize}{\tiny}
 % color definition for xcolor
 \definecolor{olive}{rgb}{0.3, 0.4, .1}
 \definecolor{fore}{RGB}{249,242,215}
@@ -94,8 +104,16 @@
 \title[${2:abbrev title}]{${1:title}}
 \subtitle{${3:}}
 \author{Zuogong YUE}
-\institute[LCSB \& FSTC]{{\scriptsize supervised by}\\\ \vspace{.2cm}{\SMALL Professor Jorge Gon\c{c}alves}\\\ \vspace{.60cm} Faculty of Science, Technology and Communication\\\ Luxembourg Centre for Systems Biomedicine\\\ \smallskip University of Luxembourg}
+\institute[LCSB \& FSTC]{{\scriptsize supervised by}\\\ \vspace{.2cm}{\SMALL Prof. Jorge Gon\c{c}alves}\\\ \vspace{.60cm} Faculty of Science, Technology and Communication\\\ Luxembourg Centre for Systems Biomedicine\\\ \smallskip University of Luxembourg}
 \date[\today]{}
+
+% Table of Contents before each section
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
 
 
 \begin{document}
@@ -127,11 +145,12 @@
       {\includegraphics[height=0.8cm]{figures/lcsb-logo}};
 \end{tikzpicture}}
 
-%\section[Outline]{}
-\begin{frame}
-  \frametitle{Outline}
-  \tableofcontents
-\end{frame}
+%\section[Outline]{}    % To add outline in toc
+%% Comment the following if having added in the preamble
+% \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents
+% \end{frame}
 
 
 % ---- Main Part ----
@@ -145,10 +164,12 @@ $0
 
 \begin{frame}
     \vspace*{1cm}
-    {\Huge \bf \textcolor{Magenta}{Thank you!}} \\\
-    \bigskip
-    \bigskip
-    \includegraphics[width=10cm]{figures/unix_happy.jpg}
+    \begin{center}
+      {\Huge \bf \textcolor{Magenta}{Thank you!}} \\\
+      \bigskip
+      \bigskip
+      \includegraphics[width=10cm]{figures/unix_happy.jpg}
+    \end{center}
 \end{frame}
 
 

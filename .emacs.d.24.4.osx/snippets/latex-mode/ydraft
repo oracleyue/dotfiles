@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: yDraft Header
+# name: Draft Header
 # key: yd
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -14,7 +14,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
-% \usepackage[scaled=0.8]{DejaVuSansMono}
+\usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym}
 \usepackage{amsmath}

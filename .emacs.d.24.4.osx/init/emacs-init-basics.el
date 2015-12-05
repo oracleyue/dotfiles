@@ -54,7 +54,7 @@
   (interactive)
   (end-of-line) ; move to end of line
   (set-mark (line-beginning-position)))
-;(global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
+(global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
 ;; "C-S-SPC" is reserved for =set-rectangular-region-anchor= in /multi-cursor/
 
 

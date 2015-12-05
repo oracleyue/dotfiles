@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: yProblem Set Header
+# name: Problem Set Header
 # key: yp
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -26,8 +26,9 @@
 
 %% packages - functionality
 \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
-\usepackage[scaled=0.8]{DejaVuSansMono}
+\usepackage[scaled=0.95]{inconsolata}
 \usepackage{latexsym,amsmath,amssymb,amsbsy,amsfonts,mathrsfs,mathtools,arydshln,amsthm}
+\usepackage{enumerate}
 \usepackage{algorithm,algpseudocode}
 \usepackage{graphicx}
 \usepackage[usenames]{xcolor}
@@ -60,7 +61,7 @@
 %% choose templates to use: Problem Sets or Lecture Notes
 % ------------------------------
 \newif\ifproblemset
-  \def\ifproblemset{\iftrue}  % use \begin{problem} OR \solution{...}
+  \def\ifproblemset{\iftrue}  % use \begin{problem} OR \begin{solution}
   % \def\ifproblemset{\iffalse}  % as article
 % ------------------------------
 
@@ -70,7 +71,7 @@
 \def\@maketitle{%
   \begin{center}
   \bfseries
-  UNIVERSIT\'{E} DU LUXEMBOURG
+  UNIVERSIT\\'{E} DU LUXEMBOURG
   \end{center}
   \vspace*{-10pt}
   \courseno \hfill \semester \par
@@ -95,7 +96,7 @@
 \newcommand{\makeheader}{%
   \begin{center}
   \bfseries
-  UNIVERSIT\'{E} DU LUXEMBOURG
+  UNIVERSIT\\'{E} DU LUXEMBOURG
   \end{center}
   \vspace*{-10pt}
   \courseno \hfill \semester \par
@@ -113,19 +114,22 @@
   \stepcounter{homeworkproblemcounter}
   \renewcommand{\homeworkproblemname}{#1}
   \section{\homeworkproblemname}}{\vspace*{24pt}}
-\newcommand{\solution}[1]{\medskip\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}\textbf{Solution:\quad}#1\end{minipage}}}
+%\newcommand{\solution}[1]{\medskip\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}\textbf{Solution:\quad}#1\end{minipage}}}
+\newenvironment{solution}{\begin{minipage}{0.98\columnwidth}\noindent\textbf{Solution:\quad}}{\end{minipage}}
 \fi
 
 \newcommand{\makelecture}{%
   \maketitle
   \maketoc}
 \newcommand{\makeproblemset}{%
-  \makeheader}
+  % \makeheader
+  \maketitle}
 
 
 %% user-defined information
 \title{${1:title}}
-\newcommand{\email}{\texttt{zuogong.yue@uni.lu}}
+%\newcommand{\email}{\texttt{zuogong.yue@uni.lu}}
+\newcommand{\email}{\texttt{jorge.goncalves@uni.lu; zuogong.yue@uni.lu}}
 \newcommand{\course}{Practical Bioinformatics}
 \newcommand{\courseno}{MAISB-26/ISB102}
 \newcommand{\semester}{Winter 2015}
@@ -141,7 +145,8 @@
 % ------------------------------
 
 %% starting problems by "\begin{problem} ... \end{problem}"
-%% starting solutions by "\solution{...}"
+%% starting solutions by "\begin{solution} ... \end{solution}"
+
 
 $0
 
