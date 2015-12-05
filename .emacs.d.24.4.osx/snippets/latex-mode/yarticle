@@ -16,7 +16,7 @@
 % \usepackage[hmarginratio=2:3]{geometry}   % default ratio for two-side pages
 
 \usepackage[utf8]{inputenc}
-% \usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
 % \usepackage{newtxmath}  % using new Times pkg
 % \usepackage{newtxtext}
@@ -29,6 +29,8 @@
     % \setmainfont{Times New Roman} % sets the roman font
     % \setsansfont{Helvetica} % sets the sans font
     % \setmonofont[Scale=0.8]{DejaVu Sans Mono} % sets the monospace font
+\usepackage[autostyle,english=american]{csquotes} % auto convert incorrect "" to ``'' quotes
+\MakeOuterQuote{"}    
 
 \usepackage{latexsym}
 \usepackage{amsmath}

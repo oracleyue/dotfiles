@@ -12,6 +12,7 @@
   % \doublespacing
 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
 \usepackage[scaled=0.95]{inconsolata}
