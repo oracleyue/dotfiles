@@ -7,6 +7,7 @@
 ;;    "C-M-f/n" go to the end of the parenthesis
 ;; 4. "C-c ." mark the current environment, e.g. \section OR \begin ... \end
 ;; 5. kill the sentence :: "M-k"; go the beginning/end of the sentence :: "M-a/e"
+;; 6. "C-c &" =reftex-view-crossref= display cross-ref info
 
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
@@ -26,6 +27,9 @@
      (append
          '(("\\.tikz\\'" . latex-mode))
           auto-mode-alist))
+
+;; Basic settings
+(setq TeX-insert-braces nil)
 
 ;; More pair-mode in LaTeX
 ;
@@ -95,7 +99,11 @@
       '(("column" "{")
         ("yue" "{")))
 
-;; So that RefTeX finds my bibliography
+;; Extend reftex-citation
+;http://www.gnu.org/software/auctex/manual/reftex.html#SEC52
+;http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands
+
+;; Make sure RefTeX finds my bibliography
 (setq reftex-default-bibliography '("./ref/library.bib"))
 ; Adding -shell-escape in pdflatex for mint
 (eval-after-load "tex" 

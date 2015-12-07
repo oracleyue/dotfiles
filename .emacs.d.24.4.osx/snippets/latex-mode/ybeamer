@@ -31,6 +31,26 @@
 %\setbeamertemplate{navigation symbols}{}
 %\setbeamercolor{title}{bg=red!65!black, fg=white}
 
+% use citations (not /biblatex/, beamer's default)
+%-- add bibliography as footnote at each page; \nobibliography{} in the titlepage frame
+\usepackage{bibentry}  % use \footnote{\bibentry{}}
+\bibliographystyle{apalike} % abbrv;apalike
+\newcommand{\footcite}[1]{\footnotetext{\bibentry{#1}}} % put \footnotemark first
+\newcommand{\textcite}[1]{\footnote{\bibentry{#1}}}
+%-- add bibliography at end: use no packages
+% \setbeamertemplate{bibliography item}{\insertbiblabel} % if want numbered entries; use 'abbrv'
+%-- add bibliography as footnote at each page or at end
+% \usepackage[style=numeric,backend=biber]{biblatex}  % use \footfullcite{} OR \fullcite{}; to compile: latex+biber+latex, NOT bibtex!
+% \addbibresource{./ref/library.bib}
+
+% refine citation styles
+%-- remove the icon
+\setbeamertemplate{bibliography item}{}
+%-- remove line breaks
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
 % include packages
 \usepackage{latexsym}
 \usepackage{amsmath}
@@ -52,24 +72,9 @@
 \renewcommand{\dateseparator}{/}
 \usepackage{hyperref}
 \usepackage{tikz}	
-% \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri,calc,intersections}
+% \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,
+%                   positioning,fit,petri,calc,intersections}
 \usepackage{calc}
-
-% %% theorem style given by /amsthm/
-% \theoremstyle{plain}% default
-% \newtheorem{theorem}{Theorem}[section]
-% \newtheorem{lemma}[theorem]{Lemma}
-% \newtheorem{proposition}[theorem]{Proposition}
-% \newtheorem*{corollary}{Corollary}
-% \theoremstyle{definition}
-% \newtheorem{definition}{Definition}[section]
-% \newtheorem{conjecture}{Conjecture}[section]
-% \newtheorem{example}{Example}[section]
-% \theoremstyle{remark}
-% \newtheorem*{remark}{Remark}
-% \newtheorem*{note}{Note}
-% \newtheorem{case}{Case}
-
 
 % General Settings
 \setcounter{footnote}{0}% Reset footnote counter
@@ -92,7 +97,7 @@
   pdftitle={},
   pdfauthor={Zuogong YUE},
   pdfsubject={Presentation Slides},
-  pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+  pdfcreator={Emacs version 24.5 + AUCTeX version 11.89}}
 
 % coordinates for logo in titlepage
 \newlength{\logoX}
@@ -136,6 +141,9 @@
   \end{tikzpicture}
 
   \titlepage
+  
+  % enable citations by /bibentry/; as footnote at each page
+  \nobibliography{./ref/library}
 \end{frame}
                            
 % add logo in slide template
@@ -171,6 +179,21 @@ $0
       \includegraphics[width=10cm]{figures/unix_happy.jpg}
     \end{center}
 \end{frame}
+
+
+% ---- Bibliography ----
+% %% using default bibtex; adding bibliography at end
+% \begin{frame}[allowframebreaks]%in case more than 1 slide needed
+%   \frametitle{References}
+%     {\footnotesize
+%     \bibliographystyle{abbrv} %apalike
+%     \bibliography{./ref/library}
+%     }
+% \end{frame}
+
+%% using /bibentry/; adding bibliography as footnote at each page
+% include bibtex libraries in front of any citations
+
 
 
 \end{document}
