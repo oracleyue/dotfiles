@@ -102,6 +102,20 @@
 ;; Extend reftex-citation
 ;http://www.gnu.org/software/auctex/manual/reftex.html#SEC52
 ;http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands
+;http://tex.stackexchange.com/questions/220632/how-to-limit-auctex-search-for-style-subdirectories
+;http://tex.stackexchange.com/questions/69031/auctex-style-for-siunitx
+;; set directly (not nice)
+;; (eval-after-load 'reftex-vars
+;;   '(progn
+;;      ;; (also some other reftex-related customizations)
+;;      (setq reftex-cite-format
+;;            '((?\r . "\\cite{%l}")
+;;              (?f . "\\footcite{%l}")
+;;              (?t . "\\textcite{%l}")))))
+;; use style files
+(eval-after-load 'reftex-vars
+  '(progn 
+     (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
 
 ;; Make sure RefTeX finds my bibliography
 (setq reftex-default-bibliography '("./ref/library.bib"))
