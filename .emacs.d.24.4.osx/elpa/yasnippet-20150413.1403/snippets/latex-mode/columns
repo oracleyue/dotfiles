@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: columns
-# key: cols
+# name: columns-default
+# key: colsdef
 # --
 \begin{columns}
   \begin{column}{.${1:5}\textwidth}

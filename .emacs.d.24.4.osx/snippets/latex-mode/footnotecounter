@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: setcounter in footnotemark
+# key: fmc
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\addtocounter{footnote}{-${1:2}}
+\stepcounter{footnote}\footnotetext{$0}

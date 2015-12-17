@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: new subfigure
+# name: subfigure
 # key: subfig
 # group: macros
 # expand-env: ((yas-indent-line 'fixed))

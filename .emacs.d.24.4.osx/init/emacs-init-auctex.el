@@ -8,6 +8,7 @@
 ;; 4. "C-c ." mark the current environment, e.g. \section OR \begin ... \end
 ;; 5. kill the sentence :: "M-k"; go the beginning/end of the sentence :: "M-a/e"
 ;; 6. "C-c &" =reftex-view-crossref= display cross-ref info
+;; 7. "C-q "" insert the double quote ", instead of ``''
 
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)

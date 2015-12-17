@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: subfigure
-# key: subfig
+# name: subfigure-default
+# key: subfigdef
 # --
 \begin{figure}[ht]
   \centering

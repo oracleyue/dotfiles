@@ -3,6 +3,7 @@
 ;; ----------------------------------------------------------------------
 ;; BASIC USAGES
 ;; ---------------
+;; captalize/upper/lower words: "M-c/u/l"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
 ;; kill backwards to the beginning of current line :: "M-0 C-k"
@@ -32,6 +33,8 @@
 
 ;;
 ;; Basic Emacs Operation Enhancement
+;;
+;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
 ;;
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
 (defun y:kill-ring-save ()

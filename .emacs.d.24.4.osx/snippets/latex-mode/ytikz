@@ -8,6 +8,7 @@
 
 % --- packages ---
 \usepackage{helvet}
+\usepackage[eulergreek]{sansmath}  % sans for math; set "font=\sffamily\sansmath" for node labels
 \renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
 \usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
 
@@ -29,7 +30,7 @@
 % \tikzset{auto, node distance=2cm, >=latex'}
 
 % --- tikz main body
-\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+\begin{tikzpicture}[auto, node distance=2cm, >=latex']
     $0
 
 \end{tikzpicture}

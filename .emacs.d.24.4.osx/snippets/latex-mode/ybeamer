@@ -19,6 +19,8 @@
 % \usefonttheme{serif} % default family is serif
 % set margins
 % \setbeamersize{text margin left=15pt,text margin right=15pt}
+% remove navigation buttons at bottom 
+%\setbeamertemplate{navigation symbols}{}
 
 
 % Theme for beamer presentation.
@@ -59,12 +61,11 @@
 \usepackage{mathabx}
 \usepackage{mathrsfs}
 \usepackage{txfonts}
-% \usepackage{amsthm}
 \usepackage{graphicx}
-% \usepackage{subfigure} % deprecated
 \usepackage{caption}
 \usepackage{subcaption}
-\captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+% \captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+\setbeamerfont{caption}{size=\scriptsize}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{xcolor}
