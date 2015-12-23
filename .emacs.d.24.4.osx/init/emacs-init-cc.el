@@ -147,7 +147,7 @@
 
 (defun oy-ac-clang-config ()
   ;; auto-complete setting for C/C++ mode
-  (setq ac-auto-start nil)   ; Note it is globally set to 4
+  ;(setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
   ;; auto-complete C/C++ headers
   (cond 
    ((string-equal system-type "gnu/linux")

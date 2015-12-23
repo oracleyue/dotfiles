@@ -76,7 +76,8 @@
 (cond
  ((string-equal system-type "darwin")
   ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
-  (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20150528.2022/jediepcserver-osx.py"))))
+  (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20151214.705/jediepcserver-osx.py"))))
+
 
 
 ;;; set max width to fix bug in popup menu in jedi (having set globally)

@@ -42,9 +42,10 @@
     (setq ac-auto-start nil)
     (ac-set-trigger-key "TAB")    ; trigger to start ac-complete
     ;3; certain modes enable/disable ac-auto-start
-    ; cc-mode disable ac-auto-start in "emacs-init-cc.el"
-    (add-hook 'emacs-lisp-mode-hook (lambda () (setq ac-auto-start 4)))
-    (add-hook 'lisp-interaction-mode-hook (lambda () (setq ac-auto-start 4)))
+    ;(add-hook 'emacs-lisp-mode-hook (lambda () (setq ac-auto-start 4)))
+    ;(add-hook 'lisp-interaction-mode-hook (lambda () (setq ac-auto-start 4)))
+    ;(add-hook 'python-mode-hook (lambda () (setq ac-auto-start nil)))
+    ;(add-hook 'c++-mode-hook (lambda () (setq ac-auto-start nil)))
 ;; set keys to control ac-complete behaviors
 (define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
 ;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
