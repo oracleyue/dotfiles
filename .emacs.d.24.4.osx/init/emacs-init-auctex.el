@@ -53,16 +53,16 @@
   (sp-local-pair "\\|" "\\|"
                  :trigger "\\|"
                  :unless '(sp-latex-point-after-backslash-left)
-                 :when '(sp-in-math-p)
-                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+                 :when '(sp-in-math-p))
+                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
   (sp-local-pair "\\left|" "\\right|"
                  :trigger "\\l|"
-                 :when '(sp-in-math-p)
-                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+                 :when '(sp-in-math-p))
+                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
   (sp-local-pair "\\left\\|" "\\right\\|"
                  :trigger "\\l\\|"
-                 :when '(sp-in-math-p)
-                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
+                 :when '(sp-in-math-p))
+                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
   )
 
 ;; More math-mode in LaTeX
@@ -183,3 +183,8 @@
      ;; '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
   )
 )
+
+;; define keybindings to refresh and fontify buffer
+(eval-after-load "latex"
+  '(progn
+     (define-key LaTeX-mode-map (kbd "C-<f5>") 'font-lock-fontify-buffer)))
