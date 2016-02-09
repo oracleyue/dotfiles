@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: text in color
+# key: tc
+# group: macros
+# --
+\textcolor{${1:yblue}}{$0}

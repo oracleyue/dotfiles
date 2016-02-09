@@ -93,14 +93,16 @@
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
 
 
-\author{Zuogong Yue$^{1}$ and Jorge Gon\c{c}alves$^{1,2}$% <-this % stops a space
-  \thanks{$^{1}$ Zuogong Yue and Jorge Gon\c{c}alves are with  
+\author{Zuogon Yue$^{1}$, Johan Thunberg$^{1}$ and Jorge Gon\c{c}alves$^{1}$%  <-this % stops a space
+  \thanks{$^{1}$ Zuogong Yue, Johan Thunberg and Jorge Gon\c{c}alves are with  
     Luxembourg Centre for Systems Biomedicine, and  Facult\'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
     7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg.}%
-  \thanks{$^{2}$ Jorge Gon\c{c}alves is with 
-    Department of Engineering, University of Cambridge, CB2 1PZ, UK.}%
-    \thanks{\hspace*{-3mm}Email: \{\href{mailto:zuogong.yue@uni.lu}{\tt
-        zuogong.yue},\href{mailto:jorge.goncalves@uni.lu}{\tt jorge.goncalves}\}{\tt @uni.lu}}%
+%  \thanks{$^{2}$ Jorge Gon\c{c}alves is with 
+%    Department of Engineering, University of Cambridge, CB2 1PZ, UK.}%
+  % \thanks{\hspace*{-3mm}Email: \href{mailto:johan.thunberg@uni.lu}{\tt
+  %     johan.thunberg@uni.lu}}%
+  \thanks{\hspace*{0mm}$^{*}$For correspondence, \href{mailto:johan.thunberg@uni.lu}{\tt
+        johan.thunberg@uni.lu}}%
 }
 
 
