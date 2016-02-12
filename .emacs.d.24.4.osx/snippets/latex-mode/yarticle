@@ -51,14 +51,13 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
-\usepackage{graphicx}
-\usepackage{caption}
+\usepackage{graphicx,wrapfig}
+\usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
-% \usepackage{subfigure} % deprecated
 % \usepackage{epsfig}
+
 \usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 \usepackage[usenames]{xcolor}
-% \usepackage[usenames]{color}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}  % to use \begin{mdframed}[style=yue]
 \usepackage{minted}

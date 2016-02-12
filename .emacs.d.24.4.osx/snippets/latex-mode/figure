@@ -4,7 +4,7 @@
 # group: macros
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{figure}[ht]
+\begin{figure}[htb]   %htbp!H
   \centering
   \includegraphics[width=\textwidth]{figures/${1:figname}}
   \caption{${2:caption}}

@@ -22,8 +22,9 @@
 
 \usepackage{algorithm,algpseudocode}
 
-\usepackage{graphicx}
-\usepackage{caption,subcaption}
+\usepackage{graphicx,wrapfig}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
 
 \usepackage[usenames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
