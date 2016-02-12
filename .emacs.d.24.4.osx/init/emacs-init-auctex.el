@@ -74,6 +74,8 @@
         ("v ="   "triangleq"   "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
+        ("."   "dots"    "Misc Symbol" nil)
+        ("v ."   "cdots"    "Misc Symbol" nil)
         ("T"   "top"    "Misc Symbol" nil)
         ("C-p" "partial" "Misc Symbol" nil)
         ("C-c" "circ" "Misc Symbol" nil)  ;overwrite \cos

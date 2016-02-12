@@ -74,6 +74,8 @@
 \usepackage[ddmmyyyy]{datetime}
   \renewcommand{\dateseparator}{/}
 \usepackage{hyperref}
+\usepackage{mdframed}   % to box theorem statements
+  \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{tikz}	
 % \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,
 %                   positioning,fit,petri,calc,intersections}
