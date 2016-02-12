@@ -31,7 +31,7 @@
   \usemintedstyle{pastie}
   \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small} %framerule=1pt
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage[round]{natbib} %numbers
+\usepackage[round,sort]{natbib} %numbers
 
 % theorem styles given by /amsthm/
 \theoremstyle{plain}% default
