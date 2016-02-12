@@ -120,8 +120,10 @@
   '(progn 
      (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
 
-;; Make sure RefTeX finds my bibliography
+;; Default bibtex paths for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))
+;; More bibtex resouces
+(setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
 ; Adding -shell-escape in pdflatex for mint
 (eval-after-load "tex" 
   '(setcdr (assoc "LaTeX" TeX-command-list)
