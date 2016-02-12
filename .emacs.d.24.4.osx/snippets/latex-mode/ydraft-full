@@ -1,10 +1,11 @@
 # -*- mode: snippet -*-
-# name: Draft Header
-# key: yd
+# name: Draft Header Full
+# key: ydf
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[a4paper,10pt]{article}
+% \documentclass[a4paper,11pt,onecolumn,twoside,compsoc]{IEEEtran}  % change to the /article/ class if you don't have /IEEEtran/ cls file
 % \usepackage[text={360pt, 595pt},centering]{geometry}     % latex /article.cls/ default layout
 \usepackage{setspace}
   \onehalfspacing
@@ -28,6 +29,8 @@
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
   \usemintedstyle{pastie}
   \fvset{
     frame=lines,
@@ -37,17 +40,21 @@
     fontsize=\small,
   }
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
-
 \usepackage{cite,natbib}
 
-% theorem styles given by /amsthm/
+
+%% theorem style given by /amsthm/
 \theoremstyle{plain}% default
+% \newtheorem{theorem}{Theorem}[section]
 \newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{proposition}[theorem]{Proposition}
 \newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
 \newtheorem*{corollary}{Corollary}
 \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
 \newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+% \newtheorem{conjecture}{Conjecture}[section]
 \newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
 \newtheorem{example}{Example}[section]
 \theoremstyle{remark}
@@ -55,14 +62,15 @@
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
+
 \setcounter{tocdepth}{3}
 \hypersetup{
+  pdftitle={},
   pdfauthor={Zuogong YUE},
+  pdfsubject={Drafts},
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
 
 
-
-% Title, Authors and Date
 \title{\sffamily \LARGE \bfseries ${1:title}}
 \author{Zuogong YUE \vspace*{1mm} \\\
 \small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\\ \small Universit\'{e} du Luxembourg
@@ -70,17 +78,19 @@
 \date{\small \today}
 
 
+
 \begin{document}
 
 \maketitle
 %     \thispagestyle{empty}
-%     \pagenumbering{Roman}
 %     % \vspace*{1cm}
+%     \pagenumbering{Roman}
 % \tableofcontents
 %     % \thispagestyle{empty}
 % \newpage
 %     \setcounter{page}{1}
 %     \pagenumbering{arabic}
+
 
 % ----------------- MAIN --------------------
 
@@ -99,17 +109,18 @@ $0
 % \newpage
 % % --------------- APPENDIX --------------
 % \appendix
-% \section*{Appendices}  
-% \addcontentsline{toc}{section}{List of appendices}   
+% % \section*{Appendices}                                % comment when using /IEEEtran/
+% % \addcontentsline{toc}{section}{List of appendices}   % comment when using /IEEEtran/
 % \renewcommand{\thesubsection}{\Alph{subsection}}
+%     Appendix here ...
 
 % \subsection{appendix 1}
-%     Appendix here ...
+
 
 
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
-% \bibliographystyle{apalike}
+% \bibliographystyle{plainnat}   % apalike
 % {\footnotesize
 % \bibliography{./ref/library}}
 

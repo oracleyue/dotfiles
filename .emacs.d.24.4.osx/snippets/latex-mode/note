@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: notes in color
-# key: note
-# group: macros
-# --
-{\color{${1:red}} $0 }
