@@ -41,7 +41,7 @@
   }
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage{cite}
-% \usepackage[round]{natbib} %numbers
+\usepackage[round]{natbib} %numbers
 
 
 %% theorem style given by /amsthm/
@@ -121,10 +121,10 @@ $0
 
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
-% %\bibliographystyle{plainnat}   % abbrvnat,unsrtnat; if using "natbib"
-% \bibliographystyle{apalike}  %ieeetr,apalike,plain,abbrv,acm,unsrt,alpha,siam
-% {\footnotesize
-% \bibliography{./ref/library}}
+% %\bibliographystyle{ieeetr}  %ieeetr,apalike,plain,abbrv,acm,unsrt,alpha,siam
+% \bibliographystyle{plainnat}   % abbrvnat,unsrtnat; if using "natbib"
+% {\footnotesize \bibliography{./ref/library}}
+
 
 \end{document}
 
