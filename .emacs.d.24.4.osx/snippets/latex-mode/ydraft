@@ -103,7 +103,7 @@ $0
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
 % %\bibliographystyle{ieeetr}  %ieeetr,apalike,plain,abbrv,acm,unsrt,alpha,siam
-% \bibliographystyle{plainnat}   % abbrvnat,unsrtnat; if using "natbib"
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
 % {\footnotesize \bibliography{./ref/library}}
 
 \end{document}
