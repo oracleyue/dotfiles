@@ -26,16 +26,10 @@
 
 \usepackage[usenames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
-    \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+  \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}
   \usemintedstyle{pastie}
-  \fvset{
-    frame=lines,
-    % framerule=1pt,
-    framesep=2mm,
-    baselinestretch=1.2,
-    fontsize=\small,
-  }
+  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small} %framerule=1pt
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round]{natbib} %numbers
 
