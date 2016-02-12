@@ -8,17 +8,17 @@
   \centering
   
   \begin{subfigure}[b]{0.4\textwidth}
-    \label{fig:subfig-label}
     \includegraphics[width=\textwidth]{figures/${1:figname}}
     \caption{subfig caption}
+    \label{fig:subfig-label}
   \end{subfigure}
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
   \begin{subfigure}[b]{0.4\textwidth}
-    \label{fig:subfig-label}
     \includegraphics[width=\textwidth]{figures/${2:figname}}
     \caption{subfig caption}
+    \label{fig:subfig-label}    
   \end{subfigure}
   
   \caption{$0}
-  \label{fig:label}
+  \label{fig:${3:label}}
 \end{figure}
