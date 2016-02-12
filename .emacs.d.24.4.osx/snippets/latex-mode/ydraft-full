@@ -40,7 +40,6 @@
     fontsize=\small,
   }
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage{cite}
 \usepackage[round]{natbib} %numbers
 
 

@@ -82,7 +82,6 @@
 % \usepackage[toc,page]{appendix}
   % \renewcommand{\appendixtocname}{List of appendices}
 % \usepackage{titlesec}
-\usepackage{cite}
 \usepackage[round]{natbib} %numbers
 
 % % MISCELLANIES

@@ -101,6 +101,9 @@
 (setq font-latex-match-variable-keywords
       '(("column" "{")
         ("yue" "{")))
+(setq font-latex-match-reference-keywords
+      '(("citep" "{")
+        ("citet" "{")))
 
 ;; Extend reftex-citation
 ;http://www.gnu.org/software/auctex/manual/reftex.html#SEC52
