@@ -59,7 +59,7 @@
 % Title, Authors and Date
 \title{\sffamily \LARGE \bfseries ${1:title}}
 \author{Zuogong YUE \vspace*{1mm} \\\
-\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\\ \small Universit\'{e} du Luxembourg
+\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\\ \small Universit\\'{e} du Luxembourg
 }
 \date{\small \today}
 

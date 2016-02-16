@@ -9,6 +9,8 @@
 ;; 5. kill the sentence :: "M-k"; go the beginning/end of the sentence :: "M-a/e"
 ;; 6. "C-c &" =reftex-view-crossref= display cross-ref info
 ;; 7. "C-q "" insert the double quote ", instead of ``''
+;; 8. "M-<tab>" complete macros
+;; 9. "C-<return>" flyspell auto correct words
 
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
@@ -94,7 +96,10 @@
         ("bigskip" "")
         ("noindent" "")
         ("indent" "")
-        ("pause")
+        ("textstyle" "")
+        ("displaystyle" "")
+        ("protect")
+        ("pause")        
         ("makelecture" "")
         ("makeproblemset" "")
         ("solution" "")))
@@ -191,7 +196,11 @@
   )
 )
 
-;; define keybindings to refresh and fontify buffer
+;; keybinding definitions
 (eval-after-load "latex"
   '(progn
-     (define-key LaTeX-mode-map (kbd "C-<f5>") 'font-lock-fontify-buffer)))
+     ;; define keybindings to refresh and fontify buffer
+     (define-key LaTeX-mode-map (kbd "C-<f5>") 'font-lock-fontify-buffer)
+     ;; macro completions (flushed by flyspell.el)
+     (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)
+     (define-key LaTeX-mode-map (kbd "C-<return>") 'flyspell-auto-correct-word)))
