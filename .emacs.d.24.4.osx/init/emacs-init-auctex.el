@@ -11,6 +11,7 @@
 ;; 7. "C-q "" insert the double quote ", instead of ``''
 ;; 8. "M-<tab>" complete macros
 ;; 9. "C-<return>" flyspell auto correct words
+;; 10."C-c _" to query for master files
 
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
@@ -69,9 +70,10 @@
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list
-      '(
-        ;; ("<"   "preceq" "Relational" 10927)
-        ;; (">"   "succeq" "Relational" 10928)
+      '(("<"   "prec" "Relational" nil)
+        (">"   "succ" "Relational" nil)
+        ("v <"   "preceq" "Relational" 10927)
+        ("v >"   "succeq" "Relational" 10928)
         ("=" "coloneqq"    "Relational" nil)
         ("v ="   "triangleq"   "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
@@ -110,7 +112,7 @@
       '(("citep" "{")
         ("citet" "{")))
 
-;; Extend reftex-citation
+;;; Extend reftex-citation
 ;http://www.gnu.org/software/auctex/manual/reftex.html#SEC52
 ;http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands
 ;http://tex.stackexchange.com/questions/220632/how-to-limit-auctex-search-for-style-subdirectories
@@ -127,6 +129,10 @@
 (eval-after-load 'reftex-vars
   '(progn 
      (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
+
+;; Set master files nil by default
+;; use "C-c _" to query for master files
+(setq-default TeX-master t) ;stop querying for master files
 
 ;; Default bibtex paths for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))

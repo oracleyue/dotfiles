@@ -9,6 +9,7 @@
 ;; kill backwards to the beginning of current line :: "M-0 C-k"
 ;; comment line or region :: "C=\"
 ;; uncomment line or region :: "C-S-\"
+;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
 ;; toggle overwrite mode :: "M-x overwrite-mode"
 ;; mark rings to jump:
 ;;      - set mark :: "C-SPC C-SPC"
@@ -35,6 +36,15 @@
 ;; Basic Emacs Operation Enhancement
 ;;
 ;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
+;;
+;; revert-buffer: update buffer if the file in disk has changed
+(defun y:revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer t t)
+    (minibuffer-message "File changed on disk. Reread from disk."))
+;; (global-set-key (kbd "C-x C-v") 'revert-buffer)
+;(global-set-key (kbd "C-x C-v") 'y:revert-buffer-no-confirm)
 ;;
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
 (defun y:kill-ring-save ()

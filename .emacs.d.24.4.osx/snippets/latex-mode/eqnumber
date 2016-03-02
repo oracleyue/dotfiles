@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: equation number label
-# key: nu
+# key: eq
 # group: macros
 # --
 % Equation #${1:number}:

@@ -151,18 +151,18 @@
      (propertize (format (format " %%%dd " w) line) 'face 'linum)))
 (setq linum-format 'linum-format-func)
 ;; enable linum-mode
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'sh-mode-hook 'linum-mode)
-(add-hook 'matlab-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'c-mode-common-hook 'linum-mode)
-(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
-(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
+;(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+;(add-hook 'sh-mode-hook 'linum-mode)
+;(add-hook 'matlab-mode-hook 'linum-mode)
+;(add-hook 'python-mode-hook 'linum-mode)
+;(add-hook 'c-mode-common-hook 'linum-mode)
+;(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
+;(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
  
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
-   (bash-completion-setup)
+(bash-completion-setup)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /multiple-cursors/: edit with multiple cursors
@@ -351,7 +351,7 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Icomplete Mode/
-; in "emacs-init-archived.el"
+;; refer to "emacs-init-archived.el"
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /neotree/
@@ -369,18 +369,18 @@
 ;; For /ECB/
 ;; [SOURCE]: https://github.com/emacsmirror/ecb
 ;;
-(add-to-list 'load-path "~/.emacs.d/git/ecb")
-(require 'ecb)
-(require 'ecb-autoloads)
-(setq ecb-windows-width 0.16)
-(setq ede-project-directories (quote ("~/Workspace/c")))
-(setq ecb-source-path '(
-                        "~/Workspace/c/src"
-                        "~/Workspace/c/include"
-                        ;"~/tmp/eign"
-                        ))
-(setq ecb-tip-of-the-day nil)
-(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+;; (add-to-list 'load-path "~/.emacs.d/git/ecb")
+;; (require 'ecb)
+;; (require 'ecb-autoloads)
+;; (setq ecb-windows-width 0.16)
+;; (setq ede-project-directories (quote ("~/Workspace/c")))
+;; (setq ecb-source-path '(
+;;                         "~/Workspace/c/src"
+;;                         "~/Workspace/c/include"
+;;                         ;"~/tmp/eign"
+;;                         ))
+;; (setq ecb-tip-of-the-day nil)
+;; (setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
 
 ;; (add-hook 'c-mode-hook 'ecb-activate)
 ;; (add-hook 'c++-mode-hook 'ecb-activate)

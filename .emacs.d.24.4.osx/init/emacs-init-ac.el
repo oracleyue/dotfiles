@@ -2,7 +2,7 @@
 ;; /Yasnippet/ A template system
 (require 'popup)
 (require 'yasnippet) ;; not yasnippet-bundle
-;(add-to-list 'yas-snippet-dirs "~/.emacs.d/git/emacs-for-python/extensions/yasnippet/snippets")
+;; to add user-defined snippet paths: (add-to-list 'yas-snippet-dirs "PATH NAME")
 (yas-global-mode 1)
 (setq-default mode-require-final-newline nil)
 ;; use popup in yasnippet
