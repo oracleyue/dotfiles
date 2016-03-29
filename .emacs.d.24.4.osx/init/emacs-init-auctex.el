@@ -78,6 +78,7 @@
         ("v ="   "triangleq"   "Relational" nil)
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
+        ("v n" "nabla"    "Misc Symbol" nil)
         ("."   "dots"    "Misc Symbol" nil)
         ("v ."   "cdots"    "Misc Symbol" nil)
         ("T"   "top"    "Misc Symbol" nil)
@@ -107,6 +108,7 @@
         ("solution" "")))
 (setq font-latex-match-variable-keywords
       '(("column" "{")
+        ("url" "{")
         ("yue" "{")))
 (setq font-latex-match-reference-keywords
       '(("citep" "{")
@@ -210,3 +212,8 @@
      ;; macro completions (flushed by flyspell.el)
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)
      (define-key LaTeX-mode-map (kbd "C-<return>") 'flyspell-auto-correct-word)))
+
+;; utility definitions
+(defun y:delete-latex-comments ()
+  (interactive)
+  (query-replace-regexp "\\(^\\| *[^\\\\]\\)%.*" "" nil nil))

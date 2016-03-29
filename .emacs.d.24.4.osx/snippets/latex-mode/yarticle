@@ -57,7 +57,7 @@
 % \usepackage{epsfig}
 
 \usepackage{enumerate}  % to use \begin{enumerate}[(a)]
-\usepackage[usenames]{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}  % to use \begin{mdframed}[style=yue]
 \usepackage{minted}

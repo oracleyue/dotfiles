@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: argument options via strings
+# key: option
+# --
+if nargin > 3
+   for arg_index = 1:length(varargin)
+       if varargin{arg_index} == 'figname'
+          figname = varargin{arg_index+1};
+       end
+   end
+end
+          

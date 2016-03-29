@@ -4,7 +4,7 @@
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass{beamer}    % "[handout]" option; by default [presentation]
+\documentclass[xcolor={dvipsnames}]{beamer}    % "[handout]" option; by default [presentation]
 % \documentclass[handout]{beamer}
 % \documentclass[notes,handout]{beamer} % "[notes]" print notes
 %\mode<presentation>
@@ -68,14 +68,24 @@
   \setbeamerfont{caption}{size=\scriptsize}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{xcolor}    %\textcolor{color-name}{texts}
-  % \definecolor{yblue}{RGB}{51,51,179}
-  \definecolor{yblue}{RGB}{38,38,134}
+% \usepackage{xcolor}    % beamer load xcolor by default
+  \definecolor{yblue}{RGB}{38,38,134} %{51,51,179}
 \usepackage[ddmmyyyy]{datetime}
   \renewcommand{\dateseparator}{/}
 \usepackage{hyperref}
-\usepackage{mdframed}   % to box theorem statements
+\usepackage{mdframed}   % to box theorem statements; "frame" using "fragile"
   \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+\usepackage{minted}     % "frame" using "fragile"
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
+  \usemintedstyle{pastie}
+  \fvset{
+    % frame=lines,
+    % framerule=1pt,
+    framesep=2mm,
+    baselinestretch=1.2,
+    fontsize=\normalsize
+  }    
 \usepackage{tikz}	
 % \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,
 %                   positioning,fit,petri,calc,intersections}
@@ -85,19 +95,8 @@
 \setcounter{footnote}{0}% Reset footnote counter
 \let\SMALL\footnotesize
 \renewcommand*{\footnotesize}{\tiny}
-% color definition for xcolor
-\definecolor{olive}{rgb}{0.3, 0.4, .1}
-\definecolor{fore}{RGB}{249,242,215}
-\definecolor{back}{RGB}{51,51,51}
-\definecolor{title}{RGB}{255,0,90}
-\definecolor{dgreen}{rgb}{0.,0.6,0.}
-\definecolor{gold}{rgb}{1.,0.84,0.}
-\definecolor{JungleGreen}{cmyk}{0.99,0,0.52,0}
-\definecolor{BlueGreen}{cmyk}{0.85,0,0.33,0}
-\definecolor{RawSienna}{cmyk}{0,0.72,1,0.45}
-\definecolor{Magenta}{cmyk}{0,1,0,0}
 
-% input math symbol definitions
+% Input math symbol definitions
 \input{userdef-mathsymb}
 
 

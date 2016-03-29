@@ -13,7 +13,7 @@
 
 (custom-set-faces
  ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
- '(default ((t (:font "DejaVu Sans Mono-13"))))   ;; 13
+ '(default ((t (:font "DejaVu Sans Mono-13"))))   ;; 13  ;10.5 in Thinpad
  ;; Note that set the font-size of fixed-pitch different from 'default will cause troubles on auto-completion when enabling linum-mode.
  ;; '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
  ;; mode-line with smaller font size
@@ -393,3 +393,5 @@
 ;; 
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)
+;; open default Dired folders on startup
+(y:dired-open-folders-startup)  ; defined in emacs-init-basics.el

@@ -26,7 +26,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
-\usepackage[usenames]{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}

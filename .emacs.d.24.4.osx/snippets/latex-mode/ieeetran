@@ -20,8 +20,9 @@
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
 %\usepackage{times} % assumes new font selection scheme installed
-% \usepackage[scaled=.8]{DejaVuSansMono}
+%\usepackage[scaled=.8]{DejaVuSansMono}
 \usepackage[scaled=0.95]{inconsolata}
+\usepackage[T1]{fontenc}
 
 \usepackage{latexsym}
 \usepackage{amsmath}
@@ -134,6 +135,6 @@ This electronic document is a ÒliveÓ template. The various components of your 
 
 % --------------- BIBLIOGRAPHY --------------
 \bibliographystyle{IEEEtran}
-\bibliography{IEEEabrv,./ref/library}
+\bibliography{./ref/library}
 
 \end{document}

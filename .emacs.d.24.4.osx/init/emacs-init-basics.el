@@ -30,6 +30,7 @@
 ;; indent region in python-mode
 ;;      - python-indent-shift-right "C-c >"
 ;;      - python-indent-shift-left  "C-c <"
+;; open default Dired folders on startup :: "M-x y:dired-open-folders-startup"
 ;; ----------------------------------------------------------------------
 
 ;;
@@ -38,14 +39,14 @@
 ;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
 ;;
 ;; revert-buffer: update buffer if the file in disk has changed
-(defun y:revert-buffer-no-confirm ()
-    "Revert buffer without confirmation."
-    (interactive)
-    (revert-buffer t t)
-    (minibuffer-message "File changed on disk. Reread from disk."))
+;(defun y:revert-buffer-no-confirm ()
+;    "Revert buffer without confirmation."
+;    (interactive)
+;    (revert-buffer t t)
+;    (minibuffer-message "File changed on disk. Reread from disk."))
 ;; (global-set-key (kbd "C-x C-v") 'revert-buffer)
 ;(global-set-key (kbd "C-x C-v") 'y:revert-buffer-no-confirm)
-;;
+;;;
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
 (defun y:kill-ring-save ()
         (interactive)
@@ -61,7 +62,7 @@
           (kill-region (point) (mark))))
 (global-set-key (kbd "M-w") 'y:kill-ring-save)
 (global-set-key (kbd "C-w") 'y:kill-region)
-;;
+;;;
 (defun y:mark-current-line ()
   "Select the current line"
   (interactive)
@@ -75,7 +76,7 @@
 ;; Face Enhancement
 ;; 
 
-;; setting size of frames
+;; setting size of frames (moving to .emacs)
 ;(when window-system (set-frame-size (selected-frame) 100 36))
 ;(add-to-list 'default-frame-alist '(height . 36))
 ;(add-to-list 'default-frame-alist '(width . 100))
@@ -255,27 +256,29 @@
 ;;; Spell Checking for some modes
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(setq ispell-dictionary "british")
-;(setq ispell-dictionary "american")
+;; (setq ispell-dictionary "british")
+(setq ispell-dictionary "american")
 (add-hook 'LaTeX-mode-hook 'ispell)
 
 
+;; oracleyue's inital Dired folders on startup
+(defun y:dired-open-folders-startup ()
+  (interactive)
+  (dired "~/Public/Dropbox/oracleyue/OrgNote")
+  (dired "~/Public/Dropbox/Workspace/matlab")
+  (dired "~/Public/Dropbox/Academia/Manuscripts"))
+;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
+;(switch-to-buffer "*scratch*")
+
 ;; oracleyue's inital path setting
-;(cd "~/Public/Dropbox/oracleyue/OrgNote")
-;(cd "~/Public/Dropbox/Academia/matlab")
-(cd "~/Public/Dropbox/Academia/Manuscripts/DSF")
-;(cd "~/Workspace/matlab")
+(cd "~/Public/Dropbox/Academia/Manuscripts")
     ;; For Ubuntu@LCSB 
-    ;(setq default-directory "~/Workspace/matlab/Feng_prj_HPC")
+    ;(setq default-directory "~/Workspace/matlab")
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
     ; For Ubuntu@LCSB
     ; (setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk-amd64/jre")
-(setenv "orgnote" "~/Public/Dropbox/oracleyue/OrgNote")
-(setenv "gitdoc" "~/Public/Dropbox/Academia/Manuscripts")
-(setenv "github" "~/Worksapce/github.com")
-(setenv "gitrepo" "~/Worksapce/gitrepo")
 
 ;;; oracleyue's env. variables to control shell
 ;; ;; Shell mode
