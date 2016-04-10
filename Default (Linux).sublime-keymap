@@ -17,6 +17,7 @@
 	{"keys": ["ctrl+x", "ctrl+s"], "command": "save"},
 	{"keys": ["ctrl+x", "ctrl+b"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
 	{"keys": ["ctrl+x", "ctrl+f"], "command": "prompt_open_file" },
+	{"keys": ["ctrl+x", "ctrl+o"], "command": "prompt_open_folder"},
 
 
     //// restore default functionality
