@@ -151,13 +151,13 @@
      (propertize (format (format " %%%dd " w) line) 'face 'linum)))
 (setq linum-format 'linum-format-func)
 ;; enable linum-mode
-;(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-;(add-hook 'sh-mode-hook 'linum-mode)
-;(add-hook 'matlab-mode-hook 'linum-mode)
-;(add-hook 'python-mode-hook 'linum-mode)
-;(add-hook 'c-mode-common-hook 'linum-mode)
-;(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
-;(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'sh-mode-hook 'linum-mode)
+(add-hook 'matlab-mode-hook 'linum-mode)
+(add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'c-mode-common-hook 'linum-mode)
+(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
+(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
  
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /bash-completion/: TAB complete alias and functions
