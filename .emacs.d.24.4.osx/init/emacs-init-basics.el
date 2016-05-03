@@ -266,9 +266,9 @@
   (interactive)
   (dired "~/Public/Dropbox/oracleyue/OrgNote")
   (dired "~/Public/Dropbox/Workspace/matlab")
-  (dired "~/Public/Dropbox/Academia/Manuscripts"))
+  (dired "~/Public/Dropbox/Academia/Manuscripts")
+  (switch-to-buffer "*scratch*"))
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
-;(switch-to-buffer "*scratch*")
 
 ;; oracleyue's inital path setting
 (cd "~/Public/Dropbox/Academia/Manuscripts")

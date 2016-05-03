@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
-# name: boxed statements
+# name: boxed equations
 # key: box
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{mdframed}[style=yue]
-    $0
-\end{mdframed}
+\begin{equation*}
+  \setlength\fboxsep{0.2cm}
+  \setlength\fboxrule{0.4pt}
+  \boxed{$0}
+\end{equation*}

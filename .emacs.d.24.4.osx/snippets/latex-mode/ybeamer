@@ -39,15 +39,15 @@
 \bibliographystyle{apalike} % abbrv;apalike
 \newcommand{\footcite}[1]{\footnotetext{\bibentry{#1}}} % put \footnotemark first
 \newcommand{\textcite}[1]{\footnote{\bibentry{#1}}}
-%-- add bibliography at end: use no packages
-% \setbeamertemplate{bibliography item}{\insertbiblabel} % if want numbered entries; use 'abbrv'
+%-- add bibliography at end: use the default /bibtex/ packages
 %-- add bibliography as footnote at each page or at end
 % \usepackage[style=numeric,backend=biber]{biblatex}  % use \footfullcite{} OR \fullcite{}; to compile: latex+biber+latex, NOT bibtex!
 % \addbibresource{./ref/library.bib}
 
-% refine citation styles
+% refine citation styles; use /bibtex/, /bibentry/
 %-- remove the icon
-\setbeamertemplate{bibliography item}{}
+% \setbeamertemplate{bibliography item}{} % remove file icons
+% \setbeamertemplate{bibliography item}{\insertbiblabel} % if want numbered entries; use 'abbrv'
 %-- remove line breaks
 \setbeamertemplate{bibliography entry title}{}
 \setbeamertemplate{bibliography entry location}{}
@@ -97,7 +97,7 @@
 \renewcommand*{\footnotesize}{\tiny}
 
 % Input math symbol definitions
-\input{userdef-mathsymb}
+%\input{userdef-mathsymb}
 
 
 % PDF info
@@ -117,7 +117,8 @@
 \title[${2:abbrev title}]{${1:title}}
 \subtitle{${3:}}
 \author{Zuogong YUE}
-\institute[LCSB \& FSTC]{{\scriptsize supervised by}\\\ \vspace{.2cm}{\SMALL Prof. Jorge Gon\c{c}alves}\\\ \vspace{.60cm} Faculty of Science, Technology and Communication\\\ Luxembourg Centre for Systems Biomedicine\\\ \smallskip University of Luxembourg}
+\institute[LCSB]{{\scriptsize supervised by}\\\ \vspace{.2cm}{\SMALL Prof. Jorge Gon\c{c}alves}\\\ \vspace{.60cm} Faculty of Science, Technology and Communication\\\ Luxembourg Centre for Systems Biomedicine\\\ \smallskip University of Luxembourg}
+%\institute[LCSB]{\vspace{.30cm} \\Faculty of Science, Technology and Communication\\ Luxembourg Centre for Systems Biomedicine\\ \medskip University of Luxembourg}
 \date[\today]{}
 
 % Table of Contents before each section
@@ -190,11 +191,12 @@ $0
 
 
 % ---- Bibliography ----
-% %% using default bibtex; adding bibliography at end
+% %% using default /bibtex/
+; adding bibliography at end
 % \begin{frame}[allowframebreaks]%in case more than 1 slide needed
 %   \frametitle{References}
 %     {\footnotesize
-%     \bibliographystyle{abbrv} %apalike
+%     \bibliographystyle{apalike} %apalike,abbrv
 %     \bibliography{./ref/library}
 %     }
 % \end{frame}
