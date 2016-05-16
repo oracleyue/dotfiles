@@ -76,6 +76,7 @@
         ("v >"   "succeq" "Relational" 10928)
         ("=" "coloneqq"    "Relational" nil)
         ("v ="   "triangleq"   "Relational" nil)
+        ("_" "bar"    "Accents" nil)
         ("v ~" "thicksim"    "Relational" nil)
         ("v 0" "varnothing"    "Misc Symbol" nil)
         ("v n" "nabla"    "Misc Symbol" nil)
