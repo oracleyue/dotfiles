@@ -311,6 +311,12 @@
 ;(matlab-cedet-setup)
 
 ; =======================================
+;; Programming Environment for /AppleScript/
+(autoload 'applescript-mode "applescript-mode"
+  "Major mode for editing AppleScript source." t)
+(add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+
+; =======================================
 ;; Editing Mode for /Markdown/
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)

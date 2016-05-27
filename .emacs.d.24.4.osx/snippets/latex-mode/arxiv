@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: arxiv
+# key: arxiv
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[letterpaper]{article}
+\pdfoutput=1 
+
+\usepackage{hyperref}
+\hypersetup{
+  pdfinfo={
+    Title={},
+    Author={Zuogong Yue},
+    Subject={},
+    Keywords={}
+  }
+}
+\usepackage{pdfpages}
+
+\begin{document}
+\includepdf[pages=1-last]{${1:filename}.pdf}
+\end{document}

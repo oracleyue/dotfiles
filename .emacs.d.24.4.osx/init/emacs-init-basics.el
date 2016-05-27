@@ -267,12 +267,12 @@
   (dired "~/Public/Dropbox/oracleyue/OrgNote")
   (dired "~/Public/Dropbox/Workspace/matlab")
   (dired "~/Public/Dropbox/Academia/Manuscripts")
-  (dired "~/Public/Dropbox/Shared/Johan_n_Zuogong")
+  (dired "~/Public/Dropbox/Shared/Johan_Zuogong")
   (switch-to-buffer "*scratch*"))
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
 
 ;; oracleyue's inital path setting
-;(cd "~/Public/Dropbox/Academia/Manuscripts")
+(cd "~/Public/Dropbox/Academia/Manuscripts")
     ;; For Ubuntu@LCSB 
     ;(setq default-directory "~/Workspace/matlab")
 

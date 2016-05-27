@@ -61,10 +61,10 @@
 \let\NAT@parse\undefined
 \makeatother
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage{minted}
-% \definecolor{bg}{RGB}{39,40,34}
-% \usemintedstyle{monokai}
-\usemintedstyle{pastie}
+% \usepackage{minted}
+% \usemintedstyle{pastie}
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma} 
