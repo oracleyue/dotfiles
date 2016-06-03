@@ -5,9 +5,8 @@
 /* shrink headebars */
 headerbar {
     min-height: 28px;
-    /*padding-left: 2px; */
-    /*[>[> same as childrens vertical margins for nicer proportions <]<]*/
-    /*padding-right: 2px;*/
+    padding-left: 2px;   /* same as childrens vertical margins for nicer proportions */
+    padding-right: 2px;
 
     border-radius: 2px;  /* remove the rounded corners*/
 }
@@ -16,15 +15,14 @@ headerbar entry,
 headerbar spinbutton,
 headerbar button,
 headerbar separator {
-    /*margin-top: 1px; */
-    /*[> same as headerbar side padding for nicer proportions <]*/
-    /*margin-bottom: 1px;*/
+    margin-top: 1px; /* same as headerbar side padding for nicer proportions */
+    margin-bottom: 1px;
 }
 
 /* shrink ssd titlebars */
 .default-decoration {
-    min-height: 0; /* let the entry and button drive the titlebar size */ 
-    /*padding: 2px*/
+    min-height: 0;  /* let the entry and button drive the titlebar size */ 
+    padding: 2px
 }
 
 .default-decoration .titlebutton {
