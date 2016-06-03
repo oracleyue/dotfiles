@@ -17,8 +17,8 @@
 	  (lambda ()
 	    (define-key python-mode-map "\C-ci" 'rope-auto-import)
 	    ;(define-key python-mode-map "\C-c\C-d" 'rope-show-calltip)
-        (define-key python-mode-map "\C-c\C-e" 'rope-show-calltip) ;oracleyue
-        (define-key python-mode-map "\C-ce" 'rope-show-doc) ;oracleyue
+        ;(define-key python-mode-map "\C-c\C-e" 'rope-show-calltip) ;oracleyue
+        ;(define-key python-mode-map "\C-ce" 'rope-show-doc) ;oracleyue; also defined in /python.el/
 	    )
 )
 

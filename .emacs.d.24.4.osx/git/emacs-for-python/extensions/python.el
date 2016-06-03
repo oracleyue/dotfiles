@@ -227,11 +227,13 @@
 
 ;;; Bindings
 
-; oracleyue, added: BEGIN
+; oracleyue, added: BEGIN ----------
 (add-to-list 'load-path "~/.emacs.d/git")
 ;; (require 'dash-at-point)
 (require 'jedi-core)
-; oracleyue, added: END
+(defalias 'y:rope-show-doc 'rope-show-doc)
+(defalias 'y:rope-show-calltip 'rope-show-calltip)
+; oracleyue, added: END ----------
 
 (defvar python-mode-map
   (let ((map (make-sparse-keymap)))
@@ -265,11 +267,12 @@
     (define-key map "\C-c\C-f" 'python-shell-send-file)   ;oracleyue, modeified; C-c C-l
     (define-key map "\C-c\C-z" 'python-shell-switch-to-shell)
     ;; Some util commands
-    (define-key map "\C-c\C-v" 'python-check)
+    (define-key map "\C-c\C-p" 'python-check)   ;oracleyue, C-c C-v
+    ;; (define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, C-c C-f
     ;; (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
-    (define-key map "\C-c?" 'jedi:show-doc)     ;oracleyue, added
-    ;(define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue
-    ;(define-key map "\C-ce" 'rope-show-doc)     ;oracleyue, added
+    (define-key map "\C-c\C-v" 'jedi:show-doc)     ;oracleyue, added
+    (define-key map "\C-ce" 'y:rope-show-doc)     ;oracleyue, added
+    (define-key map "\C-c\C-e" 'y:rope-show-calltip)     ;oracleyue, added
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
                                map global-map)
@@ -316,14 +319,16 @@
          :help "Check file for errors"]
 ;        ["Help on symbol" python-eldoc-at-point
 ;         :help "Get help on symbol at point"]
-;        ["Rope help on symbol" rope-show-doc  ; oracleyue, added
-;         :help "Get help on symbol at point by Rope"]
+        ["Rope show call tips" y:rope-show-calltip]  ;oralceyue, added
+        ["Rope help on symbol" y:rope-show-doc  ; oracleyue, added
+         :help "Get help on symbol at point by Rope"]
         ["Jedi help on symbol" jedi:show-doc     ; oracleyue, added
          :help "Get help on symbol at point by Jedi"]    ; oracleyue, added
         ;; ["Dash help on symbol" dash-at-point     ; oracleyue, added
         ;; :help "Get help on symbol at point by Dash"]   ; oracleyue, added
-        ["Complete symbol" completion-at-point
-         :help "Complete symbol before point"]))
+        ;; ["Complete symbol" completion-at-point
+        ;;  :help "Complete symbol before point"]
+        ))
     map)
   "Keymap for `python-mode'.")
 
