@@ -63,7 +63,7 @@
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)     ; optional
-;; set wait time before showing funciton call signature tooltip in ms
+;; set wait time before showing funciton call signature tip in ms
 (setq jedi:get-in-function-call-delay 200)
 ;; usages:
     ;; use jedi to show python doc of the object at point; =jedi:show-doc=
@@ -72,19 +72,10 @@
     ;; - keybinding: "C-c ."
     ;; go to the last point where =jedi:got-definition= was called
     ;; - keybinding: "C-c ,"
-;; reset jediepcserver backend for osx machines
-;; (cond
-;;  ((string-equal system-type "darwin")
-;;   (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
-
+;; set calltip methods
+;(setq jedi:tooltip-method '(popup))  ;or pos-tip
 
 ;; fix bugs in ac due to line wrap
 (add-hook 'python-mode-hook (lambda ()
                               (setq truncate-lines t)))
 
-
-
-;;; set max width to fix bug in popup menu in jedi (having set globally)
-;; (defun python-mode-ac-popup-width ()
-;;   (setq-local ac-max-width 0.5))
-;; (add-hook 'python-mode-hook 'python-mode-ac-popup-width)
