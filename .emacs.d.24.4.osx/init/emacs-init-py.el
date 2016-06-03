@@ -64,19 +64,24 @@
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)     ; optional
-;;set wait time before showing funciton call signature tooltip in ms
+;; set wait time before showing funciton call signature tooltip in ms
 (setq jedi:get-in-function-call-delay 200)
-;; use jedi to show python doc of the object at point; =jedi:show-doc=
-;; - keybinding: "C-c ?"
-;; use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
-;; - keybinding: "C-c ."
-;; go to the last point where =jedi:got-definition= was called
-;; - keybinding: "C-c ,"
+;; usages:
+    ;; use jedi to show python doc of the object at point; =jedi:show-doc=
+    ;; - keybinding: "C-c ?"
+    ;; use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
+    ;; - keybinding: "C-c ."
+    ;; go to the last point where =jedi:got-definition= was called
+    ;; - keybinding: "C-c ,"
 ;; reset jediepcserver backend for osx machines
-(cond
- ((string-equal system-type "darwin")
-  ;; (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
-  (setq jedi:server-command '("~/.emacs.d/elpa/jedi-core-20151214.705/jediepcserver-osx.py"))))
+;; (cond
+;;  ((string-equal system-type "darwin")
+;;   (setq jedi:server-command '("/usr/local/bin/jediepcserver"))))
+
+
+;; fix bugs in ac due to line wrap
+(add-hook 'python-mode-hook (lambda ()
+                              (setq truncate-lines t)))
 
 
 

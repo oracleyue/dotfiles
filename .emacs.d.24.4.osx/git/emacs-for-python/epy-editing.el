@@ -2,9 +2,9 @@
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 ;; Ido mode with fuzzy matching
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+;(require 'ido)
+;(ido-mode t)
+;(setq ido-enable-flex-matching t) ;; enable fuzzy matching
 
 (require 'smart-operator)
 
@@ -35,7 +35,7 @@
   (setq yas/wrap-around-region 'cua))
 
 ;; Eproject project management with emacs
-;(require 'eproject)   ;; oracleyue: commented
+;(require 'eproject)   ;; oracleyue: commened
 
 ;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)

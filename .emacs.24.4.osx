@@ -48,6 +48,8 @@
   (setq y-enable-semantic-parse "yes")
   (setq y-enable-function-args-flag "yes")
   (setq y-enable-cedet-source-info "yes"))
+;; suppress redefinition warnings
+(setq ad-redefinition-action 'accept)
 
 
 ;;
@@ -194,10 +196,6 @@
 ;; Setting for /Helm/ and plus
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
-;; using tuhdo's config
-;(load (concat y-init-path-prefix "emacs-init-cc-tuhdo"))
-
-
 
 
 ;;
@@ -297,7 +295,7 @@
 
 ; =======================================
 ;; Programming Environment for /R/
-(require 'ess-site)
+(load (concat y-init-path-prefix "emacs-init-r"))
 
 ; =======================================
 ;; Programming Environment for /MATLAB/
