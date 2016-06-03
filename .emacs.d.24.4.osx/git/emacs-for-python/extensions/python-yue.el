@@ -231,7 +231,6 @@
 (add-to-list 'load-path "~/.emacs.d/git")
 ;; (require 'dash-at-point)
 (require 'jedi-core)
-(defalias 'y:jedi:show-doc 'jedi:show-doc)
 (defalias 'y:rope-show-doc 'rope-show-doc)
 (defalias 'y:rope-show-calltip 'rope-show-calltip)
 ; oracleyue, added: END ----------
@@ -271,7 +270,7 @@
     (define-key map "\C-c\C-p" 'python-check)   ;oracleyue, C-c C-v
     ;; (define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, C-c C-f
     ;; (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
-    (define-key map "\C-c\C-v" 'y:jedi:show-doc)     ;oracleyue, added
+    (define-key map "\C-c\C-v" 'jedi:show-doc)     ;oracleyue, added
     (define-key map "\C-ce" 'y:rope-show-doc)     ;oracleyue, added
     (define-key map "\C-c\C-e" 'y:rope-show-calltip)     ;oracleyue, added
     ;; Utilities
@@ -323,7 +322,7 @@
         ["Rope show call tips" y:rope-show-calltip]  ;oralceyue, added
         ["Rope help on symbol" y:rope-show-doc  ; oracleyue, added
          :help "Get help on symbol at point by Rope"]
-        ["Jedi help on symbol" y:jedi:show-doc     ; oracleyue, added
+        ["Jedi help on symbol" jedi:show-doc     ; oracleyue, added
          :help "Get help on symbol at point by Jedi"]    ; oracleyue, added
         ;; ["Dash help on symbol" dash-at-point     ; oracleyue, added
         ;; :help "Get help on symbol at point by Dash"]   ; oracleyue, added
