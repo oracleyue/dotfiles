@@ -1,12 +1,15 @@
-" Set color theme to fit Firefox dark themes
+" -- interface setup
 colorscheme oracleyue-dark
 
-" Interface settings
-"set gui=none
+"set gui=noaddons,nobookmarks,nomenu,navigation,tabs
+"set gui scrollbars=false
+
+" -- basic movements
 map <C-Up> :set gui=none<CR>
 map <C-Down> :set gui=tabs,navigation<CR>
+map <C-Left> :set gui=notabs,navigation<CR>
+map <C-Right> :set gui=nonavigation,tabs<CR>
 
-" Keybindings
 noremap U u
 noremap x d
 
@@ -15,10 +18,21 @@ map K <C-b>
 map u <C-u>
 map d <C-d>
 
-noremap j 3j
-noremap k 3k
+noremap j 5j
+noremap k 5k
+noremap h 5h
+noremap l 5l
 
 noremap H gT
 noremap L gt
 
-noremap <C-q> :tabopen https://getpocket.com<CR>
+" -- jumping to history of the current tab
+map <C-j> :jumps<CR>
+
+" -- remove highlighted matches
+map <C-i> :nohlsearch<CR>
+
+" -- usage notes:
+" 1) jump to the address bar: <C-l>
+" 2) jump to the Google search bar: <C-k>
+
