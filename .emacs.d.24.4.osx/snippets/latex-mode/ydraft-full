@@ -10,6 +10,8 @@
 \usepackage{setspace}
   \onehalfspacing
   % \doublespacing
+\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs    
+
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}

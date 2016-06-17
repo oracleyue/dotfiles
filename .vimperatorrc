@@ -30,7 +30,7 @@ noremap L gt
 map <C-j> :jumps<CR>
 
 " -- remove highlighted matches
-map <C-i> :nohlsearch<CR>
+noremap <C-S-u> :nohlsearch<CR>
 
 " -- open prescribed websites
 noremap <C-q> :tabopen https://getpocket.com<CR>

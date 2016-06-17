@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: boxed amsthm
+# key: thm
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
+    \mdfdefinestyle{yue}{backgroundcolor=gray!10}    
+\theoremstyle{plain}% default
+\newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
+\newmdtheoremenv[backgroundcolor=gray!0]{lemma}[theorem]{Lemma}
+\newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}[section]
+\theoremstyle{definition}
+\newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}

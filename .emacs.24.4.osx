@@ -72,16 +72,8 @@
 ;;; ---------------------------------------------------------
 
 ;;
-;; Load basic configurations for Emacs
+;; Configuring /Dired/ in OSX
 ;;
-(load (concat y-init-path-prefix "emacs-init-basics"))
-
-;;
-;; -------------------- Settings of Modes -----------------------
-;;
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Fixing for /Dired/ in osx
-(require 'dired-x)
 (cond 
  ((string-equal system-type "darwin")
   (setq insert-directory-program "/usr/local/bin/gls")
@@ -90,12 +82,21 @@
   ))
 (add-hook 'dired-load-hook
           (lambda ()
-            (load "dired-x")
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$")
+            (require 'dired-x)
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$")
             (setq dired-omit-extensions (delete ".o" dired-omit-extensions))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
+
+;;
+;; Load basic configurations for Emacs
+;;
+(load (concat y-init-path-prefix "emacs-init-basics"))
+
+;;
+;; -------------------- Settings of Modes -----------------------
+;;
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
@@ -400,3 +401,4 @@
 (global-set-key (kbd "M-c") 'capitalize-word)
 ;; open default Dired folders on startup
 (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
+

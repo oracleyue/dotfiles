@@ -9,6 +9,8 @@
 \usepackage{setspace}
   \onehalfspacing
   % \doublespacing
+\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
+
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -25,6 +27,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
+\usepackage{enumitem} % [leftmargin=*] to remove indentation before itemize, enumerate
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
   \mdfdefinestyle{yue}{backgroundcolor=gray!10}
@@ -57,11 +60,11 @@
 
 
 % Title, Authors and Date
-\title{\sffamily \LARGE \bfseries ${1:title}}
-\author{Zuogong YUE \vspace*{1mm} \\\
-\small Luxembourg Centre for Systems Biomedicine, \vspace*{-2mm} \\\ \small Universit\\'{e} du Luxembourg
-}
-\date{\small \today}
+\title{${1:title}}
+\author{Zuogong YUE}
+\date{\today}
+%\author{Zuogong YUE \vspace*{1mm} \\\ \small Luxembourg Centre for Systems Biomedicine}
+%\date{\small \today}
 
 
 \begin{document}
