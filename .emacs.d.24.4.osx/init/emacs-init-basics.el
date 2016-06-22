@@ -81,14 +81,19 @@
 ;(add-to-list 'default-frame-alist '(height . 36))
 ;(add-to-list 'default-frame-alist '(width . 100))
 
-;; Using default theme
+;; == Using default theme
 ;(load-theme 'deeper-blue t)
-;(load-theme 'adwaita t)       ;grey
-;; Using oracleyue's theme
-(add-to-list 'load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'ymonokai t)
-;(load-theme 'monokai t)
+;(load-theme 'adwaita t)       ;grey, shipped by default
+;; == Using user-defined theme  /github/: Ethan Schoonover's solarized theme
+;; to choose dark theme and validate in terminal, refer to set-variable in .emacs
+(setq frame-background-mode (quote dark))
+(setq solarized-termcolors 256)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+(load-theme 'solarized t)
+;; == Using oracleyue's theme
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;(load-theme 'ymonokai t)
+
 ;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
 ;(fringe-mode '(0 . nil))
 
@@ -96,13 +101,15 @@
 (make-face 'mode-line-linum-face-y)
 (make-face 'mode-line-buffer-name-face-y)
 (make-face 'mode-line-plain-face-y)
-(set-face-attribute 'mode-line-linum-face-y nil
-                    :foreground "#66D9EF")
-(set-face-attribute 'mode-line-buffer-name-face-y nil
-                    :foreground "#A6E22E"
-                    :bold t)
-(set-face-attribute 'mode-line-plain-face-y nil
-                    :foreground "#F8F8F2")
+;; define the colors only for the monokai theme
+(if (eq 'ymonokai (car custom-enabled-themes))    
+    (progn (set-face-attribute 'mode-line-linum-face-y nil
+                               :foreground "#66D9EF")
+           (set-face-attribute 'mode-line-buffer-name-face-y nil
+                               :foreground "#A6E22E"
+                               :bold t)
+           (set-face-attribute 'mode-line-plain-face-y nil
+                               :foreground "#F8F8F2")))
 ;; use setq-default to set it for /all/ modes
 (setq-default mode-line-format
   (list

@@ -71,6 +71,8 @@
   (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
         helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
 
+;; /Programming Environment Supports/
+;;
 ;; enable fuzzy matching for "semantic" and "Imenu" listing
 ;; - keybinding: C-x c i
 (setq helm-semantic-fuzzy-match t
@@ -90,6 +92,7 @@
        ;; setting GNU /global/ for /semantic-symref/
        (setq semantic-symref-tool 'global)
        ))
+
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
 ;(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)

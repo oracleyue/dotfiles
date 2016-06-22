@@ -1,27 +1,34 @@
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(fill-column 80)
  '(inhibit-startup-screen t)
- ;'(linum-format " %d ")   ;; '(linum-format "%4d \u2502 ")
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
- ;; '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "firefox %s") ("\\.pdf\\'" . "evince %s"))))
- '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . "open %s") ("\\.pdf\\'" . "open %s"))))
+ '(org-file-apps
+   (quote
+    ((auto-mode . emacs)
+     ("\\.mm\\'" . default)
+     ("\\.x?html?\\'" . "open %s")
+     ("\\.pdf\\'" . "open %s"))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
- '(tool-bar-mode nil))
+ '(tab-stop-list
+   (quote
+    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+ '(tool-bar-mode nil)
+ )
 
 (custom-set-faces
- ;'(default ((t (:family "DejaVu Sans Mono" :height 130))))  ;; 125, 130
- '(default ((t (:font "DejaVu Sans Mono-13"))))   ;; 13  ;10.5 in Thinpad
- ;; Note that set the font-size of fixed-pitch different from 'default will cause troubles on auto-completion when enabling linum-mode.
- ;; '(fixed-pitch ((t (:family "DejaVu Sans Mono"))))
- ;; mode-line with smaller font size
-; '(mode-line ((t (:font "DejaVu Sans Mono-12"))))
-; '(mode-line-inactive ((t (:font "DejaVu Sans Mono-12"))))
- '(iedit-occurrence ((t (:inherit lazy-highlight))))
- '(highlight-indent-face ((t (:inherit highlight))))   ;; face for /highlight-indentation/ in /emacs-for-python/
- )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:font "DejaVu Sans Mono-12"))))
+ '(highlight-indent-face ((t (:inherit highlight))))
+ '(iedit-occurrence ((t (:inherit lazy-highlight)))))
 ;; Frame size
 (add-to-list 'default-frame-alist '(width . 100))
 (when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
@@ -83,8 +90,11 @@
 (add-hook 'dired-load-hook
           (lambda ()
             (require 'dired-x)
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$")
-            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))))
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory")
+            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
+            (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
+            (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
+            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".log")))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
@@ -361,11 +371,11 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /neotree/
-(require 'neotree)
-(global-set-key (kbd "<f6>") 'neotree-toggle)
-(setq neo-theme 'nerd)  ;classic, ascii, arrow, nerd
-(neotree-dir "~/Public/Dropbox/Academia/Manuscripts")
-(neotree-hide)
+;(require 'neotree)
+;(global-set-key (kbd "<f6>") 'neotree-toggle)
+;(setq neo-theme 'nerd)  ;classic, ascii, arrow, nerd
+;(neotree-dir "~/Public/Dropbox/Academia/Manuscripts")
+;(neotree-hide)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Org-mode/

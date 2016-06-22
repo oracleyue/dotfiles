@@ -312,7 +312,7 @@
 		  ((:keywords "convenience")
 		   (:url . "https://github.com/ergoemacs/ergoemacs-mode"))])
  (excorporate .
-	      [(0 7 3)
+	      [(0 7 5)
 	       ((emacs
 		 (24 1))
 		(fsm
@@ -605,7 +605,7 @@
 	     ((:url . "https://github.com/michael-heerdegen/on-screen.el")
 	      (:keywords "convenience"))])
  (org .
-      [(20160613)
+      [(20160620)
        nil "Outline-based notes management and organizer" tar nil])
  (osc .
       [(0 1)
@@ -635,7 +635,7 @@
 	 ((:url . "http://elpa.gnu.org/packages/poker.html")
 	  (:keywords "games"))])
  (python .
-	 [(0 25 1)
+	 [(0 25 2)
 	  ((emacs
 	    (24 1))
 	   (cl-lib
