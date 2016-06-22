@@ -62,6 +62,9 @@
 ;; use helm to find/open files
 ;; -keybinding: C-x c C-x C-f; in this session, "C-c i" will insert the current absolute path into the current buffer.
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; skip meaningless files, e.g. .DS_Store
+(setq helm-ff-skip-boring-files t)
+(add-to-list 'helm-boring-file-regexp-list "\\.DS_Store")
 
 ;; use live grep in helm
 ;; - usage: invoke =helm-ff-run-grep= by =C-s= to search a file/directory on highlighted entry in the helm buffer, when being in a =helm-find-files= session

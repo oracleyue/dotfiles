@@ -116,10 +116,10 @@
 (require 'hl-sexp)
   (add-hook 'lisp-mode-hook 'hl-sexp-mode)
   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
-  (add-hook 'python-mode-hook 'hl-sexp-mode)
-  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
-  (add-hook 'sh-mode-hook 'hl-sexp-mode)
+;  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
+;  (add-hook 'python-mode-hook 'hl-sexp-mode)
+;  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
+;  (add-hook 'sh-mode-hook 'hl-sexp-mode)
 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

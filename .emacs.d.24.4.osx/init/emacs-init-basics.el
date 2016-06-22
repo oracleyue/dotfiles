@@ -86,7 +86,7 @@
 ;(load-theme 'adwaita t)       ;grey, shipped by default
 ;; == Using user-defined theme  /github/: Ethan Schoonover's solarized theme
 ;; to choose dark theme and validate in terminal, refer to set-variable in .emacs
-(setq frame-background-mode (quote dark))
+;;(setq frame-background-mode (quote dark))
 (setq solarized-termcolors 256)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
@@ -332,13 +332,6 @@
 ;; configure /highlight-indentation/ for /monokai/, enabled in python-mode
     ;; to highlight indentations
 ;; NOT work! Having to be and having been set in .emacs
-; (cond 
-;  ((string-equal 'custom-enabled-themes "ymonokai")
-;   ;(global-hl-line-mode t)
-;   (set-face-background 'hl-line "gray27") 
-;   (set-face-attribute hl-line-face nil :underline nil)
-;   (set-face-background 'highlight-indent-face "gray27")
-;   ))
 
 
 ;; Toogle window split between horizontal-split and vertical-split
