@@ -209,7 +209,7 @@
 (cond 
  ((string-equal system-type "darwin")
   ;(setq mac-command-modifier 'control)  ; use Command key also as Control
-  ;(setq mac-option-modifier 'meta)
+  ;(setq mac-option-modifier 'meta)  ; NOT need
   ))
 
 ;; Fix $PATH for emacs in Mac OS X

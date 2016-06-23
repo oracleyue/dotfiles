@@ -272,8 +272,8 @@
     ;; (define-key map "\C-c\C-f" 'python-eldoc-at-point)   ;oracleyue, C-c C-f
     ;; (define-key map "\C-cd" 'dash-at-point)     ;oracleyue, added
     (define-key map "\C-c\C-v" 'y:jedi:show-doc)     ;oracleyue, added
-    (define-key map "\C-ce" 'y:rope-show-doc)     ;oracleyue, added
-    (define-key map "\C-c\C-e" 'y:rope-show-calltip)     ;oracleyue, added
+    (define-key map "\C-c\C-e" 'y:rope-show-doc)     ;oracleyue, added
+    (define-key map "\C-ce" 'y:rope-show-calltip)     ;oracleyue, added
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
                                map global-map)
