@@ -38,10 +38,11 @@
 ;; auto-resize buffer to fit candidates
 (helm-autoresize-mode t)
 ;; if using /golden-ratio/
-;(defun pl/helm-alive-p ()
-;  (if (boundp 'helm-alive-p)
-;      (symbol-value 'helm-alive-p)))
-;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+(defun pl/helm-alive-p ()
+  (if (boundp 'helm-alive-p)
+      (symbol-value 'helm-alive-p)))
+(if golden-ratio-mode
+    (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p))
 
 ;; adjust the max height for helm buffer
 ;(setq helm-autoresize-max-height 50)
