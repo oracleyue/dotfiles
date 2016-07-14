@@ -200,9 +200,9 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /golden-ratio/
-;(require 'golden-ratio)
-;(golden-ratio-mode t)
-;(setq golden-ratio-auto-scale t) 
+(require 'golden-ratio)
+(golden-ratio-mode t)
+(setq golden-ratio-auto-scale t) 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /Helm/ and plus

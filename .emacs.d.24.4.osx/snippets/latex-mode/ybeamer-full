@@ -1,15 +1,24 @@
 # -*- mode: snippet -*-
-# name: Beamer Header
-# key: yb
+# name: Beamer Header (Full)
+# key: beamer-full
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[xcolor={dvipsnames}]{beamer}    % "[handout]" option; by default [presentation]
 % \documentclass[handout]{beamer}
 % \documentclass[notes,handout]{beamer} % "[notes]" print notes
+%\mode<presentation>
 
-\usetheme{Madrid} % set theme
+% set theme
+% \usetheme[compress]{Berlin}
+% \usetheme{CambridgeUS}
+\usetheme{Madrid}
+% set fonts 
 \usefonttheme{professionalfonts} % using non standard fonts for beamer
+% \usefonttheme[onlymath]{serif} % use serif for math equations
+% \usefonttheme{serif} % default family is serif
+% set margins
+% \setbeamersize{text margin left=15pt,text margin right=15pt}
 % remove navigation buttons at bottom 
 \setbeamertemplate{navigation symbols}{}
 % remove the footline for authors/title/page-numbers
@@ -18,13 +27,32 @@
 \setbeamercolor{footline}{fg=Blue}
 %\setbeamerfont{footline}{series=\bfseries}
 
+% Theme for beamer presentation.
+%\usepackage{beamerthemesplit} 
+% Other themes include: beamerthemebars, beamerthemelined, 
+%                       beamerthemetree, beamerthemetreebars  
+
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{items}[ball]
+%\setbeamertemplate{navigation symbols}{}
+%\setbeamercolor{title}{bg=red!65!black, fg=white}
+
 % use citations (not /biblatex/, beamer's default)
 %-- add bibliography as footnote at each page; \nobibliography{} in the titlepage frame
 \usepackage{bibentry}  % use \footnote{\bibentry{}}
 \bibliographystyle{apalike} % abbrv;apalike
 \newcommand{\footcite}[1]{\footnotetext{\bibentry{#1}}} % put \footnotemark first
 \newcommand{\textcite}[1]{\footnote{\bibentry{#1}}}
-% refine citation styles; use /bibtex/, /bibentry/ %-- remove line breaks
+%-- add bibliography at end: use the default /bibtex/ packages
+%-- add bibliography as footnote at each page or at end
+% \usepackage[style=numeric,backend=biber]{biblatex}  % use \footfullcite{} OR \fullcite{}; to compile: latex+biber+latex, NOT bibtex!
+% \addbibresource{./ref/library.bib}
+
+% refine citation styles; use /bibtex/, /bibentry/
+%-- remove the icon
+% \setbeamertemplate{bibliography item}{} % remove file icons
+% \setbeamertemplate{bibliography item}{\insertbiblabel} % if want numbered entries; use 'abbrv'
+%-- remove line breaks
 \setbeamertemplate{bibliography entry title}{}
 \setbeamertemplate{bibliography entry location}{}
 \setbeamertemplate{bibliography entry note}{}
@@ -52,6 +80,8 @@
 \usepackage{mdframed}   % to box theorem statements; "frame" using "fragile"
   \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}     % "frame" using "fragile"
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
   \usemintedstyle{pastie}
   \fvset{
     % frame=lines,
@@ -136,6 +166,20 @@
   % enable citations by /bibentry/; as footnote at each page
   \nobibliography{./ref/library}
 \end{frame}
+                           
+% Add logo in slide template
+%\addtobeamertemplate{frametitle}{}{%
+%\begin{tikzpicture}[remember picture,overlay]
+%  \node[anchor=north east,yshift=2pt] at (current page.north east)
+%      {\includegraphics[height=0.8cm]{figures/lcsb-logo}};
+%\end{tikzpicture}}
+
+%\section[Outline]{}    % To add outline in toc
+%% Comment the following if having added in the preamble
+% \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents
+% \end{frame}
 
 
 % ---- Main Part ----
@@ -159,7 +203,18 @@ $0
 
 
 % ---- Bibliography ----
+% %% using default /bibtex/; adding bibliography at end
+% \begin{frame}[allowframebreaks]%in case more than 1 slide needed
+%   \frametitle{References}
+%     {\footnotesize
+%     \bibliographystyle{apalike} %apalike,abbrv
+%     \bibliography{./ref/library}
+%     }
+% \end{frame}
+
 %% using /bibentry/; adding bibliography as footnote at each page
-% include bibtex libraries in front of any citations; Line 131
+% include bibtex libraries in front of any citations; Line 161
+
+
 
 \end{document}

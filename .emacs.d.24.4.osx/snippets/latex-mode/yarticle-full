@@ -39,6 +39,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsbsy}   % to use faked bold math Greek letter: \pmb{\beta}; or use \boldsymbol{}
+\usepackage{upgreek}
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}

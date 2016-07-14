@@ -6,7 +6,7 @@
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
-;; kill backwards to the beginning of current line :: "M-0 C-k"
+;; kill backwards to the beginning of current line :: "M-0 C-k" or "C-x Backspace" (slightly different)
 ;; comment line or region :: "C=\"
 ;; uncomment line or region :: "C-S-\"
 ;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
@@ -19,6 +19,9 @@
 ;;      - "C-w / M-w" to kill or copy the mark region or the current line; "C-y" to yank
 ;;      - show kill ring and select to yank :: "M-y"
 ;; mark the whole buffer: "C-x h"
+;; join lines into one:
+;;      - join two lines: "M-^"
+;;      - join multiple lines in region: "C-^"
 ;; use iedit :: "C-;"
 ;; use multi-cursor:
 ;;      - select one word "C->", then hit "C-g" to place multiple cursors
@@ -38,6 +41,8 @@
 ;;
 ;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
 ;;
+
+;; --- 1 ---
 ;; revert-buffer: update buffer if the file in disk has changed
 ;(defun y:revert-buffer-no-confirm ()
 ;    "Revert buffer without confirmation."
@@ -46,7 +51,8 @@
 ;    (minibuffer-message "File changed on disk. Reread from disk."))
 ;; (global-set-key (kbd "C-x C-v") 'revert-buffer)
 ;(global-set-key (kbd "C-x C-v") 'y:revert-buffer-no-confirm)
-;;;
+
+;; --- 2 ---
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
 (defun y:kill-ring-save ()
         (interactive)
@@ -62,7 +68,9 @@
           (kill-region (point) (mark))))
 (global-set-key (kbd "M-w") 'y:kill-ring-save)
 (global-set-key (kbd "C-w") 'y:kill-region)
-;;;
+
+;; --- 3 ---
+;; mark the current line
 (defun y:mark-current-line ()
   "Select the current line"
   (interactive)
@@ -70,6 +78,19 @@
   (set-mark (line-beginning-position)))
 (global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
 ;; "C-S-SPC" is reserved for =set-rectangular-region-anchor= in /multi-cursor/
+
+;; --- 4 ---
+;; join mutiple lines in region
+(defun y:join-region (beg end)
+  "Apply join-line over region."
+  (interactive "r")
+  (if mark-active
+      (let ((beg (region-beginning))
+            (end (copy-marker (region-end))))
+        (goto-char beg)
+        (while (< (point) end)
+          (join-line 1)))))
+(global-set-key (kbd "C-^") 'y:join-region)
 
 
 ;;
@@ -84,6 +105,8 @@
 ;; == Using default theme
 ;(load-theme 'deeper-blue t)
 ;(load-theme 'adwaita t)       ;grey, shipped by default
+;; == Using user-defined theme  /elpa/: Ethan Schoonover's solarized theme
+;(load-theme 'sanityinc-solarized-light)
 ;; == Using user-defined theme  /github/: Ethan Schoonover's solarized theme
 ;; to choose dark theme and validate in terminal, refer to set-variable in .emacs
 ;;(setq frame-background-mode (quote dark))
@@ -208,8 +231,8 @@
 ;; Use Command as Control in Mac OS X for emacs, if not like to swap Command and Control 
 (cond 
  ((string-equal system-type "darwin")
-  ;(setq mac-command-modifier 'control)  ; use Command key also as Control
-  ;(setq mac-option-modifier 'meta)  ; NOT need
+  ;; (setq mac-command-modifier 'control)  ; use Command key also as Control
+  ;; (setq mac-option-modifier 'meta)  ; NOT need
   ))
 
 ;; Fix $PATH for emacs in Mac OS X
@@ -274,6 +297,7 @@
   (dired "~/Public/Dropbox/oracleyue/OrgNote")
   (dired "~/Public/Dropbox/Workspace/matlab")
   (dired "~/Public/Dropbox/Academia/Manuscripts")
+  (dired "~/Public/Dropbox/Academia/Seminars")
   (dired "~/Public/Dropbox/Shared/Johan_Zuogong")
   (switch-to-buffer "*scratch*"))
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs

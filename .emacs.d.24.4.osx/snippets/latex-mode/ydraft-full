@@ -19,7 +19,7 @@
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm}
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,upgreek}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 
 \usepackage{algorithm,algpseudocode}

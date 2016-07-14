@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: configure array spacing
+# key: setarray
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\arraycolsep=1.4pt\def\arraystretch{1.8}
