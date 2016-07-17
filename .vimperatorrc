@@ -27,6 +27,7 @@ noremap H gT
 noremap L gt
 
 " -- jump to webpages opened in the current tab before
+" ! no longer working on Firefox > 45.0
 map <C-j> :jumps<CR>
 
 " -- remove highlighted matches
