@@ -26,7 +26,7 @@ noremap l 5l
 noremap H gT
 noremap L gt
 
-" -- jumping to history of the current tab
+" -- jump to webpages opened in the current tab before
 map <C-j> :jumps<CR>
 
 " -- remove highlighted matches
@@ -35,6 +35,9 @@ noremap <C-S-u> :nohlsearch<CR>
 " -- open prescribed websites
 noremap <C-q> :tabopen https://getpocket.com<CR>
 
+" -- open websites in history
+" 1. use ":history" open the history list
+" 2. ";o" to show hint, and select by the number
 
 " -- usage notes:
 " 1) jump to the address bar: <C-l>
