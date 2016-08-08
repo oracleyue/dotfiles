@@ -1,16 +1,16 @@
 # -*- mode: snippet -*-
-# name: script header
-# key: shead
+# name: matlab script header
+# key: head
 # --
 % ${1:A short descriptions of the script}
 %
-% Copyright (c) ${1:2015-2016}, Zuogong YUE
+% Copyright (c) ${1:2014-2017}, Zuogong YUE
 % Author: Zuogong YUE <oracleyue@gmail.com>
 %         https://github.com/oracleyue
 % Licensed under the GNU General Public License
-% Released at ${2:01 Mar 2016}
-% 
-% Usage:
-%    $0
+%
+% Last update on ${2:01 Aug 2016}
+
+
 
 

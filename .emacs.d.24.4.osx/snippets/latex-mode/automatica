@@ -8,41 +8,61 @@
                                      % preceding line to obtain a two-column 
                                      % document whose style resembles the
                                      % printed Automatica style.
-%\documentclass{elsart}               % The use of LaTeX2e is preferred.
 
 
-\usepackage[scaled=0.8]{DejaVuSansMono}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}  
+% \usepackage{lmodern}  
+% \usepackage{times}
+% \usepackage{helvet}  
+% \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{mathabx}
-% \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{subfigure}
-\usepackage{epsfig}
-\usepackage[normalem]{ulem}
-\usepackage[usenames]{color}
-\usepackage{csquotes}
-\usepackage{hyperref}
-\usepackage{minted}
-% \definecolor{bg}{RGB}{39,40,34}
-% \usemintedstyle{monokai}
-\usemintedstyle{pastie}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{mathtools}
+\usepackage{empheq}     % to deal with parentheses + subfunctions  
 
-% \newtheorem{theorem}{Theorem}[section]
-% \newtheorem{lemma}[theorem]{Lemma}
-% \newtheorem{proposition}[theorem]{Proposition}
-% \newtheorem{corollary}[theorem]{Corollary}
-% \newtheorem{definition}[theorem]{Definition}
-% \newtheorem{remark}[theorem]{Remark}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{enumitem}   % begin{itemize}[noitemsep, topsep=-5pt] to remove spaces above or below paragraphs
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{comment}
+\usepackage[usenames,dvipsnames]{xcolor}
+% \usepackage{mdframed}   % to box theorem statements
+%     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+% \usepackage{minted}
+% \usemintedstyle{pastie}
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+
+\usepackage{tikz}
+% \usetikzlibrary{arrows,matrix,positioning}
+
+% THEOREM environment definitions in autart.cls
+% {cor}[thm]{Corollary},    {lem}[thm]{Lemma},      {claim}[thm]{Claim},     {axiom}[thm]{Axiom},
+% {conj}[thm]{Conjecture},  {fact}[thm]{Fact},      {hypo}[thm]{Hypothesis}, {assum}[thm]{Assumption},
+% {prop}[thm]{Proposition}, {crit}[thm]{Criterion}, {defn}[thm]{Definition},
+% {exmp}[thm]{Example},     {rem}[thm]{Remark},     {prob}[thm]{Problem},    {prin}[thm]{Principle},
+% {alg}{Algorithm},         {note}{Note},            {summ}{Summary},        {case}{Case}
+
+% command definitions for math symbols
+\input{userdef-mathsymb.tex}
 
 \hypersetup{
   pdftitle={},
   pdfauthor={Zuogong YUE},
-  pdfsubject={Technical Report},
+  pdfsubject={Automatica preprint},
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
 
 \begin{document}
@@ -53,63 +73,59 @@
                                               % is over 5 words. Running title 
                                               % is not shown in output.
 
-\title{${1:title}} % Title, preferably not more 
+\title{${1:your title}} % Title, preferably not more 
                                                 % than 10 words.
 
 \thanks[footnoteinfo]{This paper was not presented at any IFAC 
-meeting. Corresponding author M.~T.~Cicero. Tel. +XXXIX-VI-mmmxxi. 
+meeting. Corresponding author Wei~Pan. Tel. +XXXIX-VI-mmmxxi. 
 Fax +XXXIX-VI-mmmxxv.}
 
-\author[Paestum]{Marcus Tullius Cicero}\ead{cicero@senate.ir},    % Add the 
-\author[Rome]{Julius Caesar}\ead{julius@caesar.ir},               % e-mail address 
-\author[Baiae]{Publius Maro Vergilius}\ead{vergilius@culture.ir}  % (ead) as shown
+\author[Lux]{Zuogong Yue}\ead{zuogong.yue@uni.lu},    
+\author[UK]{Wei Pan}\ead{julius@caesar.ir},             
+\author[Lux]{(Johan Thunberg)}\ead{johan.thunberg@uni.lu},    
+\author[Swe]{(Lennart Ljung)}\ead{ljung@isy.liu.se},
+\author[Lux]{Jorge Gon\c{c}alves}\ead{jorge.goncalves@uni.lu}
 
-\address[Paestum]{Buckingham Palace, Paestum}  % Please supply
-\address[Rome]{Senate House, Rome}             % full addresses
-\address[Baiae]{The White House, Baiae}        % here.
+\address[Lux]{Luxembourg Centre for Systems Biomedicine, University of Luxembourg,
+  % 7 Avenue des Hauts Fourneaux, 4362, Esch-sur-Alzette,
+  L-4362, Luxembourg}  
+\address[UK]{Centre for Synthetic biology and Innovation and Department of Bioengineering, Imperial College London, United Kingdom}           
+\address[Swe]{Department of Electrical Engineering, Link\"oping University, Link\"oping, SE-58183, Sweden}      
 
           
-\begin{keyword}                           % Five to ten keywords,  
-bala bala bala                            % chosen from the IFAC 
-\end{keyword}                             % keyword list or with the 
-                                          % help of the Automatica 
-                                          % keyword wizard
-
+\begin{keyword}                           % Five to ten keywords, chosen from the IFAC keyword list
+    bala bala bala                        % or with the help of the Automatica keyword wizard
+\end{keyword}                             
+                                           
 
 \begin{abstract}                          % Abstract of not more than 200 words.
-bala bala bala bala bala bala bala bala bala bala bala bala bala 
+    bala bala bala
 \end{abstract}
 
 \end{frontmatter}
 
-\section{}
-bala bala bala bala bala bala bala bala bala bala bala bala bala 
 
 
-%  ---- FIGURE ----
-\begin{figure}
-  \begin{center}
-    \includegraphics[height=4cm]{jcaesar.eps}    % The printed column  
-    \caption{Gaius Julius Caesar, 100--44 B.C.}  % width is 8.4 cm.
-    \label{fig1}                                 % Size the figures 
-  \end{center}                                 % accordingly.
-\end{figure}
+% -------------------- MAIN BODY ----------------------
+
+
+
 
 
 
 
 % -------------------- BIBLIOGRAPHY ----------------------
 \begin{ack}                               % Place acknowledgements
-Partially supported by the Roman Senate.  % here.
+This work was supported by Fonds National de la Recherche Luxembourg (9247977).
 \end{ack}
 
-\bibliographystyle{plain}        % Include this if you use bibtex 
-\bibliography{yourbibtexfile}           % and a bib file to produce the 
-                                 % bibliography (preferred). The
-                                 % correct style is generated by
-                                 % Elsevier at the time of printing.
+\bibliographystyle{plain}              % Include this if you use bibtex 
+\bibliography{./ref/library}           % and a bib file to produce the 
+                                       % bibliography (preferred). The
+                                       % correct style is generated by
+                                       % Elsevier at the time of printing.
 
-\appendix
-\section{Appendix Name}    % Each appendix must have a short title.
+% \appendix
+% \section{Appendix Name}    % Each appendix must have a short title.
 
 \end{document}

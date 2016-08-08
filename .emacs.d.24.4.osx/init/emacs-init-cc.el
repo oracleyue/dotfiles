@@ -13,11 +13,11 @@
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
 ;; Editing Configurations (having set in /google-c-style/)
     ;(setq-default c-default-style "linux")
     ;(setq-default c-basic-offset 4)
     ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+
 ;; Package: /smartparens/
 ;; having enable globally in .emacs
 ;; if not using /smartparens/ globally, uncomment the next line
@@ -25,7 +25,7 @@
 ;; when you press RET, the curly braces automatically add another newline
 (sp-with-modes '(c-mode c++-mode)
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-  (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC") ("* ||\n[i]" "RET"))))
+  (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
 ;; Package: /iedit/; default key "C-c ;"
 (require 'iedit)
@@ -39,7 +39,7 @@
      (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
        "/usr/bin/cpplint")))
   (flymake-google-cpplint-load))
-(add-hook 'c-mode-hook 'y:flymake-google-init)
+;(add-hook 'c-mode-hook 'y:flymake-google-init)
 (add-hook 'c++-mode-hook 'y:flymake-google-init)
 
 ;; /xcscope/: source cross-referencing tool [need to install cscope]
@@ -71,7 +71,7 @@
  /usr/local/include
                  ")))
   ;; default local include-paths relative to projects' "src" folder
-  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I.")))
+  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
   (require 'auto-complete-clang-async)
   (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete") 
   )
@@ -89,7 +89,7 @@
  /usr/local/include
                  ")))
   ;; default local include-paths relative to projects' "src" folder
-  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I.")))
+  (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
   ;; read in project-level include-paths via ".dir-locals.el"
   ;; an example of ".dir-locals.el":
   ;;    ((c++-mode . ((project-local-include-path . ("-I./include" "-I./src")))))

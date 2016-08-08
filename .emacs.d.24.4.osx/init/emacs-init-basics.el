@@ -4,6 +4,7 @@
 ;; BASIC USAGES
 ;; ---------------
 ;; captalize/upper/lower words: "M-c/u/l"
+;; changing encodings: "C-x C-m f"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
 ;; kill backwards to the beginning of current line :: "M-0 C-k" or "C-x Backspace" (slightly different)
@@ -105,14 +106,14 @@
 ;; == Using default theme
 ;(load-theme 'deeper-blue t)
 ;(load-theme 'adwaita t)       ;grey, shipped by default
-;; == Using user-defined theme  /elpa/: Ethan Schoonover's solarized theme
-;(load-theme 'sanityinc-solarized-light)
+;
 ;; == Using user-defined theme  /github/: Ethan Schoonover's solarized theme
-;; to choose dark theme and validate in terminal, refer to set-variable in .emacs
+;; To use dark theme and enabled in terminal, use "set-variable" in .emacs
 ;;(setq frame-background-mode (quote dark))
 (setq solarized-termcolors 256)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
+;
 ;; == Using oracleyue's theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'ymonokai t)
@@ -294,11 +295,13 @@
 ;; oracleyue's inital Dired folders on startup
 (defun y:dired-open-folders-startup ()
   (interactive)
-  (dired "~/Public/Dropbox/oracleyue/OrgNote")
   (dired "~/Public/Dropbox/Workspace/matlab")
-  (dired "~/Public/Dropbox/Academia/Manuscripts")
-  (dired "~/Public/Dropbox/Academia/Seminars")
-  (dired "~/Public/Dropbox/Shared/Johan_Zuogong")
+  (dired "~/Public/Dropbox/oracleyue/OrgNote")
+  (dired "~/Public/Dropbox/Academia")
+  ;(dired "~/Public/Dropbox/Academia/Manuscripts")
+  ;(dired "~/Public/Dropbox/Academia/Seminars")
+  (dired "~/Public/Dropbox/Shared")
+  (find-file "~/Public/Dropbox/Academia/ToDoList.org")
   (switch-to-buffer "*scratch*"))
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
 

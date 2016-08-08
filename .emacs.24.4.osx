@@ -29,10 +29,16 @@
  '(default ((t (:font "DejaVu Sans Mono-12"))))
  '(highlight-indent-face ((t (:inherit highlight))))
  '(iedit-occurrence ((t (:inherit lazy-highlight)))))
-;; Frame size
+
+;; frame size
 (add-to-list 'default-frame-alist '(width . 100))
 (when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
 
+;;
+;; encoding 
+;;
+(set-default-coding-systems 'utf-8)
+(prefer-coding-system 'utf-8)
 
 ;;
 ;; version settings
@@ -94,7 +100,7 @@
             (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
             (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
             (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
-            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".log")))))
+            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))
 (add-hook 'dired-mode-hook
           (lambda ()
             (dired-omit-mode 1)))
