@@ -29,13 +29,13 @@
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}
 
+\usepackage{algorithm,algpseudocode}
+
 \usepackage{graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 
+\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
@@ -43,7 +43,9 @@
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}  % to use \begin{mdframed}[style=yue]
 % \usepackage{minted}
     % \usemintedstyle{pastie}
+\usepackage[round]{natbib} %numbers    
 
+% Miscellanies: Layout
 \usepackage{fancyhdr}
   % \pagestyle{fancy}              % For twoside page layout
   % \fancyhead[LE,RO]{\thepage}    % For twoside page layout
@@ -51,9 +53,6 @@
   % \fancyhead{}    % Remove all header contents
   % \cfoot{Page \thepage\ of \pageref{LastPage}}    % Page X of Y in the footer (centered)
 \usepackage{titlesec}
-\usepackage[round]{natbib} %numbers
-
-% MISCELLANIES
 \usepackage{sectsty}
     \allsectionsfont{\large\sffamily\bfseries\scshape}
 \usepackage[nottoc]{tocbibind} % to include /reference/ in toc
@@ -87,12 +86,13 @@
 % User-defined macros
 %\input{userdef-mathsymb.tex}
 
-
+% PDF information
 \hypersetup{
   pdftitle={},
   pdfauthor={Zuogong YUE},
   pdfsubject={Technical Report},
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+
 
 % --------------- TITLE AUTHORS -----------------
 \title{\LARGE \bfseries
@@ -146,7 +146,6 @@ ${1:your title}
 % \cleardoublepage  %% to add one blank page according to twoside print
 \setcounter{page}{1}
 \pagenumbering{arabic}
-
 
 
 % ----------------- MAIN --------------------
