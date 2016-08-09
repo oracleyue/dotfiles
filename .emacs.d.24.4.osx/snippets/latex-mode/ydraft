@@ -22,6 +22,8 @@
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
+\usepackage{enumitem} % [leftmargin=*] to remove indentation before items
 
 \usepackage{algorithm,algpseudocode}
 
@@ -29,7 +31,6 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
-\usepackage{enumitem} % [leftmargin=*] to remove indentation before itemize, enumerate
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
   \mdfdefinestyle{yue}{backgroundcolor=gray!10}

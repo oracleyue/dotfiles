@@ -28,6 +28,7 @@
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}
+\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 
 \usepackage{algorithm,algpseudocode}
 
@@ -35,7 +36,6 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
-\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
