@@ -25,7 +25,7 @@
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{mathtools}
-\usepackage{empheq}     % to deal with parentheses + subfunctions  
+\usepackage{empheq}     % to deal with parentheses + subequations  
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}

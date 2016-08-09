@@ -11,10 +11,12 @@
   % \doublespacing
 \usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
 
-
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}
-\usepackage{times}   % using Nimbus Serif, instead of Computer Modern Serif by default
+\usepackage{lmodern}
+% \usepackage[sc]{mathpazo}   % using Palladillo
+%    \linespread{1.05} 
+% \usepackage{times}   % using Times
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata}
 
