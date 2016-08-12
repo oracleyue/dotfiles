@@ -9,7 +9,7 @@
 \usepackage{setspace}
   \onehalfspacing
   % \doublespacing
-\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
+% \usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
 
 \usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}
@@ -55,7 +55,6 @@
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
-\setcounter{tocdepth}{3}
 \hypersetup{
   pdfauthor={Zuogong YUE},
   pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
@@ -76,6 +75,7 @@
 %     \thispagestyle{empty}
 %     \pagenumbering{Roman}
 %     % \vspace*{1cm}
+% \setcounter{tocdepth}{3}
 % \tableofcontents
 %     % \thispagestyle{empty}
 % \newpage
@@ -98,7 +98,6 @@ $0
 
 % \newpage
 % % --------------- APPENDIX --------------
-% \appendix
 % \section*{Appendices}  
 % \addcontentsline{toc}{section}{List of appendices}   
 % \renewcommand{\thesubsection}{\Alph{subsection}}
@@ -109,7 +108,6 @@ $0
 
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
-% %\bibliographystyle{ieeetr}  %ieeetr,apalike,plain,abbrv,acm,unsrt,alpha,siam
 % \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
 % {\footnotesize \bibliography{./ref/library}}
 
