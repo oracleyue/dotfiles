@@ -2,10 +2,11 @@
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
-;; Warning: semantic-mode causes "M-x gdb" hangs emacs in Mac OS X!
-;; (if (string-equal system-type "darwin")
-;;     (setq y-enable-semantic-parse "no")
-;;   (setq y-enable-semantic-parse "yes"))
+
+;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
+(if (string-equal system-type "darwin")
+    (setq y-enable-semantic-parse "no")
+  (setq y-enable-semantic-parse "yes"))
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -65,12 +66,14 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 ;; skip meaningless files, e.g. .DS_Store
 (setq helm-ff-skip-boring-files t)
+(delete '"\\.bbl$" helm-boring-file-regexp-list)    ;show .bbl file
 (add-to-list 'helm-boring-file-regexp-list "\\.DS_Store$")
 (add-to-list 'helm-boring-file-regexp-list ".*\.synctex\.gz$")
 (add-to-list 'helm-boring-file-regexp-list ".*\.url$")
 (add-to-list 'helm-boring-file-regexp-list "\\.dropbox$")
 (add-to-list 'helm-boring-file-regexp-list "Icon.*")
 (add-to-list 'helm-boring-file-regexp-list "#.*#$")
+(add-to-list 'helm-boring-file-regexp-list "\\.out$")
 
 ;; use live grep in helm
 ;; - usage: invoke =helm-ff-run-grep= by =C-s= to search a file/directory on highlighted entry in the helm buffer, when being in a =helm-find-files= session
@@ -84,23 +87,22 @@
 ;;
 ;; enable fuzzy matching for "semantic" and "Imenu" listing
 ;; - keybinding: C-x c i
-(setq helm-semantic-fuzzy-match t
-      helm-imenu-fuzzy-match    t)
-;; restore UI
-(with-eval-after-load 'helm-semantic
-  (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
-  ;(push '(c-mode . semantic-format-tag-name) helm-semantic-display-style)
-  ;(push '(c-mode . semantic-format-tag-prototype) helm-semantic-display-style)
-  (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
-;; dependency config
-;; enable /Imenu/ rescan for helm-semantic-or-imenu
-;(setq imenu-auto-rescan t)
-;;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
 (cond ((string-equal y-enable-semantic-parse "yes")
+       (setq helm-semantic-fuzzy-match t
+             helm-imenu-fuzzy-match    t)
+       ;; restore UI
+       (with-eval-after-load 'helm-semantic
+         (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+          ;(push '(c-mode . semantic-format-tag-name) helm-semantic-display-style)
+          ;(push '(c-mode . semantic-format-tag-prototype) helm-semantic-display-style)
+         (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
+       ;; dependency config
+       ;; enable /Imenu/ rescan for helm-semantic-or-imenu
+       ;(setq imenu-auto-rescan t)
+       ;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
        (semantic-mode 1)
        ;; setting GNU /global/ for /semantic-symref/
-       (setq semantic-symref-tool 'global)
-       ))
+       (setq semantic-symref-tool 'global)))
 
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m

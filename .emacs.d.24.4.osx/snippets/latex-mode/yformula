@@ -13,10 +13,11 @@
 \usepackage{times}
 
 \usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
+\usepackage{txfonts} % using different math fonts
 \usepackage{algorithm, algpseudocode}
 \usepackage{graphics, setspace}
 
-\input{../DSF/userdef-mathsymb.tex}
+% \input{../DSF/userdef-mathsymb.tex}
 
 
 \begin{document}

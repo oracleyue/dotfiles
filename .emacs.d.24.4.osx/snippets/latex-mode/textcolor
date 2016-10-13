@@ -3,4 +3,4 @@
 # key: tc
 # group: macros
 # --
-\textcolor{${1:yblue}}{$0}
+\textcolor{${1:red}}{$0}

@@ -30,7 +30,7 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
-\usepackage{enumitem}   % begin{itemize}[noitemsep, topsep=-5pt] to remove spaces above or below paragraphs
+\usepackage{enumitem}   % begin{itemize}[noitemsep, topsep=-5pt] to remove spaces above or below paragraphs; [\label=\roman*] or \alph* \arabic*
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{caption}

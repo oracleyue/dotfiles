@@ -28,7 +28,8 @@
 \usepackage{mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{amsthm}
-\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
+% \usepackage{enumerate}  % to use \begin{enumerate}[(a)]
+\usepackage{enumitem}   % begin{itemize}[noitemsep, topsep=-5pt] to remove spaces above or below paragraphs; [\label=\roman*] or \alph* \arabic*
 
 \usepackage{algorithm,algpseudocode}
 

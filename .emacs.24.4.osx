@@ -46,6 +46,12 @@
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
+;;
+;; mouse control
+;;
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
+(setq mouse-wheel-progressive-speed nil)
+
 
 ;;
 ;; global variables for configuration loading

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: configure array spacing
-# key: setarray
+# name: array spacing
+# key: sep
 # group: macros
 # expand-env: ((yas-indent-line 'fixed))
 # --

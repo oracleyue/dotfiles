@@ -18,6 +18,7 @@
 ;; set line space
 (add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
 
+(setq org-startup-folded t)
 ;(setq org-startup-indented t)
 ;(add-hook 'org-mode-hook (lambda()  (visual-line-mode t)))
 
@@ -120,3 +121,10 @@
 ;;         "makeindex %b"
 ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
 ;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"))
+
+
+;;; /smart-parens/ for org-mode
+(sp-with-modes 'org-mode
+  (sp-local-pair "$" "$"
+                 :trigger "$"
+                 :unless '(sp-latex-point-after-backslash-left)))

@@ -56,8 +56,8 @@
 \newtheorem{case}{Case}
 
 \hypersetup{
-  pdfauthor={Zuogong YUE},
-  pdfcreator={Emacs version 24.4 + AUCTeX version 11.88}}
+  pdfauthor={},
+  pdfcreator={Emacs version 24.5 + AUCTeX version 11.88}}
 
 
 

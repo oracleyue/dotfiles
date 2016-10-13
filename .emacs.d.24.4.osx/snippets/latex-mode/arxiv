@@ -4,18 +4,8 @@
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[letterpaper]{article}
+\documentclass[a4paper]{article}
 \pdfoutput=1 
-
-\usepackage{hyperref}
-\hypersetup{
-  pdfinfo={
-    Title={},
-    Author={Zuogong Yue},
-    Subject={},
-    Keywords={}
-  }
-}
 \usepackage{pdfpages}
 
 \begin{document}

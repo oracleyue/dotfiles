@@ -39,6 +39,8 @@
     % \let\endproof\IEEEendproof
  % \usepackage{MnSymbol} % if using, comment asmsymb and latexsym.
 \usepackage{empheq}     % to deal with parentheses + subfunctions  
+
+% \usepackage{enumitem}   % begin{itemize}[noitemsep, topsep=-5pt] to remove spaces above or below paragraphs; [\label=\roman*] or \alph* \arabic*
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
