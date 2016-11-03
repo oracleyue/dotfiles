@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Automatica Journal Header
+# name: Automatica Journal Paper
 # key: yau
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

@@ -165,10 +165,12 @@
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber" "rubber -fd %t" TeX-run-command nil t) t))
+
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
+
 ;; (eval-after-load "tex"
 ;;    '(add-to-list 'TeX-command-list
-;;                  '("Rubber-clean" "rubber --clean %t" TeX-run-command nil t) t))
+;;        '("Rubber-clean" "rubber --clean %t" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
@@ -178,9 +180,9 @@
    '(add-to-list 'TeX-command-list
                  '("update bib library" "./bibupdate.sh" TeX-run-command nil t) t))
 
-(eval-after-load "tex"
-   '(add-to-list 'TeX-command-list
-                 '("backup doc files" "./srcbackup.sh" TeX-run-command nil t) t))
+;; (eval-after-load "tex"
+;;    '(add-to-list 'TeX-command-list
+;;        '("backup doc files" "./srcbackup.sh" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list

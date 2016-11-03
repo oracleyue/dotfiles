@@ -9,14 +9,15 @@
 \usepackage{setspace}
   \onehalfspacing
   % \doublespacing
-% \usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
+\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
+\parskip=12pt
 
 \usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
+% \usepackage{lmodern}
 % \usepackage[sc]{mathpazo}   % using Palladillo
 %    \linespread{1.05} 
-% \usepackage{times}   % using Times
+\usepackage{times}   % using Times
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata}
 
@@ -31,25 +32,37 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\slshape}
+
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
-  \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+% \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+\mdfsetup{
+    backgroundcolor=gray!10,
+    innertopmargin=1.8\topskip,
+    skipabove=\baselineskip,
+    skipbelow=0,
+    nobreak=true
+}  
 %\usepackage{minted}
 %  \usemintedstyle{pastie}
-%  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small} %framerule=1pt
+%  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE
 
 % theorem styles given by /amsthm/
-\theoremstyle{plain}% default
-\newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
+\theoremstyle{plain}
+\newmdtheoremenv{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
-\newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
+\newmdtheoremenv{proposition}[theorem]{Proposition}
 \newtheorem*{corollary}{Corollary}
 \theoremstyle{definition}
-\newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+\newmdtheoremenv{definition}[theorem]{Definition}
 \newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
-\newtheorem{example}{Example}[section]
+\newtheorem{example}{Example}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
@@ -70,6 +83,9 @@
 
 
 \begin{document}
+
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
 
 \maketitle
 %     \thispagestyle{empty}
@@ -108,8 +124,9 @@ $0
 
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
+% \def\bibfont{\footnotesize}   % using "natbib"
 % \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
-% {\footnotesize \bibliography{./ref/library}}
+% \bibliography{./ref/library}
 
 \end{document}
 
