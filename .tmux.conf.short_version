@@ -9,6 +9,8 @@ bind -n S-down new-window
 bind -n S-left prev
 bind -n S-right next
 
+# set copy mode
+set-window-option mode-keys vi
 
 ## List of useful keystrokes
 # commands:
@@ -22,6 +24,10 @@ bind -n S-right next
 # - /:new<CR>/ new session
 # - /s/ list sessions
 # - /$/ name sessions
+#
+# copy & scroll:
+# - /[/ enter copy mode; scroll by "Fn+arrowUp" in osx for page-up
+#			 if in "vi" mode, using vi keybindings
 #
 # windows:
 # - /c/ create window
