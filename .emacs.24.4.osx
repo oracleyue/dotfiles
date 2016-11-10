@@ -417,10 +417,11 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
-;; Restore Original Key-Bindings
+;; Restore Original Settings
 ;; 
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)
 ;; open default Dired folders on startup
 (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-
+;; restore "F10" to open menu bar
+(global-set-key (kbd "<f10>") 'menu-bar-open)

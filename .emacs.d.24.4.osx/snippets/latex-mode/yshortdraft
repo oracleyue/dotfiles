@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: Short Draft Header
+# key: ysd
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper,10pt]{article}
+\usepackage{setspace}
+  \onehalfspacing
+\usepackage[parfill]{parskip}
+%\parskip=10pt
+
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}  % or "times"
+\usepackage{helvet}  % using Helvet as sans serif font
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
+\usepackage{enumitem} % [leftmargin=*] to remove indentation before items
+
+\usepackage{graphicx,wrapfig}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
+\mdfdefinestyle{default}{backgroundcolor=gray!10}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+
+\usepackage{soul}   % use "\hl{...}" to highlight text
+\newcommand{\ask}[1]{{\color{magenta}  {[Further question: #1]}}}
+
+
+\begin{document}
+
+% ----------------- MAIN --------------------
+
+
+
+
+
+
+
+
+
+% \newpage
+% --------------- BIBLIOGRAPHY --------------
+\def\bibfont{\footnotesize}
+\bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
+\bibliography{./ref/library}
+
+\end{document}

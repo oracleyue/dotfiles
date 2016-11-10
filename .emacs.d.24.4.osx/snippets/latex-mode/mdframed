@@ -4,6 +4,6 @@
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{mdframed}[style=yue]
+\begin{mdframed}[style=default]
     $0
 \end{mdframed}

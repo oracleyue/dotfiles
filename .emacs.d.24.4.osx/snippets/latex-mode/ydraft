@@ -39,7 +39,7 @@
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
-% \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+% \mdfdefinestyle{default}{backgroundcolor=gray!10}
 \mdfsetup{
     backgroundcolor=gray!10,
     innertopmargin=1.8\topskip,

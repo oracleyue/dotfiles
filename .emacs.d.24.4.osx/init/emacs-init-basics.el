@@ -103,18 +103,18 @@
 ;(add-to-list 'default-frame-alist '(height . 36))
 ;(add-to-list 'default-frame-alist '(width . 100))
 
-;; == Using default theme
+;; == using default theme
 ;(load-theme 'deeper-blue t)
 ;(load-theme 'adwaita t)       ;grey, shipped by default
-;
-;; == Using user-defined theme  /github/: Ethan Schoonover's solarized theme
+
+;; == using user-defined theme  /github/: Ethan Schoonover's solarized theme
 ;; To use dark theme and enabled in terminal, use "set-variable" in .emacs
 ;;(setq frame-background-mode (quote dark))
-(setq solarized-termcolors 256)
+;; (setq solarized-termcolors 256)   ;distort colors; do NOT enable
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
-;
-;; == Using oracleyue's theme
+
+;; == using oracleyue's theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'ymonokai t)
 
@@ -256,7 +256,7 @@
 (if (display-graphic-p)
     (menu-bar-mode 1))
 (if (not (display-graphic-p))
-    (menu-bar-mode -1))
+    (menu-bar-mode 1))   ; -1 to disable
 
 ;; Setting font set for Chinese
 (if(display-graphic-p)
@@ -297,9 +297,9 @@
   (interactive)
   (dired "~/Public/Dropbox/Workspace/matlab")
   (dired "~/Public/Dropbox/oracleyue/OrgNote")
-  (dired "~/Public/Dropbox/Academia")
+  ;(dired "~/Public/Dropbox/Academia")
   ;(dired "~/Public/Dropbox/Academia/Manuscripts")
-  ;(dired "~/Public/Dropbox/Academia/Seminars")
+  (dired "~/Public/Dropbox/Academia/Seminars")
   (dired "~/Public/Dropbox/Shared")
   (find-file "~/Public/Dropbox/Academia/ToDoList.org")
   (switch-to-buffer "*scratch*"))
@@ -308,7 +308,7 @@
 ;; oracleyue's inital path setting
 (cd "~/Public/Dropbox/Academia/Manuscripts")
     ;; For Ubuntu@LCSB 
-    ;(setq default-directory "~/Workspace/matlab")
+    ;(setq default-directory "~/Workspace/matlab/")
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
