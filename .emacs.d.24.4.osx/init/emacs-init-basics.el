@@ -98,27 +98,23 @@
 ;; Face Enhancement
 ;; 
 
-;; setting size of frames (moving to .emacs)
-;(when window-system (set-frame-size (selected-frame) 100 36))
-;(add-to-list 'default-frame-alist '(height . 36))
-;(add-to-list 'default-frame-alist '(width . 100))
+;; Setting the Theme:
 
-;; == using default theme
+;; 1) using default theme
 ;(load-theme 'deeper-blue t)
-;(load-theme 'adwaita t)       ;grey, shipped by default
 
-;; == using user-defined theme  /github/: Ethan Schoonover's solarized theme
+;; 2) using user-defined theme  /github/: Ethan Schoonover's solarized theme
 ;; To use dark theme and enabled in terminal, use "set-variable" in .emacs
 ;;(setq frame-background-mode (quote dark))
-;; (setq solarized-termcolors 256)   ;distort colors; do NOT enable
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-(load-theme 'solarized t)
+;;!! (setq solarized-termcolors 256)   ;distort colors; do NOT enable
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+;(load-theme 'solarized t)
 
-;; == using oracleyue's theme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'ymonokai t)
+;; 3) using oracleyue's theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'ymonokai t)
 
-;; Fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
+;; fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
 ;(fringe-mode '(0 . nil))
 
 ;; set mode-line
