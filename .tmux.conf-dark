@@ -46,23 +46,32 @@ set-window-option -g mode-keys vi
 
 
 ## Theme settings
-#set -g default-terminal screen-256color   # Ubuntu/Linux
-set -g default-terminal xterm-256color  # Mac OS X
+set -g default-terminal screen-256color
 
+# set pane colors - hilight the active pane
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+# colorize messages in the command line
+set-option -g message-bg black #base02
+set-option -g message-fg colour12 #brightblue #base0
 # configure the status line
-set-option -g status-bg colour7 #oracleyue
-
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour11 #yellow
+set-option -g status-attr dim 
 # set window list colors - red for active and cyan for inactive
-set-window-option -g window-status-current-bg colour247 #oracleyue 
-
-# configure the status bar
+set-window-option -g window-status-fg colour12 #base0
+set-window-option -g window-status-bg colour236 
+set-window-option -g window-status-attr dim
+set-window-option -g window-status-current-fg colour156 #brightred
+set-window-option -g window-status-current-bg colour236 
+set-window-option -g window-status-current-attr bright
+## configure the status bar
 set-option -g status on         # turn the status bar on
 set -g status-utf8 on           # set utf-8 for the status bar
 set -g status-interval 5        # set update frequencey (default 15 seconds)
 set -g status-justify left    # center window list for clarity
 set -g status-left-length 70
-set -g status-left "#[fg=colour0][s#S:w#I.p#P]"
-
+set -g status-left "#[fg=colour226][s#S:w#I.p#P]"
 # show session name, window & pane number, date and time
 set -g status-right-length 60
-set -g status-right "#[fg=colour0] %l:%M %p #[fg=colour0]:: %d %b %Y "
+set -g status-right "#[fg=colour45] %l:%M %p #[fg=colour33]:: %d %b %Y "
