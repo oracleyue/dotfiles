@@ -18,8 +18,7 @@
  '(tab-stop-list
    (quote
     (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
- '(tool-bar-mode nil)
- )
+ '(tool-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -28,7 +27,8 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:font "DejaVu Sans Mono-12"))))
  '(highlight-indent-face ((t (:inherit highlight))))
- '(iedit-occurrence ((t (:inherit lazy-highlight)))))
+ '(iedit-occurrence ((t (:inherit lazy-highlight))))
+ '(mode-line ((t (:font "Arial" :box nil :height 1)))))
 
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 100))
