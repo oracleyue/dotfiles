@@ -28,7 +28,8 @@
  '(default ((t (:font "DejaVu Sans Mono-12"))))
  '(highlight-indent-face ((t (:inherit highlight))))
  '(iedit-occurrence ((t (:inherit lazy-highlight))))
- '(mode-line ((t (:font "Arial" :box nil :height 1)))))
+ ;; '(mode-line ((t (:font "Arial" :box nil :height 1))))
+ '(mode-line ((t (:box nil :height 1)))))
 
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 100))
