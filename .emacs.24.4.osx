@@ -25,7 +25,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:font "DejaVu Sans Mono-12"))))
+ '(default ((t (:font "DejaVu Sans Mono-13"))))
  '(highlight-indent-face ((t (:inherit highlight))))
  '(iedit-occurrence ((t (:inherit lazy-highlight))))
  ;; '(mode-line ((t (:font "Arial" :box nil :height 1))))
@@ -33,7 +33,7 @@
 
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 100))
-(when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
+(when window-system (set-frame-size (selected-frame) 101 36))  ;31 in Thinkpad
 
 ;;
 ;; encoding 
@@ -376,7 +376,7 @@
 ;;
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Evil-mode/
-(load (concat y-init-path-prefix "emacs-init-evil"))
+;(load (concat y-init-path-prefix "emacs-init-evil"))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Icomplete Mode/
@@ -417,6 +417,14 @@
 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;;
+;; More keybindings
+;;
+(global-set-key (kbd "M-\\") 'y:uncomment-line-or-region)  ; "C-c C-+"
+;(require 'open-next-line)   ;; if not using /emacs-python/
+;(global-set-key (kbd "C-o") 'open-next-line)
+
 ;;
 ;; Restore Original Settings
 ;; 
@@ -424,5 +432,6 @@
 (global-set-key (kbd "M-c") 'capitalize-word)
 ;; open default Dired folders on startup
 (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
+(y:set-startup-directory)   ; defined in emacs-init-basics.el
 ;; restore "F10" to open menu bar
 (global-set-key (kbd "<f10>") 'menu-bar-open)

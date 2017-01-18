@@ -89,6 +89,7 @@
         ("v 0" "varnothing"    "Misc Symbol" nil)
         ("v n" "nabla"    "Misc Symbol" nil)
         ("."   "dots"    "Misc Symbol" nil)
+        ("o"   "circ"    "Misc Symbol" nil)
         ("v ."   "cdots"    "Misc Symbol" nil)
         ("T"   "top"    "Misc Symbol" nil)
         ("C-p" "partial" "Misc Symbol" nil)

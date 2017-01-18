@@ -16,15 +16,14 @@
 \usepackage[T1]{fontenc}
 % \usepackage{lmodern}
 % \usepackage[sc]{mathpazo}   % using Palladillo
-%    \linespread{1.05} 
 \usepackage{times}   % using Times
+% \usepackage[italic]{mathastext}  % using the same font-type in math e.g. Times
 \usepackage{helvet}  % using Helvet as sans serif font
-\usepackage[scaled=0.95]{inconsolata}
+\usepackage[scaled=0.95]{inconsolata} % courier
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
-\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
-\usepackage{enumitem} % [leftmargin=*] to remove indentation before items
+\usepackage{enumitem} % [label={(\roman*)}, topsep={-8pt}, parsep={4pt}, itemindent={8pt}]; [leftmargin=*] to remove indentation before items.
 
 \usepackage{algorithm,algpseudocode}
 
@@ -61,7 +60,8 @@
 \newtheorem*{corollary}{Corollary}
 \theoremstyle{definition}
 \newmdtheoremenv{definition}[theorem]{Definition}
-\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
+\newmdtheoremenv{assumption}[theorem]{Assumption}
+%\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
 \newtheorem{example}{Example}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}

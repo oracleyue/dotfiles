@@ -3,12 +3,14 @@
 ;; ----------------------------------------------------------------------
 ;; BASIC USAGES
 ;; ---------------
+;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
+;; /invalid/ undo: "C--";   redo: "M--";  (more by oracleyue)
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; changing encodings: "C-x C-m f"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
 ;; kill backwards to the beginning of current line :: "M-0 C-k" or "C-x Backspace" (slightly different)
-;; comment line or region :: "C=\"
+;; comment line or region :: "C-\"
 ;; uncomment line or region :: "C-S-\"
 ;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
 ;; toggle overwrite mode :: "M-x overwrite-mode"
@@ -302,9 +304,11 @@
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
 
 ;; oracleyue's inital path setting
-(cd "~/Public/Dropbox/Academia/Manuscripts")
+(defun y:set-startup-directory ()
+  (cd "~/Public/Dropbox/Academia/Manuscripts")
     ;; For Ubuntu@LCSB 
     ;(setq default-directory "~/Workspace/matlab/")
+)
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
@@ -348,6 +352,11 @@
     (uncomment-region beg end)))
 (global-set-key (kbd "C-\\") 'y:comment-line-or-region)    ; "C-c C-="
 (global-set-key (kbd "C-|") 'y:uncomment-line-or-region)  ; "C-c C-+"
+
+;; To fix undo/redo using /undo-tree.el/, if not using /Evil/
+(global-undo-tree-mode)
+;(global-set-key (kbd "C--") 'undo-tree-undo)
+;(global-set-key (kbd "M--") 'undo-tree-redo)
 
 
 ;; configure /hl-line-mode/ for /monokai/, enabled in python-mode
