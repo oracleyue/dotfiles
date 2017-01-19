@@ -250,9 +250,18 @@
        (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
        ))
 
+;; -------------------------------------------
+;; Enable major modes for CMake files
+;; /cmake-mode/: cmake-mode.el
+(require 'cmake-mode)
+;; /cmake-font-lock/: to add more fontifying features
+(add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 
 
-;;; -------------------------------------------
+
+;; -------------------------------------------
 ;; ;; use /doxymacs/ to manipulate doxygen documentations
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
 ;; (require 'doxymacs)
