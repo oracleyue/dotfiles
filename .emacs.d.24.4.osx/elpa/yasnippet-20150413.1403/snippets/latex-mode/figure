@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: figure-default
-# key: figdef
-# --
-\begin{figure}[ht]
-  \centering
-  \includegraphics[${1:width=\textwidth}]{figures/${2:path.pdf}}
-  \caption{\label{fig:${3:label}} $0}
-\end{figure}

@@ -30,7 +30,9 @@
 ; For /auto-complete/ 
 (require 'auto-complete-config)
 (ac-config-default)
+;; enable ac-mode for major modes
 (setq ac-modes (append ac-modes '(matlab-mode makefile-gmake-mode makefile-bsdmake-mode)))
+(setq ac-modes (append ac-modes '(cmake-mode)))
 ;; fix switching when line number jumps to one digit due to popup
 (ac-linum-workaround)
 ;; starting type

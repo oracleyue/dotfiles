@@ -95,6 +95,11 @@
           (join-line 1)))))
 (global-set-key (kbd "C-^") 'y:join-region)
 
+;; --- 5 ---
+;; open a new line and jump there
+(require 'open-next-line)
+(global-set-key (kbd "C-o") 'open-next-line)
+
 
 ;;
 ;; Face Enhancement
@@ -206,6 +211,9 @@
 ;; other settings
 ;;
 
+;; use ibuffer by default
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;; increase memeory for emacs to avoid garbage collections slow it down
 (setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
 
@@ -291,23 +299,24 @@
 
 
 ;; oracleyue's inital Dired folders on startup
+(setq y:HomePath "/Users/oracleyue")
 (defun y:dired-open-folders-startup ()
   (interactive)
-  (dired "~/Public/Dropbox/Workspace/matlab")
-  (dired "~/Public/Dropbox/oracleyue/OrgNote")
-  ;(dired "~/Public/Dropbox/Academia")
-  ;(dired "~/Public/Dropbox/Academia/Manuscripts")
-  (dired "~/Public/Dropbox/Academia/Seminars")
-  (dired "~/Public/Dropbox/Shared")
-  (find-file "~/Public/Dropbox/Academia/ToDoList.org")
+  (dired (concat y:HomePath "/Public/Dropbox/Workspace/matlab"))
+  (dired (concat y:HomePath "/Public/Dropbox/oracleyue/OrgNote"))
+  ;(dired (concat y:HomePath "/Public/Dropbox/Academia"))
+  ;(dired (concat y:HomePath "/Public/Dropbox/Academia/Manuscripts"))
+  (dired (concat y:HomePath "/Public/Dropbox/Academia/Seminars"))
+  (dired (concat y:HomePath "/Public/Dropbox/Shared"))
+  (find-file (concat y:HomePath "/Public/Dropbox/Academia/ToDoList.org"))
   (switch-to-buffer "*scratch*"))
 ;(y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
 
 ;; oracleyue's inital path setting
 (defun y:set-startup-directory ()
-  (cd "~/Public/Dropbox/Academia/Manuscripts")
+  (cd (concat y:HomePath "/Public/Dropbox/Academia/Manuscripts"))
     ;; For Ubuntu@LCSB 
-    ;(setq default-directory "~/Workspace/matlab/")
+    ;(setq default-directory (concat y:HomePath "/Workspace/matlab/"))
 )
 
 ;; oracleyue's env. variables and alias

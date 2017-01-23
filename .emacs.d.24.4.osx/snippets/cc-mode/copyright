@@ -1,9 +1,8 @@
 # -*- mode: snippet -*-
-# name: copyright header
-# key: copyright
+# name: copyright
+# key: cp
+# group: oracleyue
 # expand-env: ((yas-indent-line 'fixed))
 # --
-/*
- * Copyright (C) ${1:2015}, ${2:Zuogong YUE}
- */
+// Copyright [${1:2017}] <${2:oracleyue}>
 $0

@@ -56,7 +56,10 @@
 ; adding snippets in /emacs-for-python/ when use the default yasnippets
 ;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again
 (add-to-list 'yas-snippet-dirs "~/.emacs.d/git/emacs-for-python/extensions/yasnippet/snippets")
-(yas-reload-all)
+
+; fix bugs in ac due to line wrap
+(add-hook 'python-mode-hook (lambda ()
+                              (setq truncate-lines t)))
 
 ;;
 ;; Auto-completion by /Jedi/
@@ -73,9 +76,4 @@
     ;; go to the last point where =jedi:got-definition= was called
     ;; - keybinding: "C-c ,"
 ;; set calltip methods
-;(setq jedi:tooltip-method '(popup))  ;or pos-tip
-
-;; fix bugs in ac due to line wrap
-(add-hook 'python-mode-hook (lambda ()
-                              (setq truncate-lines t)))
-
+(setq jedi:tooltip-method '(pos-tip))  ;popup, OR  pos-tip

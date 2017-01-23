@@ -228,7 +228,7 @@
 ;;; Bindings
 
 ; oracleyue, added: BEGIN ----------
-(add-to-list 'load-path "~/.emacs.d/git")
+;;(add-to-list 'load-path "~/.emacs.d/git")
 ;; (require 'dash-at-point)
 (require 'jedi-core)
 (defalias 'y:jedi:show-doc 'jedi:show-doc)
@@ -1293,7 +1293,8 @@ virtualenv."
 
 (defcustom python-shell-setup-codes '(python-shell-completion-setup-code
                                       python-ffap-setup-code
-                                      python-eldoc-setup-code)
+                                      ;; python-eldoc-setup-code)
+                                      )
   "List of code run by `python-shell-send-setup-codes'."
   :type '(repeat symbol)
   :group 'python
@@ -1407,7 +1408,7 @@ controls which Python interpreter is run.  Variables
 `python-shell-completion-setup-code',
 `python-shell-completion-string-code',
 `python-shell-completion-module-string-code',
-`python-eldoc-setup-code', `python-eldoc-string-code',
+;; `python-eldoc-setup-code', `python-eldoc-string-code',
 `python-ffap-setup-code' and `python-ffap-string-code' can
 customize this mode for different Python interpreters.
 
@@ -2299,112 +2300,112 @@ Runs COMMAND, a shell command, as if by `compile'.  See
 
 ;;; Eldoc
 
-(defcustom python-eldoc-setup-code
-  "def __PYDOC_get_help(obj):
-    try:
-        import inspect
-        if hasattr(obj, 'startswith'):
-            obj = eval(obj, globals())
-        doc = inspect.getdoc(obj)
-        if not doc and callable(obj):
-            target = None
-            if inspect.isclass(obj) and hasattr(obj, '__init__'):
-                target = obj.__init__
-                objtype = 'class'
-            else:
-                target = obj
-                objtype = 'def'
-            if target:
-                args = inspect.formatargspec(
-                    *inspect.getargspec(target)
-                )
-                name = obj.__name__
-                doc = '{objtype} {name}{args}'.format(
-                    objtype=objtype, name=name, args=args
-                )
-        else:
-            doc = doc.splitlines()[0]
-    except:
-        doc = ''
-    try:
-        exec('print doc')
-    except SyntaxError:
-        print(doc)"
-  "Python code to setup documentation retrieval."
-  :type 'string
-  :group 'python)
+;; (defcustom python-eldoc-setup-code
+;;   "def __PYDOC_get_help(obj):
+;;     try:
+;;         import inspect
+;;         if hasattr(obj, 'startswith'):
+;;             obj = eval(obj, globals())
+;;         doc = inspect.getdoc(obj)
+;;         if not doc and callable(obj):
+;;             target = None
+;;             if inspect.isclass(obj) and hasattr(obj, '__init__'):
+;;                 target = obj.__init__
+;;                 objtype = 'class'
+;;             else:
+;;                 target = obj
+;;                 objtype = 'def'
+;;             if target:
+;;                 args = inspect.formatargspec(
+;;                     *inspect.getargspec(target)
+;;                 )
+;;                 name = obj.__name__
+;;                 doc = '{objtype} {name}{args}'.format(
+;;                     objtype=objtype, name=name, args=args
+;;                 )
+;;         else:
+;;             doc = doc.splitlines()[0]
+;;     except:
+;;         doc = ''
+;;     try:
+;;         exec('print doc')
+;;     except SyntaxError:
+;;         print(doc)"
+;;   "Python code to setup documentation retrieval."
+;;   :type 'string
+;;   :group 'python)
 
-(defcustom python-eldoc-string-code
-  "__PYDOC_get_help('''%s''')\n"
-  "Python code used to get a string with the documentation of an object."
-  :type 'string
-  :group 'python)
+;; (defcustom python-eldoc-string-code
+;;   "__PYDOC_get_help('''%s''')\n"
+;;   "Python code used to get a string with the documentation of an object."
+;;   :type 'string
+;;   :group 'python)
 
-(defun python-eldoc--get-doc-at-point (&optional force-input force-process)
-  "Internal implementation to get documentation at point.
-If not FORCE-INPUT is passed then what `current-word' returns
-will be used.  If not FORCE-PROCESS is passed what
-`python-shell-get-process' returns is used."
-  (let ((process (or force-process (python-shell-get-process))))
-    (if (not process)
-        "Eldoc needs an inferior Python process running."
-      (let* ((current-defun (python-info-current-defun))
-             (input (or force-input
-                        (with-syntax-table python-dotty-syntax-table
-                          (if (not current-defun)
-                              (current-word)
-                            (concat current-defun "." (current-word))))))
-             (ppss (syntax-ppss))
-             (help (when (and
-                          input
-                          (not (string= input (concat current-defun ".")))
-                          (not (or (python-info-ppss-context 'string ppss)
-                                   (python-info-ppss-context 'comment ppss))))
-                     (when (string-match
-                            (concat
-                             (regexp-quote (concat current-defun "."))
-                             "self\\.") input)
-                       (with-temp-buffer
-                         (insert input)
-                         (goto-char (point-min))
-                         (forward-word)
-                         (forward-char)
-                         (delete-region
-                          (point-marker) (search-forward "self."))
-                         (setq input (buffer-substring
-                                      (point-min) (point-max)))))
-                     (python-shell-send-string-no-output
-                      (format python-eldoc-string-code input) process))))
-        (with-current-buffer (process-buffer process)
-          (when comint-last-prompt-overlay
-            (delete-region comint-last-input-end
-                           (overlay-start comint-last-prompt-overlay))))
-        (when (and help
-                   (not (string= help "\n")))
-          help)))))
+;; (defun python-eldoc--get-doc-at-point (&optional force-input force-process)
+;;   "Internal implementation to get documentation at point.
+;; If not FORCE-INPUT is passed then what `current-word' returns
+;; will be used.  If not FORCE-PROCESS is passed what
+;; `python-shell-get-process' returns is used."
+;;   (let ((process (or force-process (python-shell-get-process))))
+;;     (if (not process)
+;;         "Eldoc needs an inferior Python process running."
+;;       (let* ((current-defun (python-info-current-defun))
+;;              (input (or force-input
+;;                         (with-syntax-table python-dotty-syntax-table
+;;                           (if (not current-defun)
+;;                               (current-word)
+;;                             (concat current-defun "." (current-word))))))
+;;              (ppss (syntax-ppss))
+;;              (help (when (and
+;;                           input
+;;                           (not (string= input (concat current-defun ".")))
+;;                           (not (or (python-info-ppss-context 'string ppss)
+;;                                    (python-info-ppss-context 'comment ppss))))
+;;                      (when (string-match
+;;                             (concat
+;;                              (regexp-quote (concat current-defun "."))
+;;                              "self\\.") input)
+;;                        (with-temp-buffer
+;;                          (insert input)
+;;                          (goto-char (point-min))
+;;                          (forward-word)
+;;                          (forward-char)
+;;                          (delete-region
+;;                           (point-marker) (search-forward "self."))
+;;                          (setq input (buffer-substring
+;;                                       (point-min) (point-max)))))
+;;                      (python-shell-send-string-no-output
+;;                       (format python-eldoc-string-code input) process))))
+;;         (with-current-buffer (process-buffer process)
+;;           (when comint-last-prompt-overlay
+;;             (delete-region comint-last-input-end
+;;                            (overlay-start comint-last-prompt-overlay))))
+;;         (when (and help
+;;                    (not (string= help "\n")))
+;;           help)))))
 
-(defun python-eldoc-function ()
-  "`eldoc-documentation-function' for Python.
-For this to work the best as possible you should call
-`python-shell-send-buffer' from time to time so context in
-inferior python process is updated properly."
-  (python-eldoc--get-doc-at-point))
+;; (defun python-eldoc-function ()
+;;   "`eldoc-documentation-function' for Python.
+;; For this to work the best as possible you should call
+;; `python-shell-send-buffer' from time to time so context in
+;; inferior python process is updated properly."
+;;   (python-eldoc--get-doc-at-point))
 
-(defun python-eldoc-at-point (symbol)
-  "Get help on SYMBOL using `help'.
-Interactively, prompt for symbol."
-  (interactive
-   (let ((symbol (with-syntax-table python-dotty-syntax-table
-                   (current-word)))
-         (enable-recursive-minibuffers t))
-     (list (read-string (if symbol
-                            (format "Describe symbol (default %s): " symbol)
-                          "Describe symbol: ")
-                        nil nil symbol))))
-  (let ((process (python-shell-get-process)))
-    (if (not process)
-        (message "Eldoc needs an inferior Python process running.")
-      (message (python-eldoc--get-doc-at-point symbol process)))))
+;; (defun python-eldoc-at-point (symbol)
+;;   "Get help on SYMBOL using `help'.
+;; Interactively, prompt for symbol."
+;;   (interactive
+;;    (let ((symbol (with-syntax-table python-dotty-syntax-table
+;;                    (current-word)))
+;;          (enable-recursive-minibuffers t))
+;;      (list (read-string (if symbol
+;;                             (format "Describe symbol (default %s): " symbol)
+;;                           "Describe symbol: ")
+;;                         nil nil symbol))))
+;;   (let ((process (python-shell-get-process)))
+;;     (if (not process)
+;;         (message "Eldoc needs an inferior Python process running.")
+;;       (message (python-eldoc--get-doc-at-point symbol process)))))
 
 
 ;;; Imenu
@@ -2792,8 +2793,8 @@ if that value is non-nil."
                                                  (current-column))))
          (^ '(- (1+ (current-indentation))))))
 
-  (set (make-local-variable 'eldoc-documentation-function)
-       #'python-eldoc-function)
+  ;; (set (make-local-variable 'eldoc-documentation-function)
+  ;;      #'python-eldoc-function)
 
   (add-to-list 'hs-special-modes-alist
                `(python-mode "^\\s-*\\(?:def\\|class\\)\\>" nil "#"

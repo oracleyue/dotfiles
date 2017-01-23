@@ -5,6 +5,10 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(fill-column 80)
+ '(flymake-google-cpplint-command
+   (if
+       (string-equal system-type "darwin")
+       "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
  '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  '(org-file-apps
@@ -15,7 +19,7 @@
      ("\\.pdf\\'" . "open %s"))))
  '(package-selected-packages
    (quote
-    (zeal-at-point yasnippet xcscope stickyfunc-enhance smex smartparens neotree multiple-cursors matlab-mode markdown-mode magit key-combo jedi iedit ido-hacks htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint flx-ido fill-column-indicator expand-region evil-leader etags-table ess csv-mode bash-completion auto-complete-clang auto-complete-c-headers auctex)))
+    (jedi company-quickhelp company-jedi yasnippet zeal-at-point xcscope stickyfunc-enhance smartparens neotree multiple-cursors matlab-mode markdown-mode magit key-combo iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint fill-column-indicator expand-region evil-leader etags-table csv-mode company-c-headers bash-completion auto-complete-clang auto-complete-c-headers auctex)))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list
@@ -29,6 +33,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:font "DejaVu Sans Mono-13"))))
+ '(company-tooltip ((t (:inherit default :background "#fdf9ec"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
+ '(company-tooltip-search-selection ((t (:inherit isearch))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(highlight-indent-face ((t (:inherit highlight))))
  '(iedit-occurrence ((t (:inherit lazy-highlight))))
  '(mode-line ((t (:box nil :height 1)))))
@@ -59,18 +68,25 @@
 ;;
 ;; global variables for configuration loading
 ;;
+
+;; loading paths
 (setq y-init-path-prefix "~/.emacs.d/init/")
 (add-to-list 'load-path "~/.emacs.d/git")
+
 ;; feature control
+;; - enable CEDET features
 (if (string-equal system-type "darwin")
-    (progn 
-      (setq y:flags "yes")
-      (setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
-      (setq y-enable-function-args-flag y:flags)  ; for /function-args/
-      (setq y-enable-cedet-source-info y:flags))  ; for /cedet-source-info/
-  (setq y-enable-semantic-parse "yes")
-  (setq y-enable-function-args-flag "yes")
-  (setq y-enable-cedet-source-info "yes"))
+    (setq y:flags "yes")
+  (setq y:flags "yes"))
+(setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
+(setq y-enable-function-args-flag y:flags)  ; for /function-args/
+(setq y-enable-cedet-source-info y:flags)  ; for /cedet-source-info/
+
+;; - select package for auto-completion
+(if (string-equal system-type "darwin")
+    (setq y:ac-mode "company")
+  (setq y:ac-mode "auto-complete"))
+
 ;; suppress redefinition warnings
 (setq ad-redefinition-action 'accept)
 
@@ -88,7 +104,7 @@
     (package-initialize)
     ;; Any add to list for package-archives
     (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    ;; (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
     ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))    
     ;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
     )
@@ -136,11 +152,11 @@
 ;  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
 ;  (add-hook 'sh-mode-hook 'hl-sexp-mode)
 
-
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Minior modes (yas, auto-complete, popup) for completion
-(load (concat y-init-path-prefix "emacs-init-ac"))
-
+;; Minior modes for auto-completion (+yas, auto-complete ...)
+(if (string-equal y:ac-mode "company")
+    (load (concat y-init-path-prefix "emacs-init-ac-comp"))  ;; use /company/
+  (load (concat y-init-path-prefix "emacs-init-ac")))  ;; use /auto-complete/
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
@@ -217,7 +233,7 @@
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
 (golden-ratio-mode t)
-(setq golden-ratio-auto-scale t) 
+;(setq golden-ratio-auto-scale t) 
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /Helm/ and plus
@@ -305,24 +321,34 @@
 ;; Programming Environment for /HTML, js/
 ;; candidates: js2-mode, web-mode, emmet-mode
 
+
 ; =======================================
 ;; Programming Environment for /C C++/
-(load (concat y-init-path-prefix "emacs-init-cc"))
-;(load (concat y-init-path-prefix "emacs-init-cc-test"))
-;; Enable to fire "C-c C-c" to compile, when in cc-mode buffers
+(if (string-equal y:ac-mode "company")
+    (load (concat y-init-path-prefix "emacs-init-cc-comp"))  ;; use /company/
+  (load (concat y-init-path-prefix "emacs-init-cc")))  ;; use /auto-complete/
+
+;; enable to fire "C-c C-c" to compile, when in cc-mode buffers
 ;; OR use projectile compile "C-c p c"
 (defun y:set-compile-command ()
   (set (make-local-variable 'compile-command) "cd .. && make -k && cd -"))
 (add-hook 'c-mode-hook 'y:set-compile-command)
 (add-hook 'c++-mode-hook 'y:set-compile-command)
 
+
 ; =======================================
 ;; Programming Environment for /Python/
-(load (concat y-init-path-prefix "emacs-init-py"))
+(if (string-equal y:ac-mode "company")
+    (load (concat y-init-path-prefix "emacs-init-py-comp"))  ;; use /company/
+  (load (concat y-init-path-prefix "emacs-init-py")))  ;; use /auto-complete/
+
 
 ; =======================================
 ;; Programming Environment for /R/
-(load (concat y-init-path-prefix "emacs-init-r"))
+(if (string-equal y:ac-mode "company")
+    (load (concat y-init-path-prefix "emacs-init-r-comp"))  ;; use /company/
+  (load (concat y-init-path-prefix "emacs-init-r")))  ;; use /auto-complete/
+
 
 ; =======================================
 ;; Programming Environment for /MATLAB/
@@ -437,3 +463,5 @@
 (y:set-startup-directory)   ; defined in emacs-init-basics.el
 ;; restore "F10" to open menu bar
 (global-set-key (kbd "<f10>") 'menu-bar-open)
+;; kill unnecessary buffers
+(kill-buffer "*ESS*")
