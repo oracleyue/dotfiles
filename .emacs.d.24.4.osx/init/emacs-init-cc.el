@@ -2,12 +2,6 @@
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
-(if (string-equal system-type "darwin")
-    (progn 
-    (setq y-enable-function-args-flag "no")
-    (setq y-enable-cedet-source-info "no"))
-  (setq y-enable-function-args-flag "yes")
-  (setq y-enable-cedet-source-info "yes"))
 
 ;; Package: /google-c-style/
 (require 'google-c-style)

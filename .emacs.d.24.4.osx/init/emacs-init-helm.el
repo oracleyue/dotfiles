@@ -4,9 +4,6 @@
 (require 'helm-config)
 
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
-(if (string-equal system-type "darwin")
-    (setq y-enable-semantic-parse "no")
-  (setq y-enable-semantic-parse "yes"))
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we

@@ -2,13 +2,6 @@
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
-(if (string-equal system-type "darwin")
-    (progn 
-    (setq y-enable-function-args-flag "no")
-    (setq y-enable-cedet-source-info "no"))
-  (setq y-enable-function-args-flag "yes")
-  (setq y-enable-cedet-source-info "yes"))
-
 
 ;; Package: /google-c-style/
 (require 'google-c-style)
@@ -19,7 +12,6 @@
     ;(setq-default c-basic-offset 4)
     ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
-
 ;; Package: /smartparens/
 ;; having enable globally in .emacs
 ;; if not using /smartparens/ globally, uncomment the next line
@@ -29,10 +21,8 @@
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-
 ;; Package: /iedit/; default key "C-c ;"
 (require 'iedit)
-
 
 ;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
 ; let's define a function for flymake initialization
@@ -46,12 +36,10 @@
 ;(add-hook 'c-mode-hook 'y:flymake-google-init)
 (add-hook 'c++-mode-hook 'y:flymake-google-init)
 
-
 ;; /xcscope/: source cross-referencing tool [need to install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
 ;(require 'xcscope)
 ;(cscope-setup)
-
 
 ;; configure /company-mode/ for C/C++ sources and headers
 ;; use /clang/ and /company-c-headers/
@@ -60,14 +48,12 @@
 ;; (add-to-list 'company-backends '(company-c-headers company-clang))
 (defun y:company-cpp-setup ()
   (setq-local company-backends
-              (append '((company-c-headers company-clang))
+              (append '((company-c-headers company-clang company-dabbrev-code))
                       company-backends)))
 (add-hook 'c-mode-common-hook 'y:company-cpp-setup)
 
-
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
 (load (concat y-init-path-prefix "emacs-init-cc-tags"))
-
 
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
@@ -111,14 +97,24 @@
        (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
        ))
 
-;; -------------------------------------------
+
+;;
 ;; Enable major modes for CMake files
+;;
 ;; /cmake-mode/: cmake-mode.el
 (require 'cmake-mode)
 ;; /cmake-font-lock/: to add more fontifying features
 (add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+;; adding /company-cmake/ for ac-complete
+(add-to-list 'company-dabbrev-code-modes 'cmake-mode)
+(defun y:company-cmake-setup ()
+  (setq-local company-backends
+              (append '((company-cmake company-dabbrev-code))
+                      company-backends)))
+(add-hook 'cmake-mode-hook 'y:company-cmake-setup)
+
 
 ;; -------------------------------------------
 ;; ;; use /doxymacs/ to manipulate doxygen documentations

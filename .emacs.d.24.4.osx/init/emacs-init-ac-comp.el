@@ -31,9 +31,8 @@
         (company-abbrev company-dabbrev)))
 ;; other backends: and check the corresponding major-mode settings
 ;(add-to-list 'company-backends 'company-xcode)
-(add-to-list 'company-backends 'company-cmake)
-(add-to-list 'company-backends 'company-css)
-(add-to-list 'company-backends 'company-nxml)
+;(add-to-list 'company-backends 'company-css)
+;(add-to-list 'company-backends 'company-nxml)
 ;; enable /company-dabbrev-code/ for /matlab-mode/
 (require 'company-dabbrev-code)
 (add-to-list 'company-dabbrev-code-modes 'matlab-mode)
@@ -41,6 +40,7 @@
 ;;      [c/c++] company-clang, company-c-headers
 ;;      [python] company-jedi
 ;;      [r] built-in of ESS
+;;      [cmake] company-cmake
 
 ;; adjust colors for solarized theme
 (require 'color)
