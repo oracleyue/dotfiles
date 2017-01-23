@@ -162,3 +162,10 @@
 ;; C-c p s g 	helm-projectile-grep 	Searches for symbol starting from project root
 ;; C-c p s a 	helm-projectile-ack 	Same as above but using ack
 ;; C-c p s s 	helm-projectile-ag 	Same as above but using ag
+
+
+;; ------------------------------------------------------
+;; List of Safe Variable Declaration (suppress warnings)
+;; ------------------------------------------------------
+(add-to-list 'safe-local-variable-values
+             '(project-local-include-path . ("-I./include" "-I./src")))

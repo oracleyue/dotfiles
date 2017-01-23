@@ -27,18 +27,20 @@
       '((company-files          ; files & directory
          company-keywords       ; keywords
          company-capf
-         ;company-yasnippet
-         )
+         company-dabbrev-code)
         (company-abbrev company-dabbrev)))
 ;; other backends: and check the corresponding major-mode settings
 ;(add-to-list 'company-backends 'company-xcode)
 (add-to-list 'company-backends 'company-cmake)
 (add-to-list 'company-backends 'company-css)
 (add-to-list 'company-backends 'company-nxml)
+;; enable /company-dabbrev-code/ for /matlab-mode/
+(require 'company-dabbrev-code)
+(add-to-list 'company-dabbrev-code-modes 'matlab-mode)
 ;; list of backends added in major-mode configs:
 ;;      [c/c++] company-clang, company-c-headers
 ;;      [python] company-jedi
-;;      [R] company-ess
+;;      [r] built-in of ESS
 
 ;; adjust colors for solarized theme
 (require 'color)
