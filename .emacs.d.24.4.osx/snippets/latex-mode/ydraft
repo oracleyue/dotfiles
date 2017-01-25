@@ -18,6 +18,7 @@
 % \usepackage[sc]{mathpazo}   % using Palladillo
 \usepackage{times}   % using Times
 % \usepackage[italic]{mathastext}  % using the same font-type in math e.g. Times
+% \usepackage{newtxmath}  % using Times-style math symbols
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata} % courier
 
@@ -43,10 +44,10 @@
     backgroundcolor=gray!10,
     innertopmargin=1.8\topskip,
     skipabove=\baselineskip,
-    skipbelow=0,
-    nobreak=true
+    skipbelow=-.4\baselineskip,
+    nobreak=true  ;; stop breaking the framed box into two pages
 }  
-%\usepackage{minted}
+% \usepackage{minted}
 %  \usemintedstyle{pastie}
 %  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}

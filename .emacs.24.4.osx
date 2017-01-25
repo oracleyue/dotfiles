@@ -4,12 +4,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(inhibit-startup-screen t)
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
  '(fill-column 80)
  '(flymake-google-cpplint-command
-   (if
-       (string-equal system-type "darwin")
+   (if (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
- '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  '(org-file-apps
    (quote
@@ -17,15 +18,7 @@
      ("\\.mm\\'" . default)
      ("\\.x?html?\\'" . "open %s")
      ("\\.pdf\\'" . "open %s"))))
- '(package-selected-packages
-   (quote
-    (jedi company-quickhelp company-jedi yasnippet zeal-at-point xcscope stickyfunc-enhance smartparens neotree multiple-cursors matlab-mode markdown-mode magit key-combo iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint fill-column-indicator expand-region evil-leader etags-table csv-mode company-c-headers bash-completion auto-complete-clang auto-complete-c-headers auctex)))
- '(scroll-bar-mode nil)
- '(show-paren-mode t)
- '(tab-stop-list
-   (quote
-    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
- '(tool-bar-mode nil))
+ '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -33,34 +26,28 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:font "DejaVu Sans Mono-13"))))
- '(company-tooltip ((t (:inherit default :background "#fdf9ec"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
- '(company-tooltip-search-selection ((t (:inherit isearch))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(highlight-indent-face ((t (:inherit highlight))))
  '(iedit-occurrence ((t (:inherit lazy-highlight))))
  '(mode-line ((t (:box nil :height 1)))))
+
+;; stop emacs automatically editing .emacs
+(setq disabled-command-function nil)
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file 'noerror)
 
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 100))
 (when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
 
-;;
 ;; encoding 
-;;
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;;
 ;; version settings
-;;
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;;
 ;; mouse control
-;;
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
 
@@ -142,15 +129,10 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
-(show-paren-mode t)
-;; (setq show-paren-style 'expression)
+;;(show-paren-mode t)  ;; replaced by /smartparens/
 (require 'hl-sexp)
   (add-hook 'lisp-mode-hook 'hl-sexp-mode)
   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-;  (add-hook 'matlab-mode-hook 'hl-sexp-mode)
-;  (add-hook 'python-mode-hook 'hl-sexp-mode)
-;  (add-hook 'c-mode-common-hook 'hl-sexp-mode)
-;  (add-hook 'sh-mode-hook 'hl-sexp-mode)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Minior modes for auto-completion (+yas, auto-complete ...)
@@ -159,37 +141,15 @@
   (load (concat y-init-path-prefix "emacs-init-ac")))  ;; use /auto-complete/
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; /Fill-Column-Indicator/ Bugs in org-mode: adding extra symbols at line ends
-; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator-1.83")
-; (require 'fill-column-indicator)
-; (define-globalized-minor-mode
-;    global-fci-mode fci-mode (lambda () (fci-mode 1)))
-; (add-hook 'python-mode-hook 'fci-mode)
-
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;; Insert Parenthesis/Brackets by /Pair/
-;(electric-pair-mode 1)
-;; make electric-pair-mode work on more brackets
-;(defvar y-electric-pair-pairs '(
-;                                (?\" . ?\")
-;                                (?\{ . ?\})
-;                                        ; (?\< . ?\>)
-;                                        ; (?\' . ?\')
-;                                        ; (?\$ . ?\$)
-;                                ))
-;(setq-default electric-pair-pairs (append electric-pair-pairs y-electric-pair-pairs))
-;;
-;;replaced advanced pkg: /smartparens/
-;;
+;; Insert pairs of parenthesis/brackets: /smartparens/
 (require 'smartparens-config)
 (show-smartparens-global-mode +1)
 (smartparens-global-mode 1)
 
-
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;; Enable /linum/ in nlinum lib
 ;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
-;;; (global-linum-mode 1)  ; linum-mode causes many bugs
+;; (global-linum-mode 1)  ; linum-mode causes many bugs
 ;; align line numbers to the right + padding
 (defun linum-format-func (line)
   (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
@@ -242,7 +202,7 @@
 
 
 ;;
-;; Configurations for Programming Environment
+;; ~~~~~~~~~~~~~~~~ Programming Environment ~~~~~~~~~~~~~~~~
 ;;
 
 ;; General Supports for Programming:
@@ -317,9 +277,11 @@
 ;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 ;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
+
 ; =======================================
 ;; Programming Environment for /HTML, js/
-;; candidates: js2-mode, web-mode, emmet-mode
+;; candidates: web-mode, emmet-mode, (NOT USED: js2-mode)
+(load (concat y-init-path-prefix "emacs-init-web"))
 
 
 ; =======================================
