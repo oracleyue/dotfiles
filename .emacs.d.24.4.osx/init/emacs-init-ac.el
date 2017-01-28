@@ -27,7 +27,7 @@
 (setq yas-prompt-functions '(yas-popup-isearch-prompt yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-x-prompt yas-no-prompt))   ; note that yas-dropdown-prompt needs /dropdown-list/ to be installed!
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; For /auto-complete/ 
+; For /auto-complete/
 (require 'auto-complete-config)
 (ac-config-default)
 ;; enable ac-mode for major modes
@@ -49,7 +49,7 @@
     ;(add-hook 'python-mode-hook (lambda () (setq ac-auto-start nil)))
     ;(add-hook 'c++-mode-hook (lambda () (setq ac-auto-start nil)))
 ;; set keys to control ac-complete behaviors
-(define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
+;(define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
 ;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
 ;; setting of pop-up boxes
 (setq ac-quick-help-delay 0.2)    ;; default "0.2"
@@ -77,3 +77,29 @@
                            ac-source-words-in-same-mode-buffers))
 ; Notes: other settings are in different programming languages' parts. See C/C++.
 ;; ------------------------------------------------------------
+
+
+;; Integration of /indent/ + /yas/ + /ac/ for TAB key
+(defun check-expansion ()
+  (save-excursion
+    (if (looking-at "\\_>") t
+      (backward-char 1)
+      (if (looking-at "\\.") t
+        (backward-char 1)
+        (if (looking-at "->") t nil)))))
+
+(defun do-yas-expand ()
+  (let ((yas/fallback-behavior 'return-nil))
+    (yas/expand)))
+
+(defun tab-indent-or-complete ()
+  (interactive)
+  (if (minibufferp)
+      (minibuffer-complete)
+    (if (or (not yas/minor-mode)
+            (null (do-yas-expand)))
+        (if (check-expansion)
+            (ac-complete)
+          (indent-for-tab-command)))))
+
+(global-set-key [tab] 'tab-indent-or-complete)

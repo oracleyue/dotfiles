@@ -8,6 +8,7 @@
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(fill-column 80)
+ '(show-paren-mode nil)   ;; conflicts with /smartparens/
  '(flymake-google-cpplint-command
    (if (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
@@ -36,10 +37,10 @@
 (load custom-file 'noerror)
 
 ;; frame size
-(add-to-list 'default-frame-alist '(width . 100))
-(when window-system (set-frame-size (selected-frame) 100 36))  ;31 in Thinkpad
+(add-to-list 'default-frame-alist '(width . 96))
+(when window-system (set-frame-size (selected-frame) 96 36))  ;31 in Thinkpad
 
-;; encoding 
+;; encoding
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
@@ -50,6 +51,10 @@
 ;; mouse control
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
+
+;; Setting the Theme (more in "emacs-init-basics.el")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+(load-theme 'solarized t)
 
 
 ;;
@@ -63,8 +68,8 @@
 ;; feature control
 ;; - enable CEDET features
 (if (string-equal system-type "darwin")
-    (setq y:flags "no")
-  (setq y:flags "yes"))
+    (setq y:flags "no"))
+
 (setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
 (setq y-enable-function-args-flag y:flags)  ; for /function-args/
 (setq y-enable-cedet-source-info y:flags)  ; for /cedet-source-info/
@@ -92,7 +97,7 @@
     ;; Any add to list for package-archives
     (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
     (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))    
+    ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
     ;; (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
     )
 ;;; ---------------------------------------------------------
@@ -100,7 +105,7 @@
 ;;
 ;; Configuring /Dired/ in OSX
 ;;
-(cond 
+(cond
  ((string-equal system-type "darwin")
   (setq insert-directory-program "/usr/local/bin/gls")
   ;(setq dired-use-ls-dired nil)
@@ -162,8 +167,8 @@
 (add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'c-mode-common-hook 'linum-mode)
 (add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default mode for makefile in gnome
-(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X 
- 
+(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default mode for makefile in OS X
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
@@ -181,9 +186,7 @@
 ;; mouse events
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 ;; specials
-(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
-;; fix "C-j" for AucTeX mode
-(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
+;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
 
 ;; /expand-region/: increase the selected region by semantic units
 (require 'expand-region)
@@ -193,7 +196,7 @@
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
 (golden-ratio-mode t)
-;(setq golden-ratio-auto-scale t) 
+;(setq golden-ratio-auto-scale t)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Setting for /Helm/ and plus
@@ -206,7 +209,7 @@
 ;;
 
 ;; General Supports for Programming:
-;; 
+;;
 ; =======================================
 ;; Version Control by /Magit/
 (global-set-key (kbd "C-c h g") 'magit-status)
@@ -222,7 +225,7 @@
 ; =======================================
 ;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(when (string-equal system-type "darwin") 
+(when (string-equal system-type "darwin")
   (require 'dash-at-point)
   (global-set-key (kbd "C-c d") 'dash-at-point) ; default "C-c d", conflicts with /doxyemacs/ and /ropemacs/ rope-show-doc (having been disabled in its python sources)
   ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
@@ -255,7 +258,7 @@
 (global-set-key (kbd "<f7>") 'gud-step);; equiv step in
 (global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
 (global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
-(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out 
+(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
 
 
 ;; Environments for Programming Languages:
@@ -348,7 +351,7 @@
 ))
 ;; Preview using /livedown.el/
 (require 'livedown)
-(setq livedown:autostart nil) ; automatically open preview when opening markdown files 
+(setq livedown:autostart nil) ; automatically open preview when opening markdown files
 (setq livedown:open t)        ; automatically open the browser window
 (setq livedown:port 1337)     ; port for livedown server
 ; use livedown to preview markdown
@@ -360,6 +363,9 @@
 ; =======================================
 ;; For /AUCTeX-Mode/
 (load (concat y-init-path-prefix "emacs-init-auctex"))
+;; fix "C-j" for AucTeX mode
+;(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
+
 
 ;;
 ;; -------------------- Settings of Modes (cont.) -----------------------
@@ -417,7 +423,7 @@
 
 ;;
 ;; Restore Original Settings
-;; 
+;;
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)
 ;; open default Dired folders on startup

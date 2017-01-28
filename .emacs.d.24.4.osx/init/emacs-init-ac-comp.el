@@ -46,7 +46,7 @@
 (require 'color)
 (let ((bg (face-attribute 'default :background)))
   (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 1)))))
    `(company-tooltip-search-selection ((t (:inherit isearch))))
    `(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
@@ -64,6 +64,7 @@
   (company-mode -1)
   (company-quickhelp-mode -1))
 (add-hook 'LaTeX-mode-hook 'y:disable-company-mode)
+(add-hook 'org-mode-hook 'y:disable-company-mode)
 
 
 ;; /Yasnippet/ A template system

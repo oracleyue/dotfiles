@@ -17,8 +17,7 @@
 % \usepackage{lmodern}
 % \usepackage[sc]{mathpazo}   % using Palladillo
 \usepackage{times}   % using Times
-% \usepackage[italic]{mathastext}  % using the same font-type in math e.g. Times
-% \usepackage{newtxmath}  % using Times-style math symbols
+% \usepackage{newtxtext,newtxmath} % new, replace /times/ and /txfonts/
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata} % courier
 
