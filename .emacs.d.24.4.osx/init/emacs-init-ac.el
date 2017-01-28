@@ -99,7 +99,7 @@
     (if (or (not yas/minor-mode)
             (null (do-yas-expand)))
         (if (check-expansion)
-            (ac-complete)
+            (auto-complete)
           (indent-for-tab-command)))))
 
 (global-set-key [tab] 'tab-indent-or-complete)
