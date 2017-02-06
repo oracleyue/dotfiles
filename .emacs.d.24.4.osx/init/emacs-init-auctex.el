@@ -100,7 +100,8 @@
         ("C-m" "longmapsto" "Arrows" nil)
         ))
 ; More math-font in LaTeX
-(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\textmd{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\text{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+;; default: (13 "\\textmd{" "}")
 
 ;; More keywords/macro fontify
 (setq font-latex-match-textual-keywords
@@ -112,7 +113,7 @@
         ("textstyle" "")
         ("displaystyle" "")
         ("protect")
-        ("pause")        
+        ("pause")
         ("makelecture" "")
         ("makeproblemset" "")
         ("solution" "")))
@@ -139,7 +140,7 @@
 ;;              (?t . "\\textcite{%l}")))))
 ;; use style files
 (eval-after-load 'reftex-vars
-  '(progn 
+  '(progn
      (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
 
 ;; Set master files nil by default
@@ -151,11 +152,11 @@
 ;; More bibtex resouces
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
 ; Adding -shell-escape in pdflatex for mint
-(eval-after-load "tex" 
+(eval-after-load "tex"
   '(setcdr (assoc "LaTeX" TeX-command-list)
           '("%`%l%(mode) -shell-escape%' %t"
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
-(eval-after-load 'latex 
+(eval-after-load 'latex
   '(setq LaTeX-clean-intermediate-suffixes
      (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
 
@@ -198,7 +199,7 @@
 ;;                  '("Git regular push" "git add --all && git ci -m \"regular update\" && git push" TeX-run-command nil t) t))
 
 
-(cond 
+(cond
  ((string-equal system-type "gnu/linux")
   ; Use Evince as viewer, enable source <-> PDF sync
   (setq TeX-output-view-style

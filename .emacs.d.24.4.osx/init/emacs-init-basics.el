@@ -382,7 +382,7 @@
 
 ;; removing trailing whitespace
 ;(add-hook 'before-save-hook 'delete-trailing-whitespace)   ;; any files
-;; ensure no trailing ws in programming
+;; enable in all programming modes
 (defun y:auto-remove-trailing-whitespace ()
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 (add-hook 'prog-mode-hook 'y:auto-remove-trailing-whitespace)

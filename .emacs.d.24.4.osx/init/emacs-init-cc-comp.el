@@ -26,7 +26,7 @@
 
 ;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
 ; let's define a function for flymake initialization
-(defun y:flymake-google-init () 
+(defun y:flymake-google-init ()
   (require 'flymake-google-cpplint)
   (custom-set-variables
    '(flymake-google-cpplint-command
@@ -42,15 +42,19 @@
 ;(cscope-setup)
 
 ;; configure /company-mode/ for C/C++ sources and headers
+(require 'company-clang)
+(add-to-list 'company-clang-arguments "-I/usr/local/include/eigen3/")
 ;; use /clang/ and /company-c-headers/
 (require 'company-c-headers)
 (add-to-list 'company-c-headers-path-system "/usr/local/include/c++/6.1.0/")
-;; (add-to-list 'company-backends '(company-c-headers company-clang))
 (defun y:company-cpp-setup ()
   (setq-local company-backends
               (append '((company-c-headers company-clang company-dabbrev-code))
                       company-backends)))
 (add-hook 'c-mode-common-hook 'y:company-cpp-setup)
+;; suppress warning due to set 'company-clang-arguments'
+(add-to-list 'safe-local-variable-values
+             '(company-clang-arguments . ("-I./include/" "-I./src/")))
 
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
 (load (concat y-init-path-prefix "emacs-init-cc-tags"))
@@ -99,8 +103,21 @@
 
 
 ;;
-;; Enable major modes for CMake files
+;; ***********other modes related to C/CPP ********************
 ;;
+
+;; Enable compile command in Makefile modes
+(add-hook 'c-mode-common-hook
+          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in gnome
+(add-hook 'makefile-gmake-mode-hook
+          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in Mac OS X
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+
+
+;; Enable major modes for CMake files
 ;; /cmake-mode/: cmake-mode.el
 (require 'cmake-mode)
 ;; /cmake-font-lock/: to add more fontifying features
@@ -116,8 +133,8 @@
 (add-hook 'cmake-mode-hook 'y:company-cmake-setup)
 
 
-;; -------------------------------------------
-;; ;; use /doxymacs/ to manipulate doxygen documentations
+;; /doxymacs/ to manipulate doxygen documentations
+;;
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
 ;; (require 'doxymacs)
 ;; (add-hook 'c-mode-common-hook 'doxymacs-mode)

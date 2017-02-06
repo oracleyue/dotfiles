@@ -3,19 +3,21 @@
 ;; 1) using default theme
 ;(load-theme 'deeper-blue t)
 
-;; 2) using user-defined theme  /github/: Ethan Schoonover's solarized theme
+;; 2) using /solarized/ theme: Ethan Schoonover's theme [github]
 ;; To use dark theme and enabled in terminal, use "set-variable" in .emacs
 ;;(setq frame-background-mode (quote dark))
 ;;!! (setq solarized-termcolors 256)   ;distort colors; do NOT enable
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 ;(load-theme 'solarized t)
 
-;; 3) using oracleyue's theme
+;; 3) using /monokai/ theme; modified by oracleyue
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'ymonokai t)
+;; OR
+;(load-theme 'monokai-y t)
 
 
-;;; Set Frinage 
+;;; Set Frinage
 ;; fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
 ;(fringe-mode '(0 . nil))
 
@@ -26,7 +28,7 @@
   (make-face 'mode-line-buffer-name-face-y)
   (make-face 'mode-line-plain-face-y)
   ;; define the colors only for the monokai theme
-  (if (eq 'ymonokai (car custom-enabled-themes))    
+  (if (eq 'ymonokai (car custom-enabled-themes))
       (progn (set-face-attribute 'mode-line-linum-face-y nil
                                  :foreground "#66D9EF")
              (set-face-attribute 'mode-line-buffer-name-face-y nil
@@ -34,6 +36,7 @@
                                  :bold t)
              (set-face-attribute 'mode-line-plain-face-y nil
                                  :foreground "#F8F8F2")))
+
   ;; use setq-default to set it for /all/ modes
   (setq-default mode-line-format
                 (list
@@ -49,7 +52,7 @@
                  ;; line and column (default: 'face 'font-lock-type-face)
                  "(" ;; '%02' to set to 2 chars at least; prevents flickering
                  (propertize "%02l" 'face 'mode-line-linum-face-y) ","
-                 (propertize "%02c") 
+                 (propertize "%02c")
                  ") "
                  ;; "  "
                  ;; relative position, size of file (default: 'face 'font-lock-constant-face)
@@ -75,7 +78,7 @@
                                      'help-echo (concat "Buffer is in "
                                                         (if overwrite-mode "overwrite" "insert") " mode")))
 
-                 ;; was this buffer modified since the last save? 
+                 ;; was this buffer modified since the last save?
                  '(:eval (when (buffer-modified-p)
                            (concat ","  (propertize "Mod"
                                                     'face 'font-lock-warning-face
@@ -85,7 +88,7 @@
                  '(:eval (when buffer-read-only
                            (concat ","  (propertize "RO"
                                                     'face 'font-lock-type-face
-                                                    'help-echo "Buffer is read-only"))))  
+                                                    'help-echo "Buffer is read-only"))))
                  "] "
                  ;; "                     "
                  ;; add the time, with the date and the emacs uptime in the tooltip
@@ -95,10 +98,10 @@
                                      (concat (format-time-string "%c; ")
                                              (emacs-uptime "Uptime:%hh"))))
                  "---"
-                 
+
                  ;; i don't want to see minor-modes; but if you want, uncomment this:
                  ;; minor-mode-alist  ;; list of minor modes
-        
+
                  ;"%-" ;; fill with '-'
                  ))
   )
