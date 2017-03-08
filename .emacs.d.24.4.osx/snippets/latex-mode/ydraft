@@ -9,10 +9,10 @@
 \usepackage{setspace}
   \onehalfspacing
   % \doublespacing
-\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs  
+\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs
 \parskip=12pt
 
-\usepackage[utf8]{inputenc}  
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 % \usepackage{lmodern}
 % \usepackage[sc]{mathpazo}   % using Palladillo
@@ -26,6 +26,9 @@
 \usepackage{enumitem} % [label={(\roman*)}, topsep={-8pt}, parsep={4pt}, itemindent={8pt}]; [leftmargin=*] to remove indentation before items.
 
 \usepackage{algorithm,algpseudocode}
+\makeatletter
+\renewcommand{\ALG@beginalgorithmic}{\small}
+\makeatother
 
 \usepackage{graphicx,wrapfig}
 \usepackage[font=small,labelfont=bf]{caption}
@@ -45,7 +48,7 @@
     skipabove=\baselineskip,
     skipbelow=-.4\baselineskip,
     nobreak=true  ;; stop breaking the framed box into two pages
-}  
+}
 % \usepackage{minted}
 %  \usemintedstyle{pastie}
 %  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
@@ -114,8 +117,8 @@ $0
 
 % \newpage
 % % --------------- APPENDIX --------------
-% \section*{Appendices}  
-% \addcontentsline{toc}{section}{List of appendices}   
+% \section*{Appendices}
+% \addcontentsline{toc}{section}{List of appendices}
 % \renewcommand{\thesubsection}{\Alph{subsection}}
 
 % \subsection{appendix 1}
@@ -129,4 +132,3 @@ $0
 % \bibliography{./ref/library}
 
 \end{document}
-

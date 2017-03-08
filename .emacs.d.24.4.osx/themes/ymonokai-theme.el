@@ -139,7 +139,7 @@ Takes and optional `FRAME' as reference."
 
          ;; Adaptive colors
          (ymonokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
-         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified 
+         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified
          ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
          (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
          (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
@@ -179,7 +179,7 @@ Takes and optional `FRAME' as reference."
          (s-mode-line-fg (if ymonokai-high-contrast-mode-line
                              ymonokai-bg ymonokai-fg))
          (s-mode-line-bg (if ymonokai-high-contrast-mode-line
-                             ymonokai-fg ymonokai-hl-line))  
+                             ymonokai-fg ymonokai-hl-line))
                              ;ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
          (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
                                        'unspecified green))
@@ -226,7 +226,7 @@ Takes and optional `FRAME' as reference."
      `(highlight
        ((,class (:background ,ymonokai-hl))))
                  ;:inherit lazy-highlight))))    ;oracleyue, modified
-          
+
      `(link
        ((,class (:foreground ,blue
                              :underline t
@@ -564,9 +564,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,ymonokai-comments))))
 
      `(font-lock-comment-face
-       ((,class (
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments))))
+       ((,class (:foreground ,ymonokai-comments))))
 
      `(font-lock-constant-face
        ((,class (:foreground ,violet))))
@@ -575,12 +573,11 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,ymonokai-comments))))
 
      `(font-lock-function-name-face
-       ((,class (:foreground ,green
-                             :bold nil))))       ;oracleyue: no this entry
+       ((,class (:foreground ,green))))
 
      `(font-lock-keyword-face
        ((,class (:foreground ,red
-                             :weight normal))))   
+                             :weight normal))))
 
      `(font-lock-negation-char-face
        ((,class (:foreground ,yellow
@@ -602,12 +599,10 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-type-face
        ((,class (:foreground ,blue
-                             ;:bold t          ; oracleyue: no this entry
                              :italic t))))
-     
+
      `(font-lock-variable-name-face
-       ((,class (:foreground ,orange  
-                             :italic nil))))    ; oracleyue: no this entry
+       ((,class (:foreground ,orange))))
 
      `(font-lock-warning-face
        ((,class (:foreground ,orange
@@ -1769,7 +1764,7 @@ Takes and optional `FRAME' as reference."
        ;((,class (:inherit match))))                ;oracleyue, commented
        ((,class (:foreground ,magenta
                              :background ,ymonokai-bg))))      ;oracleyue, modified
-       
+
      `(helm-selection
        ((,class (:background ,region-bg        ;oracleyue, default "ymonokai-hl"
                              ;:foreground ,red            ;oracleyue, added
@@ -1798,7 +1793,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,red    ;oracleyue, modified; default "magenta"
                              ;:background unspecified))))
                              :background ,ymonokai-bg))))    ;oracleyue, added
-     
+
      `(helm-swoop-line-number-face    ;oracleyue, added
        ((,class(:foreground ,green))))
 
@@ -2530,16 +2525,16 @@ Takes and optional `FRAME' as reference."
      `(org-latex-and-export-specials    ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
                              ;; :inherit 'fixed-pitch     ; oracleyue: added
-                             ))))       
-                             
+                             ))))
+
      `(org-document-info     ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
                              ;; :inherit 'fixed-pitch     ; oracleyue: added
-                             ))))        
+                             ))))
      `(org-document-info-keyword     ; oracleyue: added
        ((,class (:foreground ,ymonokai-comments
      ;; :inherit 'fixed-pitch           ; oracleyue: added
-                             ))))             
+                             ))))
 
      `(org-block
        ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added

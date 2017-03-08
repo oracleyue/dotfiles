@@ -13,8 +13,6 @@
 ;; 3) using /monokai/ theme; modified by oracleyue
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'ymonokai t)
-;; OR
-;(load-theme 'monokai-y t)
 
 
 ;;; Set Frinage

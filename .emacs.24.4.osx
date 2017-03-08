@@ -8,7 +8,7 @@
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil)
  '(fill-column 80)
- '(show-paren-mode nil)   ;; conflicts with /smartparens/
+ '(show-paren-mode t)   ;; if nil, bug on delays when hit enter after 'for...; do' pairs
  '(flymake-google-cpplint-command
    (if (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
@@ -33,13 +33,13 @@
  )
 
 ;; stop emacs automatically editing .emacs
-(setq disabled-command-function nil)
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file 'noerror)
+;(setq disabled-command-function nil)
+;(setq custom-file "~/.emacs-custom.el")
+;(load custom-file 'noerror)
 
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 96))
-(when window-system (set-frame-size (selected-frame) 96 36))  ;31 in Thinkpad
+(when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 31 in Thinkpad
 
 ;; encoding
 (set-default-coding-systems 'utf-8)
@@ -149,8 +149,8 @@
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Insert pairs of parenthesis/brackets: /smartparens/
 (require 'smartparens-config)
-(show-smartparens-global-mode +1)
 (smartparens-global-mode 1)
+(show-smartparens-global-mode +1)
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;; Enable /linum/ in nlinum lib
@@ -186,7 +186,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 ;; mouse events
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
-;; specials
+;; others
 ;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
 
 ;; /expand-region/: increase the selected region by semantic units

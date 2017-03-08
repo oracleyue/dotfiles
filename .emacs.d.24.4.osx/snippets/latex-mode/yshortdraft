@@ -10,18 +10,16 @@
 \usepackage[parfill]{parskip}
 %\parskip=10pt
 
-\usepackage[utf8]{inputenc}  
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}  % or "times"
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
-\usepackage{arydshln}   % To support partitioned matrix with dashed lines
-\usepackage{enumerate}  % to use \begin{enumerate}[(a)]
 \usepackage{enumitem} % [leftmargin=*] to remove indentation before items
 
-\usepackage{graphicx,wrapfig}
+\usepackage{graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 

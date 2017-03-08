@@ -54,11 +54,11 @@
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; adding /company-quickhelp/
-(company-quickhelp-mode 1)
+;(company-quickhelp-mode 1)
 ;; starting manually
-(setq company-quickhelp-delay nil)
-(eval-after-load 'company
-  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
+;(setq company-quickhelp-delay nil)
+;(eval-after-load 'company
+;  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
 
 ;; disable company-mode under certain major modes
 (defun y:disable-company-mode ()

@@ -175,8 +175,8 @@
 ;;   )
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
-;; set cursor type; default "box"
-(setq-default cursor-type 'bar)
+;; set cursor type: "bar", "box" (default)
+;(setq-default cursor-type 'bar)
 
 ;; font size adjustment
 ;; C-x C-0 : return to default size
@@ -242,10 +242,8 @@
 
 ;; spell checking for some modes
 (add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 ;; (setq ispell-dictionary "british")
 (setq ispell-dictionary "american")
-(add-hook 'LaTeX-mode-hook 'ispell)
 
 ;; oracleyue's inital Dired folders on startup
 (setq y:HomePath "/Users/oracleyue")
@@ -260,6 +258,9 @@
   (find-file (concat y:HomePath "/Public/Dropbox/Academia/ToDoList.org"))
   (switch-to-buffer "*scratch*"))
 ;; (y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
+(defun home ()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
 
 ;; oracleyue's inital path setting
 (defun y:set-startup-directory ()

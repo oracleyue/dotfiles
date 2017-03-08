@@ -1,6 +1,6 @@
 ;;; multiple-cursors-core.el --- An experiment in multiple cursors for emacs.
 
-;; Copyright (C) 2012 Magnar Sveen
+;; Copyright (C) 2012-2016 Magnar Sveen
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
 ;; Keywords: editing cursors
@@ -25,8 +25,7 @@
 
 ;;; Code:
 
-(require 'cl)
-
+(require 'cl-lib)
 (require 'rect)
 
 (defvar mc--read-char)
@@ -34,6 +33,11 @@
 (defface mc/cursor-face
   '((t (:inverse-video t)))
   "The face used for fake cursors"
+  :group 'multiple-cursors)
+
+(defface mc/cursor-bar-face
+  `((t (:height 1 :background ,(face-attribute 'cursor :background))))
+  "The face used for fake cursors if the cursor-type is bar"
   :group 'multiple-cursors)
 
 (defface mc/region-face
@@ -53,9 +57,9 @@
                (cons (cons 'apply (cons 'activate-cursor-for-undo (list id))) buffer-undo-list))))))
 
 (defun mc/all-fake-cursors (&optional start end)
-  (remove-if-not 'mc/fake-cursor-p
-                 (overlays-in (or start (point-min))
-                              (or end   (point-max)))))
+  (cl-remove-if-not 'mc/fake-cursor-p
+                    (overlays-in (or start (point-min))
+                                 (or end   (point-max)))))
 
 (defmacro mc/for-each-fake-cursor (&rest forms)
   "Runs the body for each fake cursor, bound to the name cursor"
@@ -99,16 +103,26 @@
        (set-marker ,p nil)
        (set-marker ,s nil))))
 
+(defun mc/cursor-is-bar ()
+  "Return non-nil if the cursor is a bar."
+  (or (eq cursor-type 'bar)
+    (and (listp cursor-type)
+         (eq (car cursor-type) 'bar))))
+
 (defun mc/make-cursor-overlay-at-eol (pos)
   "Create overlay to look like cursor at end of line."
   (let ((overlay (make-overlay pos pos nil nil nil)))
-    (overlay-put overlay 'after-string (propertize " " 'face 'mc/cursor-face))
+    (if (mc/cursor-is-bar)
+	(overlay-put overlay 'before-string (propertize "|" 'face 'mc/cursor-bar-face))
+      (overlay-put overlay 'after-string (propertize " " 'face 'mc/cursor-face)))
     overlay))
 
 (defun mc/make-cursor-overlay-inline (pos)
   "Create overlay to look like cursor inside text."
   (let ((overlay (make-overlay pos (1+ pos) nil nil nil)))
-    (overlay-put overlay 'face 'mc/cursor-face)
+    (if (mc/cursor-is-bar)
+	(overlay-put overlay 'before-string (propertize "|" 'face 'mc/cursor-bar-face))
+      (overlay-put overlay 'face 'mc/cursor-face))
     overlay))
 
 (defun mc/make-cursor-overlay-at-point ()
@@ -174,11 +188,39 @@ highlights the entire width of the window."
 
 (defun mc/create-cursor-id ()
   "Returns a unique cursor id"
-  (incf mc--current-cursor-id))
+  (cl-incf mc--current-cursor-id))
+
+(defvar mc--max-cursors-original nil
+  "This variable maintains the original maximum number of cursors.
+When `mc/create-fake-cursor-at-point' is called and
+`mc/max-cursors' is overridden, this value serves as a backup so
+that `mc/max-cursors' can take on a new value.  When
+`mc/remove-fake-cursors' is called, the values are reset.")
+
+(defcustom mc/max-cursors nil
+  "Safety ceiling for the number of active cursors.
+If your emacs slows down or freezes when using too many cursors,
+customize this value appropriately.
+
+Cursors will be added until this value is reached, at which point
+you can either temporarily override the value or abort the
+operation entirely.
+
+If this value is nil, there is no ceiling."
+  :type '(integer)
+  :group 'multiple-cursors)
 
 (defun mc/create-fake-cursor-at-point (&optional id)
   "Add a fake cursor and possibly a fake active region overlay based on point and mark.
 Saves the current state in the overlay to be restored later."
+  (unless mc--max-cursors-original
+    (setq mc--max-cursors-original mc/max-cursors))
+  (when mc/max-cursors
+    (unless (< (mc/num-cursors) mc/max-cursors)
+      (if (yes-or-no-p (format "%d active cursors. Continue? " (mc/num-cursors)))
+          (setq mc/max-cursors (read-number "Enter a new, temporary maximum: "))
+        (mc/remove-fake-cursors)
+        (error "Aborted: too many cursors"))))
   (let ((overlay (mc/make-cursor-overlay-at-point)))
     (overlay-put overlay 'mc-id (or id (mc/create-cursor-id)))
     (overlay-put overlay 'type 'fake-cursor)
@@ -261,9 +303,9 @@ cursor with updated info."
 
 (defun mc/cursor-with-id (id)
   "Find the first cursor with the given id, or nil"
-  (find-if #'(lambda (o) (and (mc/fake-cursor-p o)
-                              (= id (overlay-get o 'mc-id))))
-           (overlays-in (point-min) (point-max))))
+  (cl-find-if #'(lambda (o) (and (mc/fake-cursor-p o)
+                            (= id (overlay-get o 'mc-id))))
+              (overlays-in (point-min) (point-max))))
 
 (defvar mc--stored-state-for-undo nil
   "Variable to keep the state of the real cursor while undoing a fake one")
@@ -283,6 +325,11 @@ cursor with updated info."
     (mc/pop-state-from-overlay mc--stored-state-for-undo)
     (setq mc--stored-state-for-undo nil)))
 
+(defcustom mc/always-run-for-all nil
+  "Disables whitelisting and always executes commands for every fake cursor."
+  :type '(boolean)
+  :group 'multiple-cursors)
+
 (defun mc/prompt-for-inclusion-in-whitelist (original-command)
   "Asks the user, then adds the command either to the once-list or the all-list."
   (let ((all-p (y-or-n-p (format "Do %S for all cursors?" original-command))))
@@ -294,8 +341,8 @@ cursor with updated info."
 
 (defun mc/num-cursors ()
   "The number of cursors (real and fake) in the buffer."
-  (1+ (count-if 'mc/fake-cursor-p
-                (overlays-in (point-min) (point-max)))))
+  (1+ (cl-count-if 'mc/fake-cursor-p
+                   (overlays-in (point-min) (point-max)))))
 
 (defvar mc--this-command nil
   "Used to store the original command being run.")
@@ -372,7 +419,8 @@ the original cursor, to inform about the lack of support."
                 (when (and original-command
                            (not (memq original-command mc--default-cmds-to-run-once))
                            (not (memq original-command mc/cmds-to-run-once))
-                           (or (memq original-command mc--default-cmds-to-run-for-all)
+                           (or mc/always-run-for-all
+                               (memq original-command mc--default-cmds-to-run-for-all)
                                (memq original-command mc/cmds-to-run-for-all)
                                (mc/prompt-for-inclusion-in-whitelist original-command)))
                   (mc/execute-command-for-all-fake-cursors original-command))))))))))
@@ -382,7 +430,10 @@ the original cursor, to inform about the lack of support."
 Do not use to conclude editing with multiple cursors. For that
 you should disable multiple-cursors-mode."
   (mc/for-each-fake-cursor
-   (mc/remove-fake-cursor cursor)))
+   (mc/remove-fake-cursor cursor))
+  (when mc--max-cursors-original
+    (setq mc/max-cursors mc--max-cursors-original))
+  (setq mc--max-cursors-original nil))
 
 (defun mc/keyboard-quit ()
   "Deactivate mark if there are any active, otherwise exit multiple-cursors-mode."
@@ -424,7 +475,7 @@ The entries are returned in the order they are found in the buffer."
 (defun mc--maybe-set-killed-rectangle ()
   "Add the latest kill-ring entry for each cursor to killed-rectangle.
 So you can paste it in later with `yank-rectangle'."
-  (let ((entries (mc--kill-ring-entries)))
+  (let ((entries (let (mc/max-cursors) (mc--kill-ring-entries))))
     (unless (mc--all-equal entries)
       (setq killed-rectangle entries))))
 
@@ -524,19 +575,21 @@ from being executed if in multiple-cursors-mode."
            (overlay-put cursor 'kill-ring kill-ring)
            (overlay-put cursor 'kill-ring-yank-pointer kill-ring-yank-pointer)))))))
 
-(defvar mc/list-file "~/.emacs.d/.mc-lists.el"
+(defcustom mc/list-file (locate-user-emacs-file ".mc-lists.el")
   "The position of the file that keeps track of your preferences
-for running commands with multiple cursors.")
+for running commands with multiple cursors."
+  :type 'file
+  :group 'multiple-cursors)
 
 (defun mc/dump-list (list-symbol)
   "Insert (setq 'LIST-SYMBOL LIST-VALUE) to current buffer."
-  (symbol-macrolet ((value (symbol-value list-symbol)))
+  (cl-symbol-macrolet ((value (symbol-value list-symbol)))
     (insert "(setq " (symbol-name list-symbol) "\n"
             "      '(")
     (newline-and-indent)
     (set list-symbol
          (sort value (lambda (x y) (string-lessp (symbol-name x)
-                                                 (symbol-name y)))))
+                                            (symbol-name y)))))
     (mapc #'(lambda (cmd) (insert (format "%S" cmd)) (newline-and-indent))
           value)
     (insert "))")
@@ -565,9 +618,13 @@ for running commands with multiple cursors.")
                                      mc/edit-ends-of-lines
                                      mc/edit-beginnings-of-lines
                                      mc/mark-next-like-this
+				     mc/mark-next-like-this-word
+				     mc/mark-next-like-this-symbol
                                      mc/mark-next-word-like-this
                                      mc/mark-next-symbol-like-this
                                      mc/mark-previous-like-this
+                                     mc/mark-previous-like-this-word
+                                     mc/mark-previous-like-this-symbol
                                      mc/mark-previous-word-like-this
                                      mc/mark-previous-symbol-like-this
                                      mc/mark-all-like-this
@@ -581,6 +638,7 @@ for running commands with multiple cursors.")
                                      mc/mark-all-dwim
                                      mc/mark-sgml-tag-pair
                                      mc/insert-numbers
+				     mc/insert-letters
                                      mc/sort-regions
                                      mc/reverse-regions
                                      mc/cycle-forward
@@ -729,7 +787,6 @@ for running commands with multiple cursors.")
 
 ;; Local Variables:
 ;; coding: utf-8
-;; byte-compile-warnings: (not cl-functions)
 ;; End:
 
 ;;; multiple-cursors-core.el ends here
