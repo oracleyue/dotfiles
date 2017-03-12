@@ -129,8 +129,10 @@
 ;;
 (load (concat y-init-path-prefix "emacs-init-basics"))
 
+
+
 ;;
-;; -------------------- Settings of Modes -----------------------
+;; ~~~~~~~~~~~~~~~~~~~ Settings of Modes ~~~~~~~~~~~~~~~~~~~
 ;;
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -209,21 +211,22 @@
 ;; ~~~~~~~~~~~~~~~~ Programming Environment ~~~~~~~~~~~~~~~~
 ;;
 
+;;
 ;; General Supports for Programming:
 ;;
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Version Control by /Magit/
 (global-set-key (kbd "C-c h g") 'magit-status)
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Project Management by /projectile/ and helm addons
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Tag Support
 ;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (when (string-equal system-type "darwin")
@@ -249,7 +252,7 @@
          (ess-mode . "r")
          )))
 
-; =======================================
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Debugging Support by /GUD/: gdb, pdb
 ;; - usages: "M-x pdb", "M-x gud-gdb"
 ;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
@@ -262,6 +265,7 @@
 (global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
 
 
+;;
 ;; Environments for Programming Languages:
 ;;
 ; =======================================
@@ -271,22 +275,26 @@
 ; To make "M-:" pretty-print; both input and output are in minibuffer
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 ; Use "C-j" in *scratch*; output is in the buffer under the sexp
-;; ------
-;; use /ParEdit/ mode
+;; --------------
+;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 ;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+;(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 ;(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 ;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 ;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-
+;; --------------
+;; For dialect: MIT/GNU /Scheme/
+(setq scheme-program-name "/usr/local/bin/mit-scheme")
+(require 'xscheme)
+;; Usage:
+;;  - "M-x run-scheme" to invoke the Scheme process
+;;  - "M-o" to send the buffer to the Scheme process
 
 ; =======================================
 ;; Programming Environment for /HTML, js/
 ;; candidates: web-mode, emmet-mode, (NOT USED: js2-mode)
 (load (concat y-init-path-prefix "emacs-init-web"))
-
 
 ; =======================================
 ;; Programming Environment for /C C++/
@@ -301,20 +309,17 @@
 (add-hook 'c-mode-hook 'y:set-compile-command)
 (add-hook 'c++-mode-hook 'y:set-compile-command)
 
-
 ; =======================================
 ;; Programming Environment for /Python/
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-py-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-py")))  ;; use /auto-complete/
 
-
 ; =======================================
 ;; Programming Environment for /R/
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-r-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-r")))  ;; use /auto-complete/
-
 
 ; =======================================
 ;; Programming Environment for /MATLAB/
@@ -368,9 +373,11 @@
 ;(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
 
 
+
 ;;
-;; -------------------- Settings of Modes (cont.) -----------------------
+;;~~~~~~~~~~~~~~~~~~~ Settings of Modes (cont.) ~~~~~~~~~~~~~~~~~~~
 ;;
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Settings for /Evil-mode/
 ;(load (concat y-init-path-prefix "emacs-init-evil"))
@@ -413,17 +420,15 @@
 ;; (add-hook 'matlab-mode-hook 'ecb-activate)
 
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ;;
-;; More keybindings
+;; ~~~~~~~~~~~~~~~~~~~ More keybindings ~~~~~~~~~~~~~~~~~~~
 ;;
-(global-set-key (kbd "M-\\") 'y:uncomment-line-or-region)  ; "C-c C-+"
 ;(require 'open-next-line)   ;; if not using /emacs-python/
 ;(global-set-key (kbd "C-o") 'open-next-line)
 
 ;;
-;; Restore Original Settings
+;; ~~~~~~~~~~~~~~~~~~~ Restore Original Settings ~~~~~~~~~~~~~~~~~~~
 ;;
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)

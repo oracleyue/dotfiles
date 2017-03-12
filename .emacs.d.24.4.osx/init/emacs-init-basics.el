@@ -4,7 +4,6 @@
 ;; BASIC USAGES
 ;; ---------------
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
-;; /invalid/ undo: "C--";   redo: "M--";  (more by oracleyue)
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; changing encodings: "C-x C-m f"
 ;; =open-previous-line= :: "M-o"
@@ -308,13 +307,12 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (uncomment-region beg end)))
-(global-set-key (kbd "C-\\") 'y:comment-line-or-region)    ; "C-c C-="
-(global-set-key (kbd "C-|") 'y:uncomment-line-or-region)  ; "C-c C-+"
+(global-set-key (kbd "C-\\") 'y:comment-line-or-region)
+(global-set-key (kbd "C-|") 'y:uncomment-line-or-region)   ;; invalid in terminals
+(global-set-key (kbd "M-\\") 'y:uncomment-line-or-region)
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (global-undo-tree-mode)
-;(global-set-key (kbd "C--") 'undo-tree-undo)
-;(global-set-key (kbd "M--") 'undo-tree-redo)
 
 ;; configure /hl-line-mode/ for /monokai/, enabled in python-mode
     ;; to highlight the single row where the cursor is.
