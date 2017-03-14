@@ -65,6 +65,7 @@
 ;; use set-goal-column to do vertical editing :: "C-x C-n"; to remove "C-u C-x C-n"
 ;; insert date :: "M-x insert-date"
 ;; open default Dired folders on startup :: "M-x y:dired-open-folders-startup"
+;; toggle window split (horizontal <-> vertical) :: "C-x |"
 ;;
 ;; <Saturday, January 28, 2017>
 ;; ----------------------------------------------------------------------
