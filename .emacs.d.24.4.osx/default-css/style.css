@@ -52,12 +52,14 @@ textarea { overflow-x: auto; }
 p.postamble { text-align: center;
 	          font-size: 12px; }
 
-h1 { padding: 25px 0px 20px 0px}
-h2 { padding: 20px 0px 15px 0px}
-h3 { padding: 15px 0px 10px 0px}
-h4 { padding: 10px 0px 5px 0px}
-h5 { padding: 5px 0px 3px 0px}
-h6 { padding: 5px 0px 3px 0px}
+h1 { padding: 25px 0px 30px 0px;
+   	 color: rgb(12,139,186);
+     text-align: center; }
+h2 { padding: 20px 0px 15px 0px; }
+h3 { padding: 15px 0px 10px 0px; }
+h4 { padding: 10px 0px 5px 0px; }
+h5 { padding: 5px 0px 3px 0px; }
+h6 { padding: 5px 0px 3px 0px; }
 
 body {
     padding-top: 40px;
@@ -75,7 +77,8 @@ hr {
 }
 
 blockquote p {
-	font-size: inherit;
+    font-size: 10pt;
+	/* font-size: inherit; */
 	font-style: italic;
 }
 

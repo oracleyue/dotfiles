@@ -14,6 +14,7 @@
 ;; kill one sentence backwards :: "C-x Backspace"
 ;; comment line or region :: "C-\"
 ;; uncomment line or region :: "C-S-\"
+;; word count in region :: "M-="
 ;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
 ;; toggle overwrite mode :: "M-x overwrite-mode"
 ;; mark rings to jump:

@@ -358,17 +358,17 @@
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 ;; configure commands
 (setq markdown-command "/usr/local/bin/multimarkdown")
-(setq markdown-open-command "/Users/oracleyue/bin/subl")
+(setq markdown-open-command "/Users/oracleyue/bin/marked")
 ;; configure markdown export styles
 (setq url-boostrap-min-css
       "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (setq css-default-path "/Users/oracleyue/.emacs.d/default-css/")
 (add-hook 'markdown-mode-hook (lambda()
    (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
-   ;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; use new bootstrap.min.css
-   (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min.css"))))
+;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; if use bootstrap.min.css online
+   (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min_yeti.css"))))
 
-;; Preview using /livedown.el/
+;; Preview using /livedown.el/  (osx uses "Marked 2.app")
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
 (require 'livedown)
 (setq livedown:autostart nil) ; automatically open preview when opening markdown files
