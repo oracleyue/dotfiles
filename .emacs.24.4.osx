@@ -46,6 +46,9 @@
 ;(setq custom-file "~/.emacs-custom.el")
 ;(load custom-file 'noerror)
 
+;; enable clipboard in emacs  (only need for emacs in terminal)
+;(setq x-select-enable-clipboard t)
+
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 96))
 (when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 31 in Thinkpad
