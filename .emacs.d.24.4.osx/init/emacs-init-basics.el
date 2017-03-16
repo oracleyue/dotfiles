@@ -46,6 +46,9 @@
 ;; join lines into one:
 ;;      - join two lines: "M-^"
 ;;      - join multiple lines in region: "C-^"
+;; fill/unfill paragraph:
+;;      - "M-q"/"M-Q"
+;;      - set fill-column: "C-x f"
 ;; split long lines up to a prefixed length: use auto-fill mode
 ;;      - set fill-column :: "C-x f"
 ;;      - split paragraph or all in region :: "M-q"
@@ -128,6 +131,16 @@
         (while (< (point) end)
           (join-line 1)))))
 (global-set-key (kbd "C-^") 'y:join-region)
+
+;; unfill paragraph: the opposite of fill-paragraph
+(defun y:unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max))
+        ;; This would override `fill-column' if it's an integer.
+        (emacs-lisp-docstring-fill-column t))
+    (fill-paragraph nil region)))
+(define-key global-map "\M-Q" 'y:unfill-paragraph)
 
 ;; open a new line and jump there
 (require 'open-next-line)
@@ -247,21 +260,22 @@
 (setq ispell-dictionary "american")
 
 ;; oracleyue's inital Dired folders on startup
-(setq y:HomePath "/Users/oracleyue")
+(setq y:HomePath "/Users/oracleyue/")
 (defun y:dired-open-folders-startup ()
   (interactive)
-  (dired (concat y:HomePath "/Public/Dropbox/Workspace/matlab"))
-  (dired (concat y:HomePath "/Public/Dropbox/oracleyue/OrgNote"))
-  (dired (concat y:HomePath "/Public/Dropbox/Academia"))
-  ;(dired (concat y:HomePath "/Public/Dropbox/Academia/Manuscripts"))
-  ;(dired (concat y:HomePath "/Public/Dropbox/Academia/Seminars"))
-  ;(dired (concat y:HomePath "/Public/Dropbox/Shared"))
-  (find-file (concat y:HomePath "/Public/Dropbox/Academia/ToDoList.org"))
+  "Setup the startup folders. Used in .emacs"
+  ;(dired (concat y:HomePath "Public/Dropbox/Workspace/matlab"))
+  (dired (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote"))
+  ;(dired (concat y:HomePath "Public/Dropbox/Academia"))
+  ;(dired (concat y:HomePath "Public/Dropbox/Academia/Manuscripts"))
+  (dired (concat y:HomePath "Public/Dropbox/Academia/Seminars"))
+  ;(dired (concat y:HomePath "Public/Dropbox/Shared"))
+  (find-file (concat y:HomePath "Public/Dropbox/Academia/ToDoList.org"))
   (switch-to-buffer "*scratch*"))
-;; (y:dired-open-folders-startup)  ; on startup; moving to the end of .emacs
-(defun home ()
+(defun email ()
   (interactive)
-  (switch-to-buffer "*scratch*"))
+  (find-file (concat y:HomePath "Documents/email.tmp.md"))
+  (set-fill-column 75))
 
 ;; oracleyue's inital path setting
 (defun y:set-startup-directory ()
