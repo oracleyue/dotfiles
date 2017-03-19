@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Article-IEEE Header 
+# name: Article-IEEE Header
 # key: yae
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -10,11 +10,11 @@
 \usepackage{setspace}
   \onehalfspacing
 
-\usepackage[utf8]{inputenc}  
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}  
+\usepackage{lmodern}
 % \usepackage{times}
-\usepackage{helvet}  
+\usepackage{helvet}
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym}
@@ -26,7 +26,15 @@
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{mathtools}
 \usepackage{amsthm}     % To use proof in ieeeconf by default, uncomment the following 4 lines
-\usepackage{empheq}     % to deal with parentheses + subfunctions  
+\usepackage{empheq}     % to deal with parentheses + subfunctions
+% \makeatletter
+% \g@addto@macro\normalsize{% adjust padding above/below equations
+%   \setlength\abovedisplayskip{6pt}
+%   \setlength\belowdisplayskip{6pt}
+%   \setlength\abovedisplayshortskip{6pt}
+%   \setlength\belowdisplayshortskip{6pt}
+% }
+% \makeatother
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -45,7 +53,7 @@
 % \usemintedstyle{pastie}
   % \definecolor{bg}{RGB}{39,40,34}
   % \usemintedstyle{monokai}
-  
+
 \usepackage{tikz}
 % \usetikzlibrary{arrows,matrix,positioning}
 

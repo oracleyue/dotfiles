@@ -26,14 +26,6 @@
     % \let\proof\IEEEproof
     % \let\endproof\IEEEendproof
 \usepackage{empheq}     % to deal with parentheses + subfunctions
-% \makeatletter
-% \g@addto@macro\normalsize{% adjust padding above/below equations
-%   \setlength\abovedisplayskip{6pt}
-%   \setlength\belowdisplayskip{6pt}
-%   \setlength\abovedisplayshortskip{6pt}
-%   \setlength\belowdisplayshortskip{6pt}
-% }
-% \makeatother
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
