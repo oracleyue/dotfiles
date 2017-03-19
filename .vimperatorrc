@@ -26,15 +26,18 @@ noremap l 5l
 noremap H gT
 noremap L gt
 
-" -- jump to webpages opened in the current tab before
-" ! no longer working on Firefox > 45.0
-map <C-j> :jumps<CR>
+" -- stop loading current page
+noremap <C-g> :stop<CR>
 
 " -- remove highlighted matches
 noremap <C-S-u> :nohlsearch<CR>
 
 " -- open prescribed websites
 noremap <C-q> :tabopen https://getpocket.com<CR>
+
+" -- jump to webpages opened in the current tab before
+" ! no longer working on Firefox > 45.0
+"map <C-j> :jumps<CR>
 
 " -- open websites in history
 " 1. use ":history" open the history list
@@ -43,4 +46,9 @@ noremap <C-q> :tabopen https://getpocket.com<CR>
 " -- usage notes:
 " 1) jump to the address bar: <C-l>
 " 2) jump to the Google search bar: <C-k>
+
+
+" ------- Firefox shortcuts --------
+" 1. focus on address box: <C-L>
+" 2. focus on search box: <C-K>
 
