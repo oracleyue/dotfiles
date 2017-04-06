@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Article-IEEE Header
-# key: yae
+# key: article-ieee
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

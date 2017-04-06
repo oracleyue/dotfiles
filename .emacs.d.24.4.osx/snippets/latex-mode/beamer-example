@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Beamer Body Examples
-# key: ybeg
+# key: beamer-eg
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
@@ -14,13 +14,13 @@
 
 \institute[] % (optional, but mostly needed)
 {\begin{tabular}{l l}
-   ${}^1$ \{University of Luxembourg,\\
-  \hphantom{${}^1$ \}}Luxembourg Centre for System Biomedicine (LCSB),\\
-   \hphantom{${}^1$ \}}Systems Control Group\}\\[2ex]
+   $ {}^1$ \{University of Luxembourg,\\
+  \hphantom{$ {}^1$ \}}Luxembourg Centre for System Biomedicine (LCSB),\\
+   \hphantom{$ {}^1$ \}}Systems Control Group\}\\[2ex]
    
-    ${}^2$ \{KTH Royal Institute of Technology,\\
-    \hphantom{${}^2$ \}}Department of Mathematics,\\
-    \hphantom{${}^2$ \}}Division of Optimization \& Systems Theory\}
+    $ {}^2$ \{KTH Royal Institute of Technology,\\
+    \hphantom{$ {}^2$ \}}Department of Mathematics,\\
+    \hphantom{$ {}^2$ \}}Division of Optimization \& Systems Theory\}
    
 \end{tabular}}
 \date % (optional, should be abbreviation of conference name)

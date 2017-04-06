@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Matlab2TikZ Image Preview
-# key: ytm
+# key: mat2tikz
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

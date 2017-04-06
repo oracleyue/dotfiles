@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Draft Header
-# key: yd
+# key: draft
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
@@ -14,23 +14,22 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-% \usepackage{lmodern}
-% \usepackage[sc]{mathpazo}   % using Palladillo
 \usepackage{times}   % using Times
 % \usepackage{newtxtext,newtxmath} % new, replace /times/ and /txfonts/
+% \usepackage[lite]{mtpro2} % non-free math fonts in Times; better than /newtxmath/
 \usepackage{helvet}  % using Helvet as sans serif font
 \usepackage[scaled=0.95]{inconsolata} % courier
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
-\usepackage{enumitem} % [label={(\roman*)}, topsep={-8pt}, parsep={4pt}, itemindent={8pt}]; [leftmargin=*] to remove indentation before items.
+\usepackage{enumitem} % [label={(\roman*)}
 
 \usepackage{algorithm,algpseudocode}
 \makeatletter
 \renewcommand{\ALG@beginalgorithmic}{\small}
 \makeatother
 
-\usepackage{graphicx,wrapfig}
+\usepackage{graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Article Header (Full)
-# key: yafull
+# key: article-full
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
@@ -18,8 +18,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{times}    % using Nimbus Serif, instead of Computer Modern Serif by default
-% \usepackage{newtxmath}  % using new Times pkg
-% \usepackage{newtxtext}
+% \usepackage{newtxtext,newtxmath}  % using new Times pkg
 \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
 % \usepackage[scaled=.8]{DejaVuSansMono}
 \usepackage[scaled=0.95]{inconsolata}
@@ -30,7 +29,7 @@
     % \setsansfont{Helvetica} % sets the sans font
     % \setmonofont[Scale=0.8]{DejaVu Sans Mono} % sets the monospace font
 \usepackage[autostyle,english=american]{csquotes} % auto convert incorrect "" to ``'' quotes
-\MakeOuterQuote{"}    
+\MakeOuterQuote{"}
 
 \usepackage{latexsym}
 \usepackage{amsmath}
@@ -141,12 +140,12 @@
 % University of Luxembourg}
 % }
 \author{Zuogong Yue
-  \thanks{\upshape Zuogong Yue with  
+  \thanks{\upshape Zuogong Yue with
     Luxembourg Centre for Systems Biomedicine, and  Facult\'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
     7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
     \href{mailto:zuogong.yue@uni.lu}{\tt zuogong.yue@uni.lu}.}
   % \and Jorge Gon\c{c}alves
-  % \thanks{Jorge Gon\c{c}alves with 
+  % \thanks{Jorge Gon\c{c}alves with
   %   Department of Engineering, University of Cambridge, CB2 1PZ, UK,
   %   and Luxembourg Centre for Systems Biomedicine, and  Facult'{e} des Sciences, de la Technologie et de la Communication, University of Luxembourg,
   %   7 Avenue des Hauts-Fourneaux, L-4362 Esch-sur-Alzette, Luxembourg,
@@ -177,7 +176,7 @@
 % --------------- ABSTRACT -----------------
 \begin{abstract}
     Abstract here...
-\end{abstract}    
+\end{abstract}
 
 % --------- TABLE OF CONTENTS --------------
 \newpage
@@ -185,7 +184,7 @@
 \pagenumbering{Roman}
 \tableofcontents
 \newpage
-% \clearpage\null\newpage  %% to add one blank forcefully 
+% \clearpage\null\newpage  %% to add one blank forcefully
 % \cleardoublepage  %% to add one blank page according to twoside print
 \setcounter{page}{1}
 \pagenumbering{arabic}
@@ -223,4 +222,3 @@ $0
 \bibliography{./ref/library}}
 
 \end{document}
-

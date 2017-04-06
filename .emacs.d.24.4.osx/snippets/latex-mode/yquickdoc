@@ -1,23 +1,20 @@
 # -*- mode: snippet -*-
-# name: Short Draft Header
-# key: ysd
+# name: Quick Doc Header
+# key: qdoc
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[a4paper,10pt]{article}
-\usepackage{setspace}
-  \onehalfspacing
 \usepackage[parfill]{parskip}
-%\parskip=10pt
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}  % or "times"
-\usepackage{helvet}  % using Helvet as sans serif font
+\usepackage{times,helvet}
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,mathtools,upgreek}
-\usepackage{enumitem} % [leftmargin=*] to remove indentation before items
+\usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,
+            mathrsfs,mathtools,upgreek}
+\usepackage{enumitem} % [label={(\roman*)}
 
 \usepackage{graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
@@ -26,7 +23,8 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
 \mdfdefinestyle{default}{backgroundcolor=gray!10}
-\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
+            urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE
 
 \usepackage{titlesec}
@@ -51,8 +49,8 @@
 
 % \newpage
 % --------------- BIBLIOGRAPHY --------------
-\def\bibfont{\footnotesize}
-\bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
-\bibliography{./ref/library}
+% \def\bibfont{\footnotesize}
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
+% \bibliography{./ref/library}
 
 \end{document}

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: TikZ Image Preview
-# key: yt
+# key: tikz
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

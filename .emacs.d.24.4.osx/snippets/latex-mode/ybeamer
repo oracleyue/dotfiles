@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Beamer Header
-# key: yb
+# key: beamer
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

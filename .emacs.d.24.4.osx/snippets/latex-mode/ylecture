@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Lecture Note Header
-# key: yl
+# key: lecture
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

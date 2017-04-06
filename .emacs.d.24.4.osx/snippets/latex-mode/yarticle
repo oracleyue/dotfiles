@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Article Header 
-# key: ya
+# key: article
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
