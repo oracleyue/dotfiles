@@ -260,16 +260,16 @@
 (setq ispell-dictionary "american")
 
 ;; oracleyue's inital Dired folders on startup
-(setq y:HomePath "/Users/oracleyue/")
+(if (string-equal system-type "darwin")
+    (setq y:HomePath "/Users/oracleyue/")
+  (setq y:HomePath "/home/oracleyue/"))
+
 (defun y:dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
-  ;(dired (concat y:HomePath "Public/Dropbox/Workspace/matlab"))
-  ;(dired (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote"))
   ;(dired (concat y:HomePath "Public/Dropbox/Academia"))
-  ;(dired (concat y:HomePath "Public/Dropbox/Academia/Manuscripts"))
   (dired (concat y:HomePath "Public/Dropbox/Academia/Seminars"))
-  ;(dired (concat y:HomePath "Public/Dropbox/Shared"))
+  ;(dired (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote"))
   (find-file (concat y:HomePath "Public/Dropbox/Academia/ToDoList.org"))
   (find-file (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote/PhD.org"))
   (switch-to-buffer "*scratch*"))

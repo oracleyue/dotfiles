@@ -81,7 +81,8 @@
 ;; feature control
 ;; - enable CEDET features
 (if (string-equal system-type "darwin")
-    (setq y:flags "no"))
+    (setq y:flags "no")
+  (setq y:flags "yes"))
 
 (setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
 (setq y-enable-function-args-flag y:flags)  ; for /function-args/
