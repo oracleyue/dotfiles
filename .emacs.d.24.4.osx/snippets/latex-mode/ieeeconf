@@ -1,11 +1,13 @@
 # -*- mode: snippet -*-
-# name: IEEE Transaction Header
-# key: ieeetran
+# name: IEEE Conference Header
+# key: ieeeconf
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[letterpaper,10pt,journal,final]{IEEEtran}
-\pdfminorversion=4
+\documentclass[letterpaper, 10pt, conference]{ieeeconf}    % a4paper; use [draft]
+
+\IEEEoverridecommandlockouts        % only needed if you want to use the \thanks command
+\overrideIEEEmargins                % needed to meet printer requirements.
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -14,7 +16,15 @@
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{mathtools}
-\usepackage{amsthm}
+    \let\IEEEproof\proof
+    \let\IEEEendproof\endproof
+    \let\proof\relax
+    \let\endproof\relax
+\usepackage{amsthm}     % To use proof in ieeeconf by default, uncomment the following 4 lines
+    % \let\proof\relax
+    % \let\endproof\relax
+    % \let\proof\IEEEproof
+    % \let\endproof\IEEEendproof
 \usepackage{empheq}     % to deal with parentheses + subfunctions
 
 \usepackage{algorithm}
@@ -28,12 +38,17 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+% \usepackage{comment}
+% use /enumitem/: [noitemsep, topsep=-5pt], [\label=\roman*] or \alph* \arabic*
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{cite}
+\makeatletter
+\let\NAT@parse\undefined
+\makeatother
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,
             filecolor=red]{hyperref}
 % \usepackage{minted}
-%   \usemintedstyle{pastie}
+% \usemintedstyle{pastie}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -84,9 +99,6 @@ This electronic document is a ÒliveÓ template. The various components of your 
 % ----------------- MAIN --------------------
 
 \section{$0}
-
-
-
 
 
 
