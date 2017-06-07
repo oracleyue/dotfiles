@@ -3,7 +3,7 @@
 ;; --- oracleyue
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; For /folding-mode/ 
+; For /folding-mode/
 ;(add-to-list 'load-path "~/.emacs.d/git")
 ;(require 'folding)
 ;(load "folding" 'nomessage 'noerror)
@@ -57,7 +57,7 @@
 ;; ;  [Confirm]")))
 ;; ;(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
 ;; ;(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
- 
+
 ;; ;; /smex/ remember recently and most frequently used commands
 ;; (require 'smex)
 ;; (setq smex-save-file "~/.emacs.d/userdata/.smex-items")
@@ -125,14 +125,14 @@
 ;; ;; (global-set-key [(control shift tab)] 'tabbar-ruler-backward)     ; eqiv. "gT"
 
 ;; ;; hide for special buffers
-;;   ;; special buffers that start with "*" 
+;;   ;; special buffers that start with "*"
 ;; (setq tabbar-buffer-list-function
 ;;       (lambda ()
 ;;         (remove-if
 ;;          (lambda(buffer)
 ;;            (find (aref (buffer-name buffer) 0) " *"))
 ;;          (buffer-list))))
-;;   ;; special buffers that user-defined 
+;;   ;; special buffers that user-defined
 ;; ;;  (setq *tabbar-ignore-buffers* '("BufferName 1" "BufferName 2" "BufferName 3"))
 ;; ;;  (setq tabbar-buffer-list-function
 ;; ;;        (lambda ()
@@ -146,12 +146,12 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; ;; For /Speedbar/
-;; ;; Disable hierarchy 
+;; ;; Disable hierarchy
 ;; (setq speedbar-tag-hierarchy-method nil)
 ;; ;; Show all files
 ;; (setq speedbar-show-unknown-files t)
 
-;; ;; For /srSpeedbar/   
+;; ;; For /srSpeedbar/
 ;; ;; ; Change speedbar font size   "WenQuanYi Micro Hei Mono"
 ;;     ;; (defun y-speedbar-face ()
 ;;     ;;         (interactive)
@@ -199,14 +199,14 @@
 ;; ;; ;; (when (cedet-gnu-global-version-check t)
 ;; ;; ;;   (semanticdb-enable-gnu-global-databases 'c-mode)
 ;; ;; ;;   (semanticdb-enable-gnu-global-databases 'c++-mode))
-;; ;; ;; ;; enable ctags 
+;; ;; ;; ;; enable ctags
 ;; ;; ;; (when (cedet-ectag-version-check t)
 ;; ;; ;;   (semantic-load-enable-primary-ectags-support))
 ;; (add-hook 'c-mode-common-hook 'semantic-mode)
 ;; ;; ;(semantic-mode 1)
 
 ;; ;; ;; settings of /EDE/
-;; ;; ;(global-ede-mode t) 
+;; ;; ;(global-ede-mode t)
 ;; ;; (add-hook 'c-mode-common-hook 'global-ede-mode)
 ;; ;; (ede-cpp-root-project "cproj"
 ;; ;;                 :name "cpp project"
@@ -243,7 +243,7 @@
 ;;   (add-to-list 'ac-sources 'ac-source-gtags)
 ;;   (add-to-list 'ac-sources 'ac-source-semantic)
 ;;   ;; pressing bindng for "./>" not needed, having been enabled in auto-complete
-;;   ;; (local-set-key "." 'semantic-complete-self-insert) 
+;;   ;; (local-set-key "." 'semantic-complete-self-insert)
 ;;   ;; (local-set-key ">" 'semantic-complete-self-insert)
 ;;   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
 ;;   (local-set-key "\C-c?" 'semantic-ia-fast-jump) ; return back by using /semantic-mrub-switch-tag/ or (C-x B)
@@ -347,3 +347,55 @@
                              'company-yasnippet-or-completion
                              company-active-map)))
 ;; ----------------------------------------------------------------
+
+
+;; ----------------------------------------------------------------
+;; markdown
+;; ----------------------------------------------------------------
+(defun y:markdown-css-use-link-or-header (include-css)
+  ;; nil: including css in headers; otherwise, use link.
+  (if include-css
+      (add-hook 'markdown-mode-hook (lambda()
+        (add-to-list 'markdown-xhtml-header-content (concat css-default-path "style.css"))
+        ;; (add-to-list 'markdown-xhtml-header-content
+                     ;; (concat css-default-path "bootstrap.min_yeti.css"))
+        ))
+    (add-hook 'markdown-mode-hook (lambda()
+      (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
+      (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min_yeti.css"))))))
+(y:markdown-css-use-link-or-header 1)
+
+
+;; ----------------------------------------------------------------
+;; insert date
+;; ----------------------------------------------------------------
+;; simple formated dates
+(defun insert-today (prefix)
+  "Insert the current date. With prefix-argument, use ISO format. With
+   two prefix arguments, write out the day and month name."
+  (interactive "P")
+  (let ((format (cond
+                 ((not prefix) "%d-%m-%Y")
+                 ;; ((not prefix) "%d.%m.%Y")
+                 ((equal prefix '(4)) "%Y-%m-%d")
+                 ((equal prefix '(16)) "%A, %d. %B %Y")))
+        (system-time-locale "de_DE"))
+    (insert (format-time-string format))))
+;; another version: formated string
+(defun insdate-insert-any-date (date)
+  "Insert DATE using the current locale."
+  (interactive (list (calendar-read-date)))
+  (insert (calendar-date-string date)))
+(defun insert-date (&optional days)
+  "Insert date that is DAYS from current."
+  (interactive "p*")
+  (unless days (setq days 0))
+  (insert
+   (calendar-date-string
+    (calendar-gregorian-from-absolute
+     (+ (calendar-absolute-from-gregorian (calendar-current-date))
+        days)))))
+
+(defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
+  "Format of date to insert with `insert-current-date-time' func
+See help of `format-time-string' for possible replacements")

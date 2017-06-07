@@ -3,6 +3,8 @@
 ;; ----------------------------------------------------------------------
 ;; BASIC USAGES
 ;; ---------------
+;; insert-file: "C-x i"
+;; write-file, save-as: "C-x w"
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; changing encodings: "C-x C-m f"
@@ -263,7 +265,6 @@
 (if (string-equal system-type "darwin")
     (setq y:HomePath "/Users/oracleyue/")
   (setq y:HomePath "/home/oracleyue/"))
-
 (defun y:dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
@@ -373,32 +374,17 @@
 (global-set-key (kbd "C-x |") 'y:toggle-window-split)
 
 ;; insert date
-;(global-set-key (kbd "C-c M-d") 'insert-date)
-;; simple formated dates
-(defun insert-date-simple (prefix)
-  "Insert the current date. With prefix-argument, use ISO format. With
-   two prefix arguments, write out the day and month name."
-  (interactive "P")
-  (let ((format (cond
-                 ((not prefix) "%d.%m.%Y")
-                 ((equal prefix '(4)) "%Y-%m-%d")
-                 ((equal prefix '(16)) "%A, %d. %B %Y")))
-        (system-time-locale "de_DE"))
-    (insert (format-time-string format))))
-;; another version: formated string
-(defun insdate-insert-any-date (date)
-  "Insert DATE using the current locale."
-  (interactive (list (calendar-read-date)))
-  (insert (calendar-date-string date)))
-(defun insert-date (&optional days)
-  "Insert date that is DAYS from current."
-  (interactive "p*")
-  (unless days (setq days 0))
-  (insert
-   (calendar-date-string
-    (calendar-gregorian-from-absolute
-     (+ (calendar-absolute-from-gregorian (calendar-current-date))
-        days)))))
+(defvar current-date-format "%d %b %Y")  ;; %a" for weekdays
+(defvar current-time-format "%H:%M:%S")
+(defun insert-date ()
+  "insert the current date and time into current buffer.
+Uses `current-date-format' for the formatting the date/time."
+  (interactive)
+  (insert (format-time-string current-date-format (current-time))))
+(defun insert-time ()
+  "insert the current time (1-week scope) into the current buffer."
+  (interactive)
+  (insert (format-time-string current-time-format (current-time))))
 
 ;; adding incremental numbers to lines
 (require 'gse-number-rect)

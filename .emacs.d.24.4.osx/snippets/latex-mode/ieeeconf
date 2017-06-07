@@ -39,7 +39,6 @@
 \usepackage{subcaption}
 
 % \usepackage{comment}
-% use /enumitem/: [noitemsep, topsep=-5pt], [\label=\roman*] or \alph* \arabic*
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{cite}
 \makeatletter

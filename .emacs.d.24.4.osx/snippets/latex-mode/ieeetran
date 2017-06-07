@@ -28,6 +28,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+\usepackage{enumitem}  % [noitemsep, topsep=-5pt], [label=\roman*] or \alph* \arabic*
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{cite}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,

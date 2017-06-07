@@ -1,6 +1,8 @@
 # -*- mode: snippet -*-
 # name: function header
-# key: fhead
+# key: head
+# group: oracleyue
+# expand-env: ((yas-indent-line 'fixed))
 # --
 % ${1:FUNCTION_NAME a short descriptions of the function}
 % RESULT = FUNCTION_NAME(PARAMETER) more descriptions
@@ -21,12 +23,9 @@
 %   [res1, res2] = function_name(para1, para2);
 %
 
-% Copyright (c) ${1:2015-2016}, Zuogong YUE
+% Copyright (c) ${2:2015-2017}, Zuogong YUE
 % Author: Zuogong YUE <oracleyue@gmail.com>
 %         https://github.com/oracleyue
 % Licensed under the GNU General Public License
 %
-% Last update on ${2:01 Mar 2016}
-
-
-
+% Last update on ${3:01 Mar 2016}

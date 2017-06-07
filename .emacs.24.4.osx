@@ -46,9 +46,6 @@
 ;(setq custom-file "~/.emacs-custom.el")
 ;(load custom-file 'noerror)
 
-;; enable clipboard in emacs  (only need for emacs in terminal)
-;(setq x-select-enable-clipboard t)
-
 ;; frame size
 (add-to-list 'default-frame-alist '(width . 96))
 (when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 31 in Thinkpad
@@ -61,13 +58,27 @@
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
+;; home path
+(if (string-equal system-type "darwin")
+    (setq y:HomePath "/Users/oracleyue/")
+  (setq y:HomePath "/home/oracleyue/"))
+
+;; enable clipboard in emacs  (only need for emacs in terminal)
+;(setq x-select-enable-clipboard t)
+
 ;; mouse control
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
 
-;; Setting the Theme (more in "emacs-init-basics.el")
+;; theme (more in "emacs-init-basics.el")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
+
+;; set the default browser
+(if (string-equal system-type "darwin")
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program (concat y:HomePath "bin/web-browser")) ;use Safari
+  (setq browse-url-browser-function 'browse-url-firefox))
 
 
 ;;
@@ -364,23 +375,23 @@
 (setq markdown-command "/usr/local/bin/multimarkdown")
 (setq markdown-open-command "/Users/oracleyue/bin/marked")
 ;; configure markdown export styles
-(setq url-boostrap-min-css
-      "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (setq css-default-path "/Users/oracleyue/.emacs.d/default-css/")
+;; (setq url-boostrap-min-css
+      ;; "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (add-hook 'markdown-mode-hook (lambda()
-   (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
 ;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; if use bootstrap.min.css online
+   (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
    (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min_yeti.css"))))
 
 ;; Preview using /livedown.el/  (osx uses "Marked 2.app")
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
-(require 'livedown)
-(setq livedown:autostart nil) ; automatically open preview when opening markdown files
-(setq livedown:open t)        ; automatically open the browser window
-(setq livedown:port 1337)     ; port for livedown server
-; use livedown to preview markdown
-(add-hook 'markdown-mode-hook (lambda()
-          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
+;(require 'livedown)
+;(setq livedown:autostart nil) ; automatically open preview when opening markdown files
+;(setq livedown:open t)        ; automatically open the browser window
+;(setq livedown:port 1337)     ; port for livedown server
+; ;; use livedown to preview markdown
+;(add-hook 'markdown-mode-hook (lambda()
+;          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
 
 
 ; =======================================
