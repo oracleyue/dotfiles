@@ -19,7 +19,7 @@
      ("\\.pdf\\'" . "open %s"))))
  '(package-selected-packages
    (quote
-    (zeal-at-point yasnippet xcscope stickyfunc-enhance smartparens multiple-cursors matlab-mode markdown-mode magit key-combo js2-mode jedi iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint expand-region evil-leader etags-table ess emmet-mode csv-mode company-quickhelp company-jedi company-c-headers bash-completion auto-complete-clang auto-complete-c-headers auctex)))
+    (zeal-at-point yasnippet xcscope stickyfunc-enhance smartparens multiple-cursors matlab-mode magit key-combo js2-mode jedi iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint expand-region evil-leader etags-table ess emmet-mode csv-mode company-quickhelp company-jedi company-c-headers bash-completion auto-complete-clang auto-complete-c-headers)))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-stop-list
@@ -71,8 +71,11 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; theme (more in "emacs-init-basics.el")
+;(load-theme 'tsdh-dark t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;(load-theme 'ymonokai t)
 
 ;; set the default browser
 (if (string-equal system-type "darwin")
@@ -161,7 +164,7 @@
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Matching a pair of braces and hightlight the contents
-;;(show-paren-mode t)  ;; replaced by /smartparens/
+;; (show-paren-mode t)  ;; replaced by /smartparens/; enabled in "custom-set-variables"
 (require 'hl-sexp)
   (add-hook 'lisp-mode-hook 'hl-sexp-mode)
   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
@@ -453,6 +456,7 @@
 ;; open default Dired folders on startup
 (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
 (y:set-startup-directory)   ; defined in emacs-init-basics.el
+;(cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")  ; for dark-version
 ;; restore "F10" to open menu bar
 (global-set-key (kbd "<f10>") 'menu-bar-open)
 ;; kill unnecessary buffers

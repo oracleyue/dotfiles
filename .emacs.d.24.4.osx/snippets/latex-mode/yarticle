@@ -29,7 +29,7 @@
 \renewcommand{\ALG@beginalgorithmic}{\small}
 \makeatother
 
-\usepackage{graphicx}
+\usepackage{float, graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
@@ -51,8 +51,8 @@
 % \usepackage{minted}
 %  \usemintedstyle{pastie}
 %  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
-\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,
-			filecolor=red]{hyperref}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
+            urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE
 
 % theorem styles given by /amsthm/
@@ -71,17 +71,17 @@
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfcreator={Emacs version 24.5 + AUCTeX version 11.88}}
+
 
 % Title, Authors and Date
 \title{${1:title}}
 \author{Zuogong YUE}
 \date{\today}
 %\author{Zuogong YUE \vspace*{1mm} \\\ \small Luxembourg Centre for Systems Biomedicine}
-
-\hypersetup{
-  pdftitle={\@title},
-  pdfauthor={Zuogong YUE},
-  pdfcreator={Emacs version 24.5 + AUCTeX version 11.88}}
 
 
 \begin{document}

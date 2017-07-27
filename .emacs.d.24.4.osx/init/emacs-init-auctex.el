@@ -94,13 +94,14 @@
         ("T"   "top"    "Misc Symbol" nil)
         ("C-p" "partial" "Misc Symbol" nil)
         ("C-c" "circ" "Misc Symbol" nil)  ;overwrite \cos
-        ("C-t" "top" "Misc Symbol" nil)  ;overwirte \tan
+        ("C-t" "textstyle" "Misc" nil)  ;overwirte \tan
+        ("C-d" "displaystyle" "Misc" nil)  ;overwirte \det
         ("C-S-f" "longrightarrow" "Arrows" nil)
         ("C-S-b" "longleftarrow" "Arrows" nil)
         ("C-m" "longmapsto" "Arrows" nil)
         ))
 ; More math-font in LaTeX
-(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\text{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
+(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}" "\\boldsymbol{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\text{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
 ;; default: (13 "\\textmd{" "}")
 
 ;; More keywords/macro fontify
