@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: Beamer Template
-# key: beamer
+# name: Beamer (16:9) Template
+# key: beamerw
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[xcolor={dvipsnames}]{beamer}
+\documentclass[xcolor={dvipsnames},aspectratio=169]{beamer}
 % options: presentation,notes,handout; aspectratio=169,1610,149,54,43,32
 
 % Beamer settings
@@ -86,16 +86,12 @@
   \begin{tikzpicture}[remember picture,overlay]
     \setlength{\logoX}{\coordinateWidth}
     \setlength{\logoY}{\coordinateHeight}
-      \node[xshift=.7cm,yshift=0.75cm] at (current page.south west)
-          {\includegraphics[height=1cm]{figures/lcsb-logo}};
+    \node[xshift=1cm,yshift=0.75cm] at (current page.south west)
+    {\includegraphics[height=1cm]{figures/lcsb-logo}};
     \setlength{\logoX}{-\coordinateWidth-1cm}
     \setlength{\logoY}{\coordinateHeight-0.1cm}
-      \node[xshift=-1.7cm,yshift=0.65cm] at (current page.south east)
-          {\includegraphics[height=.7cm]{figures/unilu-logo}};
-    \setlength{\logoX}{\coordinateWidth+6.2cm}
-    \setlength{\logoY}{\coordinateHeight}
-      \node[xshift=6.9cm,yshift=0.75cm] at (current page.south west)
-          {\includegraphics[scale=1]{figures/lcsb-ppt-template-line}};
+    \node[xshift=-1cm,yshift=0.75cm] at (current page.south east)
+    {\includegraphics[height=.7cm]{figures/unilu-logo}};
   \end{tikzpicture}
 
   \titlepage

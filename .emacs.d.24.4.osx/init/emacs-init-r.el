@@ -48,3 +48,9 @@
 
 (key-combo-define-hook '(ess-mode-hook inferior-ess-mode-hook)
                        'ess-key-combo-load-default key-combo-ess-default)
+
+;; code complete: use /auto-complete/
+;; Notes:
+;;   support automatically by ESS-mode; however, the R shell has to be run
+;;   and the codes must be no synatax errors.
+;;   use "ac-source-R-args", "ac-source-R-objects", "ac-source-R" as backends

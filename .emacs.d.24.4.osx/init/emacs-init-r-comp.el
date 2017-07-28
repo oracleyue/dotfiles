@@ -47,8 +47,9 @@
 (key-combo-define-hook '(ess-mode-hook inferior-ess-mode-hook)
                        'ess-key-combo-load-default key-combo-ess-default)
 
-;; use /company/ for auto-completion
-;; notes:
+;; code complete: use /company/
+;; Notes:
 ;;   support automatically by ESS-mode; however, the R shell has to be run
 ;;   and the codes must be no synatax errors.
 ;;   use "company-R-args", "company-R-objects" as backends
+(define-key company-active-map (kbd "M-h") 'company-show-doc-buffer)

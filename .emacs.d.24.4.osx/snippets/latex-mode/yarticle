@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Simple Article Header
+# name: Simple Article Template
 # key: article
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

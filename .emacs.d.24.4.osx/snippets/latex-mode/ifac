@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: IFAC Conference Paper
+# name: IFAC Conference
 # key: ifac
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

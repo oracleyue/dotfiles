@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Lecture Note Header
+# name: Lecture Note Template
 # key: lecture
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -7,7 +7,7 @@
 \documentclass[11pt,a4paper]{article}
 
 %% packages - page layout definitions
-\usepackage[text={360pt, 650pt},centering]{geometry} 
+\usepackage[text={360pt, 650pt},centering]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{times}
@@ -56,7 +56,7 @@
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
-% 
+%
 \usepackage{lipsum}
 
 
