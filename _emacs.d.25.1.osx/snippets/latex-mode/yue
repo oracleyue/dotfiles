@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: note macros
+# key: yue
+# group: macros
+# --
+\newcommand{\yue}[1]{{\color{red}\upshape {[Zuogong: #1]}}}

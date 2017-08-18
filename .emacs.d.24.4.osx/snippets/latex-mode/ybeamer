@@ -1,0 +1,141 @@
+# -*- mode: snippet -*-
+# name: Beamer Template
+# key: beamer
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[xcolor={dvipsnames}]{beamer}
+% options: presentation,notes,handout; aspectratio=169,1610,149,54,43,32
+
+% Beamer settings
+\usetheme{Singapore} % Madrid, Singapore, Boadilla
+\usefonttheme{professionalfonts} % use lmodern mathfont; "serif"
+\setbeamertemplate{navigation symbols}{}  % remove sections in header in Singapore
+\renewcommand{\insertnavigation}[1]{}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{footline}{fg=Blue}
+\setbeamerfont{footline}{size=\footnotesize}
+
+% Citations (not /biblatex/, beamer's default)
+\usepackage{bibentry}  % use \footnote{\bibentry{}}
+\bibliographystyle{apalike} % abbrv;apalike
+\newcommand{\footcite}[1]{\footnote{\tiny\bibentry{#1}}}
+\newcommand{\textcite}[1]{\footnotetext{\tiny\bibentry{#1}}} % put \footnotemark first
+% removing line breaks between title, journal, etc.
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
+% Packages
+\usepackage{latexsym, amsmath, amssymb, amsfonts,
+            arydshln, mathrsfs, mathtools, upgreek}
+\usepackage{graphicx,subcaption,tikz}
+  \captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+  \setbeamerfont{caption}{size=\scriptsize}
+\usepackage{algorithm,algpseudocode}
+\usepackage{appendixnumberbeamer}
+
+% Math symbol definitions
+\input{userdef-mathsymb}
+
+% PDF info
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfsubject={IFAC-WC 2017 Presentation},
+  pdfcreator={Emacs version 25.1 + AUCTeX version 11.90}}
+
+
+% Title Page
+\title[]{${1:title}}
+\subtitle{${2:}}
+\author[]{\vspace*{1mm}\small \\\Zuogong Yue$^1$, Johan Thunberg$^1$,
+                     Jorge Goncalves$^1$}
+\institute[]{
+    \begin{tabular}{ll}
+       $^1$ \\{University of Luxembourg,\\\
+       \hphantom{$^1$ \\}}Luxembourg Centre for System Biomedicine (LCSB),\\\
+       \hphantom{$^1$ \\}}Systems Control Group\\}\\\[2ex]
+       %
+       % $^2$ \\{KTH Royal Institute of Technology,\\\
+       % \hphantom{$^2$ \\}}Department of Mathematics,\\\
+       % \hphantom{$^2$ \\}}Division of Optimization \\& Systems Theory\\}
+    \end{tabular}}
+\date % (optional, should be abbreviation of conference name)
+  {\hspace*{-11mm}\small 14 July 2016 $\cdot$ MTNS 2016 $\cdot$ Minneapolis, MN}
+
+% Table of Contents before each section
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\begin{document}
+
+% Coordinates for logo in titlepage
+\newlength{\logoX}
+\newlength{\logoY}
+\newcommand{\coordinateWidth}{0.7cm}
+\newcommand{\coordinateHeight}{1.1cm}
+% Creates title page of slide show using above information
+\setbeamertemplate{footline}{}  % remove page number
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+    \setlength{\logoX}{\coordinateWidth}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=.7cm,yshift=0.75cm] at (current page.south west)
+          {\includegraphics[height=1cm]{figures/lcsb-logo}};
+    \setlength{\logoX}{-\coordinateWidth-1cm}
+    \setlength{\logoY}{\coordinateHeight-0.1cm}
+      \node[xshift=-1.7cm,yshift=0.65cm] at (current page.south east)
+          {\includegraphics[height=.7cm]{figures/unilu-logo}};
+    \setlength{\logoX}{\coordinateWidth+6.2cm}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=6.9cm,yshift=0.75cm] at (current page.south west)
+          {\includegraphics[scale=1]{figures/lcsb-ppt-template-line}};
+  \end{tikzpicture}
+
+  \titlepage
+
+  % enable citations by /bibentry/; as footnote at each page
+  \nobibliography{./ref/library}
+\end{frame}
+\setbeamertemplate{footline}[frame number]   % reset page number
+\setcounter{framenumber}{0}
+
+
+% ---- Main Part ----
+
+$0
+
+
+
+% ---- Thanks Frame ----
+\section*{Thanks}
+\setbeamertemplate{footline}{}  % remove page number
+
+\begin{frame}
+    \vspace*{1cm}
+    \begin{center}
+      {\Huge \bf \textcolor{Magenta}{Thank you!}} \\\
+      \bigskip
+      \bigskip
+      \includegraphics[width=10cm]{figures/unix_happy.jpg}
+    \end{center}
+\end{frame}
+
+% ---- Appendix ----
+% \appendix
+% \begin{frame}
+%   \frametitle{Appendix: ...}
+%
+% \end{frame}
+
+% ---- Bibliography ----
+% using /bibentry/; adding bibliography as footnote at each page
+% include bibtex libraries in front of any citations; Line 103
+
+\end{document}

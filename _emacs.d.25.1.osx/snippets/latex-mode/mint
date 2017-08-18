@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: minted environment
+# key: mint
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{minted}[linenos]{${1:lang}}
+$2
+\end{minted}

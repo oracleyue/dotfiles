@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: header
+# key: head
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+TITLE:     ${1:Title}
+#+AUTHOR:    oracleyue
+#+EMAIL:     oracleyue@gmail.com
+#+DATE:      ${2:Date}
+*** export options                                           :noexport:ARCHIVE:
+#+LANGUAGE:   en
+#+OPTIONS:    H:6 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:    TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+HTML_HEAD:  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+#+HTML_HEAD_EXTRA:  <link href="css/org.css" rel="stylesheet" type="text/css"> 
+#+STYLE:     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+#+STYLE:     <link href="css/org.css" rel="stylesheet" type="text/css">
+
+
+
+$0

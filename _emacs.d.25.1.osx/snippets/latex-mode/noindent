@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: noindent
+# key: ni
+# group: macros
+# --
+\noindent

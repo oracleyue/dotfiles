@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: wrapfigure
+# key: wrapfig
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.48\textwidth]{figures/${1:figname}}
+  \caption{${2:caption}}
+  \label{fig:${3:label}}
+\end{wrapfigure}

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: simple template
+# key: head
+# group: oracleyue
+# --
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""$1
+"""
+
+# To perform debugging
+# import pdb
+# pdb.set_trace()
+
+
+$0

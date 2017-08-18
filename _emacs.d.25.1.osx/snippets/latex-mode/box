@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: boxed equations
+# key: box
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{equation*}
+  \setlength\fboxsep{0.2cm}
+  \setlength\fboxrule{0.4pt}
+  \boxed{$0}
+\end{equation*}

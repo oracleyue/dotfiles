@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: footnote
+# key: fn
+# group: macros
+# --
+footnote{$0}

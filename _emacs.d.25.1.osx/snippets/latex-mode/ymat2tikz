@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Matlab2TikZ Image Preview
+# key: mat2tikz
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{article}
+%\documentclass[class=scrreprt]{standalone}
+%\KOMAoptions{fontsize=12pt}
+
+  % --- font ---
+  \usepackage{times}
+  \usepackage[scaled]{helvet}  % using Helvetica as sans serif font
+  \usepackage[scaled=0.95]{inconsolata}
+  \usepackage{sansmath}
+  % \renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
+
+  % --- default setup ---
+  \usepackage{pgfplots}
+  \pgfplotsset{compat=newest}
+  %% the following commands are sometimes needed
+  \usetikzlibrary{plotmarks}
+  \usepackage{grffile}
+  \usepackage{amsmath}
+  %% you may also want the following commands
+  %\pgfplotsset{plot coordinates/math parser=false}
+  %\newlength\figureheight
+  %\newlength\figurewidth
+  % --- (DO NOT EDIT!) ---
+  
+  % --- preview setup ---
+  % if using KOMAoptions, comment this section
+  \usepackage[graphics,tightpage,active]{preview}
+  \setlength{\PreviewBorder}{2pt}
+  \PreviewEnvironment{tikzpicture}
+  % --- (DO NOT EDIT!) ---
+
+\begin{document}
+  \input{draw.tikz}
+\end{document}

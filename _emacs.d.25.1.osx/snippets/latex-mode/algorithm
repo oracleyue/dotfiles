@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: algorithm environment
+# key: algo
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{algorithm}
+  \caption{${1:Linear Programming}}
+  \label{alg:${2:label name}}
+  \begin{algorithmic}[1]
+    $0
+  \end{algorithmic}
+\end{algorithm}

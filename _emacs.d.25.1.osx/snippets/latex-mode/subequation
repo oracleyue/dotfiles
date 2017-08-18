@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: subequation
+# key: subeq
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{subequations}
+  \label{eq:${1:label}}
+  \begin{alignat}{1}
+    $0
+  \end{alignat}
+\end{subequations}

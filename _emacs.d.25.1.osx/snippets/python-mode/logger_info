@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: logger.info
+# key: log
+# group: oracleyue
+# --
+logger.info('$0')

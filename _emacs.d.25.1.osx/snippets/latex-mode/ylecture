@@ -1,0 +1,154 @@
+# -*- mode: snippet -*-
+# name: Lecture Note Template
+# key: lecture
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[11pt,a4paper]{article}
+
+%% packages - page layout definitions
+\usepackage[text={360pt, 650pt},centering]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{setspace}
+  \onehalfspacing
+\usepackage[mmddyyyy]{datetime}
+\renewcommand{\dateseparator}{/}  % change time format
+\usepackage[tiny]{titlesec}  % change font size of all section titles
+\usepackage{tocloft}
+\setcounter{tocdepth}{1}  % set depth to only show sections
+\addtocontents{toc}{\cftpagenumbersoff{section}}  % removing page number
+\renewcommand\cftsecfont{\mdseries}  % removing boldface
+\setlength{\cftsecindent}{3ex}  % adding indentations on toc entries
+\setlength{\cftparskip}{-10pt}  % reduce space between section entries
+\setlength{\cftaftertoctitleskip}{18pt}  % adding extra space after content title
+\usepackage{mdframed}
+\renewcommand{\contentsname}{\normalsize Content.}  % change toc title
+
+%% packages - functionality
+\usepackage[scaled]{helvet}  % using Helvetica as sans serif font
+\usepackage[scaled=0.95]{inconsolata}
+\usepackage{latexsym,amsmath,amssymb,amsbsy,amsfonts,mathrsfs,mathtools,arydshln,amsthm}
+\usepackage{enumerate}
+\usepackage{algorithm,algpseudocode}
+\usepackage{graphicx}
+\usepackage[usenames]{xcolor}
+\usepackage{mdframed}   % to box theorem statements
+    \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+% \usepackage{minted}
+%     \usemintedstyle{pastie}
+%     \fvset{frame=lines, framesep=2mm, baselinestretch=1.2, fontsize=\small}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage{cite,natbib}
+% theorem style given by /amsthm/
+\theoremstyle{plain}% default
+\newmdtheoremenv[backgroundcolor=gray!10]{theorem}{Theorem}[section]
+\newmdtheoremenv[backgroundcolor=gray!0]{lemma}[theorem]{Lemma}
+\newmdtheoremenv[backgroundcolor=gray!10]{proposition}[theorem]{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}[section]
+\theoremstyle{definition}
+\newmdtheoremenv[backgroundcolor=gray!10]{definition}{Definition}[section]
+\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+%
+\usepackage{lipsum}
+
+
+%% choose templates to use: Problem Sets or Lecture Notes
+% ------------------------------
+\newif\ifproblemset
+  % \def\ifproblemset{\iftrue}  % use \begin{problem} OR \begin{solution}
+  \def\ifproblemset{\iffalse}  % as article
+% ------------------------------
+
+
+%% sty class definitions
+\makeatletter
+\def\@maketitle{%
+  \begin{center}
+  \bfseries
+  UNIVERSIT\\'{E} DU LUXEMBOURG
+  \end{center}
+  \vspace*{-10pt}
+  \courseno \hfill \semester \par
+  \vspace*{-2pt} \noindent
+  \session\ - \course\footnote{For correspondence \email.} \hfill \@date \par
+  \vspace*{-10pt}\noindent\rule{\textwidth}{0.4pt}
+  \vspace*{4pt}
+  \begin{center}
+    {\large \bfseries \@title}
+  \end{center}
+  \vspace*{12pt}}
+\makeatother
+
+\newcommand{\maketoc}{
+  \begin{mdframed}
+    \vspace*{-1pt}
+    \tableofcontents
+    \vspace*{8pt}
+  \end{mdframed}
+  \vspace*{12pt}}
+
+\newcommand{\makeheader}{%
+  \begin{center}
+  \bfseries
+  UNIVERSIT\\'{E} DU LUXEMBOURG
+  \end{center}
+  \vspace*{-10pt}
+  \courseno \hfill \semester \par
+  \vspace*{-2pt} \noindent
+  \session\ - \course\footnote{For correspondence \email.} \hfill \@date \par
+  \vspace*{-10pt}\noindent\rule{\textwidth}{0.4pt}
+  \vspace*{-2pt}}
+
+\ifproblemset
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\setcounter{secnumdepth}{0}
+\newcounter{homeworkproblemcounter}
+\newcommand{\homeworkproblemname}{}
+\newenvironment{problem}[1][Problem \arabic{homeworkproblemcounter}]{
+  \stepcounter{homeworkproblemcounter}
+  \renewcommand{\homeworkproblemname}{#1}
+  \section{\homeworkproblemname}}{\vspace*{24pt}}
+%\newcommand{\solution}[1]{\medskip\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}\textbf{Solution:\quad}#1\end{minipage}}}
+\newenvironment{solution}{\begin{minipage}{0.98\columnwidth}\noindent\textbf{Solution:\quad}}{\end{minipage}}
+\fi
+
+\newcommand{\makelecture}{%
+  \maketitle
+  \maketoc}
+\newcommand{\makeproblemset}{%
+  \makeheader}
+
+
+%% user-defined information
+\title{${1:title}}
+%\newcommand{\email}{\texttt{zuogong.yue@uni.lu}}
+\newcommand{\email}{\texttt{jorge.goncalves@uni.lu; zuogong.yue@uni.lu}}
+\newcommand{\course}{Practical Bioinformatics}
+\newcommand{\courseno}{MAISB-26/ISB102}
+\newcommand{\semester}{Winter 2015}
+\newcommand{\session}{${2:Exercise 1}}
+\date{\today}
+
+
+%% document body
+\begin{document}
+
+% ------------------------------
+\makelecture  % used to make lecture notes
+% \makeproblemset  % used to make problem sets
+% ------------------------------
+
+% % staring with \section{...} and texts
+
+$0
+
+
+\end{document}

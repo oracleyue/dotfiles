@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: bin python
+# key: py
+# group: oracleyue
+# --
+#!/usr/bin/python

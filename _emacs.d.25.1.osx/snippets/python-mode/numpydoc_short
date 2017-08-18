@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: numpy doc - short
+# key: npdoc
+# group: oracleyue
+# --
+r"""${1:Description}
+
+Parameters
+----------
+$0
+
+Returns
+-------
+
+
+"""

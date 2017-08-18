@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: TikZ Image Preview
+# key: tikz
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{article}
+
+% --- packages ---
+\usepackage{helvet}
+\usepackage[eulergreek]{sansmath}  % sans for math; set "font=\sffamily\sansmath" for node labels
+\renewcommand{\familydefault}{\sfdefault}  % using sans serif as default
+\usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
+
+% --- TikZ/sub-packages, def usetikzlibrary---
+\usepackage{tikz}
+% \usetikzlibrary{shapes,arrows,positioning}
+
+% --- preview setup ---
+\usepackage[graphics,tightpage,active]{preview}
+\setlength{\PreviewBorder}{2pt}
+\PreviewEnvironment{tikzpicture}
+% --- (DO NOT EDIT!) ---
+
+% --- main ---
+\begin{document}
+
+% --- def tikzstyle
+% \tikzstyle{point} = [draw, circle, node distance=2.5cm]
+% \tikzset{auto, node distance=2cm, >=latex'}
+
+% --- tikz main body
+\begin{tikzpicture}[auto, node distance=2cm, >=latex']
+    $0
+
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,220 @@
+# -*- mode: snippet -*-
+# name: Beamer Header (Full)
+# key: beamer-full
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[xcolor={dvipsnames}]{beamer}    % "[handout]" option; by default [presentation]
+% \documentclass[handout]{beamer}
+% \documentclass[notes,handout]{beamer} % "[notes]" print notes
+%\mode<presentation>
+
+% set theme
+% \usetheme[compress]{Berlin}
+% \usetheme{CambridgeUS}
+\usetheme{Madrid}
+% set fonts 
+\usefonttheme{professionalfonts} % using non standard fonts for beamer
+% \usefonttheme[onlymath]{serif} % use serif for math equations
+% \usefonttheme{serif} % default family is serif
+% set margins
+% \setbeamersize{text margin left=15pt,text margin right=15pt}
+% remove navigation buttons at bottom 
+\setbeamertemplate{navigation symbols}{}
+% remove the footline for authors/title/page-numbers
+% \setbeamertemplate{footline}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{footline}{fg=Blue}
+%\setbeamerfont{footline}{series=\bfseries}
+
+% Theme for beamer presentation.
+%\usepackage{beamerthemesplit} 
+% Other themes include: beamerthemebars, beamerthemelined, 
+%                       beamerthemetree, beamerthemetreebars  
+
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{items}[ball]
+%\setbeamertemplate{navigation symbols}{}
+%\setbeamercolor{title}{bg=red!65!black, fg=white}
+
+% use citations (not /biblatex/, beamer's default)
+%-- add bibliography as footnote at each page; \nobibliography{} in the titlepage frame
+\usepackage{bibentry}  % use \footnote{\bibentry{}}
+\bibliographystyle{apalike} % abbrv;apalike
+\newcommand{\footcite}[1]{\footnotetext{\bibentry{#1}}} % put \footnotemark first
+\newcommand{\textcite}[1]{\footnote{\bibentry{#1}}}
+%-- add bibliography at end: use the default /bibtex/ packages
+%-- add bibliography as footnote at each page or at end
+% \usepackage[style=numeric,backend=biber]{biblatex}  % use \footfullcite{} OR \fullcite{}; to compile: latex+biber+latex, NOT bibtex!
+% \addbibresource{./ref/library.bib}
+
+% refine citation styles; use /bibtex/, /bibentry/
+%-- remove the icon
+% \setbeamertemplate{bibliography item}{} % remove file icons
+% \setbeamertemplate{bibliography item}{\insertbiblabel} % if want numbered entries; use 'abbrv'
+%-- remove line breaks
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
+% include packages
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+  \captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+  \setbeamerfont{caption}{size=\scriptsize}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% \usepackage{xcolor}    % beamer load xcolor by default
+  \definecolor{yblue}{RGB}{38,38,134} %{51,51,179}
+\usepackage[ddmmyyyy]{datetime}
+  \renewcommand{\dateseparator}{/}
+\usepackage{hyperref}
+\usepackage{mdframed}   % to box theorem statements; "frame" using "fragile"
+  \mdfdefinestyle{yue}{backgroundcolor=gray!10}
+\usepackage{minted}     % "frame" using "fragile"
+  % \definecolor{bg}{RGB}{39,40,34}
+  % \usemintedstyle{monokai}
+  \usemintedstyle{pastie}
+  \fvset{
+    % frame=lines,
+    % framerule=1pt,
+    framesep=2mm,
+    baselinestretch=1.2,
+    fontsize=\normalsize
+  }    
+\usepackage{tikz}	
+% \usetikzlibrary{shapes,arrows,decorations.pathmorphing,backgrounds,
+%                   positioning,fit,petri,calc,intersections}
+\usepackage{calc}
+
+% General Settings
+\setcounter{footnote}{0}% Reset footnote counter
+\let\SMALL\footnotesize
+\renewcommand*{\footnotesize}{\tiny}
+
+% Input math symbol definitions
+%\input{userdef-mathsymb}
+
+% PDF info
+\hypersetup{
+  pdftitle={},
+  pdfauthor={Zuogong YUE},
+  pdfsubject={Presentation Slides},
+  pdfcreator={Emacs version 24.5 + AUCTeX version 11.89}}
+  
+
+% Title Page
+\title[${2:abbrev title}]{${1:title}}
+\subtitle{${3:}}
+\author[Zuogong Yue]{\vspace*{1mm}\small \\Zuogong Yue${}^1$, Johan Thunberg${}^1$, Jorge Goncalves${}^1$}
+\institute[] % (optional, but mostly needed)
+{\begin{tabular}{ll}
+   ${}^1$ \{University of Luxembourg,\\
+  \hphantom{${}^1$ \}}Luxembourg Centre for System Biomedicine (LCSB),\\
+   \hphantom{${}^1$ \}}Systems Control Group\}\\[2ex]
+   
+    % ${}^2$ \{KTH Royal Institute of Technology,\\
+    % \hphantom{${}^2$ \}}Department of Mathematics,\\
+    % \hphantom{${}^2$ \}}Division of Optimization \& Systems Theory\}   
+\end{tabular}}
+\date % (optional, should be abbreviation of conference name)
+{\hspace*{-11mm}\small 14 July 2016 $\cdot$ MTNS 2016 $\cdot$ Minneapolis, MN}
+
+% Table of Contents before each section
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\begin{document}
+
+% Coordinates for logo in titlepage
+\newlength{\logoX}
+\newlength{\logoY}
+\newcommand{\coordinateWidth}{0.7cm}
+\newcommand{\coordinateHeight}{1.1cm}
+% Creates title page of slide show using above information
+\begin{frame}
+  \begin{tikzpicture}[remember picture,overlay]
+    \setlength{\logoX}{\coordinateWidth}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=.7cm,yshift=0.75cm] at (current page.south west) 
+          {\includegraphics[height=1cm]{figures/lcsb-logo}};
+    \setlength{\logoX}{-\coordinateWidth-1cm}
+    \setlength{\logoY}{\coordinateHeight-0.1cm}
+      \node[xshift=-1.7cm,yshift=0.65cm] at (current page.south east) 
+          {\includegraphics[height=.7cm]{figures/unilu-logo}};
+    \setlength{\logoX}{\coordinateWidth+6.2cm}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=6.9cm,yshift=0.75cm] at (current page.south west) 
+          {\includegraphics[scale=1]{figures/lcsb-ppt-template-line}};
+  \end{tikzpicture}
+
+  \titlepage
+  
+  % enable citations by /bibentry/; as footnote at each page
+  \nobibliography{./ref/library}
+\end{frame}
+                           
+% Add logo in slide template
+%\addtobeamertemplate{frametitle}{}{%
+%\begin{tikzpicture}[remember picture,overlay]
+%  \node[anchor=north east,yshift=2pt] at (current page.north east)
+%      {\includegraphics[height=0.8cm]{figures/lcsb-logo}};
+%\end{tikzpicture}}
+
+%\section[Outline]{}    % To add outline in toc
+%% Comment the following if having added in the preamble
+% \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents
+% \end{frame}
+
+
+% ---- Main Part ----
+
+$0
+
+
+
+% ---- Thanks Frame ----
+\section*{Thanks}
+
+\begin{frame}
+    \vspace*{1cm}
+    \begin{center}
+      {\Huge \bf \textcolor{Magenta}{Thank you!}} \\\
+      \bigskip
+      \bigskip
+      \includegraphics[width=10cm]{figures/unix_happy.jpg}
+    \end{center}
+\end{frame}
+
+
+% ---- Bibliography ----
+% %% using default /bibtex/; adding bibliography at end
+% \begin{frame}[allowframebreaks]%in case more than 1 slide needed
+%   \frametitle{References}
+%     {\footnotesize
+%     \bibliographystyle{apalike} %apalike,abbrv
+%     \bibliography{./ref/library}
+%     }
+% \end{frame}
+
+%% using /bibentry/; adding bibliography as footnote at each page
+% include bibtex libraries in front of any citations; Line 161
+
+
+
+\end{document}

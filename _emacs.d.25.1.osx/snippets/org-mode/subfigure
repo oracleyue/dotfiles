@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: subfigure
+# key: subfig
+# --
+\begin{figure}[!htbp]
+    \centering
+\subfigure[${1:sub-caption1}]{
+    \includegraphics[width=.${2:45}\textwidth]{${3:path1}}
+    \label{fig:${4:label1}}
+}
+\quad
+\subfigure[${5:sub-caption2}]{
+    \includegraphics[width=.${6:45}\textwidth]{${7:path2}}
+    \label{fig:${8:label2}}
+}
+	\caption{${9:caption}}
+\end{figure}

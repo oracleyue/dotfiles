@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Poster Paragraphs
+# key: ypo
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[class=scrreprt]{standalone}
+\usepackage{varwidth} 
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+% \KOMAoptions{fontsize=24pt}   % For equations
+\KOMAoptions{fontsize=14pt}    % For paragraphs, with A0 posters
+% \KOMAoptions{fontsize=12pt}    % For pseudo-codes
+% \KOMAoptions{fontsize=10pt}    % For legends/footnotes, with A0 posters
+\usepackage{times}
+
+\usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
+\usepackage{algorithm, algpseudocode}
+\usepackage{graphics, setspace}
+
+
+\begin{document}
+% reduce space above/below displayed equations
+% \setlength{\abovedisplayskip}{3pt}
+% \setlength{\belowdisplayskip}{3pt}
+
+   %% ================================================
+   % Paragraphs
+   \begin{varwidth}{110mm}   % 110mm
+   % -----------------------
+
+     % Paragraph #1:
+     % --------
+     $0
+          
+   % -----------------------
+   \end{varwidth}
+   
+
+\end{document}

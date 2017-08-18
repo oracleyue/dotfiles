@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: bmatrix
+# key: bm
+# --
+\begin{bmatrix}
+    ${1: a11 & a12 \\\ a21 & a22}
+\end{bmatrix}

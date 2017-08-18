@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: footnotetext
+# key: ft
+# group: macros
+# --
+\footnotetext{$0}

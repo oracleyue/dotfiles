@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: pdfcrop
+# key: pdfcrop
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper]{article}
+\pdfoutput=1
+
+\usepackage{pdfpages}
+
+\begin{document}
+\includepdf[pages=-,noautoscale=true,scale=1.3]{in.pdf}   % more options: 'delta' or 'offset'
+\end{document}

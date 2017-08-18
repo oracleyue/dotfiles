@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: table
+# key: tbl
+# --
+#+CAPTION: ${1:caption}
+#+ATTR_LaTeX: placement [H] :align |${2:c|c}|
+#+LABEL: tbl:${3:label}

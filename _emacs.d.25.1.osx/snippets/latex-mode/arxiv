@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: arxiv
+# key: arxiv
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper]{article}
+\pdfoutput=1 
+\usepackage{pdfpages}
+
+\begin{document}
+\includepdf[pages=1-last]{${1:filename}.pdf}
+\end{document}

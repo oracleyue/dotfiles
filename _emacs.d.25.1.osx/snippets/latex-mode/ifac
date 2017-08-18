@@ -1,0 +1,100 @@
+# -*- mode: snippet -*-
+# name: IFAC Conference
+# key: ifac
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{ifacconf}     % incompatible with {hyperref}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times, helvet}
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage{latexsym, amsmath, amssymb, amsfonts,
+            upgreek, mathrsfs, mathtools}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{empheq}     % to deal with parentheses + subequations
+\usepackage{enumitem}   % [\label=\roman*] or \alph* \arabic*
+
+\usepackage{algorithm, algpseudocode}
+\usepackage{float, graphicx, caption, subcaption}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{natbib}
+
+% THEOREM environment definitions in autart.cls
+% {cor}[thm]{Corollary},    {lem}[thm]{Lemma},      {claim}[thm]{Claim},     {axiom}[thm]{Axiom},
+% {conj}[thm]{Conjecture},  {fact}[thm]{Fact},      {hypo}[thm]{Hypothesis}, {assum}[thm]{Assumption},
+% {prop}[thm]{Proposition}, {crit}[thm]{Criterion}, {defn}[thm]{Definition},
+% {exmp}[thm]{Example},     {rem}[thm]{Remark},     {prob}[thm]{Problem},    {prin}[thm]{Principle},
+% {alg}{Algorithm},         {note}{Note},            {summ}{Summary},        {case}{Case}
+
+% allowing breaks in the inline math mode
+\AtBeginDocument{%
+  \mathchardef\mathcomma\mathcode`\,
+  \mathcode`\,="8000
+}
+{\catcode`,=\active
+  \gdef,{\mathcomma\discretionary{}{}{}}
+}
+
+% command definitions for math symbols
+\input{userdef-mathsymb.tex}
+
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{${1:your title}}
+
+\thanks[footnoteinfo]{
+  This work was supported by Fonds National de la Recherche Luxembourg (9247977).}
+
+\author[Lux]{Zuogong Yue}
+\author[Lux]{(Johan Thunberg)}
+\author[Swe]{(Lennart Ljung)}
+\author[Lux]{Jorge Gon\c{c}alves}
+
+\address[Lux]{Luxembourg Centre for Systems Biomedicine, University of Luxembourg,
+  L-4362, Luxembourg (e-mail: zuogong.yue@uni.lu, johan.thunberg@uni.lu, jorge.goncalves@uni.lu)}
+\address[Swe]{Department of Electrical Engineering, Link\"oping University, Link\"oping, SE-58183, Sweden (e-mail: ljung@isy.liu.se)}
+
+\begin{keyword}
+    bala bala bala
+\end{keyword}
+
+\begin{abstract}
+    bala bala bala
+\end{abstract}
+
+\end{frontmatter}
+
+
+
+% -------------------- MAIN BODY ----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+% -------------------- BIBLIOGRAPHY ----------------------
+% \begin{ack}                               % Place acknowledgements
+%   This work was supported by Fonds National de la Recherche Luxembourg (9247977).
+% \end{ack}
+
+\bibliography{./ref/library}           % and a bib file to produce the
+
+% \appendix
+% \section{Appendix Name}    % Each appendix must have a short title.
+
+
+\end{document}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: addpath relative to the current m-file
+# key: path
+# expand-env: ((yas-indent-line 'fixed))
+# --
+addpath([fileparts(mfilename('fullpath')), '/',...
+         '${1:../repath}'])

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: logging - simple
+# key: logging
+# group: oracleyue
+# --
+## To performing logging
+import logging
+logger = logging.getLogger('${1:FileName}')
