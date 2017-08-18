@@ -4,7 +4,7 @@
 ;(load-theme 'deeper-blue t)
 
 ;; 2) using /solarized/ theme: Ethan Schoonover's theme [github]
-;; To use dark theme and enabled in terminal, use "set-variable" in .emacs
+;; To use dark theme and enabled in terminal, use "set-variable" in .emacs; OR
 ;;(setq frame-background-mode (quote dark))
 ;;!! (setq solarized-termcolors 256)   ;distort colors; do NOT enable
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")

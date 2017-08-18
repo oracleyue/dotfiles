@@ -33,7 +33,7 @@
 (require 'epy-nose)       ;; For nose integration
 
 ; use *IPython*
-(epy-setup-ipython)
+;(epy-setup-ipython)
 
 ; use *flymake* checker
 (epy-setup-checker "pyflakes %f")

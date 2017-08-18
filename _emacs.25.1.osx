@@ -70,7 +70,7 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; theme (more in "emacs-init-basics.el")
-;(load-theme 'tsdh-dark t)
+;(setq frame-background-mode (quote dark))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
