@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: text
-# key: tx
-# group: macros
-# --
-\text{$0}

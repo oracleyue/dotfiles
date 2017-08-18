@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: doxygen full desp. (C)
-# key: dyf
-# expand-env: ((yas-indent-line 'fixed))
-# --
-/*! \brief ${1:brief descriptions}
- *
- * ${2:detailed descriptions} $0
- */

@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: call matlab2tikz
-# key: tikz
-# --
-addpath('./mat2tikz');
-matlab2tikz_run('Huge')
-close(fig_hl)
-system('./mat2tikz/preview.sh')

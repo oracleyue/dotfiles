@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: doxygen member desp. (C++)
-# key: dymc
-# expand-env: ((yas-indent-line 'fixed))
-# --
-//!< ${1:brief description after the member}

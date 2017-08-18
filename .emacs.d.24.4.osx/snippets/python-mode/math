@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: latex wrapper
-# key: math
-# group: oracleyue
-# --
-:math:\`$0\`

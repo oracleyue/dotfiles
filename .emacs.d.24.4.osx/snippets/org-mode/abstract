@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: abstract
-# key: abs
-# --
-#+BEGIN_ABSTRACT
-${1:This is an *abstract* in Org-mode.}
-#+END_ABSTRACT

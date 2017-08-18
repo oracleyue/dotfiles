@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: debug block
-# key: debug
-# group: oracleyue
-# --
-
-# #### For debugging: BEGIN ####
-$0
-# #### For debugging: END ####

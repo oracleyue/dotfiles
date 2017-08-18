@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: logger.warning
-# key: log
-# group: oracleyue
-# --
-logger.warning('$0')

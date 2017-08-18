@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: doxygen brief desp. (C++)
-# key: dyb
-# expand-env: ((yas-indent-line 'fixed))
-# --
-//! ${1:brief description}

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: logger.debug
-# key: log
-# group: oracleyue
-# --
-logger.debug('$0')

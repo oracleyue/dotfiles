@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: operatorname
-# key: op
-# group: macros
-# expand-env: ((yas-indent-line 'fixed))
-# --
-\operatorname{${1:operator}}$0

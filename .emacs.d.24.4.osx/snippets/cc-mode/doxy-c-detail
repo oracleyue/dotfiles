@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: doxygen detailed desp. (C)
-# key: dyd
-# expand-env: ((yas-indent-line 'fixed))
-# --
-/*!
- * ${1:detailed description} $0
- */

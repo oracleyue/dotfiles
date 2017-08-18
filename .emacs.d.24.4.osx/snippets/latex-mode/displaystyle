@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: displaystyle
-# key: disp
-# group: environments
-# expand-env: ((yas-indent-line 'fixed))
-# --
-\displaystyle

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: fancy boxed texts
-# key: frame
-# group: environments
-# expand-env: ((yas-indent-line 'fixed))
-# --
-\begin{mdframed}[style=default]
-    $0
-\end{mdframed}

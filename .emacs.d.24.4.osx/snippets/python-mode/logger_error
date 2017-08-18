@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: logger.error
-# key: log
-# group: oracleyue
-# --
-logger.error('$0')
