@@ -44,11 +44,9 @@
 
 ;; configure /auto-complete/ for C/C++ sources and headers
 ;; -------------------BEGIN-------------------------------
-(require 'auto-complete-c-headers)
-;; /auto-complete-clang/: clang completion for C/C++ [For Mac OS X]
+;; /auto-complete-clang or -async/: clang completion for C/C++ [For Mac OS X]; set on line 74
 ;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
-;; setting for Linux & Mac OS X
-;; note: list include directories by "gcc -xc++ -E -v -"
+;; Note: list include directories by "gcc -xc++ -E -v -"
 (cond
  ((string-equal system-type "gnu/linux")
   (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
@@ -103,15 +101,15 @@
   ;; configuration start
   (cond
    ((string-equal y-clang-complete-type "clang-complete-async")
-        ;;; use /emacs-clang-complete-async/
+    ;; use /emacs-clang-complete-async/
     (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
     (require 'auto-complete-clang-async)
-    (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete-osx")
+    (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
     )
    ((string-equal y-clang-complete-type "clang-complete")
-        ;;; use /emacs-clang-complete/
+    ;; use /emacs-clang-complete/
     (require 'auto-complete-clang)
-    (setq ac-clang-flags ac-clang-cflags)    ;; for /emacs-clang-complete-async
+    (setq ac-clang-flags ac-clang-cflags)  ;; copy cflags from -async to clang-complete
     )
    )
   ;; LIBRARYIES: openmpi, gsl, Eigen, boost, opengl; followed by "/", e.g., <gsl/gsl_math.h>
@@ -140,8 +138,9 @@
   )
  )
 
-(defun oy-ac-clang-config ()
-  ;; auto-complete setting for C/C++ mode
+(require 'auto-complete-c-headers) ;; setup headers completion
+(defun y:ac-clang-config ()
+  ;; auto-complete (sources & headers) setting for C/C++ mode
   ;(setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
   ;; auto-complete C/C++ headers
   (cond
@@ -186,8 +185,8 @@
     (ac-clang-launch-completion-process))
    )
 )
-(add-hook 'c-mode-hook 'oy-ac-clang-config)
-(add-hook 'c++-mode-hook 'oy-ac-clang-config)
+(add-hook 'c-mode-hook 'y:ac-clang-config)
+(add-hook 'c++-mode-hook 'y:ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 ;; setup compile command
 (add-hook 'c-mode-common-hook
@@ -245,6 +244,7 @@
        (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
        ))
 
+
 ;; -------------------------------------------
 ;; Enable major modes for CMake files
 ;; /cmake-mode/: cmake-mode.el
@@ -253,7 +253,6 @@
 (add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
-
 
 
 ;; -------------------------------------------
