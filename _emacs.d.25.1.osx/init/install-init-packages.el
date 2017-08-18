@@ -38,6 +38,7 @@
         pos-tip
         projectile
         smartparens
+        stickyfunc-enhance
         undo-tree
         xcscope
         yasnippet
