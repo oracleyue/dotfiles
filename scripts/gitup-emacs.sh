@@ -9,17 +9,18 @@
 
 # essential bash settings
 sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
+repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # rsync .emacs and .emacs.d to the local git repo
-$sync ~/.emacs ~/Workspace/gitrepo/dotfiles/_emacs.25.1.osx
-$sync ~/.emacs.d/init ~/Workspace/gitrepo/dotfiles/_emacs.d.25.1.osx/
-$sync ~/.emacs.d/git ~/Workspace/gitrepo/dotfiles/_emacs.d.25.1.osx/
-$sync ~/.emacs.d/themes ~/Workspace/gitrepo/dotfiles/_emacs.d.25.1.osx/
-$sync ~/.emacs.d/snippets ~/Workspace/gitrepo/dotfiles/_emacs.d.25.1.osx/
-$sync ~/.emacs.d/default-css ~/Workspace/gitrepo/dotfiles/_emacs.d.25.1.osx/
+$sync ~/.emacs $repopath/_emacs.25.1.osx
+$sync ~/.emacs.d/init $repopath/_emacs.d.25.1.osx/
+$sync ~/.emacs.d/git $repopath/_emacs.d.25.1.osx/
+$sync ~/.emacs.d/themes $repopath/_emacs.d.25.1.osx/
+$sync ~/.emacs.d/snippets $repopath/_emacs.d.25.1.osx/
+$sync ~/.emacs.d/default-css $repopath/_emacs.d.25.1.osx/
 
 # push updates to github.com
-cd ~/Workspace/gitrepo/dotfiles
+cd $repopath
 git add -A
 git commit -m "update emacs config from mac"
 git push
