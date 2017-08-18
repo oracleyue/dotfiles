@@ -42,7 +42,7 @@
 (defun epy-edit-hl-config()
   ;; * /highlight-indentation/ in "epy-editing.el"; face configured in .emacs
   (require 'highlight-indentation)
-  (highlight-indentation)  
+  (highlight-indentation)
   ;; * highlight line; face by default
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)

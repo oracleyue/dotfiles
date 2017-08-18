@@ -5,9 +5,9 @@
 
 ;; Package: /google-c-style/
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-;; Editing Configurations (having set in /google-c-style/)
+;(add-hook 'c-mode-common-hook 'google-set-c-style)
+;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;; modify default google-c-style
     ;(setq-default c-default-style "linux")
     ;(setq-default c-basic-offset 4)
     ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
@@ -34,7 +34,7 @@
        "/usr/bin/cpplint")))
   (flymake-google-cpplint-load))
 ;(add-hook 'c-mode-hook 'y:flymake-google-init)
-(add-hook 'c++-mode-hook 'y:flymake-google-init)
+;(add-hook 'c++-mode-hook 'y:flymake-google-init)
 
 ;; /xcscope/: source cross-referencing tool [need to install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
@@ -43,10 +43,19 @@
 
 ;; configure /company-mode/ for C/C++ sources and headers
 (require 'company-clang)
-(add-to-list 'company-clang-arguments "-I/usr/local/include/eigen3/")
+(add-to-list 'company-clang-arguments "-I/usr/local/include/eigen3")
 ;; use /clang/ and /company-c-headers/
 (require 'company-c-headers)
-(add-to-list 'company-c-headers-path-system "/usr/local/include/c++/6.1.0/")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/x86_64-apple-darwin16.5.0")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/backward")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/include")
+(add-to-list 'company-c-headers-path-system "/usr/local/include")
+(add-to-list 'company-c-headers-path-system "/usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include-fixed")
+(add-to-list 'company-c-headers-path-system "/usr/include")
+(add-to-list 'company-c-headers-path-system "/usr/local/include/eigen3")
+;; setup backends
 (defun y:company-cpp-setup ()
   (setq-local company-backends
               (append '((company-c-headers company-clang company-dabbrev-code))

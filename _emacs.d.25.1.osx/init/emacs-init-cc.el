@@ -5,9 +5,9 @@
 
 ;; Package: /google-c-style/
 (require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-;; Editing Configurations (having set in /google-c-style/)
+;(add-hook 'c-mode-common-hook 'google-set-c-style)
+;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+;; modify google c/c++ styles
     ;(setq-default c-default-style "linux")
     ;(setq-default c-basic-offset 4)
     ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
@@ -34,7 +34,7 @@
        "/usr/bin/cpplint")))
   (flymake-google-cpplint-load))
 ;(add-hook 'c-mode-hook 'y:flymake-google-init)
-(add-hook 'c++-mode-hook 'y:flymake-google-init)
+;(add-hook 'c++-mode-hook 'y:flymake-google-init)
 
 ;; /xcscope/: source cross-referencing tool [need to install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
@@ -71,15 +71,20 @@
  ((string-equal system-type "darwin")
   ;; choose the clang-complete packages
   (setq y-clang-complete-type "clang-complete-async")
-  ;; cflags/flags setting for ac-complete-clang
+  ;; cflags/flags setting for ac-complete-clang-async/..-clang
   (setq ac-clang-cflags       ;; for /emacs-clang-complete-async
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
- /usr/local/include/eigen3
- /usr/local/include/c++
- /usr/local/include/c
+ /usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0
+ /usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/x86_64-apple-darwin16.5.0
+ /usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/backward
+ /usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include
+ /usr/local/Cellar/gcc/7.1.0/include
  /usr/local/include
+ /usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include-fixed
+ /usr/include
+ /usr/local/include/eigen3
                  ")))
   ;; default local include-paths relative to projects' "src" folder
   (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
@@ -178,10 +183,15 @@
                          ;ac-source-words-in-same-mode-buffers))
       )
      )
-    (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c++")
-    (add-to-list 'achead:include-directories '"/usr/local/include/c")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/x86_64-apple-darwin16.5.0")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/backward")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include")
+    (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/lib/gcc/7/gcc/x86_64-apple-darwin16.5.0/7.1.0/include-fixed")
     (add-to-list 'achead:include-directories '"/usr/local/include")
+    (add-to-list 'achead:include-directories '"/usr/include")
+    (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
     (ac-clang-launch-completion-process))
    )
 )
