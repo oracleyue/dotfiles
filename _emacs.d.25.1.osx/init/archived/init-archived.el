@@ -399,3 +399,19 @@
 (defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
   "Format of date to insert with `insert-current-date-time' func
 See help of `format-time-string' for possible replacements")
+
+
+
+
+;; enhance colors for /company-mode/
+;; (when (eq 'solarized (car custom-enabled-themes))
+;;   (set-face-attribute 'company-tooltip nil
+;;                       :background "#fdf7e7")
+;;   (set-face-attribute 'company-tooltip-common nil
+;;                       :inherit font-lock-constant-face)
+;;   (set-face-attribute 'company-tooltip-search nil
+;;                       :foreground "#d33682")
+;;   (set-face-attribute 'company-tooltip-search-selection nil
+;;                       :inherit isearch)
+;;   (set-face-attribute 'company-tooltip-selection nil
+;;                       :inherit font-lock-function-name-face))

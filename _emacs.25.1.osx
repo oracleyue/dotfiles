@@ -1,7 +1,5 @@
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(fill-column 75)
@@ -28,17 +26,11 @@
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:font "DejaVu Sans Mono-13"))))
- '(company-tooltip ((t (:inherit default :background "#fdf7e7"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
- '(company-tooltip-search-selection ((t (:inherit isearch))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
- '(highlight-indent-face ((t (:inherit highlight))))
- '(iedit-occurrence ((t (:inherit lazy-highlight)))))
+; '(highlight-indent-face ((t (:inherit highlight))))
+; '(iedit-occurrence ((t (:inherit lazy-highlight))))
+ )
 
 ;; stop emacs automatically editing .emacs
 ;(setq disabled-command-function nil)
@@ -57,10 +49,12 @@
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;; home path
-(if (string-equal system-type "darwin")
+;; paths
+(if (string-equal system-type "darwin")		; home path
     (setq y:HomePath "/Users/oracleyue/")
   (setq y:HomePath "/home/oracleyue/"))
+(setq y-init-path-prefix "~/.emacs.d/init/")	; init files
+(add-to-list 'load-path "~/.emacs.d/git")	; pkgs from github
 
 ;; enable clipboard in emacs  (only need for emacs in terminal)
 ;(setq x-select-enable-clipboard t)
@@ -69,12 +63,16 @@
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
 
-;; theme (more in "emacs-init-basics.el")
+;; themes
+;; - "solarize"
 ;(setq frame-background-mode (quote dark))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (load-theme 'solarized t)
+;; - "monokai"
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'ymonokai t)
+;; more customizations
+(load (concat y-init-path-prefix "emacs-init-theme"))
 
 ;; set the default browser
 (if (string-equal system-type "darwin")
@@ -86,10 +84,6 @@
 ;;
 ;; global variables for configuration loading
 ;;
-
-;; loading paths
-(setq y-init-path-prefix "~/.emacs.d/init/")
-(add-to-list 'load-path "~/.emacs.d/git")
 
 ;; feature control
 ;; - enable CEDET features
@@ -160,32 +154,30 @@
 
 
 ;;
-;; ------------------- Settings of Modes -------------------
+;; ------------------- Settings of Minor Modes -------------------
 ;;
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Matching a pair of braces and hightlight the contents
-;; (show-paren-mode t)  ;; replaced by /smartparens/; enabled in "custom-set-variables"
+;; ----------------------------------------------
+;; /hl-sexp/: matching a pair of braces and hightlight the contents
 (require 'hl-sexp)
   (add-hook 'lisp-mode-hook 'hl-sexp-mode)
   (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Minior modes for auto-completion (+yas, auto-complete ...)
+;; ----------------------------------------------
+;; Minior modes for auto-completions (+yas, auto-complete ...)
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-ac-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-ac")))  ;; use /auto-complete/
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Insert pairs of parenthesis/brackets: /smartparens/
+;; ----------------------------------------------
+;; /smartparens/: insert pairs of parenthesis/brackets
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 (show-smartparens-global-mode +1)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;;; Enable /linum/ in nlinum lib
-;; [!!WARNING]: it causes org-mode extremely slow when jumping between thousands of lines by Level N headlines.
-;; (global-linum-mode 1)  ; linum-mode causes many bugs
+;; ----------------------------------------------
+;; /linum/: adding line number on left fringe
+;; (global-linum-mode 1)  ; linum-mode causes many bugs: auto-complete popups, orgmode
 ;; align line numbers to the right + padding
 (defun linum-format-func (line)
   (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
@@ -201,12 +193,21 @@
 (add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default for gnome
 (add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default for OS X
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Settings for /bash-completion/: TAB complete alias and functions
+;; ----------------------------------------------
+;; /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)
 (bash-completion-setup)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
+;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
+(require 'iedit)
+(when (eq 'ymonokai (car custom-enabled-themes))
+  (set-face-attribute 'iedit-occurrence nil
+                      :foreground "#272822"
+                      :background "#E6DB74"
+                      :weight 'normal))
+
+;; ----------------------------------------------
 ;; /multiple-cursors/: edit with multiple cursors
 (require 'multiple-cursors)
 ;; mark many occurrences in region
@@ -220,41 +221,39 @@
 ;; others
 ;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
 
+;; ----------------------------------------------
 ;; /expand-region/: increase the selected region by semantic units
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
 (golden-ratio-mode t)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Setting for /Helm/ and plus
+;; ----------------------------------------------
+;; Setting for /Helm/ and extensions
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 
 
 ;;
-;; ------------------- Programming Environment -------------------
+;; General Supports for Programming Environments
 ;;
 
-;;
-;; General Supports for Programming:
-;;
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Version Control by /Magit/
+;; ----------------------------------------------
+;; /magit/: version control
 (global-set-key (kbd "C-c h g") 'magit-status)
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Project Management by /projectile/ and helm addons
+;; ----------------------------------------------
+;; /projectile/: project management and helm addons
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
 ;; Tag Support
 ;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
 ;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (when (string-equal system-type "darwin")
@@ -280,8 +279,8 @@
          (ess-mode . "r")
          )))
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Debugging Support by /GUD/: gdb, pdb
+;; ----------------------------------------------
+;; /gud/: debugging supports, e.g. gdb, pdb
 ;; - usages: "M-x pdb", "M-x gud-gdb"
 ;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
 ;; - notes: keybindings compatible with JetBrains
@@ -293,17 +292,19 @@
 (global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
 
 
+
 ;;
-;; Environments for Programming Languages:
+;; ------------- Major Modes for Programming Languages -----------------
 ;;
-; =======================================
+
+; ===============================================
 ;; Programming Environment for /Lisp/
 ; To make "C-x C-e" pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
 ; To make "M-:" pretty-print; both input and output are in minibuffer
 (global-set-key [remap eval-expression] 'pp-eval-expression)
 ; Use "C-j" in *scratch*; output is in the buffer under the sexp
-;; --------------
+
 ;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 ;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -311,7 +312,7 @@
 ;(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 ;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 ;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-;; --------------
+
 ;; For dialect: MIT/GNU /Scheme/
 (setq scheme-program-name "/usr/local/bin/mit-scheme")
 (require 'xscheme)
@@ -319,12 +320,12 @@
 ;;  - "M-x run-scheme" to invoke the Scheme process
 ;;  - "M-o" to send the buffer to the Scheme process
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /HTML, js/
 ;; candidates: web-mode, emmet-mode, (NOT USED: js2-mode)
 (load (concat y-init-path-prefix "emacs-init-web"))
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /C C++/
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-cc-comp"))  ;; use /company/
@@ -337,19 +338,19 @@
 (add-hook 'c-mode-hook 'y:set-compile-command)
 (add-hook 'c++-mode-hook 'y:set-compile-command)
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /Python/
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-py-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-py")))  ;; use /auto-complete/
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /R/
 (if (string-equal y:ac-mode "company")
     (load (concat y-init-path-prefix "emacs-init-r-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-r")))  ;; use /auto-complete/
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /MATLAB/
 (require 'matlab)
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
@@ -362,14 +363,29 @@
 ;; enable CEDTE feature support
 ;(matlab-cedet-setup)
 
-; =======================================
+; ===============================================
 ;; Programming Environment for /AppleScript/
 (autoload 'applescript-mode "applescript-mode"
   "Major mode for editing AppleScript source." t)
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
-; =======================================
-;; Editing Mode for /Markdown/
+
+
+;;
+;; ------------------- Major Modes for Document Editing -------------------
+;;
+
+; ===============================================
+;; Settings of general /text-mode/
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-off-auto-fill)
+
+; ===============================================
+;; Settings of /Org-mode/
+(load (concat y-init-path-prefix "emacs-init-orgmode"))
+
+; ===============================================
+;; /Markdown/: major mode for Markdown
 ;; Note: require "multimarkdown" or "markdown" in Bash
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
@@ -400,9 +416,8 @@
 ;(add-hook 'markdown-mode-hook (lambda()
 ;          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
 
-
-; =======================================
-;; For /AUCTeX-Mode/
+; ===============================================
+;; /AUCTeX/: major mode for LaTeX
 (load (concat y-init-path-prefix "emacs-init-auctex"))
 ;; fix "C-j" for AucTeX mode
 ;(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
@@ -410,23 +425,14 @@
 
 
 ;;
-;;------------------- Settings of Modes (cont.) -------------------
+;; -------------------------- Obsolete Modes ------------------------
 ;;
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Settings for general /text-mode/
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'turn-off-auto-fill)
-
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-;; Settings for /Org-mode/
-(load (concat y-init-path-prefix "emacs-init-orgmode"))
-
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
 ;; Settings for /Evil-mode/
 ;(load (concat y-init-path-prefix "emacs-init-evil"))
 
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; ----------------------------------------------
 ;; For /ECB/
 ;; [SOURCE]: https://github.com/emacsmirror/ecb
 ;;
@@ -447,22 +453,35 @@
 
 
 ;;
-;; ------------------- More keybindings -------------------
+;; ------------------- Keybindings for Terminals -------------------
 ;;
+
 ;(require 'open-next-line)   ;; if not using /emacs-python/
 ;(global-set-key (kbd "C-o") 'open-next-line)
 
+
+
 ;;
-;; ------------------- Restore Original Settings -------------------
+;; ------------- Restore Original Settings ---------------
 ;;
+
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)
+
 ;; open default Dired folders on startup
-(y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-(y:set-startup-directory)   ; defined in emacs-init-basics.el
-;(cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")  ; for dark-version
+(cond ((string-equal system-type "darwin")
+       (if (string-equal (expand-file-name "~") "/Users/oracleyue")
+           (progn
+             (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
+             (y:set-startup-directory))   ; defined in emacs-init-basics.el
+         (cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")))  ; for dark-version
+      ((string-equal system-type "gnu/linux")
+       (y:dired-open-folders-startup)
+       (y:set-startup-directory)))
+
 ;; restore "F10" to open menu bar
 (global-set-key (kbd "<f10>") 'menu-bar-open)
+
 ;; kill unnecessary buffers
 (kill-buffer "*ESS*")
 (put 'set-goal-column 'disabled nil)

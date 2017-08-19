@@ -172,12 +172,6 @@
 
 
 ;;
-;; Interface Configuration
-;;
-(load (concat y-init-path-prefix "emacs-init-theme"))
-
-
-;;
 ;; Other Settings
 ;;
 

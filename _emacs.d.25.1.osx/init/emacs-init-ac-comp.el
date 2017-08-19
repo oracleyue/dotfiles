@@ -52,6 +52,9 @@
    `(company-tooltip-search-selection ((t (:inherit isearch))))
    `(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-annotation ((t (:inherit font-lock-comment-face
+                                              :slant normal
+                                              :background nil))))
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; showing quick-help doc

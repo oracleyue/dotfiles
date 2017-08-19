@@ -21,9 +21,6 @@
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-;; Package: /iedit/; default key "C-c ;"
-(require 'iedit)
-
 ;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
 ; let's define a function for flymake initialization
 (defun y:flymake-google-init ()

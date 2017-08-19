@@ -44,9 +44,12 @@
 
 ; Edit: *indentation and line highlight*
 (defun epy-edit-hl-config()
-  ;; * /highlight-indentation/ in "epy-editing.el"; face configured in .emacs
+  ;; * /highlight-indentation/ in "epy-editing.el"
   (require 'highlight-indentation)
   (highlight-indentation)
+  (when (eq 'ymonokai (car custom-enabled-themes))
+    (set-face-attribute 'highlight-indent-face nil
+                        :background "#49483E"))
   ;; * highlight line; face by default
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)
