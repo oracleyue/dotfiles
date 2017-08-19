@@ -27,8 +27,7 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If there is more than one, they won't work right.
- '(default ((t (:font "DejaVu Sans Mono-13"))))   ;; 13(mac), 10.5/12(linux)
- )
+ '(default ((t (:font "DejaVu Sans Mono-13")))))   ;; 13(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 ;(setq disabled-command-function nil)
@@ -36,8 +35,8 @@
 ;(load custom-file 'noerror)
 
 ;; frame size
-(add-to-list 'default-frame-alist '(width . 96))
-(when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 33 in Thinkpad
+(setq default-frame-alist '((width . 96) (height . 36)))
+;; Notes: (96,36) in Mac; 33 in Thinkpad
 
 ;; encoding
 (set-default-coding-systems 'utf-8)

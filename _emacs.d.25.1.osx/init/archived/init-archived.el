@@ -415,3 +415,7 @@ See help of `format-time-string' for possible replacements")
 ;;                       :inherit isearch)
 ;;   (set-face-attribute 'company-tooltip-selection nil
 ;;                       :inherit font-lock-function-name-face))
+
+
+;(add-to-list 'default-frame-alist '(width . 96))
+(when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 33 in Thinkpad

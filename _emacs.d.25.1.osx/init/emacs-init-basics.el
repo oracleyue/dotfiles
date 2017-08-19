@@ -3,6 +3,7 @@
 ;; ----------------------------------------------------------------------
 ;; BASIC USAGES
 ;; ---------------
+;; move cursor to the top/middle/bottom of the current window
 ;; insert-file: "C-x i"
 ;; write-file, save-as: "C-x w"
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
@@ -79,8 +80,9 @@
 ;;      - list all available encodings with "M-x list-coding-systems"
 ;; change End-of-Line:
 ;;      - "M-x set-buffer-file-coding-system utf-8-unix" or use "C-x RET f"
+;; open the *Messages* buffer :: "C-h e"
 ;;
-;; <16 Aug 2017>
+;; 20 Aug 2017
 ;; ----------------------------------------------------------------------
 
 
