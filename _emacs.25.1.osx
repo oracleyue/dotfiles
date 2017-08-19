@@ -28,8 +28,6 @@
  ;; custom-set-faces was added by Custom.
  ;; If there is more than one, they won't work right.
  '(default ((t (:font "DejaVu Sans Mono-13"))))
-; '(highlight-indent-face ((t (:inherit highlight))))
-; '(iedit-occurrence ((t (:inherit lazy-highlight))))
  )
 
 ;; stop emacs automatically editing .emacs
