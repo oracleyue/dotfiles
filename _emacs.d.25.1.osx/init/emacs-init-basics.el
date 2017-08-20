@@ -6,6 +6,7 @@
 ;; move cursor to the top/middle/bottom of the current window
 ;; insert-file: "C-x i"
 ;; write-file, save-as: "C-x w"
+;; open-file in read-only: "C-x C-r"
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; changing encodings: "C-x C-m f"

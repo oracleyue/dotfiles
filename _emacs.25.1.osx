@@ -296,11 +296,15 @@
 
 ; ===============================================
 ;; Programming Environment for /Lisp/
-; To make "C-x C-e" pretty-print; output is shown in minibuffer
+;; Use "C-j" in *scratch*; output is in the buffer under the sexp
+;; use "C-h e" to open *Message* buffer for elisp printout
+;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
-; To make "M-:" pretty-print; both input and output are in minibuffer
-(global-set-key [remap eval-expression] 'pp-eval-expression)
-; Use "C-j" in *scratch*; output is in the buffer under the sexp
+;; Keybindings for eval expressions (default: "C-x C-e" eval last S-expr)
+(define-key emacs-lisp-mode-map (kbd "C-c C-l") 'eval-last-sexp)
+(define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
 ;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
