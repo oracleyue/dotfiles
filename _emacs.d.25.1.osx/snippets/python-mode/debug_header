@@ -1,17 +1,8 @@
 # -*- mode: snippet -*-
-# name: simple template
-# key: head
+# name: debug header
+# key: debug
 # group: oracleyue
 # --
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""$1
-"""
-
 # To perform debugging
 # import pdb
 # pdb.set_trace()
-
-
-$0
