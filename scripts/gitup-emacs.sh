@@ -12,9 +12,10 @@ sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
 repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # rsync .emacs and .emacs.d to the local git repo
-$sync ~/.emacs $repopath/_emacs.25.1.osx
+# $sync ~/.emacs $repopath/_emacs.25.1.osx
 $sync ~/.emacs.d/init $repopath/_emacs.d.25.1.osx/
-$sync --exclude="clang-complete-async/clang-complete" ~/.emacs.d/git $repopath/_emacs.d.25.1.osx/
+$sync --exclude="clang-complete" --exclude="*.pyc" \
+      ~/.emacs.d/git $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/themes $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/default-css $repopath/_emacs.d.25.1.osx/
