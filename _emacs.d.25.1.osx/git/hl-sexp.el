@@ -63,7 +63,6 @@
      (:background "#40E0D0"))
     (((class color) (background dark))
      ;(:background "gray10"))
-     ;(:background "#444444")) ; oracleyue, modified
      (:background "#383830"))
     (t (:bold t)))
   "Face used to fontify the sexp you're looking at."

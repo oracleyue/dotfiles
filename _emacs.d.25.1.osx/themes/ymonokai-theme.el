@@ -143,7 +143,6 @@ Takes and optional `FRAME' as reference."
          ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
          (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
          (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
-         ;(ymonokai-hl-line-y   (if (in-terminal) "#212121" "#585858"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
          (ymonokai-hl       (if (in-terminal) "#303030" "#49483E"))
          (ymonokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
          (ymonokai-comments (if (in-terminal) "#8B8878" "#75715E"))
@@ -180,7 +179,6 @@ Takes and optional `FRAME' as reference."
                              ymonokai-bg ymonokai-fg))
          (s-mode-line-bg (if ymonokai-high-contrast-mode-line
                              ymonokai-fg ymonokai-hl-line))
-                             ;ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
          (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
                                        'unspecified green))
          (s-mode-line-inactive-fg (if ymonokai-high-contrast-mode-line
@@ -225,7 +223,6 @@ Takes and optional `FRAME' as reference."
 
      `(highlight
        ((,class (:background ,ymonokai-hl))))
-                 ;:inherit lazy-highlight))))    ;oracleyue, modified
 
      `(link
        ((,class (:foreground ,blue
@@ -1733,8 +1730,6 @@ Takes and optional `FRAME' as reference."
 
      `(helm-grep-match                ; used for find-file-grep & occur
        ;((,class (:inherit match))))
-       ;((,class (:inherit isearch))))   ;oracleyue, modified
-       ;((,class (:inherit lazy-highlight))))      ;oracleyue, modified
        ((,class (:foreground ,magenta
                              :background ,ymonokai-bg))))      ;oracleyue, modified
 
@@ -1767,7 +1762,6 @@ Takes and optional `FRAME' as reference."
 
      `(helm-selection
        ((,class (:background ,region-bg        ;oracleyue, default "ymonokai-hl"
-                             ;:foreground ,red            ;oracleyue, added
                              :underline t))))    ;oracleyue, modified, default "t"
 
      `(helm-selection-line
@@ -2532,28 +2526,22 @@ Takes and optional `FRAME' as reference."
                              ;; :inherit 'fixed-pitch     ; oracleyue: added
                              ))))
      `(org-document-info-keyword     ; oracleyue: added
-       ((,class (:foreground ,ymonokai-comments
-     ;; :inherit 'fixed-pitch           ; oracleyue: added
-                             ))))
+       ((,class (:foreground ,ymonokai-comments))))
 
      `(org-block
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments))))
+       ((,class (:foreground ,ymonokai-comments))))
 
-     ;; `(org-block-background                    ; oracleyue: added
-     ;;   ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-     ;;             :inherit 'fixed-pitch))))     ; oracleyue: added
+     `(org-block-background                    ; oracleyue: added
+       ((,class (:inherit 'fixed-pitch
+                          :foreground ,blue
+                          :background "#383830"))))
 
      `(org-block-begin-line
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments
+       ((,class (:foreground ,ymonokai-comments
                           :slant italic))))
+
      `(org-block-end-line                              ; oracleyue: added
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments
+       ((,class (:foreground ,ymonokai-comments
                           :slant italic))))
 
      `(org-checkbox
@@ -2561,15 +2549,12 @@ Takes and optional `FRAME' as reference."
                              :foreground ,ymonokai-fg
                              :box (:line-width 1 :style released-button)))))
 
-     `(org-code
+     `(org-code   ; oracleyue: modified; for the coeds enclosed by "~"
        ;; ((,class (:foreground ,ymonokai-comments))))
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,green))))   ; oracleyue: modified, default as commented; for the coeds enclosed by "~"
-     `(org-verbatim
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,blue))))    ; oracleyue: added; for the codes enclosed by "="
+       ((,class (:foreground ,blue))))
+
+     `(org-verbatim  ; oracleyue: added; for the codes enclosed by "="
+       ((,class (:foreground ,green))))
 
      `(org-date
        ((,class (:foreground ,blue :underline t))))
@@ -2657,8 +2642,7 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(org-table
-       ((,class (
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
+       ((,class (;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,green))))
 
      `(org-tag
@@ -3668,9 +3652,6 @@ Takes and optional `FRAME' as reference."
      'ymonokai
      `(ansi-color-names-vector [,ymonokai-bg ,red ,green ,yellow
                                             ,blue ,magenta ,cyan ,ymonokai-fg])
-
-     ;; oracleyue: added
-     ;`(linum-format " %d ")
 
      ;; compilation
      `(compilation-message-face 'default)
