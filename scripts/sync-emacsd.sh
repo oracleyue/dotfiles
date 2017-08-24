@@ -9,5 +9,5 @@ sed 's/Mono-13/Mono-15/' ~/.emacs > ~/bin/HomeDark/.emacs
 rsync -rlptD -P --exclude=.DS_Store --delete ~/.emacs.d ~/bin/HomeDark/
 
 # emacs with auto-complete
-sed 's/Mono-13/Mono-15/' ~/.emacs > ~/bin/HomeDark/.emacs
+sed 's/Mono-13/Mono-15/' ~/.emacs > ~/bin/HomeAutoCompl/.emacs
 rsync -rlptD -P --exclude=.DS_Store --delete ~/.emacs.d ~/bin/HomeAutoCompl/

@@ -11,6 +11,7 @@
         company-quickhelp
         csv-mode
         dash
+        direx
         emmet-mode
         ess
         expand-region

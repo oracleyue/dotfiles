@@ -1,10 +1,13 @@
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(fill-column 75)
  '(flymake-google-cpplint-command
-   (if (string-equal system-type "darwin")
+   (if
+       (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
  '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
@@ -16,7 +19,7 @@
      ("\\.pdf\\'" . "open %s"))))
  '(package-selected-packages
    (quote
-    (zeal-at-point yasnippet xcscope stickyfunc-enhance smartparens multiple-cursors matlab-mode magit key-combo js2-mode jedi iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint expand-region evil-leader etags-table ess emmet-mode csv-mode company-jedi company-c-headers bash-completion auto-complete-clang auto-complete-c-headers)))
+    (direx zeal-at-point yasnippet xcscope stickyfunc-enhance smartparens multiple-cursors matlab-mode magit key-combo js2-mode jedi iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint expand-region evil-leader etags-table ess emmet-mode csv-mode company-jedi company-c-headers bash-completion auto-complete-clang auto-complete-c-headers)))
  '(scroll-bar-mode nil)
  '(tab-stop-list
    (quote
@@ -25,8 +28,17 @@
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:font "DejaVu Sans Mono-13"))))) ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-13"))))
+ '(company-tooltip ((t (:inherit default :background "#fdf7e7"))))
+ '(company-tooltip-annotation ((t (:inherit font-lock-comment-face :slant normal :background nil))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
+ '(company-tooltip-search-selection ((t (:inherit isearch))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face)))))
+ ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 ;(setq disabled-command-function nil)

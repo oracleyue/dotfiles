@@ -22,7 +22,7 @@
 
 
 ;;
-;; Setup /emacs-for-python/ major modes (IDE)
+;; Python Major Mode /emacs-for-python/
 ;;
 
 (add-to-list 'load-path "~/.emacs.d/git/emacs-for-python/")  ;; "epy-init" load all
@@ -49,3 +49,8 @@
 (add-hook 'python-mode-hook 'y:company-py-setup)
 ;; set calltip methods
 (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
+
+;; source code viewer via /jedi-direx/
+(eval-after-load "python"
+  '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
+(add-hook 'jedi-mode-hook 'jedi-direx:setup)
