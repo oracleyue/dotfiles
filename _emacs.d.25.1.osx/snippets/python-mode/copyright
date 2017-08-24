@@ -4,5 +4,5 @@
 # group: oracleyue
 # expand-env: ((yas-indent-line 'fixed))
 # --
-# Copyright [${1:2017}] <${2:oracleyue}>
-$0
+# Copyright [${1:2017}] <oracleyue>
+# Last modified on $0
