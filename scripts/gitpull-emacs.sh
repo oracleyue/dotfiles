@@ -15,7 +15,7 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles'
 cd $repopath && git pull && cd ~
 
 # rsync .emacs and .emacs.d from github repo
-# $sync $repopath/_emacs.25.1.osx ~/.emacs
+$sync $repopath/_emacs.25.1.osx ~/.emacs
 $sync $repopath/_emacs.d.25.1.osx/init ~/.emacs.d/
 $sync --exclude="clang-complete" --exclude="*.pyc" \
       $repopath/_emacs.d.25.1.osx/git ~/.emacs.d/
