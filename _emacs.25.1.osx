@@ -27,7 +27,7 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If there is more than one, they won't work right.
- '(default ((t (:font "DejaVu Sans Mono-13")))))   ;; 13(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-13"))))) ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 ;(setq disabled-command-function nil)
@@ -36,7 +36,9 @@
 
 ;; frame size
 ;; notes: (96,36) in Mac; 33 in Thinkpad
-(setq default-frame-alist '((width . 96) (height . 36)))
+(if (string-equal system-type "darwin")
+    (setq default-frame-alist '((width . 96) (height . 36)))
+  (setq default-frame-alist '((width . 96) (height . 33))))
 (set-frame-size (selected-frame)
                 (cdr (assoc 'width default-frame-alist))
                 (cdr (assoc 'height default-frame-alist)))
@@ -64,13 +66,13 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; themes
-;; - "solarize"
-;(setq frame-background-mode (quote dark))
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-(load-theme 'solarized t)
-;; - "monokai"
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'ymonokai t)
+(if (string-equal (expand-file-name "~") "/Users/oracleyue")  ;; mac+home
+    (progn
+      ;(setq frame-background-mode (quote dark))
+      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+      (load-theme 'solarized t))
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")   ;; others
+  (load-theme 'ymonokai t))
 ;; more customizations
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
@@ -96,9 +98,12 @@
 (setq y-enable-cedet-source-info y:flags)  ; for /cedet-source-info/
 
 ;; - select package for auto-completion
-(if (string-equal system-type "darwin")
-    (setq y:ac-mode "company")
-  (setq y:ac-mode "auto-complete"))
+(cond ((string-equal system-type "darwin")
+       (if (string-equal (expand-file-name "~") "/Users/oracleyue/bin/HomeAutoCompl")
+           (setq y:ac-mode "auto-complete")
+         (setq y:ac-mode "company")))
+      ((string-equal system-type "gnu/linux")
+       (setq y:ac-mode "auto-complete")))
 
 ;; suppress redefinition warnings
 (setq ad-redefinition-action 'accept)
@@ -228,8 +233,9 @@
 
 ;; ----------------------------------------------
 ;; Setting for /golden-ratio/
-(require 'golden-ratio)
-(golden-ratio-mode t)
+(when (string-equal (expand-file-name "~") "/Users/oracleyue")
+  (require 'golden-ratio)
+  (golden-ratio-mode t))
 
 ;; ----------------------------------------------
 ;; Setting for /Helm/ and extensions
