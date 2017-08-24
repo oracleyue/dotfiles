@@ -1,43 +1,16 @@
-;; ibuffer by default
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+;; Notes: having been modified by oracleyue.
+;; Last modified on 24 Aug 2017
 
-;; Ido mode with fuzzy matching
-;(require 'ido)
-;(ido-mode t)
-;(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+
+;; Ibuffer by default
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (require 'smart-operator)
 
 ;; Open Next Line
 (require 'open-next-line)
 
-;; Auto Completion
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories
-	     (concat epy-install-dir "auto-complete/ac-dict"))
-(ac-config-default)
-
-(when epy-load-yasnippet-p
-  ;; Yasnippet - force the loading of the custom version of yasnippet
-  (require 'yasnippet (concat epy-install-dir "extensions/yasnippet/yasnippet"))
-  (load-file (concat epy-install-dir "extensions/snippet-helpers.el"))
-
-  ;; this one is to activate django snippets
-  (defun epy-django-snippets ()
-    "Load django snippets"
-    (interactive)
-    (and epy-load-yasnippet-p
-	 (yas/load-directory (concat epy-install-dir "snippets/django"))))
-
-  (yas/initialize)
-  (yas/load-directory (concat epy-install-dir "extensions/yasnippet/snippets"))
-  (setq yas/prompt-functions '(yas/dropdown-prompt yas/ido-prompt yas/x-prompt))
-  (setq yas/wrap-around-region 'cua))
-
-;; Eproject project management with emacs
-;(require 'eproject)   ;; oracleyue: commened
-
-;; code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
+;; Code borrowed from http://emacs-fu.blogspot.com/2010/01/duplicating-lines-and-commenting-them.html
 (defun djcb-duplicate-line (&optional commentfirst)
   "comment line at point; if COMMENTFIRST is non-nil, comment the
 original" (interactive)
@@ -52,23 +25,13 @@ original" (interactive)
     (forward-line -1)))
 
 ;; duplicate a line
-(global-set-key (kbd "C-c y") 'djcb-duplicate-line)
+(define-key python-mode-map (kbd "C-c y") 'djcb-duplicate-line) ;oracleyue
 
 ;; duplicate a line and comment the first
-(global-set-key (kbd "C-c c")(lambda()(interactive)(djcb-duplicate-line t)))
+(define-key python-mode-map (kbd "C-c c")
+  (lambda()  (interactive)(djcb-duplicate-line t)))  ;oracleyue
 
-;; Mark whole line
-(defun mark-line (&optional arg)
-  "Marks a line"
-  (interactive "p")
-  (beginning-of-line)
-  (push-mark (point) nil t)
-  (end-of-line))
-
-(global-set-key (kbd "C-c l") 'mark-line)
-
-
-; code copied from http://stackoverflow.com/questions/2423834/move-line-region-up-and-down-in-emacs
+;; Code copied from http://stackoverflow.com/questions/2423834/move-line-region-up-and-down-in-emacs
 (defun move-text-internal (arg)
   (cond
    ((and mark-active transient-mark-mode)
@@ -153,10 +116,8 @@ original" (interactive)
 	      'balle-python-shift-right)
 	    (define-key python-mode-map (kbd "M-<left>")
 	      'balle-python-shift-left)
-	    (define-key python-mode-map (kbd "C-c C-b") 
-	      'python-shell-send-block))
-	  )
-
+	    (define-key python-mode-map (kbd "C-c C-b")
+	      'python-shell-send-block)))
 
 
 ;; Other useful stuff
@@ -164,19 +125,21 @@ original" (interactive)
 ; delete seleted text when typing
 (delete-selection-mode 1)
 
-;; highlight current line
-;(global-hl-line-mode 1)
-;(set-face-background 'hl-line "seashell2") ;; Nice color
-
 ; highlight brackets
-(show-paren-mode t)
+;(show-paren-mode t)
 
-;; Highlight indentation
-;(require 'highlight-indentation)
-;(add-hook 'python-mode-hook 'highlight-indentation)
+; highlight current line & highlight indentation
+(defun epy-edit-hl-config()
+  ;; highlight indentation
+  (require 'highlight-indentation)
+  (highlight-indentation)
+  (when (eq 'ymonokai (car custom-enabled-themes))
+    (set-face-attribute 'highlight-indent-face nil
+                        :background "#49483E"))
+  ;; highlight current line
+  (hl-line-mode t))
+(add-hook 'python-mode-hook 'epy-edit-hl-config)
 
-;; Line numbering
-;(setq linum-format "%4d")
-;(global-linum-mode 1)
+
 
 (provide 'epy-editing)

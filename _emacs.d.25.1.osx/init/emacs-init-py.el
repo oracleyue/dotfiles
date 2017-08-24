@@ -28,9 +28,9 @@
 (add-to-list 'load-path "~/.emacs.d/git/emacs-for-python/")
 (require 'epy-setup)      ;; It will setup other loads, it is required!
 (require 'epy-python)     ;; If you want the python facilities [optional]
-;;(require 'epy-completion) ;; If you want the autocompletion settings [optional] ;; use /jedi/
-;(require 'epy-editing)    ;; For configurations related to editing [optional]
-;(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+;; (require 'epy-completion) ;; use /jedi/ instead
+(require 'epy-editing)    ;; For configurations related to editing [optional]
+(require 'epy-bindings)   ;; For my suggested keybindings [optional]
 ;(require 'epy-nose)       ;; For nose integration
 
 ; use *IPython*
@@ -59,7 +59,7 @@
 
 ; adding snippets in /emacs-for-python/ when use the default yasnippets
 ;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again
-(add-to-list 'yas-snippet-dirs "~/.emacs.d/git/emacs-for-python/extensions/yasnippet/snippets")
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/git/emacs-for-python/snippets")
 
 ; fix bugs in ac due to line wrap
 (add-hook 'python-mode-hook (lambda ()

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: time stamp
+# key: ts
+# expand-env: ((yas-indent-line 'fixed))
+# --
+Last modified on $0

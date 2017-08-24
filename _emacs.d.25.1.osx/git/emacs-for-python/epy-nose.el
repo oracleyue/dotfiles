@@ -10,8 +10,7 @@
             (local-set-key "\C-cx" 'nosetests-stop)
             (local-set-key "\C-cpa" 'nosetests-pdb-all)
             (local-set-key "\C-cpm" 'nosetests-pdb-module)
-            (local-set-key "\C-cp." 'nosetests-pdb-one))
-          )
+            (local-set-key "\C-cp." 'nosetests-pdb-one)))
 
 
 (provide 'epy-nose)

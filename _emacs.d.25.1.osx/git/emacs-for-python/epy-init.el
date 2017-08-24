@@ -5,8 +5,7 @@
   (file-name-directory (or load-file-name
                            (when (boundp 'bytecomp-filename) bytecomp-filename)
                            buffer-file-name))
-  "Installation directory of emacs-for-python"
-)
+  "Installation directory of emacs-for-python")
 
 (add-to-list 'load-path epy-install-dir)
 (require 'epy-setup)
