@@ -8,7 +8,7 @@ Xft.antialias: 1
 !----------xterm配置----------
 !外观
 xterm*termName: xterm-256color
-xterm*geometry: 80x24
+xterm*geometry: 80x27
 xterm*scrollBar: false
 xterm*loginshell: false
 xterm*background: black
@@ -17,9 +17,6 @@ xterm*cursorBlink: true
 xterm*cursorOffTime: 600
 xterm*cursorOnTime: 600
 
-xterm*saveLines: 4096
-xterm*scrollKey: true
-
 !语言和字体
 xterm*utf8: 1
 xterm*locale: true
@@ -27,8 +24,8 @@ xterm*utf8Title: true
 xterm*renderFont: true
 xterm*preeditType: Root
 xterm*xftAntialias: true
-xterm*faceName: DejaVu Sans Mono:pixelsize=13
-!xterm*faceName: Droid Sans Mono:pixelsize=13
+!xterm*faceName: DejaVu Sans Mono:pixelsize=13
+xterm*faceName: Noto Mono:pixelsize=13
 xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=13
 
 !tango颜色搭配
@@ -58,7 +55,5 @@ xterm*metaSendsEscape: true
 !    Shift <KeyRelease>:insert-seven-bit()
 
 !粘贴
-xterm*selectToClipboard: true 
-!xterm*VT100.Translations: #override \n\
-!    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY,CLIPBOARD, CUT_BUFFER0)
-
+xterm*VT100.Translations: #override \n\
+    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY,CLIPBOARD,CUT_BUFFER0)
