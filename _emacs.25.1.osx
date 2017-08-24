@@ -35,8 +35,11 @@
 ;(load custom-file 'noerror)
 
 ;; frame size
+;; notes: (96,36) in Mac; 33 in Thinkpad
 (setq default-frame-alist '((width . 96) (height . 36)))
-;; Notes: (96,36) in Mac; 33 in Thinkpad
+(set-frame-size (selected-frame)
+                (cdr (assoc 'width default-frame-alist))
+                (cdr (assoc 'height default-frame-alist)))
 
 ;; encoding
 (set-default-coding-systems 'utf-8)
