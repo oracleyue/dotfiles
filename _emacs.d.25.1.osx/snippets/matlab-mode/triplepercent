@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: comments - triple percent signs
+# key: ct
+# group: comments
+# --
+%
+% $0
+%

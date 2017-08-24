@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: function header
 # key: head
-# group: oracleyue
+# group: headers
 # expand-env: ((yas-indent-line 'fixed))
 # --
 % ${1:FUNCTION_NAME a short descriptions of the function}

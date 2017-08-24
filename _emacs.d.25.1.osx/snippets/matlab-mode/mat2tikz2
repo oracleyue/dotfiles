@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: Matlab2TikZ in MATLAB
-# key: mat2tikz
-# group: templates
+# name: call matlab2tikz
+# key: tikz
 # expand-env: ((yas-indent-line 'fixed))
 # --
 matlab2tikz('Test2.tikz', ...

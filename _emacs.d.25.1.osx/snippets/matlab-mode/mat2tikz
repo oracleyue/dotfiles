@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: call matlab2tikz
+# name: call matlab2tikz wraper
 # key: tikz
 # --
 addpath('./mat2tikz');

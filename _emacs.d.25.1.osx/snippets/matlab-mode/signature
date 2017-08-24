@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: signature
 # key: sig
-# group: oracleyue
+# group: headers
 # expand-env: ((yas-indent-line 'fixed))
 # --
 % Copyright (c) ${1:2014-2017}, Zuogong YUE
