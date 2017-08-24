@@ -28,6 +28,7 @@
         iedit
         jedi
         jedi-core
+        jedi-direx
         js2-mode
         julia-mode
         key-combo
@@ -36,6 +37,7 @@
         matlab-mode
         multiple-cursors
         popup
+        popwin
         pos-tip
         projectile
         smartparens

@@ -7,17 +7,14 @@
 ;;   - shift selected blocks "C-c >", "C-c <"
 ;;   - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
 ;;
+;; *source navigation*
+;;   - /jedi-direx/: source viewer, "C-c v"
+;;   - see /jedi/ below
+;;
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
-;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts; then evaluate buffer in iPython
-;;
-;; *rope refactorings*:
-;;   - "C-x p o" open rope project
-;;   - "C-x p f" find file in rope project
-;;   - "C-c d" python doc for module/method
-;;   - "C-c g" go to definition
-;;   - "C-c f" find occurencies
-;;   - "C-c r r" refactoring rename
+;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts;
+;;     then evaluate buffer in iPython
 
 
 
@@ -35,8 +32,9 @@
 ;;(require 'epy-completion)    ;; disabled; use /jedi/ instead
 (require 'epy-nose)            ;; nose integration
 
-(epy-setup-ipython)  ; use *IPython*
+(setq python-shell-interpreter "ipython") ; default ac settings in "python.el"
 (epy-setup-checker "pyflakes %f")  ; use *flymake* checker
+
 
 
 ;;

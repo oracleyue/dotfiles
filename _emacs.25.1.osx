@@ -1,13 +1,10 @@
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(fill-column 75)
  '(flymake-google-cpplint-command
-   (if
-       (string-equal system-type "darwin")
+   (if (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
  '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
@@ -17,32 +14,19 @@
      ("\\.mm\\'" . default)
      ("\\.x?html?\\'" . "open %s")
      ("\\.pdf\\'" . "open %s"))))
- '(package-selected-packages
-   (quote
-    (direx zeal-at-point yasnippet xcscope stickyfunc-enhance smartparens multiple-cursors matlab-mode magit key-combo js2-mode jedi iedit htmlize helm-swoop helm-projectile helm-gtags google-c-style golden-ratio function-args flymake-google-cpplint expand-region evil-leader etags-table ess emmet-mode csv-mode company-jedi company-c-headers bash-completion auto-complete-clang auto-complete-c-headers)))
  '(scroll-bar-mode nil)
  '(tab-stop-list
-   (quote
-    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+   (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
  '(tool-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:font "DejaVu Sans Mono-13"))))
- '(company-tooltip ((t (:inherit default :background "#fdf7e7"))))
- '(company-tooltip-annotation ((t (:inherit font-lock-comment-face :slant normal :background nil))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-search ((t (:inherit default :foreground "#d33682"))))
- '(company-tooltip-search-selection ((t (:inherit isearch))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face)))))
- ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-12"))))) ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
-;(setq disabled-command-function nil)
-;(setq custom-file "~/.emacs-custom.el")
+(setq disabled-command-function nil)
+(setq custom-file "~/.emacs-custom.el")
 ;(load custom-file 'noerror)
 
 ;; frame size
@@ -99,7 +83,7 @@
 ;;
 
 ;; feature control
-;; - enable CEDET features
+;; - enable/disable CEDET features
 (if (string-equal system-type "darwin")
     (setq y:flags "no")
   (setq y:flags "yes"))
@@ -133,34 +117,11 @@
     (package-initialize)
     ;; list for package-archives
     (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    ;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-    ;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-    )
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 ;; Install Required Packages (run only once)
-;(load (concat y-init-path-prefix "install-init-packages"))
+(load (concat y-init-path-prefix "install-init-packages"))
 ;; ---------------------------------------------------------
 
-;;
-;; Configuring /Dired/ in OSX
-;;
-(cond
- ((string-equal system-type "darwin")
-  (setq insert-directory-program "/usr/local/bin/gls")
-  ;(setq dired-use-ls-dired nil)
-  (setq dired-listing-switches "-ahl --color=always --group-directories-first")
-  ))
-(add-hook 'dired-load-hook
-          (lambda ()
-            (require 'dired-x)
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory")
-            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
-            (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
-            (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
-            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (dired-omit-mode 1)))
 
 ;;
 ;; Load basic configurations for Emacs
@@ -202,7 +163,6 @@
      (propertize (format (format " %%%dd " w) line) 'face 'linum)))
 (setq linum-format 'linum-format-func)
 ;; enable linum-mode
-;(add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'sh-mode-hook 'linum-mode)
 (add-hook 'matlab-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'linum-mode)
@@ -444,6 +404,45 @@
 (load (concat y-init-path-prefix "emacs-init-auctex"))
 ;; fix "C-j" for AucTeX mode
 ;(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
+
+
+
+;;
+;; ------------------- Other Major Modes -------------------
+;;
+
+; ===============================================
+;; Directory Explorers
+
+;; Regular explorers: /dired/ and /dired-x/
+;; fix file listing in osx
+(when (string-equal system-type "darwin")
+  (setq insert-directory-program "/usr/local/bin/gls")
+  (setq dired-listing-switches "-ahl --color=always --group-directories-first"))
+;; omit file extensions
+(add-hook 'dired-load-hook
+          (lambda ()
+            (require 'dired-x)
+            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory")
+            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
+            (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
+            (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
+            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (dired-omit-mode 1)))
+
+;; Tree directory explorer: /direx/ (frontend for /jedi-direx/)
+(require 'popwin)
+(popwin-mode 1)
+(require 'direx)
+;; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
+(push '(direx:direx-mode :position left :width 25 :dedicated t)
+      popwin:special-display-config)
+(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+(setq direx:leaf-icon "  "
+      direx:open-icon "▾ "
+      direx:closed-icon "▸ ")
 
 
 
