@@ -1,12 +1,10 @@
 ; =======================================
 ;; Programming Environment for /Python/
 
-;;
-;; using /emacs-for-python/
-;;
-
-;; USAGES:
+;; USAGES (/emacs-for-python/):
 ;; ------------------
+;; *edit*
+;;   - shift selected blocks "C-c >", "C-c <"
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
 ;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts; then evaluate buffer in iPython
@@ -54,11 +52,11 @@
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)
 
-; disabling the auto-pairing of parenthesis by /emacs-for-python/; use /smartparen/ in .emacs
+; disabling parenthesis auto-pairing, use /smartparen/ in .emacs
 (setq skeleton-pair nil)
 
 ; disabling *ropemacs* (nil)
-(setq epy-enable-ropemacs t)
+(setq epy-enable-ropemacs nil)
 
 ; adding snippets in /emacs-for-python/ when use the default yasnippets
 ;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again
@@ -73,3 +71,5 @@
   (setq-local company-backends
               (append '(company-jedi) company-backends)))
 (add-hook 'python-mode-hook 'y:company-py-setup)
+;; set calltip methods
+(setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)

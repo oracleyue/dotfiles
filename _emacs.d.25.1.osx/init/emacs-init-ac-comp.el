@@ -62,11 +62,11 @@
 
 ;; use /company-quickhelp/
 ;; notes: random positioning is fixed by maximizing window and adding lines below
-(company-quickhelp-mode 1)
+;(company-quickhelp-mode 1)
 ;; starting manually
-(setq company-quickhelp-delay nil)
-(eval-after-load 'company     ;; "M-h" for company-quickhelp
-  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
+;(setq company-quickhelp-delay nil)
+;(eval-after-load 'company     ;; "M-h" for company-quickhelp
+;  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
 
 ;; disable company-mode under certain major modes
 (defun y:disable-company-mode ()

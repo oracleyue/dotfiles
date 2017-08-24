@@ -2,6 +2,8 @@
 
 ;; fgallina/python.el
 (require 'python (concat epy-install-dir "extensions/python.el"))
+;; use emacs built-in version
+;(require 'python)
 
 ;; pymacs
 (require 'pymacs (concat epy-install-dir "extensions/pymacs.el"))
@@ -25,9 +27,9 @@
     (setenv "PYTHONPATH"
 	    (concat epy-install-dir "python-libs/"))
     )
-  
+
   (pymacs-load "ropemacs" "rope-")
-  
+
   ;; Stops from erroring if there's a syntax err
   (setq ropemacs-codeassist-maxfixes 3)
 
@@ -39,7 +41,7 @@
   (setq ropemacs-autoimport-modules '("os" "shutil" "sys" "logging"
 				      "django.*"))
 
- 
+
 
   ;; Adding hook to automatically open a rope project if there is one
   ;; in the current or in the upper level directory
@@ -57,17 +59,18 @@
   "Setup ipython integration with python-mode"
   (interactive)
 
+  (setq python-shell-completion-native-enable nil)
   (setq
-   python-shell-interpreter "ipython2"
+   python-shell-interpreter "ipython"
    python-shell-interpreter-args ""
-   python-shell-prompt-regexp "In \[[0-9]+\]: "
-   python-shell-prompt-output-regexp "Out\[[0-9]+\]: "
-   ;python-shell-completion-setup-code ""
-   ;python-shell-completion-string-code "';'.join(get_ipython().complete('''%s''')[1])\n"
-   python-shell-completion-setup-code ""
-   python-shell-completion-module-string-code ""
-   python-shell-completion-string-code ""
-   )
+   python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+   python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+   python-shell-completion-setup-code
+   "from IPython.core.completerlib import module_completion"
+   python-shell-completion-module-string-code
+   "';'.join(module_completion('''%s'''))\n"
+   python-shell-completion-string-code
+   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
   )
 
 ;;=========================================================
@@ -79,13 +82,13 @@
 
 (defun flymake-create-copy-file ()
   "Create a copy local file"
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy 
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
                      'flymake-create-temp-in-system-tempdir)))
     (file-relative-name
-     temp-file 
+     temp-file
      (file-name-directory buffer-file-name))
     )
-  )   
+  )
 
 (defun flymake-command-parse (cmdline)
   "Parses the command line CMDLINE in a format compatible
@@ -135,8 +138,8 @@ The CMDLINE should be something like:
        "Activate a Virtual Environment specified by PATH" t)
      (autoload 'virtualenv-workon "virtualenv"
        "Activate a Virtual Environment present using virtualenvwrapper" t)
-     
-     
+
+
      ;; Not on all modes, please
      ;; Be careful of mumamo, buffer file name nil
      (add-hook 'python-mode-hook (lambda ()
@@ -151,7 +154,7 @@ The CMDLINE should be something like:
        (virtualenv-activate virtualenv)
        (desktop-change-dir virtualenv))
 
-     
+
      )
   )
 ;; Cython Mode
@@ -164,9 +167,9 @@ The CMDLINE should be something like:
 ;; Py3 files
 (add-to-list 'auto-mode-alist '("\\.py3\\'" . python-mode))
 
-(add-hook 'python-mode-hook '(lambda () 
+(add-hook 'python-mode-hook '(lambda ()
      (define-key python-mode-map "\C-m" 'newline-and-indent)))
-(add-hook 'ein:notebook-python-mode-hook 
+(add-hook 'ein:notebook-python-mode-hook
 	  (lambda ()
 	    (define-key python-mode-map "\C-m" 'newline)))
 (provide 'epy-python)

@@ -1,12 +1,10 @@
 ; =======================================
 ;; Programming Environment for /Python/
 
-;;
-;; using /emacs-for-python/
-;;
-
-;; USAGES:
+;; USAGES (/emacs-for-python/):
 ;; ------------------
+;; *edit*
+;;   - shift selected blocks "C-c >", "C-c <"
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
 ;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts; then evaluate buffer in iPython
@@ -21,19 +19,22 @@
 
 
 
-;; Load by default
+;;
+;; Setup /emacs-for-python/ major modes (IDE)
+;;
+
 ;(load-file "~/.emacs.d/git/emacs-for-python/epy-init.el")
 ;; custom load
 (add-to-list 'load-path "~/.emacs.d/git/emacs-for-python/")
 (require 'epy-setup)      ;; It will setup other loads, it is required!
 (require 'epy-python)     ;; If you want the python facilities [optional]
 ;;(require 'epy-completion) ;; If you want the autocompletion settings [optional] ;; use /jedi/
-(require 'epy-editing)    ;; For configurations related to editing [optional]
-(require 'epy-bindings)   ;; For my suggested keybindings [optional]
-(require 'epy-nose)       ;; For nose integration
+;(require 'epy-editing)    ;; For configurations related to editing [optional]
+;(require 'epy-bindings)   ;; For my suggested keybindings [optional]
+;(require 'epy-nose)       ;; For nose integration
 
 ; use *IPython*
-;(epy-setup-ipython)
+(epy-setup-ipython)
 
 ; use *flymake* checker
 (epy-setup-checker "pyflakes %f")
@@ -50,11 +51,11 @@
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)
 
-; disabling the auto-pairing of parenthesis by /emacs-for-python/; use /smartparen/ in .emacs
+; disabling parenthesis auto-pairing, use /smartparen/ in .emacs
 (setq skeleton-pair nil)
 
 ; disabling *ropemacs* (nil)
-(setq epy-enable-ropemacs t)
+(setq epy-enable-ropemacs nil)
 
 ; adding snippets in /emacs-for-python/ when use the default yasnippets
 ;; having defined in "emacs-init-ac.el" to avoid yas-reload-all again
@@ -79,4 +80,4 @@
     ;; go to the last point where =jedi:got-definition= was called
     ;; - keybinding: "C-c ,"
 ;; set calltip methods
-(setq jedi:tooltip-method '(pos-tip))  ;popup, OR  pos-tip
+(setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
