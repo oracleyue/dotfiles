@@ -127,6 +127,37 @@
    `(company-scrollbar-fg ((t (:background ,atom-one-dark-mono-1))))
    `(company-scrollbar-bg ((t (:background ,atom-one-dark-bg-1))))
 
+   ;; auto-complete and popup (oracleyue)
+   `(popup-face
+     ((,class (:background ,atom-one-dark-bg-hl
+                           :foreground ,atom-one-dark-fg))))
+
+   `(popup-isearch-match
+     ((,class (:background ,atom-one-dark-red-1
+                           :foreground ,atom-one-dark-bg))))
+
+   `(popup-menu-face
+     ((,class (:background ,atom-one-dark-bg-hl
+                           :foreground ,atom-one-dark-fg))))
+
+   `(popup-menu-mouse-face
+     ((,class (:background ,atom-one-dark-blue
+                           :foreground ,atom-one-dark-fg))))
+
+   `(popup-menu-selection-face
+     ((,class (:background ,atom-one-dark-cyan
+                           :foreground ,atom-one-dark-bg))))
+
+   `(popup-scroll-bar-background-face
+     ((,class (:background ,atom-one-dark-mono-3))))
+
+   `(popup-scroll-bar-foreground-face
+     ((,class (:background ,atom-one-dark-bg-hl))))
+
+   `(popup-tip-face
+     ((,class (:background ,atom-one-dark-bg-hl
+                           :foreground ,atom-one-dark-fg))))
+
    ;; compilation
    `(compilation-face ((t (:foreground ,atom-one-dark-fg))))
    `(compilation-line-number ((t (:foreground ,atom-one-dark-mono-2))))

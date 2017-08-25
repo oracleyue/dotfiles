@@ -178,9 +178,6 @@
 ;; Other Settings
 ;;
 
-;; use ibuffer by default
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; increase memeory for emacs to avoid garbage collections slow it down
 (setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
 
@@ -271,25 +268,24 @@
 (if (string-equal system-type "darwin")
     (setq y-home-path "/Users/oracleyue/")
   (setq y-home-path "/home/oracleyue/"))
+
 (defun y:dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
-  ;(dired (concat y-home-path "Public/Dropbox/Academia"))
-  (dired (concat y-home-path "Public/Dropbox/Academia/Seminars"))
-  ;(dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
-  (find-file (concat y-home-path "Public/Dropbox/Academia/ToDoList.org"))
-  (find-file (concat y-home-path "Public/Dropbox/oracleyue/OrgNote/PhD.org"))
+  (cond ((string-equal system-type "darwin")
+         (dired (concat y-home-path "Public/Dropbox/Academia/Seminars"))
+         ;(dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
+         (find-file (concat y-home-path "Public/Dropbox/Academia/ToDoList.org"))
+         (find-file (concat y-home-path "Public/Dropbox/oracleyue/OrgNote/PhD.org")))
+        ((string-equal system-type "gnu/linux")
+         (dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))))
   (switch-to-buffer "*scratch*"))
+
+;; quick start email editing
 (defun email ()
   (interactive)
   (find-file (concat y-home-path "Documents/email.tmp.md"))
   (set-fill-column 75))
-
-;; oracleyue's inital path setting
-(defun y:set-startup-directory ()
-  (cd (concat y-home-path "/Public/Dropbox/Academia/Manuscripts")))
-    ;; For Ubuntu@LCSB
-    ;(setq default-directory (concat y-home-path "/Workspace/matlab/"))
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")

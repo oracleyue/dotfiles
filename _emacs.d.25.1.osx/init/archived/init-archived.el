@@ -424,3 +424,16 @@ See help of `format-time-string' for possible replacements")
 ;; ----------------------------------------------------------------
 ;(add-to-list 'default-frame-alist '(width . 96))
 (when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 33 in Thinkpad
+
+
+;; ----------------------------------------------------------------
+;; dired-x
+;; ----------------------------------------------------------------
+;; (add-hook 'dired-load-hook
+;;           (lambda ()
+;;             (require 'dired-x)
+;;             (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory")
+;;             (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
+;;             (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
+;;             (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
+;;             (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))

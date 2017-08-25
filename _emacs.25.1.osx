@@ -74,16 +74,17 @@
 (setq mouse-wheel-progressive-speed nil)
 
 ;; themes
-(if (string-equal (expand-file-name "~") "/Users/oracleyue")  ;; mac+home
-    (progn
-      ;(setq frame-background-mode (quote dark))
-      (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-      (load-theme 'solarized t))
-  ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes") ;; linux
-  ;; (load-theme 'monokai t)
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-  (load-theme 'atom-one-dark t))
-
+(cond ((string-equal system-type "darwin")
+       (if (string-equal (expand-file-name "~") "/Users/oracleyue")  ;; mac+home: light
+           (progn
+             ;; (setq frame-background-mode (quote dark))
+             (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+             (load-theme 'solarized t))
+         (add-to-list 'custom-theme-load-path "~/.emacs.d/themes") ;; psudo-home: dark
+         (load-theme 'monokai t)))
+      ((string-equal system-type "gnu/linux")
+        (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
+        (load-theme 'atom-one-dark t)))
 ;; customize more themes (mode-line)
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
@@ -277,12 +278,13 @@
 
 ; ===============================================
 ;; Programming Environment for /Lisp/
-;; Use "C-j" in *scratch*; output is in the buffer under the sexp
+;; use "C-j" in *scratch*; output is in the buffer under the sexp
 ;; use "C-h e" to open *Message* buffer for elisp printout
+;; use "M-x ielm" to open interactive shell
 ;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
 ;; Keybindings for eval expressions (default: "C-x C-e" eval last S-expr)
-(define-key emacs-lisp-mode-map (kbd "C-c C-l") 'eval-last-sexp)
+(define-key emacs-lisp-mode-map (kbd "C-c C-j") 'eval-last-sexp)
 (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
@@ -410,7 +412,7 @@
 ;; ------------------- Other Major Modes -------------------
 ;;
 
-; ===============================================
+; ------------------------------------------------
 ;; Directory Explorers
 
 ;; Regular explorers: /dired/ and /dired-x/
@@ -419,17 +421,10 @@
   (setq insert-directory-program "/usr/local/bin/gls")
   (setq dired-listing-switches "-ahl --color=always --group-directories-first"))
 ;; omit file extensions
-(add-hook 'dired-load-hook
-          (lambda ()
-            (require 'dired-x)
-            (setq dired-omit-files "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory")
-            (setq dired-omit-extensions (delete ".o" dired-omit-extensions))
-            (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
-            (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
-            (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (dired-omit-mode 1)))
+(require 'dired-x)
+(setq dired-omit-files
+      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|\\^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
+(add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
 ;; Tree directory explorer: /direx/ (frontend for /jedi-direx/)
 (require 'popwin)
@@ -442,6 +437,45 @@
 (setq direx:leaf-icon "  "
       direx:open-icon "▾ "
       direx:closed-icon "▸ ")
+
+; ------------------------------------------------
+;; /ibuffer/: Buffer Explorer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org"   (name . "^.*org$"))
+               ("writing" (or (mode . markdown-mode)
+                           (mode . LaTeX-mode)))
+               ("shell" (or (mode . eshell-mode)
+                            (name . "^\\*R\\*$")
+                            (name . "^\\*ielm\\*$")
+                            (mode . inferior-python-mode)))
+               ("programming" (or (mode . python-mode)
+                                  (mode . ess-mode)
+                                  (name . ".*\\.el$")
+                                  (mode . matlab-mode)
+                                  (mode . c-mode)
+                                  (mode . c++-mode)))
+               ("systems" (or (name . "^\\*scratch\\*$")
+                              (name . "^\\*Messages\\*$")
+                              (name . "^\\*Help\\*$")
+                              (mode . helm-major-mode)
+                              (name . "^\\*Pp Eval Output\\*")))
+               ))))
+(add-hook 'ibuffer-mode-hook (lambda ()
+    (ibuffer-auto-mode 1)
+    (ibuffer-switch-to-saved-filter-groups "default")))
+
+;; don't show certain buffers
+(add-to-list 'ibuffer-never-show-predicates "^\\*epc con 3\\*")
+(add-to-list 'ibuffer-never-show-predicates "^\\*ESS\\*")
+
+;; don't show filter groups if there are no buffers in that group
+(setq ibuffer-show-empty-filter-groups nil)
+
+;; don't ask for confirmation to delete marked buffers
+(setq ibuffer-expert t)
 
 
 
@@ -494,14 +528,15 @@
        (if (string-equal (expand-file-name "~") "/Users/oracleyue")
            (progn
              (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-             (y:set-startup-directory))   ; defined in emacs-init-basics.el
+             (cd (concat y-home-path "/Public/Dropbox/Academia/Manuscripts")))
          (cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")))  ; for dark-version
       ((string-equal system-type "gnu/linux")
+       (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
        (cd "~/tmp")))
 
 ;; restore "F10" to open menu bar
 (global-set-key (kbd "<f10>") 'menu-bar-open)
 
 ;; kill unnecessary buffers
-(kill-buffer "*ESS*")
-(put 'set-goal-column 'disabled nil)
+;(kill-buffer "*ESS*")
+;(put 'set-goal-column 'disabled nil)
