@@ -60,19 +60,19 @@
   "Setup ipython integration with python-mode"
   (interactive)
 
-  (setq python-shell-completion-native-enable nil)
+  ;; (setq python-shell-completion-native-enable nil)  ;!obsolete: slow; use native ac
   (setq
    python-shell-interpreter "ipython"
-   python-shell-interpreter-args ""
+   python-shell-interpreter-args "--simple-prompt -i"  ;fix bugs of ipython5 in emacs
    python-shell-prompt-regexp "In \\[[0-9]+\\]: "
    python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-   python-shell-completion-setup-code
-   "from IPython.core.completerlib import module_completion"
-   python-shell-completion-module-string-code
-   "';'.join(module_completion('''%s'''))\n"
-   python-shell-completion-string-code
-   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-  )
+   ;; python-shell-completion-setup-code
+   ;; "from IPython.core.completerlib import module_completion"
+   ;; python-shell-completion-module-string-code
+   ;; "';'.join(module_completion('''%s'''))\n"
+   ;; python-shell-completion-string-code
+   ;; "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
+  ))
 
 ;;=========================================================
 ;; Flymake additions, I have to put this one somwhere else?

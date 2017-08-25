@@ -2579,32 +2579,34 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit ,s-variable-pitch
                           ;; :height ,ymonokai-height-plus-4
                           :weight bold
-                          :height 1.2    ; oracleyue: added
+                          :height 1.1    ; oracleyue: added
                           :foreground ,red))))
 
      `(org-level-2
        ((,class (:inherit ,s-variable-pitch
                           ;; :height ,ymonokai-height-plus-3
                           :weight semi-bold     ;oracleyue: bold by default
-                          :height 1.15    ; oracleyue: added
+                          :height 1.05    ; oracleyue: added
                           :foreground ,green))))
 
      `(org-level-3
        ((,class (:inherit ,s-variable-pitch
                           ;; :height ,ymonokai-height-plus-2
                           :weight bold
-                          :height 1.1    ; oracleyue: added
+                          :height 1.02    ; oracleyue: added
                           :foreground ,blue))))
 
      `(org-level-4
        ((,class (:inherit ,s-variable-pitch
                           ;; :height ,ymonokai-height-plus-1
                           :weight bold
-                          :height 1.1    ; oracleyue: added
+                          :height 1.02    ; oracleyue: added
                           :foreground ,orange))))
 
      `(org-level-5
        ((,class (:inherit ,s-variable-pitch
+                          :weight bold   ; oracleyue: added
+                          :height 1.02
                           :foreground ,cyan))))
 
      `(org-level-6

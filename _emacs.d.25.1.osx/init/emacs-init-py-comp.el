@@ -8,8 +8,14 @@
 ;;   - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
 ;;
 ;; *source navigation*
+;;   - /jedi/ usages:
+;;     - use jedi to show python doc of the object at point; =jedi:show-doc=
+;;       keybinding: "C-c ?"
+;;     - use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
+;;       keybinding: "C-c ."
+;;     - go to the last point where =jedi:got-definition= was called
+;;       keybinding: "C-c ,"
 ;;   - /jedi-direx/: source viewer, "C-c v"
-;;   - see /jedi/ below
 ;;
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
@@ -32,8 +38,9 @@
 ;;(require 'epy-completion)    ;; disabled; use /jedi/ instead
 (require 'epy-nose)            ;; nose integration
 
-(setq python-shell-interpreter "ipython") ; default ac settings in "python.el"
-(epy-setup-checker "pyflakes %f")  ; use *flymake* checker
+;(setq python-shell-interpreter "python2") ; use python
+(epy-setup-ipython)                        ; use *ipython*
+(epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
 

@@ -402,8 +402,9 @@ See help of `format-time-string' for possible replacements")
 
 
 
-
+;; ----------------------------------------------------------------
 ;; enhance colors for /company-mode/
+;; ----------------------------------------------------------------
 ;; (when (eq 'solarized (car custom-enabled-themes))
 ;;   (set-face-attribute 'company-tooltip nil
 ;;                       :background "#fdf7e7")
@@ -417,5 +418,9 @@ See help of `format-time-string' for possible replacements")
 ;;                       :inherit font-lock-function-name-face))
 
 
+
+;; ----------------------------------------------------------------
+;; frame size
+;; ----------------------------------------------------------------
 ;(add-to-list 'default-frame-alist '(width . 96))
 (when window-system (set-frame-size (selected-frame) 96 36))  ;(96,36) 33 in Thinkpad
