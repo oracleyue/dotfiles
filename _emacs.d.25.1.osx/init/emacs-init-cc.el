@@ -211,7 +211,7 @@
 
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
-(cond ((string-equal y-enable-cedet-source-info "yes")
+(cond ((string-equal y:enable-semantics "yes")
        ;; enable /semantic-mode/
        (require 'semantic)
        (global-semantic-idle-scheduler-mode 1)
@@ -230,7 +230,7 @@
 
 ;; Package: /function-args/
 ;; - keybinding: fa-show =C-c M-i=; moo-complete =C-c M-o=
-(cond ((string-equal y-enable-function-args-flag "yes")
+(cond ((string-equal y:enable-semantics "yes")
        (require 'ivy)
        (require 'function-args)
        ;; enable case-insensitive searching

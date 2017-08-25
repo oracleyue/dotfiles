@@ -20,7 +20,8 @@
 
 (defface highlight-indent-face
   ;; Fringe has non intrusive color in most color-themes
-  '((t :inherit fringe))
+  '((t :inherit highlight))   ;oracleyue
+  ;; '((t :inherit fringe))
   "Basic face for highlighting indentation guides."
   :group 'basic-faces)
 

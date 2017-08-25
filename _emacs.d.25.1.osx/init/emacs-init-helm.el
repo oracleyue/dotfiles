@@ -25,12 +25,12 @@
       helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
       helm-ff-file-name-history-use-recentf t
       ;helm-candidate-number-limit           500
-      ;helm-move-to-line-cycle-in-source     t      
+      ;helm-move-to-line-cycle-in-source     t
       )
 
 (helm-mode 1)
 
-;; default way to split window 
+;; default way to split window
 ;(setq helm-split-window-default-side 'right)
 
 ;; auto-resize buffer to fit candidates
@@ -84,7 +84,7 @@
 ;;
 ;; enable fuzzy matching for "semantic" and "Imenu" listing
 ;; - keybinding: C-x c i
-(cond ((string-equal y-enable-semantic-parse "yes")
+(cond ((string-equal y:enable-semantics "yes")
        (setq helm-semantic-fuzzy-match t
              helm-imenu-fuzzy-match    t)
        ;; restore UI
@@ -204,9 +204,9 @@
 ;  C-c h l 	    helm-locate 	                    Helm interface to locate
 ;  C-c h o 	    helm-occur 	                        Similar to occur
 ;  C-c h a 	    helm-apropos 	                    Describes commands, functions, variables, …
-;  C-c h h g 	helm-info-gnus 	 
-;  C-c h h i 	helm-info-at-point 	 
-;  C-c h h r 	helm-info-emacs 	 
+;  C-c h h g 	helm-info-gnus
+;  C-c h h i 	helm-info-at-point
+;  C-c h h r 	helm-info-emacs
 ;  C-c h <tab> 	helm-lisp-completion-at-point 	    Provides a list of available functions
 ;  C-c h b 	    helm-resume 	                    Resumes a previous helm session
 ;  C-h SPC 	    helm-all-mark-rings 	            Views content of local and global mark rings

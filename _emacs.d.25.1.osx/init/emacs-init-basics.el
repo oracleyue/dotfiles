@@ -220,7 +220,7 @@
       (replace-regexp-in-string "[[:space:]\n]*$" ""
         (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
     ;; (setenv "PATH" path-from-shell)
-    (setenv "PATH" (concat "~/.emacs.d/bin:" path-from-shell))
+    (setenv "PATH" (concat "~/.emacs.d/bin:" "~/bin:" path-from-shell))
     (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
     ;; (setq exec-path (split-string path-from-shell path-separator))
     (setq exec-path (split-string (getenv "PATH") path-separator))))
@@ -269,27 +269,27 @@
 
 ;; oracleyue's inital Dired folders on startup
 (if (string-equal system-type "darwin")
-    (setq y:HomePath "/Users/oracleyue/")
-  (setq y:HomePath "/home/oracleyue/"))
+    (setq y-home-path "/Users/oracleyue/")
+  (setq y-home-path "/home/oracleyue/"))
 (defun y:dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
-  ;(dired (concat y:HomePath "Public/Dropbox/Academia"))
-  (dired (concat y:HomePath "Public/Dropbox/Academia/Seminars"))
-  ;(dired (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote"))
-  (find-file (concat y:HomePath "Public/Dropbox/Academia/ToDoList.org"))
-  (find-file (concat y:HomePath "Public/Dropbox/oracleyue/OrgNote/PhD.org"))
+  ;(dired (concat y-home-path "Public/Dropbox/Academia"))
+  (dired (concat y-home-path "Public/Dropbox/Academia/Seminars"))
+  ;(dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
+  (find-file (concat y-home-path "Public/Dropbox/Academia/ToDoList.org"))
+  (find-file (concat y-home-path "Public/Dropbox/oracleyue/OrgNote/PhD.org"))
   (switch-to-buffer "*scratch*"))
 (defun email ()
   (interactive)
-  (find-file (concat y:HomePath "Documents/email.tmp.md"))
+  (find-file (concat y-home-path "Documents/email.tmp.md"))
   (set-fill-column 75))
 
 ;; oracleyue's inital path setting
 (defun y:set-startup-directory ()
-  (cd (concat y:HomePath "/Public/Dropbox/Academia/Manuscripts")))
+  (cd (concat y-home-path "/Public/Dropbox/Academia/Manuscripts")))
     ;; For Ubuntu@LCSB
-    ;(setq default-directory (concat y:HomePath "/Workspace/matlab/"))
+    ;(setq default-directory (concat y-home-path "/Workspace/matlab/"))
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")

@@ -58,12 +58,11 @@
 (defface hl-sexp-face
   '((((type tty))
      (:bold t))
-    (((class color) (background light))
-     ;(:background "lightgray"))
-     (:background "#40E0D0"))
-    (((class color) (background dark))
-     ;(:background "gray10"))
-     (:background "#383830"))
+    (t :inherit highlight)   ;oracleyue
+    ;; (((class color) (background light))
+    ;;  (:background "#40E0D0"))
+    ;; (((class color) (background dark))
+    ;;  (:background "#383830"))
     (t (:bold t)))
   "Face used to fontify the sexp you're looking at."
   :group 'faces)

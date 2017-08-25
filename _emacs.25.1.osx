@@ -22,8 +22,8 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
- '(default ((t (:font "DejaVu Sans Mono-12"))))   ;; 13/15(mac), 10.5/12(linux)
- '(variable-pitch ((t (:font "Noto Sans-12")))))
+ ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
+ '(default ((t (:font "DejaVu Sans Mono-12")))))    ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
@@ -47,12 +47,24 @@
 (setq ecb-options-version "2.40")
 (setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
-;; paths
-(if (string-equal system-type "darwin")		; home path
-    (setq y:HomePath "/Users/oracleyue/")
-  (setq y:HomePath "/home/oracleyue/"))
+;; loading paths
 (setq y-init-path-prefix "~/.emacs.d/init/")	; init files
-(add-to-list 'load-path "~/.emacs.d/git")	; pkgs from github
+(add-to-list 'load-path "~/.emacs.d/git")    	; pkgs from github
+
+;; ---------- Settings of Emacs Package System -------------
+;; packages installed by /homebrew/
+(when (string-equal system-type "darwin")
+  (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path)))
+;; package management by ELPA
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+;; check and install required packages
+(load (concat y-init-path-prefix "install-init-packages"))
+;; ---------------------------------------------------------
 
 ;; enable clipboard in emacs  (only need for emacs in terminal)
 ;(setq x-select-enable-clipboard t)
@@ -67,31 +79,36 @@
       ;(setq frame-background-mode (quote dark))
       (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
       (load-theme 'solarized t))
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")   ;; others
-  (load-theme 'ymonokai t))
-;; more customizations
+  ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes") ;; linux
+  ;; (load-theme 'monokai t)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
+  (load-theme 'atom-one-dark t))
+
+;; customize more themes (mode-line)
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
 ;; set the default browser
 (if (string-equal system-type "darwin")
     (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (concat y:HomePath "bin/web-browser")) ;use Safari
+          browse-url-generic-program (concat y-home-path "bin/web-browser")) ;use Safari
   (setq browse-url-browser-function 'browse-url-firefox))
 
 
 ;;
-;; global variables for configuration loading
+;; Global Variables for Configurations
 ;;
 
-;; feature control
-;; - enable/disable CEDET features
+;; home paths
 (if (string-equal system-type "darwin")
-    (setq y:flags "no")
-  (setq y:flags "yes"))
+    (setq y-home-path "/Users/oracleyue/")
+  (setq y-home-path "/home/oracleyue/"))
 
-(setq y-enable-semantic-parse y:flags)     ; for /helm-sematic-or-imenu/
-(setq y-enable-function-args-flag y:flags)  ; for /function-args/
-(setq y-enable-cedet-source-info y:flags)  ; for /cedet-source-info/
+;; feature control
+;; - enable/disable CEDET features (semantic parser)
+;;   in /helm-sematic-or-imenu/, /function-args/, /cedet-source-info/
+(if (string-equal system-type "darwin")
+    (setq y:enable-semantics "no")
+  (setq y:enable-semantics "yes"))
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -103,25 +120,6 @@
 
 ;; suppress redefinition warnings
 (setq ad-redefinition-action 'accept)
-
-
-;;
-;; ---------- Settings of Emacs Package System -------------
-;;
-;; Load packages installed by /homebrew/
-(when (string-equal system-type "darwin")
-  (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path)))
-;; Package Management by ELPA
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    ;; list for package-archives
-    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
-;; Install Required Packages (run only once)
-(load (concat y-init-path-prefix "install-init-packages"))
-;; ---------------------------------------------------------
 
 
 ;;
@@ -137,9 +135,9 @@
 
 ;; ----------------------------------------------
 ;; /hl-sexp/: matching a pair of braces and hightlight the contents
-(require 'hl-sexp)
-  (add-hook 'lisp-mode-hook 'hl-sexp-mode)
-  (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+;; (require 'hl-sexp)
+;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 
 ;; ----------------------------------------------
 ;; Minior modes for auto-completions (+yas, auto-complete ...)
@@ -180,7 +178,7 @@
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 (require 'iedit)
-(when (eq 'ymonokai (car custom-enabled-themes))
+(when (eq 'monokai (car custom-enabled-themes))
   (set-face-attribute 'iedit-occurrence nil
                       :foreground "#272822"
                       :background "#E6DB74"

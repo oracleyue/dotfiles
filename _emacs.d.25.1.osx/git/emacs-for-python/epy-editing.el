@@ -133,9 +133,9 @@ original" (interactive)
   ;; highlight indentation
   (require 'highlight-indentation)
   (highlight-indentation)
-  (when (eq 'ymonokai (car custom-enabled-themes))
-    (set-face-attribute 'highlight-indent-face nil
-                        :background "#49483E"))
+  ;; (when (eq 'ymonokai (car custom-enabled-themes))
+  ;;   (set-face-attribute 'highlight-indent-face nil
+  ;;                       :background "#49483E"))
   ;; highlight current line
   (hl-line-mode t))
 (add-hook 'python-mode-hook 'epy-edit-hl-config)

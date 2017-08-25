@@ -1,9 +1,10 @@
-;;; ymonokai-theme.el --- A fruity color theme for Emacs.
+;;; monokai-theme.el --- A fruity color theme for Emacs.
+;; Last modified by oracleyue on 25 Aug 2017
 
 ;; Copyright (C) 2011-2013
 
 ;; Author: Kelvin Smith <oneKelvinSmith@gmail.com>
-;; URL: http://github.com/oneKelvinSmith/ymonokai-emacs
+;; URL: http://github.com/oneKelvinSmith/monokai-emacs
 ;; Version: 0.2.0
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -21,13 +22,13 @@
 
 ;;; Commentary:
 ;;
-;; A port of the popular Textmate theme Ymonokai for Emacs 24, built on top
+;; A port of the popular Textmate theme Monokai for Emacs 24, built on top
 ;; of the new built-in theme support in Emacs 24.
 ;;
 ;;; Credits:
 ;;
 ;; Wimer Hazenberg created the original theme.
-;; - http://www.ymonokai.nl/blog/2006/07/15/textmate-color-theme/
+;; - http://www.monokai.nl/blog/2006/07/15/textmate-color-theme/
 ;;
 ;; Bozhidar Batsov created zenburn-theme.el and solarized-theme.el
 ;;  on which this file is based.
@@ -36,8 +37,8 @@
 ;; Color Scheme Designer 3 for complementary colours.
 ;; - http://colorschemedesigner.com/
 ;;
-;; K. Adam Christensen for his personal ymonokai theme that addresses 256 colours.
-;; - https://github.com/pope/personal/blob/master/etc/emacs.d/ymonokai-theme.el
+;; K. Adam Christensen for his personal monokai theme that addresses 256 colours.
+;; - https://github.com/pope/personal/blob/master/etc/emacs.d/monokai-theme.el
 ;;
 ;; Thomas Frössman for his work on solarized-emacs.
 ;; - http://github.com/bbatsov/solarized-emacs
@@ -45,62 +46,62 @@
 ;;; Code:
 
 (unless (>= emacs-major-version 24)
-  (error "The ymonokai theme requires Emacs 24 or later!"))
+  (error "The monokai theme requires Emacs 24 or later!"))
 
-(deftheme ymonokai "The Ymonokai colour theme")
+(deftheme monokai "The Monokai colour theme")
 
-(defgroup ymonokai nil
-  "Ymonokai theme options.
+(defgroup monokai nil
+  "Monokai theme options.
 The theme has to be reloaded after changing anything in this group."
   :group 'faces)
 
-(defcustom ymonokai-distinct-fringe-background nil
+(defcustom monokai-distinct-fringe-background nil
   "Make the fringe background different from the normal background color.
 Also affects 'linum-mode' background."
   :type 'boolean
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-use-variable-pitch t   ; default "t", changed by oracleyue
+(defcustom monokai-use-variable-pitch t   ; default "t", changed by oracleyue
   "Use variable pitch face for some headings and titles."
   :type 'boolean
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-high-contrast-mode-line nil
+(defcustom monokai-high-contrast-mode-line nil
   "Make the active/inactive mode line stand out more."
   :type 'boolean
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-height-minus-1 0.8
+(defcustom monokai-height-minus-1 0.8
   "Font size -1."
   :type 'number
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-height-plus-1 1.1
+(defcustom monokai-height-plus-1 1.1
   "Font size +1."
   :type 'number
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-height-plus-2 1.15
+(defcustom monokai-height-plus-2 1.15
   "Font size +2."
   :type 'number
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-height-plus-3 1.2
+(defcustom monokai-height-plus-3 1.2
   "Font size +3."
   :type 'number
-  :group 'ymonokai)
+  :group 'monokai)
 
-(defcustom ymonokai-height-plus-4 1.3
+(defcustom monokai-height-plus-4 1.3
   "Font size +4."
   :type 'number
-  :group 'ymonokai)
+  :group 'monokai)
 
 (defun in-terminal ()
   "Return true if in a terminal."
   (not (display-graphic-p)))
 
-(defun create-ymonokai-theme (&optional frame)
-  "Create the ymonokai theme.
+(defun create-monokai-theme (&optional frame)
+  "Create the monokai theme.
 Takes and optional `FRAME' as reference."
   (let* ((class '((class color) (min-colors 89)))
          ;; Accented colors
@@ -138,20 +139,19 @@ Takes and optional `FRAME' as reference."
          (gray-l           (if (in-terminal) "#6c6c6c" "#6b6b6b"))
 
          ;; Adaptive colors
-         (ymonokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
-         (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified 
-         ;; (ymonokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
-         (ymonokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
-         (ymonokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
-         ;(ymonokai-hl-line-y   (if (in-terminal) "#212121" "#585858"))  ; oracleyue: added, to change mode-line color, "s-mode-line-bg"
-         (ymonokai-hl       (if (in-terminal) "#303030" "#49483E"))
-         (ymonokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
-         (ymonokai-comments (if (in-terminal) "#8B8878" "#75715E"))
+         (monokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
+         (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified
+         ;; (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
+         (monokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
+         (monokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
+         (monokai-hl       (if (in-terminal) "#303030" "#49483E"))
+         (monokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
+         (monokai-comments (if (in-terminal) "#8B8878" "#75715E"))
          (region-bg         (if (in-terminal) "#005F87" "#005F87"))  ; oracleyue: added
 
          ;; Adaptive higher/lower contrast accented colors
-         (ymonokai-fg-hc    (if (in-terminal) "#171A0B" "#141414"))
-         (ymonokai-fg-lc    (if (in-terminal) "#141414" "#171A0B"))
+         (monokai-fg-hc    (if (in-terminal) "#171A0B" "#141414"))
+         (monokai-fg-lc    (if (in-terminal) "#141414" "#171A0B"))
 
          (yellow-hc        (if (in-terminal) yellow-d yellow-l))
          (yellow-lc        (if (in-terminal) yellow-l yellow-d))
@@ -171,62 +171,60 @@ Takes and optional `FRAME' as reference."
          (green-lc         (if (in-terminal) green-l green-d))
 
          ;; customize based face properties
-         (s-variable-pitch (if ymonokai-use-variable-pitch
+         (s-variable-pitch (if monokai-use-variable-pitch
                                'variable-pitch 'default))
-         (s-fringe-bg (if ymonokai-distinct-fringe-background
-                          ymonokai-hl ymonokai-bg))
+         (s-fringe-bg (if monokai-distinct-fringe-background
+                          monokai-hl monokai-bg))
 
-         (s-mode-line-fg (if ymonokai-high-contrast-mode-line
-                             ymonokai-bg ymonokai-fg))
-         (s-mode-line-bg (if ymonokai-high-contrast-mode-line
-                             ymonokai-fg ymonokai-hl-line))  
-                             ;ymonokai-fg ymonokai-hl-line-y))  ; oracleyue: modified
-         (s-mode-line-buffer-id-fg (if ymonokai-high-contrast-mode-line
+         (s-mode-line-fg (if monokai-high-contrast-mode-line
+                             monokai-bg monokai-fg))
+         (s-mode-line-bg (if monokai-high-contrast-mode-line
+                             monokai-fg monokai-hl-line))
+         (s-mode-line-buffer-id-fg (if monokai-high-contrast-mode-line
                                        'unspecified green))
-         (s-mode-line-inactive-fg (if ymonokai-high-contrast-mode-line
-                                      ymonokai-fg ymonokai-comments))
-         (s-mode-line-inactive-bg (if ymonokai-high-contrast-mode-line
-                                      ymonokai-hl-line ymonokai-bg))
-         (s-mode-line-inactive-bc (if ymonokai-high-contrast-mode-line
-                                      ymonokai-fg ymonokai-hl-line)))
+         (s-mode-line-inactive-fg (if monokai-high-contrast-mode-line
+                                      monokai-fg monokai-comments))
+         (s-mode-line-inactive-bg (if monokai-high-contrast-mode-line
+                                      monokai-hl-line monokai-bg))
+         (s-mode-line-inactive-bc (if monokai-high-contrast-mode-line
+                                      monokai-fg monokai-hl-line)))
     (custom-theme-set-faces
-     'ymonokai
+     'monokai
      '(button ((t (:underline t))))
 
      ;; basic coloring
      `(default
-        ((,class (:foreground ,ymonokai-fg
-                              :background ,ymonokai-bg))))
+        ((,class (:foreground ,monokai-fg
+                              :background ,monokai-bg))))
 
      `(shadow
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(match
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :weight bold))))
 
      `(cursor
-       ((,class (:foreground ,ymonokai-bg
-                             :background ,ymonokai-fg
+       ((,class (:foreground ,monokai-bg
+                             :background ,monokai-fg
                              :inverse-video t))))
 
      `(mouse
-       ((,class (:foreground ,ymonokai-bg
-                             :background ,ymonokai-fg
+       ((,class (:foreground ,monokai-bg
+                             :background ,monokai-fg
                              :inverse-video t))))
 
      `(escape-glyph-face
        ((,class (:foreground ,red))))
 
      `(fringe
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :background ,s-fringe-bg))))
 
      `(highlight
-       ((,class (:background ,ymonokai-hl))))
-                 ;:inherit lazy-highlight))))    ;oracleyue, modified
-          
+       ((,class (:background ,monokai-hl))))
+
      `(link
        ((,class (:foreground ,blue
                              :underline t
@@ -247,7 +245,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,orange))))
 
      `(lazy-highlight
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :background ,yellow
                              :weight normal))))
 
@@ -277,11 +275,11 @@ Takes and optional `FRAME' as reference."
                              :underline nil))))
 
      `(compilation-face
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :underline nil))))
 
      `(compilation-info
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              :underline nil
                              :bold nil))))
 
@@ -327,17 +325,17 @@ Takes and optional `FRAME' as reference."
      ;; cua
      `(cua-global-mark
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(cua-rectangle
        ((,class (:inherit region
                           :background ,magenta
-                          :foreground ,ymonokai-bg))))
+                          :foreground ,monokai-bg))))
 
      `(cua-rectangle-noselect
        ((,class (:inherit region
-                          :background ,ymonokai-hl
-                          :foreground ,ymonokai-comments))))
+                          :background ,monokai-hl
+                          :foreground ,monokai-comments))))
 
      ;; diary
      `(diary
@@ -352,7 +350,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,red))))
 
      `(dired-header
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :bold t              ; oracleyue: no this entry
                              :background ,blue))))
 
@@ -368,7 +366,7 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(dired-perm-write
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :underline t))))
 
      `(dired-symlink
@@ -382,7 +380,7 @@ Takes and optional `FRAME' as reference."
 
      ;; dropdown
      `(dropdown-list-face
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,cyan))))
 
      `(dropdown-list-selection-face
@@ -392,7 +390,7 @@ Takes and optional `FRAME' as reference."
      ;; ecb
      `(ecb-default-highlight-face
        ((,class (:background ,blue
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(ecb-history-bucket-node-dir-soure-path-face
        ((,class (:inherit ecb-history-bucket-node-face
@@ -400,15 +398,15 @@ Takes and optional `FRAME' as reference."
 
      `(ecb-source-in-directories-buffer-face
        ((,class (:inherit ecb-directories-general-face
-                          :foreground ,ymonokai-fg))))
+                          :foreground ,monokai-fg))))
 
      `(ecb-history-dead-buffer-face
        ((,class (:inherit ecb-history-general-face
-                          :foreground ,ymonokai-comments))))
+                          :foreground ,monokai-comments))))
 
      `(ecb-directory-not-accessible-face
        ((,class (:inherit ecb-directories-general-face
-                          :foreground ,ymonokai-comments))))
+                          :foreground ,monokai-comments))))
 
      `(ecb-bucket-node-face
        ((,class (:inherit ecb-default-general-face
@@ -416,7 +414,7 @@ Takes and optional `FRAME' as reference."
                           :foreground ,blue))))
 
      `(ecb-tag-header-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(ecb-analyse-bucket-element-face
        ((,class (:inherit ecb-analyse-general-face
@@ -435,12 +433,12 @@ Takes and optional `FRAME' as reference."
 
      `(ecb-tree-guide-line-face
        ((,class (:inherit ecb-default-general-face
-                          :foreground ,ymonokai-hl
+                          :foreground ,monokai-hl
                           :height 1.0))))
 
      ;; ee
      `(ee-bookmarked
-       ((,class (:foreground ,ymonokai-emph))))
+       ((,class (:foreground ,monokai-emph))))
 
      `(ee-category
        ((,class (:foreground ,blue))))
@@ -456,14 +454,14 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(ee-omitted
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(ee-shadow
        ((,class (:inherit shadow))))
 
      ;; grep
      `(grep-context-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(grep-error-face
        ((,class (:foreground ,red
@@ -479,13 +477,13 @@ Takes and optional `FRAME' as reference."
 
      ;; faces used by isearch
      `(isearch
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :background ,magenta
                              :weight normal))))
 
      `(isearch-fail
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :bold t))))
 
      ;; man
@@ -501,8 +499,8 @@ Takes and optional `FRAME' as reference."
 
      ;; misc faces
      `(menu
-       ((,class (:foreground ,ymonokai-fg
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-fg
+                             :background ,monokai-bg))))
 
      `(minibuffer-prompt
        ((,class (:foreground ,blue
@@ -533,19 +531,19 @@ Takes and optional `FRAME' as reference."
      `(header-line
        ((,class (:inverse-video unspecified
                                 :underline unspecified
-                                :foreground ,ymonokai-emph
-                                :background ,ymonokai-hl
+                                :foreground ,monokai-emph
+                                :background ,monokai-hl
                                 :box (:line-width 1
-                                                  :color ,ymonokai-hl
+                                                  :color ,monokai-hl
                                                   :style unspecified)))))
 
      `(region
-       ;; ((,class (:background ,ymonokai-hl
+       ;; ((,class (:background ,monokai-hl
        ((,class (:background ,region-bg        ;oracleyue, modified
                              :inherit t))))
 
      `(secondary-selection
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :inherit t))))
 
 
@@ -553,7 +551,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:background ,red))))
 
      `(vertical-border
-       ((,class (:foreground ,ymonokai-hl))))
+       ((,class (:foreground ,monokai-hl))))
 
      ;; font lock
      `(font-lock-builtin-face
@@ -561,26 +559,23 @@ Takes and optional `FRAME' as reference."
                              :weight normal))))
 
      `(font-lock-comment-delimiter-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(font-lock-comment-face
-       ((,class (
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(font-lock-constant-face
        ((,class (:foreground ,violet))))
 
      `(font-lock-doc-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(font-lock-function-name-face
-       ((,class (:foreground ,green
-                             :bold nil))))       ;oracleyue: no this entry
+       ((,class (:foreground ,green))))
 
      `(font-lock-keyword-face
        ((,class (:foreground ,red
-                             :weight normal))))   
+                             :weight normal))))
 
      `(font-lock-negation-char-face
        ((,class (:foreground ,yellow
@@ -602,12 +597,10 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-type-face
        ((,class (:foreground ,blue
-                             ;:bold t          ; oracleyue: no this entry
                              :italic t))))
-     
+
      `(font-lock-variable-name-face
-       ((,class (:foreground ,orange  
-                             :italic nil))))    ; oracleyue: no this entry
+       ((,class (:foreground ,orange))))
 
      `(font-lock-warning-face
        ((,class (:foreground ,orange
@@ -623,19 +616,19 @@ Takes and optional `FRAME' as reference."
 
      ;; ace-jump-mode
      `(ace-jump-face-background
-       ((,class (:foreground ,ymonokai-comments
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-comments
+                             :background ,monokai-bg
                              :inverse-video nil))))
 
      `(ace-jump-face-foreground
-       ((,class (:foreground ,red :background ,ymonokai-bg
+       ((,class (:foreground ,red :background ,monokai-bg
                              :inverse-video nil
                              :weight bold))))
 
      ;; auctex
      `(font-latex-bold-face
        ((,class (:inherit bold
-                          :foreground ,ymonokai-emph))))
+                          :foreground ,monokai-emph))))
 
      `(font-latex-doctex-documentation-face
        ((,class (:background unspecified))))
@@ -647,55 +640,55 @@ Takes and optional `FRAME' as reference."
                     font-lock-preprocessor-face)))))
 
      `(font-latex-italic-face
-       ((,class (:inherit italic :foreground ,ymonokai-emph))))
+       ((,class (:inherit italic :foreground ,monokai-emph))))
 
      `(font-latex-math-face
        ((,class (:foreground ,violet))))
 
      `(font-latex-sectioning-0-face
        ((,class (:inherit font-latex-sectioning-1-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(font-latex-sectioning-1-face
        ((,class (:inherit font-latex-sectioning-2-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(font-latex-sectioning-2-face
        ((,class (:inherit font-latex-sectioning-3-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(font-latex-sectioning-3-face
        ((,class (:inherit font-latex-sectioning-4-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(font-latex-sectioning-4-face
        ((,class (:inherit font-latex-sectioning-5-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(font-latex-sectioning-5-face
        ((,class (:inherit ,s-variable-pitch :foreground ,yellow
                           :weight bold))))
 
      `(font-latex-sedate-face
-       ((,class (:foreground ,ymonokai-emph))))
+       ((,class (:foreground ,monokai-emph))))
 
      `(font-latex-slide-title-face
        ((,class (:inherit (,s-variable-pitch font-lock-type-face)
                           :weight bold
-                          :height ,ymonokai-height-plus-3))))
+                          :height ,monokai-height-plus-3))))
 
      `(font-latex-string-face
        ((,class (:foreground ,cyan))))
 
      `(font-latex-subscript-face
-       ((,class (:height ,ymonokai-height-minus-1))))
+       ((,class (:height ,monokai-height-minus-1))))
 
      `(font-latex-superscript-face
-       ((,class (:height ,ymonokai-height-minus-1))))
+       ((,class (:height ,monokai-height-minus-1))))
 
      `(font-latex-verbatim-face
        ((,class (:inherit fixed-pitch
-                          :foreground ,ymonokai-fg
+                          :foreground ,monokai-fg
                           :slant italic))))
 
      `(font-latex-warning-face
@@ -704,7 +697,7 @@ Takes and optional `FRAME' as reference."
 
      ;; auto-complete
      `(ac-candidate-face
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,cyan))))
 
      `(ac-selection-face
@@ -716,11 +709,11 @@ Takes and optional `FRAME' as reference."
                              :foreground ,cyan-lc))))
 
      `(ac-completion-face
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :underline t))))
 
      `(ac-gtags-candidate-face
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,blue))))
 
      `(ac-gtags-selection-face
@@ -728,7 +721,7 @@ Takes and optional `FRAME' as reference."
                              :foreground ,blue-hc))))
 
      `(ac-yasnippet-candidate-face
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,yellow))))
 
      `(ac-yasnippet-selection-face
@@ -742,7 +735,7 @@ Takes and optional `FRAME' as reference."
                              :slant normal))))
 
      `(ahs-edit-mode-face
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :background ,magenta))))
 
      `(ahs-face
@@ -774,10 +767,10 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(android-mode-info-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(android-mode-verbose-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(android-mode-warning-face
        ((,class (:foreground ,yellow))))
@@ -790,23 +783,23 @@ Takes and optional `FRAME' as reference."
      ;; bm
      `(bm-face
        ((,class (:background ,yellow-lc
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(bm-fringe-face
        ((,class (:background ,yellow-lc
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(bm-fringe-persistent-face
        ((,class (:background ,green-lc
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(bm-persistent-face
        ((,class (:background ,green-lc
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      ;; calfw
      `(cfw:face-day-title
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(cfw:face-annotation
        ((,class (:inherit cfw:face-day-title
@@ -821,10 +814,10 @@ Takes and optional `FRAME' as reference."
 
      `(cfw:face-disable
        ((,class (:inherit cfw:face-day-title
-                          :foreground ,ymonokai-comments))))
+                          :foreground ,monokai-comments))))
 
      `(cfw:face-grid
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(cfw:face-header
        ((,class (:foreground ,blue-hc
@@ -854,11 +847,11 @@ Takes and optional `FRAME' as reference."
      `(cfw:face-title
        ((,class (:inherit ,s-variable-pitch
                           :foreground ,yellow
-                          :weight bold :height ,ymonokai-height-plus-4))))
+                          :weight bold :height ,monokai-height-plus-4))))
 
      `(cfw:face-today
        ((,class (:weight bold
-                         :background ,ymonokai-hl
+                         :background ,monokai-hl
                          :foreground nil))))
 
      `(cfw:face-today-title
@@ -867,8 +860,8 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(cfw:face-toolbar
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      `(cfw:face-toolbar-button-off
        ((,class (:background ,yellow-lc
@@ -899,7 +892,7 @@ Takes and optional `FRAME' as reference."
 
      ;; company-mode
      `(company-tooltip
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,cyan))))
 
      `(company-tooltip-selection
@@ -911,19 +904,19 @@ Takes and optional `FRAME' as reference."
                              :foreground ,cyan-lc))))
 
      `(company-tooltip-common
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :underline t))))
 
      `(company-tooltip-common-selection
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :underline t))))
 
      `(company-preview
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,cyan))))
 
      `(company-preview-common
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :underline t))))
 
      `(company-scrollbar-bg
@@ -944,26 +937,26 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,yellow))))
 
      `(cscope-line-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(cscope-mouse-face
        ((,class (:background ,blue
-                             :foreground ,ymonokai-fg))))
+                             :foreground ,monokai-fg))))
 
      ;; ctable
      `(ctbl:face-cell-select
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
-                             :underline ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
+                             :underline ,monokai-emph
                              :weight bold))))
 
      `(ctbl:face-continue-bar
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,yellow))))
 
      `(ctbl:face-row-select
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg
                              :underline t))))
 
      ;; coffee
@@ -978,27 +971,27 @@ Takes and optional `FRAME' as reference."
      ;; custom
      `(custom-face-tag
        ((,class (:inherit ,s-variable-pitch
-                          :height ,ymonokai-height-plus-3
+                          :height ,monokai-height-plus-3
                           :foreground ,violet
                           :weight bold))))
 
      `(custom-variable-tag
        ((,class (:inherit ,s-variable-pitch
                           :foreground ,cyan
-                          :height ,ymonokai-height-plus-3))))
+                          :height ,monokai-height-plus-3))))
 
      `(custom-comment-tag
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(custom-group-tag
        ((,class (:inherit ,s-variable-pitch
                           :foreground ,blue
-                          :height ,ymonokai-height-plus-3))))
+                          :height ,monokai-height-plus-3))))
 
      `(custom-group-tag-1
        ((,class (:inherit ,s-variable-pitch
                           :foreground ,red
-                          :height ,ymonokai-height-plus-3))))
+                          :height ,monokai-height-plus-3))))
 
      `(custom-state
        ((,class (:foreground ,green))))
@@ -1006,34 +999,34 @@ Takes and optional `FRAME' as reference."
      ;; diff
      `(diff-added
        ((,class (:foreground ,green
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(diff-changed
        ((,class (:foreground ,blue
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(diff-removed
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(diff-header
-       ((,class (:background ,ymonokai-bg))))
+       ((,class (:background ,monokai-bg))))
 
      `(diff-file-header
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg
                              :weight bold))))
 
      `(diff-refine-added
-       ((,class :foreground ,ymonokai-bg
+       ((,class :foreground ,monokai-bg
                 :background ,green)))
 
      `(diff-refine-change
-       ((,class :foreground ,ymonokai-bg
+       ((,class :foreground ,monokai-bg
                 :background ,blue)))
 
      `(diff-refine-removed
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :background ,red))))
 
      ;; ediff
@@ -1050,28 +1043,28 @@ Takes and optional `FRAME' as reference."
        ((,class (:background ,blue-lc))))
 
      `(ediff-even-diff-A
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-fg-lc ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-fg-lc ))))
 
      `(ediff-odd-diff-A
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-fg-hc ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-fg-hc ))))
 
      `(ediff-even-diff-B
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-fg-hc ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-fg-hc ))))
 
      `(ediff-odd-diff-B
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-fg-lc ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-fg-lc ))))
 
      `(ediff-even-diff-C
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-fg ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-fg ))))
 
      `(ediff-odd-diff-C
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-bg ))))
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-bg ))))
 
      ;; diff-hl
      `(diff-hl-change
@@ -1130,13 +1123,13 @@ Takes and optional `FRAME' as reference."
 
      ;; elfeed
      `(elfeed-search-date-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(elfeed-search-feed-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(elfeed-search-tag-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(elfeed-search-title-face
        ((,class (:foreground ,cyan))))
@@ -1175,7 +1168,7 @@ Takes and optional `FRAME' as reference."
      ;; epc
      `(epc:face-title
        ((,class (:foreground ,blue
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :underline nil))))
 
@@ -1193,11 +1186,11 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit font-lock-warning-face))))
 
      `(erc-default-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(erc-highlight-face
        ((,class (:inherit erc-default-face
-                          :background ,ymonokai-hl))))
+                          :background ,monokai-hl))))
 
      `(erc-direct-msg-face
        ((,class (:inherit erc-default-face))))
@@ -1235,7 +1228,7 @@ Takes and optional `FRAME' as reference."
 
      `(erc-prompt-face
        ((,class (:foreground ,orange
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight bold))))
 
      `(erc-timestamp-face
@@ -1267,7 +1260,7 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(eshell-ls-unreadable
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(eshell-ls-missing
        ((,class (:inherit font-lock-warning-face))))
@@ -1285,19 +1278,19 @@ Takes and optional `FRAME' as reference."
 
      ;; fic
      `(fic-author-face
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,orange
                              :underline t
                              :slant italic))))
 
      `(fic-face
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,orange
                              :weight normal
                              :slant italic))))
 
      `(font-lock-fic-face
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,orange
                              :weight normal
                              :slant italic))))
@@ -1404,22 +1397,22 @@ Takes and optional `FRAME' as reference."
      ;; git-gutter
      `(git-gutter:added
        ((,class (:background ,green
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter:deleted
        ((,class (:background ,red
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter:modified
        ((,class (:background ,blue
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter:unchanged
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-bg
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      ;; git-gutter-fr
@@ -1438,22 +1431,22 @@ Takes and optional `FRAME' as reference."
      ;; git-gutter+ and git-gutter+-fr
      `(git-gutter+-added
        ((,class (:background ,green
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter+-deleted
        ((,class (:background ,red
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter+-modified
        ((,class (:background ,blue
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter+-unchanged
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-bg
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(git-gutter-fr+-added
@@ -1473,7 +1466,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,blue))))
 
      `(guide-key/key-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(guide-key/prefix-command-face
        ((,class (:foreground ,green))))
@@ -1566,7 +1559,7 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(gnus-summary-high-unread
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight bold))))
 
      `(gnus-summary-low-ancient
@@ -1579,7 +1572,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,orange))))
 
      `(gnus-summary-low-unread
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(gnus-summary-normal-ancient
        ((,class (:foreground ,blue))))
@@ -1591,7 +1584,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,orange))))
 
      `(gnus-summary-normal-unread
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(gnus-summary-selected
        ((,class (:foreground ,yellow
@@ -1649,19 +1642,19 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,blue-lc))))
 
      `(gnus-group-news-low-empty
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(gnus-signature
        ((,class (:foreground ,yellow))))
 
      `(gnus-x-face
-       ((,class (:background ,ymonokai-fg
-                             :foreground ,ymonokai-bg))))
+       ((,class (:background ,monokai-fg
+                             :foreground ,monokai-bg))))
 
 
      ;; helm (these probably needs tweaking)
      `(helm-apt-deinstalled
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(helm-apt-installed
        ((,class (:foreground ,green))))
@@ -1670,7 +1663,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit helm-ff-directory))))
 
      `(helm-bookmark-file
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(helm-bookmark-gnus
        ((,class (:foreground ,cyan))))
@@ -1692,36 +1685,36 @@ Takes and optional `FRAME' as reference."
 
      `(helm-buffer-saved-out
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :inverse-video t))))
 
      `(helm-buffer-size
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(helm-candidate-number
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :bold t))))
 
      `(helm-ff-directory
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,blue))))
 
      `(helm-ff-executable
        ((,class (:foreground ,green))))
 
      `(helm-ff-file
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg))))
 
      `(helm-ff-invalid-symlink
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,orange
                              :slant italic))))
 
      `(helm-ff-prefix
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(helm-ff-symlink
        ((,class (:foreground ,cyan))))
@@ -1738,10 +1731,8 @@ Takes and optional `FRAME' as reference."
 
      `(helm-grep-match                ; used for find-file-grep & occur
        ;((,class (:inherit match))))
-       ;((,class (:inherit isearch))))   ;oracleyue, modified
-       ;((,class (:inherit lazy-highlight))))      ;oracleyue, modified
        ((,class (:foreground ,magenta
-                             :background ,ymonokai-bg))))      ;oracleyue, modified
+                             :background ,monokai-bg))))      ;oracleyue, modified
 
      `(helm-grep-running
        ((,class (:foreground ,red))))
@@ -1750,11 +1741,11 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit header-line))))
 
      `(helm-lisp-completion-info
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(helm-lisp-show-completion
        ((,class (:foreground ,yellow
-                             :background ,ymonokai-hl
+                             :background ,monokai-hl
                              :bold t))))
 
      `(helm-M-x-key
@@ -1768,16 +1759,15 @@ Takes and optional `FRAME' as reference."
      `(helm-match                ; used for M-x match
        ;((,class (:inherit match))))                ;oracleyue, commented
        ((,class (:foreground ,magenta
-                             :background ,ymonokai-bg))))      ;oracleyue, modified
-       
+                             :background ,monokai-bg))))      ;oracleyue, modified
+
      `(helm-selection
-       ((,class (:background ,region-bg        ;oracleyue, default "ymonokai-hl"
-                             ;:foreground ,red            ;oracleyue, added
+       ((,class (:background ,region-bg        ;oracleyue, default "monokai-hl"
                              :underline t))))    ;oracleyue, modified, default "t"
 
      `(helm-selection-line
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :underline nil))))
 
      `(helm-separator
@@ -1785,20 +1775,20 @@ Takes and optional `FRAME' as reference."
 
      `(helm-source-header
        ((,class (:background ,blue-lc
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :underline nil))))
 
      `(helm-swoop-target-line-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(helm-swoop-target-line-block-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(helm-swoop-target-word-face
        ((,class (:foreground ,red    ;oracleyue, modified; default "magenta"
                              ;:background unspecified))))
-                             :background ,ymonokai-bg))))    ;oracleyue, added
-     
+                             :background ,monokai-bg))))    ;oracleyue, added
+
      `(helm-swoop-line-number-face    ;oracleyue, added
        ((,class(:foreground ,green))))
 
@@ -1809,7 +1799,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,red))))
 
      `(helm-visible-mark
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,magenta :bold t))))
 
      ;; helm-ls-git
@@ -1855,8 +1845,8 @@ Takes and optional `FRAME' as reference."
                              :background ,blue-hc))))
 
      `(hi-black-b
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg
                              :weight bold))))
 
      `(hi-blue-b
@@ -1872,8 +1862,8 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(hi-black-hb
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg
                              :weight bold))))
 
 
@@ -1888,19 +1878,19 @@ Takes and optional `FRAME' as reference."
 
      ;; highlight-indentation
      `(highlight-indentation-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(highlight-indentation-current-column-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      ;; hl-line-mode
      `(hl-line
-       ((,class (:background ,ymonokai-hl-line
+       ((,class (:background ,monokai-hl-line
                              ;; :inherit t      ;oracleyue: commented
                              ))))
 
      `(hl-line-face
-       ((,class (:background ,ymonokai-hl-line
+       ((,class (:background ,monokai-hl-line
                              ;; :inherit t    ;oracleyue: commented
                              ))))
 
@@ -1910,7 +1900,7 @@ Takes and optional `FRAME' as reference."
                              :weight normal))))
 
      `(ido-only-match
-       ((,class (:foreground ,ymonokai-bg
+       ((,class (:foreground ,monokai-bg
                              :background ,yellow
                              :weight normal))))
 
@@ -1923,7 +1913,7 @@ Takes and optional `FRAME' as reference."
 
      `(ido-indicator
        ((,class (:background ,red
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :width condensed))))
 
      `(ido-virtual
@@ -1954,10 +1944,10 @@ Takes and optional `FRAME' as reference."
                          :foreground ,green))))
 
      `(jabber-chat-text-foreign
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(jabber-chat-text-local
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(jabber-chat-rare-time-face
        ((,class (:underline t
@@ -1981,7 +1971,7 @@ Takes and optional `FRAME' as reference."
                          :foreground ,red))))
 
      `(jabber-roster-user-offline
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(jabber-roster-user-online
        ((,class (:weight bold
@@ -2037,8 +2027,8 @@ Takes and optional `FRAME' as reference."
 
      ;; linum-mode
      `(linum
-       ((,class (:foreground ,ymonokai-line-num
-                 ;:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-line-num
+                 ;:foreground ,monokai-comments
                              :background ,s-fringe-bg))))
 
      ;; lusty-explorer
@@ -2064,14 +2054,14 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(magit-item-highlight
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :weight unspecified))))
 
      `(magit-log-author
        ((,class (:foreground ,cyan))))
 
      `(magit-log-graph
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(magit-log-head-label-bisect-bad
        ((,class (:background ,red-hc
@@ -2084,7 +2074,7 @@ Takes and optional `FRAME' as reference."
                              :box 1))))
 
      `(magit-log-head-label-default
-       ((,class (:background ,ymonokai-hl :box 1))))
+       ((,class (:background ,monokai-hl :box 1))))
 
      `(magit-log-head-label-local
        ((,class (:background ,blue-lc
@@ -2115,19 +2105,19 @@ Takes and optional `FRAME' as reference."
 
      `(markdown-header-face-1
        ((,class (:inherit markdown-header-face
-                          :height ,ymonokai-height-plus-4))))
+                          :height ,monokai-height-plus-4))))
 
      `(markdown-header-face-2
        ((,class (:inherit markdown-header-face
-                          :height ,ymonokai-height-plus-3))))
+                          :height ,monokai-height-plus-3))))
 
      `(markdown-header-face-3
        ((,class (:inherit markdown-header-face
-                          :height ,ymonokai-height-plus-2))))
+                          :height ,monokai-height-plus-2))))
 
      `(markdown-header-face-4
        ((,class (:inherit markdown-header-face
-                          :height ,ymonokai-height-plus-1))))
+                          :height ,monokai-height-plus-1))))
 
      `(markdown-header-face-5
        ((,class (:inherit markdown-header-face))))
@@ -2137,21 +2127,21 @@ Takes and optional `FRAME' as reference."
 
      ;; message-mode
      `(message-cited-text
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(message-header-name
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(message-header-other
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight normal))))
 
      `(message-header-to
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight normal))))
 
      `(message-header-cc
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight normal))))
 
      `(message-header-newsgroups
@@ -2170,7 +2160,7 @@ Takes and optional `FRAME' as reference."
                              :weight bold))))
 
      `(message-separator
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              :slant italic))))
 
      ;; mew
@@ -2196,7 +2186,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,blue))))
 
      `(mew-face-header-marginal
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight bold))))
 
      `(mew-face-header-warning
@@ -2212,7 +2202,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,orange))))
 
      `(mew-face-body-comment
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :slant italic))))
 
      `(mew-face-body-cite1
@@ -2279,33 +2269,33 @@ Takes and optional `FRAME' as reference."
 
      `(moccur-edit-done-face
        ((,class
-         (:foreground ,ymonokai-comments
-                      :background ,ymonokai-bg
+         (:foreground ,monokai-comments
+                      :background ,monokai-bg
                       :slant italic))))
 
      `(moccur-edit-face
 
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(moccur-edit-file-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(moccur-edit-reject-face
        ((,class (:foreground ,red))))
 
      `(moccur-face
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :weight bold))))
 
      `(search-buffers-face
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :weight bold))))
 
      `(search-buffers-header-face
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,yellow
                              :weight bold))))
 
@@ -2361,8 +2351,8 @@ Takes and optional `FRAME' as reference."
      `(mu4e-header-highlight-face
        ((,class (:inherit unspecified
                           :foreground unspecified
-                          :background ,ymonokai-hl
-                          :underline ,ymonokai-emph
+                          :background ,monokai-hl
+                          :underline ,monokai-emph
                           :weight normal))))
 
 
@@ -2423,7 +2413,7 @@ Takes and optional `FRAME' as reference."
                           :weight bold))))
 
      `(mu4e-view-contact-face
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :weight normal))))
 
      `(mu4e-view-header-key-face
@@ -2445,7 +2435,7 @@ Takes and optional `FRAME' as reference."
 
      ;; mumamo
      `(mumamo-background-chunk-submode1
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      ;; nav
      `(nav-face-heading
@@ -2461,48 +2451,48 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,red))))
 
      `(nav-face-file
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(nav-face-hfile
        ((,class (:foreground ,red))))
 
      ;; nav-flash
      `(nav-flash-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      ;; org-mode
      `(org-agenda-structure
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-hl
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-hl
                              :weight bold
                              :slant normal
                              :inverse-video nil
-                             :height ,ymonokai-height-plus-1
+                             :height ,monokai-height-plus-1
                              :underline nil
-                             :box (:line-width 2 :color ,ymonokai-bg)))))
+                             :box (:line-width 2 :color ,monokai-bg)))))
 
      `(org-agenda-calendar-event
-       ((,class (:foreground ,ymonokai-emph))))
+       ((,class (:foreground ,monokai-emph))))
 
      `(org-agenda-calendar-sexp
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :slant italic))))
 
      `(org-agenda-date
-       ((,class (:foreground ,ymonokai-comments
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-comments
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video nil
                              :overline nil
                              :slant normal
                              :height 1.0
-                             :box (:line-width 2 :color ,ymonokai-bg)))) t)
+                             :box (:line-width 2 :color ,monokai-bg)))) t)
 
      `(org-agenda-date-weekend
        ((,class (:inherit org-agenda-date
                           :inverse-video nil
                           :background unspecified
-                          :foreground ,ymonokai-comments
+                          :foreground ,monokai-comments
                           :weight unspecified
                           :underline t
                           :overline nil
@@ -2516,65 +2506,56 @@ Takes and optional `FRAME' as reference."
                           :overline nil
                           :box unspecified
                           :foreground ,blue
-                          :background ,ymonokai-bg))) t)
+                          :background ,monokai-bg))) t)
 
      `(org-agenda-done
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              :slant italic))) t)
 
      `(org-archived
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              ;; :inherit 'fixed-pitch             ; oracleyue: added
                              :weight normal))))
 
      `(org-latex-and-export-specials    ; oracleyue: added
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              ;; :inherit 'fixed-pitch     ; oracleyue: added
-                             ))))       
-                             
+                             ))))
+
      `(org-document-info     ; oracleyue: added
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              ;; :inherit 'fixed-pitch     ; oracleyue: added
-                             ))))        
+                             ))))
      `(org-document-info-keyword     ; oracleyue: added
-       ((,class (:foreground ,ymonokai-comments
-     ;; :inherit 'fixed-pitch           ; oracleyue: added
-                             ))))             
+       ((,class (:foreground ,monokai-comments))))
 
      `(org-block
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
-     ;; `(org-block-background                    ; oracleyue: added
-     ;;   ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-     ;;             :inherit 'fixed-pitch))))     ; oracleyue: added
+     `(org-block-background                    ; oracleyue: added
+       ((,class (:inherit 'fixed-pitch
+                          :foreground ,blue
+                          :background "#383830"))))
 
      `(org-block-begin-line
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                           :slant italic))))
+
      `(org-block-end-line                              ; oracleyue: added
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                           :slant italic))))
 
      `(org-checkbox
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg
                              :box (:line-width 1 :style released-button)))))
 
-     `(org-code
-       ;; ((,class (:foreground ,ymonokai-comments))))
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,green))))   ; oracleyue: modified, default as commented; for the coeds enclosed by "~"
-     `(org-verbatim
-       ((,class (;:family "DejaVu Sans Mono"   ; oracleyue: added
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
-                          :foreground ,blue))))    ; oracleyue: added; for the codes enclosed by "="
+     `(org-code   ; oracleyue: modified; for the coeds enclosed by "~"
+       ;; ((,class (:foreground ,monokai-comments))))
+       ((,class (:foreground ,blue))))
+
+     `(org-verbatim  ; oracleyue: added; for the codes enclosed by "="
+       ((,class (:foreground ,green))))
 
      `(org-date
        ((,class (:foreground ,blue :underline t))))
@@ -2583,7 +2564,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:weight bold :foreground ,green))))
 
      `(org-ellipsis
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(org-formula
        ((,class (:foreground ,yellow))))
@@ -2592,39 +2573,41 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,green))))
 
      `(org-hide
-       ((,class (:foreground ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-bg))))
 
      ;; oracleyue: commented; adding "bold"
      `(org-level-1
        ((,class (:inherit ,s-variable-pitch
-                          ;; :height ,ymonokai-height-plus-4
+                          ;; :height ,monokai-height-plus-4
                           :weight bold
-                          :height 1.2    ; oracleyue: added
+                          :height 1.1    ; oracleyue: added
                           :foreground ,red))))
 
      `(org-level-2
        ((,class (:inherit ,s-variable-pitch
-                          ;; :height ,ymonokai-height-plus-3
+                          ;; :height ,monokai-height-plus-3
                           :weight semi-bold     ;oracleyue: bold by default
-                          :height 1.15    ; oracleyue: added
+                          :height 1.05    ; oracleyue: added
                           :foreground ,green))))
 
      `(org-level-3
        ((,class (:inherit ,s-variable-pitch
-                          ;; :height ,ymonokai-height-plus-2
+                          ;; :height ,monokai-height-plus-2
                           :weight bold
-                          :height 1.1    ; oracleyue: added
+                          :height 1.02    ; oracleyue: added
                           :foreground ,blue))))
 
      `(org-level-4
        ((,class (:inherit ,s-variable-pitch
-                          ;; :height ,ymonokai-height-plus-1
+                          ;; :height ,monokai-height-plus-1
                           :weight bold
-                          :height 1.1    ; oracleyue: added
+                          :height 1.02    ; oracleyue: added
                           :foreground ,orange))))
 
      `(org-level-5
        ((,class (:inherit ,s-variable-pitch
+                          :weight bold   ; oracleyue: added
+                          :height 1.02
                           :foreground ,cyan))))
 
      `(org-level-6
@@ -2657,20 +2640,19 @@ Takes and optional `FRAME' as reference."
                              :weight normal))))
 
      `(org-special-keyword
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              ;; :inherit 'fixed-pitch             ; oracleyue: added
                              :weight bold))))
 
      `(org-table
-       ((,class (
-                 ;; :inherit 'fixed-pitch             ; oracleyue: added
+       ((,class (;; :inherit 'fixed-pitch             ; oracleyue: added
                           :foreground ,green))))
 
      `(org-tag
        ((,class (:weight bold))))
 
      `(org-time-grid
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(org-todo
        ((,class (:foreground ,red
@@ -2717,7 +2699,7 @@ Takes and optional `FRAME' as reference."
 
      ;; latest additions
      `(org-agenda-dimmed-todo-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(org-agenda-restriction-lock
        ((,class (:background ,yellow))))
@@ -2726,7 +2708,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:background ,yellow))))
 
      `(org-column
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :strike-through nil
                              :underline nil
                              :slant normal
@@ -2734,7 +2716,7 @@ Takes and optional `FRAME' as reference."
                              :inherit default))))
 
      `(org-column-title
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :underline t
                              :weight bold))))
 
@@ -2743,13 +2725,13 @@ Takes and optional `FRAME' as reference."
                              :inverse-video t))))
 
      `(org-document-info
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(org-document-title
        ((,class (:inherit ,s-variable-pitch
-                          :foreground ,ymonokai-emph
+                          :foreground ,monokai-emph
                           :weight bold
-                          :height ,ymonokai-height-plus-1)))) ; oracleyue: 4
+                          :height ,monokai-height-plus-1)))) ; oracleyue: 4
 
      `(org-drawer
        ((,class (:foreground ,cyan))))
@@ -2793,7 +2775,7 @@ Takes and optional `FRAME' as reference."
 
      ;; parenfaceu
      `(paren-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      ;; pretty-mode
      `(pretty-mode-symbol-face
@@ -2802,35 +2784,35 @@ Takes and optional `FRAME' as reference."
 
      ;; popup
      `(popup-face
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      `(popup-isearch-match
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(popup-menu-face
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      `(popup-menu-mouse-face
        ((,class (:background ,blue
-                             :foreground ,ymonokai-fg))))
+                             :foreground ,monokai-fg))))
 
      `(popup-menu-selection-face
        ((,class (:background ,magenta
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(popup-scroll-bar-background-face
-       ((,class (:background ,ymonokai-comments))))
+       ((,class (:background ,monokai-comments))))
 
      `(popup-scroll-bar-foreground-face
-       ((,class (:background ,ymonokai-emph))))
+       ((,class (:background ,monokai-emph))))
 
      ;; oracleyue: commented
      `(popup-tip-face
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      ;; powerline
      `(powerline-active1
@@ -2883,68 +2865,68 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,orange))))
 
      `(rainbow-delimiters-unmatched-face
-       ((,class (:foreground ,ymonokai-fg
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-fg
+                             :background ,monokai-bg
                              :inverse-video t))))
 
      ;; rhtm-mode
      `(erb-face
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg))))
 
      `(erb-delim-face
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(erb-exec-face
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg))))
 
      `(erb-exec-delim-face
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(erb-out-face
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg))))
 
      `(erb-out-delim-face
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
      `(erb-comment-face
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg))))
 
      `(erb-comment-delim-face
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg))))
+                             :background ,monokai-bg))))
 
 
      ;; rst-mode
      `(rst-level-1-face
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(rst-level-2-face
        ((,class (:background ,cyan
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(rst-level-3-face
        ((,class (:background ,blue
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(rst-level-4-face
        ((,class (:background ,violet
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(rst-level-5-face
        ((,class (:background ,magenta
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      `(rst-level-6-face
        ((,class (:background ,red
-                             :foreground ,ymonokai-bg))))
+                             :foreground ,monokai-bg))))
 
      ;; rpm-mode
      `(rpm-spec-dir-face
@@ -2986,13 +2968,13 @@ Takes and optional `FRAME' as reference."
 
      ;; smartparens
      `(sp-pair-overlay-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(sp-wrap-overlay-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(sp-wrap-tag-overlay-face
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(sp-show-pair-enclosing
        ((,class (:inherit highlight))))
@@ -3000,26 +2982,26 @@ Takes and optional `FRAME' as reference."
      `(sp-show-pair-match-face
 
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
      `(sp-show-pair-mismatch-face
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
      ;; show-paren
      `(show-paren-match
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
      `(show-paren-mismatch
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
@@ -3027,19 +3009,19 @@ Takes and optional `FRAME' as reference."
      `(paren-face-match
 
        ((,class (:foreground ,cyan
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
      `(paren-face-mismatch
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
      `(paren-face-no-match
        ((,class (:foreground ,red
-                             :background ,ymonokai-bg
+                             :background ,monokai-bg
                              :weight normal
                              :inverse-video t))))
 
@@ -3050,7 +3032,7 @@ Takes and optional `FRAME' as reference."
      ;; speedbar
      `(speedbar-button-face
        ((,class (:inherit ,s-variable-pitch
-                          :foreground ,ymonokai-comments))))
+                          :foreground ,monokai-comments))))
 
      `(speedbar-directory-face
        ((,class (:inherit ,s-variable-pitch
@@ -3058,11 +3040,11 @@ Takes and optional `FRAME' as reference."
 
      `(speedbar-file-face
        ((,class (:inherit ,s-variable-pitch
-                          :foreground ,ymonokai-fg))))
+                          :foreground ,monokai-fg))))
 
      `(speedbar-highlight-face
        ((,class (:inherit ,s-variable-pitch
-                          :background ,ymonokai-hl))))
+                          :background ,monokai-hl))))
 
      `(speedbar-selected-face
        ((,class (:inherit ,s-variable-pitch
@@ -3072,7 +3054,7 @@ Takes and optional `FRAME' as reference."
      `(speedbar-separator-face
        ((,class (:inherit ,s-variable-pitch
                           :background ,blue
-                          :foreground ,ymonokai-bg
+                          :foreground ,monokai-bg
                           :overline ,cyan-lc))))
 
      `(speedbar-tag-face
@@ -3082,27 +3064,27 @@ Takes and optional `FRAME' as reference."
      ;; sunrise commander headings
      `(sr-active-path-face
        ((,class (:background ,blue
-                             :foreground ,ymonokai-bg
-                             :height ,ymonokai-height-plus-1
+                             :foreground ,monokai-bg
+                             :height ,monokai-height-plus-1
                              :weight bold))))
 
      `(sr-editing-path-face
        ((,class (:background ,yellow
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold
-                             :height ,ymonokai-height-plus-1))))
+                             :height ,monokai-height-plus-1))))
 
      `(sr-highlight-path-face
        ((,class (:background ,green
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold
-                             :height ,ymonokai-height-plus-1))))
+                             :height ,monokai-height-plus-1))))
 
      `(sr-passive-path-face
-       ((,class (:background ,ymonokai-comments
-                             :foreground ,ymonokai-bg
+       ((,class (:background ,monokai-comments
+                             :foreground ,monokai-bg
                              :weight bold
-                             :height ,ymonokai-height-plus-1))))
+                             :height ,monokai-height-plus-1))))
 
      ;; sunrise commander marked
      `(sr-marked-dir-face
@@ -3113,12 +3095,12 @@ Takes and optional `FRAME' as reference."
 
      `(sr-alt-marked-dir-face
        ((,class (:background ,magenta
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      `(sr-alt-marked-file-face
        ((,class (:background ,magenta
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      ;; sunrise commander fstat
@@ -3143,38 +3125,38 @@ Takes and optional `FRAME' as reference."
 
      ;; sunrise commander file types
      `(sr-compressed-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(sr-encrypted-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(sr-log-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(sr-packaged-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(sr-html-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(sr-xml-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      ;; sunrise commander misc
      `(sr-clex-hotchar-face
        ((,class (:background ,red
-                             :foreground ,ymonokai-bg
+                             :foreground ,monokai-bg
                              :weight bold))))
 
      ;; table
      `(table-cell
-       ((,class (:foreground ,ymonokai-fg
-                             :background ,ymonokai-hl))))
+       ((,class (:foreground ,monokai-fg
+                             :background ,monokai-hl))))
 
      ;; term
      `(term-color-black
-       ((t (:foreground ,ymonokai-bg
-                        :background ,ymonokai-hl))))
+       ((t (:foreground ,monokai-bg
+                        :background ,monokai-hl))))
 
      `(term-color-red
        ((t (:foreground ,red
@@ -3201,8 +3183,8 @@ Takes and optional `FRAME' as reference."
                         :background ,cyan-d))))
 
      `(term-color-white
-       ((t (:foreground ,ymonokai-emph
-                        :background ,ymonokai-fg))))
+       ((t (:foreground ,monokai-emph
+                        :background ,monokai-fg))))
 
      '(term-default-fg-color
        ((t (:inherit term-color-white))))
@@ -3225,11 +3207,11 @@ Takes and optional `FRAME' as reference."
 
      `(tuareg-font-lock-multistage-face
        ((,class (:foreground ,blue
-                             :background ,ymonokai-hl
+                             :background ,monokai-hl
                              :weight bold))))
 
      `(tuareg-font-lock-operator-face
-       ((,class (:foreground ,ymonokai-emph))))
+       ((,class (:foreground ,monokai-emph))))
 
      `(tuareg-font-lock-error-face
        ((,class (:foreground ,yellow
@@ -3245,8 +3227,8 @@ Takes and optional `FRAME' as reference."
 
      ;; undo-tree
      `(undo-tree-visualizer-default-face
-       ((,class (:foreground ,ymonokai-comments
-                             :background ,ymonokai-bg))))
+       ((,class (:foreground ,monokai-comments
+                             :background ,monokai-bg))))
 
      `(undo-tree-visualizer-unmodified-face
        ((,class (:foreground ,green))))
@@ -3256,8 +3238,8 @@ Takes and optional `FRAME' as reference."
                              :inverse-video t))))
 
      `(undo-tree-visualizer-active-branch-face
-       ((,class (:foreground ,ymonokai-emph
-                             :background ,ymonokai-bg
+       ((,class (:foreground ,monokai-emph
+                             :background ,monokai-bg
                              :weight bold))))
 
      `(undo-tree-visualizer-register-face
@@ -3276,83 +3258,83 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit link-visited))))
 
      `(w3m-form
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg))))
 
      `(w3m-header-line-location-title
 
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,yellow))))
 
      `(w3m-header-line-location-content
 
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      `(w3m-bold
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :weight bold))))
 
      `(w3m-image-anchor
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,cyan
                              :inherit link))))
 
      `(w3m-image
-       ((,class (:background ,ymonokai-bg
+       ((,class (:background ,monokai-bg
                              :foreground ,cyan))))
 
      `(w3m-lnum-minibuffer-prompt
-       ((,class (:foreground ,ymonokai-emph))))
+       ((,class (:foreground ,monokai-emph))))
 
      `(w3m-lnum-match
-       ((,class (:background ,ymonokai-hl))))
+       ((,class (:background ,monokai-hl))))
 
      `(w3m-lnum
        ((,class (:underline nil :bold nil
                             :foreground ,red))))
 
      `(w3m-session-select
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(w3m-session-selected
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :bold t
                              :underline t))))
 
      `(w3m-tab-background
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg))))
 
      `(w3m-tab-selected-background
 
-       ((,class (:background ,ymonokai-bg
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-bg
+                             :foreground ,monokai-fg))))
 
      `(w3m-tab-mouse
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,yellow))))
 
      `(w3m-tab-selected
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-emph
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-emph
                              :bold t))))
 
      `(w3m-tab-unselected
-       ((,class (:background ,ymonokai-hl
-                             :foreground ,ymonokai-fg))))
+       ((,class (:background ,monokai-hl
+                             :foreground ,monokai-fg))))
 
      `(w3m-tab-selected-retrieving
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,red))))
 
      `(w3m-tab-unselected-retrieving
 
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,orange))))
 
      `(w3m-tab-unselected-unseen
-       ((,class (:background ,ymonokai-hl
+       ((,class (:background ,monokai-hl
                              :foreground ,violet))))
 
      ;; web-mode
@@ -3360,7 +3342,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,red))))
 
      `(web-mode-comment-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      `(web-mode-constant-face
        ((,class (:foreground ,blue
@@ -3370,7 +3352,7 @@ Takes and optional `FRAME' as reference."
        ((,class
          (:underline unspecified
                      :weight unspecified
-                     :background ,ymonokai-hl))))
+                     :background ,monokai-hl))))
 
      `(web-mode-css-at-rule-face
        ((,class (:foreground ,violet
@@ -3381,7 +3363,7 @@ Takes and optional `FRAME' as reference."
                              :slant italic))))
 
      `(web-mode-doctype-face
-       ((,class (:foreground ,ymonokai-comments
+       ((,class (:foreground ,monokai-comments
                              :slant italic
                              :weight bold))))
 
@@ -3476,7 +3458,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit web-mode-string-face))))
 
      `(web-mode-param-name-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(web-mode-part-comment-face
        ((,class (:inherit web-mode-comment-face))))
@@ -3496,13 +3478,13 @@ Takes and optional `FRAME' as reference."
      ;; whitespace-mode
      `(whitespace-space
        ((,class (:background unspecified
-                             :foreground ,ymonokai-comments
+                             :foreground ,monokai-comments
                              :inverse-video unspecified
                              :slant italic))))
 
      `(whitespace-hspace
        ((,class (:background unspecified
-                             :foreground ,ymonokai-emph
+                             :foreground ,monokai-emph
                              :inverse-video unspecified))))
 
      `(whitespace-tab
@@ -3513,7 +3495,7 @@ Takes and optional `FRAME' as reference."
 
      `(whitespace-newline
        ((,class(:background unspecified
-                            :foreground ,ymonokai-comments
+                            :foreground ,monokai-comments
                             :inverse-video unspecified))))
 
      `(whitespace-trailing
@@ -3561,7 +3543,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,blue))))
 
      `(wl-highlight-folder-zero-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(wl-highlight-folder-unknown-face
        ((,class (:foreground ,blue))))
@@ -3600,20 +3582,20 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,green))))
 
      `(wl-highlight-message-unimportant-header-contents
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(wl-highlight-summary-answered-face
        ((,class (:foreground ,blue))))
 
      `(wl-highlight-summary-disposed-face
-       ((,class (:foreground ,ymonokai-fg
+       ((,class (:foreground ,monokai-fg
                              :slant italic))))
 
      `(wl-highlight-summary-new-face
        ((,class (:foreground ,blue))))
 
      `(wl-highlight-summary-normal-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(wl-highlight-summary-thread-top-face
        ((,class (:foreground ,yellow))))
@@ -3622,7 +3604,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:foreground ,magenta))))
 
      `(wl-highlight-summary-refiled-face
-       ((,class (:foreground ,ymonokai-fg))))
+       ((,class (:foreground ,monokai-fg))))
 
      `(wl-highlight-summary-displaying-face
        ((,class (:underline t :weight bold))))
@@ -3633,7 +3615,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit error))))
 
      `(weechat-highlight-face
-       ((,class (:foreground ,ymonokai-emph
+       ((,class (:foreground ,monokai-emph
                              :weight bold))))
 
      `(weechat-nick-self-face
@@ -3645,7 +3627,7 @@ Takes and optional `FRAME' as reference."
        ((,class (:inherit minibuffer-prompt))))
 
      `(weechat-time-face
-       ((,class (:foreground ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments))))
 
      ;; which-func-mode
      `(which-func
@@ -3657,31 +3639,28 @@ Takes and optional `FRAME' as reference."
 
      ;; yascroll
      `(yascroll:thumb-text-area
-       ((,class (:foreground ,ymonokai-comments
-                             :background ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments
+                             :background ,monokai-comments))))
 
      `(yascroll:thumb-fringe
-       ((,class (:foreground ,ymonokai-comments
-                             :background ,ymonokai-comments))))
+       ((,class (:foreground ,monokai-comments
+                             :background ,monokai-comments))))
 
      ;; zencoding
      `(zencoding-preview-input
-       ((,class (:background ,ymonokai-hl
-                             :box ,ymonokai-emph)))))
+       ((,class (:background ,monokai-hl
+                             :box ,monokai-emph)))))
 
     (custom-theme-set-variables
-     'ymonokai
-     `(ansi-color-names-vector [,ymonokai-bg ,red ,green ,yellow
-                                            ,blue ,magenta ,cyan ,ymonokai-fg])
-
-     ;; oracleyue: added
-     ;`(linum-format " %d ")
+     'monokai
+     `(ansi-color-names-vector [,monokai-bg ,red ,green ,yellow
+                                            ,blue ,magenta ,cyan ,monokai-fg])
 
      ;; compilation
      `(compilation-message-face 'default)
 
      ;; fill-column-indicator
-     `(fci-rule-color ,ymonokai-hl)
+     `(fci-rule-color ,monokai-hl)
 
      ;; magit
      `(magit-diff-use-overlays nil)
@@ -3691,8 +3670,8 @@ Takes and optional `FRAME' as reference."
 
      ;; highlight-tail
      `(highlight-tail-colors
-       '((,ymonokai-hl . 0)(,green-lc . 20)(,cyan-lc . 30)(,blue-lc . 50)
-         (,yellow-lc . 60)(,orange-lc . 70)(,magenta-lc . 85)(,ymonokai-hl . 100)))
+       '((,monokai-hl . 0)(,green-lc . 20)(,cyan-lc . 30)(,blue-lc . 50)
+         (,yellow-lc . 60)(,orange-lc . 70)(,magenta-lc . 85)(,monokai-hl . 100)))
 
      ;; syslog-mode
      `(syslog-ip-face
@@ -3752,25 +3731,25 @@ Takes and optional `FRAME' as reference."
 
      ;; weechat
      `(weechat-color-list
-       '(unspecified ,ymonokai-bg ,ymonokai-hl
+       '(unspecified ,monokai-bg ,monokai-hl
                      ,red-d ,red
                      ,green-d ,green
                      ,yellow-d ,yellow
                      ,blue-d ,blue
                      ,magenta-d ,magenta
                      ,cyan-d ,cyan
-                     ,ymonokai-fg ,ymonokai-emph)))))
+                     ,monokai-fg ,monokai-emph)))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(create-ymonokai-theme)
+(create-monokai-theme)
 
-(add-hook 'server-visit-hook 'create-ymonokai-theme )
+(add-hook 'server-visit-hook 'create-monokai-theme )
 
-(provide-theme 'ymonokai)
+(provide-theme 'monokai)
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -3778,4 +3757,4 @@ Takes and optional `FRAME' as reference."
 ;; fill-column: 95
 ;; End:
 
-;;; ymonokai-theme.el ends here
+;;; monokai-theme.el ends here
