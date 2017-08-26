@@ -76,6 +76,10 @@
 ;; customize more themes (mode-line)
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
+;; start emacs server (use =emacsclient -a "" -c= anywhere else)
+;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
+;; (server-start)
+
 
 ;;
 ;; Global Flags for Feature Control

@@ -12,7 +12,7 @@
  set t_Co=256			" vim color scheme
  autocmd FileType tex setlocal spell spelllang=en_us 
  autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us 
- "set spell spelllang=en_us      " set spell 
+ set spell spelllang=en_us      " set spell 
  set hls                        " set highlight search
  set noic                       " set no case ignore
  
@@ -25,41 +25,30 @@
  set shiftwidth=4 
  set softtabstop=4 
  
- " color schemes for vim
+" --------------------------------------------------------------------------
+" color schemes for vim
+" --------------------------------------------------------------------------
  if ! has("gui_running")
-    " colorscheme grb256 
-    " colorscheme freya
     colorscheme lucius 
     LuciusDark
-    " LuciusWhite
-    " LuciusLight
-    " LuciusBlack 
-    " let g:lucius_contrast='high'
-    " let g:lucius_use_bold=1
-    
+
     " syntax enable
     " colorscheme monokai
  endif
- 
+
  syntax on
  filetype plugin on
  filetype on
  set title			" enable dynamic title
 
-" ----------------------------------------------------------------------------
-"  For /GVIM/ 
-" ----------------------------------------------------------------------------
-if has("gui_running")
-    " colorscheme github
-    " colorscheme grb256 
+if has("gui_running")           "  for /GVIM/ 
     colorscheme lucius
     " LuciusLight
     LuciusDark
     " syntax enable
     " colorscheme monokai
-" ---
+    "
     set guioptions=a  "remove menus, using clipboard instead of primary
-"    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "frequency of cursor's blink 
     set lines=27 columns=80
     set guifont=Monospace\ 9.8 
 endif
@@ -80,6 +69,7 @@ autocmd BufReadPost *
 " --------------------------------------------------------------------------
 "  Key maps
 " --------------------------------------------------------------------------
+imap jj <Esc>
 " nnoremap <F8> :vertical wincmd gf<CR>
 " vnoremap <C-c> "+y
 imap <C-A> <Home>
@@ -92,11 +82,10 @@ imap <C-K> <Esc>d$a
 
 
 " -------------------------** Vundle **-------------------------------------
-" --------------------------------------------------------------------------
 " filetype off                   " required!
-" ---------------------------------------------------------------
+" --------------------------------------
 "  For Vundle
-" ---------------------------------------------------------------
+" --------------------------------------
  set rtp+=~/.vim/bundle/vundle/
  call vundle#rc()
 
@@ -105,7 +94,7 @@ imap <C-K> <Esc>d$a
  Bundle 'gmarik/vundle'
 
  " My Bundles here:
- " --------------------------------------------------------------
+ " -------------------------------------
  " original repos on github
   "Bundle 'gerw/vim-latex-suite' 
    Bundle 'LaTeX-Box-Team/LaTeX-Box'
@@ -121,9 +110,7 @@ imap <C-K> <Esc>d$a
  
  " git repos on your local machine (ie. when working on your own plugin) 
  
-
- " --------------------------------------------------------------
-
+ " -------------------------------------
  filetype plugin indent on     " required!
  "
  " Brief help
@@ -137,14 +124,9 @@ imap <C-K> <Esc>d$a
 " --------------------------------------------------------------------------
 
 
-
 " For Latex-Box 
 " ----------------------------------
-
-
-" For TeX-PDF script
-" ----------------------------------
-"let g:tex_pdf_map_leader_keys = 0
+" no config
 
 
 " ---------------------------** TagList **----------------------------------
