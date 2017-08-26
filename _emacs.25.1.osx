@@ -318,7 +318,8 @@
 ;; enable to fire "C-c C-c" to compile, when in cc-mode buffers
 ;; OR use projectile compile "C-c p c"
 (defun y:set-compile-command ()
-  (set (make-local-variable 'compile-command) "cd .. && make -k && cd -"))
+  ;; (set (make-local-variable 'compile-command) "cd .. && make -k && cd -")
+  (set (make-local-variable 'compile-command) "make -k"))
 (add-hook 'c-mode-hook 'y:set-compile-command)
 (add-hook 'c++-mode-hook 'y:set-compile-command)
 
@@ -415,7 +416,7 @@
 ; ------------------------------------------------
 ;; Directory Explorers
 
-;; Regular explorers: /dired/ and /dired-x/
+;; regular explorers: /dired/ and /dired-x/
 ;; fix file listing in osx
 (when (string-equal system-type "darwin")
   (setq insert-directory-program "/usr/local/bin/gls")
@@ -426,7 +427,7 @@
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|\\^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
-;; Tree directory explorer: /direx/ (frontend for /jedi-direx/)
+;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
 (require 'popwin)
 (popwin-mode 1)
 (require 'direx)
@@ -439,7 +440,7 @@
       direx:closed-icon "▸ ")
 
 ; ------------------------------------------------
-;; /ibuffer/: Buffer Explorer
+;; /ibuffer/: buffer explorer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
       (quote (("default"
@@ -456,12 +457,17 @@
                                   (name . ".*\\.el$")
                                   (mode . matlab-mode)
                                   (mode . c-mode)
-                                  (mode . c++-mode)))
-               ("systems" (or (name . "^\\*scratch\\*$")
-                              (name . "^\\*Messages\\*$")
-                              (name . "^\\*Help\\*$")
-                              (mode . helm-major-mode)
-                              (name . "^\\*Pp Eval Output\\*")))
+                                  (mode . c++-mode)
+                                  (mode . cmake-mode)
+                                  (name . "[mM]akefile")))
+               ("emacs" (or (name . "^\\*scratch\\*$")
+                            (name . "^\\*Messages\\*$")
+                            (name . "^\\.emacs$")
+                            (name . "^\\*Pp Eval Output\\*")))
+               ("auxiliary" (or (name . "^\\*Help\\*$")
+                                (name . "clang-complete")
+                                (mode . compilation-mode)
+                                (mode . helm-major-mode)))
                ))))
 (add-hook 'ibuffer-mode-hook (lambda ()
     (ibuffer-auto-mode 1)
