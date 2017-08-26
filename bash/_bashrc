@@ -7,24 +7,29 @@
     # start tmux on every shell login
     # [[ -z "$TMUX" ]] && exec tmux
 
-
 # oracleyue-added $PATH
-PATH="$PATH":/opt/android-sdk/tools:/opt/android-sdk/platform-tools:/home/oracleyue/Programs/bin
-#export TERM=xterm-256color
-#export TERM=screen-256color-bce
+PATH=/home/oracleyue/bin:"$PATH"
+# To use /mpich2/
+#PATH=/opt/mpich2/bin:"$PATH"
+#PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/mpich2/lib/pkgconfig
 
 # oracleyue-configured QT (using qtchooser)
 QT_SELECT=4
 
 # oracleyue-defined alias
 alias ls='ls --color=always'
+alias la='ls -a --color=always'
 alias ll='ls --color=always -Alh'
+alias rm='rm -i'
+alias mv='mv -i'
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
 alias dmesg='dmesg --color=always'
 alias vi='vim'
 alias view='vim -R'
-alias emacs='env LC_CTYPE=zh_CN.UTF-8 emacs'
+#alias emacs='env LC_CTYPE=zh_CN.UTF-8 emacs'
+alias emacs='emacsclient -a "" -c'
+alias ec='emacsclient -a "" -c'
 alias cp='cp -r -i'
 alias du='du -h -d 1'
 alias df='df -h'
@@ -35,10 +40,8 @@ alias android-connect="jmtpfs ~/VirtualMachine/mtp"
 alias android-disconnect="fusermount -u ~/VirtualMachine/mtp"
 alias android-docs="chrome http://developer.android.com/guide/index.html"
 alias java-docs="chrome http://docs.oracle.com/javase/7/docs/api/"
-alias emacs="emacs -nw"
 alias tmux="env TERM=xterm-256color tmux"
-
-# oracleyue-defined startups
+alias open="xdg-open"
 
 # oracleyue-defined commands/functions
 function gpgless() { gpg -d "$1" | less ;}
@@ -49,9 +52,16 @@ function gpgless() { gpg -d "$1" | less ;}
 
 # oracleyue-defined environment variables
 export EDITOR="vim"
+#export TERM=xterm-256color
+#export TERM=screen-256color-bce
+
+# oracleyue: font rendering settings for JAVA
+#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
+export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export JAVA_FONTS=/usr/share/fonts/TTF
 
 # oracleyue: setting default JVM used in MATLAB
-export MATLAB_JAVA=/usr/lib/jvm/java-7-openjdk/jre
+export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 #source ~/.kde4/env/matlab_java.sh
 
 # oracleyue: for /wine/
@@ -63,11 +73,9 @@ export PYMACS_PYTHON=python2
 export PYTHONDOCS=/usr/share/doc/python2/html/
 
 # oracleyue: setting shortcuts for working paths
-export prj=~/Workspace/matlab/Feng_prj_HPC
 export orgnote=~/Public/Dropbox/oracleyue/OrgNote
-export gitrepo=~/FileArchives/arch
-export ATLAS=~/Public/ATLAS/prj.backup
-export gaiapath=gaia:/work/users/zyue/matlab/Feng_prj_HPC
+export gitrepo=~/Workspace/gitrepo
+export gaiapath=gaia:/work/users/zyue/matlab
 
 #export yPATHdisk=/run/media/oracleyue/
 
@@ -109,7 +117,7 @@ source /usr/share/git/completion/git-prompt.sh
 #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $\[\033[00m\] '
 # ------------------------------------------------------
 # color and PS1 config for Bash
-#   For detailed explanations, refer to: 
+#   For detailed explanations, refer to:
 #       config_Arch.git/_unused/bash.bashrc
 # ------------------------------------------------------
 # If not running interactively, don't do anything!
@@ -151,13 +159,14 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
                 fi
         fi
 
-        PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+        #PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+        PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
 
 else
         # show root@ when we do not have colors
         # # PS1="\[\e[1;34m\][\t] \u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
-        # # PS1="\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h \[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] " 
-        PS1="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] " 
+        # # PS1="\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h \[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+        PS1="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
 fi
 
 PS2="> "
