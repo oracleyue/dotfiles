@@ -30,6 +30,10 @@
 (setq custom-file "~/.emacs-custom.el")
 ;(load custom-file 'noerror)
 
+;; encodings
+(set-default-coding-systems 'utf-8)
+(prefer-coding-system 'utf-8)
+
 ;; frame size
 ;; notes: (96,36) in Mac; 33 in Thinkpad
 (if (string-equal system-type "darwin")
@@ -38,14 +42,6 @@
 (set-frame-size (selected-frame)
                 (cdr (assoc 'width default-frame-alist))
                 (cdr (assoc 'height default-frame-alist)))
-
-;; encoding
-(set-default-coding-systems 'utf-8)
-(prefer-coding-system 'utf-8)
-
-;; version settings
-(setq ecb-options-version "2.40")
-(setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
 
 ;; loading paths
 (setq y-init-path-prefix "~/.emacs.d/init/")	; init files
@@ -66,13 +62,6 @@
 (load (concat y-init-path-prefix "install-init-packages"))
 ;; ---------------------------------------------------------
 
-;; enable clipboard in emacs  (only need for emacs in terminal)
-;(setq x-select-enable-clipboard t)
-
-;; mouse control
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
-(setq mouse-wheel-progressive-speed nil)
-
 ;; themes
 (cond ((string-equal system-type "darwin")
        (if (string-equal (expand-file-name "~") "/Users/oracleyue")  ;; mac+home: light
@@ -88,15 +77,9 @@
 ;; customize more themes (mode-line)
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
-;; set the default browser
-(if (string-equal system-type "darwin")
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (concat y-home-path "bin/web-browser")) ;use Safari
-  (setq browse-url-browser-function 'browse-url-firefox))
-
 
 ;;
-;; Global Variables for Configurations
+;; Global Flags for Feature Control
 ;;
 
 ;; home paths
@@ -119,15 +102,11 @@
       ((string-equal system-type "gnu/linux")
        (setq y:ac-mode "auto-complete")))
 
-;; suppress redefinition warnings
-(setq ad-redefinition-action 'accept)
-
 
 ;;
-;; Load basic configurations for Emacs
+;; Basic Configurations for Emacs
 ;;
 (load (concat y-init-path-prefix "emacs-init-basics"))
-
 
 
 ;;
@@ -362,6 +341,17 @@
 
 ; ===============================================
 ;; Settings of general /text-mode/
+(setq-default major-mode 'text-mode)
+
+;; line wrapping settings
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+;; spell check for text modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+;; (setq ispell-dictionary "british")
+(setq ispell-dictionary "american")
+
+;; use /auto-fill mode/
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
 

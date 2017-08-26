@@ -89,7 +89,7 @@
 
 
 ;;
-;; Editing Enhancement
+;; ------------- Basic Editing Function Extensions ---------------
 ;;
 
 ;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
@@ -174,17 +174,42 @@
 (global-set-key (kbd "C-x M-a") 'align-regexp)
 
 
+
 ;;
-;; Other Settings
+;; ------------ Other Basic Settings  ----------------
 ;;
 
-;; increase memeory for emacs to avoid garbage collections slow it down
-(setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
+;; various one line commands/config, like "TAB"
+(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
+(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
+
+;; enable clipboard in emacs  (only need for emacs in terminal)
+;(setq x-select-enable-clipboard t)
 
 ;; configure mark-ring
 (setq set-mark-command-repeat-pop t)
 (setq mark-ring-max 16)
 (setq global-mark-ring-max 32)
+
+;; mouse control
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
+(setq mouse-wheel-progressive-speed nil)
+
+;; set the default browser
+(if (string-equal system-type "darwin")
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program (concat y-home-path "bin/web-browser")) ;use Safari
+  (setq browse-url-browser-function 'browse-url-firefox))
+
+;; version settings
+;(setq ecb-options-version "2.40")
+;(setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
+
+;; suppress redefinition warnings
+(setq ad-redefinition-action 'accept)
+
+;; increase memeory for emacs to avoid garbage collections slow it down
+(setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
 
 ;; ;; use variable-width font types in text-mode
 ;; (defun y-variable-width-text-mode ()
@@ -203,13 +228,10 @@
 ;(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
 ;(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
-
 ;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control
-(cond
- ((string-equal system-type "darwin")
-  ;; (setq mac-command-modifier 'control)  ; use Command key also as Control
-  ;; (setq mac-option-modifier 'meta)  ; NOT need
-  ))
+;; (when (string-equal system-type "darwin")
+;;   (setq mac-command-modifier 'control)  ; use Command key also as Control
+;;   (setq mac-option-modifier 'meta))  ; NOT need
 
 ;; fix $PATH for emacs in Mac OS X
 (defun y-mac:set-exec-path-from-shell-PATH ()
@@ -238,11 +260,7 @@
  (dolist (charset '(kana han symbol cjk-misc bopomofo))
    (set-fontset-font (frame-parameter nil 'font)
                       charset
-                     (font-spec :family "WenQuanYi Micro Hei" :size 12)))
-)
-;; various one line commands/config, like "TAB"
-(setq-default tab-width 4)  ; control the width of a literal tab (C-q TAB; key=9)
-(setq-default indent-tabs-mode nil)  ; use spaces instead of evil tabs, width controled by "tab-stop-list"
+                     (font-spec :family "WenQuanYi Micro Hei" :size 12))))
 
 (setq backup-inhibited t)  ;; disable backup file creation
 
@@ -251,24 +269,12 @@
 ;;; disable all version control. makes startup and opening files much faster
 ;(setq vc-handled-backends nil)
 
-;;; setting the url brower for emacs
+;; setting the url brower for emacs
 ;; (setq browse-url-browser-function 'browse-url-firefox
 ;;       browse-url-new-window-flag  t
 ;;       browse-url-firefox-new-window-is-tab t)
 
-;; set default major mode to text-mode
-(setq-default major-mode 'text-mode)
-
-;; spell checking for some modes
-(add-hook 'text-mode-hook 'flyspell-mode)
-;; (setq ispell-dictionary "british")
-(setq ispell-dictionary "american")
-
 ;; oracleyue's inital Dired folders on startup
-(if (string-equal system-type "darwin")
-    (setq y-home-path "/Users/oracleyue/")
-  (setq y-home-path "/home/oracleyue/"))
-
 (defun y:dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
@@ -278,7 +284,8 @@
          (find-file (concat y-home-path "Public/Dropbox/Academia/ToDoList.org"))
          (find-file (concat y-home-path "Public/Dropbox/oracleyue/OrgNote/PhD.org")))
         ((string-equal system-type "gnu/linux")
-         (dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))))
+         (dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
+         (dired (concat y-home-path "Workspace"))))
   (switch-to-buffer "*scratch*"))
 
 ;; quick start email editing
@@ -300,9 +307,11 @@
 ;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 ;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 
-;; line wrapping settings
-;(define-key global-map [f4] 'toggle-truncate-lines)
-(add-hook 'text-mode-hook 'visual-line-mode)
+
+
+;;
+;; ------- More Editing-related Extensions ---------
+;;
 
 ;; key bindings for comment/uncomment
 (defun y:comment-line-or-region (&optional beg end)
@@ -341,12 +350,6 @@
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (global-undo-tree-mode)
-
-;; configure /hl-line-mode/ for /monokai/, enabled in python-mode
-    ;; to highlight the single row where the cursor is.
-;; configure /highlight-indentation/ for /monokai/, enabled in python-mode
-    ;; to highlight indentations
-    ;; NOT work! Having to be and having been set in .emacs
 
 ;; toggle window split between horizontal-split and vertical-split
 (defun y:toggle-window-split ()
