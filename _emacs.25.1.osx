@@ -373,8 +373,8 @@
 (setq markdown-open-command "/Users/oracleyue/bin/marked")
 ;; configure markdown export styles
 (setq css-default-path "/Users/oracleyue/.emacs.d/default-css/")
-;; (setq url-boostrap-min-css
-      ;; "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
+(setq url-boostrap-min-css
+      "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (add-hook 'markdown-mode-hook (lambda()
 ;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; if use bootstrap.min.css online
    (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
@@ -454,7 +454,7 @@
                             (name . "^\\.emacs$")
                             (name . "^\\*Pp Eval Output\\*")))
                ("auxiliary" (or (name . "^\\*Help\\*$")
-                                (name . "^\\*Org-Babel Error Output\\*$")
+                                (name . "^\\*Warnings\\*$")
                                 (name . "clang-complete")
                                 (mode . compilation-mode)
                                 (mode . helm-major-mode)))

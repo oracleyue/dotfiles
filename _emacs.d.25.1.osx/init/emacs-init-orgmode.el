@@ -46,8 +46,10 @@
    (R . t)
    (matlab . t)
    (latex . t)))
-(setq org-babel-python-command "python2")
-;(setq org-export-babel-evaluate nil)
+;(setq org-babel-python-command "python2")
+
+;; stop asking evaluation codes when export
+(setq org-export-babel-evaluate nil)
 
 ;; use syntax highlighting in org code blocks
 (setq org-src-fontify-natively t)

@@ -1,17 +1,9 @@
 # -*- mode: snippet -*-
 # name: export options
 # key: export
-# expand-env: ((yas-indent-line 'fixed))
 # --
-*** export options                                           :noexport:ARCHIVE:
 #+LANGUAGE:   en
 #+OPTIONS:    H:6 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:    TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+HTML_HEAD:  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-#+HTML_HEAD_EXTRA:  <link href="css/org.css" rel="stylesheet" type="text/css">
-
-
-
-$0
+#+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0   path:http://thomasf.github.io/solarized-css/org-info.min.js
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://thomasf.github.io/solarized-css/solarized-light.min.css" />

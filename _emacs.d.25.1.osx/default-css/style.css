@@ -87,7 +87,3 @@ pre.example {
 #footnotes { font-style: italic; }
 #footnotes h2.footnotes { font-size: 12px; }
 #disqus_thread { margin-top: 28px; }
-
-.org-info-js_info-navigation { border-style:none; }
-#org-info-js_console-label { font-size:10px; font-weight:bold; white-space:nowrap; }
-.org-info-js_search-highlight {background-color:#ffff00; color:#000000; font-weight:bold; }
