@@ -11,8 +11,6 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+HTML_HEAD:  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 #+HTML_HEAD_EXTRA:  <link href="css/org.css" rel="stylesheet" type="text/css">
-#+STYLE:     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-#+STYLE:     <link href="css/org.css" rel="stylesheet" type="text/css">
 
 
 

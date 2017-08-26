@@ -369,14 +369,14 @@
    `(org-sexp-date ((t (:foreground ,atom-one-dark-cyan))))
 
    `(org-block-background                    ; oracleyue: added
-     ((,class (:inherit font-lock-constant-face
+     ((,class (;:inherit font-lock-constant-face
                         :background ,atom-one-dark-bg-hl))))
    `(org-block-begin-line                    ; oracleyue: added
      ((,class (:inherit font-lock-comment-face
-                        :slant italic))))
+                        :slant normal))))
    `(org-block-end-line                      ; oracleyue: added
      ((,class (:inherit font-lock-comment-face
-                        :slant italic))))
+                        :slant normal))))
    `(org-code   ; oracleyue: added; for the coeds enclosed by "~"
      ((,class (:inherit font-lock-constant-face))))
    `(org-verbatim  ; oracleyue: added; for the codes enclosed by "="

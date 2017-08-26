@@ -437,3 +437,63 @@ See help of `format-time-string' for possible replacements")
 ;;             (setq dired-omit-extensions (delete ".so" dired-omit-extensions))
 ;;             (setq dired-omit-extensions (delete ".a" dired-omit-extensions))
 ;;             (setq dired-omit-extensions (append dired-omit-extensions '(".out" ".synctex.gz" ".url")))))
+
+
+
+;; ----------------------------------------------------------------
+;; Setting for /org-article/ for LaTeX  in Org-Mode
+;; ----------------------------------------------------------------
+(require 'ox-latex)
+(setq org-export-latex-listings 'minted)
+(setq org-export-latex-minted-options
+           '(("frame" "lines")
+             ("fontsize" "\\scriptsize")
+             ("linenos" "")))
+
+(setq org-export-latex-packages-alist
+   '(("AUTO" "inputenc" t)
+; font type settings:
+    ("" "mathptmx" t)
+    ("scaled=0.8" "DejaVuSansMono" t)
+; math symbols and figures:
+    ("" "latexsym" t)
+    ("" "amssymb" t)
+    ("" "amsmath" t)
+    ("" "amsthm" t)
+    ("" "graphicx" t)
+    ("" "subfigure" t)
+    ("" "epsfig" t)
+; others
+    ("usenames" "color" t)
+    ("" "csquotes" t)
+	("" "minted" t) ; nil by default
+    ("" "hyperref" t)
+))
+
+;; do not put in \hypersetup use your own
+;; \hypersetup{pdfkeywords={%s},\n pdfsubject={%s},\n pdfcreator={%s}
+(setq org-latex-with-hyperref nil)
+
+(add-to-list 'org-latex-classes '("org-article"
+"\\documentclass{org-article}
+\\usepackage[top=1in, bottom=1in, left=1.2in, right=1.2in]{geometry}
+
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+
+[EXTRA]"
+("\\section{%s}" . "\\section*{%s}")
+("\\subsection{%s}" . "\\subsection*{%s}")
+("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+("\\paragraph{%s}" . "\\paragraph*{%s}")
+("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+)
+
+;;; Seem not required in new version
+;; for minted you must run latex with -shell-escape because it calls pygmentize as an external program
+;; (setq org-latex-pdf-process
+;;       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+;;         "bibtex %b"
+;;         "makeindex %b"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"
+;;         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %b"))

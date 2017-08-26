@@ -9,11 +9,9 @@
  '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  '(org-file-apps
-   (quote
-    ((auto-mode . emacs)
-     ("\\.mm\\'" . default)
-     ("\\.x?html?\\'" . "open %s")
-     ("\\.pdf\\'" . "open %s"))))
+   (quote ((auto-mode . emacs)
+           ("\\.x?html?\\'" . "firefox %s")
+           ("\\.pdf\\'" . "open %s"))))
  '(scroll-bar-mode nil)
  '(tab-stop-list
    (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
@@ -47,7 +45,7 @@
 (setq y-init-path-prefix "~/.emacs.d/init/")	; init files
 (add-to-list 'load-path "~/.emacs.d/git")    	; pkgs from github
 
-;; ---------- Settings of Emacs Package System -------------
+;; ---------------- emacs package system -------------------
 ;; packages installed by /homebrew/
 (when (string-equal system-type "darwin")
   (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
@@ -57,7 +55,8 @@
     (require 'package)
     (package-initialize)
     (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
 ;; check and install required packages
 (load (concat y-init-path-prefix "install-init-packages"))
 ;; ---------------------------------------------------------
@@ -455,6 +454,7 @@
                             (name . "^\\.emacs$")
                             (name . "^\\*Pp Eval Output\\*")))
                ("auxiliary" (or (name . "^\\*Help\\*$")
+                                (name . "^\\*Org-Babel Error Output\\*$")
                                 (name . "clang-complete")
                                 (mode . compilation-mode)
                                 (mode . helm-major-mode)))
