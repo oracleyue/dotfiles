@@ -55,9 +55,9 @@
 ;; Auto-completion by /Jedi/
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)     ; optional
+(setq jedi:complete-on-dot t)
 ;; set wait time before showing funciton call signature tip in ms
-(setq jedi:get-in-function-call-delay 200)
+(setq jedi:get-in-function-call-delay 1000)
 ;; set calltip methods
 (setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
 
