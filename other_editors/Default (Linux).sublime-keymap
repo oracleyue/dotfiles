@@ -1,30 +1,23 @@
 [
-	//// emacs cursor movement
+
+	/// emacs edit
 	{"keys": ["ctrl+b"], "command": "move", "args": {"by": "characters", "forward": false} },
-    {"keys": ["ctrl+f"], "command": "move", "args": {"by": "characters", "forward": true} },
-    {"keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false} },
-    {"keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true} },
-    {"keys": ["ctrl+a"], "command": "move_to", "args": {"to": "hardbol", "extend": false }},
-    {"keys": ["ctrl+e"], "command": "move_to", "args": {"to": "hardeol", "extend": false }},
-    {"keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
+	{"keys": ["ctrl+f"], "command": "move", "args": {"by": "characters", "forward": true} },
+	{"keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false} },
+	{"keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true} },
+	{"keys": ["ctrl+a"], "command": "move_to", "args": {"to": "hardbol", "extend": false }},
+	{"keys": ["ctrl+e"], "command": "move_to", "args": {"to": "hardeol", "extend": false }},
+	{"keys": ["alt+b"], "command": "move", "args": {"by": "words", "forward": false} },
 	{"keys": ["alt+f"], "command": "move", "args": {"by": "word_ends", "forward": true} },
+	{"keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
+	{"keys": ["alt+backspace"], "command": "delete_word", "args": {"forward": false} },
+	// restore functions
 	{"keys": ["ctrl+s"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false} },
-	{"keys": ["ctrl+w"], "command": "cut" },
-	{"keys": ["alt+w"], "command": "copy" },
-	{"keys": ["ctrl+y"], "command": "paste"},
-	{"keys": ["ctrl+v"], "command": "move", "args": {"by": "pages", "forward": true} },
-	{"keys": ["ctrl+d"], "command": "right_delete"},
-    {"keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
-    // files/buffer
-	{"keys": ["ctrl+x", "ctrl+s"], "command": "save"},
-	{"keys": ["ctrl+x", "ctrl+b"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
-	{"keys": ["ctrl+x", "ctrl+f"], "command": "prompt_open_file" },
-	{"keys": ["ctrl+x", "ctrl+o"], "command": "prompt_open_folder"},
+	{"keys": ["alt+s"], "command": "save" },
 
 
-    //// restore default functionality
-	{"keys": ["ctrl+c"], "command": "expand_selection", "args": {"to": "word"} },
-	{"keys": ["ctrl+o"], "command": "show_overlay", "args": {"overlay": "goto", "rm show_files": true} },	
-	{"keys": ["alt+s"], "command": "save" },	
+	/// markdown editing and preview
+	{ "keys": ["alt+m"], "command": "markdown_preview", 
+		"args": {"target": "browser", "parser":"markdown"} },
 
 ]
