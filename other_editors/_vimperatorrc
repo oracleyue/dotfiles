@@ -4,10 +4,10 @@ colorscheme oracleyue-dark
 "set gui=noaddons,nobookmarks,nomenu,navigation,tabs
 "set gui scrollbars=false
 
-"map <C-Up> :set gui=none<CR>
-"map <C-Down> :set gui=tabs,navigation<CR>
-"map <C-Left> :set gui=notabs,navigation<CR>
-"map <C-Right> :set gui=nonavigation,tabs<CR>
+map <C-Up> :set gui=none<CR>
+map <C-Down> :set gui=tabs,navigation<CR>
+map <C-Left> :set gui=notabs,navigation<CR>
+map <C-Right> :set gui=nonavigation,tabs<CR>
 
 " -- basic movements
 noremap U u
@@ -26,29 +26,15 @@ noremap l 5l
 noremap H gT
 noremap L gt
 
-" -- stop loading current page
-noremap <C-g> :stop<CR>
+" -- jumping to the current tab's history 
+map <C-j> :jumps<CR>
 
 " -- remove highlighted matches
-noremap <C-S-u> :nohlsearch<CR>
-
-" -- open prescribed websites
-noremap <C-q> :tabopen https://getpocket.com<CR>
-
-" -- jump to webpages opened in the current tab before
-" ! no longer working on Firefox > 45.0
-"map <C-j> :jumps<CR>
-
-" -- open websites in history
-" 1. use ":history" open the history list
-" 2. ";o" to show hint, and select by the number
+map <C-S-i> :nohlsearch<CR>
 
 " -- usage notes:
 " 1) jump to the address bar: <C-l>
 " 2) jump to the Google search bar: <C-k>
-
-
-" ------- Firefox shortcuts --------
-" 1. focus on address box: <C-L>
-" 2. focus on search box: <C-K>
+" 3) open hint in history in current tab: ;o
+" 4) open hint in history in new tab: ;t
 

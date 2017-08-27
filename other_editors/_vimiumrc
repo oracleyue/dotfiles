@@ -1,0 +1,17 @@
+# This is configuration of Vimium for Google Chrome.
+# To use them, copy the following codes in the "Custom key mappings" in
+  "Vimium Options".
+# 28 Aug 2017
+
+unmap H
+unmap L
+unmap J
+unmap K
+
+map H previousTab
+map L nextTab
+map J scrollFullPageDown
+map K scrollFullPageUp
+
+map <C-o> goBack
+map <C-i> goForward
