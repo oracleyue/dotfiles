@@ -39,7 +39,7 @@
 (require 'epy-nose)            ;; nose integration
 
 ;(setq python-shell-interpreter "python2") ; use python
-(epy-setup-ipython)                        ; use *ipython*
+(setq python-shell-interpreter "ipython2") ; use *ipython*
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
