@@ -468,7 +468,7 @@
     (ibuffer-switch-to-saved-filter-groups "default")))
 
 ;; don't show certain buffers
-(add-to-list 'ibuffer-never-show-predicates "^\\*epc con 3\\*")
+(add-to-list 'ibuffer-never-show-predicates "^\\*epc con .*\\*")
 (add-to-list 'ibuffer-never-show-predicates "^\\*ESS\\*")
 
 ;; don't show filter groups if there are no buffers in that group
