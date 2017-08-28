@@ -409,13 +409,8 @@
 ;; Directory Explorers
 
 ;; regular explorers: /dired/ and /dired-x/
-;; fix file listing in osx
-(when (string-equal system-type "darwin")
-  (setq insert-directory-program "/usr/local/bin/gls")
-  (setq dired-listing-switches "-ahl --color=always --group-directories-first"))
-;; omit file extensions
 (require 'dired-x)
-(setq dired-omit-files
+(setq dired-omit-files   ;; omit file extensions
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|\\^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
@@ -439,7 +434,9 @@
                ("dired" (mode . dired-mode))
                ("org"   (name . "^.*org$"))
                ("writing" (or (mode . markdown-mode)
-                           (mode . LaTeX-mode)))
+                              (mode . latex-mode)
+                              (name . ".*\\.tikz$")
+                              (mode . bibtex-mode)))
                ("shell" (or (mode . eshell-mode)
                             (name . "^\\*R\\*$")
                             (name . "^\\*ielm\\*$")
@@ -459,8 +456,10 @@
                ("auxiliary" (or (name . "^\\*Help\\*$")
                                 (name . "^\\*Warnings\\*$")
                                 (name . "clang-complete")
-                                (mode . compilation-mode)
-                                (mode . helm-major-mode)))
+                                (name . "[hH]elm.*")
+                                (mode . TeX-output-mode)
+                                (mode . reftex-toc-mode)
+                                (mode . compilation-mode)))
                ))))
 (add-hook 'ibuffer-mode-hook (lambda ()
     (ibuffer-auto-mode 1)
@@ -476,6 +475,12 @@
 ;; don't ask for confirmation to delete marked buffers
 (setq ibuffer-expert t)
 
+;; ----------------------------------------------
+;; /TRAMP/: ssh and remote access
+(setq tramp-default-method "ssh")
+;; usages:
+;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
+;; - "C-x C-f /sudo::/etc/hosts"
 
 
 
