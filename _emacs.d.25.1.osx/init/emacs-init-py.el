@@ -40,6 +40,7 @@
 
 ;(setq python-shell-interpreter "python2") ; use python
 (setq python-shell-interpreter "ipython2") ; use *ipython*
+(setq python-shell-interpreter-args "--simple-prompt -i") ;fix bugs of ipython5 in emacs
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 ; fix bugs in ac due to line wrap
