@@ -45,7 +45,6 @@
                     (list
                      ;; default part
                      "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification
-                          ;mode-line-buffer-identification
 
                      ;; the buffer name; the file name as a tool tip
                      ;;   (default: 'face 'font-lock-keyword-face)
@@ -69,8 +68,9 @@
                      ;; the current major mode for the buffer
                      ;;  (default: 'face 'font-lock-string-face)
                      "["
-
-                     '(:eval (propertize "%m"
+                     '(:eval (propertize (if (listp mode-name)
+                                             (mapconcat 'identity (cdr mode-name) "/")
+                                           mode-name)
                                          'help-echo buffer-file-coding-system))
                      "] "
 
@@ -136,10 +136,11 @@
                              ) ;; size
                  "] "
 
-                 ;; the current major mode for the buffer
+                 ;; the current major mode for the buffer (;'face 'font-lock-string-face)
                  "["
-
-                 '(:eval (propertize "%m" ;'face 'font-lock-string-face
+                 '(:eval (propertize (if (listp mode-name)
+                                         (mapconcat 'identity (cdr mode-name) "/")
+                                       mode-name)
                                      'help-echo buffer-file-coding-system))
                  "] "
                  ;; "      "
