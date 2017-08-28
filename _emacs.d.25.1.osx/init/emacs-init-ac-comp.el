@@ -45,20 +45,21 @@
 
 ;; adjust colors for solarized theme
 (require 'color)
-(defun y:fix-color-for-company-mode ()
-  (setq bg-color (face-attribute 'company-tooltip :background))
-  (set-face-attribute 'company-tooltip nil :background
-                      (color-lighten-name bg-color 4))
-  (set-face-attribute 'company-tooltip-search-selection nil :inherit 'isearch)
-  (set-face-attribute 'company-tooltip-search nil :inherit 'font-lock-builtin-face)
-  (set-face-attribute 'company-tooltip-selection nil :inherit 'font-lock-function-name-face)
-  (set-face-attribute 'company-tooltip-annotation nil
-                      :inherit 'font-lock-comment-face :slant 'normal)
-  (set-face-attribute 'company-tooltip-common nil :inherit 'font-lock-constant-face))
-(add-hook 'after-make-frame-functions (lambda ()
-          (when (or (eq 'monokai (car custom-enabled-themes))
-                    (eq 'solarized (car custom-enabled-themes)))
-            (y:fix-color-for-company-mode))))
+(defun y:fix-color-for-company-mode (&optional frame)
+  (select-frame frame)
+  (when (or (eq 'monokai (car custom-enabled-themes))
+            (eq 'solarized (car custom-enabled-themes)))
+    (setq bg-color (face-attribute 'company-tooltip :background))
+    (set-face-attribute 'company-tooltip nil :background
+                        (color-lighten-name bg-color 4))
+    (set-face-attribute 'company-tooltip-search-selection nil :inherit 'isearch)
+    (set-face-attribute 'company-tooltip-search nil :inherit 'font-lock-builtin-face)
+    (set-face-attribute 'company-tooltip-selection nil :inherit 'font-lock-function-name-face)
+    (set-face-attribute 'company-tooltip-annotation nil
+                        :inherit 'font-lock-comment-face :slant 'normal)
+    (set-face-attribute 'company-tooltip-common nil :inherit 'font-lock-constant-face)))
+;; use after-make-frame-functions hook to valid "emacs --daemon"
+(add-hook 'after-make-frame-functions 'y:fix-color-for-company-mode)
 
 ;; showing quick-help doc
 ;; "M-x company-show-doc-buffer": default "f1" or "C-h", when the candidate list is on.
