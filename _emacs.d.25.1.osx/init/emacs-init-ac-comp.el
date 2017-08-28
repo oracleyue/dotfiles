@@ -51,7 +51,7 @@
             (eq 'solarized (car custom-enabled-themes)))
     (setq bg-color (face-attribute 'company-tooltip :background))
     (set-face-attribute 'company-tooltip nil :background
-                        (color-lighten-name bg-color 4))
+                        (color-lighten-name bg-color 2))
     (set-face-attribute 'company-tooltip-search-selection nil :inherit 'isearch)
     (set-face-attribute 'company-tooltip-search nil :inherit 'font-lock-builtin-face)
     (set-face-attribute 'company-tooltip-selection nil :inherit 'font-lock-function-name-face)
