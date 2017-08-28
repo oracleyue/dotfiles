@@ -64,8 +64,7 @@
 ;; themes
 (cond ((string-equal system-type "darwin")
        (if (string-equal (expand-file-name "~") "/Users/oracleyue")  ;; mac+home: light
-           (progn
-             ;; (setq frame-background-mode (quote dark))
+           (progn ;(setq frame-background-mode (quote dark))
              (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
              (load-theme 'solarized t))
          (add-to-list 'custom-theme-load-path "~/.emacs.d/themes") ;; psudo-home: dark
