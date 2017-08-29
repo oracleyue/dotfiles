@@ -741,6 +741,9 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; company
                 (company-tooltip (,@fg-base00 ,@bg-base02))
                 (company-tooltip-selection (,@fg-green ,@bg-base02))
+                (company-tooltip-search (,@fmt-none ,@fg-yellow))  ;oracleyue, added
+                (company-tooltip-search-selection (,@fmt-stnd ,@fg-orange ,@bg-back))
+                                        ;oracleyue, added
                 (company-tooltip-mouse (,@fg-base1 ,@bg-base02))
                 (company-tooltip-common (,@fg-blue ,@bg-base02 ,@fmt-undr))
                 (company-tooltip-common-selection (,@fg-green ,@bg-base02 ,@fmt-undr))

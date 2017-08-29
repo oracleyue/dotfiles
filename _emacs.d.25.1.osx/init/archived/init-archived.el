@@ -500,6 +500,12 @@ See help of `format-time-string' for possible replacements")
 
 
 
+
+
+;; ----------------------------------------------------------------
+;; Adjust faces
+;; ----------------------------------------------------------------
+
 ;; (require 'color)
 ;; (let ((bg (face-attribute 'default :background)))
 ;;   (custom-set-faces
@@ -512,3 +518,33 @@ See help of `format-time-string' for possible replacements")
 ;;                                               :slant normal
 ;;                                               :background nil))))
 ;;    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
+
+
+;; ----------------------------------------------------------------
+;; Adjust faces
+;; ----------------------------------------------------------------
+
+(require 'color)
+(defun y:fix-color-for-company-mode (&optional frame)
+  ;; (select-frame frame)
+  (when (or (eq 'monokai (car custom-enabled-themes))
+            (eq 'solarized (car custom-enabled-themes))
+            (eq 'atom-one-dark (car custom-enabled-themes)))
+    (setq bg-color (face-attribute 'company-tooltip :background))
+    (set-face-attribute 'company-tooltip nil :background
+                        (color-lighten-name bg-color 2))
+    (set-face-attribute 'company-tooltip-search nil :inherit 'font-lock-keyword-face)
+    (set-face-attribute 'company-tooltip-search-selection nil :inherit 'isearch)
+    (set-face-attribute 'company-tooltip-annotation nil
+                        :inherit 'font-lock-comment-face :slant 'normal)
+    (set-face-attribute 'company-tooltip-annotation-selection nil
+                        :inherit 'font-lock-comment-face :slant 'normal)
+    (set-face-attribute 'company-tooltip-common-selection nil
+                       :inherit 'font-lock-function-name-face)
+    (set-face-attribute 'company-tooltip-common nil :inherit 'font-lock-constant-face)))
+;; use after-make-frame-functions hook to valid "emacs --daemon"
+(require 'server)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions 'y:fix-color-for-company-mode)
+  (y:fix-color-for-company-mode))

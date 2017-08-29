@@ -117,13 +117,25 @@
 
    ;; company-mode
    `(company-tooltip ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg-1))))
-   `(company-tooltip-annotation ((t (:foreground ,atom-one-dark-mono-2 :background ,atom-one-dark-bg-1))))
-   `(company-tooltip-selection ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-gray))))
+   `(company-tooltip-annotation ((t (:foreground ,atom-one-dark-mono-2
+                                                 :background ,atom-one-dark-bg-1))))
+   `(company-tooltip-selection ((t (:foreground ,atom-one-dark-fg
+                                                :background ,atom-one-dark-gray))))
+
+   `(company-tooltip-search ((t (:foreground ,atom-one-dark-red-1))))    ;oracleyue, add
+   `(company-tooltip-search-selection ((t (:foreground ,atom-one-dark-bg ;oracleyue, add
+                                                       :background ,atom-one-dark-red-1))))
+
    `(company-tooltip-mouse ((t (:background ,atom-one-dark-gray))))
-   `(company-tooltip-common ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-bg-1))))
-   `(company-tooltip-common-selection ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-gray))))
+   `(company-tooltip-common ((t (;:foreground ,atom-one-dark-orange-2
+                                 :foreground ,atom-one-dark-cyan  ;oracleyue
+                                             :background ,atom-one-dark-bg-1))))
+   `(company-tooltip-common-selection ((t (;:foreground ,atom-one-dark-orange-2
+                                           :foreground ,atom-one-dark-cyan ;oracleyue
+                                                       :background ,atom-one-dark-gray))))
    `(company-preview ((t (:background ,atom-one-dark-bg))))
-   `(company-preview-common ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-bg))))
+   `(company-preview-common ((t (:foreground ,atom-one-dark-orange-2
+                                             :background ,atom-one-dark-bg))))
    `(company-scrollbar-fg ((t (:background ,atom-one-dark-mono-1))))
    `(company-scrollbar-bg ((t (:background ,atom-one-dark-bg-1))))
 

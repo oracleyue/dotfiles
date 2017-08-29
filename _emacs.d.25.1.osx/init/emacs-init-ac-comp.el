@@ -43,23 +43,8 @@
 ;;      [r] built-in of ESS
 ;;      [cmake] company-cmake
 
-;; adjust colors for solarized theme
-(require 'color)
-(defun y:fix-color-for-company-mode (&optional frame)
-  (select-frame frame)
-  (when (or (eq 'monokai (car custom-enabled-themes))
-            (eq 'solarized (car custom-enabled-themes)))
-    (setq bg-color (face-attribute 'company-tooltip :background))
-    (set-face-attribute 'company-tooltip nil :background
-                        (color-lighten-name bg-color 2))
-    (set-face-attribute 'company-tooltip-search-selection nil :inherit 'isearch)
-    (set-face-attribute 'company-tooltip-search nil :inherit 'font-lock-builtin-face)
-    (set-face-attribute 'company-tooltip-selection nil :inherit 'font-lock-function-name-face)
-    (set-face-attribute 'company-tooltip-annotation nil
-                        :inherit 'font-lock-comment-face :slant 'normal)
-    (set-face-attribute 'company-tooltip-common nil :inherit 'font-lock-constant-face)))
-;; use after-make-frame-functions hook to valid "emacs --daemon"
-(add-hook 'after-make-frame-functions 'y:fix-color-for-company-mode)
+;; adjust faces for company-mode (Note: modify the corresponding theme file!)
+;; use "list-faces-display" to show the list of faces
 
 ;; showing quick-help doc
 ;; "M-x company-show-doc-buffer": default "f1" or "C-h", when the candidate list is on.

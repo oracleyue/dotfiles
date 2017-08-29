@@ -905,11 +905,26 @@ Takes and optional `FRAME' as reference."
 
      `(company-tooltip-common
        ((,class (:foreground ,monokai-emph
-                             :underline t))))
+                             :underline nil)))) ;oracleyue, "t"
 
      `(company-tooltip-common-selection
        ((,class (:foreground ,monokai-emph
                              :underline t))))
+
+     `(company-tooltip-search               ;oracleyue, added
+       ((,class (:foreground ,red))))
+
+     `(company-tooltip-search-selection     ;oracleyue, added
+       ((,class (:foreground ,monokai-bg
+                             :background ,magenta))))
+
+     `(company-tooltip-annotation           ;oracleyue, added
+       ((,class (:foreground ,red
+                             :slant normal))))
+
+     `(company-tooltip-annotation-selection ;oracleyue, added
+       ((,class (:foreground ,red
+                             :slant normal))))
 
      `(company-preview
        ((,class (:background ,monokai-hl
