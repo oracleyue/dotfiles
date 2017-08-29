@@ -86,45 +86,13 @@
   ;; default local include-paths relative to projects' "src" folder
   (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
   ;; configuration start
-  (cond
-   ((string-equal y-clang-complete-type "clang-complete-async")
-    ;; use /emacs-clang-complete-async/
-    (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
-    (require 'auto-complete-clang-async)
-    (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
-    )
-   ((string-equal y-clang-complete-type "clang-complete")
-    ;; use /emacs-clang-complete/
-    (require 'auto-complete-clang)
-    (setq ac-clang-flags ac-clang-cflags)  ;; copy cflags from -async to clang-complete
-    )
-   )
-  ;; LIBRARYIES: openmpi, gsl, Eigen, boost, opengl; followed by "/", e.g., <gsl/gsl_math.h>
-  ;;
-  ;; /usr/local/include/c++-xcode/v1
-  ;; /usr/local/include/c/sys
-  ;; /usr/local/include/clang
-  ;
-  ;; adding for cflags for clang:
-  ;(setq ac-clang-cflags (append '("-std=c++11") ac-clang-cflags))
-  ;
-  ;; ;; way 2:
-  ;;  (setq ac-clang-cflags (list
-  ;;                        "-std=c++11"
-  ;;                        "-stdlib=libc++"
-  ;;                        "-frtti"
-  ;;                        "-fexceptions"
-  ;;                        "-DUSE_GLEW"
-  ;;                        "-I/usr/local/include/c++/v1"
-  ;;                        "-I/usr/local/include/c"
-  ;;                        "-I/usr/local/include/c/sys"
-  ;;                        ;; (concat "-I" (expand-file-name "~/Documents/fmesh_engine/engine/lib/package"))
-  ;;                        "-I/usr/local/include"
-  ;;                        "-I/usr/include"
-  ;;                        ))
+  (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
+  (require 'auto-complete-clang-async)
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
   )
  )
 
+;; standarnd header files completion
 (require 'auto-complete-c-headers) ;; setup headers completion
 (defun y:ac-clang-config ()
   ;; auto-complete (sources & headers) setting for C/C++ mode
