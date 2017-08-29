@@ -147,6 +147,7 @@
 (defun y:ac-clang-config ()
   ;; auto-complete (sources & headers) setting for C/C++ mode
   (setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
+  (setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
   ;; auto-complete C/C++ headers
   (cond
    ((string-equal system-type "gnu/linux")
@@ -198,6 +199,7 @@
 (add-hook 'c-mode-hook 'y:ac-clang-config)
 (add-hook 'c++-mode-hook 'y:ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+
 ;; setup compile command
 (add-hook 'c-mode-common-hook
           (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
