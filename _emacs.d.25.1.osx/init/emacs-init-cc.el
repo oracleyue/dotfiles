@@ -94,17 +94,8 @@
 
 ;; standarnd header files completion
 (require 'auto-complete-c-headers) ;; setup headers completion
-(defun y:ac-clang-config ()
-  ;; auto-complete (sources & headers) setting for C/C++ mode
-  ;(setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
-  ;; auto-complete C/C++ headers
-  (cond
+(cond
    ((string-equal system-type "gnu/linux")
-    (setq ac-sources '(ac-source-clang-async
-                       ac-source-c-headers
-                       ;ac-source-semantic
-                       ac-source-yasnippet))
-                       ;ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include")
     (add-to-list 'achead:include-directories '"/usr/local/include")
     (add-to-list 'achead:include-directories '"/usr/include/c++/7.1.1")
@@ -112,27 +103,8 @@
     (add-to-list 'achead:include-directories '"/usr/include/c++/7.1.1/x86_64-unknown-linux-gnu")
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include")
     (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed")
-    (add-to-list 'achead:include-directories '"/usr/include/eigen3")
-    (ac-clang-launch-completion-process))
+    (add-to-list 'achead:include-directories '"/usr/include/eigen3"))
    ((string-equal system-type "darwin")
-    (cond
-     ((string-equal y-clang-complete-type "clang-complete")
-          ;;; use /emacs-clang-complete-clang/
-      (setq ac-sources '(ac-source-clang
-                         ac-source-c-headers
-                         ;ac-source-semantic
-                         ac-source-yasnippet))
-                         ;ac-source-words-in-same-mode-buffers))
-      )
-     ((string-equal y-clang-complete-type "clang-complete-async")
-          ;;; use /emacs-clang-complete-clang-async/
-      (setq ac-sources '(ac-source-clang-async
-                         ac-source-c-headers
-                         ;ac-source-semantic
-                         ac-source-yasnippet))
-                         ;ac-source-words-in-same-mode-buffers))
-      )
-     )
     (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0")
     (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/x86_64-apple-darwin16.5.0")
     (add-to-list 'achead:include-directories '"/usr/local/Cellar/gcc/7.1.0/include/c++/7.1.0/backward")
@@ -144,7 +116,15 @@
     (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
     (ac-clang-launch-completion-process))
    )
-)
+;; setup ac-complete
+(defun y:ac-clang-config ()
+  ;; auto-complete (sources & headers) setting for C/C++ mode
+  (setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
+  ;; auto-complete C/C++ headers
+  (setq ac-sources '(ac-source-clang-async
+                    ;ac-source-semantic
+                     ac-source-c-headers))
+  (ac-clang-launch-completion-process))
 (add-hook 'c-mode-hook 'y:ac-clang-config)
 (add-hook 'c++-mode-hook 'y:ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
