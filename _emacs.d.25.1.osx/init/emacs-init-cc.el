@@ -3,14 +3,17 @@
 (require 'cc-mode)
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
 
+;; default c++-mode for .h files
+;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; defaul coding styles
+(setq-default c-default-style "linux")
+(setq-default c-basic-offset 4)
+
 ;; Package: /google-c-style/
-(require 'google-c-style)
+;(require 'google-c-style)
 ;(add-hook 'c-mode-common-hook 'google-set-c-style)
 ;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-;; modify google c/c++ styles
-    ;(setq-default c-default-style "linux")
-    ;(setq-default c-basic-offset 4)
-    ;(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
 
 ;; Package: /smartparens/
 ;; having enable globally in .emacs
@@ -51,12 +54,12 @@
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/../../../../include/c++/6.3.1
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/../../../../include/c++/6.3.1/x86_64-pc-linux-gnu
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/../../../../include/c++/6.3.1/backward
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/x86_64-pc-linux-gnu
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/../../../../include/c++/7.1.1/backward
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include
  /usr/local/include
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed
+ /usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed
  /usr/include
  /usr/include/eigen3
                  ")))
@@ -143,7 +146,7 @@
 (require 'auto-complete-c-headers) ;; setup headers completion
 (defun y:ac-clang-config ()
   ;; auto-complete (sources & headers) setting for C/C++ mode
-  ;(setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
+  (setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
   ;; auto-complete C/C++ headers
   (cond
    ((string-equal system-type "gnu/linux")
@@ -154,11 +157,11 @@
                        ;ac-source-words-in-same-mode-buffers))
     (add-to-list 'achead:include-directories '"/usr/include")
     (add-to-list 'achead:include-directories '"/usr/local/include")
-    (add-to-list 'achead:include-directories '"/usr/include/c++/6.3.1")
-    (add-to-list 'achead:include-directories '"/usr/include/c++/6.3.1/backward")
-    (add-to-list 'achead:include-directories '"/usr/include/c++/6.3.1/x86_64-unknown-linux-gnu")
-    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include")
-    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/6.3.1/include-fixed")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/7.1.1")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/7.1.1/backward")
+    (add-to-list 'achead:include-directories '"/usr/include/c++/7.1.1/x86_64-unknown-linux-gnu")
+    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include")
+    (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include-fixed")
     (add-to-list 'achead:include-directories '"/usr/include/eigen3")
     (ac-clang-launch-completion-process))
    ((string-equal system-type "darwin")
@@ -211,46 +214,41 @@
 
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
-(cond ((string-equal y:enable-semantics "yes")
-       ;; enable /semantic-mode/
-       (require 'semantic)
-       (global-semantic-idle-scheduler-mode 1)
-       (global-semanticdb-minor-mode 1)
-       ;; setting include paths
-       (semantic-add-system-include "/usr/local/include/c++" 'c++-mode)
-       (semantic-add-system-include "/usr/local/include/c" 'c-mode)
-       ;(add-hook 'c++-mode-hook
-       ;          (add-hook 'semantic-init-hooks 'semantic-reset-system-include))
-       ;; display function interface in the minibuffer
-       (global-semantic-idle-summary-mode 1)
-       ;; show the function at the first line of the current buffer
-       (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-       (require 'stickyfunc-enhance)
-       ))
+(when (string-equal y:enable-semantics "yes")
+  (require 'semantic)
+  (global-semantic-idle-scheduler-mode 1)
+  (global-semanticdb-minor-mode 1)
+  ;; setting include paths
+  (semantic-add-system-include "/usr/include/c++/7.1.1" 'c++-mode)
+  (semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include" 'c-mode)
+
+  ;; display function interface in the minibuffer
+  (global-semantic-idle-summary-mode 1)
+
+  ;; show the function at the first line of the current buffer
+  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  (require 'stickyfunc-enhance))
 
 ;; Package: /function-args/
-;; - keybinding: fa-show =C-c M-i=; moo-complete =C-c M-o=
-(cond ((string-equal y:enable-semantics "yes")
-       (require 'ivy)
-       (require 'function-args)
-       ;; enable case-insensitive searching
-       (set-default 'semantic-case-fold t)
-       ;; set selection interface
-       (setq moo-select-method 'ivy)  ;; ivy, helm, helm-fuzzy
-       ;; enable function-args
-       (add-hook 'c-mode-hook 'fa-config-default)
-       (add-hook 'c++-mode-hook 'fa-config-default)
-       ;; put c++-mode as default for .h files
-       ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-       ;; keybindings
-       ;; the source file of /function-args/ has been modified (disable keybindings of "M-o" and "M-i"), so as to keep the original:
-       ;; "M-o" :: =open-previous-line=
-       ;; "M-i" :: =tab-to=tab-stop=
-       (define-key c-mode-map   (kbd "C-c M-o")  'moo-complete)
-       (define-key c++-mode-map (kbd "C-c M-o")  'moo-complete)
-       (define-key c-mode-map   (kbd "C-c M-i")  'fa-show)
-       (define-key c++-mode-map (kbd "C-c M-i")  'fa-show)
-       ))
+;; - keybinding:
+;;     fa-show =C-c M-i=; moo-complete =C-c M-o=
+;;     moo-jump-local =C-M-j=; moo-jump-directory =C-M-k=
+(when (string-equal y:enable-semantics "yes")
+  (require 'ivy)
+  (require 'function-args)
+  ;; enable case-insensitive searching
+  (set-default 'semantic-case-fold t)
+  ;; set selection interface
+  (setq moo-select-method 'ivy)  ;; ivy, helm, helm-fuzzy
+  ;; enable function-args
+  (add-hook 'c-mode-hook 'fa-config-default)
+  (add-hook 'c++-mode-hook 'fa-config-default)
+  ;; keybindings
+  (define-key function-args-mode-map   (kbd "C-c M-o")  'moo-complete)
+  (define-key function-args-mode-map   (kbd "C-c M-i")  'fa-show)
+  ;; restore default keybindings
+  (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
+  (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
 
 
 ;; -------------------------------------------

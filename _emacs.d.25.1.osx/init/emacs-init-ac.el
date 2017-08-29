@@ -34,28 +34,21 @@
 (setq ac-modes (append ac-modes '(cmake-mode)))
 ;; fix switching when line number jumps to one digit due to popup
 (ac-linum-workaround)
-;; starting type
-(setq ac-expand-on-auto-complete t)    ;; new
 ;; different ways to start ac-complete
     ;1; default auto start complete when type 3 characters
     ;(setq ac-auto-start 3)
     ;2; explicit call to auto-complete, using trigger-key or auto-complete func
     (setq ac-auto-start nil)
     (ac-set-trigger-key "TAB")    ; trigger to start ac-complete
-;; set keys to control ac-complete behaviors
-;(define-key ac-mode-map [(control tab)] 'auto-complete)    ; force to start ac-complete
-;(define-key ac-completing-map [(meta return)] 'ac-stop)    ; force to stop ac-complete
-;; setting of pop-up boxes
-(setq ac-quick-help-delay 0.2)    ;; default "0.2"
-;(setq ac-candidate-limit 100)    ;; new
-;(setq ac-menu-height 20)    ;; new
-;(setq ac-quick-help-height 20)    ;; new
-;; show menu immediately...
+;; show menu immediately
 (setq ac-auto-show-menu t)    ;; new
 (setq ac-show-menu-immediately-on-auto-complete t)    ;; new
+(setq ac-expand-on-auto-complete t)    ;; auto-expand common part
 ;; select candidates in ac-menu
 (setq ac-use-menu-map t)
-;; ;; set the width of popup menu to fix bugs
+;; setting of pop-up boxes
+(setq ac-quick-help-delay 0.2)    ;; default "0.2"
+;; set the width of popup menu to fix bugs
 (setq ac-max-width 0.4)
 ;; keystokes
 (define-key ac-menu-map "\C-n" 'ac-next)
