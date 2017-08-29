@@ -1,5 +1,6 @@
-; =======================================
 ;; Programming Environment for /C C++/
+;; Last modified on 29 Aug 2017
+
 (require 'cc-mode)
 ;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
@@ -14,9 +15,7 @@
 ;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 ;; Package: /smartparens/
-;; having enable globally in .emacs
-;; if not using /smartparens/ globally, uncomment the next line
-;(require 'smartparens)
+;(require 'smartparens)  ;enable globally in .emacs
 ;; when you press RET, the curly braces automatically add another newline
 (sp-with-modes '(c-mode c++-mode)
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
@@ -68,8 +67,8 @@
  ((string-equal system-type "darwin")
   ;; choose the clang-complete packages
   (setq y-clang-complete-type "clang-complete-async")
-  ;; cflags/flags setting for ac-complete-clang-async/..-clang
-  (setq ac-clang-cflags       ;; for /emacs-clang-complete-async
+  ;; cflags setting for ac-complete-clang-async
+  (setq ac-clang-cflags
         (mapcar (lambda (item)(concat "-I" item))
                 (split-string
                  "
@@ -88,11 +87,9 @@
   ;; configuration start
   (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
   (require 'auto-complete-clang-async)
-  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
-  )
- )
+  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")))
 
-;; standarnd header files completion
+;; standard headers completion
 (require 'auto-complete-c-headers) ;; setup headers completion
 (cond
    ((string-equal system-type "gnu/linux")
@@ -116,11 +113,9 @@
     (add-to-list 'achead:include-directories '"/usr/local/include/eigen3")
     (ac-clang-launch-completion-process))
    )
-;; setup ac-complete
+;; setup ac-complete (sources & headers)
 (defun y:ac-clang-config ()
-  ;; auto-complete (sources & headers) setting for C/C++ mode
   (setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
-  ;; auto-complete C/C++ headers
   (setq ac-sources '(ac-source-clang-async
                     ;ac-source-semantic
                      ac-source-c-headers))
@@ -128,17 +123,8 @@
 (add-hook 'c-mode-hook 'y:ac-clang-config)
 (add-hook 'c++-mode-hook 'y:ac-clang-config)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-
-;; setup compile command
-(add-hook 'c-mode-common-hook
-          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
-;; default mode for Makefile in gnome
-(add-hook 'makefile-gmake-mode-hook
-          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
-;; default mode for Makefile in Mac OS X
-(add-hook 'makefile-bsdmake-mode-hook
-          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
 ;; ------------------------END----------------------------
+
 
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
 (load (concat y-init-path-prefix "emacs-init-cc-tags"))
@@ -182,18 +168,32 @@
   (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
 
 
+
+
+
+;; ---------------- Other Major Modes for C/C++ Supportings ----------------
+
 ;; -------------------------------------------
-;; Enable major modes for CMake files
-;; /cmake-mode/: cmake-mode.el
+;; compilation shortcuts
+(add-hook 'c-mode-common-hook
+          (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in gnome
+(add-hook 'makefile-gmake-mode-hook
+          (lambda () (define-key makefile-gmake-mode-map (kbd "C-c C-c") 'compile)))
+;; default mode for Makefile in Mac OS X
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+
+;; -------------------------------------------
+;; /cmake-mode/: major mode for CMake files
 (require 'cmake-mode)
 ;; /cmake-font-lock/: to add more fontifying features
 (add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 
-
 ;; -------------------------------------------
-;; ;; use /doxymacs/ to manipulate doxygen documentations
+;; /doxymacs/ to manipulate doxygen documentations
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
 ;; (require 'doxymacs)
 ;; (add-hook 'c-mode-common-hook 'doxymacs-mode)
