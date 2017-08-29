@@ -116,9 +116,9 @@
    `(ace-jump-face-foreground ((t (:foreground ,atom-one-dark-red-1 :background ,atom-one-dark-bg-1 :inverse-video nil))))
 
    ;; company-mode
-   `(company-tooltip ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg-1))))
+   `(company-tooltip ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg-hl))))
    `(company-tooltip-annotation ((t (:foreground ,atom-one-dark-mono-2
-                                                 :background ,atom-one-dark-bg-1))))
+                                                 :background ,atom-one-dark-bg-hl))))
    `(company-tooltip-selection ((t (:foreground ,atom-one-dark-fg
                                                 :background ,atom-one-dark-gray))))
 
@@ -129,7 +129,7 @@
    `(company-tooltip-mouse ((t (:background ,atom-one-dark-gray))))
    `(company-tooltip-common ((t (;:foreground ,atom-one-dark-orange-2
                                  :foreground ,atom-one-dark-cyan  ;oracleyue
-                                             :background ,atom-one-dark-bg-1))))
+                                             :background ,atom-one-dark-bg-hl))))
    `(company-tooltip-common-selection ((t (;:foreground ,atom-one-dark-orange-2
                                            :foreground ,atom-one-dark-cyan ;oracleyue
                                                        :background ,atom-one-dark-gray))))
