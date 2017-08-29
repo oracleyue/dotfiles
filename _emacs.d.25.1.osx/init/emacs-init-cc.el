@@ -1,12 +1,10 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
+;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
 
-;; default c++-mode for .h files
-;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
-;; defaul coding styles
+;; coding styles
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
 
@@ -24,7 +22,7 @@
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
+;; Package: /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
 ; let's define a function for flymake initialization
 (defun y:flymake-google-init ()
   (require 'flymake-google-cpplint)
@@ -36,16 +34,15 @@
 ;(add-hook 'c-mode-hook 'y:flymake-google-init)
 ;(add-hook 'c++-mode-hook 'y:flymake-google-init)
 
-;; /xcscope/: source cross-referencing tool [need to install cscope]
+;; Package: /xcscope/ source cross-referencing tool [need to install cscope]
 ;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
 ;(require 'xcscope)
 ;(cscope-setup)
 
 
-;; configure /auto-complete/ for C/C++ sources and headers
+;; Configure /auto-complete/ for C/C++ sources and headers
 ;; -------------------BEGIN-------------------------------
-;; /auto-complete-clang or -async/: clang completion for C/C++ [For Mac OS X]; set on line 74
-;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested [For Linux]
+;; /auto-complete-clang-async/: clang completion for C/C++, compiling requested
 ;; Note: list include directories by "gcc -xc++ -E -v -"
 (cond
  ((string-equal system-type "gnu/linux")
@@ -88,21 +85,6 @@
                  ")))
   ;; default local include-paths relative to projects' "src" folder
   (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
-  ;; read in project-level include-paths via ".dir-locals.el"
-  ;; an example of ".dir-locals.el":
-  ;;    ((c++-mode . ((project-local-include-path . ("-I./include" "-I./src")))))
-  (defun y:readin-dir-local-path ()
-    (cond ((boundp 'project-local-include-path)
-           (setq ac-clang-cflags (append ac-clang-cflags project-local-include-path))
-           (ac-clang-update-cmdlineargs))))
-  ;; hook function defined generally to read in per-directory variables
-  (add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
-  (defun run-local-vars-mode-hook ()
-    "Run a hook for the major-mode after the local variables have been processed."
-    (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
-  ;; use for c/c++-mode to readin include-path defined under project roots
-  (add-hook 'c++-mode-local-vars-hook 'y:readin-dir-local-path)
-  (add-hook 'c-mode-local-vars-hook 'y:readin-dir-local-path)
   ;; configuration start
   (cond
    ((string-equal y-clang-complete-type "clang-complete-async")
@@ -146,8 +128,7 @@
 (require 'auto-complete-c-headers) ;; setup headers completion
 (defun y:ac-clang-config ()
   ;; auto-complete (sources & headers) setting for C/C++ mode
-  (setq ac-auto-start nil)   ; having been set globally in "emacs-init-ac.el"
-  (setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
+  ;(setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
   ;; auto-complete C/C++ headers
   (cond
    ((string-equal system-type "gnu/linux")

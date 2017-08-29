@@ -548,3 +548,22 @@ See help of `format-time-string' for possible replacements")
 (if (daemonp)
     (add-hook 'after-make-frame-functions 'y:fix-color-for-company-mode)
   (y:fix-color-for-company-mode))
+
+;; ----------------------------------------------------------------
+;; C/C++
+;; ----------------------------------------------------------------
+;; read in project-level include-paths via ".dir-locals.el"
+;; an example of ".dir-locals.el":
+;;    ((c++-mode . ((project-local-include-path . ("-I./include" "-I./src")))))
+(defun y:readin-dir-local-path ()
+  (cond ((boundp 'project-local-include-path)
+         (setq ac-clang-cflags (append ac-clang-cflags project-local-include-path))
+         (ac-clang-update-cmdlineargs))))
+;; hook function defined generally to read in per-directory variables
+(add-hook 'hack-local-variables-hook 'run-local-vars-mode-hook)
+(defun run-local-vars-mode-hook ()
+  "Run a hook for the major-mode after the local variables have been processed."
+  (run-hooks (intern (concat (symbol-name major-mode) "-local-vars-hook"))))
+;; use for c/c++-mode to readin include-path defined under project roots
+(add-hook 'c++-mode-local-vars-hook 'y:readin-dir-local-path)
+(add-hook 'c-mode-local-vars-hook 'y:readin-dir-local-path)
