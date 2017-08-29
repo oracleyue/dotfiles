@@ -127,7 +127,7 @@
 
 
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
-(load (concat y-init-path-prefix "emacs-init-cc-tags"))
+;(load (concat y-init-path-prefix "emacs-init-cc-tags"))
 
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
@@ -161,8 +161,8 @@
   (add-hook 'c-mode-hook 'fa-config-default)
   (add-hook 'c++-mode-hook 'fa-config-default)
   ;; keybindings
-  (define-key function-args-mode-map   (kbd "C-c M-o")  'moo-complete)
-  (define-key function-args-mode-map   (kbd "C-c M-i")  'fa-show)
+  (define-key function-args-mode-map (kbd "C-c M-o") 'moo-complete)
+  (define-key function-args-mode-map (kbd "C-c M-i") 'fa-show)
   ;; restore default keybindings
   (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
   (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))

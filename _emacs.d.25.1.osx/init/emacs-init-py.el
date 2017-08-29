@@ -56,11 +56,18 @@
 ;; Auto-completion by /Jedi/
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;; disable trigger completion menu automatically
+(setq jedi:complete-on-dot nil)  ;; use "C-<tab>" on dot; else "<tab>"
 ;; set wait time before showing funciton call signature tip in ms
-(setq jedi:get-in-function-call-delay 1000)
+(setq jedi:get-in-function-call-delay 1000000)  ;; disable auto-show calltip
 ;; set calltip methods
 (setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
+;; restore jedi:complete bound default in jedi
+(define-key python-mode-map (kbd "C-<tab>") 'jedi:complete)
+;; remove ac-source-yasnippet
+(add-hook 'python-mode-hook (lambda ()
+   (setq ac-sources '(ac-source-jedi-direct
+                      ac-source-words-in-same-mode-buffers))))
 
 ;; source code viewer via /jedi-direx/
 (eval-after-load "python"
