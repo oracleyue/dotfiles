@@ -17,10 +17,10 @@
 ;(global-set-key (kbd "C-<tab>") 'company-complete)  ;; see "Integration" part
 
 ;; feature control
-(setq ;company-idle-delay              nil    ;; 0 for immediate popup
-      ;company-minimum-prefix-length   2
-      ;company-tooltip-limit           10
-      company-show-numbers            t   )
+(setq company-idle-delay              1000000  ; 0 immediate
+      company-minimum-prefix-length   2
+      company-tooltip-limit           10
+      company-show-numbers            t  )
 
 ;; standard company-backends: default
 ;; use "M-x company-diag" to check which backend is currently used
