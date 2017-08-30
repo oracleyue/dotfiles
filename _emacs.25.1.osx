@@ -21,7 +21,7 @@
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
  ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
- '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-12")))))    ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
@@ -352,6 +352,7 @@
 ;; use /auto-fill mode/
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-off-auto-fill)
 
 ; ===============================================
 ;; Settings of /Org-mode/
@@ -367,17 +368,22 @@
 (autoload 'gfm-mode "markdown-mode"
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-;; configure commands
-(setq markdown-command "/usr/local/bin/multimarkdown")
-(setq markdown-open-command "/Users/oracleyue/bin/marked")
+
+;; configure compile commands
+(if (string-equal system-type "darwin")
+    (progn
+      (setq markdown-command "/usr/local/bin/multimarkdown")
+      (setq markdown-open-command "/Users/oracleyue/bin/marked"))
+  (setq markdown-command "/usr/bin/multimarkdown"))
+
 ;; configure markdown export styles
-(setq css-default-path "/Users/oracleyue/.emacs.d/default-css/")
+(setq css-default-path (concat y-home-path ".emacs.d/default-css/"))
 (setq url-boostrap-min-css
       "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (add-hook 'markdown-mode-hook (lambda()
 ;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; if use bootstrap.min.css online
    (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
-   (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min_yeti.css"))))
+   (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min.css"))))
 
 ;; Preview using /livedown.el/  (osx uses "Marked 2.app")
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
