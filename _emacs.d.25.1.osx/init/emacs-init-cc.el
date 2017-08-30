@@ -127,7 +127,7 @@
 
 
 ;; Package: /GNU global/ + /helm-gtags/ to support tags
-;(load (concat y-init-path-prefix "emacs-init-cc-tags"))
+(load (concat y-init-path-prefix "emacs-init-cc-tags"))
 
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
