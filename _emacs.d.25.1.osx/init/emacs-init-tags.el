@@ -1,6 +1,11 @@
-;; ========================================
-;; Settings for tags support in C/C++ programming
-;; choose /ggtags/ or /helm-gtags/ as browsing frontend
+;; ======================================================
+;; Tag Supports in Programming Environement
+;; ======================================================
+
+;;
+;; ---------- Source Code Navigation via TAGS -----------
+;; (choose /ggtags/ or /helm-gtags/ as browsing frontend)
+;;
 
 ;; Package: GNU global + /ggtags/
 ;; (require 'ggtags)
@@ -14,7 +19,6 @@
 ;; (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
 ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 ;; (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-
 
 ;; Package: GNU global + /helm-gtags/
 (setq
@@ -50,8 +54,51 @@
 (define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)
 
 
-;;; ------------------------- Usages -------------------------------
-;;; + run =gtags= under your project root before use
+;;
+;; --------- Source Code Browsers via other Packages -------------
+;;
+
+;; Fuzzy matching for "semantic" and "Imenu" listing via HELM
+;;   keybinding: "C-c h i"
+(when (string-equal y:enable-cedet-semantics "yes")
+  (setq helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match    t)
+  (semantic-mode 1) ;; enable necessary CEDET backend
+  (with-eval-after-load 'helm-semantic      ;; default: c, python, elisp
+    (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
+  ;; setting GNU /global/ for /semantic-symref/
+  (setq semantic-symref-tool 'global))
+
+;; Show the function name at the first line of the current buffer via CEDET
+(when (string-equal y:enable-cedet-semantics "yes")
+  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  (semantic-mode 1)
+  (require 'stickyfunc-enhance))
+
+;; Package: /function-args/
+;; usages:
+;;   =fa-show= "M-o",          =fa-jump-maybe= "M-j"
+;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
+(when (string-equal y:enable-function-args "yes")
+  (require 'ivy)
+  (require 'function-args)
+  ;; enable case-insensitive searching
+  (set-default 'semantic-case-fold t)
+  ;; set selection interface
+  (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
+  ;; enable function-args
+  (add-hook 'c-mode-hook 'fa-config-default)
+  (add-hook 'c++-mode-hook 'fa-config-default)
+  ;; semantic refresh: "M-x semantic-force-refresh"
+  ;; restore default keybindings
+  ;; "M-u": fa-abort; "M-o": moo-complete
+  (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
+  (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
+
+
+
+;;; ---------------------Usages (helm-tags) ---------------------------
+;;; Run =gtags= under your project root before use
 ;; - a DEFINITION of a tag is where a tag is implemented
 ;; - a REFERENCE of a tag is where a tag is used in a source tree, but not where it is defined
 ;;
@@ -76,42 +123,31 @@
 ;; + =mark-defun= C-M-h:
 ;;   put a region around whole current or following function
 ;;
+;;; Show outline tree of definitions in current buffer via /function-args/
+;;  =moo-jump-local= from /function-args/; use it as an outline tree
+;;
 ;;; Find definitions in project, use /helm-gtags/:
-;; + =helm-gtags-dwim= M-.:
-;;   jump to a reference/tag definition/header
-;; + =tags-loop-continue= M-,:
-;;   jump back to original location
-;; + =helm-gtags-select= C-j:
-;;   use helm to display all available tags in a project and incrementally filtering
+;; + jump to a reference/tag definition/header
+;;   =helm-gtags-dwim= M-.
+;; + jump back to original location
+;;   =tags-loop-continue= M-,
+;; + use helm to display all available tags in a project and incrementally filtering
+;;   =helm-gtags-select= C-j
+;;
 ;;; Find references in project, use /helm-gtags/:
-;; + =helm-gtags-dwim= or =helm-gtags-find-rtags= "C-c g r"
-;;    find references to funcitons only
-;; + =helm-gtags-find-symbol= "C-c g s"
-;;    find references to variables
+;; + find references to funcitons only
+;;   =helm-gtags-dwim= or =helm-gtags-find-rtags= "C-c g r"
+;; + find references to variables
+;;   =helm-gtags-find-symbol= "C-c g s"
 ;;
 ;;; Find functions that current functions call
-;; + =helm-gtags-tags-in-this-function= "C-c g a"
-;;    list all the functions that the current function - the function that point is inside - calls
+;; + list all the functions that the current function that point is inside calls
+;;    =helm-gtags-tags-in-this-function= "C-c g a"
+;;
 ;;; Find files in project
-;; + =helm-gtags-find-files=
-;;    find files matching regexp. If point is on an included header file, =helm-gtags-dwim= automatically jumps to files
+;; + find files matching regexp. (If point is on an included header file, =helm-gtags-dwim= automatically jumps to files)
+;;   =helm-gtags-find-files=
 ;;
 ;;; View visited tags with tag stack
-;; + =helm-gtags-show-stack=
-;;    show visited tags from newest to oldest, from top to bottom.
-
-;; ---------------------------
-;; + CEDET semantic symref (symbol references)
-;;   - configuration: in "emacs-init-helm" with /semantic/
-;;   - mostly only valid for small/medium project; use /helm-gtags/ for big/huge ones
-;;     =semantic-symref-symbol sym=   "C-,-g"
-;;     =semantic-symref=              "C-,-G"
-;;   - in the buffer:
-;;     + "C-c C-e" semantic-symref-list-expand-all
-;;     + "C-c C-r" semantic-symref-list-contract-all
-;;     + "Tab", "n", "p"     forward-butoon
-;;     + "Enter"   jump to codes
-;;     + "+"       semantic-symref-list-toggle-showing
-;;     + "R"       semantic-symref-list-rename-open-hits
-;; + /function-args/: find definitions in current buffer:
-;;   - use =moo-jump-local= from /function-args/; use it as an outline tree
+;; + show visited tags from newest to oldest, from top to bottom.
+;;   =helm-gtags-show-stack=

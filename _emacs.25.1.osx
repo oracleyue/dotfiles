@@ -89,12 +89,9 @@
     (setq y-home-path "/Users/oracleyue/")
   (setq y-home-path "/home/oracleyue/"))
 
-;; feature control
-;; - enable/disable CEDET features (semantic parser)
-;;   in /helm-sematic-or-imenu/, /function-args/, /cedet-source-info/
-(if (string-equal system-type "darwin")
-    (setq y:enable-semantics "no")
-  (setq y:enable-semantics "yes"))
+;; feature control (see "emacs-init-cc-tags.el")
+(setq y:enable-cedet-semantics "yes") ;; /helm-sematic-or-imenu/, /stickyfunc/
+(setq y:enable-function-args "yes")   ;; /function-args/
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -210,16 +207,15 @@
 (load (concat y-init-path-prefix "emacs-init-helm-proj"))
 
 ;; ----------------------------------------------
-;; Tag Support
-;; Note: tag support for C/C++ has been loaded in "emacs-init-cc.el"
+;; Tag Supports (/helm-gtags/ & more)
+(load (concat y-init-path-prefix "emacs-init-tags"))
 
 ;; ----------------------------------------------
 ;; API Reference Support
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (when (string-equal system-type "darwin")
   (require 'dash-at-point)
-  (global-set-key (kbd "C-c d") 'dash-at-point) ; default "C-c d", conflicts with /doxyemacs/ and /ropemacs/ rope-show-doc (having been disabled in its python sources)
-  ;; (global-set-key "\C-ce" 'dash-at-point-with-docset)
+  (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
   ; specify docsets to search in different modes
   (set 'dash-at-point-mode-alist
        '((c-mode . "c,gsl,gl4")

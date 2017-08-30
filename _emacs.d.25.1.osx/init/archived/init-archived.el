@@ -567,3 +567,13 @@ See help of `format-time-string' for possible replacements")
 ;; use for c/c++-mode to readin include-path defined under project roots
 (add-hook 'c++-mode-local-vars-hook 'y:readin-dir-local-path)
 (add-hook 'c-mode-local-vars-hook 'y:readin-dir-local-path)
+
+;; Display Function Interface in the minibuffer (require semanticdb)
+(require 'semantic)
+(global-semantic-idle-scheduler-mode 1)
+(global-semanticdb-minor-mode 1)
+;; setting include paths
+(semantic-add-system-include "/usr/include/c++/7.1.1" 'c++-mode)
+(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include" 'c-mode)
+;; enable the function
+(global-semantic-idle-summary-mode 1)

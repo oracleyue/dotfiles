@@ -80,26 +80,8 @@
   (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
         helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
 
-;; /Programming Environment Supports/
-;;
-;; enable fuzzy matching for "semantic" and "Imenu" listing
-;; - keybinding: C-x c i
-(cond ((string-equal y:enable-semantics "yes")
-       (setq helm-semantic-fuzzy-match t
-             helm-imenu-fuzzy-match    t)
-       ;; restore UI
-       (with-eval-after-load 'helm-semantic
-         (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
-          ;(push '(c-mode . semantic-format-tag-name) helm-semantic-display-style)
-          ;(push '(c-mode . semantic-format-tag-prototype) helm-semantic-display-style)
-         (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
-       ;; dependency config
-       ;; enable /Imenu/ rescan for helm-semantic-or-imenu
-       ;(setq imenu-auto-rescan t)
-       ;; enable /semantic-mode/ in /CEDET/ for helm-semantic-or-imenu
-       (semantic-mode 1)
-       ;; setting GNU /global/ for /semantic-symref/
-       (setq semantic-symref-tool 'global)))
+;; use helm for fuzzy matching of "semantic" & "imenu" to summary C/C++ definitions
+;;   keybinding: "C-c h i"
 
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
