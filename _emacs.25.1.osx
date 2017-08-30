@@ -94,7 +94,7 @@
 ;;   in /helm-sematic-or-imenu/, /function-args/, /cedet-source-info/
 (if (string-equal system-type "darwin")
     (setq y:enable-semantics "no")
-  (setq y:enable-semantics "no"))
+  (setq y:enable-semantics "yes"))
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -270,22 +270,6 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
-;; Keybindings: basic movements
-;; + =forward-sexp= C-M-f:
-;;   move forward over a balanced expression that can be a pair or a symbol
-;; + =backward-sexp= C-M-b:
-;;   move backward ...
-;; + =kill-sexp= C-M-k:
-;;   kill balaced expression forward that can be a pair or a symbol
-;; + =mark-sexp= C-M-<SPC> or C-M-@:
-;;   put mark after following expression that can be a pair or a symbol
-;; + =beginning-of-defun= C-M-a:
-;;   move point to beginning of a function
-;; + =end-of-defun= C-M-e:
-;;   move point to end of a function
-;; + =mark-defun= C-M-h:
-;;   put a region around whole current or following function
-
 ;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 ;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -427,7 +411,7 @@
 ;; regular explorers: /dired/ and /dired-x/
 (require 'dired-x)
 (setq dired-omit-files   ;; omit file extensions
-      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|\\^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
+      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)

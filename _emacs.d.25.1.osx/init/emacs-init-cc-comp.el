@@ -1,10 +1,8 @@
 ; =======================================
 ;; Programming Environment for /C C++/
 (require 'cc-mode)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
-
-;; default c++-mode for .h files
-;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; defaul coding styles
 (setq-default c-default-style "linux")
@@ -71,18 +69,18 @@
 ;; Package: /CEDET (part)/
 ;; - usage: source code information
 (when (string-equal y:enable-semantics "yes")
-  (require 'semantic)
-  (global-semantic-idle-scheduler-mode 1)
-  (global-semanticdb-minor-mode 1)
-  ;; setting include paths
-  (semantic-add-system-include "/usr/include/c++/7.1.1" 'c++-mode)
-  (semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include" 'c-mode)
-
-  ;; display function interface in the minibuffer
-  (global-semantic-idle-summary-mode 1)
+  ;; (require 'semantic)
+  ;; (global-semantic-idle-scheduler-mode 1)
+  ;; (global-semanticdb-minor-mode 1)
+  ;; ;; setting include paths
+  ;; (semantic-add-system-include "/usr/include/c++/7.1.1" 'c++-mode)
+  ;; (semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include" 'c-mode)
+  ;; ;; display function interface in the minibuffer (require semanticdb)
+  ;; (global-semantic-idle-summary-mode 1)
 
   ;; show the function at the first line of the current buffer
   (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  (semantic-mode 1)
   (require 'stickyfunc-enhance))
 
 ;; Package: /function-args/
@@ -90,18 +88,18 @@
 ;;     fa-show =C-c M-i=; moo-complete =C-c M-o=
 ;;     moo-jump-local =C-M-j=; moo-jump-directory =C-M-k=
 (when (string-equal y:enable-semantics "yes")
-  (require 'ivy)
   (require 'function-args)
   ;; enable case-insensitive searching
   (set-default 'semantic-case-fold t)
   ;; set selection interface
-  (setq moo-select-method 'ivy)  ;; ivy, helm, helm-fuzzy
+  ;; (require 'ivy)
+  (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
   ;; enable function-args
   (add-hook 'c-mode-hook 'fa-config-default)
   (add-hook 'c++-mode-hook 'fa-config-default)
   ;; keybindings
-  (define-key function-args-mode-map   (kbd "C-c M-o")  'moo-complete)
-  (define-key function-args-mode-map   (kbd "C-c M-i")  'fa-show)
+  (define-key function-args-mode-map (kbd "C-c M-o") 'moo-complete)
+  (define-key function-args-mode-map (kbd "C-c M-i") 'fa-show)
   ;; restore default keybindings
   (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
   (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))

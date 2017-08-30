@@ -1,24 +1,20 @@
-; =======================================
-;; Project Management for Programming
-;;; using /eproject/
-    ;(add-to-list 'load-path "~/.emacs.d/git/emacs-for-python/extensions/eproject")
-    ;(require 'eproject)
-    ;; Disable automatic addition/removal of files from projects. Optional.
-    ;(setq prj-autotracking nil)
+;; ============================================================
+;; Project Management via Projectile
+;; ============================================================
+;; Last modified on 30 Aug 2017
 
-;;; using /projectile/
+;; /projectile/: project management
 (require 'projectile)
 (projectile-global-mode)
 (setq projectile-enable-caching t)
 ;; use =C-c p i= to refresh the whole cache
 
-;;; using /helm-projectile/
+;; /helm-projectile/: browse via helm
 (require 'helm-projectile)
 (helm-projectile-on)
 (setq projectile-completion-system 'helm)
 
-
-;; List of most used commands
+;; Basic commands
 ;; ----------------
 ;; - helm-projectile-switch-project =C-c p p=
 ;; - helm-projectile-find-file =C-c p f=
@@ -62,7 +58,7 @@
 ;; - Zgrep: =M-g z= (add prefix =C-u= for resursive grep), invoking grep on cpmressed files
 ;; - Locate (using Unix ~locate~): =C-x C-f= (add =C-u= to specify locate db)
 ;;; Miscellanies
-;; - Insert as org link (C-c @): Insert the current file that highlighted as an Org link. 
+;; - Insert as org link (C-c @): Insert the current file that highlighted as an Org link.
 ;; - Ediff files: =C-==
 ;; - Ediff Merge files: =C-c ==, when exactly two files are selected
 ;; - Etags: =M-.=, invoking Etags using helm
@@ -119,13 +115,8 @@
   '(when (boundp 'grep-find-ignored-files)
      (add-to-list 'grep-find-ignored-files "run")
      (add-to-list 'grep-find-ignored-directories "obj")))
-;(add-to-list 'projectile-globally-ignored-files "run")
-(add-to-list 'projectile-globally-ignored-files ".DS_Store")
-;(add-to-list 'projectile-globally-ignored-directories "obj")
-(add-to-list 'projectile-globally-ignored-directories ".git")
-;; --------
-;;; - command: helm-projectile-grep =C-c p s g=
-;;; - configuration:
+;; - command: helm-projectile-grep =C-c p s g=
+;; - configuration:
 ;; You can specify directory to exclude when searching by customize either one of these variables:
 ;;   =grep-find-ignored-files=:  --> List of file names which rgrep and lgrep shall exclude. helm-projectile-grep also uses this variable.
 ;;   =grep-find-ignored-directories=:  --> List of names of sub-directories which rgrep shall not recurse into. helm-projectile-grep also uses this variable.
@@ -146,6 +137,13 @@
 ;;   =projectile-globally-ignored-files=: --> A list of files globally ignored by Projectile.
 ;;   =projectile-globally-ignored-directories=: --> A list of directories globally ignored by Projectile.
 
+;; Ignore files/directories
+(add-to-list 'projectile-globally-ignored-files "*.out")
+(add-to-list 'projectile-globally-ignored-files ".DS_Store")
+(add-to-list 'projectile-globally-ignored-directories ".git")
+;; retore projectile's native indexing (fix the bug of disabling .projectile)
+(setq projectile-indexing-method 'native)
+
 
 ;; Summary of Keybindings
 ;; C-c p h 	    helm-projectile 	Helm interface to projectile
@@ -164,8 +162,6 @@
 ;; C-c p s s 	helm-projectile-ag 	Same as above but using ag
 
 
-;; ------------------------------------------------------
-;; List of Safe Variable Declaration (suppress warnings)
-;; ------------------------------------------------------
-(add-to-list 'safe-local-variable-values
-             '(project-local-include-path . ("-I./include" "-I./src")))
+;; Safe Variable Declaration (suppress warnings)
+;; (add-to-list 'safe-local-variable-values
+;;              '(project-local-include-path . ("-I./include" "-I./src")))
