@@ -90,8 +90,8 @@
   (setq y-home-path "/home/oracleyue/"))
 
 ;; feature control (see "emacs-init-cc-tags.el")
-(setq y:enable-cedet-semantics "no") ;; /helm-sematic-or-imenu/, /stickyfunc/ and elisp, matlab
-(setq y:enable-function-args "no")   ;; /function-args/
+(setq y:enable-cedet-semantics "yes") ;; /helm-sematic-or-imenu/, /stickyfunc/
+(setq y:enable-function-args "no")    ;; /function-args/
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -212,12 +212,6 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
-;; enable semantic (from CEDET) support for elisp
-(when (string-equal y:enable-cedet-semantics "yes")
-  (add-hook 'semantic-mode-hook (lambda ()
-     (when (fboundp 'semantic-default-elisp-setup)
-       (semantic-default-elisp-setup)))))
-
 ;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 ;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -275,8 +269,7 @@
 ;; functionality extensions
 (load (concat y-init-path-prefix "emacs-init-matlab"))
 ;; enable CEDTE feature support
-(when (string-equal y:enable-cedet-semantics "yes")
-  (matlab-cedet-setup))
+;(matlab-cedet-setup)
 
 ; ===============================================
 ;; Programming Environment for /AppleScript/

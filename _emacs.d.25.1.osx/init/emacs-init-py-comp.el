@@ -35,8 +35,7 @@
 (setq epy-load-yasnippet-p t)  ;; additional snippets (set before "epy-editing")
 (require 'epy-editing)         ;; editing [optional]
 (require 'epy-bindings)        ;; suggested keybindings [optional]
-;;(require 'epy-completion)    ;; disabled; use /jedi/ instead
-(require 'epy-nose)            ;; nose integration
+;(require 'epy-nose)            ;; nose integration
 
 ;(setq python-shell-interpreter "python2") ; use python
 (setq python-shell-interpreter "ipython2") ; use *ipython*

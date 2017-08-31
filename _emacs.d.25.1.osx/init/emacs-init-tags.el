@@ -65,18 +65,23 @@
 (with-eval-after-load 'helm-semantic      ;; default: c, python, elisp
   (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
-  (push '(matlab-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
 (when (string-equal y:enable-cedet-semantics "yes")
-  (semantic-mode 1) ;; enable necessary CEDET backend
+  ;; enable semantic (from CEDET) support for elisp
+  (add-hook 'semantic-mode-hook
+            (lambda ()
+              (when (fboundp 'semantic-default-elisp-setup)
+                (semantic-default-elisp-setup))))
+  ;; enable semantic only for c/c++, elisp (e.g. freeze python-mode)
+  (semantic-mode 1)
   ;; setting GNU /global/ for /semantic-symref/
   (setq semantic-symref-tool 'global))
 
 ;; Show the function name at the first line of the current buffer via CEDET
 (when (string-equal y:enable-cedet-semantics "yes")
+  ;; require (semantic-mode 1)
   (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-  (semantic-mode 1)
   (require 'stickyfunc-enhance))
 
 ;; Package: /function-args/
