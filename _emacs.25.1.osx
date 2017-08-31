@@ -21,7 +21,7 @@
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
  ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
- '(default ((t (:font "DejaVu Sans Mono-12")))))    ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
@@ -90,8 +90,8 @@
   (setq y-home-path "/home/oracleyue/"))
 
 ;; feature control (see "emacs-init-cc-tags.el")
-(setq y:enable-cedet-semantics "yes") ;; /helm-sematic-or-imenu/, /stickyfunc/
-(setq y:enable-function-args "yes")   ;; /function-args/
+(setq y:enable-cedet-semantics "no") ;; /helm-sematic-or-imenu/, /stickyfunc/ and elisp, matlab
+(setq y:enable-function-args "no")   ;; /function-args/
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -194,60 +194,6 @@
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 
 
-;;
-;; General Supports for Programming Environments
-;;
-
-;; ----------------------------------------------
-;; /magit/: version control
-(global-set-key (kbd "C-x M-g") 'magit-status)
-
-;; ----------------------------------------------
-;; /projectile/: project management and helm addons
-(load (concat y-init-path-prefix "emacs-init-helm-proj"))
-
-;; ----------------------------------------------
-;; Tag Supports (/helm-gtags/ & more)
-(load (concat y-init-path-prefix "emacs-init-tags"))
-
-;; ----------------------------------------------
-;; API Reference Support
-;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(when (string-equal system-type "darwin")
-  (require 'dash-at-point)
-  (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
-  ; specify docsets to search in different modes
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "cpp,eigen,boost,gsl")
-         (python-mode . "python,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r")
-         (sh-mode . "bash")
-         )))
-;; Integration with /Zeal/ for quick refernce (available for Linux)
-(when (string-equal system-type "gnu/linux")
-  (require 'zeal-at-point)
-  (global-set-key (kbd "C-c d") 'zeal-at-point)
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "c++,eigen,boost,gsl")
-         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r")
-         )))
-
-;; ----------------------------------------------
-;; /gud/: debugging supports, e.g. gdb, pdb
-;; - usages: "M-x pdb", "M-x gud-gdb"
-;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
-;; - notes: keybindings compatible with JetBrains
-(when (string-equal system-type "darwin")
-  (setq gdb-non-stop-setting nil))
-(global-set-key (kbd "<f7>") 'gud-step);; equiv step in
-(global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
-(global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
-(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
-
-
 
 ;;
 ;; ------------- Major Modes for Programming Languages -----------------
@@ -265,6 +211,12 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
+
+;; enable semantic (from CEDET) support for elisp
+(when (string-equal y:enable-cedet-semantics "yes")
+  (add-hook 'semantic-mode-hook (lambda ()
+     (when (fboundp 'semantic-default-elisp-setup)
+       (semantic-default-elisp-setup)))))
 
 ;; /ParEdit/ mode
 ;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -323,13 +275,66 @@
 ;; functionality extensions
 (load (concat y-init-path-prefix "emacs-init-matlab"))
 ;; enable CEDTE feature support
-;(matlab-cedet-setup)
+(when (string-equal y:enable-cedet-semantics "yes")
+  (matlab-cedet-setup))
 
 ; ===============================================
 ;; Programming Environment for /AppleScript/
 (autoload 'applescript-mode "applescript-mode"
   "Major mode for editing AppleScript source." t)
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+
+
+;;
+;; Minor-Mode Supports for Programming Environments
+;;
+
+;; ----------------------------------------------
+;; /magit/: version control
+(global-set-key (kbd "C-x M-g") 'magit-status)
+
+;; ----------------------------------------------
+;; /projectile/: project management and helm addons
+(load (concat y-init-path-prefix "emacs-init-helm-proj"))
+
+;; ----------------------------------------------
+;; Tag Supports (/helm-gtags/ & more)
+(load (concat y-init-path-prefix "emacs-init-tags"))
+
+;; ----------------------------------------------
+;; API reference support
+;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
+(when (string-equal system-type "darwin")
+  (require 'dash-at-point)
+  (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
+  ; specify docsets to search in different modes
+  (set 'dash-at-point-mode-alist
+       '((c-mode . "c,gsl,gl4")
+         (c++-mode . "cpp,eigen,boost,gsl")
+         (python-mode . "python,numpy,scipy,matplotlib,pandas")
+         (ess-mode . "r")
+         (sh-mode . "bash"))))
+;; Integration with /Zeal/ for quick refernce (available for Linux)
+(when (string-equal system-type "gnu/linux")
+  (require 'zeal-at-point)
+  (global-set-key (kbd "C-c d") 'zeal-at-point)
+  (set 'dash-at-point-mode-alist
+       '((c-mode . "c,gsl,gl4")
+         (c++-mode . "c++,eigen,boost,gsl")
+         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
+         (ess-mode . "r"))))
+
+;; ----------------------------------------------
+;; /gud/: debugging supports, e.g. gdb, pdb
+;; - usages: "M-x pdb", "M-x gud-gdb"
+;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
+;; - notes: keybindings compatible with JetBrains
+(when (string-equal system-type "darwin")
+  (setq gdb-non-stop-setting nil))
+(global-set-key (kbd "<f7>") 'gud-step);; equiv step in
+(global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
+(global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
+(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
 
 
 

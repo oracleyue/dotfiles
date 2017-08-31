@@ -60,12 +60,16 @@
 
 ;; Fuzzy matching for "semantic" and "Imenu" listing via HELM
 ;;   keybinding: "C-c h i"
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+(with-eval-after-load 'helm-semantic      ;; default: c, python, elisp
+  (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (push '(matlab-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
 (when (string-equal y:enable-cedet-semantics "yes")
-  (setq helm-semantic-fuzzy-match t
-        helm-imenu-fuzzy-match    t)
   (semantic-mode 1) ;; enable necessary CEDET backend
-  (with-eval-after-load 'helm-semantic      ;; default: c, python, elisp
-    (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style))
   ;; setting GNU /global/ for /semantic-symref/
   (setq semantic-symref-tool 'global))
 
