@@ -32,14 +32,13 @@
 (require 'epy-setup)           ;; required!
 (setq epy-enable-ropemacs nil) ;; disabling *ropemacs* (set before "epy-python")
 (require 'epy-python)          ;; python facilities [optional]
-(setq epy-load-yasnippet-p t)  ;; additional snippets (set before "epy-editing")
 (require 'epy-editing)         ;; editing [optional]
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
 
-;(setq python-shell-interpreter "python2") ; use python
-(setq python-shell-interpreter "ipython2") ; use *ipython*
-(setq python-shell-interpreter-args "--simple-prompt -i") ;fix bugs of ipython5 in emacs
+(setq python-shell-interpreter "python2") ; use python
+;; (setq python-shell-interpreter "ipython2") ; use ipython (freeze semantic-mode)
+;; (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 

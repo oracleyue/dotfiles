@@ -93,7 +93,7 @@
 ;;  "y:enable-cedet-semantics": /helm-sematic-or-imenu/, /stickyfunc/
 ;;  "y:enable-function-args": /function-args/
 (if (string-equal system-type "darwin")
-    (progn (setq y:enable-cedet-semantics "no")
+    (progn (setq y:enable-cedet-semantics "yes")
            (setq y:enable-function-args "no"))
   (setq y:enable-cedet-semantics "yes")
   (setq y:enable-function-args "no"))
@@ -415,8 +415,9 @@
 
 ;; regular explorers: /dired/ and /dired-x/
 (require 'dired-x)
-(setq dired-omit-files   ;; omit file extensions
+(setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
+;; enable the above
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)

@@ -32,7 +32,6 @@
 (require 'epy-setup)           ;; required!
 (setq epy-enable-ropemacs nil) ;; disabling *ropemacs* (set before "epy-python")
 (require 'epy-python)          ;; python facilities [optional]
-(setq epy-load-yasnippet-p t)  ;; additional snippets (set before "epy-editing")
 (require 'epy-editing)         ;; editing [optional]
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
