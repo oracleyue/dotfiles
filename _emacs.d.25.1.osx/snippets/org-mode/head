@@ -4,7 +4,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 #+TITLE:     ${1:Title}
-#+AUTHOR:    oracleyue
+#+AUTHOR:    Zuogong Yue
 #+EMAIL:     oracleyue@gmail.com
 #+DATE:      ${2:Date}
 

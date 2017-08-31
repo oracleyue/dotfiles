@@ -10,7 +10,7 @@
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
  '(org-file-apps
    (quote ((auto-mode . emacs)
-           ("\\.x?html?\\'" . "firefox %s")
+           ("\\.x?html?\\'" . "open %s")
            ("\\.pdf\\'" . "open %s"))))
  '(scroll-bar-mode nil)
  '(tab-stop-list
