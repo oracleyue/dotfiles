@@ -36,9 +36,9 @@
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
 
-(setq python-shell-interpreter "python2") ; use python
-;; (setq python-shell-interpreter "ipython2") ; use ipython (freeze semantic-mode)
-;; (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
+;; (setq python-shell-interpreter "python2") ; use python
+(setq python-shell-interpreter "ipython2") ; use ipython
+(setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs since ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
