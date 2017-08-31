@@ -90,8 +90,13 @@
   (setq y-home-path "/home/oracleyue/"))
 
 ;; feature control (see "emacs-init-cc-tags.el")
-(setq y:enable-cedet-semantics "yes") ;; /helm-sematic-or-imenu/, /stickyfunc/
-(setq y:enable-function-args "no")    ;; /function-args/
+;;  "y:enable-cedet-semantics": /helm-sematic-or-imenu/, /stickyfunc/
+;;  "y:enable-function-args": /function-args/
+(if (string-equal system-type "darwin")
+    (progn (setq y:enable-cedet-semantics "no")
+           (setq y:enable-function-args "no"))
+  (setq y:enable-cedet-semantics "yes")
+  (setq y:enable-function-args "no"))
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
