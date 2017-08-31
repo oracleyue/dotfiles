@@ -54,26 +54,25 @@ textarea { overflow-x: auto; }
 p.postamble { text-align: center;
 	          font-size: 12px; }
 
-h1 { padding: 45px 0px 40px 0px;
+h1 { padding: 40px 0px 20px 0px;
    	 color: rgb(12,139,186);
      text-align: center;
      font-family: 'Roboto', Sans-Serif; }
-h2 { padding: 35px 0px 30px 0px;
+h2 { padding: 40px 0px 10px 0px;
      font-family: 'Roboto', Sans-Serif; }
-h3 { padding: 30px 0px 22px 0px;
+h3 { padding: 30px 0px 20px 0px;
      font-family: 'Roboto', Sans-Serif; }
-h4 { padding: 22px 0px 17px 0px;
+h4 { padding: 22px 0px 15px 0px;
      font-family: 'Roboto', Sans-Serif; }
 h5 { padding: 17px 0px 15px 0px;
      font-family: 'Roboto', Sans-Serif; }
-h6 { padding: 15px 0px 13px 0px;
+h6 { padding: 15px 0px 15px 0px;
      font-family: 'Roboto', Sans-Serif; }
 
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    /* width: 640px; */
-    width: 680px;
+    width: 640px;
     margin: auto;
     text-align:left;
     font-family: 'Roboto', sans-serif;
