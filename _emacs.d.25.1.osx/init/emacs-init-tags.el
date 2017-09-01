@@ -2,6 +2,7 @@
 ;; Tag Supports in Programming Environement
 ;; ======================================================
 
+
 ;;
 ;; ---------- Source Code Navigation via TAGS -----------
 ;;
@@ -15,8 +16,7 @@
 ;;   - console: "gtags --gtagslabel=pygments" (no option if set env var)
 ;;   - helm-gtags: =helm-gtags-create-tags= "C-c g c"
 
-
-;; Package: /ggtags/ (frontend)
+;; Frontend: /ggtags/
 ;; (require 'ggtags)
 ;; (add-hook 'c-mode-common-hook (lambda ()
 ;;    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
@@ -29,38 +29,36 @@
 ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 ;; (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
 
-;; Package: /helm-gtags/ (frontend)
-(setq
- helm-gtags-ignore-case             t
- helm-gtags-auto-update             t
- helm-gtags-use-input-at-cursor     t
- helm-gtags-pulse-at-cursor         t
- helm-gtags-prefix-key              "\C-cg"
- helm-gtags-suggested-key-mapping   t
- )
+;; Frontend: /helm-gtags/
 (require 'helm-gtags)
-;; Enable helm-gtags-mode
+(setq helm-gtags-ignore-case             t
+      helm-gtags-auto-update             t
+      helm-gtags-use-input-at-cursor     t
+      helm-gtags-pulse-at-cursor         t
+      helm-gtags-prefix-key              "\C-cg"
+      helm-gtags-suggested-key-mapping   t)
+;; Enable helm-gtags mode
 (add-hook 'dired-mode-hook 'helm-gtags-mode)
 (add-hook 'eshell-mode-hook 'helm-gtags-mode)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
 (add-hook 'python-mode-hook 'helm-gtags-mode)
-;; Keybindings:
-;; *jumps through definitions, references, symbols or DWIM
+;; Keybindings
+;; - jumps through definitions, references, symbols or DWIM
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
 ;;   (kbd "C-c g t") 'helm-gtags-find-tag      (find definitions)
 ;;   (kbd "C-c g r") 'helm-gtags-find-rtag     (find references)
 ;;   (kbd "C-c g s") 'helm-gtags-find-symbol   (find symbols)
-;; *show list of tags in different scopes: project, file, function
+;; - show list of tags in different scopes: project, file, function
 (define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
-;;                              (kbd "C-c g f") 'helm-gtags-parse-file
+;;   (kbd "C-c g f") 'helm-gtags-parse-file
 (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-;; *jumping history/stacks
+;; - jumping history/stacks
 (define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
 (define-key helm-gtags-mode-map (kbd "C-c g ]") 'helm-gtags-next-history)
 (define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
-;; *create/update tags
+;; - create/update tags
 (define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
 (define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
 ;; (Note: prefix "C-u" update the whole project, instead of the current file)
@@ -119,13 +117,13 @@
 
 
 
-;;; ---------------------Usages (helm-tags) ---------------------------
-;;; Basic concepts of tag
+;; ----------- More Descriptions of helm-tags from tuhdo.github.io -------------
+;; Basic concepts of tag
 ;; + GTAGS:  definition database
 ;; + GRTAGS: reference database
 ;; + GPATH:  path name database
-;;
-;;; Basic movements
+
+;; Basic movements
 ;; + =forward-sexp= C-M-f:
 ;;   move forward over a balanced expression that can be a pair or a symbol
 ;; + =backward-sexp= C-M-b:
@@ -140,32 +138,32 @@
 ;;   move point to end of a function
 ;; + =mark-defun= C-M-h:
 ;;   put a region around whole current or following function
-;;
-;;; Show outline tree of definitions in current buffer via /function-args/
+
+;; Show outline tree of definitions in current buffer via /function-args/
 ;;  =moo-jump-local= from /function-args/; use it as an outline tree
-;;
-;;; Find definitions in project, use /helm-gtags/:
+
+;; Find definitions in project, use /helm-gtags/:
 ;; + jump to a reference/tag definition/header
 ;;   =helm-gtags-dwim= M-.
 ;; + jump back to original location
 ;;   =tags-loop-continue= M-,
 ;; + use helm to display all available tags in a project and incrementally filtering
 ;;   =helm-gtags-select= C-j
-;;
-;;; Find references in project, use /helm-gtags/:
+
+;; Find references in project, use /helm-gtags/:
 ;; + find references to funcitons only
 ;;   =helm-gtags-dwim= or =helm-gtags-find-rtags= "C-c g r"
 ;; + find references to variables
 ;;   =helm-gtags-find-symbol= "C-c g s"
-;;
-;;; Find functions that current functions call
+
+;; Find functions that current functions call
 ;; + list all the functions that the current function that point is inside calls
 ;;    =helm-gtags-tags-in-this-function= "C-c g a"
-;;
-;;; Find files in project
+
+;; Find files in project
 ;; + find files matching regexp. (If point is on an included header file, =helm-gtags-dwim= automatically jumps to files)
 ;;   =helm-gtags-find-files=
-;;
-;;; View visited tags with tag stack
+
+;; View visited tags with tag stack
 ;; + show visited tags from newest to oldest, from top to bottom.
 ;;   =helm-gtags-show-stack=

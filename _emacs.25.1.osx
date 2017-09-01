@@ -186,16 +186,15 @@
 ;; ----------------------------------------------
 ;; Setting for /golden-ratio/
 (require 'golden-ratio)
-(when (string-equal (expand-file-name "~") "/Users/oracleyue")
-  (golden-ratio-mode t))    ;; enable for osx main
+(golden-ratio-mode t)
 (eval-after-load "golden-ratio"
-  '(progn (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+  '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+          (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
           (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
           (add-to-list 'golden-ratio-exclude-modes "c-mode")
           (add-to-list 'golden-ratio-exclude-modes "c++-mode")
           (add-to-list 'golden-ratio-exclude-modes "ess-mode")
-          (add-to-list 'golden-ratio-exclude-modes "python-mode")
-          (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
+          (add-to-list 'golden-ratio-exclude-modes "python-mode")))
 (defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
                                (symbol-value 'helm-alive-p)))
 

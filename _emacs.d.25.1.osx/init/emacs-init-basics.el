@@ -3,7 +3,9 @@
 ;; ----------------------------------------------------------------------
 ;; BASIC USAGES
 ;; ---------------
-;; move cursor to the top/middle/bottom of the current window
+;; move cursor to the top/middle/bottom of the current window: "M-r"
+;; upcase/downcase/captalize word: "M-u", "M-l", "M-c"
+;; tranpose/swap words: "M-t"
 ;; insert-file: "C-x i"
 ;; write-file, save-as: "C-x w"
 ;; open-file in read-only: "C-x C-r"
