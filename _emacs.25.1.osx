@@ -89,14 +89,10 @@
     (setq y-home-path "/Users/oracleyue/")
   (setq y-home-path "/home/oracleyue/"))
 
-;; feature control (see "emacs-init-cc-tags.el")
-;;  "y:enable-cedet-semantics": /helm-sematic-or-imenu/, /stickyfunc/
-;;  "y:enable-function-args": /function-args/
-(if (string-equal system-type "darwin")
-    (progn (setq y:enable-cedet-semantics "yes")
-           (setq y:enable-function-args "no"))
-  (setq y:enable-cedet-semantics "yes")
-  (setq y:enable-function-args "yes"))
+;; feature control
+(setq y:enable-cedet-semantics "yes")   ;; /helm-sematic-or-imenu/, /stickyfunc/
+(setq y:enable-function-args "no")      ;; /function-args/
+(setq y:enable-direx-jedi "no")         ;; /direx-jedi
 
 ;; - select package for auto-completion
 (cond ((string-equal system-type "darwin")
@@ -194,7 +190,11 @@
   (golden-ratio-mode t))    ;; enable for osx main
 (eval-after-load "golden-ratio"
   '(progn (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-          (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode") ;;not work
+          (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
+          (add-to-list 'golden-ratio-exclude-modes "c-mode")
+          (add-to-list 'golden-ratio-exclude-modes "c++-mode")
+          (add-to-list 'golden-ratio-exclude-modes "ess-mode")
+          (add-to-list 'golden-ratio-exclude-modes "python-mode")
           (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
 (defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
                                (symbol-value 'helm-alive-p)))
@@ -443,7 +443,8 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
       (quote (("default"
-               ("dired" (mode . dired-mode))
+               ("dired" (or (mode . dired-mode)
+                            (mode . direx:direx-mode)))
                ("org"   (name . "^.*org$"))
                ("writing" (or (mode . text-mode)
                               (mode . markdown-mode)
