@@ -52,7 +52,7 @@
 ;;   (kbd "C-c g s") 'helm-gtags-find-symbol   (find symbols)
 ;; - show list of tags in different scopes: project, file, function
 (define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
-;;   (kbd "C-c g f") 'helm-gtags-parse-file
+(define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
 (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
 ;; - jumping history/stacks
 (define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
