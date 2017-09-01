@@ -82,8 +82,9 @@
 ;; change End-of-Line:
 ;;      - "M-x set-buffer-file-coding-system utf-8-unix" or use "C-x RET f"
 ;; open the *Messages* buffer :: "C-h e"
+;; flyspell-auto-correct-word :: "C-."
 ;;
-;; 20 Aug 2017
+;; 01 Sep 2017
 ;; ----------------------------------------------------------------------
 
 

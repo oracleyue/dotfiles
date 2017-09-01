@@ -10,7 +10,7 @@
 ;; 6. "C-c &" =reftex-view-crossref= display cross-ref info
 ;; 7. "C-q "" insert the double quote ", instead of ``''
 ;; 8. "M-<tab>" complete macros
-;; 9. "C-<return>" flyspell auto correct words
+;; 9. "C-." flyspell auto correct words
 ;; 10."C-c _" to query for master files
 
 ;; For /AUCTeX-Mode/
@@ -224,8 +224,7 @@
      ;; define keybindings to refresh and fontify buffer
      (define-key LaTeX-mode-map (kbd "C-S-f") 'font-lock-fontify-buffer)
      ;; macro completions (flushed by flyspell.el)
-     (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)
-     (define-key LaTeX-mode-map (kbd "C-<return>") 'flyspell-auto-correct-word)))
+     (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
 
 ;; utility definitions
 (defun y:delete-latex-comments ()

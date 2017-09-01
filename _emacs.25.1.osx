@@ -2,7 +2,7 @@
  ;; custom-set-variables was added by Custom.
  ;; Your init file should contain only one such instance.
  '(column-number-mode t)
- '(fill-column 75)
+ '(fill-column 80)
  '(flymake-google-cpplint-command
    (if (string-equal system-type "darwin")
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
@@ -349,6 +349,7 @@
 ; ===============================================
 ;; Settings of general /text-mode/
 (setq-default major-mode 'text-mode)
+;; use "C-." to auto-correct words
 
 ;; line wrapping settings
 (add-hook 'text-mode-hook 'visual-line-mode)
@@ -551,9 +552,9 @@
        (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
        (cd "~/tmp")))
 
-;; restore "F10" to open menu bar
-(global-set-key (kbd "<f10>") 'menu-bar-open)
+;; restore "F10" to open menu bar or "M-`"
+;; (global-set-key (kbd "<f10>") 'menu-bar-open)
 
 ;; kill unnecessary buffers
-;(kill-buffer "*ESS*")
-;(put 'set-goal-column 'disabled nil)
+;; (kill-buffer "*ESS*")
+;; (put 'set-goal-column 'disabled nil)
