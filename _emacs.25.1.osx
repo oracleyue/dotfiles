@@ -413,23 +413,23 @@
 ; ------------------------------------------------
 ;; Directory Explorers
 
-;; regular explorers: /dired/ and /dired-x/
+;; directory explorer: /dired/
 (require 'dired-x)
 (setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
 ;; enable the above
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
-;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
-(require 'popwin)
-(popwin-mode 1)
-(require 'direx)
-(push '(direx:direx-mode :position left :width 25 :dedicated t)
-      popwin:special-display-config)
-(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-(setq direx:leaf-icon "  "
-      direx:open-icon "▾ "
-      direx:closed-icon "▸ ")
+;; ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
+;; (require 'popwin)
+;; (popwin-mode 1)
+;; (require 'direx)
+;; (push '(direx:direx-mode :position left :width 25 :dedicated t)
+;;       popwin:special-display-config)
+;; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+;; (setq direx:leaf-icon "  "
+;;       direx:open-icon "▾ "
+;;       direx:closed-icon "▸ ")
 
 ; ------------------------------------------------
 ;; /ibuffer/: buffer explorer

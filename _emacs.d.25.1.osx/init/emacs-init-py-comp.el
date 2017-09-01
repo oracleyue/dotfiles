@@ -39,13 +39,9 @@
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
 
-;; set python interpreter
-;; note: use ipython slow down openning py files
-(setq python-shell-interpreter "python2") ; use python
-;; (setq python-shell-interpreter "ipython2") ; use ipython
-;; (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
-
-;; set python checker
+;; (setq python-shell-interpreter "python2") ; use python
+(setq python-shell-interpreter "ipython2") ; use ipython; slow down openning files
+(setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
@@ -60,7 +56,7 @@
 ;; set calltip methods
 (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
 
-;; source code viewer via /jedi-direx/
-(eval-after-load "python"
-  '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
-(add-hook 'jedi-mode-hook 'jedi-direx:setup)
+;; ;; source code viewer via /jedi-direx/
+;; (eval-after-load "python"
+;;   '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
+;; (add-hook 'jedi-mode-hook 'jedi-direx:setup)

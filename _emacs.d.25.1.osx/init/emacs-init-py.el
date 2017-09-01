@@ -49,7 +49,6 @@
   'python-shell-completion-complete-or-indent)
 
 
-
 ;;
 ;; Auto-completion by /Jedi/
 ;;
@@ -67,7 +66,7 @@
    (setq ac-sources '(ac-source-jedi-direct
                       ac-source-words-in-same-mode-buffers))))
 
-;; source code viewer via /jedi-direx/
-(eval-after-load "python"
-  '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
-(add-hook 'jedi-mode-hook 'jedi-direx:setup)
+;; ;; source code viewer via /jedi-direx/
+;; (eval-after-load "python"
+;;   '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
+;; (add-hook 'jedi-mode-hook 'jedi-direx:setup)
