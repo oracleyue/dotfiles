@@ -34,10 +34,6 @@
 ;(add-hook 'c-mode-hook 'y:flymake-google-init)
 ;(add-hook 'c++-mode-hook 'y:flymake-google-init)
 
-;; /xcscope/: source cross-referencing tool [need to install cscope]
-;; (add-to-list 'load-path "~/.emacs.d/git/xcscope")
-;(require 'xcscope)
-;(cscope-setup)
 
 ;; configure /company-mode/ for C/C++ sources and headers
 (require 'company-clang)

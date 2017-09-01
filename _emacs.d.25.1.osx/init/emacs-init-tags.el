@@ -4,10 +4,19 @@
 
 ;;
 ;; ---------- Source Code Navigation via TAGS -----------
-;; (choose /ggtags/ or /helm-gtags/ as browsing frontend)
 ;;
 
-;; Package: GNU global + /ggtags/
+;; Tagging system: /GNU global/ with ctags+pygments supports
+;; installation:
+;;   - OS X: "brew install global --with-ctags --with-pygments"
+;;   - Arch Linux: "pacman -S ctags python-pygments"
+(setenv "GTAGSLABEL" "pygments")
+;; create tags: (choose one way)
+;;   - console: "gtags --gtagslabel=pygments" (no option if set env var)
+;;   - helm-gtags: =helm-gtags-create-tags= "C-c g c"
+
+
+;; Package: /ggtags/ (frontend)
 ;; (require 'ggtags)
 ;; (add-hook 'c-mode-common-hook (lambda ()
 ;;    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
@@ -20,15 +29,14 @@
 ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 ;; (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
 
-;; Package: GNU global + /helm-gtags/
+;; Package: /helm-gtags/ (frontend)
 (setq
- helm-gtags-ignore-case t
- helm-gtags-auto-update t
- helm-gtags-use-input-at-cursor t
- helm-gtags-pulse-at-cursor t
- helm-gtags-prefix-key "\C-cg"
- helm-gtags-suggested-key-mapping t
- ;helm-gtags-cache-select-result t
+ helm-gtags-ignore-case             t
+ helm-gtags-auto-update             t
+ helm-gtags-use-input-at-cursor     t
+ helm-gtags-pulse-at-cursor         t
+ helm-gtags-prefix-key              "\C-cg"
+ helm-gtags-suggested-key-mapping   t
  )
 (require 'helm-gtags)
 ;; Enable helm-gtags-mode
@@ -37,21 +45,26 @@
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
 (add-hook 'python-mode-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
-;; Keybindings
-(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-(define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
+;; Keybindings:
+;; *jumps through definitions, references, symbols or DWIM
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-(define-key helm-gtags-mode-map (kbd "C-c [") 'helm-gtags-previous-history) ;"C-c <"
-(define-key helm-gtags-mode-map (kbd "C-c ]") 'helm-gtags-next-history)     ;"C-c >"
-;; more than tuhdo's keybindings
+;;   (kbd "C-c g t") 'helm-gtags-find-tag      (find definitions)
+;;   (kbd "C-c g r") 'helm-gtags-find-rtag     (find references)
+;;   (kbd "C-c g s") 'helm-gtags-find-symbol   (find symbols)
+;; *show list of tags in different scopes: project, file, function
+(define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
+;;                              (kbd "C-c g f") 'helm-gtags-parse-file
+(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+;; *jumping history/stacks
+(define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
+(define-key helm-gtags-mode-map (kbd "C-c g ]") 'helm-gtags-next-history)
 (define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
+;; *create/update tags
+(define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
 (define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
-(define-key helm-gtags-mode-map (kbd "C-c g p") 'helm-gtags-parse-file)
-;; in the list of helm-gtags-suggested-key-mapping
-(define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag)
-(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)
+;; (Note: prefix "C-u" update the whole project, instead of the current file)
+
 
 
 ;;
@@ -107,10 +120,6 @@
 
 
 ;;; ---------------------Usages (helm-tags) ---------------------------
-;;; Run =gtags= under your project root before use
-;; - a DEFINITION of a tag is where a tag is implemented
-;; - a REFERENCE of a tag is where a tag is used in a source tree, but not where it is defined
-;;
 ;;; Basic concepts of tag
 ;; + GTAGS:  definition database
 ;; + GRTAGS: reference database
