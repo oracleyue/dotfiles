@@ -36,6 +36,7 @@
         markdown-mode
         matlab-mode
         multiple-cursors
+        neotree
         popup
         popwin
         pos-tip

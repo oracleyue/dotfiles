@@ -427,15 +427,21 @@
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
-(require 'popwin)
-(popwin-mode 1)
-(require 'direx)
-(push '(direx:direx-mode :position left :width 25 :dedicated t)
-      popwin:special-display-config)
-(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-(setq direx:leaf-icon "  "
-      direx:open-icon "▾ "
-      direx:closed-icon "▸ ")
+(when (string-equal y:enable-direx-jedi "yes")
+  (require 'popwin)
+  (popwin-mode 1)
+  (require 'direx)
+  (push '(direx:direx-mode :position left :width 25 :dedicated t)
+        popwin:special-display-config)
+  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+  (setq direx:leaf-icon "  "
+        direx:open-icon "▾ "
+        direx:closed-icon "▸ "))
+
+;; directory explorer in tree: /neotree/
+(require 'neotree)
+(global-set-key (kbd "C-x C-j") 'neotree-toggle)
+(setq neo-theme 'arrow)
 
 ; ------------------------------------------------
 ;; /ibuffer/: buffer explorer
