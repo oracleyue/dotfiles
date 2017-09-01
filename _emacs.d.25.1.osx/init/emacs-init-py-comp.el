@@ -9,12 +9,15 @@
 ;;
 ;; *source navigation*
 ;;   - /jedi/ usages:
+;;     - show call-tip: "C-c e"; show doc: "C-c C-e" (keybindings by oracleyue)
+;;
 ;;     - use jedi to show python doc of the object at point; =jedi:show-doc=
 ;;       keybinding: "C-c ?"
 ;;     - use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
 ;;       keybinding: "C-c ."
 ;;     - go to the last point where =jedi:got-definition= was called
 ;;       keybinding: "C-c ,"
+;;
 ;;   - /jedi-direx/: source viewer, "C-c v"
 ;;
 ;; *debug*:
@@ -36,18 +39,21 @@
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
 
-;; (setq python-shell-interpreter "python2") ; use python
-(setq python-shell-interpreter "ipython2") ; use ipython
-(setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs since ipython5
-(epy-setup-checker "pyflakes %f")          ; use *flymake* checker
+;; set python interpreter
+;; note: use ipython slow down openning py files
+(setq python-shell-interpreter "python2") ; use python
+;; (setq python-shell-interpreter "ipython2") ; use ipython
+;; (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
 
+;; set python checker
+(epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
 ;;
 ;; Auto-completion by /Jedi/, using /company-jedi/
 ;;
-;; (add-to-list 'company-backends 'company-jedi)
 (defun y:company-py-setup ()
+  (jedi-mode 1) ;; not necessary for company, but for code nagivation and direx
   (setq-local company-backends
               (append '(company-jedi) company-backends)))
 (add-hook 'python-mode-hook 'y:company-py-setup)
