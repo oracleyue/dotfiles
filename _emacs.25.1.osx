@@ -189,9 +189,15 @@
 
 ;; ----------------------------------------------
 ;; Setting for /golden-ratio/
+(require 'golden-ratio)
 (when (string-equal (expand-file-name "~") "/Users/oracleyue")
-  (require 'golden-ratio)
-  (golden-ratio-mode t))
+  (golden-ratio-mode t))    ;; enable for osx main
+(eval-after-load "golden-ratio"
+  '(progn (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+          (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode") ;;not work
+          (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)))
+(defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
+                               (symbol-value 'helm-alive-p)))
 
 ;; ----------------------------------------------
 ;; Setting for /Helm/ and extensions
