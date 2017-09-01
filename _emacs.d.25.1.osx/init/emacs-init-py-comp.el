@@ -10,15 +10,14 @@
 ;; *source navigation*
 ;;   - /jedi/ usages:
 ;;     - show call-tip: "C-c e"; show doc: "C-c C-e" (keybindings by oracleyue)
-;;
 ;;     - use jedi to show python doc of the object at point; =jedi:show-doc=
 ;;       keybinding: "C-c ?"
 ;;     - use jedi to jump to the definition of the obj at point; =jedi:goto-definition=
 ;;       keybinding: "C-c ."
 ;;     - go to the last point where =jedi:got-definition= was called
 ;;       keybinding: "C-c ,"
-;;
 ;;   - /jedi-direx/: source viewer, "C-c v"
+;;   - /helm-semantic-or-imenu/: "C-c h i"
 ;;
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
@@ -56,7 +55,7 @@
 ;; set calltip methods
 (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
 
-;; ;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
-;; (eval-after-load "python"
-;;   '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
-;; (add-hook 'jedi-mode-hook 'jedi-direx:setup)
+;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
+(eval-after-load "python"
+  '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
+(add-hook 'jedi-mode-hook 'jedi-direx:setup)
