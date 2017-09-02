@@ -79,7 +79,9 @@
 
 ;; use helm to quick-jump to any man entry
 ;; - keybinding: C-x c m
-;(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+(when (string-equal system-type "darwin")
+  (setq helm-man-format-switches "%s"))
+(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
 ;; use Unix "find" in helm interface
 ;; - keybinding: C-x c /
@@ -90,7 +92,7 @@
 
 ;; use helm to show "occur"
 ;; - keybinding: C-x c M-s o
-;(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c h M-o") 'helm-occur)
 
 ;; use helm to show help doc "C-h a"
 ;; - keybinding: C-x c a

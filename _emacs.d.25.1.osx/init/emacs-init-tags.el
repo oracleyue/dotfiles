@@ -12,9 +12,11 @@
 ;;   - OS X: "brew install global --with-ctags --with-pygments"
 ;;   - Arch Linux: "pacman -S ctags python-pygments"
 (setenv "GTAGSLABEL" "pygments")
+(setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/"))
 ;; create tags: (choose one way)
 ;;   - console: "gtags --gtagslabel=pygments" (no option if set env var)
 ;;   - helm-gtags: =helm-gtags-create-tags= "C-c g c"
+
 
 ;; Frontend: /ggtags/
 ;; (require 'ggtags)
@@ -28,6 +30,7 @@
 ;; (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
 ;; (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 ;; (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
 
 ;; Frontend: /helm-gtags/
 (require 'helm-gtags)
@@ -47,9 +50,9 @@
 ;; - jumps through definitions, references, symbols or DWIM
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-(define-key helm-gtags-mode-map (kbd "C-c g t") 'helm-gtags-find-tag) ;(definitions)
-(define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag) ;(references)
-(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)  ;(symbols)
+(define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag) ;(definitions)
+(define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag) ;(references)
+(define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)  ;(symbols)
 ;; - show list of tags in different scopes: project, file, function
 (define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
 (define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
@@ -69,7 +72,7 @@
 ;; --------- Source Code Browsers via other Packages -------------
 ;;
 
-;; Fuzzy matching for "semantic" and "Imenu" listing via HELM
+;; /helm-semantic-or-imenu/: fuzzy matching for semantics in current buffer
 ;;   keybinding: "C-c h i"
 (setq helm-semantic-fuzzy-match t
       helm-imenu-fuzzy-match    t)
@@ -78,26 +81,21 @@
   (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
+;; enable semantic (from CEDET) support for elisp
 (when y:enable-cedet-semantics
-  ;; enable semantic (from CEDET) support for elisp
   (add-hook 'semantic-mode-hook
-            (lambda ()
-              (when (fboundp 'semantic-default-elisp-setup)
-                (semantic-default-elisp-setup))))
-  ;; enable semantic only for c/c++, elisp (e.g. freeze python-mode)
-  (semantic-mode 1)
-  ;; setting GNU /global/ for /semantic-symref/
-  (setq semantic-symref-tool 'global))
+            (lambda () (when (fboundp 'semantic-default-elisp-setup)
+                         (semantic-default-elisp-setup))))
+  (semantic-mode 1))
 
-;; Show the function name at the first line of the current buffer via CEDET
+;; /stickyfunc/: show the current function name on the top
 (when y:enable-cedet-semantics
   ;; require (semantic-mode 1)
   (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
   (require 'stickyfunc-enhance))
 
-;; Package: /function-args/
+;; /function-args/: symbol reference table over current file or projects
 ;; usages:
-;;   =fa-show= "M-o",          =fa-jump-maybe= "M-j"
 ;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
 (when y:enable-function-args
   (require 'ivy)
