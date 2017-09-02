@@ -56,7 +56,7 @@
 (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
 
 ;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
-(when (string-equal y:enable-direx-jedi "yes")
+(when y:enable-direx-jedi
   (eval-after-load "python"
     '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
   (add-hook 'jedi-mode-hook 'jedi-direx:setup))

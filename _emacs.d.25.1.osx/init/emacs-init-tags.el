@@ -47,9 +47,9 @@
 ;; - jumps through definitions, references, symbols or DWIM
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-;;   (kbd "C-c g t") 'helm-gtags-find-tag      (find definitions)
-;;   (kbd "C-c g r") 'helm-gtags-find-rtag     (find references)
-;;   (kbd "C-c g s") 'helm-gtags-find-symbol   (find symbols)
+(define-key helm-gtags-mode-map (kbd "C-c g t") 'helm-gtags-find-tag) ;(definitions)
+(define-key helm-gtags-mode-map (kbd "C-c g r") 'helm-gtags-find-rtag) ;(references)
+(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-find-symbol)  ;(symbols)
 ;; - show list of tags in different scopes: project, file, function
 (define-key helm-gtags-mode-map (kbd "C-c g l") 'helm-gtags-select)
 (define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
@@ -78,7 +78,7 @@
   (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
-(when (string-equal y:enable-cedet-semantics "yes")
+(when y:enable-cedet-semantics
   ;; enable semantic (from CEDET) support for elisp
   (add-hook 'semantic-mode-hook
             (lambda ()
@@ -90,7 +90,7 @@
   (setq semantic-symref-tool 'global))
 
 ;; Show the function name at the first line of the current buffer via CEDET
-(when (string-equal y:enable-cedet-semantics "yes")
+(when y:enable-cedet-semantics
   ;; require (semantic-mode 1)
   (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
   (require 'stickyfunc-enhance))
@@ -99,7 +99,7 @@
 ;; usages:
 ;;   =fa-show= "M-o",          =fa-jump-maybe= "M-j"
 ;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
-(when (string-equal y:enable-function-args "yes")
+(when y:enable-function-args
   (require 'ivy)
   (require 'function-args)
   ;; enable case-insensitive searching
