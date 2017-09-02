@@ -441,7 +441,7 @@
 (require 'neotree)
 (setq neo-theme 'arrow)
 (global-set-key (kbd "C-x C-j") 'neotree-toggle)
-(define-key neotree-mode-map (kbd "i") 'neotree-enter)
+(define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
 (setq neo-show-hidden-files nil)
 (eval-after-load "neotree"      ;; toggle by "H" in neotree
   '(setq neo-hidden-regexp-list '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~")))
