@@ -517,6 +517,7 @@
                                   (mode . c-mode)
                                   (mode . c++-mode)
                                   (mode . cmake-mode)
+                                  (name . ".dir-locals.el")
                                   (name . "[mM]akefile")))
                ("web" (or (mode . html-mode)
                           (mode . css-mode)

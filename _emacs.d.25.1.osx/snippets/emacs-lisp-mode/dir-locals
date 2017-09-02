@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dir-locals
+# key: dir
+# group: oracleyue
+# --
+((nil . ((company-clang-arguments . ("-I/Path-to-Include1"
+                                     "-I/Path-to-Include2")))))
