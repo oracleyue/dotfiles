@@ -3,5 +3,5 @@
 # key: dir
 # group: oracleyue
 # --
-((nil . ((company-clang-arguments . ("-I/Path-to-Include1"
-                                     "-I/Path-to-Include2")))))
+((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
+                                     "-I/home/<user>/project_root/include2/")))))
