@@ -1,29 +1,20 @@
-; =======================================
-;; Programming Environment for /C C++/
+; =====================================================
+;; Programming Environment for C/C++
+; =====================================================
+;; (Warning: semantic-mode in CEDET causes "M-x gdb" freeze emacs on OSX!)
+
 (require 'cc-mode)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
-
-;; defaul coding styles
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
 
-;; Package: /google-c-style/
+
+;; /google-c-style/: google c++ code style
 ;(require 'google-c-style)
 ;(add-hook 'c-mode-common-hook 'google-set-c-style)
 ;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-;; Package: /smartparens/
-;; having enable globally in .emacs
-;; if not using /smartparens/ globally, uncomment the next line
-;(require 'smartparens)
-;; when you press RET, the curly braces automatically add another newline
-(sp-with-modes '(c-mode c++-mode)
-  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-  (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
-
-;; /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
-; let's define a function for flymake initialization
+;; /flymake-google-cpplint/ (+ built-in /flymake-cursor/)
 (defun y:flymake-google-init ()
   (require 'flymake-google-cpplint)
   (custom-set-variables
@@ -35,7 +26,15 @@
 ;(add-hook 'c++-mode-hook 'y:flymake-google-init)
 
 
-;; configure /company-mode/ for C/C++ sources and headers
+;; /smartparens/: insert pair of symbols
+;; (require 'smartparens) ;; enabled in .emacs
+;; when you press RET, the curly braces automatically add another newline
+(sp-with-modes '(c-mode c++-mode)
+  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
+
+
+;; /company-mode/: code completion for C/C++ sources and headers
 (require 'company-clang)
 (add-to-list 'company-clang-arguments "-I/usr/local/include/eigen3")
 ;; use /clang/ and /company-c-headers/
@@ -55,13 +54,12 @@
               (append '((company-c-headers company-clang company-dabbrev-code))
                       company-backends)))
 (add-hook 'c-mode-common-hook 'y:company-cpp-setup)
-;; suppress warning due to set 'company-clang-arguments'
-(add-to-list 'safe-local-variable-values
-             '(company-clang-arguments . ("-I./include/" "-I./src/")))
+
+
 
 
 ;;
-;; ***********other modes related to C/CPP ********************
+;; ***********other modes support C/CPP programming ********************
 ;;
 
 ;; Enable compile command in Makefile modes

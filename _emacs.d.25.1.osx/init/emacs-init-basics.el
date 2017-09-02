@@ -198,12 +198,6 @@
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
 
-;; set the default browser
-(if (string-equal system-type "darwin")
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (concat y-home-path "bin/web-browser")) ;use Safari
-  (setq browse-url-browser-function 'browse-url-firefox))
-
 ;; version settings
 ;(setq ecb-options-version "2.40")
 ;(setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message

@@ -8,9 +8,9 @@
        "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
  '(inhibit-startup-screen t)
  '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
- '(org-file-apps
+ '(qorg-file-apps
    (quote ((auto-mode . emacs)
-           ("\\.x?html?\\'" . "open %s")
+           ;; ("\\.x?html?\\'" . "open %s")
            ("\\.pdf\\'" . "open %s"))))
  '(scroll-bar-mode nil)
  '(tab-stop-list
@@ -32,8 +32,7 @@
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; frame size
-;; notes: (96,36) in Mac; 33 in Thinkpad
+;; frame size   (note: [96,36] in Mac; 33 in Thinkpad)
 (if (string-equal system-type "darwin")
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
@@ -79,15 +78,21 @@
 ;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
 ;; (server-start)
 
+;; home
+(if (string-equal system-type "darwin")
+    (setq y-home-path "/Users/oracleyue/")
+  (setq y-home-path "/home/oracleyue/"))
+
+;; default browser
+(if (string-equal system-type "darwin")
+    (setq browse-url-browser-function 'browse-url-generic
+          browse-url-generic-program (concat y-home-path "bin/web-browser")) ;use Safari
+  (setq browse-url-browser-function 'browse-url-firefox))
+
 
 ;;
 ;; Global Flags for Feature Control
 ;;
-
-;; home paths
-(if (string-equal system-type "darwin")
-    (setq y-home-path "/Users/oracleyue/")
-  (setq y-home-path "/home/oracleyue/"))
 
 ;; feature control
 (setq y:enable-cedet-semantics t)       ;; /helm-sematic-or-imenu/, /stickyfunc/
@@ -97,8 +102,7 @@
 (setq y:enable-direx-jedi (and t        ;; /direx-jedi/ (!! require "direx")
   (cdr (assoc "direx" y:use-direx-or-neotree))))
 
-
-;; - select package for auto-completion
+;; choose package for code completion
 (cond ((string-equal system-type "darwin")
        (if (string-equal (expand-file-name "~") "/Users/oracleyue/bin/HomeAutoCompl")
            (setq y:ac-mode "auto-complete")
@@ -213,7 +217,32 @@
   (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
 
 ;; ----------------------------------------------
-;; Setting for /Helm/ and extensions
+;; /engine-mode/: query search engine
+(require 'engine-mode)
+(engine-mode t)
+(setq engine/browser-function 'browse-url-default-browser)
+;; (engine/set-keymap-prefix (kbd "C-c s"))  ;; change the defaul "C-x /"
+(defengine duckduckgo "https://duckduckgo.com/?q=%s"
+  :keybinding "d")
+(defengine github
+  "https://github.com/search?ref=simplesearch&q=%s"
+  :keybinding "h")
+(defengine amazon
+  "http://www.amazon.com/s/ref=nb_sb_noss2?url=search-alias%%3Daps&field-keywords=%s"
+  :keybinding "a")
+(defengine google "http://www.google.lu/search?ie=utf-8&oe=utf-8&q=%s"
+  :keybinding "g")
+(defengine wikipedia
+  "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+  :keybinding "w")
+(defengine wiktionary
+  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s"
+  :keybinding "k")
+(defengine stack-overflow "https://stackoverflow.com/search?q=%s"
+  :keybinding "s")
+
+;; ----------------------------------------------
+;; /helm/ and extensions: quick file search and more
 (load (concat y-init-path-prefix "emacs-init-helm"))
 (load (concat y-init-path-prefix "emacs-init-helm-swoop"))
 

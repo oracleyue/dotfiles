@@ -10,6 +10,7 @@
         company-jedi
         company-quickhelp
         csv-mode
+        engine-mode
         dash
         direx
         emmet-mode
