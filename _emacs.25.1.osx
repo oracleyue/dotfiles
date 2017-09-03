@@ -28,6 +28,12 @@
 (setq custom-file "~/.emacs-custom.el")
 ;(load custom-file 'noerror)
 
+;; running multiple emacs servers using different profiles
+;; list of profiles:
+;;  - "main"  : general purpose (light-theme, startup folders)
+;;  - "coding": coding (dark-theme, startup folders)
+;;  - "ac"    : ac-complete (the rest as "coding")
+
 ;; encodings
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
@@ -65,18 +71,18 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 (cond ((string-equal system-type "darwin")
-       (if (string-equal (expand-file-name "~") "/Users/oracleyue")
-           (progn ;(setq frame-background-mode (quote dark))
-             (load-theme 'solarized t))         ;; mac+home: light
-         (load-theme 'monokai t)))              ;; mac+psudo-home: dark
+       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
+           (load-theme 'solarized t)  ;; mac: main
+         (load-theme 'monokai t)))    ;; mac: coding, ac
       ((string-equal system-type "gnu/linux")
        (load-theme 'atom-one-dark t)))
 ;; customize more themes (mode-line)
 (load (concat y-init-path-prefix "emacs-init-theme"))
 
 ;; start emacs server (use =emacsclient -a "" -c= anywhere else)
-;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
 ;; (server-start)
+;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
+(setq server-use-tcp t)
 
 ;; home
 (if (string-equal system-type "darwin")
@@ -103,11 +109,11 @@
 
 ;; choose package for code completion
 (cond ((string-equal system-type "darwin")
-       (if (string-equal (expand-file-name "~") "/Users/oracleyue/bin/HomeAutoCompl")
-           (setq y:ac-mode "auto-complete")
-         (setq y:ac-mode "company")))
+       (if (string-equal "ac-mode" (daemonp))
+           (setq y:code-complete-mode "auto-complete")
+         (setq y:code-complete-mode "company")))
       ((string-equal system-type "gnu/linux")
-       (setq y:ac-mode "auto-complete")))
+       (setq y:code-complete-mode "auto-complete")))
 
 
 ;;
@@ -128,7 +134,7 @@
 
 ;; ----------------------------------------------
 ;; Minior modes for auto-completions (+yas, auto-complete ...)
-(if (string-equal y:ac-mode "company")
+(if (string-equal y:code-complete-mode "company")
     (load (concat y-init-path-prefix "emacs-init-ac-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-ac")))  ;; use /auto-complete/
 
@@ -286,7 +292,7 @@
 
 ; ===============================================
 ;; Programming Environment for /C C++/
-(if (string-equal y:ac-mode "company")
+(if (string-equal y:code-complete-mode "company")
     (load (concat y-init-path-prefix "emacs-init-cc-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-cc")))  ;; use /auto-complete/
 
@@ -300,13 +306,13 @@
 
 ; ===============================================
 ;; Programming Environment for /Python/
-(if (string-equal y:ac-mode "company")
+(if (string-equal y:code-complete-mode "company")
     (load (concat y-init-path-prefix "emacs-init-py-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-py")))  ;; use /auto-complete/
 
 ; ===============================================
 ;; Programming Environment for /R/
-(if (string-equal y:ac-mode "company")
+(if (string-equal y:code-complete-mode "company")
     (load (concat y-init-path-prefix "emacs-init-r-comp"))  ;; use /company/
   (load (concat y-init-path-prefix "emacs-init-r")))  ;; use /auto-complete/
 
@@ -512,6 +518,7 @@
                ("programming" (or (mode . scheme-mode)
                                   (mode . python-mode)
                                   (mode . ess-mode)
+                                  (mode . sh-mode)
                                   (mode . matlab-mode)
                                   (mode . c-mode)
                                   (mode . c++-mode)
@@ -602,7 +609,7 @@
 
 ;; open default Dired folders on startup
 (cond ((string-equal system-type "darwin")
-       (if (string-equal (expand-file-name "~") "/Users/oracleyue")
+       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
            (progn
              (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
              (cd (concat y-home-path "/Public/Dropbox/Academia/Manuscripts")))

@@ -13,12 +13,18 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # rsync .emacs and .emacs.d to the local git repo
 $sync ~/.emacs $repopath/_emacs.25.1.osx
+
 $sync ~/.emacs.d/init $repopath/_emacs.d.25.1.osx/
 $sync --exclude="clang-complete" --exclude="*.pyc" \
       ~/.emacs.d/git $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/themes $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/default-css $repopath/_emacs.d.25.1.osx/
+
+# rsync important scripts
+$sync ~/bin/gitup-emacs.sh $repopath/scripts/
+$sync ~/bin/gitpull-emacs.sh $repopath/scripts/
+$sync ~/bin/emacs-server-func.sh $repopath/scripts/
 
 # push updates to github.com
 cd $repopath
