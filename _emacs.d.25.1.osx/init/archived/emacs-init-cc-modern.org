@@ -1,0 +1,180 @@
+* Modern C++ IDE for Emacs
+
+** Requirements
+- Use CMake to build your projects
+- Have Clang/LLVM installed
+- Want to setup RTags and Irony
+- Want to integrate RTags and Irony with Company.
+
+** Source code navigation using RTags (disabled)
+*** Setup
+Build and install RTags using the RTags Quickstart Guide. Alternatively install RTags using your distribution's package manager.
+
+Install rtags from MELPA and add the following to your emacs init file:
+
+#+BEGIN_SRC
+  (require 'rtags)
+  (require 'company-rtags)
+
+  (setq rtags-completions-enabled t)
+  (eval-after-load 'company
+    '(add-to-list
+      'company-backends 'company-rtags))
+  (setq rtags-autostart-diagnostics t)
+  (rtags-enable-standard-keybindings)
+#+END_SRC
+
+To enable Helm integration add:
+#+BEGIN_SRC
+  (setq rtags-display-result-backend 'helm)
+#+END_SRC
+
+Before using RTags you need to start rdm and index your project. In order to index your project, RTags requires you to export your project's compile commands with cmake.
+
+#+BEGIN_SRC sh
+  $ rdm &
+  $ cd /path/to/project/root
+  $ cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+  $ rc -J .
+#+END_SRC
+
+We'll see how to automate this process with cmake-ide below.
+
+*** Usages
+**** Basic movements
+
+     =C-M-f= runs forward-sexp, move forward over a balanced expression that can be a pair or a symbol.
+     =C-M-b= runs backward-sexp, move backward over a balanced expression that can be a pair or a symbol.
+     =C-M-k= runs kill-sexp, kill balanced expression forward that can be a pair or a symbol.
+     =C-M-<SPC>= or =C-M-@= runs mark-sexp, put mark after following expression that can be a pair or a symbol.
+     =C-M-a= runs beginning-of-defun, which moves point to beginning of a function.
+     =C-M-e= runs end-of-defun, which moves point to end of a function.
+     =C-M-h= runs mark-defun, which put a region around whole current or following function.
+
+**** Find definitions in project
+
+     =C-c-r .= runs rtags-find-symbol-at-point, which jumps to the definition of the symbol under the cursor.
+
+**** Find references in project
+
+     =C-c-r .= runs rtags-find-references-at-point, which lists all references to the symbol under the cursor.
+     =C-c-r <= runs rtags-find-references, which prompts for the symbol name and finds all references.
+     =C-c-r >= runs rtags-find-symbol, which prompts for symbol name and finds all references.
+
+**** Find files in project
+
+     =C-c r ;= runs rtags-find-file, which prompts for file name to search for out of currently indexed files.
+
+     Alternatively, this can be better accomplished with Projectile.
+
+**** View visited tags with tag stack
+
+     =C-c r [= rtags-location-stack-back Jumps to last visited tag.
+     =C-c r ]= rtags-location-stack-forward Moves forward in location stack.
+
+** Source code completion using irony
+*** Prerequisites
+
+    Install irony-mode from MELPA and add the following to your emacs init file:
+
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'c++-mode-hook 'irony-mode)
+      (add-hook 'c-mode-hook 'irony-mode)
+
+      (defun y:irony-mode-hook ()
+        (define-key irony-mode-map [remap completion-at-point]
+          'irony-completion-at-point-async)
+        (define-key irony-mode-map [remap complete-symbol]
+          'irony-completion-at-point-async))
+
+      (add-hook 'irony-mode-hook 'y:irony-mode-hook)
+      ;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    #+END_SRC
+
+    NOTE: Like RTags, Irony requires a compilation database. To create one run the following:
+
+    #+BEGIN_SRC sh
+      $ cd /path/to/project/root
+      $ cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    #+END_SRC
+
+    The first time you run irony you must install the *irony-server* by runing the command: ~M-x irony-install-server~.
+*** Using Company with Irony
+    To use company-mode with Irony, install company-irony from melpa and add the following to your emacs init file:
+    #+BEGIN_SRC emacs-lisp
+      ;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+      (setq company-backends (delete 'company-semantic company-backends))
+      ;; (eval-after-load 'company
+      ;;   '(add-to-list 'company-backends 'company-irony))
+    #+END_SRC
+
+    If you want to enable tab-completion with no delay use the following:
+    #+BEGIN_SRC emacs-lisp
+      ;; (setq company-idle-delay 0)
+      ;; (define-key c-mode-map [(tab)] 'company-complete)
+      ;; (define-key c++-mode-map [(tab)] 'company-complete)
+    #+END_SRC
+
+*** Header file completion with company-irony-c-headers
+    To add support for completing C++ headers:
+
+    - Install =company-irony-c-headers= from MELPA
+    - Remove the following to your emacs init file:
+      #+BEGIN_SRC
+        (eval-after-load 'company
+          '(add-to-list 'company-backends 'company-irony))
+      #+END_SRC
+
+    - Add the following to your emacs init file:
+      #+BEGIN_SRC emacs-lisp
+        (require 'company-irony-c-headers)
+        (eval-after-load 'company
+          '(add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+        (global-set-key (kbd "M-RET") 'company-complete)
+      #+END_SRC
+
+** Syntax checking with Flycheck (disabled)
+*** Prerequisites
+
+    Install =flycheck= from MELPA and add the following to your emacs init file:
+    #+BEGIN_SRC
+      (add-hook 'c++-mode-hook 'flycheck-mode)
+      (add-hook 'c-mode-hook 'flycheck-mode)
+    #+END_SRC
+
+*** Integrating RTags with Flycheck (disabled)
+
+    To enable RTags and flycheck integration add the following to your emacs init file:
+    #+BEGIN_SRC
+      (require 'flycheck-rtags)
+
+      (defun my-flycheck-rtags-setup ()
+        (flycheck-select-checker 'rtags)
+        (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+        (setq-local flycheck-check-syntax-automatically nil))
+      ;; c-mode-common-hook is also called by c++-mode
+      (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
+    #+END_SRC
+*** Integrating Irony with Flycheck
+
+    Install =flycheck-irony= from MELPA and add the following to your emacs init file:
+    #+BEGIN_SRC
+      (eval-after-load 'flycheck
+        '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    #+END_SRC
+** CMake automation with cmake-ide (disabled)
+*** Prerequisites
+
+    Install cmake-ide from MELPA and add the following to your emacs init file:
+    #+BEGIN_SRC
+      (cmake-ide-setup)
+    #+END_SRC
+
+*** Using cmake-ide
+
+    To have cmake-ide automatically create a compilation commands file in your project root create a =.dir-locals.el= containing the following:
+    #+BEGIN_SRC
+      ((nil . ((cmake-ide-build-dir . "<PATH_TO_PROJECT_BUILD_DIRECTORY>"))))
+    #+END_SRC
+
+    You can now build your project using ~M-x cmake-ide-compile~. Additionally, cmake-ide will automatically update your RTags index as well.

@@ -404,11 +404,13 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-checkbox (,@fmt-bold))
                 (org-table (,@fg-cyan))
                 (org-formula (:weight bold :slant italic ,@fg-red))
-                (org-code (,@fg-base01))
+                ;; (org-code (,@fg-base01))
+                (org-code (,@fmt-none ,@fg-blue))  ;oracleyue
                 (org-document-title (,@fmt-bold ,@fg-cyan))
                 (org-document-info-keyword (,@fg-base01))
                 (org-block (,@fg-base01))
-                (org-verbatim (,@fmt-undr ,@fg-base01))
+                ;; (org-verbatim (,@fmt-undr ,@fg-base01))
+                (org-verbatim (,@fmt-undr ,@fg-cyan)) ;oracleyue
                 (org-clock-overlay (,@fmt-revr ,@bg-cyan ,@fg-base03))
                 (org-agenda-structure (,@fmt-bold ,@fg-blue))
                 (org-scheduled (:weight bold :slant italic ,@fg-green))
