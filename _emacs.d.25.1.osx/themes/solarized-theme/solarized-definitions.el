@@ -740,13 +740,15 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (term-color-white (,@fg-base00))
                 ;; company
                 (company-tooltip (,@fg-base00 ,@bg-base02))
-                (company-tooltip-selection (,@fg-green ,@bg-base02))
+                ;; (company-tooltip-selection (,@fg-green ,@bg-base02))
+                (company-tooltip-selection (,@fmt-stnd ,@fg-cyan ,@bg-back))  ;oracleyue
                 (company-tooltip-search (,@fmt-none ,@fg-yellow))  ;oracleyue, added
                 (company-tooltip-search-selection (,@fmt-stnd ,@fg-orange ,@bg-back))
                                         ;oracleyue, added
                 (company-tooltip-mouse (,@fg-base1 ,@bg-base02))
                 (company-tooltip-common (,@fg-blue ,@bg-base02 ,@fmt-undr))
-                (company-tooltip-common-selection (,@fg-green ,@bg-base02 ,@fmt-undr))
+                ;; (company-tooltip-common-selection (,@fg-green ,@bg-base02 ,@fmt-undr))
+                (company-tooltip-common-selection (,@fmt-undr))
                 (company-tooltip-annotation (,@fg-yellow ,@bg-base02))
                 (company-scrollbar-fg (,@bg-base0))
                 (company-scrollbar-bg (,@bg-base02))
