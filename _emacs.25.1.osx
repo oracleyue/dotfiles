@@ -97,10 +97,9 @@
 ;; feature control
 (setq y:enable-cedet-semantics t)       ;; /helm-sematic-or-imenu/, /stickyfunc/
 (setq y:enable-function-args nil)       ;; /function-args/
-(setq y:use-direx-or-neotree            ;; enable /direx/ or/and /neotree/
-      '(("direx" . nil) ("neotree" . t)))
-(setq y:enable-direx-jedi (and t        ;; /direx-jedi/ (!! require "direx")
-  (cdr (assoc "direx" y:use-direx-or-neotree))))
+(setq y:use-direx-or-neotree            ;; enable /direx-jedi/ or/and /neotree/
+      '(("direx-jedi" . nil) ("neotree" . t)))
+(setq y:enable-google-cpp-style nil)    ;; /google-c-style/
 
 ;; choose package for code completion
 (cond ((string-equal system-type "darwin")
@@ -345,7 +344,7 @@
 
 ;; ----------------------------------------------
 ;; Tag Supports (/helm-gtags/ & more)
-(load (concat y-init-path-prefix "emacs-init-tags"))
+(load (concat y-init-path-prefix "emacs-init-gtags"))
 
 ;; ----------------------------------------------
 ;; API reference support
@@ -471,7 +470,7 @@
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
 (require 'popwin)
 (popwin-mode 1)
-(when (cdr (assoc "direx" y:use-direx-or-neotree))
+(when (cdr (assoc "direx-jedi" y:use-direx-or-neotree))
   (require 'direx)
   (push '(direx:direx-mode :position left :width 27 :dedicated t)
         popwin:special-display-config)

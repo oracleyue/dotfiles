@@ -92,6 +92,10 @@
 ;;   (define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point))
 
 
+;; (TODO) interation with cmake to manage project, like automatically generate the .dir-locals.el -like files from CMakefileList.txt to allow clang-complete.
+;; (TODO) one may use /irony-mode/ replace company-clang which well integrates with cmake.
+
+
 
 
 ;;

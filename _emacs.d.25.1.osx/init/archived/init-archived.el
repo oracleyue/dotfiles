@@ -577,3 +577,21 @@ See help of `format-time-string' for possible replacements")
 (semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include" 'c-mode)
 ;; enable the function
 (global-semantic-idle-summary-mode 1)
+
+
+;; ----------------------------------------------------------------
+;; fix $PATH for emacs in Mac OS X
+(defun y-mac:set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell
+      (replace-regexp-in-string "[[:space:]\n]*$" ""
+        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    ;; (setenv "PATH" path-from-shell)
+    (setenv "PATH" (concat "~/.emacs.d/bin:" "~/bin:" path-from-shell))
+    (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
+    ;; (setq exec-path (split-string path-from-shell path-separator))
+    (setq exec-path (split-string (getenv "PATH") path-separator))))
+(defun y-linux:set-exec-path-from-shell-PATH()
+  (setenv "PATH" (concat "~/.emacs.d/bin:" (getenv "PATH")))
+  (setq exec-path (split-string (getenv "PATH") path-separator)))
+(when (string-equal system-type "darwin") (y-mac:set-exec-path-from-shell-PATH))
+(when (string-equal system-type "gnu/linux") (y-linux:set-exec-path-from-shell-PATH))

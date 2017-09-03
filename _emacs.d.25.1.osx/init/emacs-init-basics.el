@@ -199,10 +199,6 @@
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
 (setq mouse-wheel-progressive-speed nil)
 
-;; version settings
-;(setq ecb-options-version "2.40")
-;(setq magit-last-seen-setup-instructions "1.4.0") ;disable magit version message
-
 ;; suppress redefinition warnings
 (setq ad-redefinition-action 'accept)
 
@@ -213,18 +209,14 @@
 ;; (defun y-variable-width-text-mode ()
 ;;   (interactive)
 ;;   (variable-pitch-mode t)
-;;   (text-scale-increase 0.5)
-;;   )
+;;   (text-scale-increase 0.5))
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; set cursor type: "bar", "box" (default)
 ;(setq-default cursor-type 'bar)
 
 ;; font size adjustment
-;; C-x C-0 : return to default size
 ;; use C-x C-0 first, then use +/- to tune the size.
-;(global-set-key (kbd "C-x C-=") (lambda () (interactive) (text-scale-increase 0.5)))
-;(global-set-key (kbd "C-x C--") (lambda () (interactive) (text-scale-decrease 0.5)))
 
 ;; use Command as Control in Mac OS X for emacs, if not like to swap Command and Control
 ;; (when (string-equal system-type "darwin")
@@ -232,20 +224,7 @@
 ;;   (setq mac-option-modifier 'meta))  ; NOT need
 
 ;; fix $PATH for emacs in Mac OS X
-(defun y-mac:set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell
-      (replace-regexp-in-string "[[:space:]\n]*$" ""
-        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-    ;; (setenv "PATH" path-from-shell)
-    (setenv "PATH" (concat "~/.emacs.d/bin:" "~/bin:" path-from-shell))
-    (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/")
-    ;; (setq exec-path (split-string path-from-shell path-separator))
-    (setq exec-path (split-string (getenv "PATH") path-separator))))
-(defun y-linux:set-exec-path-from-shell-PATH()
-  (setenv "PATH" (concat "~/.emacs.d/bin:" (getenv "PATH")))
-  (setq exec-path (split-string (getenv "PATH") path-separator)))
-(when (string-equal system-type "darwin") (y-mac:set-exec-path-from-shell-PATH))
-(when (string-equal system-type "gnu/linux") (y-linux:set-exec-path-from-shell-PATH))
+(exec-path-from-shell-initialize)
 
 ;; settings for graphic or terminal modes
 (if (display-graphic-p)

@@ -16,6 +16,8 @@
         emmet-mode
         ess
         expand-region
+        exec-path-from-shell
+        flycheck
         flymake-easy
         flymake-google-cpplint
         function-args
@@ -43,9 +45,9 @@
         pos-tip
         projectile
         smartparens
+        srefactor
         stickyfunc-enhance
         undo-tree
-        xcscope
         yasnippet
         zeal-at-point))
 
