@@ -54,11 +54,6 @@
             (setq flycheck-clang-language-standard "c++11")))
 
 
-;; /flyspell/: spell check comments in c/c++
-(add-hook 'c-mode-hook 'flyspell-prog-mode)
-(add-hook 'c++-mode-hook 'flyspell-prog-mode)
-
-
 ;; /company-mode/: code completion for C/C++ sources and headers
 (require 'company-clang)
 (add-to-list 'company-clang-arguments "-I/usr/local/include")
