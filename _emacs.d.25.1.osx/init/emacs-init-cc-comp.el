@@ -19,14 +19,12 @@
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
 
-
 ;; /smartparens/: insert pair of symbols
 ;; (require 'smartparens) ;; enabled in .emacs
 ;; when you press RET, the curly braces automatically add another newline
 (sp-with-modes '(c-mode c++-mode)
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
-
 
 ;; /google-c-style/ and /flymake-google-cpplint/ style checker
 (when y:enable-google-cpp-style
@@ -43,7 +41,6 @@
   (add-hook 'c-mode-hook 'y:flymake-google-init)
   (add-hook 'c++-mode-hook 'y:flymake-google-init))
 
-
 ;; /flycheck/: syntax checker using clang
 ;;  - "C-c ! n" and "C-c ! p": jump to next or previous errors
 ;;  - "C-c ! l": list errors
@@ -55,6 +52,7 @@
 
 
 ;; /company-mode/: code completion for C/C++ sources and headers
+;; -------------------BEGIN-------------------------------
 (require 'company-clang)
 (add-to-list 'company-clang-arguments "-I/usr/local/include")
 (add-to-list 'company-clang-arguments "-I/usr/local/include/eigen3")
@@ -76,7 +74,7 @@
 ;;  ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
 ;;                                       "-I/home/<user>/project_root/include2/")))))
 ;;  one may use "dir" in yasinppet to create quickly
-
+;; ------------------- END -------------------------------
 
 ;; /semantic-refactor/: auto generate class/function implementation
 ;;                      (warning: buggy for C++ template class)
@@ -85,7 +83,6 @@
 ;;   (semantic-mode 1)      ;; require semantic-mode for cc
 ;;   (define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
 ;;   (define-key c++-mode-map (kbd "M-RET") 'srefactor-refactor-at-point))
-
 
 
 

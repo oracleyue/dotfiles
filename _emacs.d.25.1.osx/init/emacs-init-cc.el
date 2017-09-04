@@ -2,36 +2,43 @@
 ;; Last modified on 29 Aug 2017
 
 (require 'cc-mode)
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; Warning: semantic-mode in CEDET causes "M-x gdb" hangs emacs in Mac OS X!
 
 ;; coding styles
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
 
-;; Package: /google-c-style/
-;(require 'google-c-style)
-;(add-hook 'c-mode-common-hook 'google-set-c-style)
-;(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
-;; Package: /smartparens/
-;(require 'smartparens)  ;enable globally in .emacs
+;; /smartparens/: insert pair of symbols
+;; (require 'smartparens) ;; enabled in .emacs
 ;; when you press RET, the curly braces automatically add another newline
 (sp-with-modes '(c-mode c++-mode)
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-;; Package: /flymake-google-cpplint/ (having built-in /flymake-cursor/ functionality)
-; let's define a function for flymake initialization
-(defun y:flymake-google-init ()
-  (require 'flymake-google-cpplint)
-  (custom-set-variables
-   '(flymake-google-cpplint-command
-     (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
-       "/usr/bin/cpplint")))
-  (flymake-google-cpplint-load))
-;(add-hook 'c-mode-hook 'y:flymake-google-init)
-;(add-hook 'c++-mode-hook 'y:flymake-google-init)
+;; /google-c-style/ and /flymake-google-cpplint/ style checker
+(when y:enable-google-cpp-style
+  (require 'google-c-style)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+  (defun y:flymake-google-init ()
+    (require 'flymake-google-cpplint)
+    (custom-set-variables
+     '(flymake-google-cpplint-command
+       (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
+         "/usr/bin/cpplint")))
+    (flymake-google-cpplint-load))
+  (add-hook 'c-mode-hook 'y:flymake-google-init)
+  (add-hook 'c++-mode-hook 'y:flymake-google-init))
+
+;; /flycheck/: syntax checker using clang
+;;  - "C-c ! n" and "C-c ! p": jump to next or previous errors
+;;  - "C-c ! l": list errors
+;;  - "C-c ! c": menually run checker
+(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook
+          (lambda () (flycheck-mode 1)
+            (setq flycheck-clang-language-standard "c++11")))
 
 
 ;; Configure /auto-complete/ for C/C++ sources and headers
