@@ -56,9 +56,9 @@
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
 ;; disable trigger completion menu automatically
-(setq jedi:complete-on-dot nil)  ;; use "C-<tab>" on dot; else "<tab>"
+(setq jedi:complete-on-dot nil)  ;; if nil, use "C-<tab>" on dot; else "<tab>".
 ;; set wait time before showing funciton call signature tip in ms
-(setq jedi:get-in-function-call-delay 1000000)  ;; disable auto-show calltip
+(setq jedi:get-in-function-call-delay 200000000)  ;; set huge to disable auto show
 ;; set calltip methods
 (setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
 ;; restore jedi:complete bound default in jedi
