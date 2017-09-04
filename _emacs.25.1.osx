@@ -108,7 +108,7 @@
            (setq y:code-complete-mode "auto-complete")
          (setq y:code-complete-mode "company")))
       ((string-equal system-type "gnu/linux")
-       (setq y:code-complete-mode "company")))
+       (setq y:code-complete-mode "auto-complete")))
 
 
 ;;
