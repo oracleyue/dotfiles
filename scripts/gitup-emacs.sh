@@ -19,7 +19,7 @@ $sync --exclude="clang-complete" --exclude="*.pyc" \
       ~/.emacs.d/git $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/themes $repopath/_emacs.d.25.1.osx/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d.25.1.osx/
-$sync ~/.emacs.d/default-css $repopath/_emacs.d.25.1.osx/
+$sync ~/.emacs.d/templates $repopath/_emacs.d.25.1.osx/
 
 # rsync important scripts
 $sync ~/bin/gitup-emacs.sh $repopath/scripts/

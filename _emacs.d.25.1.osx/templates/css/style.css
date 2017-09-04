@@ -1,0 +1,100 @@
+.title  { text-align: center;
+          font-family: 'Roboto', sans-serif; }
+.todo   { color: red; }
+.done   { color: green; }
+.tag    { background-color: #add8e6; font-weight:normal }
+.target { }
+.timestamp { color: #bebebe; }
+.timestamp-kwd { color: #5f9ea0; }
+.right  { margin-left:auto; margin-right:0px;  text-align:right;}
+.left   { margin-left:0px;  margin-right:auto; text-align:left;}
+.center { margin-left:auto; margin-right:auto; text-align:center;}
+.linenr { font-size:smaller; }
+.code-highlighted { background-color:#ffff00; }
+
+p.verse { margin-left: 5% }
+pre {
+    border: 1pt solid #AEBDCC;
+    /* background-color: #FAFAFA; */
+    background-color: #002B36;
+    color: #93A1A1;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 90%;
+    width: 95%;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+table { border-collapse: collapse; }
+td, th { vertical-align: top;  }
+th.right  { text-align:center;  }
+th.left   { text-align:center;   }
+th.center { text-align:center; }
+td.right  { text-align:right;  }
+td.left   { text-align:left;   }
+td.center { text-align:center; }
+dt { font-weight: bold; }
+div.figure { padding: 0.5em; }
+div.figure p { text-align: center; }
+img { display: block;
+      margin: 0 auto;
+      padding-top: 12px;
+      padding-bottom: 12px; }
+div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+}
+textarea { overflow-x: auto; }
+p.postamble { text-align: center;
+	          font-size: 12px; }
+
+h1 { padding: 40px 0px 20px 0px;
+   	 color: rgb(12,139,186);
+     text-align: center;
+     font-family: 'Roboto', Sans-Serif; }
+h2 { padding: 40px 0px 10px 0px;
+     font-family: 'Roboto', Sans-Serif; }
+h3 { padding: 30px 0px 20px 0px;
+     font-family: 'Roboto', Sans-Serif; }
+h4 { padding: 22px 0px 15px 0px;
+     font-family: 'Roboto', Sans-Serif; }
+h5 { padding: 17px 0px 15px 0px;
+     font-family: 'Roboto', Sans-Serif; }
+h6 { padding: 15px 0px 15px 0px;
+     font-family: 'Roboto', Sans-Serif; }
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 640px;
+    margin: auto;
+    text-align:left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11pt;
+}
+
+hr { width: 96%; height: 1px; }
+blockquote p {
+    font-size: 10pt;
+	/* font-size: inherit; */
+	font-style: italic;
+}
+
+pre.src,
+pre.example {
+	background-color: #303030;
+    color: #f4f4f4;
+	font-size: 13px;
+    border-top: solid 2px #9c0001;
+    border-bottom: solid 2px #9c0001;
+}
+
+#footnotes { font-style: italic; }
+#footnotes h2.footnotes { font-size: 12px; }
+#disqus_thread { margin-top: 28px; }

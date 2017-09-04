@@ -52,7 +52,7 @@
         zeal-at-point))
 
 
-;; Function to Install Packages
+;; Check whether certain packages have not been installed
 (defun custom/packages-installed-p ()
   (catch 'exit
     (dolist (pkg custom/packages)
@@ -60,7 +60,7 @@
         (throw 'exit nil)))
     (throw 'exit t)))
 
-;; Perform Installation
+;; Perform Installation if not installed
 (unless (custom/packages-installed-p)
   ;; list pkgs to be installed
   (message "\n%s" "Refreshing package database...")

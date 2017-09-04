@@ -256,19 +256,19 @@
   (interactive)
   "Setup the startup folders. Used in .emacs"
   (cond ((string-equal system-type "darwin")
-         (dired (concat y-home-path "Public/Dropbox/Academia/Seminars"))
-         ;(dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
-         (find-file (concat y-home-path "Public/Dropbox/Academia/ToDoList.org"))
-         (find-file (concat y-home-path "Public/Dropbox/oracleyue/OrgNote/PhD.org")))
+         (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
+         ;(dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
+         (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
+         (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/PhD.org")))
         ((string-equal system-type "gnu/linux")
-         (dired (concat y-home-path "Public/Dropbox/oracleyue/OrgNote"))
-         (dired (concat y-home-path "Workspace"))))
+         (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
+         (dired (expand-file-name "~/Workspace"))))
   (switch-to-buffer "*scratch*"))
 
 ;; quick start email editing
 (defun email ()
   (interactive)
-  (find-file (concat y-home-path "Documents/email.tmp.md"))
+  (find-file (expand-file-name "~/Documents/email.tmp.md"))
   (set-fill-column 75))
 
 ;; oracleyue's env. variables and alias

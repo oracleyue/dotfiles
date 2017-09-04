@@ -22,4 +22,4 @@ $sync --exclude="clang-complete" --exclude="*.pyc" \
       $repopath/_emacs.d.25.1.osx/git ~/.emacs.d/
 $sync $repopath/_emacs.d.25.1.osx/themes ~/.emacs.d/
 $sync $repopath/_emacs.d.25.1.osx/snippets ~/.emacs.d/
-$sync $repopath/_emacs.d.25.1.osx/default-css ~/.emacs.d/
+$sync $repopath/_emacs.d.25.1.osx/templates ~/.emacs.d/

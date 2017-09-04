@@ -12,7 +12,7 @@
 ;;   - OS X: "brew install global --with-ctags --with-pygments"
 ;;   - Arch Linux: "pacman -S ctags python-pygments"
 (setenv "GTAGSLABEL" "pygments")
-(setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/"))
+;; (setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
 ;; create tags: (choose one way)
 ;;   - console: "gtags --gtagslabel=pygments" (no option if set env var)
 ;;   - helm-gtags: =helm-gtags-create-tags= "C-c g c"
@@ -82,23 +82,22 @@
   (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
   (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
-;; enable semantic (from CEDET) support for elisp
+
+;; enable /semantic/ (CEDET) for /helm-semantic-or-imenu/ and /stickyfunc/
 (when y:enable-cedet-semantics
   (add-hook 'semantic-mode-hook
             (lambda () (when (fboundp 'semantic-default-elisp-setup)
                          (semantic-default-elisp-setup))))
-  (semantic-mode 1))
-
 ;; /stickyfunc/: show the current function name on the top
-(when y:enable-cedet-semantics
-  ;; require (semantic-mode 1)
   (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  (semantic-mode 1)
   (require 'stickyfunc-enhance))
 
 ;; /function-args/: symbol reference table over current file or projects
 ;; usages:
 ;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
-(when y:enable-function-args
+(when (and y:enable-function-args
+           y:enable-cedet-semantics)
   (require 'ivy)
   (require 'function-args)
   ;; enable case-insensitive searching
