@@ -18,12 +18,15 @@
     (setq custom/modern-cc-packages
           '(irony
             company-irony
+            company-irony-c-headers
             flycheck-irony
             irony-eldoc
             helm-make))
-    (dolist (pkg custom/modern-cc-packages)
-      (unless (package-installed-p pkg)
-        (package-install pkg)))
+    (unless (custom/packages-installed-p custom/modern-cc-packages)
+      (package-refresh-contents)
+      (dolist (pkg custom/modern-cc-packages)
+        (unless (package-installed-p pkg)
+          (package-install pkg))))
   #+END_SRC
 
 ** C++ Coding styles
@@ -274,8 +277,8 @@ We'll see how to automate this process with cmake-ide below.
 
     You can now build your project using ~M-x cmake-ide-compile~. Additionally, cmake-ide will automatically update your RTags index as well.
 
-** Other major modes supporting C/C++ programming
-*** helm-make to support compilation in CC-mode and Makefile
+** More supports for C/C++ programming
+*** Compilation supports for C/C++, cmake and makefile
     Install =helm-make= package, and setup as below.
     To compile the whole project, use =C-c C-c= (=helm-make-projectile=); otherwise, simple run =M-x helm-make= or =M-x compile=.
     #+BEGIN_SRC emacs-lisp
@@ -286,11 +289,16 @@ We'll see how to automate this process with cmake-ide below.
       ;; default mode for Makefile in gnome
       (add-hook 'makefile-gmake-mode-hook
                 (lambda () (define-key makefile-gmake-mode-map
-                             (kbd "C-c C-c") 'helm-make-projectile)))
+                             (kbd "C-c C-c") 'helm-make)))
       ;; default mode for Makefile in Mac OS X
       (add-hook 'makefile-bsdmake-mode-hook
                 (lambda () (define-key makefile-bsdmake-mode-map
-                             (kbd "C-c C-c") 'helm-make-projectile)))
+                             (kbd "C-c C-c") 'helm-make)))
+      ;; compilation setup for cmake-mode
+      (add-hook 'cmake-mode-hook
+                (lambda ()
+                  (setq compile-command "cd build/ && cmake .. && make")
+                  (define-key cmake-mode-map (kbd "C-c C-c") 'compile)))
     #+END_SRC
 
     If the Makefile is in different directories, e.g. created by *cmake*, we need to specify the location of =Makefile=. =.dir-locals.el= file is needed for this purpose. =.dir-locals.el= should be placed in project root. The file content looks like this:

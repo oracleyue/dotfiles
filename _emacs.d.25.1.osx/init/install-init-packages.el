@@ -53,15 +53,15 @@
 
 
 ;; Check whether certain packages have not been installed
-(defun custom/packages-installed-p ()
+(defun custom/packages-installed-p (pkg-list)
   (catch 'exit
-    (dolist (pkg custom/packages)
+    (dolist (pkg pkg-list)
       (unless (package-installed-p pkg)
         (throw 'exit nil)))
     (throw 'exit t)))
 
 ;; Perform Installation if not installed
-(unless (custom/packages-installed-p)
+(unless (custom/packages-installed-p custom/packages)
   ;; list pkgs to be installed
   (message "\n%s" "Refreshing package database...")
   (message "----------------------")

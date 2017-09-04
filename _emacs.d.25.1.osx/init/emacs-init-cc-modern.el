@@ -7,12 +7,15 @@
 (setq custom/modern-cc-packages
       '(irony
         company-irony
+        company-irony-c-headers
         flycheck-irony
         irony-eldoc
         helm-make))
-(dolist (pkg custom/modern-cc-packages)
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
+(unless (custom/packages-installed-p custom/modern-cc-packages)
+  (package-refresh-contents)
+  (dolist (pkg custom/modern-cc-packages)
+    (unless (package-installed-p pkg)
+      (package-install pkg))))
 
 (require 'cc-mode)
 (setq-default c-default-style "linux")
@@ -71,11 +74,16 @@
 ;; default mode for Makefile in gnome
 (add-hook 'makefile-gmake-mode-hook
           (lambda () (define-key makefile-gmake-mode-map
-                       (kbd "C-c C-c") 'helm-make-projectile)))
+                       (kbd "C-c C-c") 'helm-make)))
 ;; default mode for Makefile in Mac OS X
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (define-key makefile-bsdmake-mode-map
-                       (kbd "C-c C-c") 'helm-make-projectile)))
+                       (kbd "C-c C-c") 'helm-make)))
+;; compilation setup for cmake-mode
+(add-hook 'cmake-mode-hook
+          (lambda ()
+            (setq compile-command "cd build/ && cmake .. && make")
+            (define-key cmake-mode-map (kbd "C-c C-c") 'compile)))
 
 (put 'helm-make-build-dir 'safe-local-variable 'stringp)
 
