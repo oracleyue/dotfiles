@@ -224,6 +224,8 @@
 ;;   (setq mac-option-modifier 'meta))  ; NOT need
 
 ;; fix $PATH for emacs in Mac OS X
+(require 'exec-path-from-shell)
+(push "PYTHONPATH" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
 
 ;; settings for graphic or terminal modes

@@ -21,7 +21,7 @@
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
  ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
- '(default ((t (:font "DejaVu Sans Mono-12")))))    ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
@@ -468,6 +468,7 @@
 (require 'dired-x)
 (setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
+(delete ".bbl" dired-omit-extensions)
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
