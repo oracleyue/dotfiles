@@ -919,11 +919,11 @@ Takes and optional `FRAME' as reference."
                              :background ,magenta))))
 
      `(company-tooltip-annotation           ;oracleyue, added
-       ((,class (:foreground ,red
+       ((,class (:foreground ,monokai-line-num
                              :slant normal))))
 
      `(company-tooltip-annotation-selection ;oracleyue, added
-       ((,class (:foreground ,red
+       ((,class (:foreground ,cyan-hc
                              :slant normal))))
 
      `(company-preview
