@@ -326,8 +326,8 @@
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
     ;; (define-key map "\C-c\C-f" 'python-eldoc-at-point)  ;oracleyue
-    (define-key map "\C-ce" 'y:jedi:show-doc)              ;oracleyue, added
-    (define-key map "\C-c\C-e" 'y:jedi:show-calltip)       ;oracleyue, added
+    (define-key map "\C-c\C-e" 'y:jedi:show-doc)              ;oracleyue, added
+    (define-key map "\C-ce" 'y:jedi:show-calltip)       ;oracleyue, added
 
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
