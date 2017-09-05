@@ -268,10 +268,11 @@
   (switch-to-buffer "*scratch*"))
 
 ;; quick start email editing
-(defun email ()
+(defun draft-email ()
   (interactive)
-  (find-file (expand-file-name "~/Documents/email.tmp.md"))
-  (set-fill-column 75))
+  (find-file (expand-file-name "~/Documents/email.tmp.txt"))
+  (auto-fill-mode 1)
+  (set-fill-column 70))
 
 ;; oracleyue's env. variables and alias
 ;(setenv "MATLAB_JAVA" "/usr/lib/jvm/java-7-openjdk/jre")
