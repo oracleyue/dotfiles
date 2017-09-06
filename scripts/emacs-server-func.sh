@@ -13,6 +13,8 @@
 
 function es() {
     tmpfile="$HOME/.tmp.stdout"
+    EMACS="/usr/local/bin/emacs"
+    EMACSCLIENT="/usr/local/bin/emacsclient"
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
         ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
@@ -23,15 +25,45 @@ function es() {
         rm $tmpfile
 
     elif [[ "$1" == "stop" ]]; then
-        kill $(ps aux | grep -i 'Emacs --daemon' | grep -v 'grep' | awk '{print $2}')
+        if [[ -z $2 ]]; then
+	        kill $(ps aux | grep 'Emacs --daemon' | grep -v 'grep' | awk '{print $2}')
+        else
+            case $2 in
+                m)
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "main" | grep -v 'grep' | awk '{print $2}')
+                    ;;
+                c)
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "coding" | grep -v 'grep' | awk '{print $2}')
+                    ;;
+                a)
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
+                    ;;
+                *)
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
+                    ;;
+            esac
+        fi
 
     elif [[ "$1" == "start" ]]; then
         if [[ -z $2 ]]; then
-            $HOME/bin/emacs --daemon=main
+            $EMACS --daemon=main
+            $EMACS --daemon=coding
         else
-            $HOME/bin/emacs --daemon="$2"
+            case $2 in
+                m)
+                    $EMACS --daemon=main
+                    ;;
+                c)
+                    $EMACS --daemon=coding
+                    ;;
+                a)
+                    $EMACS --daemon=ac-mode
+                    ;;
+                *)
+                    $EMACS --daemon="$2"
+                    ;;
+            esac
         fi
-
     else
         echo 'usage: 0, 1 or 2 arguments'
         echo '  - 0: list running servers;'
@@ -42,9 +74,9 @@ function es() {
 
 function ec() {
     if [[ $# -eq 0 ]]; then
-        $HOME/bin/emacsclient -nc --server-file=main
+        $EMACSCLIENT -nc --server-file=main
     elif [[ -n $1 ]]; then
-        $HOME/bin/emacsclient -nc --server-file=main $1
+        $EMACSCLIENT -nc --server-file=main $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "main" server;'
