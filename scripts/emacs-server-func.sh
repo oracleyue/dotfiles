@@ -14,7 +14,6 @@
 function es() {
     tmpfile="$HOME/.tmp.stdout"
     EMACS="/usr/local/bin/emacs"
-    EMACSCLIENT="/usr/local/bin/emacsclient"
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
         ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
@@ -73,6 +72,8 @@ function es() {
 }
 
 function ec() {
+    EMACSCLIENT="/usr/local/bin/emacsclient"
+
     if [[ $# -eq 0 ]]; then
         $EMACSCLIENT -nc --server-file=main
     elif [[ -n $1 ]]; then
