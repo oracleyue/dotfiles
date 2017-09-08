@@ -109,7 +109,7 @@
                      )))
   ;; set default mode line for other themes
   (set-face-attribute 'mode-line nil
-                      :box '(:line-width 2 :style released-button))
+                      :box '(:line-width 1 :style released-button))
   (setq-default mode-line-format
                 (list
                  ;; default part
