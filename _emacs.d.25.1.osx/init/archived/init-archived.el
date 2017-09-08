@@ -595,3 +595,17 @@ See help of `format-time-string' for possible replacements")
   (setq exec-path (split-string (getenv "PATH") path-separator)))
 (when (string-equal system-type "darwin") (y-mac:set-exec-path-from-shell-PATH))
 (when (string-equal system-type "gnu/linux") (y-linux:set-exec-path-from-shell-PATH))
+
+
+
+;; ----------------------------------------------------------------
+;; join mutiple lines in region (use "y:unfill-paragraph")
+(defun y:join-region (beg end)
+  "Apply join-line over region."
+  (interactive "r")
+  (if mark-active
+      (let ((beg (region-beginning))
+            (end (copy-marker (region-end))))
+        (goto-char beg)
+        (while (< (point) end)
+          (join-line 1)))))

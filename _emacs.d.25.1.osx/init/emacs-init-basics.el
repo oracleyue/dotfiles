@@ -50,10 +50,8 @@
 ;;      - "C-w / M-w" to kill or copy the mark region or the current line; "C-y" to yank
 ;;      - show kill ring and select to yank :: "M-y"
 ;; mark the whole buffer: "C-x h"
-;; join lines into one:
-;;      - join two lines: "M-^"
-;;      - join multiple lines in region: "C-^"
-;; fill/unfill paragraph:
+;; join the current line to the above one: "M-^"
+;; fill/unfill paragraph/region:
 ;;      - "M-q"/"M-Q"
 ;;      - set fill-column: "C-x f"
 ;; split long lines up to a prefixed length: use auto-fill mode
@@ -136,27 +134,15 @@
 ;; remove all except 1 space between characters ("M-SPC" disabled due to Alfred)
 (global-set-key (kbd "C-c SPC") 'just-one-space)
 
-;; join mutiple lines in region
-(defun y:join-region (beg end)
-  "Apply join-line over region."
-  (interactive "r")
-  (if mark-active
-      (let ((beg (region-beginning))
-            (end (copy-marker (region-end))))
-        (goto-char beg)
-        (while (< (point) end)
-          (join-line 1)))))
-(global-set-key (kbd "C-^") 'y:join-region)
-
 ;; unfill paragraph: the opposite of fill-paragraph
-(defun y:unfill-paragraph (&optional region)
+(defun y:unfill-paragraph-or-region (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
   (let ((fill-column (point-max))
         ;; This would override `fill-column' if it's an integer.
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
-(define-key global-map "\M-Q" 'y:unfill-paragraph)
+(define-key global-map "\M-Q" 'y:unfill-paragraph-or-region)
 
 ;; open a new line and jump there
 (require 'open-next-line)
