@@ -597,7 +597,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-type-face
        ((,class (:foreground ,blue
-                             :italic t))))
+                             :italic nil))))  ;oracleyue: t
 
      `(font-lock-variable-name-face
        ((,class (:foreground ,orange))))

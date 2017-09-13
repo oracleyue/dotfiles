@@ -330,7 +330,8 @@
 ;; config /smartparens/ for matlab
 (sp-with-modes 'matlab-mode
   (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                 :actions '(insert wrap autoskip navigate)))
+                 :actions '(wrap autoskip navigate)))
+
 
 ; ===============================================
 ;; Programming Environment for /AppleScript/
@@ -345,7 +346,7 @@
 
 ;; ----------------------------------------------
 ;; /magit/: version control
-(global-set-key (kbd "C-x M-g") 'magit-status)
+(global-set-key (kbd "C-c h g") 'magit-status)
 
 ;; ----------------------------------------------
 ;; /projectile/: project management and helm addons
