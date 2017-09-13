@@ -139,7 +139,7 @@
 ;; /smartparens/: insert pairs of parenthesis/brackets
 (require 'smartparens-config)
 (smartparens-global-mode 1)
-;; (show-smartparens-global-mode +1) ;; use show-paren-mode
+;; (show-smartparens-global-mode 1) ;; use show-paren-mode
 
 ;; ----------------------------------------------
 ;; /linum/: adding line number on left fringe
@@ -327,6 +327,10 @@
 (load (concat y-init-path-prefix "emacs-init-matlab"))
 ;; enable CEDTE feature support
 ;(matlab-cedet-setup)
+;; config /smartparens/ for matlab
+(sp-with-modes 'matlab-mode
+  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                 :actions '(insert wrap autoskip navigate)))
 
 ; ===============================================
 ;; Programming Environment for /AppleScript/

@@ -11,6 +11,11 @@
 # Last modified on 03 Sep 2017
 
 
+
+# =======================================================
+# Function: list/start/stop emacs severs
+# =======================================================
+
 function es() {
     tmpfile="$HOME/.tmp.stdout"
     EMACS="/usr/local/bin/emacs"
@@ -71,6 +76,13 @@ function es() {
     fi
 }
 
+
+
+# =======================================================
+# Function: emacs client (main & coding)
+# =======================================================
+
+# emacsclient: main
 function ec() {
     EMACSCLIENT="/usr/local/bin/emacsclient"
 
@@ -81,6 +93,21 @@ function ec() {
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "main" server;'
+        echo '  - 1: run emacsclient to open FILES you specified.'
+    fi
+}
+
+# emacsclient: coding
+function ecc() {
+    EMACSCLIENT="/usr/local/bin/emacsclient"
+
+    if [[ $# -eq 0 ]]; then
+        $EMACSCLIENT -nc --server-file=coding
+    elif [[ -n $1 ]]; then
+        $EMACSCLIENT -nc --server-file=coding $1
+    else
+        echo 'usage: 0 or 1 argument'
+        echo '  - 0: connet "emacsclient -nc" to "coding" server;'
         echo '  - 1: run emacsclient to open FILES you specified.'
     fi
 }
