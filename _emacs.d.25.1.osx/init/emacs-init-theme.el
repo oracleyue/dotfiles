@@ -1,4 +1,15 @@
 ;;
+;; Frame Size   (note: [96,36] in Mac; 33 in Thinkpad)
+;;
+
+(if (string-equal system-type "darwin")
+    (setq default-frame-alist '((width . 96) (height . 36)))
+  (setq default-frame-alist '((width . 96) (height . 33))))
+(set-frame-size (selected-frame)
+                (cdr (assoc 'width default-frame-alist))
+                (cdr (assoc 'height default-frame-alist)))
+
+;;
 ;; Set Themes
 ;;
 

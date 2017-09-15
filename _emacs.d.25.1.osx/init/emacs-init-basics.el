@@ -12,14 +12,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-;; frame size   (note: [96,36] in Mac; 33 in Thinkpad)
-(if (string-equal system-type "darwin")
-    (setq default-frame-alist '((width . 96) (height . 36)))
-  (setq default-frame-alist '((width . 96) (height . 33))))
-(set-frame-size (selected-frame)
-                (cdr (assoc 'width default-frame-alist))
-                (cdr (assoc 'height default-frame-alist)))
-
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
 (setq custom-file "~/.emacs-custom.el")
