@@ -21,7 +21,7 @@
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
  ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
- '(default ((t (:font "DejaVu Sans Mono-12")))))    ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
@@ -29,10 +29,9 @@
 ;(load custom-file 'noerror)
 
 ;; running multiple emacs servers using different profiles
-;; list of profiles:
-;;  - "main"  : general purpose (light-theme, startup folders)
-;;  - "coding": coding (dark-theme, startup folders)
-;;  - "ac"    : ac-complete (the rest as "coding")
+;; "main"    : general purpose (light-theme, startup folders)
+;; "coding"  : coding (dark-theme, startup folders)
+;; "ac-mode" : ac-complete (the rest as "coding")
 
 ;; encodings
 (set-default-coding-systems 'utf-8)
@@ -115,7 +114,7 @@
 ;; Basic Configurations for Emacs
 ;;
 (load (concat y-init-path-prefix "emacs-init-basics"))
-
+;; (load (concat y-init-path-prefix "emacs-init-chs"))   ;; Chinese supports
 
 ;;
 ;; ------------------- Settings of Minor Modes -------------------

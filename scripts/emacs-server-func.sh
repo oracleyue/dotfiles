@@ -18,36 +18,32 @@
 
 function es() {
     tmpfile="$HOME/.tmp.stdout"
-    if [[ $(uname) == "Linux" ]]; then
-        EMACS="/usr/bin/emacs"
-    else
-        EMACS="/usr/local/bin/emacs"
-    fi
+    EMACS="/usr/local/bin/emacs"
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
         ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
-            | awk '{print $2 "\t" $9 "\temacs " $12}' > $tmpfile
+            | awk '{print $2 "\t" $9 "\tEmacs " $12}' > $tmpfile
         while read line; do
-            echo "$line" | sed 's/\0123,4\012//p'
+            echo "$line" | sed -n 's/\0123,4\012//p'
         done < $tmpfile
-        rm -f $tmpfile
+        rm $tmpfile
 
     elif [[ "$1" == "stop" ]]; then
         if [[ -z $2 ]]; then
-	        kill $(ps aux | grep -i 'emacs --daemon' | grep -v 'grep' | awk '{print $2}')
+	        kill $(ps aux | grep 'Emacs --daemon' | grep -v 'grep' | awk '{print $2}')
         else
             case $2 in
                 m)
-                    kill $(ps aux | grep -i 'emacs --daemon' | grep "main" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "main" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 c)
-                    kill $(ps aux | grep -i 'emacs --daemon' | grep "coding" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 a)
-                    kill $(ps aux | grep -i 'emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 *)
-                    kill $(ps aux | grep -i 'emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep 'Emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
                     ;;
             esac
         fi
@@ -88,11 +84,7 @@ function es() {
 
 # emacsclient: main
 function ec() {
-    if [[ $(uname) == "Linux" ]]; then
-        EMACSCLIENT="/usr/bin/emacsclient"
-    else
-        EMACSCLIENT="/usr/local/bin/emacsclient"
-    fi
+    EMACSCLIENT="/usr/local/bin/emacsclient"
 
     if [[ $# -eq 0 ]]; then
         $EMACSCLIENT -nc --server-file=main
@@ -107,11 +99,7 @@ function ec() {
 
 # emacsclient: coding
 function ecc() {
-    if [[ $(uname) == "Linux" ]]; then
-        EMACSCLIENT="/usr/bin/emacsclient"
-    else
-        EMACSCLIENT="/usr/local/bin/emacsclient"
-    fi
+    EMACSCLIENT="/usr/local/bin/emacsclient"
 
     if [[ $# -eq 0 ]]; then
         $EMACSCLIENT -nc --server-file=coding

@@ -78,27 +78,32 @@
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list
-      '(("<"   "prec" "Relational" nil)
-        (">"   "succ" "Relational" nil)
-        ("v <"   "preceq" "Relational" 10927)
-        ("v >"   "succeq" "Relational" 10928)
-        ("=" "coloneqq"    "Relational" nil)
-        ("v ="   "triangleq"   "Relational" nil)
-        ("_" "bar"    "Accents" nil)
-        ("v ~" "thicksim"    "Relational" nil)
-        ("v 0" "varnothing"    "Misc Symbol" nil)
-        ("v n" "nabla"    "Misc Symbol" nil)
-        ("."   "dots"    "Misc Symbol" nil)
-        ("o"   "circ"    "Misc Symbol" nil)
-        ("v ."   "cdots"    "Misc Symbol" nil)
-        ("T"   "top"    "Misc Symbol" nil)
-        ("C-p" "partial" "Misc Symbol" nil)
-        ("C-c" "circ" "Misc Symbol" nil)  ;overwrite \cos
-        ("C-t" "textstyle" "Misc" nil)  ;overwirte \tan
-        ("C-d" "displaystyle" "Misc" nil)  ;overwirte \det
+      '(("<"     "prec"         "Relational" nil)
+        (">"     "succ"         "Relational" nil)
+        ("v <"   "preceq"       "Relational" 10927)
+        ("v >"   "succeq"       "Relational" 10928)
+        ("="     "coloneqq"     "Relational" nil)
+        ("v ="   "triangleq"    "Relational" nil)
+        ("v ~"   "thicksim"     "Relational" nil)
+
+        ("_"     "bar"          "Accents" nil)
+
+        ("o"     "otimes"       "Binary Op" nil)
+        ("O"     "circ"         "Binary Op" nil)
+
+        ("v 0"   "varnothing"   "Misc Symbol" nil)
+        ("v n"   "nabla"        "Misc Symbol" nil)
+        ("."     "dots"         "Misc Symbol" nil)
+        ("v ."   "cdots"        "Misc Symbol" nil)
+        ("T"     "top"          "Misc Symbol" nil)
+        ("C-p"   "partial"      "Misc Symbol" nil)
+
         ("C-S-f" "longrightarrow" "Arrows" nil)
-        ("C-S-b" "longleftarrow" "Arrows" nil)
-        ("C-m" "longmapsto" "Arrows" nil)
+        ("C-S-b" "longleftarrow"  "Arrows" nil)
+        ("C-m"   "longmapsto"     "Arrows" nil)
+
+        ("C-t"   "textstyle"      "Misc" nil)     ;overwirte \tan
+        ("C-d"   "displaystyle"   "Misc" nil)  ;overwirte \det
         ))
 ; More math-font in LaTeX
 (setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}" "\\pmb{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\text{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
