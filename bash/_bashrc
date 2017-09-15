@@ -8,13 +8,14 @@
     # [[ -z "$TMUX" ]] && exec tmux
 
 # oracleyue-added $PATH
-PATH=/home/oracleyue/bin:"$PATH"
+export PATH=/home/oracleyue/bin:"$PATH"
 # To use /mpich2/
 #PATH=/opt/mpich2/bin:"$PATH"
 #PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/mpich2/lib/pkgconfig
 
 # oracleyue-configured QT (using qtchooser)
-QT_SELECT=4
+export QT_SELECT=4
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # oracleyue-defined alias
 alias ls='ls --color=always'
@@ -27,9 +28,10 @@ alias egrep='egrep --color=always'
 alias dmesg='dmesg --color=always'
 alias vi='vim'
 alias view='vim -R'
-#alias emacs='env LC_CTYPE=zh_CN.UTF-8 emacs'
-alias emacs='emacsclient -a "" -c'
-alias ec='emacsclient -a "" -c'
+# alias emacs='env LC_CTYPE=zh_CN.UTF-8 emacs'
+# source $HOME/bin/emacs-server-func.sh
+alias em='emacsclient -a "" -c'  # run new emacs if no server runs
+alias ec='emacsclient -nc'
 alias cp='cp -r -i'
 alias du='du -h -d 1'
 alias df='df -h'
@@ -51,6 +53,7 @@ function gpgless() { gpg -d "$1" | less ;}
 #function rsync-push() { rsync -avz --progress --partial "$1" gaia-cluster:"$2"; }
 
 # oracleyue-defined environment variables
+#export EDITOR='emacsclient -a "" -c'
 export EDITOR="vim"
 #export TERM=xterm-256color
 #export TERM=screen-256color-bce
