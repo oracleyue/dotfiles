@@ -114,7 +114,7 @@
 ;; Basic Configurations for Emacs
 ;;
 (load (concat y-init-path-prefix "emacs-init-basics"))
-;; (load (concat y-init-path-prefix "emacs-init-chs"))   ;; Chinese supports
+(load (concat y-init-path-prefix "emacs-init-edit"))
 
 ;;
 ;; ------------------- Settings of Minor Modes -------------------
