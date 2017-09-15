@@ -18,15 +18,19 @@
 
 function es() {
     tmpfile="$HOME/.tmp.stdout"
-    EMACS="/usr/local/bin/emacs"
+    if [[ $(uname) == "Linux" ]]; then
+        EMACS="/usr/bin/emacs"
+    else
+        EMACS="/usr/local/bin/emacs"
+    fi
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
         ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
             | awk '{print $2 "\t" $9 "\tEmacs " $12}' > $tmpfile
         while read line; do
-            echo "$line" | sed -n 's/\0123,4\012//p'
+            echo "$line" | sed 's/\0123,4\012//'
         done < $tmpfile
-        rm $tmpfile
+        rm -f $tmpfile
 
     elif [[ "$1" == "stop" ]]; then
         if [[ -z $2 ]]; then
@@ -84,7 +88,11 @@ function es() {
 
 # emacsclient: main
 function ec() {
-    EMACSCLIENT="/usr/local/bin/emacsclient"
+    if [[ $(uname) == "Linux" ]]; then
+        EMACSCLIENT="/usr/bin/emacsclient"
+    else
+        EMACSCLIENT="/usr/local/bin/emacsclient"
+    fi
 
     if [[ $# -eq 0 ]]; then
         $EMACSCLIENT -nc --server-file=main
@@ -99,7 +107,11 @@ function ec() {
 
 # emacsclient: coding
 function ecc() {
-    EMACSCLIENT="/usr/local/bin/emacsclient"
+    if [[ $(uname) == "Linux" ]]; then
+        EMACSCLIENT="/usr/bin/emacsclient"
+    else
+        EMACSCLIENT="/usr/local/bin/emacsclient"
+    fi
 
     if [[ $# -eq 0 ]]; then
         $EMACSCLIENT -nc --server-file=coding
