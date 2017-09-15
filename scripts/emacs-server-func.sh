@@ -34,20 +34,20 @@ function es() {
 
     elif [[ "$1" == "stop" ]]; then
         if [[ -z $2 ]]; then
-	        kill $(ps aux | grep 'Emacs --daemon' | grep -v 'grep' | awk '{print $2}')
+	        kill $(ps aux | grep -i 'emacs --daemon' | grep -v 'grep' | awk '{print $2}')
         else
             case $2 in
                 m)
-                    kill $(ps aux | grep 'Emacs --daemon' | grep "main" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep -i 'emacs --daemon' | grep "main" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 c)
-                    kill $(ps aux | grep 'Emacs --daemon' | grep "coding" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep -i 'emacs --daemon' | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 a)
-                    kill $(ps aux | grep 'Emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep -i 'emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 *)
-                    kill $(ps aux | grep 'Emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep -i 'emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
                     ;;
             esac
         fi
