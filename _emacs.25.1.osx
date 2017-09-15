@@ -1,65 +1,60 @@
 (custom-set-faces
  '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
 
-;; Load paths
+;; load paths
 (add-to-list 'load-path (expand-file-name "init" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "git" user-emacs-directory))
 
-;; Packages
+;; packages
 ;; (package-initialize)
 (require 'emacs-init-packages)
 
-;; Theme
+;; theme
 (require 'emacs-init-theme)
 
-;; Basics
+;; basics
 (require 'emacs-init-basics)
 (require 'emacs-init-edit)
+;; (require 'emacs-init-evil)           ;; use vim in emacs
 
-;; Feature Control
+;; feature control
 (setq y:enable-cedet-semantics nil)     ;; /helm-sematic-or-imenu/, /stickyfunc/
 (setq y:enable-function-args nil)       ;; /function-args/ (require semantics)
 (setq y:use-direx-or-neotree            ;; enable /direx-jedi/ or/and /neotree/
       '(("direx-jedi" . nil) ("neotree" . t)))
 (setq y:enable-google-cpp-style nil)    ;; /google-c-style/
-(cond ((string-equal system-type "darwin")       ;; code completion
+
+;; code completion
+(cond ((string-equal system-type "darwin")
        (if (string-equal "ac-mode" (daemonp))
            (setq y:code-complete-mode "auto-complete")
          (setq y:code-complete-mode "company")))
       ((string-equal system-type "gnu/linux")
        (setq y:code-complete-mode "company")))
 
-
-;;
-;; Basic Modes
-;;
-
 ;; /helm/ and extensions
 (require 'emacs-init-helm)
 (require 'emacs-init-helm-swoop)
-(require 'emacs-init-helm-proj)
+(require 'emacs-init-helm-proj)         ;; project management
+(require 'emacs-init-gtags)             ;; code navigation
 
 ;; major modes for document editing
-(require 'emacs-init-orgmode)   ;; org-mode
-(require 'emacs-init-markdown)  ;; markdown
-(require 'emacs-init-auctex)    ;; latex
+(require 'emacs-init-orgmode)           ;; org-mode
+(require 'emacs-init-markdown)          ;; markdown
+(require 'emacs-init-auctex)            ;; latex
 
 ;; auto-completions
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-company)  ;; use /company/
-  (require 'emacs-init-ac))        ;; use /auto-complete/
+    (require 'emacs-init-company)       ;; use /company/
+  (require 'emacs-init-ac))             ;; use /auto-complete/
 
 ;; directory and buffer explorers
-(require 'emacs-init-dired)     ;; directory explorers
-
-;; use VIM in emacs
-;; (require 'emacs-init-evil)   ;; evil-mode
+(require 'emacs-init-dired)             ;; directory explorers
 
 
-;;
+;; ----------------------------------------------------------------
 ;; Programming Environments
-;;
-
+;; ----------------------------------------------------------------
 ;; programming environment for /Lisp/
 (require 'emacs-init-lisp)
 
@@ -68,20 +63,21 @@
 
 ;; programming environment for /C C++/
 (if (string-equal y:code-complete-mode "company")
-    ;; (require 'emacs-init-cc-comp)  ;; use /company-clang/
-    (org-babel-load-file
-     "~/.emacs.d/init/emacs-init-cc-modern.org")  ;; use /company-irony/
-  (require 'emacs-init-cc-ac))  ;; use /auto-complete/
+    ;; (require 'emacs-init-cc-comp)    ;; use /company-clang/
+    (org-babel-load-file                ;; use /company-irony/
+     (expand-file-name "init/emacs-init-cc-modern.org"
+                       user-emacs-directory))
+  (require 'emacs-init-cc-ac))          ;; use /auto-complete/
 
 ;; programming environment for /Python/
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-py-comp)  ;; use /company/
-  (require 'emacs-init-py-ac))  ;; use /auto-complete/
+    (require 'emacs-init-py-comp)       ;; use /company/
+  (require 'emacs-init-py-ac))          ;; use /auto-complete/
 
 ;; programming environment for /R/
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-r-comp)  ;; use /company/
-  (require 'emacs-init-r-ac))  ;; use /auto-complete/
+    (require 'emacs-init-r-comp)        ;; use /company/
+  (require 'emacs-init-r-ac))           ;; use /auto-complete/
 
 ;; programming environment for /MATLAB/
 (require 'emacs-init-matlab)
@@ -91,20 +87,10 @@
   "Major mode for editing AppleScript source." t)
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
-;; /magit/: version control
-(global-set-key (kbd "C-c h g") 'magit-status)
-
-;; /helm-gtags/: code nagivation
-(require 'emacs-init-gtags)
-
 ;; general programming supports
 (require 'emacs-init-prog)
-
-
+;; ----------------------------------------------------------------
 
 
 ;; Restore default configurations overwritten by other modes
 (require 'emacs-init-restore)
-
-;; ----------------------------------------------------------------
-;; .emacs ends here.

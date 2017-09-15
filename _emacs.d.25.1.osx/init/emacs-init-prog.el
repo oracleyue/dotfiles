@@ -2,6 +2,12 @@
 ;; General Programming Supports
 ;; ================================================================
 
+;; ---------------------------------------------
+;; /magit/: version control
+;; ---------------------------------------------
+(global-set-key (kbd "C-c h g") 'magit-status)
+
+
 ;; ----------------------------------------------
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
@@ -10,6 +16,7 @@
   (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
      (propertize (format (format " %%%dd " w) line) 'face 'linum)))
 (setq linum-format 'linum-format-func)
+
 ;; enable linum-mode
 (add-hook 'sh-mode-hook 'linum-mode)
 (add-hook 'matlab-mode-hook 'linum-mode)
