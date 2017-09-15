@@ -67,9 +67,11 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 ;; Compile commands in c/c++ and makefile modes
+;; use helm-make
+(global-set-key (kbd "C-c p c") 'helm-make-projectile)
 (add-hook 'c-mode-common-hook
           (lambda () (define-key c-mode-base-map
-                       (kbd "C-c C-c") 'helm-make-projectile)))
+                       (kbd "C-c C-c") 'helm-make)))
 ;; default mode for Makefile in gnome
 (add-hook 'makefile-gmake-mode-hook
           (lambda () (define-key makefile-gmake-mode-map
