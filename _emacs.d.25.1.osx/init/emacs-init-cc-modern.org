@@ -62,14 +62,12 @@
         (add-hook 'c-mode-common-hook 'google-make-newline-indent)
         (defun y:flymake-google-init ()
           (require 'flymake-google-cpplint)
-          (custom-set-variables
-           '(flymake-google-cpplint-command
-             (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
-               "/usr/bin/cpplint")))
+          (setq flymake-google-cpplint-command
+            (if (string-equal system-type "darwin")
+                "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
           (flymake-google-cpplint-load))
         (add-hook 'c-mode-hook 'y:flymake-google-init)
         (add-hook 'c++-mode-hook 'y:flymake-google-init))
-
     #+END_SRC
 
 ** Source code navigation using RTags (disabled)
@@ -343,3 +341,10 @@ We'll see how to automate this process with cmake-ide below.
             (doxymacs-font-lock)))
       (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
     #+END_SRC
+
+** Ends
+   #+BEGIN_SRC emacs-lisp
+     (provide 'emacs-init-cc-modern)
+     ;; ================================================
+     ;; emacs-init-cc-modern.el ends here
+   #+END_SRC

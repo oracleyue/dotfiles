@@ -1,627 +1,115 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; Your init file should contain only one such instance.
- '(column-number-mode t)
- '(fill-column 80)
- '(flymake-google-cpplint-command
-   (if (string-equal system-type "darwin")
-       "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
- '(inhibit-startup-screen t)
- '(matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
- '(qorg-file-apps
-   (quote ((auto-mode . emacs)
-           ;; ("\\.x?html?\\'" . "open %s")
-           ("\\.pdf\\'" . "open %s"))))
- '(scroll-bar-mode nil)
- '(tab-stop-list
-   (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
- '(tool-bar-mode nil))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
  ;; '(variable-pitch ((t (:font "Noto Sans-12"))))
  '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
 
-;; stop emacs automatically editing .emacs
-(setq disabled-command-function nil)
-(setq custom-file "~/.emacs-custom.el")
-;(load custom-file 'noerror)
-
-;; running multiple emacs servers using different profiles
-;; "main"    : general purpose (light-theme, startup folders)
-;; "coding"  : coding (dark-theme, startup folders)
-;; "ac-mode" : ac-complete (the rest as "coding")
-
-;; encodings
-(set-default-coding-systems 'utf-8)
-(prefer-coding-system 'utf-8)
-
-;; frame size   (note: [96,36] in Mac; 33 in Thinkpad)
-(if (string-equal system-type "darwin")
-    (setq default-frame-alist '((width . 96) (height . 36)))
-  (setq default-frame-alist '((width . 96) (height . 33))))
-(set-frame-size (selected-frame)
-                (cdr (assoc 'width default-frame-alist))
-                (cdr (assoc 'height default-frame-alist)))
-
-;; loading paths
-(setq y-init-path-prefix "~/.emacs.d/init/")	; init files
+;; Load paths
+(setq y-init-path-prefix "~/.emacs.d/init/")
+(add-to-list 'load-path "~/.emacs.d/init")      ; init files
 (add-to-list 'load-path "~/.emacs.d/git")    	; pkgs from github
 
-;; ---------------- emacs package system -------------------
-;; packages installed by /homebrew/
-(when (string-equal system-type "darwin")
-  (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path)))
-;; package management by ELPA
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
-;; check and install required packages
-(load (concat y-init-path-prefix "install-init-packages"))
-;; ---------------------------------------------------------
+;; Packages
+;; (package-initialize)
+(require 'emacs-init-packages)
 
-;; themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-(cond ((string-equal system-type "darwin")
-       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
-           (load-theme 'solarized t)  ;; mac: main
-         (load-theme 'monokai t)))    ;; mac: coding, ac
-      ((string-equal system-type "gnu/linux")
-       (load-theme 'atom-one-dark t)))
-;; customize more themes (mode-line)
-(load (concat y-init-path-prefix "emacs-init-theme"))
+;; Theme
+(require 'emacs-init-theme)
 
-;; start emacs server (use =emacsclient -a "" -c= anywhere else)
-;; (server-start)
-;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
-(setq server-use-tcp t)
+;; Basics
+(require 'emacs-init-basics)
+(require 'emacs-init-edit)
 
-;; default browser
-(if (string-equal system-type "darwin")
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (expand-file-name "~/bin/web-browser")) ;use Safari
-  (setq browse-url-browser-function 'browse-url-firefox))
-
-;; basic configurations
-(load (concat y-init-path-prefix "emacs-init-basics"))
-(load (concat y-init-path-prefix "emacs-init-edit"))
-
-;;
-;; Global Flags for Feature Control
-;;
-
-;; feature control
+;; Feature Control
 (setq y:enable-cedet-semantics nil)     ;; /helm-sematic-or-imenu/, /stickyfunc/
 (setq y:enable-function-args nil)       ;; /function-args/ (require semantics)
 (setq y:use-direx-or-neotree            ;; enable /direx-jedi/ or/and /neotree/
       '(("direx-jedi" . nil) ("neotree" . t)))
 (setq y:enable-google-cpp-style nil)    ;; /google-c-style/
-
-;; choose package for code completion
-(cond ((string-equal system-type "darwin")
+(cond ((string-equal system-type "darwin")       ;; code completion
        (if (string-equal "ac-mode" (daemonp))
            (setq y:code-complete-mode "auto-complete")
          (setq y:code-complete-mode "company")))
       ((string-equal system-type "gnu/linux")
        (setq y:code-complete-mode "company")))
 
-
 ;;
-;; ------------------- Settings of Minor Modes -------------------
+;; Settings of Basic Modes
 ;;
 
-;; ----------------------------------------------
-;; /hl-sexp/: matching a pair of braces and hightlight the contents
-;; (require 'hl-sexp)
-;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+;; /helm/ and extensions: quick file search
+(require 'emacs-init-helm)
+(require 'emacs-init-helm-swoop)
 
-;; ----------------------------------------------
-;; Minior modes for auto-completions (+yas, auto-complete ...)
+;; major modes for document editing
+(require 'emacs-init-orgmode)   ;; org-mode
+(require 'emacs-init-markdown)  ;; markdown
+(require 'emacs-init-auctex)    ;; latex
+
+;; auto-completions
 (if (string-equal y:code-complete-mode "company")
-    (load (concat y-init-path-prefix "emacs-init-ac-comp"))  ;; use /company/
-  (load (concat y-init-path-prefix "emacs-init-ac")))  ;; use /auto-complete/
+    (require 'emacs-init-company)  ;; use /company/
+  (require 'emacs-init-ac))        ;; use /auto-complete/
 
-;; ----------------------------------------------
-;; highlight brackets
-(show-paren-mode t)
-;; /smartparens/: insert pairs of parenthesis/brackets
-(require 'smartparens-config)
-(smartparens-global-mode 1)
-;; (show-smartparens-global-mode 1) ;; use show-paren-mode
+;; directory and buffer explorers
+(require 'emacs-init-dired)     ;; directory explorers
 
-;; ----------------------------------------------
-;; /linum/: adding line number on left fringe
-;; (global-linum-mode 1)  ; linum-mode causes many bugs: auto-complete popups, orgmode
-;; align line numbers to the right + padding
-(defun linum-format-func (line)
-  (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
-     (propertize (format (format " %%%dd " w) line) 'face 'linum)))
-(setq linum-format 'linum-format-func)
-;; enable linum-mode
-(add-hook 'sh-mode-hook 'linum-mode)
-(add-hook 'matlab-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'c-mode-common-hook 'linum-mode)
-(add-hook 'ess-mode-hook 'linum-mode)   ; for R
-(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default for gnome
-(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default for OS X
-
-;; ----------------------------------------------
-;; /bash-completion/: TAB complete alias and functions
-(require 'bash-completion)
-(bash-completion-setup)
-
-;; ----------------------------------------------
-;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
-(require 'iedit)
-(when (eq 'monokai (car custom-enabled-themes))
-  (set-face-attribute 'iedit-occurrence nil
-                      :foreground "#272822"
-                      :background "#E6DB74"
-                      :weight 'normal))
-
-;; ----------------------------------------------
-;; /multiple-cursors/: edit with multiple cursors
-(require 'multiple-cursors)
-;; mark many occurrences in region
-(global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
-;; mark one more occurrence by regexp match
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-;; mouse events
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
-;; others
-;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
-
-;; ----------------------------------------------
-;; /expand-region/: increase the selected region by semantic units
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-;; ----------------------------------------------
-;; Setting for /golden-ratio/
-(require 'golden-ratio)
-(when (string-equal "main" (daemonp))
-  (golden-ratio-mode t))
-(eval-after-load "golden-ratio"
-  '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
-     (add-to-list 'golden-ratio-inhibit-functions 'pl/no-golden-ratio-popwin)
-     (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-     (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
-     (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
-     (add-to-list 'golden-ratio-exclude-modes "c-mode")
-     (add-to-list 'golden-ratio-exclude-modes "c++-mode")
-     (add-to-list 'golden-ratio-exclude-modes "ess-mode")
-     (add-to-list 'golden-ratio-exclude-modes "python-mode")))
-(defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
-                               (symbol-value 'helm-alive-p)))
-(defun pl/no-golden-ratio-popwin ()
-  "Disable golden-ratio for popwin buffer."
-  (or (pl/no-golden-ratio-for-buffers " *guide-key*")
-      (pl/no-golden-ratio-for-buffers " *popwin-dummy*")
-      (pl/no-golden-ratio-for-buffers "*Ilist*")))
-(defun pl/no-golden-ratio-for-buffers (bufname)
-  "Disable golden-ratio if BUFNAME is the name of a visible buffer."
-  (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
-
-;; ----------------------------------------------
-;; /engine-mode/: query search engine
-(require 'engine-mode)
-(engine-mode t)
-(setq engine/browser-function 'browse-url-default-browser)
-;; (engine/set-keymap-prefix (kbd "C-c s"))  ;; change the defaul "C-x /"
-(defengine duckduckgo "https://duckduckgo.com/?q=%s"
-  :keybinding "d")
-(defengine github
-  "https://github.com/search?ref=simplesearch&q=%s"
-  :keybinding "h")
-(defengine amazon
-  "http://www.amazon.com/s/ref=nb_sb_noss2?url=search-alias%%3Daps&field-keywords=%s"
-  :keybinding "a")
-(defengine google "http://www.google.lu/search?ie=utf-8&oe=utf-8&q=%s"
-  :keybinding "g")
-(defengine wikipedia
-  "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
-  :keybinding "w")
-(defengine wiktionary
-  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s"
-  :keybinding "k")
-(defengine stack-overflow "https://stackoverflow.com/search?q=%s"
-  :keybinding "s")
-
-;; ----------------------------------------------
-;; /helm/ and extensions: quick file search and more
-(load (concat y-init-path-prefix "emacs-init-helm"))
-(load (concat y-init-path-prefix "emacs-init-helm-swoop"))
-
+;; VIM in emacs
+;; (require 'emacs-init-evil)   ;; evil-mode
 
 
 ;;
-;; ------------- Major Modes for Programming Languages -----------------
+;; Major Modes for Programming Languages
 ;;
 
-; ===============================================
-;; Programming Environment for /Lisp/
-;; use "C-j" in *scratch*; output is in the buffer under the sexp
-;; use "C-h e" to open *Message* buffer for elisp printout
-;; use "M-:" to evaluate elisp in mini-buffer
-;; use "M-x ielm" to open interactive shell
-;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
-(global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
-;; Keybindings for eval expressions (default: "C-x C-e" eval last S-expr)
-(define-key emacs-lisp-mode-map (kbd "C-c C-j") 'eval-last-sexp)
-(define-key emacs-lisp-mode-map (kbd "C-c C-r") 'eval-region)
-(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
-(define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
+;; programming environment for /Lisp/
+(require 'emacs-init-lisp)
 
-;; /ParEdit/ mode
-;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+;; programming environment for /HTML, js/
+(require 'emacs-init-web)
 
-;; For dialect: MIT/GNU /Scheme/
-(setq scheme-program-name "/usr/local/bin/mit-scheme")
-(require 'xscheme)
-;; Usage:
-;;  - "M-x run-scheme" to invoke the Scheme process
-;;  - "M-o" to send the buffer to the Scheme process
-
-; ===============================================
-;; Programming Environment for /HTML, js/
-;; candidates: web-mode, emmet-mode, (NOT USED: js2-mode)
-(load (concat y-init-path-prefix "emacs-init-web"))
-
-; ===============================================
-;; Programming Environment for /C C++/
+;; programming environment for /C C++/
 (if (string-equal y:code-complete-mode "company")
-    ;; (load (concat y-init-path-prefix "emacs-init-cc-comp")  ;; use /company-clang/
+    ;; (require 'emacs-init-cc-comp)  ;; use /company-clang/
     (org-babel-load-file
      (concat y-init-path-prefix "emacs-init-cc-modern.org"))  ;; use /company-irony/
-  (load (concat y-init-path-prefix "emacs-init-cc-ac")))  ;; use /auto-complete/
+  (require 'emacs-init-cc-ac))  ;; use /auto-complete/
 
-;; enable to fire "C-c C-c" to compile, when in cc-mode buffers
-;; OR use projectile compile "C-c p c"
-(defun y:set-compile-command ()
-  ;; (set (make-local-variable 'compile-command) "cd .. && make -k && cd -")
-  (set (make-local-variable 'compile-command) "make -k"))
-(add-hook 'c-mode-hook 'y:set-compile-command)
-(add-hook 'c++-mode-hook 'y:set-compile-command)
-
-; ===============================================
-;; Programming Environment for /Python/
+;; programming environment for /Python/
 (if (string-equal y:code-complete-mode "company")
-    (load (concat y-init-path-prefix "emacs-init-py-comp"))  ;; use /company/
-  (load (concat y-init-path-prefix "emacs-init-py")))  ;; use /auto-complete/
+    (require 'emacs-init-py-comp)  ;; use /company/
+  (require 'emacs-init-py-ac))  ;; use /auto-complete/
 
-; ===============================================
-;; Programming Environment for /R/
+;; programming environment for /R/
 (if (string-equal y:code-complete-mode "company")
-    (load (concat y-init-path-prefix "emacs-init-r-comp"))  ;; use /company/
-  (load (concat y-init-path-prefix "emacs-init-r")))  ;; use /auto-complete/
+    (require 'emacs-init-r-comp)  ;; use /company/
+  (require 'emacs-init-r-ac))  ;; use /auto-complete/
 
-; ===============================================
-;; Programming Environment for /MATLAB/
-(require 'matlab)
-(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
-(add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
-(setq matlab-indent-function t)
-(setq matlab-shell-command "/usr/local/bin/matlab")
-(load-library "matlab-load")
-;; functionality extensions
-(load (concat y-init-path-prefix "emacs-init-matlab"))
-;; enable CEDTE feature support
-;(matlab-cedet-setup)
-;; config /smartparens/ for matlab
-(sp-with-modes 'matlab-mode
-  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                 :actions '(wrap autoskip navigate)))
+;; programming environment for /MATLAB/
+(require 'emacs-init-matlab)
 
-
-; ===============================================
-;; Programming Environment for /AppleScript/
+;; programming environment for /AppleScript/
 (autoload 'applescript-mode "applescript-mode"
   "Major mode for editing AppleScript source." t)
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
-
-;;
-;; Minor-Mode Supports for Programming Environments
-;;
-
-;; ----------------------------------------------
 ;; /magit/: version control
 (global-set-key (kbd "C-c h g") 'magit-status)
 
-;; ----------------------------------------------
 ;; /projectile/: project management and helm addons
-(load (concat y-init-path-prefix "emacs-init-helm-proj"))
+(require 'emacs-init-helm-proj)
 
-;; ----------------------------------------------
-;; Tag Supports (/helm-gtags/ & more)
-(load (concat y-init-path-prefix "emacs-init-gtags"))
+;; /helm-gtags/: code nagivation
+(require 'emacs-init-gtags)
 
-;; ----------------------------------------------
-;; API reference support
-;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(when (string-equal system-type "darwin")
-  (require 'dash-at-point)
-  (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
-  ; specify docsets to search in different modes
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "cpp,eigen,boost,gsl")
-         (python-mode . "python,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r")
-         (sh-mode . "bash"))))
-;; Integration with /Zeal/ for quick refernce (available for Linux)
-(when (string-equal system-type "gnu/linux")
-  (require 'zeal-at-point)
-  (global-set-key (kbd "C-c d") 'zeal-at-point)
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "c++,eigen,boost,gsl")
-         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r"))))
-
-;; ----------------------------------------------
-;; /gud/: debugging supports, e.g. gdb, pdb
-;; - usages: "M-x pdb", "M-x gud-gdb"
-;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
-;; - notes: keybindings compatible with JetBrains
-(when (string-equal system-type "darwin")
-  (setq gdb-non-stop-setting nil))
-(global-set-key (kbd "<f7>") 'gud-step);; equiv step in
-(global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
-(global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
-(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
+;; general programming supports
+(require 'emacs-init-prog)
 
 
 
-;;
-;; ------------------- Major Modes for Document Editing -------------------
-;;
 
-; ===============================================
-;; Settings of general /text-mode/
-(setq-default major-mode 'text-mode)
-;; use "C-." to auto-correct words
+;; Restore default configurations overwritten by other modes
+(require 'emacs-init-restore)
 
-;; line wrapping settings
-(add-hook 'text-mode-hook 'visual-line-mode)
-
-;; spell check for text modes
-(add-hook 'text-mode-hook 'flyspell-mode)
-;; (setq ispell-dictionary "british")
-(setq ispell-dictionary "american")
-
-;; use /auto-fill mode/
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'turn-off-auto-fill)
-(add-hook 'markdown-mode-hook 'turn-off-auto-fill)
-
-; ===============================================
-;; Settings of /Org-mode/
-(load (concat y-init-path-prefix "emacs-init-orgmode"))
-
-; ===============================================
-;; /Markdown/: major mode for Markdown
-;; Note: require "multimarkdown" or "markdown" in Bash
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(autoload 'gfm-mode "markdown-mode"
-  "Major mode for editing GitHub Flavored Markdown files" t)
-(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
-
-;; configure compile commands
-(if (string-equal system-type "darwin")
-    (progn
-      (setq markdown-command "/usr/local/bin/multimarkdown")
-      (setq markdown-open-command "/Users/oracleyue/bin/marked"))
-  (setq markdown-command "/usr/bin/multimarkdown"))
-
-;; configure markdown export styles
-(setq css-default-path (expand-file-name "~/.emacs.d/templates/css"))
-(setq url-boostrap-min-css
-      "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
-(add-hook 'markdown-mode-hook (lambda()
-;; (add-to-list 'markdown-css-paths url-boostrap-min-css)  ;; if use bootstrap.min.css online
-   (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
-   (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min.css"))))
-
-;; Preview using /livedown.el/  (osx uses "Marked 2.app")
-;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
-;(require 'livedown)
-;(setq livedown:autostart nil) ; automatically open preview when opening markdown files
-;(setq livedown:open t)        ; automatically open the browser window
-;(setq livedown:port 1337)     ; port for livedown server
-; ;; use livedown to preview markdown
-;(add-hook 'markdown-mode-hook (lambda()
-;          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
-
-; ===============================================
-;; /AUCTeX/: major mode for LaTeX
-(load (concat y-init-path-prefix "emacs-init-auctex"))
-;; fix "C-j" for AucTeX mode
-;(global-set-key (kbd "C-S-j") 'electric-newline-and-maybe-indent)
-
-
-
-;;
-;; ------------------- Other Major Modes -------------------
-;;
-
-; ------------------------------------------------
-;; Directory Explorers
-
-;; directory explorer: /dired/
-(require 'dired-x)
-(setq dired-omit-files
-      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
-(delete ".bbl" dired-omit-extensions)
-(add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
-
-;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
-(require 'popwin)
-(popwin-mode 1)
-(when (cdr (assoc "direx-jedi" y:use-direx-or-neotree))
-  (require 'direx)
-  (push '(direx:direx-mode :position left :width 27 :dedicated t)
-        popwin:special-display-config)
-  (define-key direx:direx-mode-map (kbd "<tab>") 'direx:toggle-item) ;; fix tab
-  (define-key direx:direx-mode-map (kbd "x") 'direx/y:kill-buffer)
-  (setq direx:leaf-icon "  "
-        direx:open-icon "▾ "
-        direx:closed-icon "▸ ")
-  (defun direx/y:kill-buffer (&optional item) (interactive)
-         (kill-buffer (current-buffer)))
-  (unless (cdr (assoc "neotree" y:use-direx-or-neotree))
-    (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)))
-
-;; directory explorer in tree: /neotree/
-(when (cdr (assoc "neotree" y:use-direx-or-neotree))
-  (require 'neotree)
-  (setq neo-theme 'arrow)
-  (global-set-key (kbd "C-x C-j") 'neotree-toggle)
-  (define-key neotree-mode-map (kbd "i") 'neotree-enter)
-  (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
-  (setq neo-show-hidden-files nil)
-  (eval-after-load "neotree"      ;; toggle by "H" in neotree
-    '(setq neo-hidden-regexp-list '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
-
-; ------------------------------------------------
-;; /ibuffer/: buffer explorer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-               ("dired" (mode . dired-mode))
-               ("org"   (name . "^.*org$"))
-               ("writing" (or (mode . text-mode)
-                              (mode . markdown-mode)
-                              (mode . latex-mode)))
-               ("shell" (or (mode . eshell-mode)
-                            (name . "^\\*R\\*$")
-                            (name . "^\\*ielm\\*$")
-                            (mode . inferior-python-mode)))
-               ("programming" (or (mode . scheme-mode)
-                                  (mode . python-mode)
-                                  (mode . ess-mode)
-                                  (mode . sh-mode)
-                                  (mode . matlab-mode)
-                                  (mode . c-mode)
-                                  (mode . c++-mode)
-                                  (mode . cmake-mode)
-                                  (name . ".dir-locals.el")
-                                  (name . "[mM]akefile")))
-               ("web" (or (mode . html-mode)
-                          (mode . css-mode)
-                          (mode . js2-mode)))
-               ("emacs" (or (mode . emacs-lisp-mode)
-                            (name . "^\\*scratch\\*$")
-                            (name . "^\\*Messages\\*$")))
-               ("tags viewer" (mode . direx:direx-mode))
-               ("miscellany" (or (name . "^\\*Help\\*$")
-                                 (name . "^\\*Warnings\\*$")
-                                 (name . "clang-complete")
-                                 (name . "[hH]elm.*")
-                                 (mode . TeX-output-mode)
-                                 (mode . reftex-toc-mode)
-                                 (mode . compilation-mode)))
-               ))))
-(add-hook 'ibuffer-mode-hook (lambda ()
-    (ibuffer-auto-mode 1)
-    (ibuffer-switch-to-saved-filter-groups "default")))
-
-;; don't show certain buffers
-(add-to-list 'ibuffer-never-show-predicates "^\\*epc con .*\\*")
-(add-to-list 'ibuffer-never-show-predicates "^\\*ESS\\*")
-
-;; don't show filter groups if there are no buffers in that group
-(setq ibuffer-show-empty-filter-groups nil)
-
-;; don't ask for confirmation to delete marked buffers
-(setq ibuffer-expert t)
-
-;; ----------------------------------------------
-;; /TRAMP/: ssh and remote access
-(setq tramp-default-method "ssh")
-;; usages:
-;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
-;; - "C-x C-f /sudo::/etc/hosts"
-
-
-
-;;
-;; -------------------------- Obsolete Modes ------------------------
-;;
-
-;; ----------------------------------------------
-;; Settings for /Evil-mode/
-;(load (concat y-init-path-prefix "emacs-init-evil"))
-
-;; ----------------------------------------------
-;; For /ECB/
-;; [SOURCE]: https://github.com/emacsmirror/ecb
-;;
-;; (add-to-list 'load-path "~/.emacs.d/git/ecb")
-;; (require 'ecb)
-;; (require 'ecb-autoloads)
-;; (setq ecb-windows-width 0.16)
-;; (setq ede-project-directories (quote ("~/Workspace/c")))
-;; (setq ecb-source-path '("~/Workspace/c/src"
-;;                         "~/Workspace/c/include"))
-;; (setq ecb-tip-of-the-day nil)
-;; (setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
-;;
-;; (add-hook 'c-mode-hook 'ecb-activate)
-;; (add-hook 'c++-mode-hook 'ecb-activate)
-;; (add-hook 'matlab-mode-hook 'ecb-activate)
-
-
-
-;;
-;; ------------------- Keybindings for Terminals -------------------
-;;
-
-;(require 'open-next-line)   ;; if not using /emacs-python/
-;(global-set-key (kbd "C-o") 'open-next-line)
-
-
-
-;;
-;; ------------- Restore Original Settings ---------------
-;;
-
-;; restore "M-c" for capitalize words
-(global-set-key (kbd "M-c") 'capitalize-word)
-
-;; open default Dired folders on startup
-(cond ((string-equal system-type "darwin")
-       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
-           (progn
-             (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-             (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts")))
-         (cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")))  ; for dark-version
-      ((string-equal system-type "gnu/linux")
-       (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-       (cd "~/tmp")))
-
-;; restore "F10" to open menu bar or "M-`"
-;; (global-set-key (kbd "<f10>") 'menu-bar-open)
-
-;; kill unnecessary buffers
-;; (kill-buffer "*ESS*")
-;; (put 'set-goal-column 'disabled nil)
+;; ----------------------------------------------------------------
+;; .emacs ends here.

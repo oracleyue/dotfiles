@@ -15,3 +15,9 @@
 ;(require 'web-mode)
 ;(add-to-list 'auto-mode-alist '("\\.[x]?html\\'" . web-mode))
 ;(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+
+
+
+(provide 'emacs-init-web)
+;; ================================================
+;; emacs-init-web.el ends here

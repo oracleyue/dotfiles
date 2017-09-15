@@ -165,3 +165,8 @@
 ;; View visited tags with tag stack
 ;; + show visited tags from newest to oldest, from top to bottom.
 ;;   =helm-gtags-show-stack=
+
+
+(provide 'emacs-init-gtags)
+;; ================================================
+;; emacs-init-gtags.el ends here

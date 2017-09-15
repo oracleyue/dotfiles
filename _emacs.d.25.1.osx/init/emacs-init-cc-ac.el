@@ -23,10 +23,9 @@
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
   (defun y:flymake-google-init ()
     (require 'flymake-google-cpplint)
-    (custom-set-variables
-     '(flymake-google-cpplint-command
-       (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
-         "/usr/bin/cpplint")))
+    (setq flymake-google-cpplint-command
+      (if (string-equal system-type "darwin")
+          "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
     (flymake-google-cpplint-load))
   (add-hook 'c-mode-hook 'y:flymake-google-init)
   (add-hook 'c++-mode-hook 'y:flymake-google-init))
@@ -130,7 +129,8 @@
 
 ;; ---------------- Other Major Modes for C/C++ Supportings ----------------
 
-;; compilation shortcuts
+;; compilation supports
+;; use "C-c C-c" or use projectile compile "C-c p c"
 (add-hook 'c-mode-common-hook
           (lambda () (define-key c-mode-base-map (kbd "C-c C-c") 'compile)))
 ;; default mode for Makefile in gnome
@@ -139,6 +139,13 @@
 ;; default mode for Makefile in Mac OS X
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (define-key makefile-bsdmake-mode-map (kbd "C-c C-c") 'compile)))
+;; set compilation command
+(defun y:set-compile-command ()
+  ;; (set (make-local-variable 'compile-command) "cd .. && make -k && cd -")
+  (set (make-local-variable 'compile-command) "make -k"))
+(add-hook 'c-mode-hook 'y:set-compile-command)
+(add-hook 'c++-mode-hook 'y:set-compile-command)
+
 
 ;; /cmake-mode/: major mode for CMake files
 (require 'cmake-mode)
@@ -156,3 +163,8 @@
 ;;   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
 ;;       (doxymacs-font-lock)))
 ;; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+
+(provide 'emacs-init-cc-ac)
+;; ================================================
+;; emacs-init-cc-ac.el ends here

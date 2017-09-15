@@ -48,3 +48,8 @@
 ;; Optional face for line numbers
 ;; Face name is `helm-swoop-line-number-face`
 (setq helm-swoop-use-line-number-face t)
+
+
+(provide 'emacs-init-helm-swoop)
+;; ================================================
+;; emacs-init-helm-swoop.el ends here

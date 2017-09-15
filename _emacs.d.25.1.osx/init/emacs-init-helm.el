@@ -199,3 +199,8 @@
 ;  C-c C-l 	    helm-eshell-history 	            Interface to eshell history
 ;  C-c C-l 	    helm-comint-input-ring 	            Interface to shell history
 ;  C-c C-l 	    helm-mini-buffer-history 	        Interface to mini-buffer history
+
+
+(provide 'emacs-init-helm)
+;; ================================================
+;; emacs-init-helm.el ends here

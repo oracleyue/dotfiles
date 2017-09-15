@@ -93,7 +93,7 @@
 
 
 ;;
-;; ------------- Basic Editing Function Extensions ---------------
+;; ------------- Basic Editing Extensions ---------------
 ;;
 
 ;; Note: some keybindings are added at the end of .emacs, due to the complication to locate which third packages change the original keybindings
@@ -258,3 +258,60 @@ Uses `current-date-format' for the formatting the date/time."
 (defun y:auto-remove-trailing-whitespace ()
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 (add-hook 'prog-mode-hook 'y:auto-remove-trailing-whitespace)
+
+
+;;
+;; ----------- Powerful Minor Modes ------------
+;;
+
+;; /multiple-cursors/: edit with multiple cursors
+(require 'multiple-cursors)
+;; mark many occurrences in region
+(global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
+;; mark one more occurrence by regexp match
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; mouse events
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+;; others
+;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
+
+
+;; /expand-region/: increase the selected region by semantic units
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+;;
+;; ----------- Settings of /text-mode/ ------------
+;;
+(setq-default major-mode 'text-mode)
+;; use "C-." to auto-correct words
+
+;; line wrapping settings
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+;; spell check for text modes
+(add-hook 'text-mode-hook 'flyspell-mode)
+;; (setq ispell-dictionary "british")
+(setq ispell-dictionary "american")
+
+;; use /auto-fill mode/
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook 'turn-off-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-off-auto-fill)
+
+
+;;
+;; ------------------- Keybindings for Terminals -------------------
+;;
+(unless (display-graphic-p)
+  (require 'open-next-line)   ;; if not using /emacs-python/
+  (global-set-key (kbd "C-o") 'open-next-line))
+
+
+
+(provide 'emacs-init-edit)
+;; ================================================
+;; emacs-init-edit.el ends here

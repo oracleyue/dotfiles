@@ -90,3 +90,8 @@
           (indent-for-tab-command)))))
 
 (global-set-key [tab] 'tab-indent-or-complete)
+
+
+(provide 'emacs-init-ac)
+;; ================================================
+;; emacs-init-ac.el ends here

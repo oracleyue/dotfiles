@@ -235,3 +235,8 @@
 (defun y:delete-latex-comments ()
   (interactive)
   (query-replace-regexp "\\(^\\| *[^\\\\]\\)%.*" "" nil nil))
+
+
+(provide 'emacs-init-auctex)
+;; ================================================
+;; emacs-init-auctex.el ends here

@@ -31,8 +31,8 @@
 (define-key evil-normal-state-map "\M-." nil)
 (define-key evil-normal-state-map "\M-?" nil)
 
-;; For keybindings defined by /evil-leader/			
-(evil-leader/set-key 
+;; For keybindings defined by /evil-leader/
+(evil-leader/set-key
     "cc" 'comment-region
     "cu" 'uncomment-region
 )
@@ -48,3 +48,8 @@
             (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
             (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
             (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)))
+
+
+(provide 'emacs-init-evil)
+;; ================================================
+;; emacs-init-evil.el ends here

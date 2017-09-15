@@ -34,10 +34,9 @@
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
   (defun y:flymake-google-init ()
     (require 'flymake-google-cpplint)
-    (custom-set-variables
-     '(flymake-google-cpplint-command
-       (if (string-equal system-type "darwin") "/usr/local/bin/cpplint"
-         "/usr/bin/cpplint")))
+    (setq flymake-google-cpplint-command
+      (if (string-equal system-type "darwin")
+          "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
     (flymake-google-cpplint-load))
   (add-hook 'c-mode-hook 'y:flymake-google-init)
   (add-hook 'c++-mode-hook 'y:flymake-google-init))
@@ -100,3 +99,7 @@
               (append '((company-cmake company-dabbrev-code))
                       company-backends)))
 (add-hook 'cmake-mode-hook 'y:company-cmake-setup)
+
+(provide 'emacs-init-cc-modern)
+;; ================================================
+;; emacs-init-cc-modern.el ends here

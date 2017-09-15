@@ -52,3 +52,8 @@
 ;;   support automatically by ESS-mode; however, the R shell has to be run
 ;;   and the codes must be no synatax errors.
 ;;   use "company-R-args", "company-R-objects" as backends
+
+
+(provide 'emacs-init-r-comp)
+;; ================================================
+;; emacs-init-r-comp.el ends here

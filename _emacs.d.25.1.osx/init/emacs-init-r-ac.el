@@ -54,3 +54,8 @@
 ;;   support automatically by ESS-mode; however, the R shell has to be run
 ;;   and the codes must be no synatax errors.
 ;;   use "ac-source-R-args", "ac-source-R-objects", "ac-source-R" as backends
+
+
+(provide 'emacs-init-r-ac)
+;; ================================================
+;; emacs-init-r-ac.el ends here

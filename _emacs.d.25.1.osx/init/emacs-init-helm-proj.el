@@ -165,3 +165,8 @@
 ;; Safe Variable Declaration (suppress warnings)
 ;; (add-to-list 'safe-local-variable-values
 ;;              '(project-local-include-path . ("-I./include" "-I./src")))
+
+
+(provide 'emacs-init-helm-proj)
+;; ================================================
+;; emacs-init-helm-proj.el ends here

@@ -60,3 +60,8 @@
   (eval-after-load "python"
     '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
   (add-hook 'jedi-mode-hook 'jedi-direx:setup))
+
+
+(provide 'emacs-init-py-comp)
+;; ================================================
+;; emacs-init-py-comp.el ends here

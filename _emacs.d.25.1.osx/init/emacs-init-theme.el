@@ -2,6 +2,19 @@
 ;; Set Themes
 ;;
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
+(cond ((string-equal system-type "darwin")
+       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
+           (load-theme 'solarized t)  ;; mac: main
+         (load-theme 'monokai t)))    ;; mac: coding, ac
+      ((string-equal system-type "gnu/linux")
+       (load-theme 'atom-one-dark t)))
+
+;; -----------------------------------------------------------------
+;; INFO:
+;; -----------------------------------------------------------------
 ;; 1) using default theme
 ;(load-theme 'tango-dark t)
 
@@ -14,13 +27,7 @@
 ;; 3) using /monokai/ theme; modified by oracleyue
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;(load-theme 'monokai t)
-
-
-;;
-;; Set Frinage
-;;
-;; fringe setting (right-only); bug: cause linum-mode to destory the auto-complete popup menu
-;(fringe-mode '(0 . nil))
+;; -----------------------------------------------------------------
 
 
 ;;
@@ -178,3 +185,9 @@
                  ;"%-" ;; fill with '-'
                  ))
   )
+
+
+
+(provide 'emacs-init-theme)
+;; ================================================
+;; emacs-init-theme.el ends here

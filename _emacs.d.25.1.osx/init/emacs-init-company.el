@@ -108,3 +108,9 @@
 ;          (lambda ()
 ;            (add-to-list (make-local-variable 'company-backends)
 ;                         '(company-c-headers company-clang :with company-yasnippet))))
+
+
+
+(provide 'emacs-init-company)
+;; ================================================
+;; emacs-init-company.el ends here

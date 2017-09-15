@@ -70,3 +70,8 @@
   (sp-local-pair "$" "$"
                  :trigger "$"
                  :unless '(sp-latex-point-after-backslash-left)))
+
+
+(provide 'emacs-init-orgmode)
+;; ================================================
+;; emacs-init-orgmode.el ends here
