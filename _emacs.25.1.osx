@@ -89,6 +89,9 @@
           browse-url-generic-program (expand-file-name "~/bin/web-browser")) ;use Safari
   (setq browse-url-browser-function 'browse-url-firefox))
 
+;; basic configurations
+(load (concat y-init-path-prefix "emacs-init-basics"))
+(load (concat y-init-path-prefix "emacs-init-edit"))
 
 ;;
 ;; Global Flags for Feature Control
@@ -109,12 +112,6 @@
       ((string-equal system-type "gnu/linux")
        (setq y:code-complete-mode "company")))
 
-
-;;
-;; Basic Configurations for Emacs
-;;
-(load (concat y-init-path-prefix "emacs-init-basics"))
-(load (concat y-init-path-prefix "emacs-init-edit"))
 
 ;;
 ;; ------------------- Settings of Minor Modes -------------------
