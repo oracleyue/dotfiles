@@ -68,13 +68,14 @@ autocmd BufReadPost *
 " --------------------------------------------------------------------------
 " nnoremap <F8> :vertical wincmd gf<CR>
 " vnoremap <C-c> "+y
-imap <C-A> <Home>
-imap <C-E> <End>
-imap <C-F> <Right>
-imap <C-B> <Left>
-imap <C-N> <Down>
-imap <C-P> <Up>
-imap <C-K> <Esc>d$a
+
+"imap <C-A> <Home>
+"imap <C-E> <End>
+"imap <C-F> <Right>
+"imap <C-B> <Left>
+"imap <C-N> <Down>
+"imap <C-P> <Up>
+"imap <C-K> <Esc>d$a
 
 
 " --------------------------------------------------------------------------
@@ -97,6 +98,10 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'taglist.vim'
   Plugin 'jamessan/vim-gnupg'
   Plugin 'scrooloose/nerdcommenter'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " Help
 " :PluginList          - list configured bundles
@@ -131,13 +136,11 @@ nmap  t :TlistOpen
 
 
 " -----------------** NerdTree **-------------------------
-map <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 " --------------------------------------------------------
-
 
 
 " --------------------------------------------------------------------------
 " others
 " --------------------------------------------------------------------------
-filetype plugin indent on
 syntax on
