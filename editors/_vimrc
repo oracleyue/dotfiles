@@ -1,0 +1,143 @@
+" --------------------------------------------------------------------------
+" Global Settings
+" --------------------------------------------------------------------------
+set nu                                      " set row number
+set nocompatible                            " be iMproved
+set cursorline                              " highlight the current line
+set showmatch                               " show mathced brackets
+set autoindent smartindent                  " smart auto-indent
+set foldmethod=indent                       " default indent mode
+set showcmd                                 " show commands that not finished
+set directory=/tmp                          " set directory for .swp files
+set autochdir                               " automatically change directory
+set incsearch hlsearch ignorecase smartcase " settings for search
+set t_Co=256                                " vim color scheme
+set hls                                     " set highlight search
+set noic                                    " set no case ignore
+set timeoutlen=1000 ttimeoutlen=0           " set no delay for visual mode block edit
+set title                                   " enable dynamic title
+set shiftwidth=4                            " using four blanks for tab
+set softtabstop=4
+
+" dealing with copy-paste (avoid auto-indent when paste codes)
+set pastetoggle=<F6>
+
+" language spell checking
+" set spell spelllang=en_us
+autocmd FileType tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+
+
+" --------------------------------------------------------------------------
+" color schemes
+" --------------------------------------------------------------------------
+if ! has("gui_running")
+   syntax enable
+    colorscheme lucius
+   " LuciusLight
+    LuciusDark
+endif
+if has("gui_running")  "  For /GVIM/
+   "colorscheme github
+   "colorscheme grb256
+   colorscheme lucius
+   LuciusLight
+   "LuciusDark
+   set guioptions=a  "remove menus, using clipboard instead of primary
+   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "frequency of cursor's blink
+   set lines=34 columns=97
+   set guifont=DejaVu\ Sans\ Mono:h12
+endif
+
+
+" --------------------------------------------------------------------------
+"  For backup
+" --------------------------------------------------------------------------
+set backup
+set backupdir=/tmp
+
+" set cursor to the last position
+autocmd BufReadPost *
+    \if line("'\"") > 0 && line("'\"") <= line("$") |
+        \exe "normal g`\"" |
+    \endif
+
+
+" --------------------------------------------------------------------------
+"  Key maps
+" --------------------------------------------------------------------------
+" nnoremap <F8> :vertical wincmd gf<CR>
+" vnoremap <C-c> "+y
+imap <C-A> <Home>
+imap <C-E> <End>
+imap <C-F> <Right>
+imap <C-B> <Left>
+imap <C-N> <Down>
+imap <C-P> <Up>
+imap <C-K> <Esc>d$a
+
+
+" --------------------------------------------------------------------------
+" Plugins
+" --------------------------------------------------------------------------
+
+" ------------------** Vundle **--------------------------
+filetype off				" required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" List of installed plugins:
+" repos on github
+  Plugin 'LaTeX-Box-Team/LaTeX-Box'
+  Plugin 'djoshea/vim-matlab'
+  Plugin 'scrooloose/nerdtree'
+
+" vim-scripts repos
+  Plugin 'taglist.vim'
+  Plugin 'jamessan/vim-gnupg'
+  Plugin 'scrooloose/nerdcommenter'
+
+" Help
+" :PluginList          - list configured bundles
+" :PluginInstall       - install(update) bundles
+" :PluginSearch foo    - search(or refresh cache first) for foo
+" :PluginClean         - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+" --------------------------------------------------------
+
+
+" -----------------** TagList **--------------------------
+let Tlist_Enable_Fold_Column=0
+let Tlist_Exit_OnlyWindow=1
+let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_Show_One_File=1
+
+" Taglist - Support /LaTeX/
+let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
+let tlist_make_settings  = 'make;m:makros;t:targets'
+
+" Taglist - Support /MatLab/
+let tlist_matlab_settings = 'matlab;f:functions'
+let tlist_matlab_settings   = 'matlab;f:functions'
+
+" 'T' opens/closes the TagList window
+nmap  T :TlistToggle
+" 't' jumps to and from the TagList window
+nmap  t :TlistOpen
+" --------------------------------------------------------
+
+
+" -----------------** NerdTree **-------------------------
+map <C-n> :NERDTreeToggle<CR>
+" --------------------------------------------------------
+
+
+
+" --------------------------------------------------------------------------
+" others
+" --------------------------------------------------------------------------
+filetype plugin indent on
+syntax on
