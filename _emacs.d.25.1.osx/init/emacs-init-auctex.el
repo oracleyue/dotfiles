@@ -213,15 +213,16 @@
                  ("^html?$" "." "firefox %o"))))
   )
  ((string-equal system-type "darwin")
-;; use Skim as default pdf viewer
-;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; use skim as default pdf viewer
+;; skim's displayline is used for forward search (from .tex to .pdf)
 ;; option -b highlights the current line; option -g opens Skim in the background
   (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
   (setq TeX-view-program-list
-     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))
-     ;; '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
-  )
-)
+     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))))
+;; backward search: in skim's preference -> Sync -> PDF-TeX Sync support:
+;; if using emacs server, set
+;;  "Command": /usr/local/bin/emacsclient
+;;  "Arguments": --server-file=main --no-wait +%line "%file"
 
 ;; keybinding definitions
 (eval-after-load "latex"

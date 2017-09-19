@@ -47,7 +47,7 @@ function es() {
                     kill $(ps aux | grep -i 'emacs --daemon' | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 *)
-                    kill $(ps aux | grep -i 'emacs --daemon' | grep "$1" | grep -v 'grep' | awk '{print $2}')
+                    kill $(ps aux | grep -i 'emacs --daemon' | grep "$2" | grep -v 'grep' | awk '{print $2}')
                     ;;
             esac
         fi

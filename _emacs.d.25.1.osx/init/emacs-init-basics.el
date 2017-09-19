@@ -75,8 +75,8 @@
 
 ;; use command as control in OS X for emacs
 ;; (when (string-equal system-type "darwin")
-;;   (setq mac-command-modifier 'control)  ; use Command key also as Control
-;;   (setq mac-option-modifier 'meta))  ; NOT need
+;;   (setq mac-command-modifier 'control)  ; use command as control
+;;   (setq mac-option-modifier 'meta))     ; may not need
 
 ;; default browser
 (if (string-equal system-type "darwin")
