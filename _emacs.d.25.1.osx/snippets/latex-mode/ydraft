@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Simple Draft Template
+# name: Draft Template
 # key: draft
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

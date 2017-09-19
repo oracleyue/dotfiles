@@ -6,16 +6,10 @@
 ;; basics
 (setq inhibit-startup-screen t)
 (column-number-mode t)
-(setq fill-column 80)
 (setq backup-inhibited t)
-(fset 'yes-or-no-p 'y-or-n-p)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-
-;; stop emacs automatically editing .emacs
-(setq disabled-command-function nil)
-(setq custom-file "~/.emacs-custom.el")
-;; (load custom-file 'noerror)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; encodings
 (set-default-coding-systems 'utf-8)

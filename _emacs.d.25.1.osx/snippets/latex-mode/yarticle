@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Simple Article Template
+# name: Article Template
 # key: article
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -13,11 +13,11 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times}   % using Times
-% \usepackage{newtxtext,newtxmath} % new, replace /times/ and /txfonts/
+\usepackage{times}          % using Times
+% \usepackage{baskervald}   % nice fonts for regular articles
+\usepackage{helvet}         % using Helvetica
+\usepackage[scaled=0.95]{inconsolata}   % monospace (default: courier)
 % \usepackage[lite]{mtpro2} % non-free math fonts in Times
-\usepackage{helvet}  % using Helvet as sans serif font
-\usepackage[scaled=0.95]{inconsolata} % courier
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,
 			mathtools,upgreek}

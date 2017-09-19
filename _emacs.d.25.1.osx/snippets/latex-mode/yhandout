@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Problem Set Template
-# key: problemset
+# name: Handout Template
+# key: handout
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
