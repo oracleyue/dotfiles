@@ -16,7 +16,6 @@
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-(setq-default TeX-master nil)
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 ;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
@@ -151,7 +150,7 @@
 
 ;; Set master files nil by default
 ;; use "C-c _" to query for master files
-(setq-default TeX-master t) ;stop querying for master files
+(setq-default TeX-master nil)
 
 ;; Default bibtex paths for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))
@@ -192,12 +191,18 @@
    '(add-to-list 'TeX-command-list
        '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
 
-;; to compile the Cambridge thesis, use "M-x compile", then "make" or "make clean"
+;; use makefile
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
        '("Make" "make -k" TeX-run-command nil t) t))
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+       '("MakeClean" "make clean" TeX-run-command nil t) t))
+
+;; to compile the Cambridge thesis in sub-directory, use "M-x compile"
 (add-hook 'LaTeX-mode-hook
-          (lambda () (set (make-local-variable 'compile-command) "make ")))
+          (lambda () (set (make-local-variable 'compile-command)
+                          "cd .. && make ")))
 
 (cond
  ((string-equal system-type "gnu/linux")
