@@ -178,32 +178,26 @@
 
 ;; (eval-after-load "tex"
 ;;    '(add-to-list 'TeX-command-list
-;;        '("Rubber-clean" "rubber --clean %t" TeX-run-command nil t) t))
+;;        '("convert to png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("convert to png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
+       '("update bib" "./supports/bibupdate.sh" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("update bib library" "./bibupdate.sh" TeX-run-command nil t) t))
-
-;; (eval-after-load "tex"
-;;    '(add-to-list 'TeX-command-list
-;;        '("backup doc files" "./srcbackup.sh" TeX-run-command nil t) t))
+       '("backup tex" "./supports/texbackup.sh" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("backup tex files" "./texbackup.sh" TeX-run-command nil t) t))
+       '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
 
+;; to compile the Cambridge thesis, use "M-x compile", then "make" or "make clean"
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("update userdef-mathsymb" "./mathsym_update.sh" TeX-run-command nil t) t))
-
-;; (eval-after-load "tex"
-;;    '(add-to-list 'TeX-command-list
-;;                  '("Git regular push" "git add --all && git ci -m \"regular update\" && git push" TeX-run-command nil t) t))
-
+       '("Make" "make -k" TeX-run-command nil t) t))
+(add-hook 'LaTeX-mode-hook
+          (lambda () (set (make-local-variable 'compile-command) "make ")))
 
 (cond
  ((string-equal system-type "gnu/linux")

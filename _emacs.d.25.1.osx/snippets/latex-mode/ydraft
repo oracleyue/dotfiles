@@ -56,6 +56,6 @@
 % --------------- BIBLIOGRAPHY --------------
 % \def\bibfont{\footnotesize}
 % \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
-% \bibliography{./library}
+% \bibliography{./ref/library}
 
 \end{document}
