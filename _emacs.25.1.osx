@@ -47,7 +47,6 @@
 (require 'emacs-init-helm)
 (require 'emacs-init-helm-swoop)
 (require 'emacs-init-helm-proj)         ;; project management
-(require 'emacs-init-gtags)             ;; code navigation
 
 ;; major modes for document editing
 (require 'emacs-init-orgmode)           ;; org-mode
@@ -66,6 +65,11 @@
 ;; ----------------------------------------------------------------
 ;; Programming Environments
 ;; ----------------------------------------------------------------
+
+;; general programming supports
+(require 'emacs-init-prog)              ;; edit, vc, debug, ui ...
+(require 'emacs-init-gtags)             ;; code navigation
+
 ;; programming environment for /Lisp/
 (require 'emacs-init-lisp)
 
@@ -73,11 +77,18 @@
 (require 'emacs-init-web)
 
 ;; programming environment for /C C++/
+(setq cc-complete-engine "irony")
 (if (string-equal y:code-complete-mode "company")
-    ;; (require 'emacs-init-cc-comp)    ;; use /company-clang/
-    (org-babel-load-file                ;; use /company-irony/
-     (expand-file-name "init/emacs-init-cc-modern.org"
-                       user-emacs-directory))
+    (cond ((string-equal cc-complete-engine "clang")            ;; company-clang
+           (require 'emacs-init-cc-comp))
+          ((string-equal cc-complete-engine "irony")            ;; irony
+           (org-babel-load-file
+            (expand-file-name "init/emacs-init-cc-irony.org"
+                              user-emacs-directory)))
+          ((string-equal cc-complete-engine "irony+rtags")      ;; irony + rtags + cmake-ide
+           (org-babel-load-file
+            (expand-file-name "init/emacs-init-cc-modern.org"
+                              user-emacs-directory))))
   (require 'emacs-init-cc-ac))          ;; use /auto-complete/
 
 ;; programming environment for /Python/
@@ -98,9 +109,8 @@
   "Major mode for editing AppleScript source." t)
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
-;; general programming supports
-(require 'emacs-init-prog)
 ;; ----------------------------------------------------------------
+
 
 
 ;; Restore default configurations overwritten by other modes
