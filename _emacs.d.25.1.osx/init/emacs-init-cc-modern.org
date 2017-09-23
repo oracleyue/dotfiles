@@ -3,7 +3,8 @@
   - use *rtags* for code navigation
   - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
   - integrate *flycheck* with *rtags* (disabled) and *irony*
-  - use *cmake-ide* (disabled)
+  - use *cmake-ide* to integrate cmake-based projects
+  - use *helm-make* as alternative compilation
 
 ** Requirements
 *** install software in OS
@@ -42,6 +43,7 @@
             company-rtags
             helm-rtags
             flycheck-rtags
+            cmake-ide
             helm-make))
     (unless (custom/packages-installed-p custom/modern-cc-packages)
       (package-refresh-contents)
@@ -293,11 +295,11 @@ We'll see how to automate this process with cmake-ide below.
     - =C-c ! l=: list errors
     - =C-c ! c=: menually run checker
 
-** CMake automation with cmake-ide (disabled)
+** CMake automation with cmake-ide
 *** Prerequisites
 
     Install cmake-ide from MELPA and add the following to your emacs init file:
-    #+BEGIN_SRC
+    #+BEGIN_SRC emacs-lisp
       (cmake-ide-setup)
     #+END_SRC
 
