@@ -87,7 +87,7 @@
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-irony.org"
                               user-emacs-directory)))
-          ((string-equal y:cc-complete-engine "modern")      ;; irony + rtags + cmake-ide
+          ((string-equal y:cc-complete-engine "modern")      ;; rtags + irony
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-modern.org"
                               user-emacs-directory))))
