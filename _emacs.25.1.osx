@@ -29,11 +29,14 @@
 ;; (require 'emacs-init-evil)           ;; use vim in emacs
 
 ;; feature control
-(setq y:enable-cedet-semantics nil)     ;; /helm-sematic-or-imenu/, /stickyfunc/
+(if (or (string-equal "main" (daemonp)) (not (daemonp)))
+    (setq y:enable-cedet-semantics nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
+  (setq y:enable-cedet-semantics t))
 (setq y:enable-function-args nil)       ;; /function-args/ (require semantics)
 (setq y:use-direx-or-neotree            ;; enable /direx-jedi/ or/and /neotree/
       '(("direx-jedi" . nil) ("neotree" . t)))
 (setq y:enable-google-cpp-style nil)    ;; /google-c-style/
+(setq y:cc-complete-engine "irony")     ;; company-clang, irony, modern
 
 ;; code completion
 (cond ((string-equal system-type "darwin")
@@ -77,15 +80,14 @@
 (require 'emacs-init-web)
 
 ;; programming environment for /C C++/
-(setq cc-complete-engine "irony")
 (if (string-equal y:code-complete-mode "company")
-    (cond ((string-equal cc-complete-engine "clang")            ;; company-clang
+    (cond ((string-equal y:cc-complete-engine "clang")       ;; company-clang
            (require 'emacs-init-cc-comp))
-          ((string-equal cc-complete-engine "irony")            ;; irony
+          ((string-equal y:cc-complete-engine "irony")       ;; irony
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-irony.org"
                               user-emacs-directory)))
-          ((string-equal cc-complete-engine "irony+rtags")      ;; irony + rtags + cmake-ide
+          ((string-equal y:cc-complete-engine "modern")      ;; irony + rtags + cmake-ide
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-modern.org"
                               user-emacs-directory))))
