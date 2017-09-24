@@ -609,3 +609,10 @@ See help of `format-time-string' for possible replacements")
         (goto-char beg)
         (while (< (point) end)
           (join-line 1)))))
+
+
+;; ----------------------------------------------------------------
+;; frame size
+(set-frame-size (selected-frame)
+                (cdr (assoc 'width default-frame-alist))
+                (cdr (assoc 'height default-frame-alist)))

@@ -58,7 +58,7 @@
 ;; disable trigger completion menu automatically
 (setq jedi:complete-on-dot t)  ;; if nil, use "C-<tab>" on dot; else "<tab>".
 ;; set wait time before showing funciton call signature tip in ms
-(setq jedi:get-in-function-call-delay 800)  ;; set huge to disable auto show
+(setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
 ;; set calltip methods
 (setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
 ;; restore jedi:complete bound default in jedi

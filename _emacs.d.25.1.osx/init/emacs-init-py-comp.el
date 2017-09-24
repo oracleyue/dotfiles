@@ -53,6 +53,7 @@
               (append '(company-jedi) company-backends)))
 (add-hook 'python-mode-hook 'y:company-py-setup)
 ;; set calltip methods
+(setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
 (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
 
 ;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)

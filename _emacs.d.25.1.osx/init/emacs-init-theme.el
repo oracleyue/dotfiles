@@ -5,9 +5,7 @@
 (if (string-equal system-type "darwin")
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
-(set-frame-size (selected-frame)
-                (cdr (assoc 'width default-frame-alist))
-                (cdr (assoc 'height default-frame-alist)))
+
 
 ;;
 ;; Set Themes
@@ -27,22 +25,22 @@
 ;; INFO:
 ;; -----------------------------------------------------------------
 ;; 1) using default theme
-;(load-theme 'tango-dark t)
+;; (load-theme 'tango-dark t)
 
 ;; 2) using /solarized/ theme: Ethan Schoonover's theme [github]
-;;!! (setq solarized-termcolors 256)   ;distort colors; do NOT enable
-;(setq frame-background-mode (quote dark))  ;; use dark theme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-;(load-theme 'solarized t)
+;;!! (setq solarized-termcolors 256)          ;; distort colors; do NOT enable
+;; (setq frame-background-mode (quote dark))  ;; use dark theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+;; (load-theme 'solarized t)
 
 ;; 3) using /monokai/ theme; modified by oracleyue
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;(load-theme 'monokai t)
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-theme 'monokai t)
 ;; -----------------------------------------------------------------
 
 
 ;;
-;; Customize Mode-Line (not work well for HTML mode)
+;; Customize Mode-Line
 ;;
 (if (eq 'monokai (car custom-enabled-themes))
     (progn
@@ -97,7 +95,7 @@
                                          'face
                                          (if overwrite-mode 'font-lock-preprocessor-face
                                            'mode-line-plain-face-y)
-                                           ;'font-lock-preprocessor-face
+                                        ;'font-lock-preprocessor-face
                                          'help-echo (concat "Buffer is in "
                                                             (if overwrite-mode "overwrite" "insert") " mode")))
 
@@ -124,6 +122,8 @@
 
                      ;; i don't want to see minor-modes; but if you want, uncomment this:
                      ;; minor-mode-alist  ;; list of minor modes
+
+                     ;; "%-" ;; fill with '-'
                      )))
   ;; set default mode line for other themes
   (set-face-attribute 'mode-line nil
@@ -134,27 +134,23 @@
                  "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification
 
                  ;; the buffer name; the file name as a tool tip
-                 '(:eval (propertize "%b " ;'face 'font-lock-keyword-face
-                                     'face 'bold
+                 '(:eval (propertize "%b " 'face 'bold
                                      'help-echo (buffer-file-name)))
 
                  ;; line and column
-                 "(" ;; '%02' to set to 2 chars at least; prevents flickering
-                 (propertize "%02l" ;'face 'font-lock-type-face
-                             ) ","
+                 "("
+                 (propertize "%02l") ","
                  (propertize "%02c")
                  ") "
 
                  ;; relative position, size of file
                  "["
-                 (propertize "%p" ;'face 'font-lock-constant-face
-                             ) ;; % above top
+                 (propertize "%p") ;; % above top
                  "/"
-                 (propertize "%I" ;'face 'font-lock-constant-face
-                             ) ;; size
+                 (propertize "%I") ;; size
                  "] "
 
-                 ;; the current major mode for the buffer (;'face 'font-lock-string-face)
+                 ;; the current major mode for the buffer
                  "["
                  '(:eval (propertize (if (listp mode-name)
                                          (mapconcat 'identity (cdr mode-name) "/")
@@ -171,15 +167,12 @@
 
                  ;; was this buffer modified since the last save?
                  '(:eval (when (buffer-modified-p)
-                           (concat ","  (propertize "Mod"
-                                                    ;'face 'font-lock-warning-face
-                                                    'face 'error
+                           (concat ","  (propertize "Mod" 'face 'error
                                                     'help-echo "Buffer has been modified"))))
 
                  ;; is this buffer read-only?
                  '(:eval (when buffer-read-only
-                           (concat ","  (propertize "RO"
-                                                    'face 'font-lock-type-face
+                           (concat ","  (propertize "RO" 'face 'font-lock-type-face
                                                     'help-echo "Buffer is read-only"))))
                  "] "
 
@@ -190,12 +183,9 @@
                                      (concat (format-time-string "%c; ")
                                              (emacs-uptime "Uptime:%hh"))))
                  "---"
-
-                 ;; i don't want to see minor-modes; but if you want, uncomment this:
-                 ;; minor-mode-alist  ;; list of minor modes
-                 ;"%-" ;; fill with '-'
                  ))
   )
+
 
 
 

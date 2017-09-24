@@ -16,8 +16,9 @@
        (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
        (cd "~/tmp")))
 
-;; restore "F10" to open menu bar or "M-`"
-;; (global-set-key (kbd "<f10>") 'menu-bar-open)
+;; restore "F10" to open menu bar or "M-`" for terminal
+(when (not (display-graphic-p))
+  (global-set-key (kbd "<f10>") 'menu-bar-open))
 
 
 

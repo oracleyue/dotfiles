@@ -89,7 +89,7 @@
             (auto-complete)
           (indent-for-tab-command)))))
 
-(global-set-key [tab] 'tab-indent-or-complete)
+(global-set-key (kbd "TAB") 'tab-indent-or-complete)
 
 
 (provide 'emacs-init-ac)
