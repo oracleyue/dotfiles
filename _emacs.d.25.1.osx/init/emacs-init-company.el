@@ -96,18 +96,10 @@
             (company-complete-common)
           (indent-for-tab-command)))))
 
-(global-set-key (kbd "TAB") 'tab-indent-or-complete)
-
-
-
-;; ----------------------------------------------------------------
-;; Archived codes in configurations
-;; ----------------------------------------------------------------
-;; add backends locally available in the major-modes
-;(add-hook 'c++-mode-hook
-;          (lambda ()
-;            (add-to-list (make-local-variable 'company-backends)
-;                         '(company-c-headers company-clang :with company-yasnippet))))
+(if (display-graphic-p)
+    (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+  ;; <tab> is not available in terminal, "TAB" is used instead
+  (global-set-key (kbd "TAB") 'tab-indent-or-complete))
 
 
 

@@ -1,5 +1,6 @@
-;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
 ;; /Yasnippet/ A template system
+;;
 (require 'popup)
 (require 'yasnippet) ;; not yasnippet-bundle
 ;; to add user-defined snippet paths: (add-to-list 'yas-snippet-dirs "PATH NAME")
@@ -25,8 +26,10 @@
      )))
 (setq yas-prompt-functions '(yas-popup-isearch-prompt yas-dropdown-prompt yas-completing-prompt yas-ido-prompt yas-x-prompt yas-no-prompt))   ; note that yas-dropdown-prompt needs /dropdown-list/ to be installed!
 
-; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-; For /auto-complete/
+
+;;
+;; /auto-complete/
+;;
 (require 'auto-complete-config)
 (ac-config-default)
 ;; enable ac-mode for major modes
@@ -35,11 +38,13 @@
 ;; fix switching when line number jumps to one digit due to popup
 (ac-linum-workaround)
 ;; different ways to start ac-complete
-    ;1; default auto start complete when type 3 characters
-    ;(setq ac-auto-start 3)
-    ;2; explicit call to auto-complete, using trigger-key or auto-complete func
-    (setq ac-auto-start nil)
-    (ac-set-trigger-key "TAB")    ; trigger to start ac-complete
+;; 1 - default auto start complete when type 3 characters
+;; (setq ac-auto-start 3)
+;; 2 - explicit call to auto-complete, using trigger-key or auto-complete func
+(setq ac-auto-start nil)
+(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
+;; force to complete
+;; (define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 ;; show menu immediately
 (setq ac-auto-show-menu t)    ;; new
 (setq ac-show-menu-immediately-on-auto-complete t)    ;; new
@@ -62,11 +67,10 @@
                            ac-source-filename    ;; new
                            ac-source-yasnippet
                            ac-source-words-in-same-mode-buffers))
-; Notes: other settings are in different programming languages' parts. See C/C++.
-;; ------------------------------------------------------------
 
-
-;; Integration of /indent/ + /yas/ + /ac/ for TAB key
+;;
+;; Integration of "indent" + /company/ + /yas/
+;;
 (defun check-expansion ()
   (save-excursion
     (if (looking-at "\\_>") t
@@ -89,7 +93,11 @@
             (auto-complete)
           (indent-for-tab-command)))))
 
-(global-set-key (kbd "TAB") 'tab-indent-or-complete)
+(if (display-graphic-p)
+    (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+  ;; <tab> is not available in terminal, "TAB" is used instead
+  (global-set-key (kbd "TAB") 'tab-indent-or-complete))
+
 
 
 (provide 'emacs-init-ac)

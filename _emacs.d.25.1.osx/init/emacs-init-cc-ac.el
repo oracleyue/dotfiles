@@ -63,8 +63,7 @@
   ;; default local include-paths relative to projects' "src" folder
   (setq ac-clang-cflags (append ac-clang-cflags '("-I../include" "-I./include" "-I.")))
   (require 'auto-complete-clang-async)
-  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")
-  )
+  (setq ac-clang-complete-executable "~/.emacs.d/bin/clang-complete"))
  ((string-equal system-type "darwin")
   ;; choose the clang-complete packages
   (setq y-clang-complete-type "clang-complete-async")
@@ -88,7 +87,7 @@
   ;; configuration start
   (add-to-list 'load-path "~/.emacs.d/git/clang-complete-async")
   (require 'auto-complete-clang-async)
-  (setq ac-clang-complete-executable "~/.emacs.d/git/clang-complete-async/clang-complete")))
+  (setq ac-clang-complete-executable "~/.emacs.d/bin/clang-complete")))
 
 ;; standard headers completion
 (require 'auto-complete-c-headers) ;; setup headers completion
@@ -116,7 +115,7 @@
    )
 ;; setup ac-complete (sources & headers)
 (defun y:ac-clang-config ()
-  (setq ac-clang-async-do-autocompletion-automatically nil) ; disable auto-trigger
+  (setq ac-clang-async-do-autocompletion-automatically t) ; nil to disable auto-trigger
   (setq ac-sources '(ac-source-clang-async
                     ;ac-source-semantic
                      ac-source-c-headers))

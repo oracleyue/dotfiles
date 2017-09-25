@@ -17,12 +17,14 @@
         (ess-R-fl-keyword:F&T)
         (ess-R-fl-keyword:%op%))))
 
-;; fix bugs in ac due to line wrap
-(add-hook 'ess-mode-hook (lambda ()
-                           (setq truncate-lines t)))
+;; fix bugs in ac due to line wrap (fixed, not needed)
+;; (add-hook 'ess-mode-hook (lambda () (setq truncate-lines t)))
 
 ;; disable understore behaviors
 (ess-toggle-underscore nil)
+
+;; enable ess-indent-or-complete for completion
+;; (setq ess-tab-complete-in-script t)
 
 ;; adding operator support in ESS via /key-combo/
 (require 'key-combo)

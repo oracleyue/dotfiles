@@ -14,6 +14,7 @@
         company-rtags
         helm-rtags
         flycheck-rtags
+        cmake-ide
         helm-make))
 (unless (custom/packages-installed-p custom/modern-cc-packages)
   (package-refresh-contents)
@@ -78,6 +79,8 @@
 
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+(cmake-ide-setup)
 
 ;; Compile commands in c/c++ and makefile modes
 ;; use helm-make

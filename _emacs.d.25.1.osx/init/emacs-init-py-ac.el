@@ -43,10 +43,10 @@
 ;; (setq python-shell-interpreter-args "--simple-prompt -i") ;fix bugs of ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
-; fix bugs in ac due to line wrap
-(add-hook 'python-mode-hook (lambda() (setq truncate-lines t)))
+;; fix bugs in ac due to line wrap
+;; (add-hook 'python-mode-hook (lambda() (setq truncate-lines t)))
 
-; fix <tab> completion in ipython when use auto-complete
+;; fix <tab> completion in ipython when use auto-complete
 (define-key inferior-python-mode-map (kbd "<tab>")
   'python-shell-completion-complete-or-indent)
 
@@ -56,13 +56,11 @@
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)
 ;; disable trigger completion menu automatically
-(setq jedi:complete-on-dot t)  ;; if nil, use "C-<tab>" on dot; else "<tab>".
+(setq jedi:complete-on-dot t)  ; if nil, use jedi:complete; else TAB
 ;; set wait time before showing funciton call signature tip in ms
 (setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
 ;; set calltip methods
 (setq jedi:tooltip-method '(popup))  ;popup, pos-tip OR nil (use minibuffer)
-;; restore jedi:complete bound default in jedi
-(define-key python-mode-map (kbd "C-<tab>") 'jedi:complete)
 ;; remove ac-source-yasnippet
 (add-hook 'python-mode-hook (lambda ()
    (setq ac-sources '(ac-source-jedi-direct

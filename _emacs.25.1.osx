@@ -18,15 +18,15 @@
 
 ;; packages
 ;; (package-initialize)
-(require 'emacs-init-packages)
+(load "emacs-init-packages")
 
 ;; theme
-(require 'emacs-init-theme)
+(load "emacs-init-theme")
 
 ;; basics
-(require 'emacs-init-basics)
-(require 'emacs-init-edit)
-;; (require 'emacs-init-evil)           ;; use vim in emacs
+(load "emacs-init-basics")
+(load "emacs-init-edit")
+;; (load "emacs-init-evil")           ;; use vim in emacs
 
 ;; feature control
 (if (or (string-equal "main" (daemonp)) (not (daemonp)))
@@ -47,22 +47,22 @@
        (setq y:code-complete-mode "company")))
 
 ;; /helm/ and extensions
-(require 'emacs-init-helm)
-(require 'emacs-init-helm-swoop)
-(require 'emacs-init-helm-proj)         ;; project management
+(load "emacs-init-helm")
+(load "emacs-init-helm-swoop")
+(load "emacs-init-helm-proj")         ;; project management
 
 ;; major modes for document editing
-(require 'emacs-init-orgmode)           ;; org-mode
-(require 'emacs-init-markdown)          ;; markdown
-(require 'emacs-init-auctex)            ;; latex
+(load "emacs-init-orgmode")           ;; org-mode
+(load "emacs-init-markdown")          ;; markdown
+(load "emacs-init-auctex")            ;; latex
 
 ;; auto-completions
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-company)       ;; use /company/
-  (require 'emacs-init-ac))             ;; use /auto-complete/
+    (load "emacs-init-company")       ;; use /company/
+  (load "emacs-init-ac"))             ;; use /auto-complete/
 
 ;; directory and buffer explorers
-(require 'emacs-init-dired)             ;; directory explorers
+(load "emacs-init-dired")             ;; directory explorers
 
 
 ;; ----------------------------------------------------------------
@@ -70,19 +70,19 @@
 ;; ----------------------------------------------------------------
 
 ;; general programming supports
-(require 'emacs-init-prog)              ;; edit, vc, debug, ui ...
-(require 'emacs-init-gtags)             ;; code navigation
+(load "emacs-init-prog")              ;; edit, vc, debug, ui ...
+(load "emacs-init-gtags")             ;; code navigation
 
 ;; programming environment for /Lisp/
-(require 'emacs-init-lisp)
+(load "emacs-init-lisp")
 
 ;; programming environment for /HTML, js/
-(require 'emacs-init-web)
+(load "emacs-init-web")
 
 ;; programming environment for /C C++/
 (if (string-equal y:code-complete-mode "company")
     (cond ((string-equal y:cc-complete-engine "clang")       ;; company-clang
-           (require 'emacs-init-cc-comp))
+           (load "emacs-init-cc-comp"))
           ((string-equal y:cc-complete-engine "irony")       ;; irony
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-irony.org"
@@ -91,20 +91,20 @@
            (org-babel-load-file
             (expand-file-name "init/emacs-init-cc-modern.org"
                               user-emacs-directory))))
-  (require 'emacs-init-cc-ac))          ;; use /auto-complete/
+  (load "emacs-init-cc-ac"))          ;; use /auto-complete/
 
 ;; programming environment for /Python/
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-py-comp)       ;; use /company/
-  (require 'emacs-init-py-ac))          ;; use /auto-complete/
+    (load "emacs-init-py-comp")       ;; use /company/
+  (load "emacs-init-py-ac"))          ;; use /auto-complete/
 
 ;; programming environment for /R/
 (if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-r-comp)        ;; use /company/
-  (require 'emacs-init-r-ac))           ;; use /auto-complete/
+    (load "emacs-init-r-comp")        ;; use /company/
+  (load "emacs-init-r-ac"))           ;; use /auto-complete/
 
 ;; programming environment for /MATLAB/
-(require 'emacs-init-matlab)
+(load "emacs-init-matlab")
 
 ;; programming environment for /AppleScript/
 (autoload 'applescript-mode "applescript-mode"
@@ -116,4 +116,4 @@
 
 
 ;; Restore default configurations overwritten by other modes
-(require 'emacs-init-restore)
+(load "emacs-init-restore")

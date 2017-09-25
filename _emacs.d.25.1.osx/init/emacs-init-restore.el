@@ -16,9 +16,12 @@
        (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
        (cd "~/tmp")))
 
-;; restore "F10" to open menu bar or "M-`" for terminal
+;; restore keybindings for emacs in terminal
 (when (not (display-graphic-p))
-  (global-set-key (kbd "<f10>") 'menu-bar-open))
+  ;; "F10" to open menu bar or "M-`"
+  (global-set-key (kbd "<f10>") 'menu-bar-open)
+  ;; fix "TAB" for code completion in cc-mode (or use "M-TAB")
+  (define-key c++-mode-map (kbd "TAB") 'tab-indent-or-complete))
 
 
 

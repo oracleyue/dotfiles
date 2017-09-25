@@ -152,9 +152,10 @@
     - Add the following to your emacs init file:
       #+BEGIN_SRC emacs-lisp
         (require 'company-irony-c-headers)
-        (eval-after-load 'company
-          '(add-to-list
-            'company-backends '(company-irony-c-headers company-irony)))
+        (defun y:add-company-backend-irony ()
+          (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+        (add-hook 'c-mode-hook 'y:add-company-backend-irony)
+        (add-hook 'c++-mode-hook 'y:add-company-backend-irony)
       #+END_SRC
 
 *** Show eldoc for C/C++ mode via irony (disabled)

@@ -55,9 +55,10 @@
 ;;   '(add-to-list 'company-backends 'company-irony))
 
 (require 'company-irony-c-headers)
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony-c-headers company-irony)))
+(defun y:add-company-backend-irony ()
+  (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+(add-hook 'c-mode-hook 'y:add-company-backend-irony)
+(add-hook 'c++-mode-hook 'y:add-company-backend-irony)
 
 ;; /flycheck/: syntax checker
 (add-hook 'c++-mode-hook 'flycheck-mode)
