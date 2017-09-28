@@ -56,7 +56,9 @@
 
 (require 'company-irony-c-headers)
 (defun y:add-company-backend-irony ()
-  (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+  (setq-local company-backends
+              (append '((company-irony-c-headers company-irony))
+                      company-backends)))
 (add-hook 'c-mode-hook 'y:add-company-backend-irony)
 (add-hook 'c++-mode-hook 'y:add-company-backend-irony)
 

@@ -13,6 +13,9 @@
 ;; enable CEDTE feature support
 ;(matlab-cedet-setup)
 
+;; enable /company-dabbrev-code/ for /matlab-mode/
+(add-to-list 'company-dabbrev-code-modes 'matlab-mode)
+
 ;; config /smartparens/ for matlab
 (sp-with-modes 'matlab-mode
   (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)

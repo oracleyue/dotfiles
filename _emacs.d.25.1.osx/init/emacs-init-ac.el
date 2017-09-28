@@ -42,7 +42,7 @@
 ;; (setq ac-auto-start 3)
 ;; 2 - explicit call to auto-complete, using trigger-key or auto-complete func
 (setq ac-auto-start nil)
-(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
+;(ac-set-trigger-key "TAB")    ; trigger to start ac-complete
 ;; force to complete
 ;; (define-key ac-mode-map (kbd "C-<tab>") 'auto-complete)
 ;; show menu immediately

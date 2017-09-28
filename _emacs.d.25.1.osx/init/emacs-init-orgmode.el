@@ -1,10 +1,13 @@
-;;; Settings for /Org-mode/
+;; ================================================================
+;; Settings for /Org-mode/
+;; ================================================================
 
 
+;;
 ;; Basic Configuratoins
+;;
 
 (global-font-lock-mode 1)
-;(add-hook 'org-mode-hook 'turn-on-font-lock)
 ;(global-set-key "\C-cl" 'org-store-link)
 ;(global-set-key "\C-cc" 'org-capture)
 ;(global-set-key "\C-ca" 'org-agenda)
@@ -14,11 +17,12 @@
 ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
 
 ;; set line space
-;(add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
+;; (add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
 
 ;; startup styles
 (setq org-startup-folded t)
 ;(setq org-startup-indented t)
+
 
 ;;
 ;; HTML Export Settings
@@ -33,6 +37,7 @@
    ;(add-to-list 'org-structure-template-alist '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
    ;(add-to-list 'org-structure-template-alist '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
    ))
+
 
 ;;
 ;; Source Code Blocks and Babel
@@ -62,14 +67,20 @@
       (cons '(:exports . "both")
              (assq-delete-all :exports org-babel-default-header-args)))
 
+
 ;;
 ;; Auxiliary Configurations
 ;;
-;;; /smart-parens/ for org-mode
+
+;; /smart-parens/ for org-mode
 (sp-with-modes 'org-mode
   (sp-local-pair "$" "$"
-                 :trigger "$"
-                 :unless '(sp-latex-point-after-backslash-left)))
+                 :unless '(sp-latex-point-after-backslash-left))
+  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                 :actions '(insert wrap autoskip navigate escape))
+  (sp-local-pair "\"" "\"" :unless '(sp-point-after-word-p)
+                 :actions '(insert wrap autoskip navigate escape)))
+
 
 
 (provide 'emacs-init-orgmode)

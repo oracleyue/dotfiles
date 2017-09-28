@@ -30,18 +30,15 @@
          company-capf
          company-dabbrev-code)
         (company-abbrev company-dabbrev)))
+
 ;; other backends: and check the corresponding major-mode settings
 ;(add-to-list 'company-backends 'company-xcode)
 ;(add-to-list 'company-backends 'company-css)
 ;(add-to-list 'company-backends 'company-nxml)
-;; enable /company-dabbrev-code/ for /matlab-mode/
+
+;; enable dabbrev-code for completion in string or comments
 (require 'company-dabbrev-code)
-(add-to-list 'company-dabbrev-code-modes 'matlab-mode)
-;; list of backends added in major-mode configs:
-;;      [c/c++] company-clang, company-c-headers
-;;      [python] company-jedi
-;;      [r] built-in of ESS
-;;      [cmake] company-cmake
+(setq company-dabbrev-code-everywhere t)
 
 ;; adjust faces for company-mode (Note: modify the corresponding theme file!)
 ;; use "list-faces-display" to show the list of faces
@@ -51,11 +48,11 @@
 
 ;; use /company-quickhelp/
 ;; notes: random positioning is fixed by maximizing window and adding lines below
-;(company-quickhelp-mode 1)
+(company-quickhelp-mode 1)
 ;; starting manually
-;(setq company-quickhelp-delay nil)
-;(eval-after-load 'company     ;; "M-h" for company-quickhelp
-;  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
+(setq company-quickhelp-delay nil)
+(eval-after-load 'company     ;; "M-h" for company-quickhelp
+ '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
 
 ;; disable company-mode under certain major modes
 (defun y:disable-company-mode ()
