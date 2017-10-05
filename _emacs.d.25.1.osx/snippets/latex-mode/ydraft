@@ -11,6 +11,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+% \usepackage{baskervald}   % nice fonts for regular articles
 \usepackage{times,helvet}
 \usepackage[scaled=0.95]{inconsolata}
 

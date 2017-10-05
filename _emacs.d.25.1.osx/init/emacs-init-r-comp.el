@@ -20,8 +20,13 @@
 ;; disable understore behaviors
 (ess-toggle-underscore nil)
 
-;; enable ess-indent-or-complete for completion
+;; code completion:
+;; use built-in: ess-indent-or-complete (use "TAB", mini-buffer)
 ;; (setq ess-tab-complete-in-script t)
+;; use company-mode
+(if (display-graphic-p)
+    (define-key ess-mode-map (kbd "<tab>") 'tab-indent-or-complete)
+  (define-key ess-mode-map (kbd "TAB") 'tab-indent-or-complete))
 
 ;; adding operator support in ESS via /key-combo/
 (require 'key-combo)

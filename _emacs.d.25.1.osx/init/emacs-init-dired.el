@@ -151,11 +151,11 @@
 (defengine wikipedia
   "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
   :keybinding "w")
-(defengine wiktionary
-  "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s"
-  :keybinding "k")
-(defengine stack-overflow "https://stackoverflow.com/search?q=%s"
+(defengine google-scholar
+  "https://scholar.google.lu/scholar?hl=en&q=%s"
   :keybinding "s")
+(defengine stack-overflow "https://stackoverflow.com/search?q=%s"
+  :keybinding "o")
 
 
 

@@ -148,9 +148,9 @@
   '(progn
      (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
 
-;; Set master files nil by default
+;; Set master files for multiple documents
 ;; use "C-c _" to query for master files
-(setq-default TeX-master nil)
+(setq-default TeX-master 'dwim)
 
 ;; Default bibtex paths for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))
@@ -163,7 +163,7 @@
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
 (eval-after-load 'latex
   '(setq LaTeX-clean-intermediate-suffixes
-     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg"))))
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.fdb_latexmk"))))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
@@ -191,19 +191,12 @@
    '(add-to-list 'TeX-command-list
        '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
 
-;; use makefile
+;; use latexmk
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-       '("Make" "make -k" TeX-run-command nil t) t))
-(eval-after-load "tex"
-   '(add-to-list 'TeX-command-list
-       '("MakeClean" "make clean" TeX-run-command nil t) t))
+       '("Latexmk" "latexmk -quiet -pdf -pdflatex='pdflatex -synctex=1 -shell-escape' %t" TeX-run-command nil t) t))
 
-;; to compile the Cambridge thesis in sub-directory, use "M-x compile"
-(add-hook 'LaTeX-mode-hook
-          (lambda () (set (make-local-variable 'compile-command)
-                          "cd .. && make ")))
-
+;; PDF viewers
 (cond
  ((string-equal system-type "gnu/linux")
   ; Use Evince as viewer, enable source <-> PDF sync
@@ -212,16 +205,16 @@
                  ("^html?$" "." "firefox %o"))))
   )
  ((string-equal system-type "darwin")
-;; use skim as default pdf viewer
-;; skim's displayline is used for forward search (from .tex to .pdf)
-;; option -b highlights the current line; option -g opens Skim in the background
+  ;; use skim as default pdf viewer
+  ;; skim's displayline is used for forward search (from .tex to .pdf)
+  ;; option -b highlights the current line; option -g opens Skim in the background
   (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
   (setq TeX-view-program-list
      '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))))
-;; backward search: in skim's preference -> Sync -> PDF-TeX Sync support:
-;; if using emacs server, set
-;;  "Command": /usr/local/bin/emacsclient
-;;  "Arguments": --server-file=main --no-wait +%line "%file"
+  ;; backward search: in skim's preference -> Sync -> PDF-TeX Sync support:
+  ;; if using emacs server, set
+  ;;  "Command": /usr/local/bin/emacsclient
+  ;;  "Arguments": --server-file=main --no-wait +%line "%file"
 
 ;; keybinding definitions
 (eval-after-load "latex"

@@ -103,7 +103,7 @@
   (interactive)
   (find-file (expand-file-name "~/Documents/.email.tmp.txt"))
   (auto-fill-mode 1)
-  (set-fill-column 70))
+  (set-fill-column 75))
 
 ;; supports for Chinese
 ;; setting font set
