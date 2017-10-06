@@ -30,14 +30,18 @@
   (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
 
 
-; ------------------------------------------------
-;; directory explorer: /dired/
-; ------------------------------------------------
+;; ------------------------------------------------
+;; directory explorers
+;; ------------------------------------------------
+
+;; default directory explorer: /dired/ & /dired-x/
 (require 'dired-x)
 (setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
 (delete ".bbl" dired-omit-extensions)
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
+;; suppress errors due to no support of "ls --dired" on osx
+(when (string= system-type "darwin") (setq dired-use-ls-dired nil))
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
 (require 'popwin)
@@ -67,9 +71,9 @@
   (eval-after-load "neotree"      ;; toggle by "H" in neotree
     '(setq neo-hidden-regexp-list '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
 
-; ------------------------------------------------
+;; ------------------------------------------------
 ;; /ibuffer/: buffer explorer
-; ------------------------------------------------
+;; ------------------------------------------------
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
       (quote (("default"

@@ -14,7 +14,8 @@
 ;; insert-file: "C-x i"
 ;; write-file, save-as: "C-x w"
 ;; open-file in read-only: "C-x C-r"
-;; undo: "C-/", "C-_";   redo: "C-?", "M-_";   (default by /undo-tree/)
+;; undo: "C-/", "C-_";   redo: "C-?", "M-_";  (default by /undo-tree/)
+;; comment line or region :: "C-\"; uncomment: "M-\"
 ;; captalize/upper/lower words: "M-c/u/l"
 ;; changing encodings: "C-x C-m f"
 ;; =open-previous-line= :: "M-o"
@@ -23,8 +24,6 @@
 ;; zap-to-char :: "M-z [e]"  (kills from the current point to a character)
 ;; kill line backwards :: "M-0 C-k" (built-in) OR "C-<backspace>"
 ;; kill one sentence backwards :: "C-x Backspace"
-;; comment line or region :: "C-\"
-;; uncomment line or region :: "C-S-\"
 ;; word count in region :: "M-="
 ;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
 ;; toggle overwrite mode :: "M-x overwrite-mode"
@@ -185,17 +184,17 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (uncomment-region beg end)))
-(defun y:comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
+;; (defun y:comment-or-uncomment-region-or-line ()
+;;     "Comments or uncomments the region or the current line if there's no active region."
+;;     (interactive)
+;;     (let (beg end)
+;;         (if (region-active-p)
+;;             (setq beg (region-beginning) end (region-end))
+;;             (setq beg (line-beginning-position) end (line-end-position)))
+;;         (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "C-\\") 'y:comment-line-or-region)
+(global-set-key (kbd "M-\\") 'y:uncomment-line-or-region)
 (global-set-key (kbd "C-|") 'y:uncomment-line-or-region)   ;; invalid in terminals
-(global-set-key (kbd "M-\\") 'y:comment-or-uncomment-region-or-line)
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (global-undo-tree-mode)
