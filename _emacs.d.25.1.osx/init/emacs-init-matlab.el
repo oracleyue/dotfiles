@@ -14,6 +14,7 @@
 ;(matlab-cedet-setup)
 
 ;; enable /company-dabbrev-code/ for /matlab-mode/
+(require 'company-dabbrev-code)
 (add-to-list 'company-dabbrev-code-modes 'matlab-mode)
 
 ;; config /smartparens/ for matlab

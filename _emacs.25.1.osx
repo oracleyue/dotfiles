@@ -46,7 +46,7 @@
       ((string-equal system-type "gnu/linux")
        (setq y:code-complete-mode "company")))
 
-;; /helm/ and extensions
+;; helm and extensions
 (load "emacs-init-helm")
 (load "emacs-init-helm-swoop")
 (load "emacs-init-helm-proj")         ;; project management

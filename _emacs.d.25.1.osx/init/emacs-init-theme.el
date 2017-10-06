@@ -16,8 +16,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 (cond ((string-equal system-type "darwin")
        (if (or (string-equal "main" (daemonp)) (not (daemonp)))
-           (load-theme 'solarized t)  ;; mac: main
-         (load-theme 'monokai t)))    ;; mac: coding, ac
+           (load-theme 'solarized t)            ;; server: main
+         (if (string-equal "ac-mode" (daemonp))
+             (load-theme 'atom-one-dark t)      ;; server: ac-mode
+           (load-theme 'monokai t))))           ;; server: coding
       ((string-equal system-type "gnu/linux")
        (load-theme 'atom-one-dark t)))
 
