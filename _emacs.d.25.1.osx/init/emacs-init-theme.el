@@ -16,6 +16,10 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 (cond ((string-equal system-type "darwin")
        (if (or (string-equal "main" (daemonp)) (not (daemonp)))
+           (unless window-system                ;; terminal
+             (setq frame-background-mode '(dark))
+             (setq solarized-termcolors 256)
+             (setq solarized-degrade nil))
            (load-theme 'solarized t)            ;; server: main
          (if (string-equal "ac-mode" (daemonp))
              (load-theme 'atom-one-dark t)      ;; server: ac-mode
