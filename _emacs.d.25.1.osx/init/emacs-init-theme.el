@@ -204,7 +204,9 @@
         ((string-equal "ac-mode" (daemonp))
          (load-theme 'atom-one-dark t))))         ;; server: ac-mode
       ((string-equal system-type "gnu/linux")
-       (load-theme 'atom-one-dark t)))
+       (if (or (daemonp) (display-graphic-p))
+           (load-theme 'atom-one-dark t)          ;; GUI (app or server)
+         (load-theme 'monokai t))))               ;; terminal
 (y:customize-mode-line)
 
 
