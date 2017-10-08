@@ -10,8 +10,8 @@ GPG_TTY=`tty`
 export GPG_TTY
 
 # update PATH and MANPATH
+# export PATH=/usr/local/opt/python/libexec/bin:${PATH}
 export PATH=/Users/oracleyue/bin:/usr/local/sbin:${PATH}
-export PATH=/usr/local/opt/python/libexec/bin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
 
 # library pathes
@@ -21,10 +21,7 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
 alias ll='ls -Alh'
 alias la='ls -a'
 alias view='vim -R'
-#alias emacs-server="emacs --daemon=default --load \"$HOME/.emacs.origin\""
-#alias ec='emacsclient -nc --server-file=main'
-# alias es="ps aux | grep 'emacs --daemon' | grep -v 'grep' \
-                 # | awk '{print \$2 \"\t\" \$9 \"\tEmacs \" \$12}' "
+alias emacs='emacs -nw'
 source $HOME/bin/emacs-server-func.sh
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
