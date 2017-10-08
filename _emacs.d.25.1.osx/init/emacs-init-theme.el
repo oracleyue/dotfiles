@@ -52,6 +52,9 @@
                             :foreground "#F8F8F2")
 
         ;; set default mode line for monokai theme
+        (unless window-system        ;; in terminal
+          (set-face-attribute 'mode-line nil
+                              :background "color-238"))
         (setq-default mode-line-format
                       (list
                        ;; default part
