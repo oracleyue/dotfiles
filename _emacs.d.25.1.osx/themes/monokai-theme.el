@@ -105,70 +105,70 @@ Also affects 'linum-mode' background."
 Takes and optional `FRAME' as reference."
   (let* ((class '((class color) (min-colors 89)))
          ;; Accented colors
-         (yellow           "#E6DB74")
-         (orange           "#FD971F")
-         (red              "#F92672")
-         (magenta          "#FD5FF0")
-         (violet           "#AE81FF")
-         (blue             "#66D9EF")
-         (cyan             "#A1EFE4")
-         (green            "#A6E22E")
-         (gray             "#474747")
+         (yellow           (if (in-terminal) "#CDC673" "#E6DB74"))
+         (orange           (if (in-terminal) "#FF8C00" "#FD971F"))
+         (red              (if (in-terminal) "#FF1493" "#F92672"))
+         (magenta          (if (in-terminal) "#D700D7" "#FD5FF0"))
+         (violet           (if (in-terminal) "#AF87FF" "#AE81FF"))
+         (blue             (if (in-terminal) "#5FD7FF" "#66D9EF"))
+         (cyan             (if (in-terminal) "#5FFFFF" "#A1EFE4"))
+         (green            (if (in-terminal) "#87D700" "#A6E22E"))
+         (gray             (if (in-terminal) "#444444" "#474747"))
 
          ;; Darker and lighter accented colors
          ;;
          ;; TODO: find terminal equivalents for all window colors (on the right)
          ;;
-         (yellow-d         "#968B26")
-         (yellow-l         "#F3EA98")
-         (orange-d         "#A45E0A")
-         (orange-l         "#FEB257")
-         (red-d            "#A20C41")
-         (red-l            "#FC5C94")
-         (magenta-d        "#A41F99")
-         (magenta-l        "#FE87F4")
-         (violet-d         "#562AA6")
-         (violet-l         "#C2A1FF")
-         (blue-d           "#21889B")
-         (blue-l           "#8DE6F7")
-         (cyan-d           "#349B8D")
-         (cyan-l           "#BBF7EF")
-         (green-d          "#67930F")
-         (green-l          "#C1F161")
-         (gray-d           "#333333")
-         (gray-l           "#6b6b6b")
+         (yellow-d         (if (in-terminal) "#968B26" "#968B26"))
+         (yellow-l         (if (in-terminal) "#FFF68F" "#F3EA98"))
+         (orange-d         (if (in-terminal) "#A0522D" "#A45E0A"))
+         (orange-l         (if (in-terminal) "#FFA54F" "#FEB257"))
+         (red-d            (if (in-terminal) "#5F0000" "#A20C41"))
+         (red-l            (if (in-terminal) "#EE6AA7" "#FC5C94"))
+         (magenta-d        (if (in-terminal) "#A41F99" "#A41F99"))
+         (magenta-l        (if (in-terminal) "#FE87F4" "#FE87F4"))
+         (violet-d         (if (in-terminal) "#562AA6" "#562AA6"))
+         (violet-l         (if (in-terminal) "#C2A1FF" "#C2A1FF"))
+         (blue-d           (if (in-terminal) "#21889B" "#21889B"))
+         (blue-l           (if (in-terminal) "#8DE6F7" "#8DE6F7"))
+         (cyan-d           (if (in-terminal) "#349B8D" "#349B8D"))
+         (cyan-l           (if (in-terminal) "#AFEEEE" "#BBF7EF"))
+         (green-d          (if (in-terminal) "#6B8E23" "#67930F"))
+         (green-l          (if (in-terminal) "#B3EE3A" "#C1F161"))
+         (gray-d           (if (in-terminal) "#3a3a3a" "#333333"))
+         (gray-l           (if (in-terminal) "#6c6c6c" "#6b6b6b"))
 
          ;; Adaptive colors
-         ;; (monokai-bg        "#1B1E1C" "#272822"))
-         (monokai-fg       "#F8F8F2")
-         (monokai-bg       "#272822")  ; oracleyue: modified
-         (monokai-line-num "#8F908A")  ; oracleyue: added
-         (monokai-hl-line  "#3E3D31")
-         (monokai-hl       "#49483E")
-         (monokai-emph     "#F8F8F0")
-         (monokai-comments "#75715E")
-         (region-bg        "#005F87")  ; oracleyue: added
+         (monokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
+         (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified
+         ;; (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
+         (monokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
+         (monokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
+         (monokai-hl       (if (in-terminal) "#303030" "#49483E"))
+         (monokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
+         (monokai-comments (if (in-terminal) "#8B8878" "#75715E"))
+         (region-bg         (if (in-terminal) "#005F87" "#005F87"))  ; oracleyue: added
 
          ;; Adaptive higher/lower contrast accented colors
-         (monokai-fg-hc    "#141414")
-         (monokai-fg-lc    "#171A0B")
+         (monokai-fg-hc    (if (in-terminal) "#171A0B" "#141414"))
+         (monokai-fg-lc    (if (in-terminal) "#141414" "#171A0B"))
 
-         (yellow-hc         yellow-l)
-         (yellow-lc         yellow-d)
-         (orange-hc         orange-l)
-         (orange-lc         orange-d)
-         (red-hc            red-l)
-         (red-lc            red-d)
-         (magenta-hc        magenta-l)
-         (magenta-lc        magenta-d)
-         (violet-hc         violet-l)
-         (violet-lc         violet-d)
-         (blue-hc           blue-l)
-         (blue-lc           blue-d)
-         (cyan-hc           cyan-l)
-         (cyan-lc           cyan-d)
-         (green-hc          green-l)
-         (green-lc          green-d)
+         (yellow-hc        (if (in-terminal) yellow-d yellow-l))
+         (yellow-lc        (if (in-terminal) yellow-l yellow-d))
+         (orange-hc        (if (in-terminal) orange-d orange-l))
+         (orange-lc        (if (in-terminal) orange-l orange-d))
+         (red-hc           (if (in-terminal) red-d red-l))
+         (red-lc           (if (in-terminal) red-l red-d))
+         (magenta-hc       (if (in-terminal) magenta-d magenta-l))
+         (magenta-lc       (if (in-terminal) magenta-l magenta-d))
+         (violet-hc        (if (in-terminal) violet-d violet-l))
+         (violet-lc        (if (in-terminal) violet-l violet-d))
+         (blue-hc          (if (in-terminal) blue-d blue-l))
+         (blue-lc          (if (in-terminal) blue-l blue-d))
+         (cyan-hc          (if (in-terminal) cyan-d cyan-l))
+         (cyan-lc          (if (in-terminal) cyan-l cyan-d))
+         (green-hc         (if (in-terminal) green-d green-l))
+         (green-lc         (if (in-terminal) green-l green-d))
 
          ;; customize based face properties
          (s-variable-pitch (if monokai-use-variable-pitch
@@ -597,7 +597,7 @@ Takes and optional `FRAME' as reference."
 
      `(font-lock-type-face
        ((,class (:foreground ,blue
-                             :italic nil))))  ;oracleyue: t
+                             :italic t))))
 
      `(font-lock-variable-name-face
        ((,class (:foreground ,orange))))
@@ -919,11 +919,11 @@ Takes and optional `FRAME' as reference."
                              :background ,magenta))))
 
      `(company-tooltip-annotation           ;oracleyue, added
-       ((,class (:foreground ,monokai-line-num
+       ((,class (:foreground ,red
                              :slant normal))))
 
      `(company-tooltip-annotation-selection ;oracleyue, added
-       ((,class (:foreground ,cyan-hc
+       ((,class (:foreground ,red
                              :slant normal))))
 
      `(company-preview
