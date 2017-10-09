@@ -77,7 +77,6 @@
 ;; add incremental numbers to lines :: "C-x r N" (built-in; now bound to new func)
 ;; use set-goal-column to do vertical editing :: "C-x C-n"; to remove "C-u C-x C-n"
 ;; insert date :: "M-x insert-date"
-;; open default Dired folders on startup :: "M-x y:dired-open-folders-startup"
 ;; toggle window split (horizontal <-> vertical) :: "C-x |"
 ;; change encodings:   utf-8-unix, utf-8-dos
 ;;      - change when saving using "C-x C-m f"

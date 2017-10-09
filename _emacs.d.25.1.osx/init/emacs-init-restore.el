@@ -9,8 +9,10 @@
 (cond ((string-equal system-type "darwin")
        (if (or (string-equal "main" (daemonp)) (not (daemonp)))
            (progn
-             (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
-             (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts")))
+             (if (not (display-graphic-p))
+                 nil    ;; terminal
+               (y:dired-open-folders-startup)
+               (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
          (cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")))  ; for dark-version
       ((string-equal system-type "gnu/linux")
        (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
