@@ -1,10 +1,12 @@
 ;;
 ;; Use /smart-mode-line/
 ;;
-(defun y:use-smart-mode-line ()
-  (setq sml/no-confirm-load-theme t)
-  (setq sml/theme 'powerline)
-  (sml/setup))
+;; (note: require /smart-mode-line/ and /smart-mode-line-powerline-theme/)
+
+;; (defun y:use-smart-mode-line ()
+;;   (setq sml/no-confirm-load-theme t)
+;;   (setq sml/theme 'powerline)
+;;   (sml/setup))
 
 
 ;;
@@ -161,9 +163,8 @@
 ;; Interface
 ;;
 (defun y:setup-mode-line ()
-  (y:use-smart-mode-line)
-  ;; (y:customize-mode-line)
-  )
+  ;; (y:use-smart-mode-line)
+  (y:customize-mode-line))
 
 
 

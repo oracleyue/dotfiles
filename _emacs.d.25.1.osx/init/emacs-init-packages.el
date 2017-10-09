@@ -60,8 +60,6 @@
         pos-tip
         projectile
         smartparens
-        smart-mode-line
-        smart-mode-line-powerline-theme
         srefactor
         stickyfunc-enhance
         undo-tree
