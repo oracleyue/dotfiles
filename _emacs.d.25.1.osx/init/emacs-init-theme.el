@@ -51,7 +51,7 @@
         ;; app (not server)
         ((not (daemonp))
          (if (display-graphic-p)
-             (load-theme 'monokai t)            ;; GUI
+             (load-theme 'solarized t)            ;; GUI
            (load-theme 'monokai t)))              ;; terminal
         ;; servers (use daemon)
         ((string-equal "main" (daemonp))          ;; server: main
