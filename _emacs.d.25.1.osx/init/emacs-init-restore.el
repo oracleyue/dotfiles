@@ -7,15 +7,19 @@
 
 ;; open default Dired folders on startup
 (cond ((string-equal system-type "darwin")
-       (if (or (string-equal "main" (daemonp)) (not (daemonp)))
-           (progn
-             (if (not (display-graphic-p))
-                 nil    ;; terminal
-               (y:dired-open-folders-startup)
-               (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
-         (cd "/Users/oracleyue/Public/Dropbox/Workspace/matlab")))  ; for dark-version
+       (cond ((not (daemonp))
+              (if window-system
+                  (progn
+                    (y:dired-open-folders-startup)
+                    (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts")))
+                nil))
+             ((string-equal (daemonp) "main")
+              (progn
+                (y:dired-open-folders-startup)
+                (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
+             (t (cd (expand-file-name "~/Public/Dropbox/Workspace/matlab")))))
       ((string-equal system-type "gnu/linux")
-       (y:dired-open-folders-startup)  ; defined in emacs-init-basics.el
+       (y:dired-open-folders-startup)
        (cd "~/tmp")))
 
 ;; restore keybindings for emacs in terminal
