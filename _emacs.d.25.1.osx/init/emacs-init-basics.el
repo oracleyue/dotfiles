@@ -28,6 +28,8 @@
 ;; fix $PATH for emacs in Mac OS X
 (require 'exec-path-from-shell)
 (push "PYTHONPATH" exec-path-from-shell-variables)
+(push "LC_ALL" exec-path-from-shell-variables)
+(push "LANG" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
 
 ;; more environment variables

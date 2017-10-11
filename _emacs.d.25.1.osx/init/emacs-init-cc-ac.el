@@ -153,6 +153,7 @@
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 
+
 ;; /doxymacs/ to manipulate doxygen documentations
 ;; (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
 ;; (require 'doxymacs)
@@ -162,6 +163,7 @@
 ;;   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
 ;;       (doxymacs-font-lock)))
 ;; (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
 
 
 (provide 'emacs-init-cc-ac)

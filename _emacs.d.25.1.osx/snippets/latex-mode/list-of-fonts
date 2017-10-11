@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: List of Fonts
+# key: fonts
+# group: info
+# --
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Serif
+\usepackage{lmodern}      % computer modern with enhancement
+\usepackage{times}        % use Times
+\usepackage{fouriernc}    % use New CenturySchL
+\usepackage{baskervald}   % nice fonts for regular articles
+
+% Sans
+\usepackage{lmodern}      % computer modern with enhancement on sans
+\usepackage{helvet}
+
+% Monospace
+\usepackage[scaled=0.95]{inconsolata}
+\usepackage[scaled=.8]{DejaVuSansMono}
+
+% Math Fonts
+\usepackage{newtxtext,newtxmath}  % using new Times pkg
+\usepackage[lite]{mtpro2}    % non-free math fonts in Times

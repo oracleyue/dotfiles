@@ -70,7 +70,7 @@
 ;; ----------------------------------------------------------------
 
 ;; general programming supports
-(require 'emacs-init-prog)              ;; edit, vc, debug, ui ...
+(require 'emacs-init-progsupp)          ;; edit, vc, debug, ui ...
 (require 'emacs-init-gtags)             ;; code navigation
 
 ;; programming environment for /Lisp/
@@ -106,13 +106,10 @@
 ;; programming environment for /MATLAB/
 (require 'emacs-init-matlab)
 
-;; programming environment for /AppleScript/
-(autoload 'applescript-mode "applescript-mode"
-  "Major mode for editing AppleScript source." t)
-(add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+;; major-modes for minority languages
+(require 'emacs-init-proglang)
 
 ;; ----------------------------------------------------------------
-
 
 
 ;; Restore default configurations overwritten by other modes

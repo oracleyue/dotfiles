@@ -99,6 +99,6 @@
 
 
 
-(provide 'emacs-init-prog)
+(provide 'emacs-init-progsupp)
 ;; ================================================
-;; emacs-init-prog.el ends here
+;; emacs-init-progsupp.el ends here

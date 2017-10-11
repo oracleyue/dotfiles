@@ -13,11 +13,9 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times}          % using Times
-% \usepackage{baskervald}   % nice fonts for regular articles
-\usepackage{helvet}         % using Helvetica
+\usepackage{times,helvet}   % using Times and Helvetica
+% \usepackage{baskervald}   % nice fonts for readable articles
 \usepackage[scaled=0.95]{inconsolata}   % monospace (default: courier)
-% \usepackage[lite]{mtpro2} % non-free math fonts in Times
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,
 			mathtools,upgreek}
@@ -46,11 +44,12 @@
     innertopmargin=1.8\topskip,
     skipabove=\baselineskip,
     skipbelow=-.4\baselineskip,
-    nobreak=true  ;; stop breaking the framed box into two pages
+    nobreak=true
 }
 % \usepackage{minted}
-%  \usemintedstyle{pastie}
-%  \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
+% \usemintedstyle{pastie}
+% \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
+
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE

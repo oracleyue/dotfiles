@@ -140,14 +140,14 @@ Takes and optional `FRAME' as reference."
 
          ;; Adaptive colors
          (monokai-fg       (if (in-terminal) "#F5F5F5" "#F8F8F2"))
-         (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))  ; oracleyue: modified
+         (monokai-bg       (if (in-terminal) "color-235" "#272822"))  ; oracleyue: modified
          ;; (monokai-bg       (if (in-terminal) "#1B1E1C" "#272822"))
-         (monokai-line-num (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
+         (monokai-linum    (if (in-terminal) "#8F908A" "#8F908A"))  ; oracleyue: added
          (monokai-hl-line  (if (in-terminal) "#212121" "#3E3D31"))
          (monokai-hl       (if (in-terminal) "#303030" "#49483E"))
          (monokai-emph     (if (in-terminal) "#FFFAFA" "#F8F8F0"))
          (monokai-comments (if (in-terminal) "#8B8878" "#75715E"))
-         (region-bg         (if (in-terminal) "#005F87" "#005F87"))  ; oracleyue: added
+         (region-bg        (if (in-terminal) "#005F87" "#005F87"))  ; oracleyue: added
 
          ;; Adaptive higher/lower contrast accented colors
          (monokai-fg-hc    (if (in-terminal) "#171A0B" "#141414"))
@@ -2042,7 +2042,7 @@ Takes and optional `FRAME' as reference."
 
      ;; linum-mode
      `(linum
-       ((,class (:foreground ,monokai-line-num
+       ((,class (:foreground ,monokai-linum
                  ;:foreground ,monokai-comments
                              :background ,s-fringe-bg))))
 
