@@ -21,16 +21,13 @@
 ;; -----------------------------------------------------------------
 ;; INFO: (available themes and usages)
 ;; -----------------------------------------------------------------
-;; 1) using default theme
-;; (load-theme 'tango-dark t)
-
-;; 2) using /solarized/ theme: Ethan Schoonover's theme [github]
-;;!! (setq solarized-termcolors 256)          ;; distort colors; do NOT enable
-;; (setq frame-background-mode (quote dark))  ;; use dark theme
+;; using /solarized/ theme: Ethan Schoonover's theme [github]
+;; (setq solarized-termcolors 256)      ;; used in terminal
+;; (setq frame-background-mode 'dark)   ;; use dark theme
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 ;; (load-theme 'solarized t)
 
-;; 3) using /monokai/ theme; modified by oracleyue
+;; using /monokai/ theme; modified by oracleyue
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-theme 'monokai t)
 ;; -----------------------------------------------------------------

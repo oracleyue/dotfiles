@@ -4,7 +4,7 @@
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,11pt]{article}
 \usepackage{setspace}
   \onehalfspacing
 \usepackage[parfill]{parskip}
@@ -40,7 +40,7 @@
 
 % ----------------- MAIN --------------------
 
-
+$0
 
 
 

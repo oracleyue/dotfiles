@@ -23,10 +23,12 @@
     (set-face-attribute 'mode-line nil
                         :box '(:line-width 1 :style released-button)))
 
-  ;; amendments for terminal
+  ;; config for terminal
   (when (and (not (daemonp)) (not window-system))
     (set-face-attribute 'mode-line nil
-                        :background "color-238"))
+                        :background "color-238")
+    (set-face-attribute 'mode-line-inactive nil
+                        :background "color-236"))
 
   ;; format default mode line
   (setq-default mode-line-format
