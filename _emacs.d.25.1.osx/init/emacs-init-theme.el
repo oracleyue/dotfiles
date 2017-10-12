@@ -21,20 +21,20 @@
 ;; -----------------------------------------------------------------
 ;; INFO: (available themes and usages)
 ;; -----------------------------------------------------------------
-;; using /solarized/ theme: Ethan Schoonover's theme [github]
+;; - using /solarized/ theme: Ethan Schoonover's theme [github]
 ;; (setq solarized-termcolors 256)      ;; used in terminal
 ;; (setq frame-background-mode 'dark)   ;; use dark theme
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 ;; (load-theme 'solarized t)
-
-;; using /monokai/ theme; modified by oracleyue
+;;
+;; - using /monokai/ theme; modified by oracleyue
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (load-theme 'monokai t)
 ;; -----------------------------------------------------------------
 
 
 ;;
-;; Load ModeLine Configurations
+;; Customize ModeLine
 ;;
 (load-file (expand-file-name "init/styles/customize-modeline.el"
 			     user-emacs-directory))
@@ -49,7 +49,7 @@
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'solarized t)            ;; GUI
-           (load-theme 'Amelie t)))              ;; terminal
+           (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         ((string-equal "main" (daemonp))          ;; server: main
          (load-theme 'solarized t))
