@@ -133,17 +133,6 @@
 ;;; Extend reftex-citation
 ;http://www.gnu.org/software/auctex/manual/reftex.html#SEC52
 ;http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands
-;http://tex.stackexchange.com/questions/220632/how-to-limit-auctex-search-for-style-subdirectories
-;http://tex.stackexchange.com/questions/69031/auctex-style-for-siunitx
-;; set directly (not nice)
-;; (eval-after-load 'reftex-vars
-;;   '(progn
-;;      ;; (also some other reftex-related customizations)
-;;      (setq reftex-cite-format
-;;            '((?\r . "\\cite{%l}")
-;;              (?f . "\\footcite{%l}")
-;;              (?t . "\\textcite{%l}")))))
-;; use style files
 (eval-after-load 'reftex-vars
   '(progn
      (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
@@ -152,18 +141,25 @@
 ;; use "C-c _" to query for master files
 (setq-default TeX-master 'dwim)
 
-;; Default bibtex paths for RefTeX
+;; Bibliography for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))
-;; More bibtex resouces
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
-; Adding -shell-escape in pdflatex for mint
+
+;; Customize compilation commands
 (eval-after-load "tex"
   '(setcdr (assoc "LaTeX" TeX-command-list)
           '("%`%l%(mode) -shell-escape%' %t"
           TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
+
 (eval-after-load 'latex
   '(setq LaTeX-clean-intermediate-suffixes
-     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.fdb_latexmk"))))
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk"))))
+
+;; adding commands
+(eval-after-load "tex"
+  '(add-to-list 'TeX-command-list
+                '("Index (nomencl)" "makeindex %s.nlo -s nomencl.ist -o %s.nls"
+                  TeX-run-TeX nil t :help "Run MakeIndex with nomencl")))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
@@ -172,12 +168,11 @@
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber" "rubber -fd %t" TeX-run-command nil t) t))
-
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
-;; (eval-after-load "tex"
-;;    '(add-to-list 'TeX-command-list
-;;        '("convert to png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+       '("pdf2png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
@@ -191,10 +186,10 @@
    '(add-to-list 'TeX-command-list
        '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
 
-;; use latexmk
+;; use latexmk (require "~/.latexmkrc" for full functionalities)
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-       '("Latexmk" "latexmk -quiet -pdf -pdflatex='pdflatex -synctex=1 -shell-escape' %t" TeX-run-command nil t) t))
+                 '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
 ;; PDF viewers
 (cond
