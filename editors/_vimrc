@@ -33,9 +33,9 @@ autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 " --------------------------------------------------------------------------
 if ! has("gui_running")
    syntax enable
-    colorscheme lucius
-   " LuciusLight
-    LuciusDark
+   colorscheme lucius
+    "LuciusLight
+   LuciusDark
 endif
 if has("gui_running")  "  For /GVIM/
    "colorscheme github

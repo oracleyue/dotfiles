@@ -17,9 +17,15 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles'
 # rsync bash config
 $sync ~/.bashrc $repopath/bash/_bashrc.osx
 $sync ~/.profile $repopath/bash/_profile.osx
+$sync ~/.tmux.conf $repopath/bash/_tmux.conf.osx
+$sync ~/.screenrc $repopath/bash/_screenrc.osx
+
+# rsync tool config
+$sync ~/.latexmkrc $repopath/bash/_latexmkrc
+$sync ~/.Renviron $repopath/bash/_Renviron.osx
+$sync ~/.Rprofile $repopath/bash/_Rprofile.osx
 
 # rsync editor config
-
 ## VIM
 $sync ~/.vimrc $repopath/editors/_vimrc
 $sync ~/.vim $repopath/editors/

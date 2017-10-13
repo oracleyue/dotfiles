@@ -21,7 +21,7 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
 alias ll='ls -Alh'
 alias la='ls -a'
 alias view='vim -R'
-alias emacs='emacs -nw'
+alias em='emacs -nw'
 source $HOME/bin/emacs-server-func.sh
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
