@@ -7,5 +7,6 @@ export XMODIFIERS="@im=fcitx"
 # Swap keys for apps running on Xorg
 xmodmap /home/oracleyue/.Xmodmap
 
-# QT5
+# QT
+export QT_SELECT=4
 export QT_QPA_PLATFORMTHEME=qt5ct
