@@ -15,7 +15,7 @@ export PATH=/home/oracleyue/bin:"$PATH"
 
 # oracleyue-configured QT (using qtchooser)
 export QT_SELECT=4
-export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # oracleyue-defined alias
 alias ls='ls --color=always'
@@ -29,9 +29,10 @@ alias dmesg='dmesg --color=always'
 alias vi='vim'
 alias view='vim -R'
 # alias emacs='env LC_CTYPE=zh_CN.UTF-8 emacs'
-# source $HOME/bin/emacs-server-func.sh
-alias em='emacsclient -a "" -c'  # run new emacs if no server runs
+#alias em='emacsclient -a "" -c'  # run new emacs if no server runs
+source $HOME/bin/emacs-server-func.sh
 alias ec='emacsclient -nc'
+alias em='emacs -nw'
 alias cp='cp -r -i'
 alias du='du -h -d 1'
 alias df='df -h'
@@ -56,10 +57,8 @@ function gpgless() { gpg -d "$1" | less ;}
 #export EDITOR='emacsclient -a "" -c'
 export EDITOR="vim"
 #export TERM=xterm-256color
-#export TERM=screen-256color-bce
 
 # oracleyue: font rendering settings for JAVA
-#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 export JAVA_FONTS=/usr/share/fonts/TTF
 
@@ -117,7 +116,7 @@ source /usr/share/git/completion/git-prompt.sh
 
 
 # ---------------- PS1 config --------------------------------------------
-#PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $\[\033[00m\] '
+# PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w $\[\033[00m\] '
 # ------------------------------------------------------
 # color and PS1 config for Bash
 #   For detailed explanations, refer to:
@@ -162,13 +161,10 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
                 fi
         fi
 
-        #PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
         PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
 
 else
         # show root@ when we do not have colors
-        # # PS1="\[\e[1;34m\][\t] \u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
-        # # PS1="\[\e[1;35m\][\t] \[\033[01;32m\]\u@\h \[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
         PS1="\[\033[01;32m\]\u@\h \[\033[01;34m\]\w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
 fi
 

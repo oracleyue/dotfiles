@@ -1,0 +1,257 @@
+;
+; xboard 4.7.3 Save Settings file
+;
+; You can edit the values of options that are already set in this file,
+; but if you add other options, the next Save Settings will not save them.
+; Use a shortcut, an @indirection file, or a .bat file instead.
+;
+-whitePieceColor #FFFFCC
+-blackPieceColor #202020
+-lightSquareColor #C8C365
+-darkSquareColor #77A26D
+-highlightSquareColor #FFFF00
+-premoveHighlightColor #FF0000
+-movesPerSession 40
+-variations true
+-appendPV true
+-internetChessServerInputBox false
+-soundProgram "aplay -q"
+-fontSizeTolerance 4
+-lowTimeWarningColor #FF0000
+-lowTimeWarning false
+-titleInWindow false
+-flashCount 0
+-flashRate 5
+-pieceImageDirectory ""
+-trueColors false
+-soundDirectory "/usr/share/games/xboard/sounds"
+-msLoginDelay 0
+-pasteSelection false
+-dropMenu false
+-pieceMenu false
+-sweepPromotions true
+-timeDelay 1
+-timeControl "5"
+-seekGraph true
+-autoRefresh false
+-autoBox true
+-saveGameFile ""
+-autoSaveGames false
+-onlyOwnGames false
+-monoMode false
+-showCoords false
+-showThinking false
+-ponderNextMove true
+-periodicUpdates true
+-popupExitMessage true
+-popupMoveErrors false
+-clockFont "size21:-*-helvetica-bold-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-clockFont "size45:-*-helvetica-bold-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-messageFont "size21:-*-helvetica-medium-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-messageFont "size45:-*-helvetica-medium-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-coordFont "size21:-*-helvetica-bold-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-coordFont "size45:-*-helvetica-bold-r-normal--*-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--*-*-*-*-*-*-*-*,-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+-boardSize Tiny
+-alwaysOnTop false
+-autoCallFlag false
+-autoComment false
+-autoCreateLogon false
+-autoObserve false
+-autoFlipView true
+-autoRaiseBoard true
+-alwaysPromoteToQueen false
+-oldSaveStyle false
+-quietPlay false
+-getMoveList true
+-testLegality true
+-premove true
+-premoveWhite false
+-premoveWhiteText ""
+-premoveBlack false
+-premoveBlackText ""
+-icsAlarm false
+-icsAlarmTime 5000
+-animateMoving true
+-animateSpeed 10
+-animateDragging true
+-blindfold false
+-highlightLastMove true
+-colorizeMessages true
+-colorShout green
+-colorSShout green,black,1
+-colorChannel1 cyan
+-colorChannel cyan,black,1
+-colorKibitz magenta,black,1
+-colorTell yellow,black,1
+-colorChallenge red,black,1
+-colorRequest red
+-colorSeek blue
+-colorNormal default
+-soundShout ""
+-soundSShout ""
+-soundChannel1 ""
+-soundChannel ""
+-soundKibitz ""
+-soundTell "phone.wav"
+-soundChallenge "gong.wav"
+-soundRequest ""
+-soundSeek ""
+-soundMove "woodthunk.wav"
+-soundBell ""
+-soundIcsWin ""
+-soundIcsLoss ""
+-soundIcsDraw ""
+-soundIcsUnfinished ""
+-soundIcsAlarm "penalty.wav"
+-disguisePromotedPieces true
+-saveSettingsOnExit true
+-icsMenu {Give me;ptell Please give me $input;
+Avoid;ptell Please don't let him get $input;
+Q;$add a Queen $input;
+R;$add a Rook $input;
+B;$add a Bishop $input;
+N;$add a Knight $input;
+P;$add a Pawn $input;
+Dead;ptell I will be checkmated;
+MultiLine;
+set open 0
+set seek 0
+set tell 1;
+Kill;ptell I will checkmate him!;
+Who;who;
+Finger (name);finger $name;
+Players;players;
+Vars (name);vars $name;
+Games;games;
+Observe (name);observe $name;
+Sought;sought;
+Match (name);match $name;
+Tell (name);tell $name $input;
+Play (name);play $name;
+Message (name);message $name $input;
+}
+-icsNames {"fics" -icshost freechess.org -icshelper timeseal
+"icc" -icshost chessclub.com -icshelper timestamp
+"kc" -icshost alanimus.com -icshelper timeseal
+}
+-recentEngines 4
+-recentEngineList {gnuchess
+}
+-firstChessProgramNames {gnuchess
+"Fruit 2.1" -fcp fruit -fUCI
+"Crafty" -fcp crafty
+"GNU Chess" -fcp gnuchess
+}
+-showButtonBar true
+-pgnExtendedInfo true
+-hideThinkingFromHuman false
+-liteBackTextureFile "/usr/share/games/xboard/themes/textures/wood_l.png"
+-darkBackTextureFile "/usr/share/games/xboard/themes/textures/wood_d.png"
+-liteBackTextureMode 1
+-darkBackTextureMode 1
+-renderPiecesWithFont ""
+-fontPieceToCharTable ""
+-fontPieceSize 80
+-overrideLineGap 1
+-adjudicateLossThreshold 0
+-delayBeforeQuit 0
+-delayAfterQuit 0
+-pgnEventHeader "Computer Chess Game"
+-defaultFrcPosition -1
+-gameListTags "eprd"
+-saveOutOfBookInfo true
+-showEvalInMoveHistory true
+-evalHistColorWhite #FFFFB0
+-evalHistColorBlack #AD5D3D
+-highlightMoveWithArrow true
+-stickyWindows false
+-adjudicateDrawMoves 0
+-autoDisplayComment true
+-autoDisplayTags true
+-adapterCommand 'polyglot -noini -ec "%fcp" -ed "%fd" -uci NalimovCache=%defaultCacheSizeEGTB'
+-uxiAdapter ""
+-polyglotDir ""
+-usePolyglotBook false
+-polyglotBook ""
+-bookDepth 12
+-bookVariation 50
+-discourageOwnBooks false
+-defaultHashSize 64
+-defaultCacheSizeEGTB 4
+-defaultPathEGTB "/egtb"
+-language ""
+-usePieceFont false
+-useBoardTexture true
+-useBorder false
+-border ""
+-pgnNumberTag false
+-oneClickMove false
+-defaultMatchGames 10
+-matchPause 10000
+-testClaims true
+-checkMates true
+-materialDraws true
+-trivialDraws false
+-ruleMoves 51
+-repeatsToDraw 6
+-backgroundObserve false
+-dualBoard false
+-smpCores 1
+-egtFormats ""
+-niceEngines 0
+-logoSize 0
+-logoDir "."
+-autoLogo false
+-featureDefaults ""
+-showTargetSquares true
+-absoluteAnalysisScores false
+-scoreWhite false
+-evalZoom 1
+-evalThreshold 25
+-pairingEngine ""
+-defaultTourneyName "Tourney_%y%M%d_%h%m.trn"
+-viewerOptions "-ncp -engineOutputUp false -saveSettingsOnExit false"
+-tourneyOptions "-ncp -mm -saveSettingsOnExit false"
+-autoCopyPV false
+-topLevel true
+-dialogColor ""
+-buttonColor ""
+-timeOddsMode 0
+-keepLineBreaksICS false
+-winWidth 573
+-winHeight 472
+-x 471
+-y 49
+-icsX 2147483177
+-icsY 2147483599
+-icsW -2147483648
+-icsH -2147483648
+-commentX 2147483177
+-commentY 2147483599
+-commentW -2147483648
+-commentH -2147483648
+-tagsX 2147483177
+-tagsY 2147483599
+-tagsW -2147483648
+-tagsH -2147483648
+-gameListX 2147483177
+-gameListY 2147483599
+-gameListW 500
+-gameListH 300
+-slaveX 2147483177
+-slaveY 2147483599
+-moveHistoryUp false
+-moveHistoryX 2147483177
+-moveHistoryY 2147483599
+-moveHistoryW -2147483648
+-moveHistoryH -2147483648
+-evalGraphUp false
+-evalGraphX 2147483177
+-evalGraphY 2147483599
+-evalGraphW -2147483648
+-evalGraphH -2147483648
+-engineOutputUp false
+-engineOutputX 2147483177
+-engineOutputY 2147483599
+-engineOutputW -2147483648
+-engineOutputH -2147483648

@@ -1,0 +1,11 @@
+# Enable fcitx in Gnome (!NOT working, since default gnome use Wayland)
+# adding them manually in =etc/environment=
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+
+# Swap keys for apps running on Xorg
+xmodmap /home/oracleyue/.Xmodmap
+
+# QT5
+export QT_QPA_PLATFORMTHEME=qt5ct
