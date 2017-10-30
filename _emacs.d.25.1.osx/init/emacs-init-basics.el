@@ -103,7 +103,7 @@
 ;; quick start email editing
 (defun draft-email ()
   (interactive)
-  (find-file (expand-file-name "~/Documents/.email.tmp.txt"))
+  (find-file (expand-file-name "~/Documents/.email.tmp.md"))
   (auto-fill-mode 1)
   (set-fill-column 75))
 

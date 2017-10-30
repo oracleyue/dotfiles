@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: subequation
 # key: subeq
-# group: macros
+# group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{subequations}

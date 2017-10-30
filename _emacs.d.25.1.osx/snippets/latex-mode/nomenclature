@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: nomenclature
+# key: nm
+# group: macros
+# --
+\nomenclature[${1:group}]{$0}{}

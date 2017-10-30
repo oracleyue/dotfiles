@@ -11,11 +11,7 @@
         flycheck-irony
         irony-eldoc
         helm-make))
-(unless (custom/packages-installed-p custom/modern-cc-packages)
-  (package-refresh-contents)
-  (dolist (pkg custom/modern-cc-packages)
-    (unless (package-installed-p pkg)
-      (package-install pkg))))
+(custom/install-packages custom/modern-cc-packages)
 
 (require 'cc-mode)
 (setq-default c-default-style "linux")

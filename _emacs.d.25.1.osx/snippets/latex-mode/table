@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: table
 # key: tbl
-# group: macros
+# group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{table}[htb]

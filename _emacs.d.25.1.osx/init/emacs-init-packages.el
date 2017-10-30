@@ -28,7 +28,6 @@
         engine-mode
         dash
         direx
-        emmet-mode
         ess
         expand-region
         exec-path-from-shell
@@ -47,7 +46,6 @@
         jedi
         jedi-core
         jedi-direx
-        js2-mode
         julia-mode
         key-combo
         magit
@@ -66,29 +64,33 @@
         yasnippet
         zeal-at-point))
 
-
-;; Check whether certain packages have not been installed
+;; Functions to check and install packages
 (defun custom/packages-installed-p (pkg-list)
+  "Check whether certain packages have not yet been installed."
   (catch 'exit
     (dolist (pkg pkg-list)
       (unless (package-installed-p pkg)
         (throw 'exit nil)))
     (throw 'exit t)))
 
-;; Perform Installation if not installed
-(unless (custom/packages-installed-p custom/packages)
-  ;; list pkgs to be installed
-  (message "\n%s" "Refreshing package database...")
-  (message "----------------------")
-  (dolist (pkg custom/packages)
-    (unless (package-installed-p pkg)
-      (message "+ %s" pkg)))
-  (message "----------------------\n")
-  ;; install pkgs
-  (package-refresh-contents)
-  (dolist (pkg custom/packages)
-    (unless (package-installed-p pkg)
-      (package-install pkg))))
+(defun custom/install-packages (pkg-list)
+  "Interface to install essential packages."
+  (unless (custom/packages-installed-p pkg-list)
+    ;; list pkgs to be installed
+    (message "\n%s" "Refreshing package database...")
+    (message "----------------------")
+    (dolist (pkg pkg-list)
+      (unless (package-installed-p pkg)
+        (message "+ %s" pkg)))
+    (message "----------------------\n")
+    ;; install pkgs
+    (package-refresh-contents)
+    (dolist (pkg pkg-list)
+      (unless (package-installed-p pkg)
+        (package-install pkg)))))
+
+;; Install packages that have not yet been installed
+(custom/install-packages custom/packages)
 
 
 

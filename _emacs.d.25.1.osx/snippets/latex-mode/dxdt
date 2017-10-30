@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: operator d/dt
+# key: dt
+# group: macros
+# --
+\displaystyle \frac{\mathrm{d}}{\mathrm{d}t}

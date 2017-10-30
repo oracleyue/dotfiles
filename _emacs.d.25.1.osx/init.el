@@ -38,7 +38,7 @@
 (setq y:enable-google-cpp-style nil)    ;; /google-c-style/
 (setq y:cc-complete-engine "irony")     ;; company-clang, irony, modern
 
-;; code completion
+;; select completion engine for servers
 (cond ((string-equal system-type "darwin")
        (if (string-equal "ac-mode" (daemonp))
            (setq y:code-complete-mode "auto-complete")
@@ -46,23 +46,23 @@
       ((string-equal system-type "gnu/linux")
        (setq y:code-complete-mode "company")))
 
+;; code completion engine
+(if (string-equal y:code-complete-mode "company")
+    (require 'emacs-init-company)       ;; use /company/
+  (require 'emacs-init-ac))             ;; use /auto-complete/
+
 ;; helm and extensions
 (require 'emacs-init-helm)
 (require 'emacs-init-helm-swoop)
 (require 'emacs-init-helm-proj)         ;; project management
 
+;; directory and buffer explorers
+(require 'emacs-init-dired)             ;; directory explorers
+
 ;; major modes for document editing
 (require 'emacs-init-orgmode)           ;; org-mode
 (require 'emacs-init-markdown)          ;; markdown
 (require 'emacs-init-auctex)            ;; latex
-
-;; auto-completions
-(if (string-equal y:code-complete-mode "company")
-    (require 'emacs-init-company)       ;; use /company/
-  (require 'emacs-init-ac))             ;; use /auto-complete/
-
-;; directory and buffer explorers
-(require 'emacs-init-dired)             ;; directory explorers
 
 
 ;; ----------------------------------------------------------------

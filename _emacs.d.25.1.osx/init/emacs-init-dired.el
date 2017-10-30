@@ -43,9 +43,11 @@
 ;; suppress errors due to no support of "ls --dired" on osx
 (when (string= system-type "darwin") (setq dired-use-ls-dired nil))
 
-;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
+;; popup window manager: /popwin/
 (require 'popwin)
 (popwin-mode 1)
+
+;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
 (when (cdr (assoc "direx-jedi" y:use-direx-or-neotree))
   (require 'direx)
   (push '(direx:direx-mode :position left :width 27 :dedicated t)
@@ -98,6 +100,7 @@
                                   (name . "[mM]akefile")))
                ("web" (or (mode . html-mode)
                           (mode . css-mode)
+                          (mode . json-mode)
                           (mode . js2-mode)))
                ("emacs" (or (mode . emacs-lisp-mode)
                             (name . "^\\*scratch\\*$")

@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: wrapfigure
 # key: wrapfig
-# group: macros
+# group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{wrapfigure}{r}{0.5\textwidth}

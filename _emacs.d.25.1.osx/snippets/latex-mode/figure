@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: figure
 # key: fig
-# group: macros
+# group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{figure}[htb]   %htbp!H

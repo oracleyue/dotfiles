@@ -34,6 +34,11 @@
             flycheck-irony
             irony-eldoc
             helm-make))
+    (custom/install-packages custom/modern-cc-packages)
+  #+END_SRC
+
+  (Notes: the old script used before rewriting ~custom/install-packages~)
+  #+BEGIN_SRC
     (unless (custom/packages-installed-p custom/modern-cc-packages)
       (package-refresh-contents)
       (dolist (pkg custom/modern-cc-packages)
