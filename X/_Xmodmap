@@ -2,7 +2,7 @@
 ! Swap Alt and Control 
 ! Map Meta to win
 ! Swap Esc and CapsLock
-!
+
 clear control
 clear mod1
 clear mod4
@@ -13,7 +13,7 @@ keycode 37 = Super_L
 keycode 105 = Print Sys_Req Print Sys_Req
 keycode 64 = Control_L
 keycode 108 = Control_R
-!! Map win to Meta, PrtSc to Meta
+! Map win to Meta, PrtSc to Meta
 keycode 133 = Alt_L
 keycode 107 = Alt_R
 ! Swap Esc and CapsLock

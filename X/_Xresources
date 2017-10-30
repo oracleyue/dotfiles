@@ -8,11 +8,13 @@ Xft.antialias: 1
 !----------xterm配置----------
 !外观
 xterm*termName: xterm-256color
-xterm*geometry: 80x27
+!xterm*geometry: 80x27
+xterm*geometry: 85x28
 xterm*scrollBar: false
 xterm*loginshell: false
 xterm*background: black
-xterm*foreground: white
+!xterm*foreground: white
+xterm*foreground: gray
 xterm*cursorBlink: true
 xterm*cursorOffTime: 600
 xterm*cursorOnTime: 600
@@ -24,9 +26,9 @@ xterm*utf8Title: true
 xterm*renderFont: true
 xterm*preeditType: Root
 xterm*xftAntialias: true
-!xterm*faceName: DejaVu Sans Mono:pixelsize=13
-xterm*faceName: Noto Mono:pixelsize=13
-xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=13
+xterm*faceName: DejaVu Sans Mono:pixelsize=14
+!xterm*faceName: Noto Mono:pixelsize=14
+xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=14
 
 !tango颜色搭配
 xterm*color0: #1e1e1e
