@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hexo-head
+# key: head
+# group: blog
+# --
+---
+title: ${1:TITLE}
+categories: ${2:Category}
+tags:
+- $0
+---

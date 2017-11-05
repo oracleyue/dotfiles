@@ -5,7 +5,9 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; Your init file should contain only one such instance.
- '(default ((t (:font "DejaVu Sans Mono-15")))))    ;; 13/15(mac), 10.5/12(linux)
+ '(default ((t (:font "DejaVu Sans Mono-15"))))  ;; 13/15(mac), 10.5/12(linux)
+ '(fixed-pitch ((t (:family "Roboto Mono"))))
+ '(variable-pitch ((t (:family "Roboto")))))
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)

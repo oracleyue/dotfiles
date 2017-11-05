@@ -92,7 +92,8 @@
   "Setup the startup folders. Used in .emacs"
   (cond ((string-equal system-type "darwin")
          (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
-         ;(dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
+         (dired (expand-file-name
+                 "~/Public/Dropbox/oracleyue/blog/oracleyue.github.io/source/_posts"))
          (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
          (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/PhD.org")))
         ((string-equal system-type "gnu/linux")

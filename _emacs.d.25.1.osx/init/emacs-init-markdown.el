@@ -11,6 +11,10 @@
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
+;; faces
+(add-hook 'markdown-mode-hook
+          (lambda () (variable-pitch-mode t)))
+
 ;; configure compile commands
 (if (string-equal system-type "darwin")
     (progn

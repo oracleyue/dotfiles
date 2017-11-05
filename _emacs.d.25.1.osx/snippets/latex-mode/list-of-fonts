@@ -9,7 +9,7 @@
 % Serif
 \usepackage{lmodern}      % computer modern with enhancement
 \usepackage{times}        % use Times
-\usepackage{fouriernc}    % use New CenturySchL
+\usepackage{fouriernc}    % use New CenturySchL with math symbols
 \usepackage{baskervald}   % nice fonts for regular articles
 
 % Sans
@@ -22,4 +22,4 @@
 
 % Math Fonts
 \usepackage{newtxtext,newtxmath}  % using new Times pkg
-\usepackage[lite]{mtpro2}    % non-free math fonts in Times
+\usepackage[lite,straightbraces]{mtpro2}    % non-free math fonts in Times
