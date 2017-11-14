@@ -11,7 +11,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}   % "baskervald" for regular texts
+\usepackage{times,helvet}   % "charter" for regular texts
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,
@@ -27,10 +27,6 @@
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib}
-
-\usepackage{titlesec}
-\titleformat*{\section}{\large\bfseries}
-\titleformat*{\subsection}{\normalsize\bfseries}
 
 
 \begin{document}

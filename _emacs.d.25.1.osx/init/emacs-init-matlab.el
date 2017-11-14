@@ -20,7 +20,7 @@
 ;; config /smartparens/ for matlab
 (sp-with-modes 'matlab-mode
   (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                 :actions '(wrap autoskip navigate)))
+                 :actions '(insert wrap autoskip navigate)))
 
 ;; Add "align" supports for matlab: align both "=" and "%"
 ;; alternatively, use "align-regexp" ("C-x M-a" defined in "emacs-init-basic.el"),

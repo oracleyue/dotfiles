@@ -8,14 +8,14 @@
 % \usepackage[margin=25mm,centering]{geometry}
 \usepackage{setspace}
   \onehalfspacing
-\usepackage[parfill]{parskip}  % instead of indentation , use new line to show paragraphs
+\usepackage[parfill]{parskip}  % use newline instead of indentation
   \parskip=12pt
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}   % using Times and Helvetica
-% \usepackage{baskervald}   % nice fonts for readable articles
-\usepackage[scaled=0.95]{inconsolata}   % monospace (default: courier)
+\usepackage{times,helvet}
+% \usepackage{charter}      % nice for regular articles
+\usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,
 			mathtools,upgreek}

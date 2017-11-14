@@ -34,37 +34,19 @@
 ;; Basic settings
 (setq TeX-insert-braces nil)
 
-;; More pair-mode in LaTeX
-;
-;;; Use /AucTeX/ default pairs
-;(add-hook 'LaTeX-mode-hook
-;	  (lambda () (set (make-variable-buffer-local 'TeX-electric-math)
-;                      (cons "$" "$"))))
-;(setq-default LaTeX-electric-left-right-brace t)
-;
-;;; Use /smartparens/ to complete pairs; having enable globally in /.emacs/
+;; More pair-mode in LaTeX by /smartparens/
 ;; disable AucTeX pair completion
 (setq-default LaTeX-electric-left-right-brace nil)
 ;; user-defined pairs
-(defun sp-latex-point-after-backslash-left (id action context)
-  "Return t if point follows a backslash, nil otherwise."
-  (when (eq action 'insert)
-    (let ((trigger (sp-get-pair id :trigger)))
-      (looking-back (concat "\\\\l" (regexp-quote (if trigger trigger id)))))))
+(require 'smartparens-latex)
 (sp-with-modes 'latex-mode
   (sp-local-pair "\\|" "\\|"
                  :trigger "\\|"
-                 :unless '(sp-latex-point-after-backslash-left)
+                 :unless '(sp-latex-point-after-backslash)
                  :when '(sp-in-math-p))
-                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
   (sp-local-pair "\\left|" "\\right|"
                  :trigger "\\l|"
                  :when '(sp-in-math-p))
-                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
-  (sp-local-pair "\\left\\|" "\\right\\|"
-                 :trigger "\\l\\|"
-                 :when '(sp-in-math-p))
-                 ;; :post-handlers '(sp-latex-insert-spaces-inside-pair))
   (sp-local-pair "\\big(" "\\big)"
                  :trigger "\\b("
                  :when '(sp-in-math-p)
@@ -72,8 +54,7 @@
   (sp-local-pair "\\big[" "\\big]"
                  :trigger "\\b["
                  :when '(sp-in-math-p)
-                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
-  )
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair)))
 
 ;; More math-mode in LaTeX
 (setq LaTeX-math-list
