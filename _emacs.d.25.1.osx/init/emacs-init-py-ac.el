@@ -52,6 +52,16 @@
 
 
 ;;
+;; Additional Editing Settings
+;;
+(add-hook 'python-mode-hook
+          (lambda ()
+		    (setq indent-tabs-mode t)
+		    (setq tab-width 4)
+			(setq python-indent 4)))
+
+
+;;
 ;; Auto-completion by /Jedi/
 ;;
 (add-hook 'python-mode-hook 'jedi:setup)

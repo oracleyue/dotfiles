@@ -1,23 +1,23 @@
 # -*- mode: snippet -*-
-# name: Beamer Template (16:9; lcsb)
+# name: Beamer Template (4:3; lcsb)
 # key: beamer
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[xcolor={dvipsnames},aspectratio=169]{beamer}
+\documentclass[xcolor={dvipsnames}]{beamer}
 % options: presentation,notes,handout; aspectratio=169,1610,149,54,43,32
 
 % Beamer settings
-\usetheme{Singapore} % Madrid, Singapore, Boadilla
-\usefonttheme{professionalfonts} % use lmodern mathfont; "serif"
-\setbeamertemplate{navigation symbols}{}  % remove sections in header in Singapore
+\usetheme{Singapore}                % Madrid, Singapore, Boadilla
+\usefonttheme{professionalfonts}    % use lmodern mathfont; "serif"
+\setbeamertemplate{navigation symbols}{}
 \renewcommand{\insertnavigation}[1]{}
 \setbeamertemplate{footline}[frame number]
 \setbeamercolor{footline}{fg=Blue}
 \setbeamerfont{footline}{size=\footnotesize}
 
 % Citations (not /biblatex/, beamer's default)
-\usepackage{bibentry}  % use \footnote{\bibentry{}}
+\usepackage{bibentry}       % use \footnote{\bibentry{}}
 \bibliographystyle{apalike} % abbrv;apalike
 \newcommand{\footcite}[1]{\footnote{\tiny\bibentry{#1}}}
 \newcommand{\textcite}[1]{\footnotetext{\tiny\bibentry{#1}}} % put \footnotemark first
@@ -25,6 +25,13 @@
 \setbeamertemplate{bibliography entry title}{}
 \setbeamertemplate{bibliography entry location}{}
 \setbeamertemplate{bibliography entry note}{}
+
+% % Fonts
+% \usepackage{lmodern,charter}
+% \usefonttheme{serif}
+% \setbeamerfont{title}{family=\sffamily, series=\bfseries}
+% \setbeamerfont{frametitle}{family=\sffamily\sf}
+% \setbeamerfont{framesubtitle}{family=\sffamily\sf}
 
 % Packages
 \usepackage{latexsym, amsmath, amssymb, amsfonts,
@@ -86,12 +93,16 @@
   \begin{tikzpicture}[remember picture,overlay]
     \setlength{\logoX}{\coordinateWidth}
     \setlength{\logoY}{\coordinateHeight}
-    \node[xshift=1cm,yshift=0.75cm] at (current page.south west)
-    {\includegraphics[height=1cm]{figures/lcsb-logo}};
+      \node[xshift=.7cm,yshift=0.75cm] at (current page.south west)
+          {\includegraphics[height=1cm]{figures/lcsb-logo}};
     \setlength{\logoX}{-\coordinateWidth-1cm}
     \setlength{\logoY}{\coordinateHeight-0.1cm}
-    \node[xshift=-1cm,yshift=0.75cm] at (current page.south east)
-    {\includegraphics[height=.7cm]{figures/unilu-logo}};
+      \node[xshift=-1.7cm,yshift=0.65cm] at (current page.south east)
+          {\includegraphics[height=.7cm]{figures/unilu-logo}};
+    \setlength{\logoX}{\coordinateWidth+6.2cm}
+    \setlength{\logoY}{\coordinateHeight}
+      \node[xshift=6.9cm,yshift=0.75cm] at (current page.south west)
+          {\includegraphics[scale=1]{figures/lcsb-ppt-template-line}};
   \end{tikzpicture}
 
   \titlepage

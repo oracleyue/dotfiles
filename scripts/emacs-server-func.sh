@@ -128,3 +128,22 @@ function ecc() {
         echo '  - 1: run emacsclient to open FILES you specified.'
     fi
 }
+
+# emacsclient: ac-mode
+function eca() {
+    if [[ $(uname) == "Linux" ]]; then
+        EMACSCLIENT="/usr/bin/emacsclient"
+    else
+        EMACSCLIENT="/usr/local/bin/emacsclient"
+    fi
+
+    if [[ $# -eq 0 ]]; then
+        $EMACSCLIENT -nc --server-file=ac-mode
+    elif [[ -n $1 ]]; then
+        $EMACSCLIENT -nc --server-file=ac-mode $1
+    else
+        echo 'usage: 0 or 1 argument'
+        echo '  - 0: connet "emacsclient -nc" to "ac-mode" server;'
+        echo '  - 1: run emacsclient to open FILES you specified.'
+    fi
+}

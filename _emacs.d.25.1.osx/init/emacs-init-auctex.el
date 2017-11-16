@@ -134,7 +134,7 @@
 
 (eval-after-load 'latex
   '(setq LaTeX-clean-intermediate-suffixes
-     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk"))))
+     (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk" "\\.tdo"))))
 
 ;; adding commands
 (eval-after-load "tex"
@@ -148,7 +148,7 @@
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("Rubber" "rubber -fd %t" TeX-run-command nil t) t))
+                 '("Rubber" "rubber --synctex -fd %t" TeX-run-command nil t) t))
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
 (eval-after-load "tex"
