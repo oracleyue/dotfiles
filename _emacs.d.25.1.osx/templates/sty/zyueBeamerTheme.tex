@@ -1,0 +1,53 @@
+% ================================================================
+% Beamer Configurations: default for zyue
+% ================================================================
+
+
+% Beamer Settings
+% set fonts
+\usepackage[condensed]{roboto}
+\usepackage{charter}
+\usefonttheme{serif}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{family=\sffamily, series=\mdseries}
+\setbeamerfont{framesubtitle}{family=\sffamily,series=\mdseries}
+% define colors
+\definecolor{mBlack}{HTML}{2c2c2c}
+\definecolor{mGray}{HTML}{808080}
+\definecolor{mBlue}{HTML}{06a1cd}
+\definecolor{mGreen}{HTML}{12b28b}
+\definecolor{mCyan}{HTML}{2cb3c5}
+\definecolor{mRed}{HTML}{ce2e84}
+\definecolor{mAlert}{HTML}{ce2e84}
+\definecolor{mColor}{HTML}{06a1cd}
+% set beamer elements
+\usecolortheme[named=mColor]{structure}
+\setbeamercolor{normal text}{fg=mBlack}
+\setbeamercolor{alerted text}{fg=mAlert}
+\setbeamerfont*{block title}{family=\sffamily, series=\mdseries}
+\setbeamerfont*{block body example}{size=\small}
+\setbeamercolor*{block title}{fg=mBlack, bg= mColor!80}
+\setbeamercolor*{block body}{fg=mBlack, bg= mGray!10}
+\setbeamercolor*{block title alerted}{fg=mBlack, bg= mAlert!80}
+\setbeamercolor*{block body alerted}{fg=mBlack, bg= mGray!10}
+\setbeamercolor*{block title example}{fg=mBlack, bg= mGray!80}
+\setbeamercolor*{block body example}{fg=mBlack, bg= mGray!10}
+% set layouts
+\usepackage{dashrule}
+\setbeamertemplate{frametitle}{%\centering
+  \usebeamerfont{frametitle}\insertframetitle\\[-8pt]
+  {\color{mGray}\hdashrule{\textwidth}{1pt}{1pt}}}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{footline}{fg=mBlack}
+\setbeamerfont{footline}{size=\footnotesize}
+
+% Citations
+\usepackage{bibentry}       % use \footnote{\bibentry{}}
+\bibliographystyle{apalike} % abbrv;apalike
+\newcommand{\footcite}[1]{\footnote{\tiny\bibentry{#1}}}
+\newcommand{\textcite}[1]{\footnotetext{\tiny\bibentry{#1}}} % put \footnotemark first
+% removing line breaks between title, journal, etc.
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
