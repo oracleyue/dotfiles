@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: use beamer to show colors
+# key: showcolor
+# group: templates
+# --
+\documentclass[xcolor={dvipsnames}]{beamer}
+
+% color definitions
+\definecolor{color01}{HTML}{005f87}
+\definecolor{color02}{HTML}{303030}
+
+\begin{document}
+
+\begin{frame}
+  \frametitle{Color List}
+
+  \colorbox{color01}{color01}
+  \colorbox{color02}{color02}
+
+\end{frame}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
