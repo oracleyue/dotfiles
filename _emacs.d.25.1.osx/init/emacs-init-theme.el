@@ -49,7 +49,7 @@
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'solarized t)            ;; GUI
-           (load-theme 'monokai t)))              ;; terminal
+           (load-theme 'Amelie t)))              ;; terminal
         ;; servers (use daemon)
         ((string-equal "main" (daemonp))          ;; server: main
          (load-theme 'solarized t))
