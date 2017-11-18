@@ -37,7 +37,7 @@
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
-(blink-cursor-mode -1)  ;stop cursor blinking
+(blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment
 ;; use C-x C-0 first, then use +/- to tune the size.

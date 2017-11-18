@@ -43,6 +43,7 @@
         helm-projectile
         helm-swoop
         iedit
+        imenu-list
         jedi
         jedi-core
         jedi-direx

@@ -3,7 +3,7 @@
 ;; ================================================================
 
 ;; ----------------------------------------------
-;; Buffer manager: /golden-ratio/
+;; /golden-ratio/: resize multiple windows
 ;; ----------------------------------------------
 (require 'golden-ratio)
 (when (string-equal "main" (daemonp))
@@ -31,10 +31,15 @@
 
 
 ;; ------------------------------------------------
-;; directory explorers
+;; /popwin/: manage popup (temporary) buffers
 ;; ------------------------------------------------
+(require 'popwin)
+(popwin-mode 1)
 
-;; default directory explorer: /dired/ & /dired-x/
+
+;; ------------------------------------------------
+;; Directory explorer (regular, /dired/)
+;; ------------------------------------------------
 (require 'dired-x)
 (setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
@@ -43,9 +48,10 @@
 ;; suppress errors due to no support of "ls --dired" on osx
 (when (string= system-type "darwin") (setq dired-use-ls-dired nil))
 
-;; popup window manager: /popwin/
-(require 'popwin)
-(popwin-mode 1)
+
+;; ------------------------------------------------
+;; Directory explorers (tree)
+;; ------------------------------------------------
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
 (when (cdr (assoc "direx-jedi" y:use-direx-or-neotree))
@@ -73,8 +79,9 @@
   (eval-after-load "neotree"      ;; toggle by "H" in neotree
     '(setq neo-hidden-regexp-list '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
 
+
 ;; ------------------------------------------------
-;; /ibuffer/: buffer explorer
+;; /ibuffer/: manage opened buffers
 ;; ------------------------------------------------
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-saved-filter-groups
@@ -129,8 +136,21 @@
 ;; don't ask for confirmation to delete marked buffers
 (setq ibuffer-expert t)
 
+
+;; ------------------------------------------------
+;; /imenu-list/: show imenu entries in side bar
+;; ------------------------------------------------
+;; Integrations:
+;;   - /markdown-mode/ to show headings
+
+(require 'imenu-list)
+(global-set-key (kbd "C-x C-'") #'imenu-list-smart-toggle)
+;; (setq imenu-list-auto-resize t)
+(setq imenu-list-focus-after-activation t)
+
+
 ; ------------------------------------------------
-;; /TRAMP/: ssh and remote access
+;; /TRAMP/: manage ssh and remote access
 ; ------------------------------------------------
 (setq tramp-default-method "ssh")
 ;; usages:
@@ -139,7 +159,7 @@
 
 
 ;; ----------------------------------------------
-;; /engine-mode/: query search engine
+;; /engine-mode/: manage web search
 ;; ----------------------------------------------
 (require 'engine-mode)
 (engine-mode t)

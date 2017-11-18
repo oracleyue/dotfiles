@@ -16,6 +16,9 @@
           (lambda () (variable-pitch-mode t)
             (setq-local cursor-type 'bar)))
 
+;; outline view of headings
+;; use /imenu-list/ in "emacs-init-dired", toggled by "C-x C-'"
+
 ;; configure compile commands
 (if (string-equal system-type "darwin")
     (progn
