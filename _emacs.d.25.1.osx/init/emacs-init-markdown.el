@@ -12,8 +12,9 @@
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;; use variable-width fonts
-;; (add-hook 'markdown-mode-hook
-;;           (lambda () (variable-pitch-mode t)))
+(add-hook 'markdown-mode-hook
+          (lambda () (variable-pitch-mode t)
+            (setq-local cursor-type 'bar)))
 
 ;; configure compile commands
 (if (string-equal system-type "darwin")
