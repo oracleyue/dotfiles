@@ -11,9 +11,9 @@
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
-;; faces
-(add-hook 'markdown-mode-hook
-          (lambda () (variable-pitch-mode t)))
+;; use variable-width fonts
+;; (add-hook 'markdown-mode-hook
+;;           (lambda () (variable-pitch-mode t)))
 
 ;; configure compile commands
 (if (string-equal system-type "darwin")
@@ -23,7 +23,7 @@
   (setq markdown-command "/usr/bin/multimarkdown"))
 
 ;; configure markdown export styles
-(setq css-default-path (expand-file-name "~/.emacs.d/templates/css"))
+(setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
 (setq url-boostrap-min-css
       "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css")
 (add-hook 'markdown-mode-hook (lambda()
