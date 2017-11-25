@@ -12,6 +12,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; encodings
+(set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 

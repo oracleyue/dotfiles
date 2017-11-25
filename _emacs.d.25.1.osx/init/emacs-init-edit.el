@@ -17,7 +17,16 @@
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";  (default by /undo-tree/)
 ;; comment line or region :: "C-\"; uncomment: "M-\"
 ;; captalize/upper/lower words: "M-c/u/l"
-;; changing encodings: "C-x C-m f"
+;; encodings:   "utf-8-unix"
+;;      - open a file with specific coding system: =revert-buffer-with-coding-system=
+;;      - set a encoding system for saving file: =set-buffer-file-coding-system=
+;;      - find out the current coding system used for opening and saving files:
+;;          =describe-current-coding-system=
+;;      - find out what encoding system was used to decode current file:
+;;          =describe-variable= "buffer-file-coding-system"
+;;      - list all available encodings with "M-x list-coding-systems"
+;;      - declare a file with a particular character encoding:
+;;          add "-*- coding: utf-8 -*-" in the first line of your files
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
 ;; remove all except 1 space between characters :: "C-c SPC" (built-in: M-SPC)
@@ -81,7 +90,6 @@
 ;; change encodings:   utf-8-unix, utf-8-dos
 ;;      - change when saving using "C-x C-m f"
 ;;      - force it immediately by using "C-x C-m c <encoding> RET C-x C-w RET"
-;;      - list all available encodings with "M-x list-coding-systems"
 ;; change End-of-Line:
 ;;      - "M-x set-buffer-file-coding-system utf-8-unix" or use "C-x RET f"
 ;; open the *Messages* buffer :: "C-h e"
