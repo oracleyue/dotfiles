@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: itemize
+# key: itemize
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{itemize}
+  \setlength\itemsep{.8em}
+\item $0
+
+\end{itemize}

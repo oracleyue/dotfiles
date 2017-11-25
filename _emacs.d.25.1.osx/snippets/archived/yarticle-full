@@ -32,6 +32,7 @@
 \usepackage{subcaption}
 
 \usepackage[dvipsnames]{xcolor}
+\usepackage{soul}  % use "\hl{...}" to highlight text
 \usepackage[framemethod=TikZ]{mdframed}   % to box theorem statements
     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
 \usepackage{minted}

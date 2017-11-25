@@ -375,14 +375,37 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-cancelled-kwd-face (,@fg-green ,@bg-base03))
                 (org-delegated-kwd-face (,@fg-cyan ,@bg-base03))
                 (org-default (:inherit default))
-                (org-level-1 (:inherit outline-1))
-                (org-level-2 (:inherit outline-2))
-                (org-level-3 (:inherit outline-3))
-                (org-level-4 (:inherit outline-4))
-                (org-level-5 (:inherit outline-5))
-                (org-level-6 (:inherit outline-6))
-                (org-level-7 (:inherit outline-7))
-                (org-level-8 (:inherit outline-8))
+                ;; (org-level-1 (:inherit outline-1))
+                ;; (org-level-2 (:inherit outline-2))
+                ;; (org-level-3 (:inherit outline-3))
+                ;; (org-level-4 (:inherit outline-4))
+                ;; (org-level-5 (:inherit outline-5))
+                ;; (org-level-6 (:inherit outline-6))
+                ;; (org-level-7 (:inherit outline-7))
+                ;; (org-level-8 (:inherit outline-8))
+                ;; ---- oracleyue: add ----
+                (org-level-1 (:inherit variable-pitch
+                                       :height 1.10
+                                       ,@fg-blue))
+                (org-level-2 (:inherit variable-pitch
+                                       :height 1.05
+                                       ,@fg-cyan))
+                (org-level-3 (:inherit variable-pitch
+                                       :height 1.02
+                                       ,@fg-yellow))
+                (org-level-4 (:inherit variable-pitch
+                                       :height 1.02
+                                       ,@fg-red))
+                (org-level-5 (:inherit variable-pitch
+                                       :height 1.02
+                                       ,@fg-base0))
+                (org-level-6 (:inherit variable-pitch
+                                       ,@fg-base01))
+                (org-level-7 (:inherit variable-pitch
+                                       ,@fg-orange))
+                (org-level-8 (:inherit variable-pitch
+                                       ,@fg-violet))
+                ;; ---- oracleyue: end ----
                 (org-special-keyword (,@fmt-ital ,@fg-base01))
                 (org-drawer (,@fmt-bold ,@fg-blue))
                 (org-column (,@fmt-revr ,@fg-cyan))

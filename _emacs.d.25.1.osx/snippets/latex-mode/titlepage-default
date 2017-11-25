@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: title page (default)
+# key: title
+# group: macros
+# --
+\title[]{${1:title}}
+\subtitle{${2:}}
+\author{\small Zuogong Yue$^1$\\\\[1ex] J. Thunberg$^1$, L. Ljung$^2$, J. Goncalves$^1$}
+\institute[]{
+    \begin{tabular}{ll}
+       $^1$ University of Luxembourg, Luxembourg\\\
+       $^2$ Link\\"{o}ping University, Sweden
+    \end{tabular}}
+\date{\footnotesize 14 July 2016 $\cdot$ MTNS 2016 $\cdot$ Minneapolis, MN}

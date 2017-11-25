@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: itemize spacing
+# key: seti
+# group: macros
+# --
+\setlength\itemsep{.8em}

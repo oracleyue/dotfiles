@@ -23,7 +23,7 @@
 % Title Page
 \title[]{${1:title}}
 \subtitle{${2:}}
-\author{\small \\\Zuogong Yue$^1$\\\\[1ex] J. Thunberg$^1$, L. Ljung$^2$, J. Goncalves$^1$}
+\author{\small Zuogong Yue$^1$\\\\[1ex] J. Thunberg$^1$, L. Ljung$^2$, J. Goncalves$^1$}
 \institute[]{
     \begin{tabular}{ll}
        $^1$ University of Luxembourg, Luxembourg\\\

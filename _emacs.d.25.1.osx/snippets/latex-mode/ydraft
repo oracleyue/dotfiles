@@ -23,7 +23,6 @@
 \usepackage{subcaption}
 
 \usepackage[dvipsnames]{xcolor}
-\usepackage{soul}  % use "\hl{...}" to highlight text
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage[round,sort]{natbib}

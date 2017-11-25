@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: array (2 col)
-# key: ay
+# key: array
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --

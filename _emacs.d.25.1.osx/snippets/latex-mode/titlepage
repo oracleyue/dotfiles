@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: title page (group meeting)
+# key: title
+# group: macros
+# --
+\title[]{${1:title}}
+\subtitle{${2:}}
+\author{\small Author: J.~Woude$^*$ \\\\ Presenter: Zuogong~Yue}
+\institute[]{
+    \begin{tabular}{ll}
+       $^*$Delft University of Technology
+    \end{tabular}}
+\date{\footnotesize 02 Nov 2017 $\cdot$ Group Meeting $\cdot$ Belval}
