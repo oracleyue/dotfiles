@@ -379,20 +379,50 @@
    `(org-date ((t (:foreground ,atom-one-dark-cyan))))
    `(org-footnote ((t (:foreground ,atom-one-dark-cyan))))
    `(org-sexp-date ((t (:foreground ,atom-one-dark-cyan))))
-
-   `(org-block-background                    ; oracleyue: added
-     ((,class (;:inherit font-lock-constant-face
+   ;; ---- oracleyue: add ----
+   `(org-block-background
+     ((,class (:inherit default
                         :background ,atom-one-dark-bg-hl))))
-   `(org-block-begin-line                    ; oracleyue: added
+   `(org-block-begin-line
      ((,class (:inherit font-lock-comment-face
                         :slant normal))))
-   `(org-block-end-line                      ; oracleyue: added
+   `(org-block-end-line
      ((,class (:inherit font-lock-comment-face
                         :slant normal))))
-   `(org-code   ; oracleyue: added; for the coeds enclosed by "~"
+   `(org-code           ;; codes enclosed by "~"
      ((,class (:inherit font-lock-constant-face))))
-   `(org-verbatim  ; oracleyue: added; for the codes enclosed by "="
+   `(org-verbatim       ;; codes enclosed by "="
      ((,class (:inherit font-lock-doc-face))))
+   `(org-level-1
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-blue
+                        :height 1.1))))
+   `(org-level-2
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-red-1
+                        :height 1.05))))
+   `(org-level-3
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-purple
+                        :height 1.02))))
+   `(org-level-4
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-cyan
+                        :height 1.02))))
+   `(org-level-5
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-orange-2
+                        :height 1.02))))
+   `(org-level-6
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-green))))
+   `(org-level-7
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-orange-1))))
+   `(org-level-8
+     ((,class (:inherit variable-pitch
+                        :foreground ,atom-one-dark-mono-3))))
+   ;; ---- oracleyue: end ----
 
    ;; undo-tree
    `(undo-tree-visualizer-current-face ((t (:foreground ,atom-one-dark-red-1))))
