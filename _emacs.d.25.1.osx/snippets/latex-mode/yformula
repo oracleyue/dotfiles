@@ -5,29 +5,26 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[class=scrreprt]{standalone}
-\usepackage{varwidth} 
+\usepackage{varwidth}
 
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\KOMAoptions{fontsize=24pt}
-\usepackage{times}
+% \KOMAoptions{fontsize=24pt}
+% \usepackage{times,newtxmath}
+\usepackage{lmodern}
 
 \usepackage{latexsym, amsmath, amssymb, amsfonts, mathrsfs, arydshln, mathtools}
-\usepackage{txfonts} % using different math fonts
 \usepackage{algorithm, algpseudocode}
 \usepackage{graphics, setspace}
 
-% \input{../DSF/userdef-mathsymb.tex}
-
-
 \begin{document}
-   \begin{varwidth}{10in}
-        \begin{equation*}
-          \begin{aligned}
-            % insert equation here:
-            % Equation #1
-            $0
-          \end{aligned}
-        \end{equation*}
-   \end{varwidth}
+\begin{varwidth}{10in}
+     \begin{equation*}
+       \begin{aligned}
+         % insert equation here:
+         % Equation #1
+         $0
+       \end{aligned}
+     \end{equation*}
+\end{varwidth}
 \end{document}

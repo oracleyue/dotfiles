@@ -11,7 +11,7 @@
 (global-set-key (kbd "C-o") 'open-next-line)
 ;; Behave like vi's O command
 (defun open-previous-line (arg)
-  "Open a new line before the current one. 
+  "Open a new line before the current one.
      See also `newline-and-indent'."
   (interactive "p")
   (beginning-of-line)

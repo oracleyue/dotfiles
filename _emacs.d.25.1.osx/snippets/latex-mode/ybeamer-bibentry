@@ -1,21 +1,22 @@
 # -*- mode: snippet -*-
-# name: Beamer Template (default; BibLaTeX)
+# name: Beamer Template (default; BibEntry)
 # key: beamer
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[xcolor={dvipsnames},aspectratio=169]{beamer}
 % options: notes,handout; aspectratio=169,1610,149,54,43,32
-\usepackage{styles/zyuebeamer}  % biblatex, sans, txmath
-% \usepackage[sans]{styles/zyuebeamerdark}
+\usepackage[bibentry]{styles/zyuebeamer}  % bibentry, sans, txmath
+% \usepackage[sans,bibentry]{styles/zyuebeamerdark}
 
 % Packages
 \usepackage{latexsym, amsmath, amssymb, amsfonts,
             arydshln, mathrsfs, mathtools, upgreek}
+\usepackage{graphicx,subcaption,tikz}
+  \captionsetup[figure]{textfont=scriptsize,labelfont=scriptsize}
+  \setbeamerfont{caption}{size=\scriptsize}
 \usepackage{algorithm,algpseudocode}
-
-% Citations
-\addbibresource{./ref/library.bib}
+\usepackage{appendixnumberbeamer}
 
 % Macros
 % \input{userdef-mathsym}
@@ -27,9 +28,16 @@
 \institute[]{
     \begin{tabular}{ll}
       $^1$ Universit\\'{e} du Luxembourg, Luxembourg\\\\
-      $^2$ Link\\"{o}ping University, Sweden
+       $^2$ Link\\"{o}ping University, Sweden
     \end{tabular}}
 \date{\footnotesize 14 July 2016 $\cdot$ MTNS 2016 $\cdot$ Minneapolis, MN}
+
+% Table of Contents (before each section)
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}}
 
 
 \begin{document}
@@ -39,9 +47,12 @@
 \begin{frame}
   \vspace*{1cm}
   \titlepage
+  \bibliographystyle{apalike}               % abbrv;apalike
+  \nobibliography{./ref/library}			% enable citations by /bibentry/
 \end{frame}
 \setbeamertemplate{footline}[frame number]  % reset page number
 \setcounter{framenumber}{0}
+
 
 % ---- Main Part ----
 
@@ -63,12 +74,6 @@ $0
     \end{center}
 \end{frame}
 
-% ---- Bibliography ----
-% use /biblatex/: adding the bibliography frame
-\begin{frame}%[allowframebreaks]  % use the option if more than 1 page
-  \frametitle{\bibname}
-  \printbibliography
-\end{frame}
 
 % ---- Appendix ----
 % \appendix
@@ -76,5 +81,10 @@ $0
 %   \frametitle{Appendix: ...}
 %
 % \end{frame}
+
+
+% ---- Bibliography ----
+% using /bibentry/; adding bibliography as footnote at each page
+% include bibtex libraries in the tilepage frame.
 
 \end{document}

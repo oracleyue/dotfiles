@@ -385,10 +385,10 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 ;; (org-level-8 (:inherit outline-8))
                 ;; ---- oracleyue: add ----
                 (org-level-1 (:inherit variable-pitch
-                                       :height 1.10
+                                       :height 1.02 ;;1.10
                                        ,@fg-blue))
                 (org-level-2 (:inherit variable-pitch
-                                       :height 1.05
+                                       :height 1.02 ;;1.05
                                        ,@fg-cyan))
                 (org-level-3 (:inherit variable-pitch
                                        :height 1.02

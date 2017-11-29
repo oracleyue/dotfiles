@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: itemize
-# key: itemize
+# key: item
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --

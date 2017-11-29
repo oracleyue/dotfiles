@@ -1,0 +1,62 @@
+# -*- mode: snippet -*-
+# name: Beamer Template (Plain)
+# key: beamer
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[9pt,aspectratio=54]{beamer}
+\usepackage{styles/zyuebeamerplain}  % serif, times; accent=blue,cyan,etc.
+
+% Packages
+\usepackage{latexsym, amsmath, amssymb, amsfonts,
+            arydshln, mathrsfs, mathtools, upgreek}
+\usepackage{algorithm,algpseudocode}
+
+% Citations
+\addbibresource{./ref/library.bib}
+
+% Macros
+% \input{userdef-mathsym}
+
+% Title Page
+\title{$1}
+\author[Zuogong Yue, ISB102, LCSB]{}
+\date{}
+
+
+\begin{document}
+
+% ---- Title Page ----
+{
+  \setbeamertemplate{footline}[text line]{\hfill\parbox[b][40pt][t]%
+    {\textwidth}{\sffamily\footnotesize\insertshortauthor}\hfill}
+  \begin{frame}
+    \titlepage
+    \vspace*{-50pt}
+    \tableofcontents
+  \end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+% ---- Main Part ----
+
+$0
+
+
+
+
+% ---- Bibliography ----
+% use /biblatex/: adding the bibliography frame
+\begin{frame}%[allowframebreaks]  % use the option if more than 1 page
+  \frametitle{\bibname}
+  \printbibliography
+\end{frame}
+
+% ---- Appendix ----
+% \appendix
+% \begin{frame}
+%   \frametitle{Appendix: ...}
+%
+% \end{frame}
+
+\end{document}
