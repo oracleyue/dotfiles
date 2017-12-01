@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hexo markdown
+# key: hexo
+# --
+#+STARTUP: showall indent
+#+OPTIONS: toc:nil
+#+BEGIN_HTML
+---
+title:
+categories:
+tags:
+---
+#+END_HTML

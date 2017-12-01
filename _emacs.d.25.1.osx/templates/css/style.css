@@ -73,10 +73,12 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     width: 640px;
+    /* width: 720px; */
     margin: auto;
     text-align:left;
     font-family: 'Roboto', sans-serif;
     font-size: 11pt;
+    /* font-size: 13pt; */
 }
 
 hr { width: 96%; height: 1px; }
@@ -88,11 +90,12 @@ blockquote p {
 
 pre.src,
 pre.example {
-	background-color: #303030;
-    color: #f4f4f4;
-	font-size: 13px;
-    border-top: solid 2px #9c0001;
-    border-bottom: solid 2px #9c0001;
+    /* atom-one-dark */
+    background-color: #282C34;
+    color: #ABB2BF;
+    font-size: 90%;
+    border-top: solid 1px #f0f0f0;
+    border-bottom: solid 1px #f0f0f0;
 }
 
 #footnotes { font-style: italic; }

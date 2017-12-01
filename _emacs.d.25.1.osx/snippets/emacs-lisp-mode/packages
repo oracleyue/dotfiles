@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: required packages
+# key: pkg
+# group: oracleyue
+# --
+;; Install required packages for more functions
+(setq custom/${1:org}-packages
+      '($0))
+(custom/install-packages custom/${2:org}-packages)

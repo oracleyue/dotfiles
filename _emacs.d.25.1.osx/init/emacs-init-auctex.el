@@ -126,7 +126,8 @@
 (setq reftex-default-bibliography '("./ref/library.bib"))
 (setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
 
-;; Customize compilation commands
+;; Customize Compilation
+;; modifying commands
 (eval-after-load "tex"
   '(setcdr (assoc "LaTeX" TeX-command-list)
           '("%`%l%(mode) -shell-escape%' %t"
@@ -149,6 +150,9 @@
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber" "rubber --synctex -fd %t" TeX-run-command nil t) t))
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+                 '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
 (eval-after-load "tex"
@@ -167,12 +171,15 @@
    '(add-to-list 'TeX-command-list
        '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
 
-;; use latexmk (require "~/.latexmkrc" for full functionalities)
+;; use latexmk
+(unless (file-exists-p (expand-file-name "~/.latexmkrc"))
+  (copy-file (expand-file-name "~/.emacs.d/init/config/_latexmkrc")
+             (expand-file-name "~/.latexmkrc")))   ;; enable more functions
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
-;; PDF viewers
+;; PDF Viewers
 (cond
  ((string-equal system-type "gnu/linux")
   ; Use Evince as viewer, enable source <-> PDF sync

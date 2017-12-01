@@ -2,7 +2,19 @@
 ;; /Markdown/: major mode for Markdown
 ;; ================================================================
 
-;; Note: require "multimarkdown" or "markdown" in Bash
+;; Install required packages for more functions
+(setq custom/md-packages
+      '(markdown-mode
+        imenu-list
+        hexo))
+(custom/install-packages custom/md-packages)
+
+
+;;
+;; /markdown-mode/: major mode
+;;
+
+;; require "multimarkdown" or "markdown" in Bash
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -42,6 +54,15 @@
 ; ;; use livedown to preview markdown
 ;(add-hook 'markdown-mode-hook (lambda()
 ;          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
+
+
+;;
+;; /hexo/: major mode to write blogs using .md
+;;
+(defun write-blog:hexo ()
+  (interactive)
+  (hexo "~/Public/Dropbox/oracleyue/blog/oracleyue.github.io"))
+
 
 
 

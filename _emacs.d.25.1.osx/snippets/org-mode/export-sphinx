@@ -1,9 +1,10 @@
 # -*- mode: snippet -*-
-# name: export options (template)
-# key: templ
+# name: export options (sphinx)
+# key: export
 # --
-#+DESCRIPTION: copy "org-html-template" under .emacs.d
 #+LANGUAGE:  en
 #+OPTIONS:   H:4 toc:t num:2
 #+PROPERTY:  header-args :padline no
 #+SETUPFILE: setup/theme-readtheorg.setup
+
+usage: copy and unzip "org-theme-sphinx.zip" from ~/.emacs.d/template/css/org-mode/

@@ -7,7 +7,7 @@
 #+AUTHOR:    Zuogong Yue
 #+EMAIL:     oracleyue@gmail.com
 #+DATE:      ${2:Date}
-
+#+STARTUP:   indent
 
 
 $0
