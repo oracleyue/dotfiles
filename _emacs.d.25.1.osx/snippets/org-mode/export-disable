@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: export options (disable HTML head)
+# key: export
+# --
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
