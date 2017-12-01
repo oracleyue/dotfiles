@@ -1,5 +1,13 @@
-; =======================================
+;; ================================================================
 ;; Programming Environment for /Python/
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/py-ac-packages
+      '(jedi
+        jedi-core
+        jedi-direx))
+(custom/install-packages custom/py-ac-packages)
 
 ;; usages
 ;; ------------------

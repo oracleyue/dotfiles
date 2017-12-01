@@ -1,6 +1,11 @@
-;; ======================================================
+;; ================================================================
 ;; Tag Supports in Programming Environement
-;; ======================================================
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/gtags-packages
+      '(helm-gtags))
+(custom/install-packages custom/gtags-packages)
 
 
 ;;

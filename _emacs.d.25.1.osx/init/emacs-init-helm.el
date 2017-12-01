@@ -1,4 +1,14 @@
-;; ====================================
+;; ================================================================
+;; /Helm/ as the main completion system
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/helm-packages
+      '(helm
+        helm-core))
+(custom/install-packages custom/helm-packages)
+
+
 ;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)

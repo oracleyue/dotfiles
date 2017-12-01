@@ -16,14 +16,7 @@
 ;; List of Required Packages
 (setq custom/packages
       '(auctex
-        auto-complete
-        auto-complete-c-headers
-        auto-complete-clang
         bash-completion
-        company
-        company-c-headers
-        company-jedi
-        company-quickhelp
         csv-mode
         engine-mode
         dash
@@ -37,16 +30,8 @@
         function-args
         golden-ratio
         google-c-style
-        helm
-        helm-core
-        helm-gtags
-        helm-projectile
-        helm-swoop
         iedit
         imenu-list
-        jedi
-        jedi-core
-        jedi-direx
         julia-mode
         key-combo
         magit
@@ -54,15 +39,11 @@
         matlab-mode
         multiple-cursors
         neotree
-        popup
         popwin
-        pos-tip
-        projectile
         smartparens
         srefactor
         stickyfunc-enhance
         undo-tree
-        yasnippet
         zeal-at-point))
 
 ;; Functions to check and install packages

@@ -1,7 +1,14 @@
-;; ============================================================
+;; ================================================================
 ;; Project Management via Projectile
-;; ============================================================
+;; ================================================================
 ;; Last modified on 30 Aug 2017
+
+;; Install required packages for more functions
+(setq custom/proj-packages
+      '(projectile
+        helm-projectile))
+(custom/install-packages custom/proj-packages)
+
 
 ;; /projectile/: project management
 (require 'projectile)

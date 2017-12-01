@@ -1,3 +1,17 @@
+;; ================================================================
+;; /Company/ as the backend for intelligent completion
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/company-packages
+      '(company
+        company-c-headers
+        company-jedi
+        pos-tip
+        company-quickhelp))
+(custom/install-packages custom/company-packages)
+
+
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;; Usage:
 ;; 1. "C-s", "C-r": search among candidates

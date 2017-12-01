@@ -1,8 +1,12 @@
-;; =====================================
+;; ================================================================
 ;; Settings for /helm-swoop/
+;; ================================================================
 
-;; Prerequisite packages
-;(require 'helm)
+;; Install required packages for more functions
+(setq custom/helm-swoop-packages
+      '(helm-swoop))
+(custom/install-packages custom/helm-swoop-packages)
+
 
 ;; Locate the helm-swoop folder to your path
 (add-to-list 'load-path "~/.emacs.d/elisp/helm-swoop")

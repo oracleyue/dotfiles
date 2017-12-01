@@ -1,3 +1,17 @@
+;; ================================================================
+;; /Auto-Complete/ as the backend for intelligent completion
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/ac-packages
+      '(yasnippet
+        auto-complete
+        popup
+        auto-complete-c-headers
+        auto-complete-clang))
+(custom/install-packages custom/ac-packages)
+
+
 ;;
 ;; /Yasnippet/ A template system
 ;;
