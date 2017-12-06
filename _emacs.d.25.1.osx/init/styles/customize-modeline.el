@@ -4,15 +4,6 @@
 
 
 ;;
-;; Use powerline
-;;
-(defun y:use-powerline ()
-  (require 'powerline)
-  (setq powerline-default-separator 'arrow)
-  (powerline-default-theme))
-
-
-;;
 ;; Customize mode-line
 ;;
 (defun y:customize-mode-line ()
@@ -104,7 +95,6 @@
 ;; Interface
 ;;
 (defun y:setup-mode-line ()
-  ;; (y:use-powerline)
   (y:customize-mode-line))
 
 
