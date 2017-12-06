@@ -11,7 +11,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}   % "charter" for regular texts
+\usepackage{charter,helvet}   % times,charter (11pt); cochineal (12pt)
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,
@@ -30,7 +30,8 @@
 
 \begin{document}
 % \title{}
-% \date{\today}
+% \author{}
+% \date{\vspace*{-2em}\today}
 % \maketitle
 
 % ----------------- MAIN --------------------
@@ -44,8 +45,8 @@ $0
 
 
 % --------------- BIBLIOGRAPHY --------------
-% \def\bibfont{\footnotesize}
-% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
+% \def\bibfont{\small}
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat
 % \bibliography{./ref/library}
 
 \end{document}

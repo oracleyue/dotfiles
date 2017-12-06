@@ -59,7 +59,7 @@
 ;;
 ;; /hexo/: major mode to write blogs using .md
 ;;
-(defun write-blog:hexo ()
+(defun hexo-blog ()
   (interactive)
   (hexo "~/Public/Dropbox/oracleyue/blog/oracleyue.github.io"))
 

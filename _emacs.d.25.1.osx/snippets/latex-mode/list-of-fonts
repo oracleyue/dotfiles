@@ -12,7 +12,9 @@
 \usepackage{fouriernc}    % use New CenturySchL with math symbols
 
 \usepackage{charter}      % nice for regular texts (e.g. novel, blog)
-\usepackage{baskervald}   % ...
+\usepackage{cochineal}    % fork of crimson
+\usepackage{baskervald}   % variant: Baskervaldx
+\usepackage{palatino}
 
 % Sans
 \usepackage{lmodern}      % computer modern with enhancement on sans

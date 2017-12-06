@@ -42,7 +42,7 @@
 ;; ------------------------------------------------
 (require 'dired-x)
 (setq dired-omit-files
-      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$")
+      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls")
 (delete ".bbl" dired-omit-extensions)
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 ;; suppress errors due to no support of "ls --dired" on osx
@@ -109,6 +109,7 @@
                           (mode . css-mode)
                           (mode . json-mode)
                           (mode . js2-mode)))
+               ("blog" (mode . hexo-mode))
                ("emacs" (or (mode . emacs-lisp-mode)
                             (name . "^\\*scratch\\*$")
                             (name . "^\\*Messages\\*$")))
