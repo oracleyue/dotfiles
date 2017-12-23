@@ -16,7 +16,6 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # rsync bash config
 $sync ~/.bashrc $repopath/bash/_bashrc.osx
-$sync ~/.profile $repopath/bash/_profile.osx
 $sync ~/.tmux.conf $repopath/tmux/_tmux.conf.osx
 $sync ~/.screenrc $repopath/tmux/_screenrc.osx
 

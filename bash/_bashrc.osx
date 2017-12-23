@@ -15,7 +15,7 @@ export PATH=/Users/oracleyue/bin:/usr/local/sbin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
 
 # library pathes
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
+# export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
 
 # alias
 alias ll='ls -Alh'
@@ -37,6 +37,7 @@ alias grep='grep -i --colour=always'
 alias gitup='git add . && git ci -m "regular update" && git push'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias shred='gshred -n 5'
+alias trash='trash -v'
 
 # alias commands for development
 alias gcc='gcc-7'
@@ -49,6 +50,10 @@ alias matlab-term='matlab -nosplash -nodesktop'
 export EDITOR=vim
 export GTAGSLABEL=pygments      # "gtags" in GNU global
 export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
+
+# env variables for shorthands of paths
+export BLOGPATH=${HOME}/Public/Dropbox/oracleyue/blog/oracleyue.github.io
+alias blog="cd $BLOGPATH; hexo list post"
 
 # colorize the bash
 export CLICOLOR=1

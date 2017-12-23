@@ -1,5 +1,5 @@
 " -- interface setup
-colorscheme oracleyue-dark
+"colorscheme oracleyue-dark
 
 "set gui=noaddons,nobookmarks,nomenu,navigation,tabs
 "set gui scrollbars=false
