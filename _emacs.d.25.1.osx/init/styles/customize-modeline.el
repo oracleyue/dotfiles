@@ -11,6 +11,10 @@
   (make-face 'y/mode-line-buffer-name-face)
   (make-face 'y/mode-line-plain-face)
 
+  (when (eq 'solarized (car custom-enabled-themes))
+    (set-face-attribute 'y/mode-line-buffer-name-face nil
+                        :bold t))
+
   (unless (eq 'solarized (car custom-enabled-themes))
     (set-face-attribute 'y/mode-line-buffer-name-face nil
                         :foreground

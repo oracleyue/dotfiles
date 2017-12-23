@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: figure (in example env)
+# key: fige
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{center}
+  \includegraphics[height=.2\textwidth]{figures/${1:figname}}
+  \captionof{figure}{${2:caption}}
+  \label{fig:${3:label}}
+\end{center}
