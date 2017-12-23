@@ -18,20 +18,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 
-;; -----------------------------------------------------------------
-;; INFO: (available themes and usages)
-;; -----------------------------------------------------------------
-;; - using /solarized/ theme: Ethan Schoonover's theme [github]
-;; (setq solarized-termcolors 256)      ;; used in terminal
-;; (setq frame-background-mode 'dark)   ;; use dark theme
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-;; (load-theme 'solarized t)
-;;
-;; - using /monokai/ theme; modified by oracleyue
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (load-theme 'monokai t)
-;; -----------------------------------------------------------------
-
 
 ;;
 ;; Customize ModeLine
@@ -49,7 +35,7 @@
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'solarized t)            ;; GUI
-           (load-theme 'Amelie t)))              ;; terminal
+           (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         ((string-equal "main" (daemonp))          ;; server: main
          (load-theme 'solarized t))
@@ -67,6 +53,21 @@
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
          (load-theme 'monokai t))))               ;; terminal
 (y:setup-mode-line)
+
+
+;; -----------------------------------------------------------------
+;; INFO: (available themes and usages)
+;; -----------------------------------------------------------------
+;; - using /solarized/ theme: Ethan Schoonover's theme [github]
+;; (setq solarized-termcolors 256)      ;; used in terminal
+;; (setq frame-background-mode 'dark)   ;; use dark theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
+;; (load-theme 'solarized t)
+;;
+;; - using /monokai/ theme; modified by oracleyue
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (load-theme 'monokai t)
+;; -----------------------------------------------------------------
 
 
 
