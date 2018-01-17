@@ -37,11 +37,12 @@ noremap <C-q> :tabopen https://getpocket.com<CR>
 
 " -- jump to webpages opened in the current tab before
 " ! no longer working on Firefox > 45.0
-"map <C-j> :jumps<CR>
+noremap <C-j> :jumps<CR>
 
 " -- open websites in history
 " 1. use ":history" open the history list
 " 2. ";o" to show hint, and select by the number
+noremap <C-h> :history<CR>
 
 " -- usage notes:
 " 1) jump to the address bar: <C-l>
