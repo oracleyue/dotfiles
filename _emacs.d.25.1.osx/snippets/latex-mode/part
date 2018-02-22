@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: frame with part title
+# key: part
+# group: macros
+# --
+\begin{frame}
+  \begin{center}
+      \huge \sffamily \color{mColor}
+      $0
+    \end{center}
+\end{frame}

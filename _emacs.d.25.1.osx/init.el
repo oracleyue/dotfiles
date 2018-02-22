@@ -11,8 +11,8 @@
 
 ;; stop emacs automatically editing .emacs
 (setq disabled-command-function nil)
-(setq custom-file "~/.emacs-custom.el")
-;(load custom-file 'noerror)
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror)
 
 ;; load paths
 (add-to-list 'load-path (expand-file-name "init" user-emacs-directory))

@@ -6,7 +6,7 @@
 # --
 \documentclass[xcolor={dvipsnames},aspectratio=169]{beamer}
 % options: notes,handout; aspectratio=169,1610,149,54,43,32
-\usepackage{styles/zyuebeamer}  % biblatex, sans, txmath
+\usepackage[bg]{styles/zyuebeamer}  % biblatex, sans, txmath, bg
 % \usepackage[sans]{styles/zyuebeamerdark}
 
 % Packages
@@ -59,7 +59,7 @@ $0
       {\Huge \bf \textcolor{mAlert}{Thank you!}} \\\
       \bigskip
       \bigskip
-      \includegraphics[width=10cm]{figures/unix_happy.jpg}
+      \includegraphics[width=10cm]{figures/unix_happy.png}
     \end{center}
 \end{frame}
 

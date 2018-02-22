@@ -52,6 +52,7 @@
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
 (add-hook 'python-mode-hook 'helm-gtags-mode)
+(add-hook 'matlab-mode-hook 'helm-gtags-mode)
 ;; Keybindings
 ;; - jumps through definitions, references, symbols or DWIM
 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)

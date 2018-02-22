@@ -31,10 +31,10 @@
 ;;
 (cond ((string-equal system-type "darwin")
        (cond
-        ;; app (not server)
+        ;; app (not server-client)
         ((not (daemonp))
          (if (display-graphic-p)
-             (load-theme 'solarized t)            ;; GUI
+             (load-theme 'atom-one-dark t)        ;; GUI
            (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         ((string-equal "main" (daemonp))          ;; server: main
@@ -44,14 +44,14 @@
                    (lambda (frame)
                      (select-frame frame)
                      (when (display-graphic-p frame)
-                       (load-theme 'monokai t)
+                       (load-theme 'atom-one-dark t)
                        (y:setup-mode-line)))))
         ((string-equal "ac-mode" (daemonp))
-         (load-theme 'atom-one-dark t))))         ;; server: ac-mode
+         (load-theme 'monokai t))))               ;; server: ac-mode
       ((string-equal system-type "gnu/linux")
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
-         (load-theme 'monokai t))))               ;; terminal
+         (load-theme 'Amelie t))))               ;; terminal
 (y:setup-mode-line)
 
 

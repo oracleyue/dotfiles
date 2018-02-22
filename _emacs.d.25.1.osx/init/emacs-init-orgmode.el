@@ -63,14 +63,11 @@
 ;; use syntax highlighting in org code blocks
 (setq org-src-fontify-natively t)
 
-;; indentation
-;; (setq org-src-preserve-indentation t)
-
 ;; setup babel for programming languages
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (sh . t)
+   ;; (sh . t)
    (C . t)
    (python . t)
    (R . t)

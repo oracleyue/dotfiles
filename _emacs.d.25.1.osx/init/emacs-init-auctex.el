@@ -51,6 +51,10 @@
                  :trigger "\\b("
                  :when '(sp-in-math-p)
                  :post-handlers '(sp-latex-insert-spaces-inside-pair))
+  (sp-local-pair "\\big\\{" "\\big\\}"
+                 :trigger "\\b{"
+                 :when '(sp-in-math-p)
+                 :post-handlers '(sp-latex-insert-spaces-inside-pair))
   (sp-local-pair "\\big[" "\\big]"
                  :trigger "\\b["
                  :when '(sp-in-math-p)

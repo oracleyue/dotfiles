@@ -4,7 +4,7 @@
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{figure}[htb]
+\begin{figure}[htbp]
   \centering
 
   \begin{subfigure}[b]{0.4\textwidth}

@@ -1,6 +1,17 @@
 ;; ================================================================
-;; Directory Explorers
+;; Directory Explorers and Window Management
 ;; ================================================================
+
+
+;; ----------------------------------------------
+;; Basic settings for window management
+;; ----------------------------------------------
+
+;; use "super-<left>", "super-<right>" to move between frames
+
+;; use "S-<left>", "S-<right>", "S-<up>", "S-<down>" to move between splitted windows
+(windmove-default-keybindings)
+
 
 ;; ----------------------------------------------
 ;; /golden-ratio/: resize multiple windows
