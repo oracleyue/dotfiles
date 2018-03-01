@@ -1,0 +1,392 @@
+* Modern C++ IDE for Emacs
+  Features:
+  - use *rtags* for code navigation
+  - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
+  - integrate *flycheck* with *rtags* (disabled) and *irony*
+  - use *cmake-ide* to integrate cmake-based projects
+  - use *helm-make* as alternative compilation
+
+** Requirements
+*** install software in OS
+1. use pip to install =cpplint= for google-cpp-style
+
+2. have *cmake* installed
+
+3. install *clang/LLVM*: ~brew install llvm~
+
+4. compile *irony-server*
+   - make a clean build directory
+   - run ~cmake -DCMAKE_PREFIX_PATH=/usr/local/Cellar/llvm/5.0.0/ -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON ~/.emacs.d/elpa/irony-20170828.1218/server/~
+   - build and run ~make && ./bin/irony-server --version~
+   - copy =./bin/irony-server= under your =.emacs.d/bin=
+
+5. compile *rtags* servers (see RTags section)
+
+*** install packages in emacs
+  Adding a header for the exported =.el= file.
+  #+BEGIN_SRC emacs-lisp
+    ; =====================================================
+    ;; Programming Environment for C/C++ (modern)
+    ; =====================================================
+  #+END_SRC
+
+  Install the additional packages to support the modern C/C++ environment.
+  #+BEGIN_SRC emacs-lisp
+    ;; check and install essential pkgs
+    (setq custom/modern-cc-packages
+          '(irony
+            company-irony
+            company-irony-c-headers
+            flycheck-irony
+            irony-eldoc
+            rtags
+            company-rtags
+            helm-rtags
+            flycheck-rtags
+            cmake-ide
+            helm-make))
+    (unless (custom/packages-installed-p custom/modern-cc-packages)
+      (package-refresh-contents)
+      (dolist (pkg custom/modern-cc-packages)
+        (unless (package-installed-p pkg)
+          (package-install pkg))))
+  #+END_SRC
+
+** C++ Coding styles
+*** Default style for C/C++
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'cc-mode)
+      (setq-default c-default-style "linux")
+      (setq-default c-basic-offset 4)
+    #+END_SRC
+
+*** Basic edit enhancement for C/C++
+**** Auto insert pair of symbols using smartparens
+     Install =smartparens= mode and enable it by ~(require 'smartparens)~, which has been enabled in =.emacs= globally.
+
+     #+BEGIN_SRC emacs-lisp
+       ;; /smartparens/: insert pair of symbols
+       ;; when you press RET, the curly braces automatically add another newline
+       (sp-with-modes '(c-mode c++-mode)
+         (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+         (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
+     #+END_SRC
+
+*** Google C++ style and its flymake checker
+    Install =google-c-style= and =flymake-google-cpplint=.
+    You also need to install Python package =cpplint= by =pip=.
+
+    #+BEGIN_SRC emacs-lisp
+      ;; /google-c-style/ and /flymake-google-cpplint/ style checker
+      (when y:enable-google-cpp-style
+        (require 'google-c-style)
+        (add-hook 'c-mode-common-hook 'google-set-c-style)
+        (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+        (defun y:flymake-google-init ()
+          (require 'flymake-google-cpplint)
+          (setq flymake-google-cpplint-command
+            (if (string-equal system-type "darwin")
+                "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
+          (flymake-google-cpplint-load))
+        (add-hook 'c-mode-hook 'y:flymake-google-init)
+        (add-hook 'c++-mode-hook 'y:flymake-google-init))
+    #+END_SRC
+
+** Source code navigation using RTags
+*** Install rtags servers in OS
+Build and install RTags using the RTags Quickstart Guide. Alternatively install RTags using your distribution's package manager.
+
+For OS X (due to the issues of duplicated clang's), compile as follows:
+#+BEGIN_SRC sh
+  git clone --recursive https://github.com/Andersbakken/rtags.git
+  cd rtags
+  mkdir build && cd build
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_PREFIX_PATH=/usr/local/Cellar/llvm/5.0.0/ ..
+  make
+#+END_SRC
+Put =rdm= and =rc= under your PATH.
+
+*** Setup rtags packages in Emacs
+    Install rtags from MELPA.
+
+**** use rtags for code navigation
+    #+BEGIN_SRC emacs-lisp
+      (require 'rtags)
+      ;; run rtags server automatically
+      (rtags-start-process-unless-running)
+      (rtags-enable-standard-keybindings)
+    #+END_SRC
+
+**** use rtags for code completions (disabled)
+    #+BEGIN_SRC emacs-lisp
+      (setq rtags-autostart-diagnostics t)
+      (setq rtags-completions-enabled t)
+      (push 'company-rtags company-backends)
+    #+END_SRC
+    If want to use *rtags* as *company* backend together with *irony* at the same time, we could add =company-rtags= in the same list with =company-irony=.
+
+**** integration with helm
+    #+BEGIN_SRC emacs-lisp
+      (setq rtags-display-result-backend 'helm)
+    #+END_SRC
+
+*** Run rtags server for projects
+Before using RTags you need to start rdm and index your project. In order to index your project, RTags requires you to export your project's compile commands with cmake.
+
+#+BEGIN_SRC sh
+  $ rdm &
+  $ cd /path/to/project/dir/containing/compile_commands.json/
+  $ cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+  $ rc -J .
+#+END_SRC
+
+We'll see how to automate this process with cmake-ide below.
+
+*** Usages
+**** Basic movements
+
+     =C-M-f= runs forward-sexp, move forward over a balanced expression that can be a pair or a symbol.
+     =C-M-b= runs backward-sexp, move backward over a balanced expression that can be a pair or a symbol.
+     =C-M-k= runs kill-sexp, kill balanced expression forward that can be a pair or a symbol.
+     =C-M-<SPC>= or =C-M-@= runs mark-sexp, put mark after following expression that can be a pair or a symbol.
+     =C-M-a= runs beginning-of-defun, which moves point to beginning of a function.
+     =C-M-e= runs end-of-defun, which moves point to end of a function.
+     =C-M-h= runs mark-defun, which put a region around whole current or following function.
+
+**** Find definitions/references in project
+
+     =C-c-r .= runs rtags-find-symbol-at-point, which jumps to the definition of the symbol under the cursor; press again to jump between definition and declaration.
+
+     =C-c-r ,= runs rtags-find-references-at-point, which lists all references to the symbol under the cursor.
+
+     =C-c-r <= runs rtags-find-references, which prompts for the symbol name and finds all references.
+     =C-c-r >= runs rtags-find-symbol, which prompts for symbol name and finds all references.
+
+     =C-c r I= gets a list of rtags-extracted symbols in the current file (*helm* also provides =helm-semantic-or-imenu=)
+
+**** Find files in project
+
+     =C-c r ;= runs rtags-find-file, which prompts for file name to search for out of currently indexed files.
+
+     Alternatively, this can be better accomplished with Projectile.
+
+**** View visited tags with tag stack
+
+     =C-c r [= rtags-location-stack-back Jumps to last visited tag.
+     =C-c r ]= rtags-location-stack-forward Moves forward in location stack.
+
+** Source code completion using irony
+*** Prerequisites (For Mac OS X)
+
+    Download a pre-compiled package from llvm.org to install =irony-server=.
+    (change the 4.0.1 version with the latest (the greatest!))
+
+    - Download =clang+llvm-4.0.1-x86_64-apple-darwin.tar.xz= from http://llvm.org/releases/download.html
+
+    - Extract it somewhere (e.g: =~/Programs/=) (Warning: you need to keep it on your computer to allow =irony-server= to work!)
+
+    - make a clean build directory (e.g. ~cd ~/tmp && mkdir build && cd build~)
+
+    - run
+    #+BEGIN_SRC sh
+      cmake -DCMAKE_PREFIX_PATH=/Users/oracleyue/Programs/clang+llvm-4.0.1-x86_64-apple-macosx10.9.0/ -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON /Users/oracleyue/.emacs.d/elpa/irony-20170828.1218/server/
+    #+END_SRC
+
+    - build and run ~make && ./bin/irony-server --version~
+
+    - cp =irony-server= to your =.emacs.d/bin/=
+
+*** Setup
+
+    Install irony-mode from MELPA and add the following to your emacs init file:
+
+    #+BEGIN_SRC emacs-lisp
+      ;; /irony/+/company-irony/: code completions
+      (add-hook 'c++-mode-hook 'irony-mode)
+      (add-hook 'c-mode-hook 'irony-mode)
+      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+      (setq irony--server-executable (expand-file-name "~/.emacs.d/bin/irony-server"))
+      (add-to-list 'irony-additional-clang-options "-std=c++11")
+    #+END_SRC
+
+    NOTE: Like RTags, Irony requires a compilation database. To create one run the following:
+
+    #+BEGIN_SRC sh
+      $ cd /path/to/project/root
+      $ cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    #+END_SRC
+
+    The first time you run irony you must install the *irony-server* by runing the command: ~M-x irony-install-server~.
+
+*** Using Company with Irony
+    To use company-mode with Irony, install company-irony from melpa and add the following to your emacs init file:
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+      (setq company-backends (delete 'company-semantic company-backends))
+    #+END_SRC
+    We will add the *irony* into company-backends later together with *irony-c-headers*.
+
+*** Header file completion with company-irony-c-headers
+    To add support for completing C++ headers:
+
+    - Install =company-irony-c-headers= from MELPA
+
+    - Add the following to your emacs init file:
+      #+BEGIN_SRC emacs-lisp
+        (require 'company-irony-c-headers)
+        (defun y:add-company-backend-irony ()
+          (setq-local company-backends
+                      (append '((company-irony-c-headers company-irony))
+                              company-backends)))
+        (add-hook 'c-mode-hook 'y:add-company-backend-irony)
+        (add-hook 'c++-mode-hook 'y:add-company-backend-irony)
+      #+END_SRC
+
+*** Show eldoc for C/C++ mode via irony (disabled)
+    Enable the minor mode irony-eldoc, as well as eldoc-mode. For an example, place point on top of a symbol, or inside a function call.
+    #+BEGIN_SRC
+      (add-hook 'irony-mode-hook #'irony-eldoc)
+    #+END_SRC
+
+*** Auto-generate .clang_complete
+    =.clang_complete= - A file at the root of your project containing the compilation flags, one per line.
+
+    To generate the =.clang_complete= file automatically, we use =cc_args.py=, which has a copy in your =~/.emacs.d/git/=. Copy it to the folder in your =PATH= search paths. Then, in your build folder, e.g. =<your-project-root>/build=,
+    - run ~CXX='cc_args.py g++' cmake ..~
+    - run ~make~ and then you find =.clang_complete= under your build folder.
+    - copy it to your project root.
+
+** Syntax checking with Flycheck
+*** Prerequisites
+
+    Install =flycheck= from MELPA and add the following to your emacs init file:
+
+    #+BEGIN_SRC emacs-lisp
+      ;; /flycheck/: syntax checker
+      (add-hook 'c++-mode-hook 'flycheck-mode)
+      (add-hook 'c-mode-hook 'flycheck-mode)
+    #+END_SRC
+
+*** Integrating RTags with Flycheck (disabled)
+
+    To enable RTags and flycheck integration add the following to your emacs init file:
+
+    #+BEGIN_SRC
+      (require 'flycheck-rtags)
+
+      (defun y:flycheck-rtags-setup ()
+        (flycheck-select-checker 'rtags)
+        (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+        (setq-local flycheck-check-syntax-automatically nil))
+      (add-hook 'c-mode-common-hook #'y:flycheck-rtags-setup)
+    #+END_SRC
+
+*** Integrating Irony with Flycheck
+
+    Install =flycheck-irony= from MELPA and add the following to your emacs init file:
+
+    #+BEGIN_SRC emacs-lisp
+      (eval-after-load 'flycheck
+        '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    #+END_SRC
+
+*** Keybindings
+
+    - =C-c ! n= and =C-c ! p=: jump to next or previous errors
+    - =C-c ! l=: list errors
+    - =C-c ! c=: menually run checker
+
+** CMake automation with cmake-ide
+*** Prerequisites
+
+    Install cmake-ide from MELPA and add the following to your emacs init file:
+    #+BEGIN_SRC emacs-lisp
+      (cmake-ide-setup)
+    #+END_SRC
+
+*** Using cmake-ide
+
+    To have cmake-ide automatically create a compilation commands file in your project root create a =.dir-locals.el= containing the following:
+    #+BEGIN_SRC
+      ((nil . ((cmake-ide-build-dir . "<PATH_TO_PROJECT_BUILD_DIRECTORY>"))))
+    #+END_SRC
+
+    You can now build your project using ~M-x cmake-ide-compile~. Additionally, cmake-ide will automatically update your RTags index as well.
+
+** More supports for C/C++ programming
+*** Compilation supports for C/C++, cmake and makefile
+    Install =helm-make= package, and setup as below.
+    To compile the whole project, use =C-c p c= (=helm-make-projectile=); otherwise, simple run =M-x helm-make= or =M-x compile=.
+    #+BEGIN_SRC emacs-lisp
+      ;; Compile commands in c/c++ and makefile modes
+      ;; use helm-make
+      (global-set-key (kbd "C-c p c") 'helm-make-projectile)
+      (add-hook 'c-mode-common-hook
+                (lambda () (define-key c-mode-base-map
+                             (kbd "C-c C-c") 'helm-make)))
+      ;; default mode for Makefile in gnome
+      (add-hook 'makefile-gmake-mode-hook
+                (lambda () (define-key makefile-gmake-mode-map
+                             (kbd "C-c C-c") 'helm-make)))
+      ;; default mode for Makefile in Mac OS X
+      (add-hook 'makefile-bsdmake-mode-hook
+                (lambda () (define-key makefile-bsdmake-mode-map
+                             (kbd "C-c C-c") 'helm-make)))
+      ;; compilation setup for cmake-mode
+      (add-hook 'cmake-mode-hook
+                (lambda ()
+                  (setq compile-command "cd build/ && cmake .. && make")
+                  (define-key cmake-mode-map (kbd "C-c C-c") 'compile)))
+    #+END_SRC
+
+    If the Makefile is in different directories, e.g. created by *cmake*, we need to specify the location of =Makefile=. =.dir-locals.el= file is needed for this purpose. =.dir-locals.el= should be placed in project root. The file content looks like this:
+    #+BEGIN_SRC
+      ((c++-mode (helm-make-build-dir . "build/")))
+    #+END_SRC
+
+    Due to the local variable settings, Emacs will ask if the variable =helm-make-build-dir= is safe. Put the configuration in init file to prevent it.
+    #+BEGIN_SRC emacs-lisp
+      (put 'helm-make-build-dir 'safe-local-variable 'stringp)
+    #+END_SRC
+
+*** Major modes to edit CMake files
+
+    #+BEGIN_SRC emacs-lisp
+      ;; /cmake-mode/: cmake-mode.el
+      (require 'cmake-mode)
+      ;; /cmake-font-lock/: to add more fontifying features
+      (add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
+      (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+      (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+      ;; adding /company-cmake/ for ac-complete
+      (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
+      (defun y:company-cmake-setup ()
+        (setq-local company-backends
+                    (append '((company-cmake company-dabbrev-code))
+                            company-backends)))
+      (add-hook 'cmake-mode-hook 'y:company-cmake-setup)
+    #+END_SRC
+
+*** Major modes for doxygen documentations (disabled)
+    To use =doxymacs=, setup the following in your init file:
+
+    #+BEGIN_SRC
+      ;; /doxymacs/ to manipulate doxygen documentations
+      (add-to-list 'load-path "~/.emacs.d/git/doxymacs-1.8.0")
+      (require 'doxymacs)
+      (add-hook 'c-mode-common-hook 'doxymacs-mode)
+      ; fontify the doxygen keywords
+      (defun my-doxymacs-font-lock-hook ()
+        (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+            (doxymacs-font-lock)))
+      (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+    #+END_SRC
+
+** Ends
+   #+BEGIN_SRC emacs-lisp
+     (provide 'init-cc-modern)
+     ;; ================================================
+     ;; init-cc-modern.el ends here
+   #+END_SRC

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Beamer Template (16:9; lcsb)
+# name: Beamer Template (16:9; LCSB)
 # key: beamer
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
