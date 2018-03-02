@@ -54,6 +54,7 @@ export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 # env variables for shorthands of paths
 export BLOGPATH=${HOME}/Public/Dropbox/oracleyue/blog/oracleyue.github.io
 alias blog="cd $BLOGPATH; hexo list post"
+export scgPATH="scg:/home/zuogong/Workspace/thesis"
 
 # colorize the bash
 export CLICOLOR=1
