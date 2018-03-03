@@ -3,32 +3,24 @@
 ;; ================================================================
 
 
-;;
 ;; Frame Size   (note: [96,36] in Mac; 33 in Thinkpad)
-;;
 (if *is-mac*
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
 
 
-;;
 ;; Theme Path
-;;
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 
 
-;;
 ;; Customize ModeLine
-;;
 (load-file (expand-file-name "init/styles/customize-modeline.el"
 			     user-emacs-directory))
 
 
-;;
 ;; Setup Theme
-;;
 (cond (*is-mac*
        (cond
         ;; app (not server-client)
@@ -53,6 +45,13 @@
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
          (load-theme 'Amelie t))))                ;; terminal
 (y:setup-mode-line)
+
+
+;; ;; Set Fringe Color
+;; (when (eq 'atom-one-dark (car custom-enabled-themes))
+;;   (set-face-attribute 'fringe nil
+;;                       :foreground (face-foreground 'default)
+;;                       :background (face-background 'mode-line)))
 
 
 ;; -----------------------------------------------------------------

@@ -62,7 +62,7 @@
 
 ;; use /company-quickhelp/
 ;; notes: random positioning is fixed by maximizing window and adding lines below
-(company-quickhelp-mode 1)
+;(company-quickhelp-mode 1)
 ;; starting manually
 (setq company-quickhelp-delay nil)
 (eval-after-load 'company     ;; "M-h" for company-quickhelp

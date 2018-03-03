@@ -2,10 +2,15 @@
 ;; Programming Environment for /Python/
 ;; ================================================================
 
-;; Install required packages for more functions
+;; Install required python packages
+;;    =pip install virtualenv jedi epc argparse=
+;;    =pip install pyflakes=
+
+;; Install required emacs packages
 (setq custom/py-ac-packages
       '(jedi
         jedi-core
+        company-jedi
         jedi-direx))
 (custom/install-packages custom/py-ac-packages)
 
@@ -33,7 +38,6 @@
 ;;     then evaluate buffer in iPython
 
 
-
 ;;
 ;; Python Major Mode /emacs-for-python/
 ;;
@@ -46,8 +50,8 @@
 (require 'epy-bindings)        ;; suggested keybindings [optional]
 ;(require 'epy-nose)            ;; nose integration
 
-;; (setq python-shell-interpreter "python2") ; use python
-(setq python-shell-interpreter "ipython2") ; use ipython; slow down openning files
+;; (setq python-shell-interpreter "python2") ; use python2
+(setq python-shell-interpreter "ipython3") ; use ipython; slow down openning files
 (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
@@ -63,16 +67,23 @@
 
 
 ;;
-;; Auto-completion by /Jedi/, using /company-jedi/
+;; Auto-completion by /Jedi/ (using /company-jedi/)
 ;;
+
+;; basic settings of jedi
+(setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
+(setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
+
+;; set virtualenv to use python2 (default: python3)
+;; (setq jedi:environment-virtualenv
+;;       (list "virtualenv2" "--system-site-packages"))
+
+;; integration with /company-mode/
 (defun y:company-py-setup ()
   (jedi-mode 1) ;; not necessary for company, but for code nagivation and direx
   (setq-local company-backends
               (append '(company-jedi) company-backends)))
 (add-hook 'python-mode-hook 'y:company-py-setup)
-;; set calltip methods
-(setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
-(setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
 
 ;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
 (when (cdr (assoc "direx-jedi" y:use-direx-or-neotree))

@@ -72,6 +72,11 @@
 (add-hook 'ess-mode-hook 'y:add-company-backend-ess)
 
 
+;; delete the unnecessary buffer *ESS*
+(kill-buffer "*ESS*")
+
+
+
 (provide 'init-r)
 ;; ================================================
 ;; init-r.el ends here

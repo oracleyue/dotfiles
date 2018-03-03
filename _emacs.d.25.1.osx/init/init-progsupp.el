@@ -12,10 +12,8 @@
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
 ;; align line numbers to the right + padding
-(defun linum-format-func (line)
-  (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
-     (propertize (format (format " %%%dd " w) line) 'face 'linum)))
-(setq linum-format 'linum-format-func)
+(setq linum-format "%4d  ")
+;; (setq linum-format "%4d \u2502 ")    ;; solid line separator
 
 ;; enable linum-mode
 (add-hook 'sh-mode-hook 'linum-mode)
