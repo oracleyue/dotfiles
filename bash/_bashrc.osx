@@ -9,13 +9,11 @@ export LANG=en_US.UTF-8
 GPG_TTY=`tty`
 export GPG_TTY
 
-# update PATH and MANPATH
-# export PATH=/usr/local/opt/python/libexec/bin:${PATH}
+# pathes
 export PATH=/Users/oracleyue/bin:/usr/local/sbin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
-
-# library pathes
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
+# export BSTINPUTS=$(kpsepath bst)
 
 # alias
 alias ll='ls -Alh'

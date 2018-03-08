@@ -27,7 +27,7 @@ $sync ~/.Rprofile $repopath/bash/_Rprofile.osx
 # rsync editor config
 ## VIM
 $sync ~/.vimrc $repopath/editors/_vimrc
-$sync ~/.vim $repopath/editors/
+$sync ~/.vim --exclude=.git $repopath/editors/
 
 ## Vimperator for Firefox
 $sync ~/.vimperatorrc $repopath/editors/_vimperatorrc
