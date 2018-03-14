@@ -16,8 +16,7 @@
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; servers
-;; profiles
+;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
 ;;   - "coding"  for coding (dark-theme, startup folders)
 ;;   - "ac-mode" for ac-complete (the rest as "coding")
@@ -38,6 +37,8 @@
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
+(add-hook 'text-mode-hook
+          (lambda () (setq-local cursor-type 'bar)))
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment

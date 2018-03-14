@@ -24,9 +24,8 @@
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;; use variable-width fonts
-(add-hook 'markdown-mode-hook
-          (lambda () (variable-pitch-mode t)
-            (setq-local cursor-type 'bar)))
+(add-hook 'markdown-mode-hook (lambda () (variable-pitch-mode t)
+                                (setq-local cursor-type 'bar)))
 
 ;; outline view of headings
 ;; use /imenu-list/ in "init-dired", toggled by "C-x C-'"
@@ -59,10 +58,9 @@
 ;;
 ;; /hexo/: major mode to write blogs using .md
 ;;
-(defun hexo-blog ()
+(defun draft-blog ()
   (interactive)
   (hexo "~/Public/Dropbox/oracleyue/blog/oracleyue.github.io"))
-
 
 
 

@@ -8,7 +8,8 @@
 (setq matlab-indent-function t)
 (setq matlab-shell-command "/usr/local/bin/matlab")
 (setq matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
-(load-library "matlab-load")
+;; (load-library "matlab-load")
+(load "matlab-load" t t)
 
 ;; enable CEDTE feature support
 ;(matlab-cedet-setup)

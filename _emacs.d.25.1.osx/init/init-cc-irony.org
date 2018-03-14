@@ -262,8 +262,7 @@
       (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
       (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
       ;; adding /company-cmake/ for ac-complete
-      (load-file (expand-file-name "git/company-cmake.el"
-                                   user-emacs-directory))
+      (require 'company-cmake)
       (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
       (defun y:company-cmake-setup ()
         (setq-local company-backends

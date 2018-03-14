@@ -8,17 +8,15 @@
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
 
-
 ;; Theme Path
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-
+(add-to-list 'load-path "~/.emacs.d/themes/sanityinc-tomorrow")
 
 ;; Customize ModeLine
-(load-file (expand-file-name "init/styles/customize-modeline.el"
-			     user-emacs-directory))
-
+(add-to-list 'load-path "~/.emacs.d/init/styles")
+(load "customize-modeline" t t)
 
 ;; Setup Theme
 (cond (*is-mac*
@@ -39,13 +37,17 @@
                        (load-theme 'atom-one-dark t)
                        (y:setup-mode-line)))))
         (*is-server-ac*
-         (load-theme 'monokai t))))               ;; server: ac-mode
+         (add-hook 'after-make-frame-functions    ;; server: ac-mode
+                   (lambda (frame)
+                     (select-frame frame)
+                     (when (display-graphic-p frame)
+                       (load-theme 'monokai t)
+                       (y:setup-mode-line)))))))
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
          (load-theme 'Amelie t))))                ;; terminal
 (y:setup-mode-line)
-
 
 ;; ;; Set Fringe Color
 ;; (when (eq 'atom-one-dark (car custom-enabled-themes))

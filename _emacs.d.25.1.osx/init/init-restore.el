@@ -18,7 +18,7 @@
        (cd "~/tmp")))
 
 ;; restore keybindings for emacs in terminal
-(when (not (display-graphic-p))
+(when (and (not (display-graphic-p)) (not (daemonp)))
   ;; "F10" to open menu bar or "M-`"
   (global-set-key (kbd "<f10>") 'menu-bar-open)
   ;; fix "TAB" for code completion in cc-mode (or use "M-TAB")

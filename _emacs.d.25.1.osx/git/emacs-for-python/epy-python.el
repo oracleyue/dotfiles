@@ -108,10 +108,12 @@ The CMDLINE should be something like:
     ))
 
 
-(when (load-file (concat epy-install-dir "extensions/flymake-patch.el"))
+;; (when (load-file (concat epy-install-dir "extensions/flymake-patch.el"))
+(when (load (concat epy-install-dir "extensions/flymake-patch") t t)
   (setq flymake-info-line-regex
         (append flymake-info-line-regex '("unused$" "^redefinition" "used$")))
-  (load-library "flymake-cursor"))
+  ;; (load-library "flymake-cursor")
+  (load "flymake-cursor" t t))
 
 (defun epy-setup-checker (cmdline)
   (add-to-list 'flymake-allowed-file-name-masks

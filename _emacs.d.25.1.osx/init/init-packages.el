@@ -75,6 +75,19 @@
 (custom/install-packages custom/packages)
 
 
+;; User-defined functions
+(defun byte-compile-directory (directory)
+  "Byte-compile all *.el in the directory if the corresponding
+.elc doesn't exist."
+
+  (setq flist (directory-files directory nil ".*\.el$"))
+  (dolist (fname flist)
+    (unless (file-exists-p
+             (concat (expand-file-name (file-name-base fname)
+                                       directory) ".elc"))
+      (byte-compile-file (expand-file-name fname directory)))))
+
+
 
 (provide 'init-packages)
 ;; ================================================

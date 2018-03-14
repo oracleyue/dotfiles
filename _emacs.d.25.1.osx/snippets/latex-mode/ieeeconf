@@ -54,7 +54,7 @@
 \newtheorem{remark}{Remark}
 
 % command definitions for math symbols
-\input{userdef-mathsymb.tex}
+\input{userdef-mathsym.tex}
 
 \hypersetup{
   pdftitle={},
