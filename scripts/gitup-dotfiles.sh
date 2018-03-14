@@ -23,7 +23,7 @@ $sync ~/.screenrc $repopath/tmux/_screenrc.osx
 $sync ~/.latexmkrc $repopath/bash/_latexmkrc
 $sync ~/.Renviron $repopath/bash/_Renviron.osx
 $sync ~/.Rprofile $repopath/bash/_Rprofile.osx
-$sync ~/.jupyter $repopath/bash/_jupyter.osx
+$sync ~/.jupyter/ $repopath/bash/_jupyter.osx
 
 # rsync editor config
 ## VIM
