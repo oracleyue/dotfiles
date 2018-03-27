@@ -8,6 +8,14 @@
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
 
+;; Font Size (Mac/Linux)
+(defun y:adjust-fontsize ()
+  (if *is-mac*      ;; default: 13/15(mac), 10.5/12(linux)
+      (set-face-attribute 'default nil :font "DejaVu Sans Mono-15")
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
+  (set-face-attribute 'fixed-pitch nil :family "Roboto Mono")
+  (set-face-attribute 'variable-pitch nil :family "Roboto"))
+
 ;; Theme Path
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
@@ -24,37 +32,40 @@
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; GUI
-           (load-theme 'Amelie t)))               ;; terminal
+           (load-theme 'Amelie t))                ;; terminal
+         (y:setup-modeline)
+         (y:adjust-fontsize))
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main
-         (load-theme 'solarized t))
+         (add-hook 'after-make-frame-functions
+                   (lambda (frame)
+                     (select-frame frame)
+                     (when (display-graphic-p frame)
+                       (load-theme 'solarized t)
+                       (y:setup-modeline)
+                       (y:adjust-fontsize)))))
         (*is-server-coding*
          (add-hook 'after-make-frame-functions    ;; server: coding
                    (lambda (frame)
                      (select-frame frame)
                      (when (display-graphic-p frame)
                        (load-theme 'atom-one-dark t)
-                       (y:setup-modeline)))))
+                       (y:setup-modeline)
+                       (y:adjust-fontsize)))))
         (*is-server-ac*
          (add-hook 'after-make-frame-functions    ;; server: ac-mode
                    (lambda (frame)
                      (select-frame frame)
                      (when (display-graphic-p frame)
                        (load-theme 'monokai t)
-                       (y:setup-modeline)))))))
+                       (y:setup-modeline)
+                       (y:adjust-fontsize)))))))
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
-         (load-theme 'Amelie t))))                ;; terminal
-(y:setup-modeline)
-
-;; Adjust Font Size for Mac/Linux
-(set-face-attribute 'default nil        ;; 13/15(mac), 10.5/12(linux)
-                    :font "DejaVu Sans Mono-15")
-(set-face-attribute 'fixed-pitch nil
-                    :family "Roboto Mono")
-(set-face-attribute 'variable-pitch nil
-                    :family "Roboto")
+         (load-theme 'Amelie t))                  ;; terminal
+       (y:setup-modeline)
+       (y:adjust-fontsize)))
 
 ;; Set Fringe Color
 ;; (when (eq 'atom-one-dark (car custom-enabled-themes))
