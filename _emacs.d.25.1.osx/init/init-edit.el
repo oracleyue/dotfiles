@@ -296,7 +296,6 @@ Uses `current-date-format' for the formatting the date/time."
 (setq ispell-dictionary "american")
 
 ;; use /auto-fill mode/
-(setq fill-column 80)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
 (add-hook 'markdown-mode-hook 'turn-off-auto-fill)

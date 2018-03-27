@@ -15,7 +15,7 @@
             mathtools, amsthm}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{empheq}     % to deal with parentheses + subfunctions
-\usepackage{enumitem}  % [noitemsep, topsep=-5pt], [label=\roman*] or \alph* \arabic*
+\usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
 
 \usepackage{algorithm, algpseudocode}
 \makeatletter

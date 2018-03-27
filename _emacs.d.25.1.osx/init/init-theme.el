@@ -12,7 +12,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-(add-to-list 'load-path "~/.emacs.d/themes/sanityinc-tomorrow")
 
 ;; Customize ModeLine
 (add-to-list 'load-path "~/.emacs.d/init/styles")
@@ -49,7 +48,15 @@
          (load-theme 'Amelie t))))                ;; terminal
 (y:setup-mode-line)
 
-;; ;; Set Fringe Color
+;; Adjust Font Size for Mac/Linux
+(set-face-attribute 'default nil        ;; 13/15(mac), 10.5/12(linux)
+                    :font "DejaVu Sans Mono-15")
+(set-face-attribute 'fixed-pitch nil
+                    :family "Roboto Mono")
+(set-face-attribute 'variable-pitch nil
+                    :family "Roboto")
+
+;; Set Fringe Color
 ;; (when (eq 'atom-one-dark (car custom-enabled-themes))
 ;;   (set-face-attribute 'fringe nil
 ;;                       :foreground (face-foreground 'default)

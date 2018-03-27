@@ -15,12 +15,14 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles'
 cd $repopath && git pull && cd ~
 
 # rsync .emacs or init.el
-# sed 's/Sans Mono-[0-9][0-9]/Sans Mono-15/' $repopath/_emacs.25.1.osx > ~/.emacs
-sed 's/Sans Mono-[0-9][0-9]/Sans Mono-15/' \
-    $repopath/_emacs.d.25.1.osx/init.el > ~/.emacs.d/init.el
+$sync $repopath/_emacs.d.25.1.osx/init.el ~/.emacs.d/init.el
+# sed 's/Sans Mono-[0-9][0-9]/Sans Mono-15/' \
+#     $repopath/_emacs.d.25.1.osx/init.el > ~/.emacs.d/init.el
 
 # rsync .emacs.d (essential packages)
 $sync $repopath/_emacs.d.25.1.osx/init ~/.emacs.d/
+sed 's/Sans Mono-[0-9][0-9]/Sans Mono-15/' \
+    $repopath/_emacs.d.25.1.osx/init/init-theme.el > ~/.emacs.d/init/init-theme.el
 $sync --exclude="clang-complete" --exclude="*.pyc" \
       $repopath/_emacs.d.25.1.osx/git ~/.emacs.d/
 $sync $repopath/_emacs.d.25.1.osx/themes ~/.emacs.d/

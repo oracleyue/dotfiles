@@ -10,6 +10,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq-default fill-column 80)
 
 ;; encodings
 (set-language-environment "UTF-8")
@@ -37,6 +38,8 @@
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
+(when *is-server-main*
+  (setq-default cursor-type 'bar))
 (add-hook 'text-mode-hook
           (lambda () (setq-local cursor-type 'bar)))
 (blink-cursor-mode t)  ;-1 stops cursor blinking
@@ -107,7 +110,7 @@
   (interactive)
   (find-file (expand-file-name "~/Documents/.email.tmp.md"))
   (auto-fill-mode 1)
-  (set-fill-column 75))
+  (setq-local fill-column 75))
 
 ;; supports for Chinese
 ;; setting font set

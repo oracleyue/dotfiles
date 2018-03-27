@@ -52,7 +52,7 @@
 
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage[round,sort]{natbib} %numbers + "unsrtnat" style, if IEEE
+\usepackage[round,sort]{natbib} % IEEE: numbers + "unsrtnat" style
 
 % theorem styles given by /amsthm/
 \theoremstyle{plain}
@@ -63,7 +63,6 @@
 \theoremstyle{definition}
 \newmdtheoremenv{definition}[theorem]{Definition}
 \newmdtheoremenv{assumption}[theorem]{Assumption}
-%\newmdtheoremenv[backgroundcolor=red!10,roundcorner=3pt]{conjecture}{Conjecture}
 \newtheorem{example}{Example}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}

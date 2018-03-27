@@ -153,7 +153,8 @@
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-                 '("Rubber" "rubber --synctex -fd %t" TeX-run-command nil t) t))
+                 '("Rubber" "rubber --synctex -d %t" TeX-run-command nil t) t))
+    ;; '("Rubber" "rubber --synctex -fd %t" TeX-run-command nil t) t))
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
@@ -212,7 +213,7 @@
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
 
 ;; utility definitions
-(defun y:delete-latex-comments ()
+(defun y:latex-remove-comments ()
   (interactive)
   (query-replace-regexp "\\(^\\| *[^\\\\]\\)%.*" "" nil nil))
 

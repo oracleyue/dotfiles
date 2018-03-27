@@ -6,8 +6,8 @@
 # --
 \documentclass[letterpaper, 10pt, conference]{ieeeconf}    % a4paper; use [draft]
 
-\IEEEoverridecommandlockouts   % only needed if you want to use the \thanks
-\overrideIEEEmargins           % needed to meet printer requirements.
+\IEEEoverridecommandlockouts        % only needed if you want to use the \thanks command
+\overrideIEEEmargins                % needed to meet printer requirements.
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -15,9 +15,15 @@
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,mathtools}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
-\let\IEEEproof\proof  \let\IEEEendproof\endproof
-\let\proof\relax      \let\endproof\relax
-\usepackage{amsthm}
+    \let\IEEEproof\proof
+    \let\IEEEendproof\endproof
+    \let\proof\relax
+    \let\endproof\relax
+\usepackage{amsthm}     % To use proof in ieeeconf by default, uncomment the following 4 lines
+    % \let\proof\relax
+    % \let\endproof\relax
+    % \let\proof\IEEEproof
+    % \let\endproof\IEEEendproof
 \usepackage{empheq}     % to deal with parentheses + subfunctions
 
 \usepackage{algorithm, algpseudocode}
@@ -51,7 +57,7 @@
 \hypersetup{
   pdftitle={},
   pdfauthor={Zuogong YUE},
-  pdfcreator={Emacs version 25.3.1 + AUCTeX version 11.90}}
+  pdfcreator={Emacs version 25.1 + AUCTeX version 11.90}}
 
 % ---------------- END Preambles ----------------
 
@@ -78,7 +84,7 @@
 % ---------------- ABSTRACT ----------------
 \begin{abstract}
 
-Abstract here...
+This electronic document is a ÒliveÓ template. The various components of your paper [title, text, heads, etc.] are already defined on the style sheet, as illustrated by the portions given in this document.
 
 \end{abstract}
 

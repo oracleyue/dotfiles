@@ -51,7 +51,9 @@
 ;(require 'epy-nose)            ;; nose integration
 
 ;; (setq python-shell-interpreter "python2") ; use python2
-(setq python-shell-interpreter "ipython3") ; use ipython; slow down openning files
+(if *is-mac*
+    (setq python-shell-interpreter "ipython3") ; use ipython; may slow down openning files
+  (setq python-shell-interpreter "ipython2"))
 (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 

@@ -1,18 +1,13 @@
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; Your init file should contain only one such instance.
- '(default ((t (:font "DejaVu Sans Mono-15"))))  ;; 13/15(mac), 10.5/12(linux)
- '(fixed-pitch ((t (:family "Roboto Mono"))))
- '(variable-pitch ((t (:family "Roboto")))))
+;; -*- lexical-binding: t -*-
+(setq debug-on-error t)
 
-;; stop emacs automatically editing .emacs
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file 'noerror 'nomessage)
+;; This file bootstraps the configuration, which is divided into a
+;; number of other files.
 
 ;; load paths
-(add-to-list 'load-path (expand-file-name "init" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "init/unmaintained" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "git" user-emacs-directory))
+(add-to-list 'load-path "~/.emacs.d/init")
+(add-to-list 'load-path "~/.emacs.d/init/unmaintained")
+(add-to-list 'load-path "~/.emacs.d/git")
 
 ;; constants
 (defconst *is-mac* (string-equal system-type "darwin"))
@@ -21,8 +16,12 @@
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
 (defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))
 
+;; stop emacs automatically editing .emacs
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;;(load custom-file 'noerror 'nomessage)
+
 ;; packages
-;; (package-initialize)
+;; (package-initialize)           ;; required to suppress warnings
 (require 'init-packages)
 
 ;; theme
