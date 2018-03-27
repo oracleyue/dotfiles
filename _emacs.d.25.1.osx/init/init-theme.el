@@ -1,5 +1,4 @@
 ;; -*- lexical-binding:t -*-
-
 ;; ================================================================
 ;; Emacs Themes
 ;; ================================================================
@@ -58,11 +57,11 @@
 (y:setup-modeline)
 (y:adjust-fontsize)
 
-;; Set Fringe Color
-;; (when (eq 'atom-one-dark (car custom-enabled-themes))
-;;   (set-face-attribute 'fringe nil
-;;                       :foreground (face-foreground 'default)
-;;                       :background (face-background 'mode-line)))
+;; Frame with Transparent Background (alpha < 1)
+(defun new-alpha-frame (&optional value)
+  (interactive)
+  (or value (setq value 95))
+  (make-frame '((alpha . value))))
 
 
 ;; -----------------------------------------------------------------

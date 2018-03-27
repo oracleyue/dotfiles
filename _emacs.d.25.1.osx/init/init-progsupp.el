@@ -11,9 +11,12 @@
 ;; ----------------------------------------------
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
-;; align line numbers to the right + padding
-(setq linum-format "%4d  ")
-;; (setq linum-format "%4d \u2502 ")    ;; solid line separator
+;; basic linum padding
+;; (setq linum-format "%4d  ")
+
+;; customize and stylize linum
+(require 'linum-highlight-current-line-number)
+(setq linum-format 'linum-highlight-current-line-number)
 
 ;; enable linum-mode
 (add-hook 'sh-mode-hook 'linum-mode)
