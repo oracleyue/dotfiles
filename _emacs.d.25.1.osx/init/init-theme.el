@@ -1,3 +1,5 @@
+;; -*- lexical-binding:t -*-
+
 ;; ================================================================
 ;; Emacs Themes
 ;; ================================================================
@@ -26,46 +28,35 @@
 (load "customize-modeline" t t)
 
 ;; Setup Theme
+(defun server-load-theme (theme)
+  (add-hook 'after-make-frame-functions
+    (lambda (frame)
+      (select-frame frame)
+      (when (display-graphic-p frame)
+        (load-theme theme t)
+        (y:setup-modeline)
+        (y:adjust-fontsize)))))
 (cond (*is-mac*
        (cond
-        ;; app (not server-client)
+        ;; apps
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; GUI
-           (load-theme 'Amelie t))                ;; terminal
-         (y:setup-modeline)
-         (y:adjust-fontsize))
+           (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main
-         (add-hook 'after-make-frame-functions
-                   (lambda (frame)
-                     (select-frame frame)
-                     (when (display-graphic-p frame)
-                       (load-theme 'solarized t)
-                       (y:setup-modeline)
-                       (y:adjust-fontsize)))))
-        (*is-server-coding*
-         (add-hook 'after-make-frame-functions    ;; server: coding
-                   (lambda (frame)
-                     (select-frame frame)
-                     (when (display-graphic-p frame)
-                       (load-theme 'atom-one-dark t)
-                       (y:setup-modeline)
-                       (y:adjust-fontsize)))))
-        (*is-server-ac*
-         (add-hook 'after-make-frame-functions    ;; server: ac-mode
-                   (lambda (frame)
-                     (select-frame frame)
-                     (when (display-graphic-p frame)
-                       (load-theme 'monokai t)
-                       (y:setup-modeline)
-                       (y:adjust-fontsize)))))))
+         (server-load-theme 'solarized))
+        (*is-server-coding*                       ;; server: coding
+         (server-load-theme 'atom-one-dark))
+        (*is-server-ac*                           ;; server: ac-mode
+         (server-load-theme 'monokai))))
+
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
-         (load-theme 'Amelie t))                  ;; terminal
-       (y:setup-modeline)
-       (y:adjust-fontsize)))
+         (load-theme 'Amelie t))))                ;; terminal
+(y:setup-modeline)
+(y:adjust-fontsize)
 
 ;; Set Fringe Color
 ;; (when (eq 'atom-one-dark (car custom-enabled-themes))
