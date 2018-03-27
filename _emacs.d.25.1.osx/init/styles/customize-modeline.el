@@ -4,9 +4,24 @@
 
 
 ;;
+;; Powerline
+;;
+(defun y:use-powerline ()
+  (when (image-type-available-p 'xpm)
+    (use-package powerline
+      :config
+      (setq powerline-display-buffer-size nil)
+      (setq powerline-display-mule-info nil)
+      (setq powerline-display-hud nil)
+      (when (display-graphic-p)
+        (powerline-default-theme)
+        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
+
+
+;;
 ;; Customize mode-line
 ;;
-(defun y:customize-mode-line ()
+(defun y:customize-modeline ()
   (make-face 'y/mode-line-rownum-face)
   (make-face 'y/mode-line-buffer-name-face)
   (make-face 'y/mode-line-plain-face)
@@ -98,9 +113,9 @@
 ;;
 ;; Interface
 ;;
-(defun y:setup-mode-line ()
-  (y:customize-mode-line))
-
+(defun y:setup-modeline ()
+  (y:customize-modeline))
+  ;; (y:use-powerline))
 
 
 

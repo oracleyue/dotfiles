@@ -34,19 +34,19 @@
                      (select-frame frame)
                      (when (display-graphic-p frame)
                        (load-theme 'atom-one-dark t)
-                       (y:setup-mode-line)))))
+                       (y:setup-modeline)))))
         (*is-server-ac*
          (add-hook 'after-make-frame-functions    ;; server: ac-mode
                    (lambda (frame)
                      (select-frame frame)
                      (when (display-graphic-p frame)
                        (load-theme 'monokai t)
-                       (y:setup-mode-line)))))))
+                       (y:setup-modeline)))))))
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
          (load-theme 'Amelie t))))                ;; terminal
-(y:setup-mode-line)
+(y:setup-modeline)
 
 ;; Adjust Font Size for Mac/Linux
 (set-face-attribute 'default nil        ;; 13/15(mac), 10.5/12(linux)
