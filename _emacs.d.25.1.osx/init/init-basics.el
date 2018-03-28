@@ -10,7 +10,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq-default fill-column 80)
+(setq-default fill-column 75)
 
 ;; encodings
 (set-language-environment "UTF-8")
@@ -49,7 +49,8 @@
 
 ;; configure TAB
 (setq tab-stop-list
-      (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+      (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72
+                76 80 84 88 92 96 100 104 108 112 116 120)))
 ;; the width of a literal tab (C-q TAB; key=9)
 (setq-default tab-width 4)
 ;; use spaces instead of evil tabs, width controled by "tab-stop-list"
@@ -63,8 +64,8 @@
 (setq mark-ring-max 16)
 (setq global-mark-ring-max 32)
 
-;; mouse control
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 1) ((control) . nil)))  ;2 line at a time
+;; mouse control (move 3 lines each time)
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
 ;; suppress redefinition warnings
