@@ -50,7 +50,7 @@
          (server-load-theme 'monokai))))
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
-           (load-theme 'atom-one-dark t)          ;; GUI (app or server)
+           (server-load-theme 'atom-one-dark)     ;; GUI (app or server)
          (load-theme 'Amelie t))))                ;; terminal
 (y:setup-modeline)
 (y:adjust-fontsize)
