@@ -1,4 +1,3 @@
-;; -*- lexical-binding:t -*-
 ;; ================================================================
 ;; Emacs Themes
 ;; ================================================================
@@ -29,12 +28,12 @@
 ;; Setup Theme
 (defun server-load-theme (theme)
   (add-hook 'after-make-frame-functions
-    (lambda (frame)
-      (select-frame frame)
-      (when (display-graphic-p frame)
-        (load-theme theme t)
-        (y:setup-modeline)
-        (y:adjust-fontsize)))))
+            `(lambda (frame)
+               (select-frame frame)
+               (when (display-graphic-p frame)
+                 (load-theme ',theme t)
+                 (y:setup-modeline)
+                 (y:adjust-fontsize)))))
 (cond (*is-mac*
        (cond
         ;; apps
@@ -49,7 +48,6 @@
          (server-load-theme 'atom-one-dark))
         (*is-server-ac*                           ;; server: ac-mode
          (server-load-theme 'monokai))))
-
       (*is-linux*
        (if (or (daemonp) (display-graphic-p))
            (load-theme 'atom-one-dark t)          ;; GUI (app or server)
