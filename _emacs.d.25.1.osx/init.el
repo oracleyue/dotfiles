@@ -36,12 +36,12 @@
 (if *use-company* (require 'init-company) (require 'init-ac))
 
 ;; helm and extensions
-(require 'init-helm)
-(require 'init-helm-swoop)
-(require 'init-helm-proj)         ;; project management
+;; (require 'init-helm)
+;; (require 'init-helm-swoop)
+;; (require 'init-helm-proj)         ;; project management
 
 ;; ivy and extensions (consel, swiper)
-;; (require 'init-ivy)
+(require 'init-ivy)
 
 ;; directory and buffer explorers
 (require 'init-dired)             ;; directory explorers
