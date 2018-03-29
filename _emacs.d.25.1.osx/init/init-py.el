@@ -55,6 +55,8 @@
     (setq python-shell-interpreter "ipython3") ; use ipython; may slow down openning files
   (setq python-shell-interpreter "ipython2"))
 (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
+;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
+;; (setq python-shell-interpreter-args "-i --pylab --simple-prompt --no-color-info")
 (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
 
