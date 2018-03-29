@@ -5,33 +5,29 @@
 ;; ===============================================================
 
 
-;; /Ivy/ mode
-(use-package ivy
-  :ensure t
-  :diminish ivy-mode
-  :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+;; Install required emacs packages
+(setq custom/ivy-ext-packages
+      '(ivy
+        counsel
+        swiper))
+(custom/install-packages custom/ivy-ext-packages)
 
-;; /Counsel/ mode
-(use-package counsel
-  :ensure t
-  :bind
-  ("C-c g"   . counsel-git)
-  ("C-c j"   . counsel-git-grep)
-  ("C-c k"   . counsel-ag)
-  ("C-x l"   . counsel-locate)
-  :config
-  (define-key minibuffer-local-map (kbd "C-r")
-    'counsel-minibuffer-history))
 
-;; /Swiper/ mode
-(use-package swiper
-  :ensure t
-  :bind
-  ("C-s" . swiper))
+;; Configurations
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+
+(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)  ;; bugs
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(define-key minibuffer-local-map (kbd "C-r")
+  'counsel-minibuffer-history)
 
 
 
