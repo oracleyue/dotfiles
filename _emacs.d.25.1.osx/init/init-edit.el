@@ -104,7 +104,7 @@
 
 ;; revert-buffer: update buffer if the file in disk has changed
 ;; default keybinding: "s-u" (s: super/win/command)
-;; (global-set-key (kbd "C-x M-r") 'revert-buffer)
+(global-set-key (kbd "s-u") 'revert-buffer)
 
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
 (defun y:kill-ring-save ()
