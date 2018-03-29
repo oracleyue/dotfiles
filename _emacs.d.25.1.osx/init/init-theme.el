@@ -11,7 +11,8 @@
 ;; Font Size (Mac/Linux)
 (defun y:adjust-fontsize ()
   (if *is-mac*      ;; default: 13/15(mac), 10.5/12(linux)
-      (set-face-attribute 'default nil :font "DejaVu Sans Mono-15")
+      (set-face-attribute 'default nil
+                          :font "DejaVu Sans Mono-15")
     (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
   (set-face-attribute 'fixed-pitch nil :family "Roboto Mono")
   (set-face-attribute 'variable-pitch nil :family "Roboto"))
@@ -39,7 +40,7 @@
         ;; apps
         ((not (daemonp))
          (if (display-graphic-p)
-             (load-theme 'atom-one-dark t)        ;; GUI
+             (load-theme 'atom-one-dark t)        ;; app
            (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main
@@ -49,11 +50,13 @@
         (*is-server-ac*                           ;; server: ac-mode
          (server-load-theme 'monokai))))
       (*is-linux*
-       (if (or (daemonp) (display-graphic-p))
-           (server-load-theme 'atom-one-dark)     ;; GUI (app or server)
-         (load-theme 'Amelie t))))                ;; terminal
-(y:setup-modeline)
-(y:adjust-fontsize)
+       (if (daemonp)
+           (server-load-theme 'atom-one-dark)     ;; server
+         (if (display-graphic-p)
+             (load-theme 'atom-one-dark t)        ;; app
+           (load-theme 'Amelie t)))))             ;; terminal
+(unless (daemonp)
+  (y:setup-modeline) (y:adjust-fontsize))
 
 ;; Frame with Transparent Background (alpha < 1)
 (defun new-alpha-frame (&optional value)
