@@ -23,8 +23,9 @@
 ;;
 (defun y:customize-modeline ()
   ;; fonts
-  (set-face-attribute 'mode-line nil
-                      :font "DejaVu Sans Mono-10.5")
+  (when *is-linux*
+    (set-face-attribute 'mode-line nil
+                        :font "DejaVu Sans Mono-10.5"))
 
   ;; faces
   (make-face 'y/mode-line-rownum-face)
