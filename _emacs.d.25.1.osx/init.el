@@ -14,7 +14,8 @@
 (defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))
 
 ;; stop emacs automatically editing .emacs
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file
+      (expand-file-name "custom.el" user-emacs-directory))
 ;;(load custom-file 'noerror 'nomessage)
 
 ;; packages

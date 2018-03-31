@@ -120,7 +120,7 @@
 ;;
 (defun y:setup-modeline ()
   (y:customize-modeline))
-  ;; (y:use-powerline))
+;; (y:use-powerline))
 
 
 
