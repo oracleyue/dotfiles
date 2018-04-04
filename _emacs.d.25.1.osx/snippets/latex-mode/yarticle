@@ -6,20 +6,14 @@
 # --
 \documentclass[a4paper,10pt]{article}
 % \usepackage[margin=25mm,centering]{geometry}
-\usepackage{setspace}
-  \onehalfspacing
-\usepackage[parfill]{parskip}  % use newline instead of indentation
-  \parskip=12pt
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}
-% \usepackage{charter}      % nice for regular articles
+\usepackage{times,helvet}  % charter (for regular texts)
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,amsthm,
-			mathtools,upgreek}
-\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,
+			mathrsfs,mathtools,upgreek,arydshln}
 \usepackage{enumitem} % [label={(\roman*)}
 
 \usepackage{algorithm,algpseudocode}
@@ -27,10 +21,14 @@
 \renewcommand{\ALG@beginalgorithmic}{\small}
 \makeatother
 
-\usepackage{float, graphicx}
+\usepackage{float,graphicx}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[parfill]{parskip}  % use newline instead of indentation
+\parskip=12pt
 \usepackage{titlesec}
 \titleformat*{\section}{\large\bfseries}
 \titleformat*{\subsection}{\normalsize\bfseries}
@@ -44,15 +42,14 @@
     innertopmargin=1.8\topskip,
     skipabove=\baselineskip,
     skipbelow=-.4\baselineskip,
-    nobreak=true
-}
+    nobreak=true}
 % \usepackage{minted}
 % \usemintedstyle{pastie}
 % \fvset{frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\small}
 
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage[round,sort]{natbib} % IEEE: numbers + "unsrtnat" style
+\usepackage[round,sort]{natbib}   % IEEE: numbers + "unsrtnat" style
 
 % theorem styles given by /amsthm/
 \theoremstyle{plain}
@@ -125,7 +122,7 @@ $0
 % \newpage
 % % --------------- BIBLIOGRAPHY --------------
 % \def\bibfont{\footnotesize}   % using "natbib"
-% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; if using "natbib"
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat
 % \bibliography{./ref/library}
 
 \end{document}
