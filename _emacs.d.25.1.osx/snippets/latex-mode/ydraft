@@ -7,10 +7,10 @@
 \documentclass[a4paper,11pt]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{charter,helvet}   % times,charter (11pt); cochineal (12pt)
+\usepackage{lmodern}   % times,charter; helvet
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts}
+\usepackage{latexsym,amsmath,amssymb,amsfonts}   % newtxtext/newtxmath
 \usepackage{enumitem}
 
 \usepackage{setspace}  \onehalfspacing
@@ -21,8 +21,7 @@
 \usepackage{subcaption}
 
 \usepackage[dvipsnames]{xcolor}
-\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
-            urlcolor=cyan,filecolor=red]{hyperref}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
 \usepackage[round,sort]{natbib}
 
 

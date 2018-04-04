@@ -12,7 +12,7 @@
 \usepackage{fouriernc}    % use New CenturySchL with math symbols
 
 \usepackage{charter}      % nice for regular texts (e.g. novel, blog)
-\usepackage{cochineal}    % fork of crimson
+\usepackage{cochineal}    % fork of crimson (12pt)
 \usepackage{baskervald}   % variant: Baskervaldx
 \usepackage{palatino}
 
