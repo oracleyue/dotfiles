@@ -73,9 +73,6 @@
   (setq direx:leaf-icon "  "
         direx:open-icon "▾ "
         direx:closed-icon "▸ ")
-  ;; (define-key direx:direx-mode-map (kbd "x") 'direx/y:kill-buffer)
-  ;; (defun direx/y:kill-buffer (&optional item) (interactive)
-  ;;        (kill-buffer (current-buffer)))
   (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window))
 
 ;; directory explorer in tree: /neotree/
@@ -83,7 +80,6 @@
   (require 'neotree)
   (setq neo-theme 'arrow)
   (global-set-key (kbd "C-x C-j") 'neotree-toggle)
-  (define-key neotree-mode-map (kbd "i") 'neotree-enter)
   (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
   (setq neo-show-hidden-files nil)
   (eval-after-load "neotree"      ;; toggle by "H" in neotree
