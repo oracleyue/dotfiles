@@ -70,14 +70,13 @@
   (push '(direx:direx-mode :position left :width 27 :dedicated t)
         popwin:special-display-config)
   (define-key direx:direx-mode-map (kbd "<tab>") 'direx:toggle-item) ;; fix tab
-  (define-key direx:direx-mode-map (kbd "x") 'direx/y:kill-buffer)
   (setq direx:leaf-icon "  "
         direx:open-icon "▾ "
         direx:closed-icon "▸ ")
-  (defun direx/y:kill-buffer (&optional item) (interactive)
-         (kill-buffer (current-buffer)))
-  (unless (cdr (assoc "neotree" y:use-direx-or-neotree))
-    (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)))
+  ;; (define-key direx:direx-mode-map (kbd "x") 'direx/y:kill-buffer)
+  ;; (defun direx/y:kill-buffer (&optional item) (interactive)
+  ;;        (kill-buffer (current-buffer)))
+  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window))
 
 ;; directory explorer in tree: /neotree/
 (when (string-equal y:tree-manager "neotree")

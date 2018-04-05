@@ -4,8 +4,8 @@
 
 
 ;; Select Tree Window Manager
-(setq y:tree-manager "neotree")
-;; (setq y:tree-manager "direx") ;; enable /direx-jedi/ in python
+;; (setq y:tree-manager "neotree")
+(setq y:tree-manager "direx") ;; enable /direx-jedi/ in python
 
 ;; Completion Engine
 (cond (*is-mac*
