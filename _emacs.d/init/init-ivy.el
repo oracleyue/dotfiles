@@ -62,9 +62,6 @@
 ;;  =M-n=, =M-p=: cycles through the Ivy command history
 ;;  =S-SPC=: deletes the current input and rests the list
 
-;; Reset keybindings to Ivy
-(global-set-key (kbd "M-w") 'ivy-kill-ring-save)
-
 
 ;; ---------------------------------------------
 ;; /Counsel-Projectile/: Ivy for Projectile
