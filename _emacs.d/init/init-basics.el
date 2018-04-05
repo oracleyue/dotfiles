@@ -60,7 +60,7 @@
 ;; (setq x-select-enable-clipboard t)
 
 ;; configure mark-ring
-(setq set-mark-command-repeat-pop t)
+(setq set-mark-command-repeat-pop nil)
 (setq mark-ring-max 16)
 (setq global-mark-ring-max 32)
 

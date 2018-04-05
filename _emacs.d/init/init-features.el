@@ -3,9 +3,9 @@
 ;; ================================================================
 
 
-;; Features on Window Management
-(setq y:use-direx-or-neotree            ;; enable /direx-jedi/ or/and /neotree/
-      '(("direx-jedi" . nil) ("neotree" . t)))
+;; Select Tree Window Manager
+(setq y:tree-manager "neotree")
+;; (setq y:tree-manager "direx") ;; enable /direx-jedi/ in python
 
 ;; Completion Engine
 (cond (*is-mac*
