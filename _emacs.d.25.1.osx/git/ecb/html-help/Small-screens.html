@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Small screens</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Small screens">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Small screens">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Big-screens.html#Big-screens" rel="next" title="Big screens">
+<link href="Changing-faces.html#Changing-faces" rel="prev" title="Changing faces">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Small-screens"></a>
+<div class="header">
+<p>
+Next: <a href="Big-screens.html#Big-screens" accesskey="n" rel="next">Big screens</a>, Previous: <a href="Changing-faces.html#Changing-faces" accesskey="p" rel="prev">Changing faces</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Working-with-small-screens"></a>
+<h3 class="section">10.2 Working with small screens</h3>
+
+<a name="index-Small-screen"></a>
+<p>If your screen is very small so you need every square-centimeter for
+displaying the buffer which you want to edit, ECB offers you a special
+layouts, where only the ECB-methods buffer is displayed on top or on
+left-side. Here comes what you should/can do to work best with ECB in
+such a situation:
+</p>
+<ul>
+<li> First customize your ECB:
+
+<ol>
+<li> Customize <code>ecb-layout-name</code> to layout-name &ldquo;top2&rdquo; (on top) or
+&ldquo;left9&rdquo; (on left-side)
+
+</li><li> Ensure that <code>ecb-compile-window-height</code> is nil.
+
+</li><li> Optional: Adjust the <code>ecb-windows-height</code> rsp. <code>ecb-windows-width</code>.
+
+</li><li> Save your changes.
+</li></ol>
+
+</li><li> To edit your buffers:
+Call <code>ecb-toggle-ecb-windows</code> (also available via the menu &ldquo;ECB&rdquo; and
+by <kbd>C-c . lw</kbd>) or <code>ecb-hide-ecb-windows</code> to hide the ECB-method buffer
+so you get all the place of your screen for editing.
+
+</li><li> To browse and select functions:
+Call <code>ecb-toggle-ecb-windows</code> or <code>ecb-show-ecb-windows</code> to
+make the ECB-method buffer visible if not already. If you want select
+a method/variable with the keyboard instead with the mouse you should
+read the section <a href="Using-the-keyboard.html#Using-the-keyboard">Using the keyboard</a> in this online help!
+</li></ul>
+
+<p>The possibility of hiding temporally the ECB windows like described
+above is also useful for all the other layouts.
+</p>
+
+
+
+
+</body>
+</html>

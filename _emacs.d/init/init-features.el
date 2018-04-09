@@ -3,11 +3,16 @@
 ;; ================================================================
 
 
-;; Select Tree Window Manager
+;; select tree window manager
 (setq y:tree-manager "neotree")
 ;; (setq y:tree-manager "direx") ;; enable /direx-jedi/ in python
 
-;; Completion Engine
+;; completion system
+(if *is-mac*
+    (defconst *use-helm* t)
+  (defconst *use-helm* nil))
+
+;; code completion engine
 (cond (*is-mac*
        (if *is-server-ac*
            (defconst *use-company* nil) ;; use auto-complete
@@ -15,7 +20,7 @@
       (*is-linux*
        (defconst *use-company* t)))
 
-;; Features on C/C++ Programming
+;; features on C/C++ programming
 (if (or *is-server-main* (not (daemonp)))
     (setq y:enable-cedet-semantics nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
   (setq y:enable-cedet-semantics t))

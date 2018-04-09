@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Using the keyboard</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Using the keyboard">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Using the keyboard">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Usage-of-ECB.html#Usage-of-ECB" rel="up" title="Usage of ECB">
+<link href="Navigation_002fSelection.html#Navigation_002fSelection" rel="next" title="Navigation/Selection">
+<link href="Using-the-mouse.html#Using-the-mouse" rel="prev" title="Using the mouse">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Using-the-keyboard"></a>
+<div class="header">
+<p>
+Next: <a href="The-edit_002darea.html#The-edit_002darea" accesskey="n" rel="next">The edit-area</a>, Previous: <a href="Using-the-mouse.html#Using-the-mouse" accesskey="p" rel="prev">Using the mouse</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Working-with-the-keyboard-in-the-ECB_002dwindows"></a>
+<h3 class="section">6.2 Working with the keyboard in the ECB-windows</h3>
+
+<p>ECB offers the <code>ecb-mode-map</code> which binds the most important
+functions of ECB to keys so you can easily use ECB in every
+window<a name="DOCF16" href="#FOOT16"><sup>16</sup></a> without
+a mouse.
+</p>
+<p>IMPORTANT: Do not modify <code>ecb-mode-map</code> directly! The option
+<code>ecb-key-map</code> defines all ECB keybindings, including a common
+prefix-key (This is by default <kbd>C-c .</kbd>). If there are conflicts
+with other minor-modes or packages you can define very easy another
+prefix. Please read carefully the description of <code>ecb-key-map</code>
+(see <a href="ecb_002dgeneral.html#ecb_002dgeneral">ecb-general</a>).!
+</p>
+<p>The following sections describe special topics about using the
+keyboard in the ECB-tree-buffers:
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Navigation_002fSelection.html#Navigation_002fSelection" accesskey="1">Navigation/Selection</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Keyboard navigation/selection in a tree-buffer
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Incremental-search.html#Incremental-search" accesskey="2">Incremental search</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Find nodes as fast as possible
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Personal-tree_002dkeybindings.html#Personal-tree_002dkeybindings" accesskey="3">Personal tree-keybindings</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Adding personal keybindings to a tree-buffer
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Using-popup_002dmenus.html#Using-popup_002dmenus" accesskey="4">Using popup-menus</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Using the popup-menus from keyboard.
+</td></tr>
+</table>
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT16" href="#DOCF16">(16)</a></h3>
+<p>Regardless if a tree-window or an edit-window</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Version-control support</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Version-control support">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Version-control support">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Identifying-backends.html#Identifying-backends" rel="next" title="Identifying backends">
+<link href="Remote-directories.html#Remote-directories" rel="prev" title="Remote directories">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Version_002dcontrol-support"></a>
+<div class="header">
+<p>
+Next: <a href="Using-eshell.html#Using-eshell" accesskey="n" rel="next">Using eshell</a>, Previous: <a href="Remote-directories.html#Remote-directories" accesskey="p" rel="prev">Remote directories</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Supporting-Version-control-systems"></a>
+<h3 class="section">10.8 Supporting Version control systems</h3>
+
+<p>Beginning with version 2.30 ECB supports Version-control systems (in
+the following named VC-systems). This means the special tree-buffers
+of ECB display files managed by a VC-system with an appropriate
+image-icon<a name="DOCF36" href="#FOOT36"><sup>36</sup></a> in front
+of the filename.
+</p>
+<p>The following four options allow full control over this feature (see
+also <a href="ecb_002dversion_002dcontrol.html#ecb_002dversion_002dcontrol">ecb-version-control</a>:
+</p>
+<dl compact="compact">
+<dt><code>ecb-vc-enable-support</code></dt>
+<dd><p>Enable or disable this feature.
+</p></dd>
+<dt><code>ecb-vc-supported-backends</code></dt>
+<dd><p>The most important option for this feature. Allows to specify how ECB
+should test if a directory is managed by a VC-system (how to identify
+the VC-backend of a directory) and - if yes - how it should check the
+VC-state of a certain file. The former ones are called
+<em>identify-backend-functions</em> and the latter ones
+<em>check-state-functions</em>.
+</p></dd>
+<dt><code>ecb-vc-directory-exclude-regexps</code></dt>
+<dd><p>Allows excluding certain directories (on a regexp-basis) from the
+VC-support even if they are managed by a VC-system.
+</p></dd>
+<dt><code>ecb-vc-state-mapping</code></dt>
+<dd><p>Defines the mapping between the state-values returned by a
+check-state-function (a function set in
+<code>ecb-vc-supported-backends</code> and used for getting the VC-state of
+a file, e.g. <code>vc-state</code>) and the allowed state-values ECB can
+understand.
+</p></dd>
+</dl>
+
+<p>Probably the default settings will fit your needs but to get sure you
+should carefully read the documentation of these options!
+</p>
+<p>The following subsection give you important informations about
+identify-backend-functions, check-state-functions, about working with
+remote repositories.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Identifying-backends.html#Identifying-backends" accesskey="1">Identifying backends</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How ECB identifies the VC-backend of a dir
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Checking-the-state.html#Checking-the-state" accesskey="2">Checking the state</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How ECB checks the VC-state of a file
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Remote-repositories.html#Remote-repositories" accesskey="3">Remote repositories</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">What you should know about this
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Refreshing-the-VC_002dstate.html#Refreshing-the-VC_002dstate" accesskey="4">Refreshing the VC-state</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to refresh when state changed outside
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Adding-new-backends.html#Adding-new-backends" accesskey="5">Adding new backends</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Necessary steps for adding new backends
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Known-VC_002dproblems.html#Known-VC_002dproblems" accesskey="6">Known VC-problems</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Currently known problems of the VC-support
+</td></tr>
+</table>
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT36" href="#DOCF36">(36)</a></h3>
+<p>Of course only when Emacs is capable to display
+images; otherwise a suitable ascii-icon will be displayed.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Using-eshell.html#Using-eshell" accesskey="n" rel="next">Using eshell</a>, Previous: <a href="Remote-directories.html#Remote-directories" accesskey="p" rel="prev">Remote directories</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

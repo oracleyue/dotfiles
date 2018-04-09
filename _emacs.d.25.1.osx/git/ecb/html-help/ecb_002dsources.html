@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: ecb-sources</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: ecb-sources">
+<meta name="keywords" content="ECB - the Emacs Code Browser: ecb-sources">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Customizable-options.html#Customizable-options" rel="up" title="Customizable options">
+<link href="ecb_002dmethods.html#ecb_002dmethods" rel="next" title="ecb-methods">
+<link href="ecb_002ddirectories.html#ecb_002ddirectories" rel="prev" title="ecb-directories">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="ecb_002dsources"></a>
+<div class="header">
+<p>
+Next: <a href="ecb_002dmethods.html#ecb_002dmethods" accesskey="n" rel="next">ecb-methods</a>, Previous: <a href="ecb_002ddirectories.html#ecb_002ddirectories" accesskey="p" rel="prev">ecb-directories</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Group-ecb_002dsources"></a>
+<h4 class="subsection">7.3.4 Group ecb-sources</h4>
+
+<p>This group contains settings for the sources-buffer in the ECB:
+</p>
+<dl>
+<dt><a name="index-read_002donly_002dcheck_002dexclude_002dregexps"></a>User Option: <strong>read-only-check-exclude-regexps</strong></dt>
+<dd><p>Which directories should be excluded from the sources-read-only-check.
+If a directory matches any of the regexps of this option their sources
+will not be checked if they are writable - This option takes only
+effect if <code>ecb-sources-perform-read-only-check</code> is not nil.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-show_002dsource_002dfile_002dextension"></a>User Option: <strong>show-source-file-extension</strong></dt>
+<dd><p>Show the file extension of source files.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-source_002dfile_002dregexps"></a>User Option: <strong>source-file-regexps</strong></dt>
+<dd><p>Specifies which files are shown as source files.
+</p>
+<p>This is done on directory-base, which means for each directory-regexp
+the files to display can be specified. If more than one
+directory-regexp matches the current selected directory then always the
+first one (and its related file-exclude/include-regexps) is used! If
+no directory-regexp matches then all files are displayed for the
+currently selected directory.
+</p>
+<p>Important note: It is recommended that the *LAST* element of this list
+should contain an always matching directory-regexp (<code>&quot;.*&quot;</code>)!
+</p>
+<p>So the value of this option is a list of cons-cells where the car is a
+directory regexp and the cdr is a 2 element list where the first
+element is a list of exclude regexps and the second element is a list
+of include regexps. A file is displayed in the source-buffer of ECB
+iff: The file does not match any of the exclude regexps OR the file
+matches at least one of the include regexps.
+</p>
+<p>But regardless of the value of this option a file F is never displayed
+in the sources-buffer if the directory matches
+<code>ecb-sources-exclude-cvsignore</code> and the directory contains a file
+.cvsignore which contains F as an entry!
+</p>
+<p>There are three predefined and useful combinations of an exclude and
+include regexp:
+</p>
+<ul>
+<li> All files
+
+</li><li> All, but no backup, object, lib or ini-files (except .emacs and .gnus). This
+means all files except those starting with &ldquo;.&rdquo;, &ldquo;#&rdquo; or ending with
+&ldquo;~&rdquo;, &ldquo;.elc&rdquo;, &ldquo;.obj&rdquo;, &ldquo;.o&rdquo;, &ldquo;.lib&rdquo;, &ldquo;.dll&rdquo;, &ldquo;.a&rdquo;,
+&ldquo;.so&rdquo;. (but including .emacs and .gnus)
+
+</li><li> Common source file types (.c, .java etc.)
+</li></ul>
+
+<p>In addition to these predefined values a custom exclude and include
+combination can be defined.
+</p>
+<p>Tips for the directory- and file-rexexps: <code>&quot;$^&quot;</code> matches no
+files/directories, <code>&quot;.*&quot;</code> matches all files/directories.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sources_002dbuffer_002dafter_002dcreate_002dhook"></a>User Option: <strong>sources-buffer-after-create-hook</strong></dt>
+<dd><p>Local hook running after the creation of the sources-buffer. Every
+function of this hook is called once without arguments direct after
+creating the sources-buffer of ECB and it&rsquo;s local key-map. So for
+example a function could be added which performs calls of
+<code>local-set-key</code> to define new keybindings only for the
+sources-buffer of ECB.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-sources_002dbuffer_002dname"></a>User Option: <strong>sources-buffer-name</strong></dt>
+<dd><p>Name of the ECB sources buffer. Because it is not a normal buffer for
+editing you should enclose the name with stars, e.g. &ldquo;*ECB Sources*&rdquo;.
+</p>
+<p>If it is necessary for you you can get emacs-lisp access to the
+buffer-object of the ECB-sources-buffer by this name, e.g. by a call
+of <code>set-buffer</code>.
+</p>
+<p>Changes for this option at runtime will take affect only after
+deactivating and then activating ECB again!
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-sources_002dexclude_002dcvsignore"></a>User Option: <strong>sources-exclude-cvsignore</strong></dt>
+<dd><p>Specify if files contained in a <samp>.cvsignore</samp> should be
+excluded.
+</p>
+<p>Value is a list of regular expressions or nil. If you want to exclude
+files listed in a <samp>.cvsignore</samp>-file from being displayed in the
+ecb-sources-buffer then specify a regexp for such a directory.
+</p>
+<p>If you want to exclude the contents of <samp>.cvsignore</samp>-files for
+every directory then you should add one regexp &ldquo;.*&rdquo; which matches
+every directory.
+</p>
+<p>If you never want to exclude the contents of <samp>.cvsignore</samp>-files
+then set this option to nil.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-sources_002dmenu_002dsorter"></a>User Option: <strong>sources-menu-sorter</strong></dt>
+<dd><p>Function which re-sorts the menu-entries of the directories buffer.
+</p>
+<p>If a function then this function is called to sort the menu-entries of
+the combined menu-entries of the user-menu-extensions of
+<code>ecb-sources-menu-user-extension</code> and the built-in-menu
+<code>ecb-sources-menu</code>. If nil then no special sorting will be done
+and the user-extensions are placed in front of the built-in-entries.
+</p>
+<p>For the guidelines for such a sorter-function see
+<code>ecb-directories-menu-sorter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sources_002dmenu_002duser_002dextension"></a>User Option: <strong>sources-menu-user-extension</strong></dt>
+<dd><p>Static user extensions for the popup-menu of the sources buffer.
+For further explanations see <code>ecb-directories-menu-user-extension</code>.
+</p>
+<p>The node-argument of a menu-function contains as data the source
+for which the popup-menu has been opened. Use always
+<code>ecb-source-get-*</code> to extract whatever you need from the
+node-data. E.g. use <code>ecb-source-get-filename</code> to get the full
+filename of the source of the node.
+</p>
+<p>Per default the static user-extensions are added at the beginning of the
+built-in menu-entries of <code>ecb-sources-menu</code> but the whole menu can be
+re-arranged with <code>ecb-sources-menu-sorter</code>.
+</p></dd></dl>
+
+
+
+<dl>
+<dt><a name="index-sources_002dmenu_002duser_002dextension_002dfunction"></a>User Option: <strong>sources-menu-user-extension-function</strong></dt>
+<dd><p>Dynamic user extensions for the popup-menu of the sources buffer. A
+function which has to return a list in the same format like the option
+<code>ecb-sources-menu-user-extension</code>. This function is called when
+the user opens the popup-menu for the sources buffer.
+</p>
+<p>If no dynamically evaluated menu-extensions should be added to the
+sources-buffer the function has to return nil. Therefore the
+default-value of this option is <code>ignore</code>.
+</p>
+<p>Per default the dynamic user-extensions are added in front of the
+static extensions of <code>ecb-sources-menu-user-extension</code> but the
+whole menu can be re-arranged with <code>ecb-sources-menu-sorter</code>.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-sources_002dperform_002dread_002donly_002dcheck"></a>User Option: <strong>sources-perform-read-only-check</strong></dt>
+<dd><p>Check if source-items in the tree-buffers are read-only. If a
+sourcefile is read-only then it will be displayed with that face set
+in the option <code>ecb-source-read-only-face</code>.
+</p>
+<p>Because this check can be take some time if files are used via a
+mounted net-drive ECB performs this check stealthily (see
+<code>ecb-stealthy-tasks-delay</code>) so normally the user should not see a
+performance-decrease or additional waiting-time. But to get sure this
+option offers three choices: <code>t</code>, <code>unless-remote</code> and
+<code>nil</code>. See <code>ecb-prescan-directories-for-emptyness</code> for an
+explanation for these three choices.
+</p>
+<p>The option <code>ecb-read-only-check-exclude-regexps</code> offers are more
+fine granularity to exclude the sources of certain directories from
+the read-only state-check.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sources_002dshow_002dnode_002dinfo"></a>User Option: <strong>sources-show-node-info</strong></dt>
+<dd><p>When to display which node-info in the sources-buffer.
+Define which node info should be displayed after moving the mouse
+over a node (or after a shift click onto the node) in the
+sources-buffer.
+</p>
+<p>You can define &ldquo;when&rdquo; a node-info should be displayed:
+See <code>ecb-directories-show-node-info</code> for the possible choices.
+</p>
+<ul class="no-bullet">
+<li>- name: Only the full node-name is displayed.
+</li><li>- file-info: File infos for this file are displayed.
+</li><li>- file-info-full: Fill infos incl. full path for this file are displayed.
+</li></ul>
+
+<p>Do NOT set this option directly via setq but use always customize!
+</p></dd></dl>
+
+
+
+<dl>
+<dt><a name="index-sources_002dsort_002dignore_002dcase"></a>User Option: <strong>sources-sort-ignore-case</strong></dt>
+<dd><p>Ignore case for sorting the source-files of the Sources-buffer. See
+also <code>ecb-sources-sort-method</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sources_002dsort_002dmethod"></a>User Option: <strong>sources-sort-method</strong></dt>
+<dd><p>Defines how the source files are sorted.
+</p>
+<ul class="no-bullet">
+<li>- <code>name</code>:
+Sorting by name.
+</li><li>- <code>extension</code>:
+Sorting first by extension and then by name.
+</li><li>- <code>nil</code>:
+No sorting, means source files are displayed in the sequence returned
+by <code>directory-files</code> (called without sorting).
+</li></ul>
+
+<p>See also <code>ecb-sources-sort-ignore-case</code>
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="ecb_002dmethods.html#ecb_002dmethods" accesskey="n" rel="next">ecb-methods</a>, Previous: <a href="ecb_002ddirectories.html#ecb_002ddirectories" accesskey="p" rel="prev">ecb-directories</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

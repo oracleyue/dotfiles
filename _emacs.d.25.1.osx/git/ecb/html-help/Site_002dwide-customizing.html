@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Site-wide customizing</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Site-wide customizing">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Site-wide customizing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="General-aspects.html#General-aspects" rel="up" title="General aspects">
+<link href="Most-important-options.html#Most-important-options" rel="next" title="Most important options">
+<link href="setq-or-customize.html#setq-or-customize" rel="prev" title="setq or customize">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Site_002dwide-customizing"></a>
+<div class="header">
+<p>
+Previous: <a href="setq-or-customize.html#setq-or-customize" accesskey="p" rel="prev">setq or customize</a>, Up: <a href="General-aspects.html#General-aspects" accesskey="u" rel="up">General aspects</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Site_002dwide-customizing-of-ECB"></a>
+<h4 class="subsection">7.1.2 Site-wide customizing of ECB</h4>
+
+<p>If you are the administrator for an Emacs-site, means you are
+responsible for the basic customization of a lot of Emacs users, then
+you maybe need a way to customize Emacs and ECB without changing
+everyones <samp>.emacs</samp>-file and normally you will do this with the
+file <samp>site-start.el</samp>. You can customize all options of ECB in a
+central <samp>site-start.el</samp> (even the options mentioned above!) but
+you <strong>MUST NOT</strong> do this via <code>setq</code> but you have to use a
+mechanism like the following<a name="DOCF27" href="#FOOT27"><sup>27</sup></a>!
+</p>
+<p>This section describes two methods how to pre-customize ECB site-wide.
+The elisp-code contained in the following two subsections has to be
+copied to the file <samp>site-start.el</samp> before it can be used.
+</p>
+<p>But ensure for both methods that you customize the options with the
+correct lisp format. Read carefully the docstrings of the options you
+want to customize from within Elisp-code!
+</p>
+<a name="Storing-all-option_002dsettings-in-the-users-custom_002dfile"></a>
+<h4 class="subsubsection">7.1.2.1 Storing all option-settings in the users custom-file</h4>
+
+<p>The mechanism described here defines all site-wide-settings in a file
+<samp>site-lisp.el</samp> but stores the values in the users
+<code>custom-file</code> which is probably <samp>.emacs</samp>!
+</p>
+<p>First two helper functions are needed, namely
+<code>customize-option-get-value</code> and
+<code>customize-save-variable-save</code> whereas the latter one sets the
+value for an option via the customize-mechanism (and is therefore
+allowed for the setq-forbidden options!) but only if the option has no
+saved value until now (i.e. the user has not saved this option for
+future sessions until now)
+</p>
+<div class="example">
+<pre class="example">(defun customize-option-get-value (option type)
+  &quot;Return the value of a customizable option OPTION with TYPE, where TYPE
+can either be 'standard-value \(the default-value of the defcustom) or
+'saved-value \(the value stored persistent by the user via customize).&quot;
+  (let ((val (car (get option type))))
+    (cond ((not (listp val)) val)
+          ((equal 'quote (car val)) (car (cdr val)))
+          (t (car val)))))
+
+(defun customize-save-variable-save (option value &amp;optional override)
+  &quot;Calls `customize-save-variable' with OPTION and VALUE if OPTION is a
+custom-type and if OPTION has no saved-value until now.
+If OVERRIDE is a function or lambda-form then it is called with two arguments:
+- OLD-SAVED-VAL: The saved value of OPTION
+- NEW-VALUE: see argument VALUE.
+OVERRIDE is only called if OPTION has already a saved-value. If OVERIDE
+returns not nil then `customize-save-variable' is called for OPTION with VALUE
+even if OPTION has no saved-value until now.&quot;
+  (and (get option 'custom-type)
+       (or (not (get option 'saved-value))
+           (and (functionp override)
+                (funcall override
+                         (customize-option-get-value option 'saved-value)
+                         value)))
+       (progn
+         (message &quot;Overriding saved value for option %s with %s&quot; option value)
+         (customize-save-variable option value))))
+</pre></div>
+
+<p>With <code>customize-save-variable-save</code> all ECB-options can be
+site-wide pre-customized like follows:
+</p>
+<div class="example">
+<pre class="example">(customize-save-variable-save 'ecb-show-tags
+                              '((include collapsed nil)
+                                (parent collapsed nil)
+                                (type flattened nil)
+                                (variable collapsed name)
+                                (function flattened name)
+                                (rule flattened name)
+                                (section flattened nil)
+                                (def collapsed name)
+                                (t collapsed name)))
+(customize-save-variable-save 'ecb-font-lock-tags t)
+;; add here more options of ECB it you want
+</pre></div>
+
+<a name="Using-a-special-setq-for-site_002dwide-settings"></a>
+<h4 class="subsubsection">7.1.2.2 Using a special setq for site-wide settings</h4>
+
+<p>The mechanism above saves the pre-customized values always in the
+users <code>custom-file</code> (probably <samp>.emacs</samp>). If this is not
+preferred, then you can use the following mechanism but of course the
+offered <code>setq-save</code> is only allowed for options which are not
+setq-forbidden (see <a href="setq-or-customize.html#setq-or-customize">setq or customize</a>).
+</p>
+<p>The mechanism below does not change the users <code>custom-file</code>. This
+mechanism is needed especially if ECB should be autoloaded and all
+site-wide settings should first loaded when ECB is activated by the
+user. This can be achieved for example via<a name="DOCF28" href="#FOOT28"><sup>28</sup></a>:
+</p>
+<div class="example">
+<pre class="example">(require 'ecb-autoloads))
+(eval-after-load &quot;ecb&quot;
+  '(require 'site-ecb))
+</pre></div>
+
+<p>In such a situation the whole <code>custom-file</code> of a user is mostly
+loaded <strong>before</strong> ECB is activated and therefore before the
+site-wide-settings are loaded. So the users own customizations are
+loaded before the site-wide ones.
+</p>
+<p>The <code>setq-save</code>-mechanism described below prevents the users own
+customisations contained in his <code>custom-file</code> from being
+overridden by the site-wide setq-settings. If <code>setq</code> would be
+used for the site-wide settings then in an autoload-situation the
+site-wide settings would override the users-settings and this should
+not be done!
+</p>
+<p>First two helper-macros are needed:
+</p>
+<div class="example">
+<pre class="example">(defmacro custom-saved-p (option)
+  &quot;Return only not nil if OPTION is a defcustom-option and has a
+saved value. Option is a variable and is literal \(not evaluated).&quot;
+  `(and (get (quote ,option) 'custom-type)
+        (get (quote ,option) 'saved-value)))
+
+(defmacro setq-save (option value)
+  &quot;Sets OPTION to VALUE if and only if OPTION is not already saved
+by customize. Option is a variable and is literal \(not evaluated).&quot;
+  `(and (not (custom-saved-p ,option))
+        (set (quote ,option) ,value)))
+</pre></div>
+
+<p>With <code>setq-save</code> all &ldquo;not-setq-forbidden&rdquo;-ECB-options can be
+site-wide pre-customized like follows:
+</p>
+<div class="example">
+<pre class="example">(setq-save ecb-tree-indent 4)
+(setq-save ecb-tree-expand-symbol-before t)
+(setq-save ecb-primary-secondary-mouse-buttons 'mouse-1--mouse-2)
+</pre></div>
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT27" href="#DOCF27">(27)</a></h3>
+<p>At least for the options for
+which <code>setq</code> is explicitly forbidden, but it is recommended to
+use always such a mechanism</p>
+<h3><a name="FOOT28" href="#DOCF28">(28)</a></h3>
+<p>The file
+<samp>site-ecb.el</samp> contains all site-wide settings for ECB</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="setq-or-customize.html#setq-or-customize" accesskey="p" rel="prev">setq or customize</a>, Up: <a href="General-aspects.html#General-aspects" accesskey="u" rel="up">General aspects</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

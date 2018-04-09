@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Integrating speedbar</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Integrating speedbar">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Integrating speedbar">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Large-directories.html#Large-directories" rel="next" title="Large directories">
+<link href="Simulating-speedbar.html#Simulating-speedbar" rel="prev" title="Simulating speedbar">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Integrating-speedbar"></a>
+<div class="header">
+<p>
+Next: <a href="Large-directories.html#Large-directories" accesskey="n" rel="next">Large directories</a>, Previous: <a href="Simulating-speedbar.html#Simulating-speedbar" accesskey="p" rel="prev">Simulating speedbar</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Integrating-speedbar-in-the-ECB_002dframe"></a>
+<h3 class="section">10.5 Integrating speedbar in the ECB-frame</h3>
+
+<p>It is very easy to integrate speedbar into ECB. There are two
+different ways to do this:
+</p>
+<ol>
+<li> You can either use speedbar in the directories-, sources- or
+methods-window of ECB instead of the built-in directory-, sources- or
+methods-browser of ECB. This can be done via the option
+<code>ecb-use-speedbar-instead-native-tree-buffer</code>.
+
+</li><li> Or you can integrate an extra speedbar-window into a layout
+independent of the existence of a directory-, sources- or
+methods-window. For this you can either use the built-in layout
+&ldquo;left-dir-plus-speedbar&rdquo; or you have to create your own layout
+interactively with the command <code>ecb-create-new-layout</code>. This way
+is not described in more details because there is nothing more to
+describe - just create your layout.
+</li></ol>
+
+<p>In general integrating speedbar into the ECB-frame makes sense for
+people...
+</p>
+<ul>
+<li> ...who like the speedbar way of handling directories and source-files
+but also like the ECB-way of displaying the buffer-contents (like
+methods and variables in a source-file). This people should use the
+option <code>ecb-use-speedbar-instead-native-tree-buffer</code> and set it
+to <code>dir</code>.
+
+</li><li> ...who like the speedbar way of browsing things like directories,
+files, file-contents etc. but who dislike the extra speedbar-frame.
+</li></ul>
+
+<p>Note: It is not necessary to integrate speedbar if you only want
+parsing sources not supported by semantic. From version 1.94 on ECB
+supports native parsing and displaying of such sources
+(see <a href="Non_002dsemantic-sources.html#Non_002dsemantic-sources">Non-semantic sources</a>)!
+</p>
+<p>Regardless the group you belong, with the speedbar-integration feature
+of ECB you can combine both worlds, the speedbar- and the ECB-world:
+</p>
+<ol>
+<li> Choose a layout which either contains a directories- or a
+sources-window but not both of them<a name="DOCF30" href="#FOOT30"><sup>30</sup></a>.
+
+<p>Because speedbar has also display-modes for buffers and info-nodes and
+some other useful things (which can be changed by the speedbar-command
+<code>speedbar-change-initial-expansion-list</code> we recommend layouts
+like &ldquo;left15&rdquo; or &ldquo;leftright3&rdquo; for using with speedbar.
+</p>
+</li><li> Set the option
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> to not nil. After
+this the chosen window of ECB will contain a full featured speedbar
+(the only difference to standard speedbar is not residing in an extra
+frame).
+</li></ol>
+
+<p>Note: If you belong to the first group of people (s.a.) a similar
+effect and usability is available by setting
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> to nil and setting
+<code>ecb-show-sources-in-directories-buffer</code> to not nil, because this
+combination displays also directories and sources in one window.
+</p>
+<p>So with the option <code>ecb-use-speedbar-instead-native-tree-buffer</code>
+you have the choice which way of displaying and handling &ldquo;things&rdquo;
+(directories, sources, methods...) you want (the speedbar- or the
+ECB-way).
+</p>
+<p>During speedbar is running within ECB (i.e.
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is not nil) the
+speedbar-command <code>speedbar</code> is disabled and the speedbar-command
+<code>speedbar-get-focus</code> switches between the speedbar-window and the
+edit-window<a name="DOCF31" href="#FOOT31"><sup>31</sup></a>.
+</p>
+<p><strong>IMPORTANT</strong>: ECB can only integrate speedbar-versions &gt;=
+0.14beta1! If you use lower versions of speedbar
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> has no effect.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT30" href="#DOCF30">(30)</a></h3>
+<p>Only one of them is
+needed if you use speedbar because speedbar displays directories and
+sources in one window. But if you like wasting space then you can also
+use a layout with both windows...</p>
+<h3><a name="FOOT31" href="#DOCF31">(31)</a></h3>
+<p>The standard behavior is switching between the
+speedbar-frame and the attached frame, but this make obviously no
+sense during running speedbar with ECB.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Large-directories.html#Large-directories" accesskey="n" rel="next">Large directories</a>, Previous: <a href="Simulating-speedbar.html#Simulating-speedbar" accesskey="p" rel="prev">Simulating speedbar</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

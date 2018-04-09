@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Add-on synchronization</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Add-on synchronization">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Add-on synchronization">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" rel="up" title="ECB-window synchronizing">
+<link href="Stealthy-background-tasks.html#Stealthy-background-tasks" rel="next" title="Stealthy background tasks">
+<link href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" rel="prev" title="Synchronization of basic ECB-windows">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Add_002don-synchronization"></a>
+<div class="header">
+<p>
+Previous: <a href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" accesskey="p" rel="prev">Synchronization of basic ECB-windows</a>, Up: <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" accesskey="u" rel="up">ECB-window synchronizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Synchronization-of-add_002don-ECB_002dwindows"></a>
+<h4 class="subsection">6.12.3 Synchronization of add-on ECB-windows</h4>
+
+<p>Currently ECB has a separate synchronization for the add-on ECB-windows
+ECB-analyse and ECB-symboldef and also for the eshell and
+speedbar-integration. Customizing can be done via:
+</p>
+<ul>
+<li> ECB-analyse:
+<code>ecb-analyse-buffer-sync</code>, <code>ecb-analyse-buffer-sync-delay</code> and
+<code>ecb-analyse-buffer-sync-hook</code>
+
+</li><li> ECB-symboldef:
+<code>ecb-symboldef-buffer-sync</code>, <code>ecb-symboldef-buffer-sync-delay</code> and
+<code>ecb-symboldef-buffer-sync-hook</code>
+
+</li><li> ECB-eshell:
+<code>ecb-eshell-buffer-sync</code>, <code>ecb-eshell-buffer-sync-delay</code> and
+<code>ecb-eshell-buffer-sync-hook</code>
+
+</li><li> ECB-speedbar:
+<code>ecb-speedbar-buffer-sync</code>, <code>ecb-speedbar-buffer-sync-delay</code> and
+<code>ecb-speedbar-buffer-sync-hook</code>
+
+</li></ul>
+
+<p>Each enabling- and delay-option has an additonal special value &rsquo;basic which is
+the default for all these options because it allows to use the current setting
+of <code>ecb-basic-buffer-sync</code> rsp. <code>ecb-basic-buffer-sync-delay</code> for
+the add-on synchronization too. Example: If <code>ecb-basic-buffer-sync</code> is
+set to the value <code>(Info-mode dired-mode)</code> then a setting of &rsquo;basic for
+<code>ecb-analyse-buffer-sync</code> means that synchronization is always done
+unless the current major-mode is Info-mode or dired-mode. Per default all
+add-on synchronization enabling- and delay-options are set to &rsquo;basic with one
+exeption: <code>ecb-analyse-buffer-sync-delay</code>: See the documentation of this
+option for a detailed description.
+</p>
+<p>In general it is recommended to read the documentation of all these options.
+</p>
+
+
+
+</body>
+</html>

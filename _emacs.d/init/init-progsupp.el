@@ -6,8 +6,9 @@
 ;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
-;; (global-set-key (kbd "C-c h g") 'magit-status)
-(global-set-key (kbd "C-x g") 'magit-status)
+(if *use-helm*
+    (global-set-key (kbd "C-c h g") 'magit-status)
+  (global-set-key (kbd "C-x g") 'magit-status))
 
 
 ;; ----------------------------------------------

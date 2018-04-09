@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Grepping directories</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Grepping directories">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Grepping directories">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Working-with-JDEE.html#Working-with-JDEE" rel="next" title="Working with JDEE">
+<link href="Using-eshell.html#Using-eshell" rel="prev" title="Using eshell">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Grepping-directories"></a>
+<div class="header">
+<p>
+Next: <a href="Working-with-JDEE.html#Working-with-JDEE" accesskey="n" rel="next">Working with JDEE</a>, Previous: <a href="Using-eshell.html#Using-eshell" accesskey="p" rel="prev">Using eshell</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Grepping-directories-with-ECB"></a>
+<h3 class="section">10.10 Grepping directories with ECB</h3>
+
+<p>ECB offers in the popup-menus in the directories- and
+sources-tree-buffer commands for easy (recursive) grepping the current
+directory under point (directory-buffer) rsp. the current-directory
+(sources-buffer). In every case just the function of the options
+<code>ecb-grep-function</code> rsp. <code>ecb-grep-find-function</code> is called
+and the <code>default-directory</code> is tempor. set to the chosen
+directory so the grep will performed in this directory regardless of
+the <code>default-directory</code> of current buffer in the edit-window.
+</p>
+<p>Other smart things beyond that are not done by ECB, see also
+<code>ecb-grep-function</code>!
+</p>
+<p>So, how to exclude some subdirectories or files from the grep?
+</p>
+<p>Basically this has to be done with the &ldquo;-prune&rdquo; option of the
+find-utility: If the standard-grep facility of Emacs is used then this
+is not easy but with the command <samp>igrep.el</samp> there is a convenient
+way to exclude things like CVS- or RCS-directories from the find-call:
+See the variable <code>igrep-find-prune-clause</code> of the library
+<samp>igrep.el</samp>.
+</p>
+
+
+
+</body>
+</html>

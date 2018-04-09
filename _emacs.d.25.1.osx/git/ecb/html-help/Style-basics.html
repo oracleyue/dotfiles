@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Style basics</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Style basics">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Style basics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles" rel="up" title="Tree-buffer styles">
+<link href="Ascii_002dbased-styles.html#Ascii_002dbased-styles" rel="next" title="Ascii-based styles">
+<link href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles" rel="prev" title="Tree-buffer styles">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Style-basics"></a>
+<div class="header">
+<p>
+Next: <a href="Ascii_002dbased-styles.html#Ascii_002dbased-styles" accesskey="n" rel="next">Ascii-based styles</a>, Previous: <a href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles" accesskey="p" rel="prev">Tree-buffer styles</a>, Up: <a href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles" accesskey="u" rel="up">Tree-buffer styles</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Basic-knowledge-about-the-styles"></a>
+<h4 class="subsubsection">4.1.2.1 Basic knowledge about the styles</h4>
+
+<p>There are nine image-names which define the control- and guide-symbols
+to draw the tree. Here is the list of the allowed image-names and the
+related corresponding ascii-symbols:
+</p>
+<ul class="no-bullet">
+<li>- open (&ldquo;[-]&rdquo;):
+The control-symbol displayed for an opened tree-node which has several
+subnodes. Clicking onto this control closes the node.
+
+</li><li>- close (&ldquo;[+]&rdquo;):
+The control-symbol displayed for a closed tree-node, i.e. an
+expandable node with subnodes but all subnodes are hidden. Clicking
+onto this control opened the node and displays its subnodes - if
+there are any. If it has no subnodes the empty-symbol will be
+displayed.
+
+</li><li>- empty (&ldquo;[x]&rdquo;):
+The symbol displayed for an empty node. An empty node is a
+node which could have subnodes but has currently none.
+
+</li><li>- leaf (&ldquo;*&rdquo;):
+The symbol displayed for a node which can not have any subnodes so it
+is a &ldquo;leaf&rdquo; in the tree.
+
+</li><li>- guide (&ldquo; |&rdquo;):
+The symbol used for drawing vertical &ldquo;guide-lines&rdquo; for opened nodes.
+See the example below.
+
+</li><li>- no-guide (&ldquo;  &rdquo;):
+Sometimes invisible guide-lines are needed to draw the tree.
+
+</li><li>- end-guide (&ldquo; &lsquo;&rdquo;):
+The symbol used for the guide-line of the last subnode of an opened
+node.
+
+</li><li>- handle (&ldquo;-&rdquo;):
+The symbol displayed before every subnode. Each handle is connected to
+a guide-line - either a normal guide or an end-guide.
+
+</li><li>- no-handle (&ldquo; &rdquo;):
+An invisible handle.
+</li></ul>
+
+<p>A tree will be build-up with these elements like follows:
+</p>
+<div class="example">
+<pre class="example">[-] node-with-subnodes      (open)
+ |-[+] not-empty-subnode1   (guide+handle+close)
+ |-[x] empty-subnode        (guide+handle+empty)
+ `-[-] not-empty-subnode2   (end-guide+handle+open)
+    |-* leaf-1              (no-guide+no-handle+guide+handle+leaf)
+    `-* leaf-2              (no-guide+no-handle+end-guide+handle+leaf)
+</pre></div>
+
+
+
+
+</body>
+</html>

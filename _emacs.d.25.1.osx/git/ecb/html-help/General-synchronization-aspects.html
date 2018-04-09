@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: General synchronization aspects</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: General synchronization aspects">
+<meta name="keywords" content="ECB - the Emacs Code Browser: General synchronization aspects">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" rel="up" title="ECB-window synchronizing">
+<link href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" rel="next" title="Synchronization of basic ECB-windows">
+<link href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" rel="prev" title="ECB-window synchronizing">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="General-synchronization-aspects"></a>
+<div class="header">
+<p>
+Next: <a href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" accesskey="n" rel="next">Synchronization of basic ECB-windows</a>, Previous: <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" accesskey="p" rel="prev">ECB-window synchronizing</a>, Up: <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" accesskey="u" rel="up">ECB-window synchronizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="General-synchronization-aspects-1"></a>
+<h4 class="subsection">6.12.1 General synchronization aspects</h4>
+
+<p>For each separate ECB-window-synchronization (remember: One common for the basic
+ECB-windows, one for each add-on ECB-window) ECB offers the following
+option-triple (demonstrated for the basic ECB-windows):
+</p>
+<ul>
+<li> <code>ecb-basic-buffer-sync</code>:
+
+<p>Enables or disables the synchronization in general.
+</p>
+<p>If active then the synchronization for the related ECB-window-buffers/windows
+takes place whenever a buffer changes in an edit window or if another
+edit-window with another buffer will be selected, if deactivated then never.
+But you can also set this option to a list of major-modes and then the sync.
+will only be done if the major-mode of the current buffer does NOT belong to
+this list.
+</p>
+<p>But in every case the synchronization only takes place if the
+major-mode of the current-buffer in the current selected edit-window
+has a relation to files or directories. Examples for the former one
+are all programming-language-modes like <code>c++-mode</code> or
+<code>java-mode</code>, <code>Info-mode</code> too, an example for the latter one
+is <code>dired-mode</code>. For all major-modes related to
+non-file/directory-buffers like <code>help-mode</code>,
+<code>customize-mode</code> and others a synchronization will never be done!
+</p>
+<p>It&rsquo;s recommended to exclude at least <code>Info-mode</code> because it makes
+no sense to synchronize the ECB-windows after calling the Info help.
+Per default also <code>dired-mode</code> is excluded but it can also making
+sense to synchronize the ECB-directories/sources windows with the
+current directory of the dired-buffer in the edit-window.
+</p>
+</li><li> <code>ecb-basic-buffer-sync-delay</code>:
+
+<p>This option takes only effect if the synchronization is switched on via
+<code>ecb-basic-buffer-sync</code> and determines when ECB synchronizes.
+</p>
+<p>This option sets the time in seconds (fractions allowed) Emacs must be idle
+before the related ECB-window(s) are synchronized. If nil then there is no
+delay, means synchronization takes place immediately. A small value of about
+0.25 seconds saves CPU resources and you get even though almost the same
+effect as if you set no delay.
+</p>
+<p>Per default ECB always synchronizes on idle-basis and it is strongly
+recommened not to change this (ie. not setting the delay-option to nil)
+because this can be very performance consuming (e.g. at least the check if a
+synchronization must be performed is done after <strong>every</strong> key- or
+mouse-button press!
+</p>
+<p>Some fraction of a second is probably always the best choice, because it does
+not cost cpu-power and nonetheless the synchronization takes place quite
+immediately. So in most cases there is no need to bother with this option,
+just use the default value.
+</p>
+</li><li> <code>ecb-basic-buffer-sync-hook</code>:
+
+<p>For each separate synchronization a hook variable is offered where you can
+hook in with some elisp code if you need some tasks performed afterwards the
+synchronization has been finished.
+</p>
+<p>In most cases no hook will be needed.
+</p>
+</li></ul>
+
+<p>Analogous to the shown options for the basic ECB-windows each add-on
+ECB-window has its own separate triple of these options, named congruent to
+the name of the buffer-name of the add-on ECB-window (e.g. for the analyse
+ECB-window with the buffer-name hold in <code>ecb-analyse-buffer-name</code> these
+three options are named <code>ecb-analyse-buffer-sync</code>,
+<code>ecb-analyse-buffer-sync-delay</code> and <code>ecb-analyse-buffer-sync-hook</code>.
+For some specialities see <a href="Add_002don-synchronization.html#Add_002don-synchronization">Add-on synchronization</a>.
+</p>
+<p><strong>Please note</strong>: With the command <code>ecb-window-sync</code> you can
+do a manual synchronization if the automatic one is switched off or
+if you just want to do this! See the documantation of this command.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" accesskey="n" rel="next">Synchronization of basic ECB-windows</a>, Previous: <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" accesskey="p" rel="prev">ECB-window synchronizing</a>, Up: <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing" accesskey="u" rel="up">ECB-window synchronizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

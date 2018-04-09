@@ -1,0 +1,901 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Interactive ECB commands</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Interactive ECB commands">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Interactive ECB commands">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Usage-of-ECB.html#Usage-of-ECB" rel="up" title="Usage of ECB">
+<link href="Customizing.html#Customizing" rel="next" title="Customizing">
+<link href="Stealthy-background-tasks.html#Stealthy-background-tasks" rel="prev" title="Stealthy background tasks">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Interactive-ECB-commands"></a>
+<div class="header">
+<p>
+Previous: <a href="Stealthy-background-tasks.html#Stealthy-background-tasks" accesskey="p" rel="prev">Stealthy background tasks</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Interactive-ECB-commands-1"></a>
+<h3 class="section">6.14 Interactive ECB commands</h3>
+
+<p>ECB offers a lot of interactive commands. Some of these commands
+prompt the user in the minibuffer if called with a prefix argument.
+</p>
+<p>Example: If <code>ecb-clear-history</code> is called with a prefix argument
+then you will be prompted in the minibuffer with:
+</p>
+<div class="example">
+<pre class="example">Clear from history: [all, not-existing-buffers, existing-buffers]
+</pre></div>
+
+<p>You can choose one of the options enclosed in brackets with
+TAB-completion; hitting RET direct after the prompt chooses auto. the
+first offered option (in the example above &ldquo;all&rdquo;).
+</p>
+<p><strong>Please note</strong>: The following interactive commands of ECB are
+listed without the prefix &ldquo;ecb-&rdquo; (e.g. the command
+<code>ecb-activate</code> is listed with name &ldquo;activate&rdquo;). This has been
+done for a better readable command index. See <a href="Command-Index.html#Command-Index">Command Index</a>.
+</p>
+<dl>
+<dt><a name="index-activate"></a>Command: <strong>activate</strong></dt>
+<dd><p>Activates ECB and creates the special buffers for the choosen layout.
+For the layout see <code>ecb-layout-name</code>. This function always raises
+the ECB-frame if called from another frame. This is the same as
+calling <code>ecb-minor-mode</code> with a positive argument.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-add_002dall_002dbuffers_002dto_002dhistory"></a>Command: <strong>add-all-buffers-to-history</strong></dt>
+<dd><p>Add all current file-buffers to the history-buffer of ECB.
+Dependend on the values of <code>ecb-history-make-buckets</code> and
+<code>ecb-history-sort-method</code> afterwards the history is bucketized or
+not and sorted either by name or by extension (if bucketized
+then the sorting is only within each bucket). If
+<code>ecb-history-sort-method</code> is nil the most recently used buffers
+are on the top of the history and the seldom used buffers at the
+bottom (again: when bucketized then this holds only within each
+bucket).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-analyse_002dbuffer_002dsync"></a>Command: <strong>analyse-buffer-sync</strong></dt>
+<dd><p>Synchronize the analyse buffer with the current buffer and point. This
+means in fact display the current analysis for current point.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-change_002dlayout"></a>Command: <strong>change-layout</strong> <em>&amp;optional preselect-type</em></dt>
+<dd><p>Select a layout-name from all current available layouts
+(TAB-completion is offered) and change the layout to the selected
+layout-name. If optional argument PRESELECT-TYPE is not nil then you
+can preselect a layout-type \(TAB-completion is offered too) and then
+you will be asked only for layouts of that preselected type. Note:
+This function works by changing the option <code>ecb-layout-name</code> but
+only for current Emacs-session.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-clear_002dhistory"></a>Command: <strong>clear-history</strong></dt>
+<dd><p>Clears the history-buffer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-customize"></a>Command: <strong>customize</strong></dt>
+<dd><p>Open a customize-buffer for all customize-groups of ECB.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-customize_002dmost_002dimportant"></a>Command: <strong>customize-most-important</strong></dt>
+<dd><p>Open a customize-buffer for the most important options of ECB.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-create_002dnew_002dlayout"></a>Command: <strong>create-new-layout</strong></dt>
+<dd><p>Start process for interactively creating a new ECB-layout
+(see <a href="Creating-a-new-ECB_002dlayout.html#Creating-a-new-ECB_002dlayout">Creating a new ECB-layout</a>).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cycle_002dmaximized_002decb_002dbuffers"></a>Command: <strong>cycle-maximized-ecb-buffers</strong></dt>
+<dd><p>Cycles through all ecb-buffers of current layout by maximizing exactly
+one of the ecb-windows after every cycle-step.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-cycle_002dthrough_002dcompilation_002dbuffers"></a>Command: <strong>cycle-through-compilation-buffers</strong> <em>&amp;optional choose-buffer</em></dt>
+<dd><p>Cycle through all compilation buffers currently open and display them
+within the compilation window <code>ecb-compile-window</code>. If the
+currently opened buffer within the compilation window is not a
+compilation buffer, we jump to the first compilation buffer. If not we
+try to loop through all compilation buffers. If we hit the end we go
+back to the beginning.
+</p>
+<p>If <var>CHOOSE-BUFFER</var> is not <code>nil</code> then the user will be
+prompted for the compilation-buffer to switch to.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-deactivate"></a>Command: <strong>deactivate</strong></dt>
+<dd><p>Deactivates the ECB and kills all ECB buffers and windows.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-delete_002dnew_002dlayout"></a>Command: <strong>delete-new-layout</strong></dt>
+<dd><p>Select a layout-name for a layout created by
+<code>ecb-create-new-layout</code> and delete this layout. This means the
+layout-definition is removed from the file
+<code>ecb-create-layout-file</code> and the layout-function and associated
+aliases are unbound.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-display_002dnews_002dfor_002dupgrade"></a>Command: <strong>display-news-for-upgrade</strong> <em>&amp;optional FULL-NEWS</em></dt>
+<dd><p>Display the most important NEWS after an ECB-upgrade. If you call this
+function but no ECB-upgrade has been performed before starting ECB
+then nothing is display unless <var>FULL-NEWS</var> is not nil.
+</p>
+<p>If <var>FULL-NEWS</var> is not nil then the NEWS-file is displayed in
+another window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-display_002dupgraded_002doptions"></a>Command: <strong>display-upgraded-options</strong></dt>
+<dd><p>Display a information-buffer which options have been upgraded or
+reset. Offers two buttons where the user can decide if the upgraded
+options should also being saved by ECB for future settings or if the
+buffer should be killed.
+</p>
+<p>If saving is possible this command display where the options would be
+saved. It is that file Emacs uses to save customize-settings. This
+file is &ldquo;computed&rdquo; from the settings in <code>custom-file</code> and
+<code>user-init-file</code> (see the documentation of these variables).
+</p>
+<p>ECB automatically makes a backup-file of that file which will be
+modified by storing the upgraded rsp. renamed ECB-options. This backup
+file gets a unique name by adding a suffix &ldquo;.before_ecb_&lt;version&gt;&rdquo;
+to the name of the modified file. If such a file already exists ECB
+adds a unique number to the end of the filename to make the filename
+unique. This is a safety mechanism if something fails during storing
+the upgraded options, so you never lose the contents of your
+customization-file!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-expand_002dmethods_002dnodes"></a>Command: <strong>expand-methods-nodes</strong> <em>&amp;optional force-all</em></dt>
+<dd><p>Set the expand level of the nodes in the ECB-methods-buffer.
+</p>
+<p>This command asks in the minibuffer for an indentation level LEVEL. With this
+LEVEL you can precisely specify which level of nodes should be expanded. LEVEL
+means the indentation-level of the nodes.
+</p>
+<p>A LEVEL value X means that all nodes with an indentation-level &lt;= X are
+expanded and all other are collapsed. A negative LEVEL value means all visible
+nodes are collapsed.
+</p>
+<p>Nodes which are not indented have indentation-level 0!
+</p>
+<p>Which node-types are expanded (rsp. collapsed) by this command
+depends on the options <code>ecb-methods-nodes-expand-spec</code> and
+<code>ecb-methods-nodes-collapse-spec</code>! With optional argument
+<var>FORCE-ALL</var> all tags will be expanded/collapsed regardless of
+the values of these options.
+</p>
+<p>Examples:
+</p><ul class="no-bullet">
+<li>- LEVEL = 0
+expands only nodes which have no indentation itself.
+</li><li>- LEVEL = 2
+expands nodes which are either not indented or indented indented once
+or twice
+</li><li>- LEVEL ~ 10
+should normally expand all nodes expect there are nodes which are
+indented deeper than 10.
+</li></ul>
+
+<p>Note 1: This command switches off auto. expanding of the method-buffer
+if <code>ecb-expand-methods-switch-off-auto-expand</code> is not nil. But it
+can be switched on again quickly with
+<code>ecb-toggle-auto-expand-tag-tree</code> or <kbd>[C-c . a]</kbd>.
+</p>
+<p>Note 2: All this is only valid for file-types parsed by semantic. For
+other file types which are parsed by imenu or etags (see
+<code>ecb-process-non-semantic-files</code>) <var>FORCE-ALL</var> is always true!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-dump_002dsemantic_002dtoplevel"></a>Command: <strong>dump-semantic-toplevel</strong></dt>
+<dd><p>Dump the current semantic-tags in special buffer and display them.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-eshell_002dcurrent_002dbuffer_002dsync"></a>Command: <strong>eshell-current-buffer-sync</strong></dt>
+<dd><p>Synchronize the eshell with the directory of current source-buffer.
+This is only done if the eshell is currently visible in the
+compile-window of ECB and if either this function is called
+interactively or <code>ecb-eshell-buffer-sync</code> is not nil.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-eshell_002drecenter"></a>Command: <strong>eshell-recenter</strong></dt>
+<dd><p>Recenter the eshell window so that the prompt is at the buffer-end.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-expand_002ddirectory_002dnodes"></a>Command: <strong>expand-directory-nodes</strong></dt>
+<dd><p>Set the expand level of the nodes in the ECB-directories-buffer. For
+argument LEVEL see <code>ecb-expand-methods-nodes</code>.
+</p>
+<p>Be aware that for deep structured paths and a lot of source-paths this
+command can last a long time - depending on machine- and
+disk-performance.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002danalyse"></a>Command: <strong>goto-window-analyse</strong></dt>
+<dd><p>Make the ECB-analyse window the current window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dcompilation"></a>Command: <strong>goto-window-compilation</strong></dt>
+<dd><p>Goto the ecb compilation window <code>ecb-compile-window</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002ddirectories"></a>Command: <strong>goto-window-directories</strong></dt>
+<dd><p>Make the ECB-directories window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>dir</code> then
+goto to the speedbar-window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002decb_002dby_002dsmart_002dselection"></a>Command: <strong>goto-window-ecb-by-smart-selection</strong></dt>
+<dd><p>selects a special ecb-browsing-window by smart selection. The command offers a
+list of all special ecb-windows by buffer-name. Selecting the buffer-name will
+select the displaying window. Which special ecb-windows are offered depends on
+the currently selected window: If not a special ecb-window is the currently
+selected-window then all edit-windows are offered in canonical order (means
+from top-left to button-right). If an ecb-window is the currently
+selected-window then all other(!) special ecb-windows are offered, beginning
+with the next special ecb-window to the current ecb-window (the following
+special ecb-windows also in canonical order). If there is only one senseful
+destination-ecb-window then this window is immediately selected, without
+confirmation (e.g.: There are two special ecb-windows and point stays in one
+of them. Or there is only one ecb-window and point stays either in one of the
+edit-windows or in the compile-window).
+</p>
+<p>If optional argument USE-IMMEDIATE-COMPLETION is nil then all possible
+destination-windows are displayed in the message-area and only hitting TAB
+offers completion. If USE-IMMEDIATE-COMPLETION is not nil then all possible
+destinations are immediately shown in a completion-buffer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dedit_002dby_002dsmart_002dselection"></a>Command: <strong>goto-window-edit-by-smart-selection</strong></dt>
+<dd><p>Selects an edit-window by smart selection. The command offers a list of all
+edit-windows by buffer-name. Selecting the buffer-name will select the
+displaying window. Which edit-windows are offered depends on the currently
+selected window: If not an edit-window is the currently selected-window then
+all edit-windows are offered in canonical order (means from top-left to
+button-right). If an edit-window is the currently selected-window then all
+other(!) edit-windows are offered, beginning with the next edit-window to the
+current edit-window (the following edit-windows also in canonical order). If
+there is only one senseful destination-edit-window then this window is
+immediately selected, without confirmation (e.g.: There are two edit-windows
+and point stays in one of them. Or there is only one edit-window and point
+stays either in one of the special ecb-windows or in the compile-window).
+</p>
+<p>If optional argument USE-IMMEDIATE-COMPLETION is nil then all possible
+destination-windows are displayed in the message-area and only hitting TAB
+offers completion. If USE-IMMEDIATE-COMPLETION is not nil then all possible
+destinations are immediately shown in a completion-buffer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dedit1"></a>Command: <strong>goto-window-edit1</strong></dt>
+<dd><p>Make the (first) edit-window window the current window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dedit2"></a>Command: <strong>goto-window-edit2</strong></dt>
+<dd><p>Make the second edit-window (if available) window the current window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dedit_002dlast"></a>Command: <strong>goto-window-edit-last</strong></dt>
+<dd><p>Make the last selected edit-window window the current window. This is
+the same as if <code>ecb-mouse-click-destination</code> is set to
+<code>last-point</code>.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dhistory"></a>Command: <strong>goto-window-history</strong></dt>
+<dd><p>Make the ECB-history window the current window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dmethods"></a>Command: <strong>goto-window-methods</strong></dt>
+<dd><p>Make the ECB-methods window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>method</code>
+then goto to the speedbar-window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-goto_002dwindow_002dsources"></a>Command: <strong>goto-window-sources</strong></dt>
+<dd><p>Make the ECB-sources window the current window. If
+<code>ecb-use-speedbar-instead-native-tree-buffer</code> is <code>source</code>
+then goto to the speedbar-window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-history_002dfilter"></a>Command: <strong>history-filter</strong></dt>
+<dd><p>Apply a filter to the history-buffer to reduce the number of entries.
+So you get a better overlooking. There are three choices:
+</p>
+<ul class="no-bullet">
+<li>- Filter by extension:
+Just insert the extension you want the History-buffer being filtered.
+Insert the extension without leading dot!
+
+</li><li>- Filter by regexp:
+Insert the filter as regular expression.
+
+</li><li>- No filter:
+This means to display an entry for all currently living file-buffers.
+</li></ul>
+</dd></dl>
+
+<dl>
+<dt><a name="index-jde_002ddisplay_002dclass_002dat_002dpoint"></a>Command: <strong>jde-display-class-at-point</strong></dt>
+<dd><p>Display in the ECB-methods-buffer the contents (methods, attributes
+etc...) of the class which contains the definition of the &ldquo;thing&rdquo;
+under point (this can be a variable-name, class-name, method-name,
+attribute-name). This function needs the same requirements to work as
+the method-completion feature of JDEE (see
+<code>jde-complete</code>)!. The source-file is searched first in
+<code>jde-sourcepath</code>, then in <code>jde-global-classpath</code>, then in
+<var>$CLASSPATH</var>, then in current-directory.
+</p>
+<p>Works only for classes where the source-code (i.e. the *.java-file) is
+available.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002danalyse"></a>Command: <strong>maximize-window-analyse</strong></dt>
+<dd><p>Maximize the ECB-analyse-window. I.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-analyse-window is not visible
+in current layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002ddirectories"></a>Command: <strong>maximize-window-directories</strong></dt>
+<dd><p>Maximize the ECB-directories-window, i.e. delete all other
+ECB-windows, so only one ECB-window and the edit-window(s) are visible
+(and maybe a compile-window). Works also if the ECB-directories-window
+is not visible in current layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002dsources"></a>Command: <strong>maximize-window-sources</strong></dt>
+<dd><p>Maximize the ECB-sources-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-sources-window is not visible
+in current layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002dmethods"></a>Command: <strong>maximize-window-methods</strong></dt>
+<dd><p>Maximize the ECB-methods-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-methods-window is not visible
+in current layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002dhistory"></a>Command: <strong>maximize-window-history</strong></dt>
+<dd><p>Maximize the ECB-history-window, i.e. delete all other ECB-windows, so
+only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Works also if the ECB-history-window is not visible
+in current layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-maximize_002dwindow_002dspeedbar"></a>Command: <strong>maximize-window-speedbar</strong></dt>
+<dd><p>Maximize the ECB-speedbar-window, i.e. delete all other ECB-windows,
+so only one ECB-window and the edit-window(s) are visible (and maybe a
+compile-window). Does nothing if the speedbar-window is not visible
+within the ECB-frame.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter"></a>Command: <strong>methods-filter</strong></dt>
+<dd><p>Apply a filter to the Methods-buffer to reduce the number of entries.
+So you get a better overlooking. There are six choices:
+</p>
+<ul>
+<li> Filter by protection:
+Just insert the protection you want the Methods-buffer being filtered:
+private, protected or public!
+
+</li><li> Filter by regexp:
+Insert the filter as regular expression.
+
+</li><li> Filter by tag-class:
+You can filter by the tag-classes of current major-mode. The available
+tag-classes come from the variable
+<code>semantic--symbol-&gt;name-assoc-list</code>. The are normally methods,
+variables etc.
+
+</li><li> Filter by current type:
+In languages which have types like Java or C++ this filter displays
+only the current type and all its members (e.g. attributes and
+methods). If ECB can not identify the current type in the
+source-buffer or in the methods-window then nothing will be done.
+
+</li><li> Filter by a filter-function:   
+Such a function gets two arguments: a tag and the source-buffer of
+this tag. If the tag should be displayed (i.e. not being filtered out)
+then the function has to return not nil otherwise nil.
+
+</li><li> No special filter:
+This means to display all tags specified with the option
+<code>ecb-show-tokens</code>. If currently some of the above filters are
+applied they will be all removed.
+
+</li><li> Delete the last added:
+This removes only the topmost filter-layer, means that filter added
+last.
+</li></ul>
+
+<p>The protection-, current-type- and the tag-class-filter are only
+available for semantic-supported sources.
+</p>
+<p>Be aware that the tag-list specified by the option
+<code>ecb-show-tags</code> is the basis of all filters, i.e. tags which are
+excluded by that option will never be shown regardless of the filter
+type here!
+</p>
+<p>All tags which match the applied filter(s) will be displayed in the
+Methods-buffer.
+</p>
+<p>If called with a prefix-argument or when optional arg INVERSE is not
+nil then an inverse filter is applied to the Methods-buffer, i.e. all
+tags which do NOT match the choosen filter will be displayed in the
+Methods-buffer!
+</p>
+<p>Per default the choosen filter will be applied on top of already
+existing filters. This means that filters applied before are combined
+with the new filter. This behavior can changed via the option
+<code>ecb-methods-filter-replace-existing</code>. But regardless of the
+setting in <code>ecb-methods-filter-replace-existing</code> applying one of
+the not-inverse filters protection, tag-class or current-type always
+replaces exactly already existing filters of that type. On the other
+hand applying more than one inverse tag-class- or protection-filter
+can make sense.
+</p>
+<p>Such a filter is only applied to the current source-buffer, i.e. each
+source-buffer can have its own tag-filters.
+</p>
+<p>The current active filter will be displayed in the modeline of the
+Methods-buffer [regexp, prot (= protection), tag-class, function (=
+filter-function)]. If an inverse filter has been applied then this is
+signalized by a preceding caret ^. If currently more than 1 filter is
+applied then always the top-most filter is displayed in the modeline
+but the fact of more than 1 filter is visualized by the number of the
+filters - included in parens. You can see all currently applied
+filters by moving the mouse over the filter-string in modeline of the
+Methods-buffer: They will displayed as help-echo.
+</p>
+<p>See the option <code>ecb-default-tag-filter</code> if you search for
+automatically applied default-tag-filters.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dcurrent_002dtype"></a>Command: <strong>methods-filter-current-type</strong></dt>
+<dd><p>Display in the Methods-buffer only the current type and its members.
+For further details see <code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-methods_002dfilter_002ddelete_002dlast"></a>Command: <strong>methods-filter-delete-last</strong></dt>
+<dd><p>Remove the most recent filter from the Methods-buffer. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dfunction"></a>Command: <strong>methods-filter-function</strong> <em>&amp;optional inverse</em></dt>
+<dd><p>Filter the methods-buffer by a function. If INVERSE is not nil (called
+with a prefix arg) then an inverse filter is applied. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dnofilter"></a>Command: <strong>methods-filter-nofilter</strong></dt>
+<dd><p>Remove any filter from the Methods-buffer. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dprotection"></a>Command: <strong>methods-filter-protection</strong> <em>&amp;optional inverse</em></dt>
+<dd><p>Filter the methods-buffer by protection. If INVERSE is not nil (called
+with a prefix arg) then an inverse filter is applied. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dregexp"></a>Command: <strong>methods-filter-regexp</strong> <em>&amp;optional inverse</em></dt>
+<dd><p>Filter the methods-buffer by a regexp. If INVERSE is not nil (called
+with a prefix arg) then an inverse filter is applied. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-methods_002dfilter_002dtagclass"></a>Command: <strong>methods-filter-tagclass</strong> <em>&amp;optional inverse</em></dt>
+<dd><p>Filter the methods-buffer by tag-class. If INVERSE is not nil (called
+with a prefix arg) then an inverse filter is applied. For further details see
+<code>ecb-methods-filter</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-minor_002dmode"></a>Command: <strong>minor-mode</strong> <em>&amp;optional arg</em></dt>
+<dd><p>Toggle ECB minor mode. With prefix argument <var>ARG</var>, turn on if
+positive, otherwise off. Return non-<code>nil</code> if the minor mode is
+enabled.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-nav_002dgoto_002dprevious"></a>Command: <strong>nav-goto-previous</strong></dt>
+<dd><p>Go backward in the navigation history-list, see <a href="Back_002fforward-navigation.html#Back_002fforward-navigation">Back/forward navigation</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-nav_002dgoto_002dnext"></a>Command: <strong>nav-goto-next</strong></dt>
+<dd><p>Go forward in the navigation history-list, see <a href="Back_002fforward-navigation.html#Back_002fforward-navigation">Back/forward navigation</a>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-rebuild_002dmethods_002dbuffer"></a>Command: <strong>rebuild-methods-buffer</strong></dt>
+<dd><p>Updates the methods buffer with the current buffer after deleting the
+complete previous parser-information, means no semantic-cache is used!
+Point must stay in an edit-window otherwise nothing is done. This
+method is merely needed for semantic parsed buffers if semantic parses
+not the whole buffer because it reaches a not parse-able code or for
+buffers not supported by semantic but by imenu or etags.
+</p>
+<p>Examples when a call to this function can be necessary:
+</p>
+<ul>
+<li> If an Elisp-file is parsed which contains in the middle a defun X
+where the closing ) is missing then semantic parses only until this
+defun X is reached and you will get an incomplete ECB-method buffer.
+In such a case you must complete the defun X and then call this
+function to completely reparse the Elisp-file and rebuild the ECB
+method buffer!
+
+</li><li> For not semantic supported buffers which can be parsed by imenu or
+etags (see <code>ecb-process-non-semantic-files</code>) because for these
+buffers there is no built-in auto-rebuild mechanism. For these buffers
+this command calls <code>ecb-rebuild-methods-buffer-for-non-semantic</code>.
+</li></ul>
+
+<p>For non-semantic-sources supported by etags the option
+<code>ecb-auto-save-before-etags-methods-rebuild</code> is checked before
+rescanning the source-buffer and rebuilding the methods-buffer.
+</p>
+<p>If point is in one of the ecb-windows or in the compile-window then
+this command rebuids the methods-buffer with the contents of the
+source-buffer the last selected edit-window.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-redraw_002dlayout"></a>Command: <strong>redraw-layout</strong> <em>&amp;optional ARG</em></dt>
+<dd><p>Redraw the ECB screen.
+</p>
+<p>Do not call this command from elisp-program but only interactively!
+</p>
+<p>Called without a prefix-argument the state of the ECB-frame-layout
+will preserved. This means:
+</p>
+<ul class="no-bullet">
+<li>- The state of compile-window (hidden or visible) will be preserved but
+if visible then the height will be as specified in
+<code>ecb-compile-window-height</code>.
+
+</li><li>- The state of the ECB-windows will be preserved (hidden or visible) but
+if visible then the sizes will be as specified in the layout (and with
+the options <code>ecb-windows-width</code> and <code>ecb-windows-height</code>) or
+as stored with <code>ecb-store-window-sizes</code>.
+</li></ul>
+
+<p>If called with ONE prefix-argument (<kbd>[C-u]</kbd>) then the layout will
+be drawn with all ECB-windows and also with a visible compile-window
+(when <code>ecb-compile-window-height</code> is not nil). The
+splitting-state of the edit-area will be preserved.
+</p>
+<p>If called with TWO prefix-arguments (i.e. hitting <kbd>[C-u]</kbd> twice:
+(<kbd>[C-u]</kbd> <kbd>[C-u]</kbd>) then an emergency-redraw will be performed.
+This means the same as if called with one prefix-argument (s.a.) but
+the splitting-state of the edit-area will NOT be preserved but all
+edit-windows besides the current one will be deleted. Use this only if
+there are some anomalies after standard redraws!
+</p>
+<p>If the variable <code>ecb-redraw-layout-quickly</code> is not nil then the
+redraw is done by the <code>ecb-redraw-layout-quickly</code> function,
+otherwise by <code>ecb-redraw-layout-full</code>.
+</p>
+<p>Please not: It&rsquo;s strongly recommended to use the quick redraw only if
+you have really slow machines where a full redraw takes several
+seconds because the quick redraw is not really safe and has some
+annoying drawbacks! On normal machines the full redraw should be done
+in &lt;&lt; 1s so there should be no need for the quick version!
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-restore_002ddefault_002dwindow_002dsizes"></a>Command: <strong>restore-default-window-sizes</strong></dt>
+<dd><p>Resets the sizes of the ECB windows to their default values.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-restore_002dwindow_002dsizes"></a>Command: <strong>restore-window-sizes</strong></dt>
+<dd><p>Sets the sizes of the ECB windows to their stored values. See option
+<code>ecb-layout-window-sizes</code> and command
+<code>ecb-store-window-sizes</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-select_002decb_002dframe"></a>Command: <strong>select-ecb-frame</strong></dt>
+<dd><p>Selects the <code>ecb-frame</code> if ECB is activated - otherwise reports
+an error.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-show_002dhelp"></a>Command: <strong>show-help</strong> <em>&amp;optional format</em></dt>
+<dd><p>Shows the online help of ECB either in Info or in HTML format
+depending on the value of <code>ecb-show-help-format</code>. If called with
+prefix argument, i.e. if <var>FORMAT</var> is not nil then the user is
+prompted to choose the format of the help (Info or HTML). If an error
+about not finding the needed help-file occurs please take a look at
+the options <code>ecb-help-info-start-file</code> and
+<code>ecb-help-html-start-file</code>!
+</p>
+<p>Note: If you got ECB as a standard XEmacs-package maybe the
+HTML-online-documentation is not included.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-show_002dlayout_002dhelp"></a>Command: <strong>show-layout-help</strong></dt>
+<dd><p>Select a name of a layout and shows the documentation of the
+associated layout-function. At least for the built-in layouts the
+documentation contains a picture of the outline of the chosen layout.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-show_002dtip_002dof_002dthe_002dday"></a>Command: <strong>show-tip-of-the-day</strong></dt>
+<dd><p>Show tip of the day if <code>ecb-tip-of-the-day</code> is not nil or if
+called interactively.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-sources_002dfilter"></a>Command: <strong>sources-filter</strong></dt>
+<dd><p>Apply a filter to the sources-buffer to reduce the number of entries.
+So you get a better overlooking. There are three choices:
+</p>
+<ul class="no-bullet">
+<li>- Filter by extension:
+Just insert the extension you want the Sources-buffer being filtered.
+Insert the extension without leading dot!
+
+</li><li>- Filter by regexp:
+Insert the filter as regular expression.
+
+</li><li>- No filter:
+This means to display an entry for every file in the current selected
+directory (all except these filter already filtered out by
+<code>ecb-source-file-regexps</code> and
+<code>ecb-sources-exclude-cvsignore</code>).
+</li></ul>
+
+<p>Such a filter is only applied to the current selected directory, i.e. each
+directory has its own filtered sources-buffer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-store_002dwindow_002dsizes"></a>Command: <strong>store-window-sizes</strong> <em>&amp;optional FIX</em></dt>
+<dd><p>Stores the sizes of the ECB windows for the current layout. The size
+of the ECB windows will be set to their stored values when
+<code>ecb-redraw-layout</code> or <code>ecb-restore-window-sizes</code> is called.
+To reset the window sizes to their default values call
+<code>ecb-restore-default-window-sizes</code>. Please read also the
+documentation of <code>ecb-layout-window-sizes</code>!
+</p>
+<p>The windows sizes are stored per default as fractions of current
+frame-width and -height of the ecb-frame, so the stored values will
+&ldquo;work&rdquo; for other frame sizes too. If a permanent compile-window is
+visible then ECB will tell you that window-sizes should be stored with
+hidden compile-window and ask you if you want proceed; if you proceed
+then the window-heights will be stored as fractions of current
+(frame-height minus current visible compile-window-height) so you
+should ensure that the current compile-window has its standard-height
+as specified in <code>ecb-compile-window-height</code>!. If <var>FIX</var> is not
+nil (means called with a prefix argument) then always the fixed values
+of current width and height are stored!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-submit_002dproblem_002dreport"></a>Command: <strong>submit-problem-report</strong></dt>
+<dd><p>Submit a problem report for the ECB to the ECB mailing-list. This
+command generates in the edit-window a problem-report which contains
+already the current values of all ECB options, the current
+backtrace-buffer if there is any and the current message-buffer. You
+will be asked for a problem-report subject and then you must insert a
+description of the problem. Please describe the problem as detailed as
+possible!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toggle_002dauto_002dexpand_002dtag_002dtree"></a>Command: <strong>toggle-auto-expand-tag-tree</strong> <em>&amp;optional arg</em></dt>
+<dd><p>Toggle auto expanding of the ECB-methods-buffer. With prefix argument
+<var>ARG</var>, make switch on if positive, otherwise switch off. If the
+effect is that auto-expanding is switched off then the current value
+of <code>ecb-auto-expand-tag-tree</code> is saved so it can be used for
+the next switch on by this command.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toggle_002dcompile_002dwindow"></a>Command: <strong>toggle-compile-window</strong> <em>&amp;optional arg</em></dt>
+<dd><p>Toggle the visibility of the compile-window of ECB. With prefix
+argument ARG, make visible if positive, otherwise invisible. The
+height of the compile-window is always the current value of
+<code>ecb-compile-window-height</code>! If called and
+<code>ecb-compile-window-height</code> is nil then ECB asks for the height
+of the compile-window, sets this height as new value of
+<code>ecb-compile-window-height</code> and displays the compile-window (so
+if you have called this command by mistake and you do not want a
+compile-window you have to quit with <tt class="key">C-g</tt>).
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-toggle_002dcompile_002dwindow_002dheight"></a>Command: <strong>toggle-compile-window-height</strong> <em>&amp;optional arg</em></dt>
+<dd><p>Toggle whether the <code>ecb-compile-window</code> is enlarged or not. If
+<var>ARG</var> &gt; 0 then shrink or enlarge the the compile-window according
+to the value of <code>ecb-enlarged-compilation-window-max-height</code>. But
+never shrink below the value of <code>ecb-compile-window-height</code>. If
+<var>ARG</var> &lt;= 0 then shrink <code>ecb-compile-window</code> to
+<code>ecb-compile-window-height</code> and if <var>ARG</var> is nil then toggle
+the enlarge-state.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toggle_002decb_002dwindows"></a>Command: <strong>toggle-ecb-windows</strong> <em>&amp;optional arg</em></dt>
+<dd><p>Toggle visibility of the ECB-windows. With prefix argument <var>ARG</var>,
+make visible if positive, otherwise invisible. This has nothing to do
+with (de)activating ECB but only affects the visibility of the ECB
+windows. ECB minor mode remains active!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toggle_002dlayout"></a>Command: <strong>toggle-layout</strong> <em>&amp;optional last-one</em></dt>
+<dd><p>Toggles between the layouts defined in
+<code>ecb-toggle-layout-sequence</code> (See also option
+<code>ecb-show-sources-in-directories-buffer</code>). Note: This function
+works by changing the options <code>ecb-layout-name</code> but only for
+current Emacs-session.
+</p>
+<p>If optional argument <var>LAST-ONE</var> is not nil (e.g. called with a
+prefix-arg) then always the last selected layout was choosen
+regardless of the setting in <code>ecb-toggle-layout-sequence</code>. The
+last selected layout is always that layout which was current direct
+before the most recent layout-switch. So now a user can switch to
+another layout via &lsquo;ecb-change-layout&rsquo; and always come back to his
+previous layout via <kbd>[C-u]</kbd> <code>ecb-toggle-layout</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-toggle_002dscroll_002dother_002dwindow_002dscrolls_002dcompile"></a>Command: <strong>toggle-scroll-other-window-scrolls-compile</strong> <em>&amp;optional ARG</em></dt>
+<dd><p>Toggle the state of
+<code>ecb-scroll-other-window-scrolls-compile-window</code>. With prefix
+argument <var>ARG</var>, set it to <code>t</code>, otherwise to <code>nil</code>. For
+all details about the scroll-behavior of <code>scroll-other-window</code>
+see the advice documentation of <code>other-window-for-scrolling</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-update_002ddirectories_002dbuffer"></a>Command: <strong>update-directories-buffer</strong></dt>
+<dd><p>Updates the ECB directories buffer.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-upgrade_002doptions"></a>Command: <strong>upgrade-options</strong></dt>
+<dd><p>Check for all ECB-options if their current value is compatible to the
+defined type. If not upgrade it to the new type or reset it to the
+default-value of current ECB. Try also to upgrade renamed options.
+Displays all upgraded or reset options with their old (before the
+upgrade/reset) and new values.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-window_002dsync"></a>Command: <strong>window-sync</strong></dt>
+<dd><p>ynchronizes all special ECB-buffers with current buffer.
+Depending on the contents of current buffer this command performs different
+synchronizing tasks but only if ECB is active and point stays in an
+edit-window.
+</p>
+<ul>
+<li> If current buffer is a file-buffer (or an indirect-buffer with a file-buffer
+as base-buffer) then all basic ECB-windows (directories, sources, methods and
+history) are synchronized with current buffer.
+
+</li><li> If current buffer is a dired-buffer then the directory- and
+the sources-tree-buffer are synchronized if visible
+</li></ul>
+
+<p>In addition to this the hooks in <code>ecb-basic-buffer-sync-hook</code> run.
+</p>
+<p>If optional argument ONLY-BASIC-WINDOWS is not nil then only the basic
+tree-buffer directories, sources, methods and history are synchronized.
+Otherwise all registered special ecb-buffers are synchronized too.
+</p>
+<p>See <a href="ECB_002dwindow-synchronizing.html#ECB_002dwindow-synchronizing">ECB-window synchronizing</a>.
+</p></dd></dl>
+
+<p>Most of these functions are also available via the menu &ldquo;ECB&rdquo; and
+also via the ECB key-map with prefix <kbd>C-c .</kbd> (see
+<code>ecb-minor-mode</code> for a complete list of the keybindings).
+</p>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Stealthy-background-tasks.html#Stealthy-background-tasks" accesskey="p" rel="prev">Stealthy background tasks</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

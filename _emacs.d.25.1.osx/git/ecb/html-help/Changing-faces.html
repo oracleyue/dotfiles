@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Changing faces</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Changing faces">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Changing faces">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Small-screens.html#Small-screens" rel="next" title="Small screens">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="prev" title="Common use-cases">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Changing-faces"></a>
+<div class="header">
+<p>
+Next: <a href="Small-screens.html#Small-screens" accesskey="n" rel="next">Small screens</a>, Previous: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="p" rel="prev">Common use-cases</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Changing-faces-in-the-ECB-tree_002dbuffers"></a>
+<h3 class="section">10.1 Changing faces in the ECB tree-buffers</h3>
+
+<a name="index-Faces"></a>
+<p>There are two basic faces:
+</p>
+<ul>
+<li> <code>ecb-default-general-face</code>:
+Basic face for displaying an ECB-tree-buffer.
+
+<p>It´s recommended to define the font-family, the font-size, the basic
+color etc. with this face.
+</p>
+<p>In GNU Emacs 21.X all faces (even the face
+<code>ecb-default-highlight-face</code>) used in the ECB tree-buffers
+inherit from this face. Therefore the default attributes like font
+etc. of a face used in a tree-buffer can be very easily changed with
+face <code>ecb-default-general-face</code>.
+</p>
+<p>With XEmacs there is no inheritance-feature but the options
+<code>ecb-directories-general-face</code>, <code>ecb-sources-general-face</code>,
+<code>ecb-methods-general-face</code> and <code>ecb-history-general-face</code>
+offer the choice to use the face <code>ecb-default-general-face</code> so
+also with XEmacs the basic face-settings can be easily changed just by
+customizing the face <code>ecb-default-general-face</code>.
+</p>
+</li><li> <code>ecb-default-highlight-face</code>:
+Basic face for highlighting the current node in an ECB-tree-buffer.
+
+<p>In GNU Emacs 21.X all highlighting faces used in the ECB tree-buffers
+inherit from this face. Therefore the default attributes like font
+etc. of a highlighting face used in a tree-buffer can be very easily
+changed with face <code>ecb-default-highlight-face</code>.
+</p>
+<p>With XEmacs there is no inheritance-feature but the options
+<code>ecb-directory-face</code>, <code>ecb-source-face</code>,
+<code>ecb-method-face</code> and <code>ecb-history-face</code> offer the choice to
+use the face <code>ecb-default-highlight-face</code> so also with XEmacs the
+basic face-settings can be easily changed just by customizing the face
+<code>ecb-default-highlight-face</code>.
+</p>
+</li></ul>
+
+<p>With these faces you can change the basic attributes easily and fast
+for ALL ECB-tree-buffers. But you are also able to display each
+ECB-tree-buffer with different faces, see the different options for
+every tree-buffer mentioned above.
+</p>
+<p><strong>Please note</strong> (only for XEmacs users): Cause of the lack of the
+font-inheritance feature using ONE other font for the ECB-methods
+buffer can NOT be achieved just by setting
+<code>ecb-methods-general-face</code> to <code>ecb-default-general-face</code> and
+changing the font of this default face. In addition you have to set
+the same font also for the face <code>ecb-bucket-node-face</code> like in
+the following example:
+</p>
+<div class="example">
+<pre class="example">(defconst my-ecb-font
+          &quot;-outline-Courier-normal-normal-13-97-96-96-c-*-iso8859-1&quot;)
+(set-face-font 'ecb-default-general-face my-ecb-font)
+(set-face-font 'ecb-bucket-node-face my-ecb-font)
+</pre></div>
+
+<p>This code sets the new defined font <code>my-ecb-font</code> as font for
+all<a name="DOCF29" href="#FOOT29"><sup>29</sup></a> ECB-tree-buffers (incl. the methods
+buffer).
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT29" href="#DOCF29">(29)</a></h3>
+<p>Of course <code>ecb-directories-general-face</code>,
+<code>ecb-sources-general-face</code>, <code>ecb-methods-general-face</code> and
+<code>ecb-history-general-face</code> must be set to
+<code>ecb-default-general-face</code>!</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Small-screens.html#Small-screens" accesskey="n" rel="next">Small screens</a>, Previous: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="p" rel="prev">Common use-cases</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

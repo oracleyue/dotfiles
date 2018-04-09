@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Refreshing the VC-state</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Refreshing the VC-state">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Refreshing the VC-state">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Version_002dcontrol-support.html#Version_002dcontrol-support" rel="up" title="Version-control support">
+<link href="Adding-new-backends.html#Adding-new-backends" rel="next" title="Adding new backends">
+<link href="Remote-repositories.html#Remote-repositories" rel="prev" title="Remote repositories">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Refreshing-the-VC_002dstate"></a>
+<div class="header">
+<p>
+Next: <a href="Adding-new-backends.html#Adding-new-backends" accesskey="n" rel="next">Adding new backends</a>, Previous: <a href="Remote-repositories.html#Remote-repositories" accesskey="p" rel="prev">Remote repositories</a>, Up: <a href="Version_002dcontrol-support.html#Version_002dcontrol-support" accesskey="u" rel="up">Version-control support</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-to-refresh-ECB_002dstate_002ddisplay-when-changed-outside"></a>
+<h4 class="subsection">10.8.4 How to refresh ECB-state-display when changed outside</h4>
+
+<p>If all actions concerning version controlling of a file are performed
+within Emacs with commands offeres by VC then the displayed state for
+such a file in the tree-buffers of ECB will be always correct - in
+that sense that ECB will always display that state which the
+check-state-function for the file will return. At least with GNU Emacs
+for the backends CVS, RCS, SCCS and Subversion this will be true. With
+XEmacs only for CVS. For other backends see <a href="Adding-new-backends.html#Adding-new-backends">Adding new backends</a>.
+</p>
+<p>But if the VC-state of a file will be changed outside of Emacs
+(unfortunately PCL-CVS must be called &ldquo;outside&rdquo; too because PCL-CVS
+doesn&rsquo;t use the functions of the VC-package of Emacs for checking-in
+or -out) then ECB can not automatically recognize this and therefore
+it can not aurtomatically update the displayed state-image-icon. You
+have to tell ECB for which files in the tree-buffers the VC-state
+should be recomputed. This can be done via the popup-menus of the
+ECB-tree-buffers - The following popup-commands are offered in the
+submenu &ldquo;Version Control&rdquo;:
+</p>
+<dl compact="compact">
+<dt>ECB-directories-buffer (if sources are displayed within):</dt>
+<dd><p>&ldquo;Recompute state for file&rdquo; and &ldquo;Recompute state for dir&rdquo; whereas
+the latter one recomputes the VC-state for all files of that directory
+the file belongs.
+</p></dd>
+<dt>ECB-sources-buffer</dt>
+<dd><p>&ldquo;Recompute state for file&rdquo; and &ldquo;Recompute state for dir&rdquo; whereas
+the latter one recomputes the VC-state for all files currently
+displayed in the sources-buffer.
+</p></dd>
+<dt>ECB-history-buffer</dt>
+<dd><p>&ldquo;Recompute state for file&rdquo; and &ldquo;Recompute state for whole history&rdquo;
+whereas the latter one recomputes the VC-state for all file-entries currently
+displayed in the history-buffer.
+</p></dd>
+</dl>
+
+<p><strong>Caution</strong>: The state will only recomputed right under all
+situations if you use either <code>ecb-vc-state</code> or
+<code>vc-recompute-state</code> as check-state-function in
+<code>ecb-vc-supported-backends</code> (see <a href="Checking-the-state.html#Checking-the-state">Checking the state</a>).
+</p>
+<p>Of course all these commands update the VC-state in all visible
+tree-buffers the file is currently displayed (e.g. often a file is
+displayed in the sources- and the history-buffer)!
+</p>
+<p>For general informations about the usage of popup-menus in ECB see
+<a href="Using-the-mouse.html#Using-the-mouse">Using the mouse</a> (subsection &ldquo;The right mouse button&rdquo;).
+</p>
+<p>In addition to these popup-commands using the POWER- rsp. Shift-click
+(see <a href="Using-the-mouse.html#Using-the-mouse">Using the mouse</a>) onto a directory in the directory-window of
+ECB refreshes the VC-state-values of all files contained in this
+directory too.
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Adding-new-backends.html#Adding-new-backends" accesskey="n" rel="next">Adding new backends</a>, Previous: <a href="Remote-repositories.html#Remote-repositories" accesskey="p" rel="prev">Remote repositories</a>, Up: <a href="Version_002dcontrol-support.html#Version_002dcontrol-support" accesskey="u" rel="up">Version-control support</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

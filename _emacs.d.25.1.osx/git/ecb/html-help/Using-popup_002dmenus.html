@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Using popup-menus</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Using popup-menus">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Using popup-menus">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Using-the-keyboard.html#Using-the-keyboard" rel="up" title="Using the keyboard">
+<link href="The-edit_002darea.html#The-edit_002darea" rel="next" title="The edit-area">
+<link href="Personal-tree_002dkeybindings.html#Personal-tree_002dkeybindings" rel="prev" title="Personal tree-keybindings">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Using-popup_002dmenus"></a>
+<div class="header">
+<p>
+Previous: <a href="Personal-tree_002dkeybindings.html#Personal-tree_002dkeybindings" accesskey="p" rel="prev">Personal tree-keybindings</a>, Up: <a href="Using-the-keyboard.html#Using-the-keyboard" accesskey="u" rel="up">Using the keyboard</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Using-the-popup_002dmenu-of-a-tree_002dbuffer-from-keyboard_002e"></a>
+<h4 class="subsection">6.2.4 Using the popup-menu of a tree-buffer from keyboard.</h4>
+
+<a name="index-tmm"></a>
+<p>A popup-menu of a tree-buffer can be activated from keyboard with the
+command <code>tree-buffer-show-menu-keyboard</code> which is bound to
+<kbd>M-m</kbd> in every tree-buffer. How the popup-menu is displayed
+depends if this command is called with a prefix-argument or not:
+</p>
+<p>If called without a prefix-arg then the popup-menu is displayed
+graphically as if it would be activated via mouse (for GNU Emacs this
+works perfectly but for XEmacs there is a bug which results in a wrong
+menu-position - but the menu itself works also with XEmacs).
+</p>
+<p>If called with a prefix-arg (<kbd>C-u M-m</kbd>) then the popup-menu is
+displayed with the tmm-mechanism (like the Emacs-[menu-bar] is
+displayed when &lsquo;tmm-menubar&rsquo; is called). This tmm-display is only
+available for GNU Emacs.
+</p>
+
+
+
+
+</body>
+</html>

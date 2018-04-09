@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: The layout-engine</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: The layout-engine">
+<meta name="keywords" content="ECB - the Emacs Code Browser: The layout-engine">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Elisp-programming.html#Elisp-programming" rel="up" title="Elisp programming">
+<link href="Programming-a-new-layout.html#Programming-a-new-layout" rel="next" title="Programming a new layout">
+<link href="Adviced-functions.html#Adviced-functions" rel="prev" title="Adviced functions">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="The-layout_002dengine"></a>
+<div class="header">
+<p>
+Previous: <a href="Adviced-functions.html#Adviced-functions" accesskey="p" rel="prev">Adviced functions</a>, Up: <a href="Elisp-programming.html#Elisp-programming" accesskey="u" rel="up">Elisp programming</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-to-program-new-layouts-and-new-special-windows"></a>
+<h3 class="section">11.5 How to program new layouts and new special windows</h3>
+
+<p>There are two aspects concerning this topic:
+</p>
+<ol>
+<li> Programming a new layout which contains several special ECB-windows
+like directories, sources, methods, history or other special windows
+and arranging them in a new outline.
+
+</li><li> Creating complete new special windows (e.g. a local-variable window
+for a graphical debugger like JDEbug of JDEE), adding them to a layout
+and synchronizing them with the current active edit-window.
+</li></ol>
+
+<p>The former one covers merely the layout-programming aspect which is
+explained in the first subsection of this chapter whereas the latter
+one covers all aspects of creating new special windows and what is
+necessary to synchronize it with the current active edit-window of
+ECB. This is explained in the second subsection which will refers to
+the first subsection.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Programming-a-new-layout.html#Programming-a-new-layout" accesskey="1">Programming a new layout</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to program a new layout
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Programming-special-windows.html#Programming-special-windows" accesskey="2">Programming special windows</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Aspects of programming special windows
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" accesskey="3">Possible layout-outlines</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">The wide range of possible layouts
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="The-layout_002dengine-API.html#The-layout_002dengine-API" accesskey="4">The layout-engine API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">The complete layout-engine API
+</td></tr>
+</table>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Background information</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Background information">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Background information">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" rel="up" title="Auto. option-upgrading">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="next" title="Common use-cases">
+<link href="User-interface.html#User-interface" rel="prev" title="User interface">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Background-information"></a>
+<div class="header">
+<p>
+Previous: <a href="User-interface.html#User-interface" accesskey="p" rel="prev">User interface</a>, Up: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="u" rel="up">Auto. option-upgrading</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Background-information-1"></a>
+<h4 class="subsection">9.2.2 Background information</h4>
+
+<p>Big packages like ECB will be enhanced and developed continuously so
+sometimes a new version must be released. Such packages offer in
+general a lot of customizable options so probably some of these
+options change the type or are renamed because the old type and/or
+name of the option makes no sense in the new release.
+</p>
+<p>Especially options which have changed the type of their value are now
+a problem for the user which want to upgrade to the latest
+ECB-version: If the user has saved a certain value for option X in its
+file <samp>.emacs</samp> but the type of this saved value doesn&rsquo;t match the
+new defined type in the defcustom-form after an ECB-upgrade then there
+can occur serious problems like ECB can not be started anymore or even
+Emacs can not be started without errors.
+</p>
+<p>Until now there was only one way to fix these problems: The user must
+manually edit his file <samp>.emacs</samp> and remove all entries for
+options which have now another type. After this and after restarting
+Emacs the new default-values of the type-changed options in the new
+ECB-release are active and the user can go on using Emacs and ECB. But
+this approach to fix the incompatible-option-problem has two serious
+drawbacks:
+</p>
+<ol>
+<li> The user must manually edit the customize-section in his file
+<samp>.emacs</samp>. This should normally not be done and if then only by
+old-handed Emacs-users.
+
+</li><li> The customized value of the option X in the old-release (with the old
+type) is lost because after removing the related entry from the
+file <samp>.emacs</samp> the new default-value is active, so the user must
+re-customize the option X.
+</li></ol>
+
+<p>OK, this is one half of the option-upgrade-problem but a new ECB-release
+can also rename a option from name X to name Y because the new name Y makes
+much more sense and/or is more mnemonic. If only the name has changed but
+not the type this is not a serious problem like above but also annoying
+because the customized value of the old-option X takes no effect in the new
+release but instead the default-value of the new-option Y is now active.
+But nevertheless this problem has the drawback number 2 (see above).
+</p>
+<p>The last category of upgrade-problems is a renamed option which has also
+changed its type.
+</p>
+<p>ECB has a solution for all these problems:
+</p>
+<ul>
+<li> It checks all customized values of all ECB-options if they are still
+type-compatible. If not then it tries to upgrade the old-value to the
+new value-type and if this is not possible then it resets the option
+to the new default value and offers then to store it via customize in
+the .emacs-file (or in any file which is used for customized options).
+But ECB does not touch any customization-file without asking the user!
+
+</li><li> It offers a special constant <code>ecb-upgradable-option-alist</code> which
+allows the ECB-maintainers to define special transformings for renamed
+options so even the value of an old-option X can be savely transformed
+to the new-option Y and the old setting is not lost.
+</li></ul>
+
+<p>All these checks and transformings are done at beginning of activating
+ECB - if the option <code>ecb-auto-compatibility-check</code> is not nil. If
+ECB has recognized incompatible or renamed options it does its
+upgrading/reseting-job so all ECB-options have correct types so ECB
+can start correct. After ECB is started it displays a list of all
+upgraded or reseted option with their old and new values.
+</p>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="User-interface.html#User-interface" accesskey="p" rel="prev">User interface</a>, Up: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="u" rel="up">Auto. option-upgrading</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

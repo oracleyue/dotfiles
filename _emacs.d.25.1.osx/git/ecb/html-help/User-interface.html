@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: User interface</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: User interface">
+<meta name="keywords" content="ECB - the Emacs Code Browser: User interface">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" rel="up" title="Auto. option-upgrading">
+<link href="Background-information.html#Background-information" rel="next" title="Background information">
+<link href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" rel="prev" title="Auto. option-upgrading">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="User-interface"></a>
+<div class="header">
+<p>
+Next: <a href="Background-information.html#Background-information" accesskey="n" rel="next">Background information</a>, Previous: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="p" rel="prev">Auto. option-upgrading</a>, Up: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="u" rel="up">Auto. option-upgrading</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="User-interface-for-option_002dupgrading"></a>
+<h4 class="subsection">9.2.1 User interface for option-upgrading</h4>
+
+<p>There are two interactive commands (see <a href="Interactive-ECB-commands.html#Interactive-ECB-commands">Interactive ECB commands</a>):
+</p>
+<ul class="no-bullet">
+<li>- <code>ecb-upgrade-options</code>:
+Does all necessary beginning with a incompatibility-check for all
+options, upgrading/resetting incompatible options and ending with the
+display of all upgraded or reset options.
+
+</li><li>- <code>ecb-display-upgraded-options</code>:
+Displays an information-buffer which options have been upgraded or
+reset. Offers two buttons where the user can decide if the upgraded
+options should also being saved by ECB for future settings or if the
+buffer should be killed.
+</li></ul>
+
+<p>If the option <code>ecb-auto-compatibility-check</code> has a non-nil value
+(which is the default) then ECB does all this stuff automatically at
+startup. This is very recommended!
+</p>
+<p>If you are interested in some background information, read
+<a href="Background-information.html#Background-information">Background information</a>!
+</p>
+
+
+
+</body>
+</html>

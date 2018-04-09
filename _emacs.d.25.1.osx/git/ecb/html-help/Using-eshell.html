@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Using eshell</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Using eshell">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Using eshell">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Grepping-directories.html#Grepping-directories" rel="next" title="Grepping directories">
+<link href="Known-VC_002dproblems.html#Known-VC_002dproblems" rel="prev" title="Known VC-problems">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Using-eshell"></a>
+<div class="header">
+<p>
+Next: <a href="Grepping-directories.html#Grepping-directories" accesskey="n" rel="next">Grepping directories</a>, Previous: <a href="Version_002dcontrol-support.html#Version_002dcontrol-support" accesskey="p" rel="prev">Version-control support</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Optimal-using-of-eshell-in-ECB"></a>
+<h3 class="section">10.9 Optimal using of eshell in ECB</h3>
+
+<a name="index-eshell"></a>
+<p>ECB offers a very smart integration of the &ldquo;eshell&rdquo; if you are using
+a compile window (see <a href="Temp_002d-and-compile_002dbuffers.html#Temp_002d-and-compile_002dbuffers">Temp- and compile-buffers</a>)<a name="DOCF41" href="#FOOT41"><sup>41</sup></a>
+</p>
+<p>Here is a short summary of provided features:
+</p>
+<ul>
+<li> Ability to jump to the eshell buffer within the compilation window by
+simply call <code>eshell</code> (bound to <kbd>C-c . e</kbd>). If the eshell
+isn&rsquo;t running it will be started.
+
+</li><li> Expands the compilation window when you run commands. So for example
+it allows you to view the eshell in minimized mode and then when you
+run &ldquo;ls&rdquo; the window automatically expands (but always depending on
+the output of the command you run).
+
+</li><li> Synchronizes the current directory of the eshell with the current
+buffer in the current active edit-window of ECB.
+
+</li><li> Provides smart window layout of the eshell buffer. This makes sure
+that the eshell is taking up the exact amount of space and that
+nothing is hidden.
+</li></ul>
+
+<p>Here comes a detailed explanation of these features and how to use it
+(all these features are only available if you use a persistent
+compile-window, i.e. if <code>ecb-compile-window-height</code> is not nil):
+</p>
+<p>You do not have to learn a new command for the eshell-start - just
+call <code>eshell</code> (for convenience also bound to <kbd>C-c . e</kbd>) and
+the eshell will displayed in the compile-window of ECB (if eshell is
+not already alive then it will be started automatically).
+</p>
+
+<p>ECB tries to display the contents of the eshell-buffer as best as
+possible, means ECB can autom. enlarge and shrink the compile-window
+so the contents of the eshell are fitting the window. See option
+<code>ecb-eshell-enlarge-when-eshell</code> and
+<code>ecb-eshell-fit-window-to-command-output</code>. Normally this is done
+autom. but you can also you the standard compile-window
+enlarging-command of ECB: <code>ecb-toggle-compile-window-height</code>.
+</p>
+<p>ECB tries also to recenter the eshell-buffer as best as possible.
+Normally this is done autom. but you can do it on demand with the
+command <code>ecb-eshell-recenter</code>.
+</p>
+<p>If option <code>ecb-eshell-buffer-sync</code> is true then ECB always
+synchronizes the command prompt of eshell with the directory of
+current source-buffer of the current active edit-window.
+</p>
+<p>With the option <code>ecb-eshell-auto-activate</code> you can start eshell
+autom. in the compile-window when ECB is started but of course if a
+compile-window exists.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT41" href="#DOCF41">(41)</a></h3>
+<p>Of
+course you can use eshell also if there is no compile-window. Then it
+is just displayed in the edit-area and there is no special
+integration.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Grepping-directories.html#Grepping-directories" accesskey="n" rel="next">Grepping directories</a>, Previous: <a href="Version_002dcontrol-support.html#Version_002dcontrol-support" accesskey="p" rel="prev">Version-control support</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

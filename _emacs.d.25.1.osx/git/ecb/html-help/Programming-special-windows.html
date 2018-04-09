@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Programming special windows</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Programming special windows">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Programming special windows">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="The-layout_002dengine.html#The-layout_002dengine" rel="up" title="The layout-engine">
+<link href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" rel="next" title="Possible layout-outlines">
+<link href="Programming-a-new-layout.html#Programming-a-new-layout" rel="prev" title="Programming a new layout">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Programming-special-windows"></a>
+<div class="header">
+<p>
+Next: <a href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" accesskey="n" rel="next">Possible layout-outlines</a>, Previous: <a href="Programming-a-new-layout.html#Programming-a-new-layout" accesskey="p" rel="prev">Programming a new layout</a>, Up: <a href="The-layout_002dengine.html#The-layout_002dengine" accesskey="u" rel="up">The layout-engine</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="All-aspects-of-programming-special-windows"></a>
+<h4 class="subsection">11.5.2 All aspects of programming special windows</h4>
+
+<p>ECB offers a flexible programmable layout-engine for other packages to
+display their own contents and informations in special ECB-windows. An
+example could be a graphical debugger which offers a special window for
+displaying local variables and another special window for messages
+from the debugger-process (like JDEbug of JDEE<a name="DOCF50" href="#FOOT50"><sup>50</sup></a>).
+</p>
+<p>This section explains all aspects of programming new special windows,
+adding them to a new layout and synchronizing them with edit-window of
+ECB. This can be done best with an easy example which nevertheless
+covers all necessary aspects to be a good example and skeleton for
+complex tools (like a graphical debugger) which want to use the
+layout-engine of ECB do display their own information.
+</p>
+<p><strong>IMPORTANT</strong>: See <a href="tree_002dbuffer.html#tree_002dbuffer">tree-buffer</a> for a full documentation of
+the library tree-buffer.el which can be used for programming a new
+special window as a tree!
+</p>
+<p>Here comes the example:
+</p>
+<a name="The-outline-of-the-example-layout_003a"></a>
+<h4 class="subsubsection">11.5.2.1 The outline of the example layout:</h4>
+
+<div class="example">
+<pre class="example">-------------------------------------------------------
+|Bufferinfo for &lt;filename&gt;:            |[prior]       |
+|Type: file                            |[next]        |
+|Size: 23456                           |              |
+|Modes: rw-rw-rw-                      |              |
+|-----------------------------------------------------|
+|                                                     |
+|                                                     |
+|                                                     |
+|                                                     |
+|                 edit-window                         |
+|                                                     |
+|                                                     |
+|                                                     |
+|                                                     |
+-------------------------------------------------------
+|                                                     |
+|                 compilation-window                  |
+|                                                     |
+-------------------------------------------------------
+</pre></div>
+
+<a name="The-description-of-the-layout_002dcontents"></a>
+<h4 class="subsubsection">11.5.2.2 The description of the layout-contents</h4>
+
+<p>The top-left window always displays informations about the current
+buffer in the selected edit-window. This window demonstrates how
+autom. synchronizing a special window/buffer of a layout with current
+edit-window.
+</p>
+<p>The top-right window contains an read-only &ldquo;action-buffer&rdquo; and
+offers two buttons which can be used with the middle mouse-button to
+scroll the edit-window. This is not very senseful but it demonstrates
+how to control the edit-window with actions performed in a special
+window/buffer of a layout.
+</p>
+<p>(If you have not set a compilation-window in
+<code>ecb-compile-window-height</code> then the layout contains no persistent
+compilation window and the other windows get a little more place).
+</p>
+<a name="The-example-code"></a>
+<h4 class="subsubsection">11.5.2.3 The example code</h4>
+
+<p>Now let have us a look at the several parts of the Elisp-program
+needed to program this new example layout. ECB contains a library
+<samp>ecb-examples.el</samp> which contains the full working code of this
+example. To test this example and to play with it you can load this
+library into Emacs (with <code>load-library</code> for example) and then
+calling <code>ecb-change-layout</code> (bound to <kbd>C-c . lc</kbd>) and
+inserting &ldquo;example-layout1&rdquo; as layout-name. An alternative is
+calling <code>ecb-examples-activate</code> and
+<code>ecb-examples-deactivate</code>. For details see file
+<samp>ecb-examples.el</samp>.
+</p>
+<p>The following steps only contain code-skeletons to demonstrate the
+principle. The full working code is available in
+<samp>ecb-examples.el</samp>.
+</p>
+<a name="The-bufferinfo-buffer-of-the-example"></a>
+<h4 class="subsubsection">11.5.2.4 The bufferinfo buffer of the example</h4>
+
+<p>The name of the bufferinfo buffer:
+</p>
+<div class="lisp">
+<pre class="lisp">(defconst ecb-examples-bufferinfo-buffer-name &quot; *ECB buffer info*&quot;)
+</pre></div>
+
+<p>Two helper functions for displaying infos in a special buffer:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-print-file-attributes (buffer filename)
+  (ecb-with-readonly-buffer buffer
+    (erase-buffer)
+    (insert (format &quot;Bufferinfo for %s:\n\n&quot; filename))
+    ;; insert with the function `file-attributes' some 
+    ;; informations about FILENAME.
+    ))
+
+(defun ecb-examples-print-non-filebuffer (buffer buffer-name)
+  (ecb-with-readonly-buffer buffer
+    (erase-buffer)
+    ;; analogous to `ecb-examples-print-file-attributes'
+    ))
+</pre></div>
+
+
+<p>For synchronizing the bufferinfo window with the current source-buffer we
+first introduce some three options which are very typical for a special
+ECB-window which should be synchronized with current buffer in the edit-area.
+</p>
+<p>The :type of the first two options is essential and <strong>MUST NOT</strong> be
+defined differently, because the macro <code>defecb-autocontrol/sync-function</code>
+(s.b.) and the function <code>ecb-activate-ecb-autocontrol-function</code> (s.b.)
+expects exactly these option-types.
+</p>
+<p>The third one for an own hook running after synchronizing is not essential but
+mostly useful for users who wants to do some own stuff.
+</p>
+<p>Here come the three options - for detailled docstrings take a look into the
+file <samp>ecb-examples.el</samp>:
+</p>
+<div class="lisp">
+<pre class="lisp">(defcustom ecb-examples-bufferinfo-buffer-sync 'basic
+  &quot;*Synchronize the bufferinfo buffer automatically with current edit buffer.
+
+If 'always then the synchronization takes place always a buffer changes in the
+edit window, if nil then never. If a list of major-modes then only if the
+`major-mode' of the new buffer belongs NOT to this list.
+
+If the special value 'basic is set then ECB uses the setting of the option
+`ecb-basic-buffer-sync'.
+
+IMPORTANT NOTE: Every time the synchronization is done the hook
+`ecb-bufferinfo-buffer-sync-hook' is evaluated.&quot;
+  :group 'ecb-examples-bufferinfo
+  :type '(radio :tag &quot;Synchronize ECBs example bufferino buffer&quot;
+                (const :tag &quot;use basic value&quot; :value basic)
+                (const :tag &quot;Always&quot; :value always)
+                (const :tag &quot;Never&quot; nil)
+                (repeat :tag &quot;Not with these modes&quot;
+                        (symbol :tag &quot;mode&quot;))))
+
+(defcustom ecb-examples-bufferinfo-buffer-sync-delay 'basic
+  &quot;*Time Emacs must be idle before the bufferinfo-buffer is synchronized.
+Synchronizing is done with the current source displayed in the edit window. If
+nil then there is no delay, means synchronization takes place immediately. A
+small value of about 0.25 seconds saves CPU resources and you get even though
+almost the same effect as if you set no delay.
+
+If the special value 'basic is set then ECB uses the setting of the option
+`ecb-basic-buffer-sync-delay'&quot;
+  :group 'ecb-analyse
+  :type '(radio (const :tag &quot;use basic value&quot; :value basic)
+                (const :tag &quot;No synchronizing delay&quot; :value nil)
+                (number :tag &quot;Idle time before synchronizing&quot; :value 2))
+  :set (function (lambda (symbol value)
+                   (set symbol value)
+                   (if (and (boundp 'ecb-minor-mode)
+                            (featurep 'ecb-examples)
+                            ecb-minor-mode)
+                       (ecb-activate-ecb-autocontrol-function
+                        value 'ecb-examples-bufferinfo-buffer-sync))))
+  :initialize 'custom-initialize-default)
+
+(defcustom ecb-examples-bufferinfo-buffer-sync-hook nil
+  &quot;Hook run at the end of `ecb-examples-bufferinfo-buffer-sync'.
+See documentation of `ecb-examples-bufferinfo-buffer-sync' for conditions when
+synchronization takes place and so in turn these hooks are evaluated.
+
+...&quot;
+  :group 'ecb-analyse
+  :type 'hook)
+
+</pre></div>
+
+<p>Now we define the synchronizing function. <strong>IMPORTANT</strong>: The main
+synchronizing function must be defined with the macro
+<code>defecb-autocontrol/sync-function</code>! See the documentation of this
+function for all details.
+</p>
+<p>The following function synchronizes the bufferinfo buffer with the current
+buffer of the edit-window if that buffer has changed
+</p>
+<p>See the comments in the code for explanations.
+</p>
+<div class="lisp">
+<pre class="lisp">(defvar ecb-examples-bufferinfo-last-file-buffer nil)
+
+(defecb-autocontrol/sync-function ecb-examples-bufferinfo-buffer-sync
+    ecb-examples-bufferinfo-buffer-name ecb-examples-bufferinfo-buffer-sync t
+  &quot;Synchronizes the buffer-info buffer with current source if changed.
+Can be called interactively but normally this should not be necessary because
+it will be called autom. by the internal synchronizing mechanism of ECB.&quot;
+
+  ;; The macro `defecb-autocontrol/sync-function' does a lot for our
+  ;; conveniance:
+  
+  ;; 1) here we can be sure that the buffer with name
+  ;; `ecb-examples-bufferinfo-buffer-name' is displayed in a window of
+  ;; `ecb-frame' because the macro `defecb-autocontrol/sync-function'
+  ;; encapsulates automatically the following code within
+  ;; `ecb-do-if-buffer-visible-in-ecb-frame' and this macro binds locally the
+  ;; variables visible-buffer and visible-window: visible-window:=
+  ;; (get-buffer-window ecb-examples-bufferinfo-buffer-name) visible-buffer:=
+  ;; (get-buffer ecb-examples-bufferinfo-buffer-name)
+
+  ;; 2) The macro `defecb-autocontrol/sync-function' automatically takes care of
+  ;;    the setting of option `ecb-examples-bufferinfo-buffer-sync' and runs the
+  ;;    following code only when the related conditions are true
+
+  ;; 3) The generated function has one optional argument FORCE which can be used
+  ;; in the code below.
+  
+  ;; 4) The macro `defecb-autocontrol/sync-function' makes this synchronizing
+  ;;    function interactive
+
+  ;; For details please read the documentation of
+  ;; `defecb-autocontrol/sync-function'!
+
+  ;; synchronize only when point stays in one of the edit-window.
+  (when (ecb-point-in-edit-window-number)
+
+    ;; we need the file-name of indirect-buffers too (if the base-buffer is a
+    ;; file-buffer), therefore we use `ecb-buffer-file-name' (see the docstring
+    ;; of this function)
+    (let ((filename (ecb-buffer-file-name (current-buffer))))
+    
+      (if (and filename (ecb-buffer-or-file-readable-p filename))
+
+          ;; synchronizing for real filesource-buffers or indirect buffers of
+          ;; real file buffers
+
+            ;; Let us be smart: We synchronize only if sourcebuffer has changed
+            ;; or if the argument FORCE is not nil
+            (when (or force
+                      (not (equal (current-buffer)
+                                  ecb-examples-bufferinfo-last-file-buffer)))
+              ;; set new last-file-buffer so we can check next time if changed
+              (setq ecb-examples-bufferinfo-last-file-buffer (current-buffer))
+              ;; we display the file-infos for current source-buffer
+              (ecb-examples-print-file-attributes visible-buffer filename))
+        
+        ;; what should we do for non file buffers like help-buffers etc...
+        (setq ecb-examples-bufferinfo-last-file-buffer nil)
+        (ecb-examples-print-non-filebuffer visible-buffer
+                                           (buffer-name (current-buffer)))))
+
+    ;; Now lets run the hooks in `ecb-examples-bufferinfo-buffer-sync-hook'
+    (run-hooks 'ecb-examples-bufferinfo-buffer-sync-hook)))
+</pre></div>
+
+<p>Two conveniance commands for the user:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-maximize-bufferinfo-window ()
+  &quot;Maximize the bufferinfo-window.
+I.e. delete all other ECB-windows, so only one ECB-window and the
+edit-window\(s) are visible \(and maybe a compile-window). Works
+also if the ECB-analyse-window is not visible in current layout.&quot;
+  (interactive)
+  (ecb-display-one-ecb-buffer ecb-examples-bufferinfo-buffer-name))
+
+(defun ecb-goto-bufferinfo-window ()
+  &quot;Make the bufferinfo-window the current window.&quot;
+  (interactive)
+  (ecb-goto-ecb-window ecb-examples-bufferinfo-buffer-name))
+</pre></div>
+
+<a name="Synchronizing-the-bufferinfo_002dbuffer-automatically"></a>
+<h4 class="subsubsection">11.5.2.5 Synchronizing the bufferinfo-buffer automatically</h4>
+
+<p>By using the macro <code>defecb-autocontrol/sync-function</code> for defining our
+synchronizing function we have already registered this function as a
+synchronizing function managed by ECB:
+</p>
+<p>The only thing we need is to tell ECB when this function should run - for this
+we have already defined the first two options in our example (s.a.).
+ECB offers to functions for 
+</p>
+<ul>
+<li> <code>ecb-activate-ecb-autocontrol-function</code>: Activate/start synchronizing
+</li><li> <code>ecb-stop-autocontrol/sync-function</code>: Stop synchronizing
+</li></ul>
+
+<p>It&rsquo;s smart to activate the synchronizing function within the
+dedicator-function. See the comment within the following function.
+</p>
+<p>The function which makes the bufferinfo-buffer dedicated to a window
+and registers the new special window/buffer at ECB.
+</p>
+<div class="lisp">
+<pre class="lisp">(defecb-window-dedicator-to-ecb-buffer ecb-examples-set-bufferinfo-buffer
+    ecb-examples-bufferinfo-buffer-name nil
+  &quot;Set the buffer in the current window to the bufferinfo-buffer and make this
+window dedicated for this buffer. Makes the buffer read-only.&quot;
+
+  ;; activating the synchronization of the bufferinfo-window:
+  ;; `ecb-activate-ecb-autocontrol-function' takes care of the possible
+  ;; settings in `ecb-examples-bufferinfo-buffer-sync-delay'. Therefore we do
+  ;; it here because then changes in ecb-examples-bufferinfo-buffer-sync-delay
+  ;; are taken into account each time the bufferinfo buffer is set in the
+  ;; layout (after each hiding/showing the ecb-window, each redrawing the
+  ;; layout deactivating/activating ECB)
+  (ecb-activate-ecb-autocontrol-function ecb-examples-bufferinfo-buffer-sync-delay
+                                         'ecb-examples-bufferinfo-buffer-sync)
+  
+  (switch-to-buffer (get-buffer-create ecb-examples-bufferinfo-buffer-name))
+  (setq buffer-read-only t))
+</pre></div>
+
+
+<p>This is all what we need for the special bufferinfo buffer. We have
+demonstrated already three of the important functions/macros of the
+layout-engine API of ECB: <code>ecb-with-readonly-buffer</code>,
+<code>defecb-autocontrol/sync-function</code> and <code>defecb-window-dedicator-to-ecb-buffer</code>
+(see <a href="The-layout_002dengine-API.html#The-layout_002dengine-API">The layout-engine API</a>. Especially the second macro is a MUST for
+programming good synchronizing functions which do not waste CPU-power! We have
+also shown how to start/activate a synchronizing function by
+<code>ecb-activate-ecb-autocontrol-function</code>. Later we will see how to stop
+it.
+</p>
+<a name="The-action-buffer-of-the-example"></a>
+<h4 class="subsubsection">11.5.2.6 The action buffer of the example</h4>
+
+<p>The name of the action-buffer:
+</p>
+<div class="lisp">
+<pre class="lisp">(defconst ecb-examples-action-buffer-name &quot; *ECB action buffer*&quot;)
+</pre></div>
+
+<p>Two helper functions for creating a readonly action-buffer with a
+special local key-map for the middle-mouse-button and two buttons
+[prior] and [next]:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-insert-text-in-action-buffer (text)
+  (let ((p (point)))
+    (insert text)
+    (put-text-property p (+ p (length text)) 'mouse-face
+                                             'highlight)))
+
+(defun ecb-examples-action-buffer-create ()
+  (save-excursion
+    (if (get-buffer ecb-examples-action-buffer-name)
+        (get-buffer ecb-examples-action-buffer-name)
+
+      (set-buffer (get-buffer-create
+                    ecb-examples-action-buffer-name))
+
+      ;; we setup a local key-map and bind middle-mouse-button
+      ;; see ecb-examples.el for the full code        
+
+      ;; insert the action buttons [prior] and [next] and
+      ;; make it read-only
+      
+      (ecb-with-readonly-buffer (current-buffer)
+        (erase-buffer)
+        (ecb-examples-insert-text-in-action-buffer &quot;[prior]&quot;)
+        ;; analogous for the [next] button
+        )
+      
+      (current-buffer))))
+</pre></div>
+
+<p>The function which performs the actions in the action-buffer if
+clicked with the middle-mouse button onto a button [next] or [prior].
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-action-buffer-clicked (e)
+  (interactive &quot;e&quot;)
+  (mouse-set-point e)
+  (let ((line (buffer-substring (ecb-line-beginning-pos)
+                                (ecb-line-end-pos))))
+    (cond ((string-match &quot;prior&quot; line)
+           (ecb-select-edit-window)
+           (call-interactively 'scroll-down))
+          ((string-match &quot;next&quot; line)
+           ;; analogous for [next]
+           ))))
+</pre></div>
+
+<p>Two conveniance-commands for the user:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-maximize-action-window ()
+  &quot;Maximize the action-window.
+I.e. delete all other ECB-windows, so only one ECB-window and the
+edit-window\(s) are visible \(and maybe a compile-window). Works
+also if the ECB-analyse-window is not visible in current layout.&quot;
+  (interactive)
+  (ecb-display-one-ecb-buffer ecb-examples-action-buffer-name))
+
+(defun ecb-goto-action-window ()
+  &quot;Make the action-window the current window.&quot;
+  (interactive)
+  (ecb-goto-ecb-window ecb-examples-action-buffer-name))
+</pre></div>
+
+<p>The function which makes the action-buffer dedicated to a window and
+registers it at ECB.
+</p>
+<div class="lisp">
+<pre class="lisp">(defecb-window-dedicator-to-ecb-buffer ecb-examples-set-action-buffer
+    ecb-examples-action-buffer-name nil
+  &quot;Set the buffer in the current window to the action-buffer
+and make this window dedicated for this buffer.&quot;
+  (switch-to-buffer (buffer-name (ecb-examples-action-buffer-create))))
+</pre></div>
+
+<p>We do not need more code for the action buffer. All of the code is
+standard emacs-lisp which would also needed if used without ECB.
+</p>
+<a name="Adding-the-bufferinfo_002d-and-action_002dbuffer-to-a-new-layout"></a>
+<h4 class="subsubsection">11.5.2.7 Adding the bufferinfo- and action-buffer to a new layout</h4>
+
+<p>Now we add the bufferinfo- and the action-buffer to a new layout of
+type top with name &ldquo;example-layout1&rdquo;:
+</p>
+<div class="lisp">
+<pre class="lisp">(ecb-layout-define &quot;example-layout1&quot; top
+  
+  ;; dedicating the bufferinfo window to the bufferinfo-buffer
+  (ecb-examples-set-bufferinfo-buffer)
+
+  ;; creating the action-window
+  (ecb-split-hor 0.75)
+  
+  ;; dedicate the action window to the action-buffer
+  (ecb-examples-set-action-buffer)
+
+  ;; select the edit-window
+  (select-window (next-window)))
+</pre></div>
+
+<p>This all what we need to define the new layout. See <a href="Programming-a-new-layout.html#Programming-a-new-layout">Programming a new layout</a> for more details of the pure layout-programming task.
+</p>
+<a name="Activating-and-deactivating-new-layouts"></a>
+<h4 class="subsubsection">11.5.2.8 Activating and deactivating new layouts</h4>
+
+<p>Because a set of new special windows integrated in a new layout is
+often just the GUI of a complete tool (like a graphical debugger) we
+demonstrate here the complete activation and deactivation of such a
+tool or at least of the tool-GUI. We decide that the GUI of our
+example &ldquo;tool&rdquo; needs a compile-window with height 5 lines and the
+height of the special windows &ldquo;row&rdquo; on top should be exactly 6 lines
+(normally width and height of the special windows should be a fraction
+of the frame, but here we use 6 lines<a name="DOCF51" href="#FOOT51"><sup>51</sup></a>
+</p>
+<p>Here comes the (de)activation code.
+</p>
+<p>The code for saving and restoring the state before activation (the
+full code is available in <samp>ecb-examples.el</samp>:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-preactivation-state(action)
+  (cond ((equal action 'save)
+         ;; code for saving the state
+         )
+        ((equal action 'restore)
+        ;; code for restoring the state
+        )))
+</pre></div>
+
+<p>The following function activates the GUI of our example tool:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-activate ()
+  &quot;Activate the new layout \&quot;example-layout1\&quot;.
+Acivates the function `ecb-examples-bufferinfo-buffer-sync', set
+`ecb-compile-window-height' to 5 and `ecb-windows-height' to 6. The
+preactivation-state is saved and will be restored by
+`ecb-examples-deactivate'.&quot;
+  (interactive)
+
+  (assert (featurep 'ecb) nil
+          &quot;ECB must be loaded!&quot;)
+  (assert ecb-minor-mode nil
+          &quot;ECB must be activated!&quot;)
+  (assert (equal (selected-frame) ecb-frame) nil
+          &quot;The ECB-frame must be selected!&quot;)
+  (assert (not (ecb-string= ecb-layout-name &quot;example-layout1&quot;)) nil
+          &quot;The examples-layout1 is already active!&quot;)
+  
+  ;; saving the state
+  (ecb-examples-preactivation-state 'save)
+
+  ;; switch to our prefered layout
+  (setq ecb-windows-height 6)
+  (setq ecb-compile-window-height 8)
+  (let ((ecb-change-layout-preserves-compwin-state nil))
+    ;; activating the synchronization of the bufferinfo-window is done in the
+    ;; dedicator-function (see `ecb-examples-set-bufferinfo-buffer' for the
+    ;; reason). So the synchronizing will be activated implicitly with the
+    ;; layout-switch because this redraws the layout and this calls all
+    ;; dedicator-functions.
+    (ecb-layout-switch &quot;example-layout1&quot;)))
+</pre></div>
+
+<p>This function deactivates the GUI of our example-tool and restores the
+state as before activation:
+</p>
+<div class="lisp">
+<pre class="lisp">(defun ecb-examples-deactivate ()
+  &quot;Deactivate the new layout \&quot;example-layout1\&quot;.
+Stops `ecb-examples-bufferinfo-buffer-sync' and restore the state
+as before activation.&quot;
+  (interactive)
+
+  (assert (featurep 'ecb) nil
+          &quot;ECB must be loaded!&quot;)
+  (assert ecb-minor-mode nil
+          &quot;ECB must be activated!&quot;)
+  (assert (equal (selected-frame) ecb-frame) nil
+          &quot;The ECB-frame must be selected!&quot;)
+  (assert (ecb-string= ecb-layout-name &quot;example-layout1&quot;) nil
+          &quot;The example-layout1 is not active!&quot;)
+
+  ;; we stop here the synchronization.
+  (ecb-stop-autocontrol/sync-function 'ecb-examples-bufferinfo-buffer-sync)
+  
+  (ecb-examples-preactivation-state 'restore)
+  
+  (ecb-layout-switch ecb-layout-name))
+</pre></div>
+
+
+<p>Now we have all code for the new layout and the new layout-buffers.
+The example is ready for use; just load <samp>ecb-examples.el</samp> (s.a.).
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT50" href="#DOCF50">(50)</a></h3>
+<p>JDEE is
+available at
+<a href="http://jdee.sunsite.dk/">http://jdee.sunsite.dk/</a>
+</p>
+<h3><a name="FOOT51" href="#DOCF51">(51)</a></h3>
+<p>You can change the code
+in the file <samp>ecb-examples.el</samp> to use a frame-fraction of 0.2
+instead of 6 hard lines, just try it!</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" accesskey="n" rel="next">Possible layout-outlines</a>, Previous: <a href="Programming-a-new-layout.html#Programming-a-new-layout" accesskey="p" rel="prev">Programming a new layout</a>, Up: <a href="The-layout_002dengine.html#The-layout_002dengine" accesskey="u" rel="up">The layout-engine</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

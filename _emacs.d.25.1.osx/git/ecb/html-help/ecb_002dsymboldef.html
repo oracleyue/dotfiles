@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: ecb-symboldef</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: ecb-symboldef">
+<meta name="keywords" content="ECB - the Emacs Code Browser: ecb-symboldef">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Customizable-options.html#Customizable-options" rel="up" title="Customizable options">
+<link href="ecb_002dlayout.html#ecb_002dlayout" rel="next" title="ecb-layout">
+<link href="ecb_002danalyse.html#ecb_002danalyse" rel="prev" title="ecb-analyse">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="ecb_002dsymboldef"></a>
+<div class="header">
+<p>
+Next: <a href="ecb_002dlayout.html#ecb_002dlayout" accesskey="n" rel="next">ecb-layout</a>, Previous: <a href="ecb_002danalyse.html#ecb_002danalyse" accesskey="p" rel="prev">ecb-analyse</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Group-ecb_002danalyse-1"></a>
+<h4 class="subsection">7.3.8 Group ecb-analyse</h4>
+
+<dl>
+<dt><a name="index-symboldef_002dbuffer_002dname"></a>User Option: <strong>symboldef-buffer-name</strong></dt>
+<dd><p>Name of the ECB-symbol-definition buffer.
+Because it is not a normal buffer for editing you should enclose the name with
+stars, e.g. &ldquo;*ECB Symboldefinition*&rdquo;.
+</p>
+<p>If it is necessary for you you can get emacs-lisp access to the buffer-object
+of the ECB-symbol-definition-buffer by this name, e.g. by a call of
+<code>set-buffer</code>.
+</p>
+<p>Changes for this option at runtime will take affect only after deactivating and
+then activating ECB again!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-symboldef_002dbuffer_002dsync"></a>User Option: <strong>symboldef-buffer-sync</strong></dt>
+<dd><p>Synchronize the symboldef buffer automatically with current edit buffer.
+</p>
+<p>If <code>always</code> then the synchronization takes place always a buffer changes in the
+edit window, if nil then never. If a list of major-modes then only if the
+<code>major-mode</code> of the new buffer belongs NOT to this list.
+</p>
+<p>If the special value <code>basic</code> is set then ECB uses the setting of the option
+<code>ecb-basic-buffer-sync</code>.
+</p>
+<p>IMPORTANT NOTE: Every time the synchronization is done the hook
+<code>ecb-symboldef-buffer-sync-hook</code> is evaluated.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-symboldef_002dbuffer_002dsync_002ddelay"></a>User Option: <strong>symboldef-buffer-sync-delay</strong></dt>
+<dd><p>Time Emacs must be idle before the symboldef-buffer is synchronized.
+Synchronizing is done with the current source displayed in the edit window. If
+nil then there is no delay, means synchronization takes place immediately. A
+small value of about 0.25 seconds saves CPU resources and you get even though
+almost the same effect as if you set no delay.
+</p>
+<p>If the special value &rsquo;basic is set then ECB uses the setting of the option
+<code>ecb-basic-buffer-sync-delay</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-symboldef_002dbuffer_002dsync_002dhook"></a>User Option: <strong>symboldef-buffer-sync-hook</strong></dt>
+<dd><p>ook run at the end of the function <code>ecb-symboldef-buffer-sync</code>.
+See documentation of <code>ecb-symboldef-buffer-sync</code> for conditions when
+synchronization takes place and so in turn these hooks are evaluated.
+</p>
+<p>Preconditions for such a hook:
+</p>
+<ul>
+<li> Current buffer is the buffer of the currently selected edit-window.
+</li><li> The symboldef-buffer is displayed in a visible window of the
+ecb-frame (so no check for visibilty of the symboldef-buffer in
+the ecb-frame is necessary in a hook function)
+</li></ul>
+
+<p>Postcondition for such a hook:
+Point must stay in the same edit-window as before evaluating the hook.
+</p>
+<p>Important note: If the option <code>ecb-symboldef-buffer-sync</code> is not
+nil the function <code>ecb-symboldef-buffer-sync</code> is running either
+every time Emacs is idle or even after every command (see
+<code>ecb-symboldef-buffer-sync-delay</code>). So if the symboldef-buffer is
+displayed in a window of the ecb-frame (see preconditions above)
+these hooks can be really called very often! Therefore each
+function of this hook should/must check in an efficient way at
+beginning if its task have to be really performed and then do
+them only if really necessary! Otherwise performance of Emacs
+could slow down dramatically!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-symboldef_002dfind_002dfunctions"></a>User Option: <strong>symboldef-find-functions</strong></dt>
+<dd><p>Funtions to find the definition for current symbol under point.
+This functionality is set on a major-mode base, i.e. for every major-mode a
+different setting can be used. The value of this option is a list of
+cons-cells:
+</p>
+<ul>
+<li> The car is either a major-mode symbol or the special symbol &rsquo;default which
+means if no setting for a certain major-mode is defined then the cdr of
+the &rsquo;default cons-cell is used.
+
+</li><li> The car is a function intended to find the definition of a certain symbol for
+files of this major-mode. Such a function will be called with two arguments,
+the first is the symbol-name as string for which the definition should be
+displayed and the second the current edit-buffer as buffer-object,
+i.e. the current buffer of the current edit-window. The function will be
+called with the special ecb-symbol-definition-buffer as current buffer
+whereas this buffer is empty. The function has to insert everything
+necessary to display the symbol-definition and is also responsible to format
+the displayed text. The buffer-local variable <code>fill-column is already preset
+to the window-width of the special ecb-window minus 1. The function is
+responsible to set the buffer-local variable `truncate-lines</code> appropriate.
+The function can either return nil or a string which will be integrated in
+the modeline-display of this ecb-window.
+</li></ul>
+
+<p>There are two prefined functions <code>ecb-symboldef-find-lisp-doc</code> and
+<code>ecb-symboldef-find-definition</code> whereas the latter on is used a default
+find-function.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-symboldef_002dminimum_002dsymbol_002dlength"></a>User Option: <strong>symboldef-minimum-symbol-length</strong></dt>
+<dd><p>Minimum length a symbol must have so its definition or doc is displayed.
+</p></dd></dl>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="ecb_002dlayout.html#ecb_002dlayout" accesskey="n" rel="next">ecb-layout</a>, Previous: <a href="ecb_002danalyse.html#ecb_002danalyse" accesskey="p" rel="prev">ecb-analyse</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

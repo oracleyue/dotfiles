@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Filtering Sources</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Filtering Sources">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Filtering Sources">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Filtering-the-tree_002dbuffers.html#Filtering-the-tree_002dbuffers" rel="up" title="Filtering the tree-buffers">
+<link href="Filtering-History.html#Filtering-History" rel="next" title="Filtering History">
+<link href="Filtering-Directories.html#Filtering-Directories" rel="prev" title="Filtering Directories">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Filtering-Sources"></a>
+<div class="header">
+<p>
+Next: <a href="Filtering-History.html#Filtering-History" accesskey="n" rel="next">Filtering History</a>, Previous: <a href="Filtering-Directories.html#Filtering-Directories" accesskey="p" rel="prev">Filtering Directories</a>, Up: <a href="Filtering-the-tree_002dbuffers.html#Filtering-the-tree_002dbuffers" accesskey="u" rel="up">Filtering the tree-buffers</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Applying-filters-to-the-Sources_002dbuffer"></a>
+<h4 class="subsection">6.7.2 Applying filters to the Sources-buffer</h4>
+
+<a name="Interactive-Sources_002dfilters"></a>
+<h4 class="subsubsection">6.7.2.1 Interactive Sources-filters</h4>
+
+<p>The command <code>ecb-sources-filter</code> allows to filter these
+tree-buffer either by a regular expression or by an extension (e.g.
+java, cc, el for java-, c++- rsp elisp-sources). This functionality is
+also available via the popup-menu of the Sources-tree-buffer.
+</p>
+<p>The currently applied filter is indicated in the modeline of the
+related tree-buffer. Applying a new filter replaces an eventually
+already applied filter.
+</p>
+<a name="Default-Sources_002dfilters"></a>
+<h4 class="subsubsection">6.7.2.2 Default Sources-filters</h4>
+
+<p>The option <code>ecb-source-file-regexps</code> allow to specify which
+source-files should be displayed and which not. This is done on a
+directory-basis, ie. for each directory-regexp the files to display
+can be specified. See the documentation of this option for all
+details.
+</p>
+<p>In addition to this option you should also know the option
+<code>ecb-sources-exclude-cvsignore</code> (see <a href="Filtering-Directories.html#Filtering-Directories">Filtering Directories</a>).
+</p>
+
+
+
+</body>
+</html>

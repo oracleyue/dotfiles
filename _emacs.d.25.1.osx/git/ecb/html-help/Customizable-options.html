@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Customizable options</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Customizable options">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Customizable options">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Customizing.html#Customizing" rel="up" title="Customizing">
+<link href="ecb_002dgeneral.html#ecb_002dgeneral" rel="next" title="ecb-general">
+<link href="Most-important-options.html#Most-important-options" rel="prev" title="Most important options">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Customizable-options"></a>
+<div class="header">
+<p>
+Previous: <a href="Most-important-options.html#Most-important-options" accesskey="p" rel="prev">Most important options</a>, Up: <a href="Customizing.html#Customizing" accesskey="u" rel="up">Customizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="All-customizable-options-of-ECB"></a>
+<h3 class="section">7.3 All customizable options of ECB</h3>
+
+<p>All customization of ECB is divided into the following &ldquo;customize
+groups&rdquo;. You can highly customize all the ECB behavior/layout so just
+go to these groups and you will see all well documented ECB-options.
+</p>
+<p><strong>Please note</strong>: All options in the following subsections are
+listed without the prefix &ldquo;ecb-&rdquo; (e.g. the option
+<code>ecb-layout-name</code> is listed with name &ldquo;layout-name&rdquo;). This has
+been done for a better readable option index. See <a href="Option-Index.html#Option-Index">Option Index</a>.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dgeneral.html#ecb_002dgeneral" accesskey="1">ecb-general</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">General customizing ECB
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dtree_002dbuffer.html#ecb_002dtree_002dbuffer" accesskey="2">ecb-tree-buffer</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the general tree layout
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002ddirectories.html#ecb_002ddirectories" accesskey="3">ecb-directories</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-directories-tree
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dsources.html#ecb_002dsources" accesskey="4">ecb-sources</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-sources-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dmethods.html#ecb_002dmethods" accesskey="5">ecb-methods</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-methods-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dhistory.html#ecb_002dhistory" accesskey="6">ecb-history</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-history-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002danalyse.html#ecb_002danalyse" accesskey="7">ecb-analyse</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-analyse-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dsymboldef.html#ecb_002dsymboldef" accesskey="8">ecb-symboldef</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-symboldef-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dlayout.html#ecb_002dlayout" accesskey="9">ecb-layout</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the ECB-layout
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dcompilation.html#ecb_002dcompilation">ecb-compilation</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the compile-window
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dcreate_002dlayout.html#ecb_002dcreate_002dlayout">ecb-create-layout</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing options for creating layouts
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dface_002doptions.html#ecb_002dface_002doptions">ecb-face-options</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing options for faces
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dfaces.html#ecb_002dfaces">ecb-faces</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the faces
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dhelp.html#ecb_002dhelp">ecb-help</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the online help of ECB
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002deshell.html#ecb_002deshell">ecb-eshell</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the eshell-integration
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dspeedbar.html#ecb_002dspeedbar">ecb-speedbar</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the speedbar-integration
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dnon_002dsemantic.html#ecb_002dnon_002dsemantic">ecb-non-semantic</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing parsing non-semantic sources
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dwinman.html#ecb_002dwinman">ecb-winman</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing window-manager support
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dmode_002dline.html#ecb_002dmode_002dline">ecb-mode-line</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the tree-buffer-modelines
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="ecb_002dversion_002dcontrol.html#ecb_002dversion_002dcontrol">ecb-version-control</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Customizing the version-control-support
+</td></tr>
+</table>
+
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Most-important-options.html#Most-important-options" accesskey="p" rel="prev">Most important options</a>, Up: <a href="Customizing.html#Customizing" accesskey="u" rel="up">Customizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

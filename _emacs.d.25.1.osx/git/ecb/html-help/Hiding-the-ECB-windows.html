@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Hiding the ECB windows</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Hiding the ECB windows">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Hiding the ECB windows">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Usage-of-ECB.html#Usage-of-ECB" rel="up" title="Usage of ECB">
+<link href="Maximizing-the-ECB-windows.html#Maximizing-the-ECB-windows" rel="next" title="Maximizing the ECB windows">
+<link href="Creating-a-new-ECB_002dlayout.html#Creating-a-new-ECB_002dlayout" rel="prev" title="Creating a new ECB-layout">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Hiding-the-ECB-windows"></a>
+<div class="header">
+<p>
+Next: <a href="Maximizing-the-ECB-windows.html#Maximizing-the-ECB-windows" accesskey="n" rel="next">Maximizing the ECB windows</a>, Previous: <a href="The-ECB_002dlayout.html#The-ECB_002dlayout" accesskey="p" rel="prev">The ECB-layout</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Hiding_002fShowing-the-ECB-windows"></a>
+<h3 class="section">6.9 Hiding/Showing the ECB windows</h3>
+
+<a name="index-Hide-windows"></a>
+<a name="index-Show-windows"></a>
+<p>With <code>ecb-toggle-ecb-windows</code>, <code>ecb-hide-ecb-windows</code> and
+<code>ecb-show-ecb-windows</code> you can hide/show all the ECB windows
+without changing the activation state of ECB and also without
+deactivating the advices for <code>delete-other-windows</code> and/or
+<code>delete-window</code>. This is most useful if you use a layout like
+&ldquo;top2&rdquo; (see <a href="Common-use_002dcases.html#Common-use_002dcases">Common use-cases</a>) or if you want to have maximum space
+for editing and you don&rsquo;t need the browsing windows all the time.
+</p>
+<p>The following sequence of hooks is evaluated during showing again the
+hidden ECB-windows:
+</p><ol>
+<li> <code>ecb-show-ecb-windows-before-hook</code>
+</li><li> <code>ecb-redraw-layout-before-hook</code>
+</li><li> &lt;Redrawing the layout to show the hidden ECB-windows&gt;
+</li><li> <code>ecb-redraw-layout-after-hook</code>
+</li><li> <code>ecb-show-ecb-windows-after-hook</code>
+</li></ol>
+
+<p>The following sequence of hooks is evaluated during hiding the
+ECB-windows:
+</p><ol>
+<li> <code>ecb-hide-ecb-windows-before-hook</code>
+</li><li> <code>ecb-redraw-layout-before-hook</code>
+</li><li> &lt;Hiding the ECB-windows&gt;
+</li><li> <code>ecb-redraw-layout-after-hook</code>
+</li><li> <code>ecb-hide-ecb-windows-after-hook</code>
+</li></ol>
+
+<p>If the special ECB-windows are hidden (e.g. by
+&lsquo;ecb-toggle-ecb-windows&rsquo;) all adviced functions behave as their
+originals. So the frame can be used as if ECB would not be active but
+ECB IS still active in the &ldquo;background&rdquo; and all ECB-commands and all
+ECB-keybindings can be used. Of course some of them doesn&rsquo;t make much
+sense but nevertheless they can be called. Toggling the visibility of
+the ECB-windows preserves the splitting-state of the edit-area: If you
+hide the ECB-windows then the frame will be divided in the same
+window-layout the edit-area had before the hiding and if you show the
+ECB-windows again the edit-area will be divided into all the
+edit-windows the ECB-frame had before the showing.
+</p>
+<p>Therefore it should be enough to hide the ECB-windows to run other
+Emacs-applications which have their own window-layout-managing. There
+should be no conflicts. But nevertheless the most recommended method
+for running ECB and other applications (e.g. xrefactory, Gnus etc.) in
+the same frame is to use a window-manager like winring.el or
+escreen.el (see <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB">Window-managers and ECB</a>).
+</p>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Maximizing-the-ECB-windows.html#Maximizing-the-ECB-windows" accesskey="n" rel="next">Maximizing the ECB windows</a>, Previous: <a href="The-ECB_002dlayout.html#The-ECB_002dlayout" accesskey="p" rel="prev">The ECB-layout</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

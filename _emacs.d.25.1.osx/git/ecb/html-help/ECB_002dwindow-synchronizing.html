@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: ECB-window synchronizing</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: ECB-window synchronizing">
+<meta name="keywords" content="ECB - the Emacs Code Browser: ECB-window synchronizing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Usage-of-ECB.html#Usage-of-ECB" rel="up" title="Usage of ECB">
+<link href="General-synchronization-aspects.html#General-synchronization-aspects" rel="next" title="General synchronization aspects">
+<link href="Back_002fforward-navigation.html#Back_002fforward-navigation" rel="prev" title="Back/forward navigation">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="ECB_002dwindow-synchronizing"></a>
+<div class="header">
+<p>
+Next: <a href="Stealthy-background-tasks.html#Stealthy-background-tasks" accesskey="n" rel="next">Stealthy background tasks</a>, Previous: <a href="Back_002fforward-navigation.html#Back_002fforward-navigation" accesskey="p" rel="prev">Back/forward navigation</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Synchronization-of-the-ECB_002dwindows"></a>
+<h3 class="section">6.12 Synchronization of the ECB-windows</h3>
+
+<p>Per default ECB synchronizes automatically the contents of the
+ECB-windows (e.g. tree-buffers) with the current active edit-window
+(rsp. the current buffer of the edit window).
+</p>
+<p>ECB distinguishes between the so called &ldquo;basic&rdquo; ECB-windows (for a general
+description see <a href="Basic-ECB_002dwindows.html#Basic-ECB_002dwindows">Basic ECB-windows</a>) and add-on
+ECB-windows (see <a href="Add_002don-ECB_002dwindows.html#Add_002don-ECB_002dwindows">Add-on ECB-windows</a>). This distinction is also important
+concerning synchronization:
+</p>
+<p>The basic ECB-windows are always synchronized together whereas for each add-on
+ECB-window a separate synchronization option is offered.
+</p>
+<p>This section describes at beginning some general synchronization aspects
+(common for all ECB-windows, basic ones as well as add-ons), then the
+synchronization of the basic-ECB-windows and finally the synchronization of
+the add-on ECB-windows.
+</p>
+
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="General-synchronization-aspects.html#General-synchronization-aspects" accesskey="1">General synchronization aspects</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">General synchronization aspects
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Synchronization-of-basic-ECB_002dwindows.html#Synchronization-of-basic-ECB_002dwindows" accesskey="2">Synchronization of basic ECB-windows</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Synchronization of basic ECB-windows
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Add_002don-synchronization.html#Add_002don-synchronization" accesskey="3">Add-on synchronization</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Synchronization of add-on ECB-windows
+</td></tr>
+</table>
+
+
+
+
+</body>
+</html>

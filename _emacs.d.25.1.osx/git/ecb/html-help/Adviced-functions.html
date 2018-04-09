@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Adviced functions</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Adviced functions">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Adviced functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Elisp-programming.html#Elisp-programming" rel="up" title="Elisp programming">
+<link href="The-layout_002dengine.html#The-layout_002dengine" rel="next" title="The layout-engine">
+<link href="Tree_002dbuffer-How-to.html#Tree_002dbuffer-How-to" rel="prev" title="Tree-buffer How to">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Adviced-functions"></a>
+<div class="header">
+<p>
+Next: <a href="The-layout_002dengine.html#The-layout_002dengine" accesskey="n" rel="next">The layout-engine</a>, Previous: <a href="tree_002dbuffer.html#tree_002dbuffer" accesskey="p" rel="prev">tree-buffer</a>, Up: <a href="Elisp-programming.html#Elisp-programming" accesskey="u" rel="up">Elisp programming</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="How-to-deal-with-the-adviced-functions"></a>
+<h3 class="section">11.4 How to deal with the adviced functions</h3>
+
+<p>ECB needs a bunch of advices so ECB can work correctly. ECB has a
+powerful advice-backbone which allows defining sets of adviced
+functions whereas a set means, that all advices of a certain set are
+always enabled or disabled together.
+</p>
+<p>For this ECB contains four macros:
+</p>
+<ul class="no-bullet">
+<li>- <code>defecb-advice-set</code>
+</li><li>- <code>defecb-advice</code>
+</li><li>- <code>ecb-with-original-adviced-function-set</code>
+</li><li>- <code>ecb-with-ecb-advice</code> (for this one see below)
+</li></ul>
+
+<p>For a detailed explanation of each macro read the documentation with
+<code>describe-function</code>!
+</p>
+<p>An advice in ECB must not being defined by <code>defadvice</code> but only
+with <code>defecb-advice</code> which in turn needs a previously defined
+advice-set defined by <code>defecb-advice-set</code>.
+</p>
+<p>So ECB has always full control of all advices. For example ECB
+automatically disables all advices of all advice-sets at load-time of
+ECB and also at deactivation time of ECB. So you can be sure that
+after deactivating ECB all ecb-advices are deactivated/disabled too.
+</p>
+<p>In addition to the four macros above ECB offers two further macros
+for running code with disabled some ecb-advices:
+</p>
+<ul class="no-bullet">
+<li>- <code>ecb-with-original-basic-functions</code>
+</li><li>- <code>ecb-with-original-permanent-layout-functions</code>
+</li></ul>
+
+<p>The advice set <code>ecb-basic-adviced-functions</code> contains most of the
+ecb-advices. See the contents of this variable to see which advices
+are contained in this set. Use
+<code>ecb-with-original-basic-functions</code> when you want evaluating
+elisp-code with disabled basic-advices.
+<code>ecb-with-original-basic-functions</code> is only a shortcut for
+<code>ecb-with-original-adviced-function-set</code> called for the
+<code>ecb-basic-adviced-functions</code>-set.
+</p>
+<p>Same for <code>ecb-with-original-permanent-layout-functions</code> which is a
+shortcut for the advice-set <code>ecb-permanent-adviced-layout-functions</code>.
+</p>
+<p>Last but not least ECB contains an advice-set
+<code>ecb-always-disabled-advices</code>. These advices are always disabled.
+This advice-set can not be enabled by <code>ecb-enable-advices</code> but
+such an advice has to be activated &rsquo;on demand&rsquo; by the caller. Such an
+advice must be used with the macro <code>ecb-with-ecb-advice</code> (see the
+docstring) and is also enabled within the BODY of the macro-call.
+</p>
+<p>ECB contains some more advice-sets but don&rsquo;t bother about it.
+</p>
+<p><strong>Please Note</strong>: See the value of <code>ecb-adviced-function-sets</code> which
+advice-sets are defined and see <code>ecb-adviced-functions</code> for an overview
+for all adviced functions.
+</p>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="The-layout_002dengine.html#The-layout_002dengine" accesskey="n" rel="next">The layout-engine</a>, Previous: <a href="tree_002dbuffer.html#tree_002dbuffer" accesskey="p" rel="prev">tree-buffer</a>, Up: <a href="Elisp-programming.html#Elisp-programming" accesskey="u" rel="up">Elisp programming</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

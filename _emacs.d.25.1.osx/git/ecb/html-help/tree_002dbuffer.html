@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: tree-buffer</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: tree-buffer">
+<meta name="keywords" content="ECB - the Emacs Code Browser: tree-buffer">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Elisp-programming.html#Elisp-programming" rel="up" title="Elisp programming">
+<link href="Introduction.html#Introduction" rel="next" title="Introduction">
+<link href="List-of-hooks.html#List-of-hooks" rel="prev" title="List of hooks">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="tree_002dbuffer"></a>
+<div class="header">
+<p>
+Next: <a href="Adviced-functions.html#Adviced-functions" accesskey="n" rel="next">Adviced functions</a>, Previous: <a href="List-of-hooks.html#List-of-hooks" accesskey="p" rel="prev">List of hooks</a>, Up: <a href="Elisp-programming.html#Elisp-programming" accesskey="u" rel="up">Elisp programming</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-library-tree_002dbuffer_002eel"></a>
+<h3 class="section">11.3 The library tree-buffer.el</h3>
+
+<p>The library tree-buffer.el is an ECB-independent library written
+completely in emacs lisp and can be used also by other applications
+than ECB. But the main purpose of tree-buffer.el is to offer a small
+but powerful API to create new tree-buffers for ECB, add new
+tree-nodes to a tree-buffer and thus use such a tree-buffer to display
+arbitrary information structured by a tree.
+</p>
+<p>This chapter is for emacs-lisp-programmers and describes how to create
+a new tree-buffer, how to add new tree-nodes to a tree-buffer
+(includes removing and updating already existing tree-nodes) and how
+to use the offered tree-buffer- and tree-node-APIs.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Introduction.html#Introduction" accesskey="1">Introduction</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">General description of tree-buffers
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="A-new-tree_002dbuffer.html#A-new-tree_002dbuffer" accesskey="2">A new tree-buffer</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to create a new tree-buffer
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="A-new-tree_002dnode.html#A-new-tree_002dnode" accesskey="3">A new tree-node</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to add new tree-nodes to a tree-buffer
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Updating-a-tree_002dbuffer.html#Updating-a-tree_002dbuffer" accesskey="4">Updating a tree-buffer</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">How to update a tree-buffer after changes
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tree_002dbuffer-keybindings.html#Tree_002dbuffer-keybindings" accesskey="5">Tree-buffer keybindings</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Default and customizable keybindings
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="The-tree_002dbuffer_002dAPI.html#The-tree_002dbuffer_002dAPI" accesskey="6">The tree-buffer-API</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">All functions for tree-buffers and -nodes
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Do-not-with-tree_002dbuffer.html#Do-not-with-tree_002dbuffer" accesskey="7">Do not with tree-buffer</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Things which are strictly forbidden
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tree_002dbuffer-How-to.html#Tree_002dbuffer-How-to" accesskey="8">Tree-buffer How to</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Dealing with special situations
+</td></tr>
+</table>
+
+
+
+
+</body>
+</html>

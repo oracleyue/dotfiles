@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Simulating speedbar</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Simulating speedbar">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Simulating speedbar">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Integrating-speedbar.html#Integrating-speedbar" rel="next" title="Integrating speedbar">
+<link href="Big-screens.html#Big-screens" rel="prev" title="Big screens">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Simulating-speedbar"></a>
+<div class="header">
+<p>
+Next: <a href="Integrating-speedbar.html#Integrating-speedbar" accesskey="n" rel="next">Integrating speedbar</a>, Previous: <a href="Big-screens.html#Big-screens" accesskey="p" rel="prev">Big screens</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Simulating-speedbar-without-an-extra-frame"></a>
+<h3 class="section">10.4 Simulating speedbar without an extra frame</h3>
+
+<a name="index-Speedbar"></a>
+<p>You can simulate a speedbar-like layout within ONE frame by doing the
+following:
+</p>
+<ol>
+<li> Customize <code>ecb-layout-name</code> to layout name &ldquo;left9&rdquo;, &ldquo;left12&rdquo;,
+&ldquo;left13&rdquo; or &ldquo;left14&rdquo; dependent to what you like.
+
+</li><li> Optional: Ensure that <code>ecb-compile-window-height</code> is nil.
+
+</li><li> Optional: Adjust the <code>ecb-windows-width</code>.
+
+</li><li> Optional: Customize <code>ecb-toggle-layout-sequence</code> and toggle very fast
+between several layouts by <code>ecb-toggle-layout</code>. See the doc-strings!
+
+</li><li> Optional: Customize <code>ecb-show-sources-in-directories-buffer</code> to
+not nil if the chosen layout (see 1. and 4.) contains a
+directories-tree-buffer.
+
+</li><li> Save your changes.
+</li></ol>
+
+<p>But not only simulating speedbar is possible but also full integrating
+it into the ECB and the ECB-frame, See <a href="Integrating-speedbar.html#Integrating-speedbar">Integrating speedbar</a>.
+</p>
+
+
+
+</body>
+</html>

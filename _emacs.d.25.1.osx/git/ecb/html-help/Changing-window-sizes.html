@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Changing window sizes</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Changing window sizes">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Changing window sizes">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="The-ECB_002dlayout.html#The-ECB_002dlayout" rel="up" title="The ECB-layout">
+<link href="Fixing-window-sizes.html#Fixing-window-sizes" rel="next" title="Fixing window sizes">
+<link href="Redrawing-the-ECB_002dlayout.html#Redrawing-the-ECB_002dlayout" rel="prev" title="Redrawing the ECB-layout">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Changing-window-sizes"></a>
+<div class="header">
+<p>
+Next: <a href="Fixing-window-sizes.html#Fixing-window-sizes" accesskey="n" rel="next">Fixing window sizes</a>, Previous: <a href="Redrawing-the-ECB_002dlayout.html#Redrawing-the-ECB_002dlayout" accesskey="p" rel="prev">Redrawing the ECB-layout</a>, Up: <a href="The-ECB_002dlayout.html#The-ECB_002dlayout" accesskey="u" rel="up">The ECB-layout</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Changing-the-sizes-of-the-special-ECB_002dwindows"></a>
+<h4 class="subsection">6.8.3 Changing the sizes of the special ECB-windows</h4>
+
+<p>The standard width and height of the special ECB-windows is defined
+with the options <code>ecb-windows-width</code> and
+<code>ecb-windows-height</code>. But changing these options always
+influences all layouts which is not always desired.
+</p>
+<p>ECB offers to re-adjust the width and height of the ECB-windows (e.g. by
+dragging the windows-borders via the mouse) and then saving exactly
+these current window-sizes for the current layout so after activating
+this layout all windows have autom. the stored sizes.
+</p>
+<p>This is done via the option <code>ecb-layout-window-sizes</code> and the
+commands <code>ecb-store-window-sizes</code>,
+<code>ecb-restore-window-sizes</code> and
+<code>ecb-restore-default-window-sizes</code>.
+</p>
+<p>Here is an example how to resize and store the sizes of the
+ECB-windows of layout &ldquo;left1&rdquo;:
+</p>
+<ol>
+<li> Switch to layout &ldquo;left1&rdquo; via <code>ecb-change-layout</code> (<kbd>C-c . lc</kbd>)
+</li><li> Resize the ECB-windows by dragging the window-borders with the mouse
+</li><li> Call <code>ecb-store-window-sizes</code>
+</li></ol>
+
+<p>After this layout &ldquo;left1&rdquo; will be always drawn with the new sizes
+until you call <code>ecb-restore-default-window-sizes</code> during layout
+&ldquo;left1&rdquo; is active.
+</p>
+<p><strong>Please note</strong>: <code>ecb-store-window-sizes</code> stores the width
+and height of the windows per default as fractions of the width (rsp.
+height) of the ECB-frame, so the stored sizes are always correct
+regardless of the current frame-size! But if called with a prefix
+argument then fixed sizes are stored.
+</p>
+
+
+
+</body>
+</html>

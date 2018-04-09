@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Most important options</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Most important options">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Most important options">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Customizing.html#Customizing" rel="up" title="Customizing">
+<link href="Customizable-options.html#Customizable-options" rel="next" title="Customizable options">
+<link href="Site_002dwide-customizing.html#Site_002dwide-customizing" rel="prev" title="Site-wide customizing">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Most-important-options"></a>
+<div class="header">
+<p>
+Next: <a href="Customizable-options.html#Customizable-options" accesskey="n" rel="next">Customizable options</a>, Previous: <a href="General-aspects.html#General-aspects" accesskey="p" rel="prev">General aspects</a>, Up: <a href="Customizing.html#Customizing" accesskey="u" rel="up">Customizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-most-important-options-of-ECB"></a>
+<h3 class="section">7.2 The most important options of ECB</h3>
+
+<p>Here are the most important options (it is recommended to check at
+least the following options before working with ECB). You can
+customize them via the customize-group &ldquo;ecb-most-important&rdquo; or via
+the command <code>ecb-customize-most-important</code>.
+</p>
+<dl compact="compact">
+<dt><code>ecb-source-path</code></dt>
+<dd><p>Where ECB can find your sources. You must set this option!
+</p></dd>
+<dt><code>ecb-show-help-format</code></dt>
+<dd><p>Should the online help of ECB be displayed in the standard Info format
+or in HTML format in a web-browser.
+</p></dd>
+<dt><code>ecb-auto-activate</code></dt>
+<dt><code>ecb-major-modes-show-or-hide</code></dt>
+<dd><p>Auto. activation of ECB after start (see <a href="Automatic-activation.html#Automatic-activation">Automatic activation</a>) or
+major-mode-based showing or hiding the ecb-windows.
+</p></dd>
+<dt><code>ecb-winman-escreen-number</code></dt>
+<dt><code>ecb-winman-winring-name</code></dt>
+<dd><p>Support of several window-managers (see <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB">Window-managers and ECB</a>).
+</p></dd>
+<dt><code>ecb-key-map</code></dt>
+<dd><p>All ECB-keybindings incl. a common prefix-key (see <a href="Using-the-keyboard.html#Using-the-keyboard">Using the keyboard</a>).
+</p></dd>
+<dt><code>ecb-new-ecb-frame</code></dt>
+<dd><p>Should ECB create a new frame at activation time.
+</p></dd>
+<dt><code>ecb-primary-secondary-mouse-buttons</code></dt>
+<dt><code>ecb-mouse-click-destination</code></dt>
+<dd><p>Define how to use the mouse (see <a href="Using-the-mouse.html#Using-the-mouse">Using the mouse</a>).
+</p></dd>
+<dt><code>ecb-tree-buffer-style</code></dt>
+<dt><code>ecb-tree-expand-symbol-before</code></dt>
+<dt><code>ecb-tree-indent</code></dt>
+<dt><code>ecb-truncate-lines</code></dt>
+<dd><p>The look&amp;feel of the trees in the tree-buffers. The former option
+defines the general style of the tree-buffers and the latter ones
+allow to customize the ascii-style tree-buffers (maybe you like a
+value of 4 for the latter one if you display the expand-symbol before
+(see <a href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles">Tree-buffer styles</a>).
+</p></dd>
+<dt><code>ecb-source-file-regexps</code></dt>
+<dd><p>Which files will (not) be shown in ECB.
+</p></dd>
+<dt><code>ecb-layout-name</code></dt>
+<dt><code>ecb-compile-window-height</code></dt>
+<dt><code>ecb-compile-window-width</code></dt>
+<dt><code>ecb-other-window-behavior</code></dt>
+<dd><p>The ECB layout, means which windows you want to be displayed in the
+ECB-frame and also the location of these windows (see <a href="Changing-the-ECB_002dlayout.html#Changing-the-ECB_002dlayout">Changing the ECB-layout</a>).
+</p></dd>
+<dt><code>ecb-compilation-buffer-names</code></dt>
+<dd><p>Which buffers should be treaten as &ldquo;compilation-buffers&rdquo; and
+therefore displayed in the compile-window of ECB - if there is any.
+</p></dd>
+<dt><code>ecb-tag-display-function</code></dt>
+<dt><code>ecb-type-tag-display</code></dt>
+<dt><code>ecb-type-tag-expansion</code></dt>
+<dt><code>ecb-show-tags</code></dt>
+<dd><p>How to display the entries in the ECB-method window for semantic
+supported sources (see <a href="Customizing-the-display.html#Customizing-the-display">Customizing the display</a>). These options
+take only effect for semantic-sources (see <a href="The-Methods-window.html#Definition-of-semantic_002d-and-non_002dsemantic_002dsources">Definition of semantic- and non-semantic-sources</a>).
+</p></dd>
+<dt><code>ecb-process-non-semantic-files</code></dt>
+<dd><p>Displaying file-contents for not by semantic supported files too, e.g.
+for LaTeX- and perl-sources (see <a href="Non_002dsemantic-sources.html#Non_002dsemantic-sources">Non-semantic sources</a>).
+</p></dd>
+</dl>
+
+<p>But to make ECB working best for you it is also recommended to have a
+look at <a href="Customizable-options.html#Customizable-options">Customizable options</a>!
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Customizable-options.html#Customizable-options" accesskey="n" rel="next">Customizable options</a>, Previous: <a href="General-aspects.html#General-aspects" accesskey="p" rel="prev">General aspects</a>, Up: <a href="Customizing.html#Customizing" accesskey="u" rel="up">Customizing</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

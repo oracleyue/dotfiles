@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Downloading new versions</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Downloading new versions">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Downloading new versions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Upgrading.html#Upgrading" rel="up" title="Upgrading">
+<link href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" rel="next" title="Auto. option-upgrading">
+<link href="Upgrading.html#Upgrading" rel="prev" title="Upgrading">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Downloading-new-versions"></a>
+<div class="header">
+<p>
+Next: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="n" rel="next">Auto. option-upgrading</a>, Previous: <a href="Upgrading.html#Upgrading" accesskey="p" rel="prev">Upgrading</a>, Up: <a href="Upgrading.html#Upgrading" accesskey="u" rel="up">Upgrading</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Downloading-new-versions-of-ECB-and_002for-CEDET"></a>
+<h3 class="section">9.1 Downloading new versions of ECB and/or CEDET</h3>
+
+<a name="index-Download"></a>
+
+<p><strong>Please note</strong>: THE PACKAGE-DOWNLOAD-FEATURE OF ECB IS COMPLETELY
+DEACTIVATED SINCE VERSION 2.33! Please got to the website of ECB and download
+and install &ldquo;by hand&rdquo;:
+</p>
+<ol>
+<li> Download ECB
+
+<p>Go to
+<a href="http://ecb.sourceforge.net">http://ecb.sourceforge.net</a>
+and download the latest release (or if you are brave and tough the latest
+CVS-snapshot) from the download section.
+</p>
+<p>Save the archive (either *.tar.gz or *.zip) in a suitable location of your disk.
+</p>
+</li><li> Extract the downloaded ECB-archive
+
+<p>Extract the archive with a suitable extraction-tool. The archive will extract
+into a new directory <samp>ecb-&lt;version&gt;</samp> whereas &lt;version&gt; is either the
+version number of the downloaded release or &ldquo;latest&rdquo; in case of the
+CVS-snapshot. (example for a release: The archive extracts into a new
+subdirectory <samp>ecb-2.33</samp>.
+</p>
+<p>The newly created subdirectory contains all files of ECB in the needed
+subdirectory structure.
+</p>
+<p><strong>Note</strong>: Do not change the subdirectory structure of the extracted archive -
+this will prevent ECB from working correctly!
+</p>
+</li><li> Install and setup ECB
+
+<p>See <a href="Installation.html#Installation">Installation</a>.
+</p>
+</li><li> Start ECB
+
+<p>ECB will perform some requirements checks, especially for CEDET.
+<strong>Remark</strong>: By setting the option <code>ecb-version-check</code> to
+<code>nil</code> you can prevent ECB from checking correct versions of CEDET but
+it&rsquo;s strongly recommended not to do this!
+</p>
+</li><li> (Optional) Download and install a newer version of CEDET
+
+<p>If the version-check in (4) fails then you have to install a newer version of
+CEDET which fulfill the version-number ECB reports to you after its version
+check.
+</p>
+<p>See the instruction of CEDET how to do this. You will find CEDET at
+<a href="http://cedet.sourceforge.net">http://cedet.sourceforge.net</a>
+</p>
+<p>For setting up CEDET see <a href="Setting-up-CEDET_002fsemantic.html#Setting-up-CEDET_002fsemantic">Setting up CEDET/semantic</a>.
+</p>
+<p>If you have installed a new CEDET-version you <strong>MUST</strong> re-byte-compile
+ECB unless you run ECB not byte-compiled!
+</p>
+</li></ol>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Auto_002e-option_002dupgrading.html#Auto_002e-option_002dupgrading" accesskey="n" rel="next">Auto. option-upgrading</a>, Previous: <a href="Upgrading.html#Upgrading" accesskey="p" rel="prev">Upgrading</a>, Up: <a href="Upgrading.html#Upgrading" accesskey="u" rel="up">Upgrading</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

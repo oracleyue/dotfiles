@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Navigation/Selection</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Navigation/Selection">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Navigation/Selection">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Using-the-keyboard.html#Using-the-keyboard" rel="up" title="Using the keyboard">
+<link href="Incremental-search.html#Incremental-search" rel="next" title="Incremental search">
+<link href="Using-the-keyboard.html#Using-the-keyboard" rel="prev" title="Using the keyboard">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Navigation_002fSelection"></a>
+<div class="header">
+<p>
+Next: <a href="Incremental-search.html#Incremental-search" accesskey="n" rel="next">Incremental search</a>, Previous: <a href="Using-the-keyboard.html#Using-the-keyboard" accesskey="p" rel="prev">Using the keyboard</a>, Up: <a href="Using-the-keyboard.html#Using-the-keyboard" accesskey="u" rel="up">Using the keyboard</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Navigation-and-Selection-in-a-tree_002dbuffer"></a>
+<h4 class="subsection">6.2.1 Navigation and Selection in a tree-buffer</h4>
+
+<a name="index-RETURN-key"></a>
+<a name="index-TAB-key"></a>
+<a name="index-expanding"></a>
+<a name="index-collapsing"></a>
+<p>In the ECB-buffers RETURN and TAB are the most important keys:
+</p>
+<ul>
+<li> RETURN does the same as the primary button and C-RETURN does the same
+as the secondary button. S-RETURN is the same as the SHIFT-click or
+POWER-click. The terms &ldquo;primary&rdquo;, &ldquo;secondary&rdquo;, &ldquo;SHIFT-&rdquo; and
+&ldquo;POWER-click&rdquo; are explained in <a href="Using-the-mouse.html#Using-the-mouse">Using the mouse</a>. See also the
+option <code>ecb-tree-do-not-leave-window-after-select</code> and the
+function <code>ecb-toggle-do-not-leave-window-after-select</code> which is
+bound to <kbd>C-t</kbd> in each tree-buffer of ECB!
+
+<p>For all RETURN (and S-RETURN and C-RETURN) hits the position of the
+point within the current node-line is irrelevant! This is for
+conveniance.
+</p>
+</li><li> TAB always expands or collapses expandable nodes.
+</li></ul>
+
+<p>The RETURN and TAB keys can not be (re)defined with <code>ecb-key-map</code>!
+</p>
+<p>If you set <code>ecb-tree-navigation-by-arrow</code> to not nil then the
+arrow keys work in the ECB tree-window in the following smart way:
+</p>
+<ul>
+<li> Left-arrow: If node is expanded then it will be collapsed otherwise
+(i.e. current node is either not expandable or not expanded) point
+jumps to the next &ldquo;higher&rdquo; node in the hierarchical tree (higher
+means the next higher level or - if no higher level available
+- the next higher node on the same level).
+
+</li><li> Right-arrow: If node is expandable but not expanded then it will be
+expanded. Otherwise (i.e. current node is either not expandable or
+already expanded) point jumps to the next following node (which is the
+first subnode in case of an already expanded node or simply the next
+node in the following line).
+
+</li><li> Up- and down-arrow: Point jumps to the first character of the previous
+(up) rsp. next node (down). &ldquo;First&rdquo; character means either the first
+character of the expand-symbol (in case
+<code>ecb-tree-expand-symbol-before</code> is not nil) or of the displayed
+node-name. Or with other words: The first non-indentation and
+non-guide-line (see <code>ecb-tree-buffer-style</code>) character of a node
+(see <a href="Tree_002dbuffer-styles.html#Tree_002dbuffer-styles">Tree-buffer styles</a>).
+</li></ul>
+
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Incremental-search.html#Incremental-search" accesskey="n" rel="next">Incremental search</a>, Previous: <a href="Using-the-keyboard.html#Using-the-keyboard" accesskey="p" rel="prev">Using the keyboard</a>, Up: <a href="Using-the-keyboard.html#Using-the-keyboard" accesskey="u" rel="up">Using the keyboard</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

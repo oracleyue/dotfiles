@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Maximizing the ECB windows</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Maximizing the ECB windows">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Maximizing the ECB windows">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Usage-of-ECB.html#Usage-of-ECB" rel="up" title="Usage of ECB">
+<link href="Back_002fforward-navigation.html#Back_002fforward-navigation" rel="next" title="Back/forward navigation">
+<link href="Hiding-the-ECB-windows.html#Hiding-the-ECB-windows" rel="prev" title="Hiding the ECB windows">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Maximizing-the-ECB-windows"></a>
+<div class="header">
+<p>
+Next: <a href="Back_002fforward-navigation.html#Back_002fforward-navigation" accesskey="n" rel="next">Back/forward navigation</a>, Previous: <a href="Hiding-the-ECB-windows.html#Hiding-the-ECB-windows" accesskey="p" rel="prev">Hiding the ECB windows</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Maximizing-the-ECB-windows-1"></a>
+<h3 class="section">6.10 Maximizing the ECB windows</h3>
+
+<a name="How-to-maximize-and-minimize-special-ecb_002dtree_002dwindows"></a>
+<h4 class="subsection">6.10.1 How to maximize and minimize special ecb-tree-windows</h4>
+
+<p>To get a better overlook about the contents of a certain ECB-window
+every ECB-window can be &ldquo;maximized&rdquo;, means all other ECB-windows are
+deleted so only the edit-window(s) and this maximized ECB-window are
+visible (and maybe a compile-window if active). There are several ways
+to do this:
+</p>
+<ul>
+<li> Via the node-popup-menus of the ECB-windows
+
+</li><li> Via the main &ldquo;ECB&rdquo;-menu and here &ldquo;Display window maximized&rdquo;
+
+</li><li> Via calling the adviced version of
+<code>delete-other-windows</code><a name="DOCF25" href="#FOOT25"><sup>25</sup></a> (bound to <kbd>C-x 1</kbd>) in one of
+the ECB windows.
+
+</li><li> Via one of the commands <code>ecb-maximize-window-directories</code>,
+<code>ecb-maximize-window-sources</code>, <code>ecb-maximize-window-methods</code>,
+<code>ecb-maximize-window-history</code> or
+<code>ecb-maximize-window-speedbar</code> or the bound short-cuts for those
+commands.
+
+</li><li> Via the new command <code>ecb-cycle-maximized-ecb-buffers</code> which
+cycles through all ecb-buffers of current layout by maximizing exactly
+one of the ecb-windows after every cycle-step.
+
+</li><li> Via the option <code>ecb-maximize-ecb-window-after-selection</code> and then
+just by selecting an ECB-window. &ldquo;Deselecting&rdquo; an ECB-window brings
+back all ECB-windows of current layout.
+
+</li><li> Via the default modeline-mechanisms for deleting other windows. GNU
+Emacs binds <kbd>mouse-2</kbd> in its modeline to
+<code>delete-other-window</code>. XEmacs binds a popup-menu with some window
+commands to <kbd>button-3</kbd> in its modeline.
+
+<p>ECB combines the best of both worlds by supporting both of these
+mechanisms for both Xemacs and Emacs: ECB binds a toggle-command to
+<kbd>mouse-2</kbd> in the modeline of each tree-buffer which maximizes the
+current tree-window if all ECB-windows are visible and displays all
+ECB-windows if current tree-window is maximized. In addition ECB binds
+a popup-menu to <kbd>mouse-3</kbd> which offers exactly 2 commands:
+Maximizing current tree-window and displaying all ECB-windows.
+</p></li></ul>
+
+<p>&ldquo;Minimizing&rdquo; such a maximized ECB-window, i.e. bringing back to its
+original size and displays all ecb-windows of current layout, can
+simply be done by redrawing the layout via the command
+<code>ecb-redraw-layout</code> (bound to <kbd>C-c . lr</kbd>).
+</p>
+<a name="Selecting-a-node-in-a-maximized-ecb_002dtree_002dwindow"></a>
+<h4 class="subsection">6.10.2 Selecting a node in a maximized ecb-tree-window</h4>
+
+<p>When you select a node (either via mouse or RET) in a maximized
+tree-window the default behavior of ECB is the following:
+</p>
+<p>Maximized directories-window: When selecting a directory then first
+automatically the maximized directories-window will be &ldquo;minimized&rdquo;
+(i.e. all ecb-windows of current layout are displayed) if the current
+layout contains a sources-buffer and no sources are shown in the
+directories-window - see <code>ecb-show-sources-in-directories-buffer</code>.
+So the source-files can be displayed in the sources-window.
+</p>    
+<p>Maximized sources- or history-window: When selecting a source-file in
+one of these buffers then first automatically the maximized window
+will be &ldquo;minimized&rdquo; (i.e. all ecb-windows of current layout are
+displayed) if the current layout contains a methods-buffer. So the
+tag-contents of the selected source-file can be displayed in the
+methods-window.
+</p>
+<p>For a even smarter behavior ECB offers the option
+<code>ecb-maximize-next-after-maximized-select</code> which automatically
+maximizes the next logical tree-window after a node selection. The
+definition of &ldquo;next logical is&rdquo;: Directories &ndash;&gt; sources,
+sources/history &ndash;&gt; methods. But if the current maximized tree-buffer
+is also contained in the option
+<code>ecb-tree-do-not-leave-window-after-select</code> (see also the
+tree-buffer-command <code>ecb-toggle-do-not-leave-window-after-select</code>
+which is bound to <tt class="key">C-t</tt> in each tree-buffer) then ECB does *not*
+maximize the next logical tree-window but point stays in the currently
+maximized tree-buffer so for example the user can select more than one
+source-file from the sources-buffer.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT25" href="#DOCF25">(25)</a></h3>
+<p>This command is adviced per
+default, see <a href="The-edit_002darea.html#The-edit_002darea">The edit-area</a>.</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Back_002fforward-navigation.html#Back_002fforward-navigation" accesskey="n" rel="next">Back/forward navigation</a>, Previous: <a href="Hiding-the-ECB-windows.html#Hiding-the-ECB-windows" accesskey="p" rel="prev">Hiding the ECB windows</a>, Up: <a href="Usage-of-ECB.html#Usage-of-ECB" accesskey="u" rel="up">Usage of ECB</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

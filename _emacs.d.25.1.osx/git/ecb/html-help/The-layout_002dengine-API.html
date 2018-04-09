@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: The layout-engine API</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: The layout-engine API">
+<meta name="keywords" content="ECB - the Emacs Code Browser: The layout-engine API">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="The-layout_002dengine.html#The-layout_002dengine" rel="up" title="The layout-engine">
+<link href="Conflicts-and-bugs.html#Conflicts-and-bugs" rel="next" title="Conflicts and bugs">
+<link href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" rel="prev" title="Possible layout-outlines">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="The-layout_002dengine-API"></a>
+<div class="header">
+<p>
+Previous: <a href="Possible-layout_002doutlines.html#Possible-layout_002doutlines" accesskey="p" rel="prev">Possible layout-outlines</a>, Up: <a href="The-layout_002dengine.html#The-layout_002dengine" accesskey="u" rel="up">The layout-engine</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="The-complete-layout_002dengine-API-of-ECB"></a>
+<h4 class="subsection">11.5.4 The complete layout-engine API of ECB</h4>
+
+<p>This section lists all functions, macros, variables and user-options
+the layout-engine API of ECB offers foreign packages. Call
+<code>describe-function</code> rsp. <code>describe-variable</code> to get a
+detailed description.
+</p>
+<p>Functions and macros for programming with layouts and special
+ecb-windows:
+</p><ul class="no-bullet">
+<li>- <code>defecb-window-dedicator-to-ecb-buffer</code>
+</li><li>- <code>ecb-available-layouts-member-p</code>
+</li><li>- <code>ecb-canonical-ecb-windows-list</code>
+</li><li>- <code>ecb-canonical-edit-windows-list</code>
+</li><li>- <code>ecb-compile-window-live-p</code>
+</li><li>- <code>ecb-compile-window-state</code>
+</li><li>- <code>ecb-do-if-buffer-visible-in-ecb-frame</code>
+</li><li>- <code>ecb-exec-in-window</code>
+</li><li>- <code>ecb-get-current-visible-ecb-buffers</code>
+</li><li>- <code>ecb-layout-define</code>
+</li><li>- <code>ecb-layout-switch</code>
+</li><li>- <code>ecb-layout-undefine</code>
+</li><li>- <code>ecb-point-in-compile-window</code>
+</li><li>- <code>ecb-point-in-ecb-window-number</code>
+</li><li>- <code>ecb-point-in-edit-window-number</code>
+</li><li>- <code>ecb-select-edit-window</code>
+</li><li>- <code>ecb-split-hor</code>
+</li><li>- <code>ecb-split-ver</code>
+</li><li>- <code>ecb-where-is-point</code>
+</li><li>- <code>ecb-with-dedicated-window</code><a name="DOCF53" href="#FOOT53"><sup>53</sup></a>
+</li></ul>
+
+<p>Utility functions/macros:
+</p><ul class="no-bullet">
+<li>- <code>ecb-display-one-ecb-buffer</code>
+</li><li>- <code>ecb-enlarge-window</code>
+</li><li>- <code>ecb-fix-filename</code>
+</li><li>- <code>ecb-goto-ecb-window</code>
+</li><li>- <code>ecb-window-live-p</code>
+</li><li>- <code>ecb-with-readonly-buffer</code>
+</li></ul>
+
+<p>Some other maybe useful functions/macros:
+</p><ul class="no-bullet">
+<li>- <code>ecb-with-adviced-functions</code>
+</li><li>- <code>ecb-with-original-functions</code>
+</li><li>- <code>ecb-with-some-adviced-functions</code>
+</li></ul>
+
+<p>Some useful <strong>READONLY</strong> variables:
+</p><ul class="no-bullet">
+<li>- <code>ecb-compile-window</code>
+</li><li>- <code>ecb-last-edit-window-with-point</code>
+</li><li>- <code>ecb-last-source-buffer</code>
+</li></ul>
+
+<p><strong>Caution</strong>: DO NOT USE THE VARIABLE <code>ecb-edit-window</code> IN
+YOUR PROGRAMS!
+</p>
+<p>User-options and hooks related to the layout-engine API:
+</p><ul class="no-bullet">
+<li>- <code>ecb-basic-buffer-sync-hook</code>
+</li><li>- <code>ecb-hide-ecb-windows-after-hook</code>
+</li><li>- <code>ecb-hide-ecb-windows-before-hook</code>
+</li><li>- <code>ecb-redraw-layout-after-hook</code>
+</li><li>- <code>ecb-redraw-layout-before-hook</code>
+</li><li>- <code>ecb-show-ecb-windows-after-hook</code>
+</li><li>- <code>ecb-show-ecb-windows-before-hook</code>
+</li><li>- <code>ecb-windows-height</code>
+</li><li>- <code>ecb-windows-width</code>
+</li><li>- <code>ecb-compile-window-height</code>
+</li></ul>
+
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT53" href="#DOCF53">(53)</a></h3>
+<p>Normally not needed because
+<code>defecb-window-dedicator-to-ecb-buffer</code> does all necessary.</p>
+</div>
+
+
+
+</body>
+</html>

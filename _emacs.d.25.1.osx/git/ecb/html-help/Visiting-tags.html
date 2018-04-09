@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Visiting tags</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Visiting tags">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Visiting tags">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="The-Methods-window.html#The-Methods-window" rel="up" title="The Methods window">
+<link href="Expanding.html#Expanding" rel="next" title="Expanding">
+<link href="The-Methods-window.html#The-Methods-window" rel="prev" title="The Methods window">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Visiting-tags"></a>
+<div class="header">
+<p>
+Next: <a href="Expanding.html#Expanding" accesskey="n" rel="next">Expanding</a>, Previous: <a href="The-Methods-window.html#The-Methods-window" accesskey="p" rel="prev">The Methods window</a>, Up: <a href="The-Methods-window.html#The-Methods-window" accesskey="u" rel="up">The Methods window</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Possible-actions-after-visiting-a-tag"></a>
+<h4 class="subsection">6.6.1 Possible actions after visiting a tag</h4>
+
+<p>You visit a tag by clicking with either the primary oder secondary
+mouse-button (or by hitting <kbd>RET</kbd> or <kbd>C-RET</kbd> if using the
+keyboard) onto a node in the Methods-tree-buffer of ECB. This simply
+selects the &ldquo;right&rdquo; edit-window (depends if clicked with the primary
+or secondary button, in how many windows the edit-area is splitted and
+the value of <code>ecb-mouse-click-destination</code>) and puts the point
+onto the first line of the clicked tag.
+</p>
+<p>But you can define if after this &ldquo;basic&rdquo; tag-visit-action more
+additional actions should be performed by ECB. You can either use some
+of the predefined actions (e.g. highlighting the header-line of the
+tag) or define own actions. You can set different actions for
+different major-modes. All this is done via the option
+<code>ecb-tag-visit-post-actions</code>.
+</p>
+<p>The following actions are currently predefined:
+</p><ul class="no-bullet">
+<li>- <code>ecb-tag-visit-highlight-tag-header</code>
+</li><li>- <code>ecb-tag-visit-smart-tag-start</code>
+</li><li>- <code>ecb-tag-visit-recenter</code>
+</li><li>- <code>ecb-tag-visit-recenter-top</code>
+</li><li>- <code>ecb-tag-visit-goto-doc-start</code>
+</li><li>- <code>ecb-tag-visit-narrow-tag</code>
+</li></ul>
+
+<p>See the documentation of these function for details what they do.
+</p>
+<p>Per default ECB performs the actions
+<code>ecb-tag-visit-smart-tag-start</code> and
+<code>ecb-tag-visit-highlight-tag-header</code> for all major-modes.
+</p>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: The tree-buffer-API</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: The tree-buffer-API">
+<meta name="keywords" content="ECB - the Emacs Code Browser: The tree-buffer-API">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="tree_002dbuffer.html#tree_002dbuffer" rel="up" title="tree-buffer">
+<link href="Do-not-with-tree_002dbuffer.html#Do-not-with-tree_002dbuffer" rel="next" title="Do not with tree-buffer">
+<link href="Tree_002dbuffer-keybindings.html#Tree_002dbuffer-keybindings" rel="prev" title="Tree-buffer keybindings">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="The-tree_002dbuffer_002dAPI"></a>
+<div class="header">
+<p>
+Next: <a href="Do-not-with-tree_002dbuffer.html#Do-not-with-tree_002dbuffer" accesskey="n" rel="next">Do not with tree-buffer</a>, Previous: <a href="Tree_002dbuffer-keybindings.html#Tree_002dbuffer-keybindings" accesskey="p" rel="prev">Tree-buffer keybindings</a>, Up: <a href="tree_002dbuffer.html#tree_002dbuffer" accesskey="u" rel="up">tree-buffer</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="All-functions-available-for-tree_002dbuffers-and-tree_002dnodes"></a>
+<h4 class="subsection">11.3.6 All functions available for tree-buffers and tree-nodes</h4>
+
+<p>This chapter lists the complete API available for tree-buffers and
+tree-nodes.
+</p>
+<p><strong>IMPORTANT</strong>: These are the only functions and macros of
+tree-buffer.el you are allowed to use for programming with
+tree-buffers and tree-nodes. If you use other - not here listed -
+functions, macros or variables of tree-buffer.el then you run the risk
+of unwanted side-effects or program-behaviors!
+</p>
+<a name="The-API-for-a-tree_002dbuffer_003a"></a>
+<h4 class="subsubsection">11.3.6.1 The API for a tree-buffer:</h4>
+
+<p>See the documentation of these functions (e.g. via <kbd>C-h f</kbd>) to get
+the details how to use it.
+</p>
+<ul>
+<li> <code>tree-buffer-add-image-icon-maybe</code>
+</li><li> <code>tree-buffer-find-image</code>
+</li><li> <code>tree-buffer-create</code><a name="DOCF48" href="#FOOT48"><sup>48</sup></a>
+</li><li> <code>tree-buffer-defpopup-command</code>
+</li><li> <code>tree-buffer-destroy</code><a name="DOCF49" href="#FOOT49"><sup>49</sup></a>
+</li><li> <code>tree-buffer-empty-p</code>
+</li><li> <code>tree-buffer-expand-node</code>
+</li><li> <code>tree-buffer-get-node-at-point</code>
+</li><li> <code>tree-buffer-node-data-equal-p</code>
+</li><li> <code>tree-buffer-recenter</code>
+</li><li> <code>tree-buffer-highlight-node-by-data/name</code>
+</li><li> <code>tree-buffer-find-displayed-node-by-data/name</code>
+</li><li> <code>tree-buffer-remove-highlight</code>
+</li><li> <code>tree-buffer-remove-node</code>
+</li><li> <code>tree-buffer-clear-tree</code>
+</li><li> <code>tree-buffer-displayed-nodes-copy</code>
+</li><li> <code>tree-buffer-search-displayed-node-list</code>
+</li><li> <code>tree-buffer-number-of-displayed-nodes</code>
+</li><li> <code>tree-buffer-get-data-store</code>
+</li><li> <code>tree-buffer-set-data-store</code>
+</li><li> <code>tree-buffer-get-root</code>
+</li><li> <code>tree-buffer-set-root</code>
+</li><li> <code>tree-buffer-update</code>
+</li><li> <code>tree-buffer-update-node</code>
+</li></ul>
+
+<a name="The-API-for-a-tree_002dnode"></a>
+<h4 class="subsubsection">11.3.6.2 The API for a tree-node</h4>
+
+<p>See the documentation of these functions (e.g. via <kbd>C-h f</kbd>) to get
+the details how to use it.
+</p>
+<ul>
+<li> <code>tree-node-add-children</code>
+</li><li> <code>tree-node-linelength</code>
+</li><li> <code>tree-node-map-subtree</code>
+</li><li> <code>tree-node-new</code>
+</li><li> <code>tree-node-new-root</code>
+</li><li> <code>tree-node-remove-child</code>
+</li><li> <code>tree-node-remove-child-by-data/name</code>
+</li><li> <code>tree-node-find-child-by-data/name</code>
+</li><li> <code>tree-node-find-child-by-name</code>
+</li><li> <code>tree-node-search-subtree-by-data</code>
+</li><li> <code>tree-node-search-subtree-by-id</code>
+</li><li> <code>tree-node-sort-children</code>
+</li><li> <code>tree-node-toggle-expanded</code>
+</li></ul>
+
+<p>In addition to these functions the tree-node API contains all accessors
+for a tree-node which are described in <a href="A-new-tree_002dnode.html#A-new-tree_002dnode">A new tree-node</a>.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT48" href="#DOCF48">(48)</a></h3>
+<p>If the tree-buffer should be
+used by ECB then you must use <code>defecb-tree-buffer-creator</code> - see
+the documentation!</p>
+<h3><a name="FOOT49" href="#DOCF49">(49)</a></h3>
+<p>Not needed when
+<code>defecb-tree-buffer-creator</code> has been used for creation.</p>
+</div>
+
+
+
+</body>
+</html>

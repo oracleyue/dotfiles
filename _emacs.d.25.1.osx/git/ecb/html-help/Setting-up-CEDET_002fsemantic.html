@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Setting up CEDET/semantic</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Setting up CEDET/semantic">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Setting up CEDET/semantic">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Setting-up-Emacs.html#Setting-up-Emacs" rel="up" title="Setting up Emacs">
+<link href="Non_002dsemantic-files.html#Non_002dsemantic-files" rel="next" title="Non-semantic files">
+<link href="General-hints.html#General-hints" rel="prev" title="General hints">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Setting-up-CEDET_002fsemantic"></a>
+<div class="header">
+<p>
+Next: <a href="Non_002dsemantic-files.html#Non_002dsemantic-files" accesskey="n" rel="next">Non-semantic files</a>, Previous: <a href="General-hints.html#General-hints" accesskey="p" rel="prev">General hints</a>, Up: <a href="Setting-up-Emacs.html#Setting-up-Emacs" accesskey="u" rel="up">Setting up Emacs</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Setting-up-CEDET_002fsemantic-1"></a>
+<h4 class="subsection">1.2.2 Setting up CEDET/semantic</h4>
+
+<p>To ensure ECB and semantic are working correctly for all by semantic
+supported languages you have to pay attention to the following aspects
+concerning your Emacs-setup:
+</p>
+<ol>
+<li> Setting up CEDET/semantic itself
+
+<p>This section implies that you either use Emacs &gt;= 23.2 or that you have
+already successfully installed the CEDET-suite.
+</p>
+<p>For all semantic-supported file-types parsing files is done completely
+by semantic. ECB just displays the parsing results.
+</p>
+<ul>
+<li> Users of Emacs &gt;= 23.2:
+You just have to enable semantic by activating the semantic-mode. This can be
+done by adding code to your initialization-file (e.g. .emacs) like
+this:
+
+<div class="lisp">
+<pre class="lisp">(semantic-mode 1)
+</pre></div>
+
+<p>This should be placed BEFORE the statements which activate ECB.
+</p>
+<p>As an alternative you can use the <code>ecb-before-activate-hook</code> like
+follows:
+</p>
+<div class="lisp">
+<pre class="lisp">(add-hook 'ecb-before-activate-hook
+          (lambda () (semantic-mode 1)))
+</pre></div>
+
+<p>This is a smarter way when you need semantic only if ECB is active.
+</p>
+</li><li> Users of XEmacs or Emacs &lt; 23.2:
+You should read carefully the file <samp>INSTALL</samp> shipped with the
+cedet-suite. In addition the CEDET-website offers a link to a &ldquo;Gentle
+introduction to Cedet&rdquo;. It&rsquo;s worth to read it! You find it here:
+<a href="http://xtalk.msk.su/~ott/en/writings/emacs-devenv/EmacsCedet.html">http://xtalk.msk.su/~ott/en/writings/emacs-devenv/EmacsCedet.html</a>
+If CEDET is not correctly installed then ECB can not setup semantic for its
+needs.
+
+</li></ul>
+
+<p><strong>Minimum setup recommendation</strong>: It is very useful to enable the
+<code>global-semantic-idle-scheduler-mode</code> and
+<code>global-semanticdb-minor-mode</code>. Read the manual of Emacs 23.2 or the
+manual of cedet/semantic how to do this. With CEDET-versions &gt;= 1.0pre6 this
+can be done by adding <code>semantic-load-enable-minimum-features</code> to your
+startup-file. Please read also the subsection &ldquo;Jumping to the definition of
+external types&rdquo; in <a href="ECB-Methods_002dwindow.html#ECB-Methods_002dwindow">ECB Methods-window</a>.
+</p>
+<a name="Checking-your-hooks"></a></li><li> Checking your hooks (Only for XEmacs and Emacs &lt; 23.2!)
+
+<p>If you use Emacs &gt; 23.2 you can ignore the following paragraphs.
+</p>
+<p>If you have already checked point (1.) and if you have still problems
+getting ECB/semantic working properly for your sources you should
+check the related major-mode hook. Every major-mode X has a hook with
+name &ldquo;X-hook&rdquo; which is evaluated after activating the major-mode
+(see above, 2.), e.g. the hook for the major-mode <code>c++-mode</code> is
+<code>c++-mode-hook</code>.
+</p>
+<p>Semantic adds automatically during load-time a special
+&ldquo;semantic-setup&rdquo; to these major-mode hooks<a name="DOCF6" href="#FOOT6"><sup>6</sup></a> in form of a
+&ldquo;setup-function&rdquo;. Example: For c and c++ modes semantic adds
+<code>semantic-default-c-setup</code> to <code>c-mode-hook</code> and
+<code>c++-mode-hook</code>.
+</p>
+<p>If your own Emacs-setup (e.g. in <samp>.emacs</samp> or
+<samp>site-lisp/site-start.el</samp>) overwrites such a major-mode-hook then
+semantic can not be activated for this major-mode and in consequence
+ECB can not work properly too!
+</p>
+<p>Check if your Emacs-setup uses somewhere <code>setq</code> for adding code
+to a major-mode-hook. <strong>IMPORTANT</strong>: Use <code>add-hook</code> instead of
+<code>setq</code><a name="DOCF7" href="#FOOT7"><sup>7</sup></a>!
+</p>
+</li></ol>
+
+<p>If your source-files are &ldquo;running&rdquo; with correct <code>major-mode</code> and - in
+case of XEmacs or Emacs &lt; 23.2 - correct major-mode hooks ECB and semantic
+will do what you expect them doing!
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT6" href="#DOCF6">(6)</a></h3>
+<p>Of course only
+for major-modes supported by semantic!</p>
+<h3><a name="FOOT7" href="#DOCF7">(7)</a></h3>
+<p><code>setq</code> replaces/overwrites the current
+value of a hook with the new value whereas <code>add-hook</code>
+<strong>adds</strong> the new value to the old-value of the hook!</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Non_002dsemantic-files.html#Non_002dsemantic-files" accesskey="n" rel="next">Non-semantic files</a>, Previous: <a href="General-hints.html#General-hints" accesskey="p" rel="prev">General hints</a>, Up: <a href="Setting-up-Emacs.html#Setting-up-Emacs" accesskey="u" rel="up">Setting up Emacs</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: ecb-mode-line</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: ecb-mode-line">
+<meta name="keywords" content="ECB - the Emacs Code Browser: ecb-mode-line">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Customizable-options.html#Customizable-options" rel="up" title="Customizable options">
+<link href="ecb_002dversion_002dcontrol.html#ecb_002dversion_002dcontrol" rel="next" title="ecb-version-control">
+<link href="ecb_002dwinman.html#ecb_002dwinman" rel="prev" title="ecb-winman">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="ecb_002dmode_002dline"></a>
+<div class="header">
+<p>
+Next: <a href="ecb_002dversion_002dcontrol.html#ecb_002dversion_002dcontrol" accesskey="n" rel="next">ecb-version-control</a>, Previous: <a href="ecb_002dwinman.html#ecb_002dwinman" accesskey="p" rel="prev">ecb-winman</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Group-ecb_002dmode_002dline"></a>
+<h4 class="subsection">7.3.19 Group ecb-mode-line</h4>
+
+<p>This group contains settings for the modelines of the
+ECB-tree-buffers:
+</p>
+<dl>
+<dt><a name="index-mode_002dline_002ddata"></a>User Option: <strong>mode-line-data</strong></dt>
+<dd><p>Data shown in the modelines of the special ECB-buffers. Everey element
+of this list is a cons-cell where the car is used to define a
+buffer-name and the cdr to define the modeline-data for that buffer.
+For details about how to defining a buffer-name see
+<code>ecb-mode-line-prefixes</code> - its completely the same.
+</p>
+<p>The cdr is the data for ths modeline and can either be the symbol
+<code>sel-dir</code> or <code>sel-source</code> whereas the former one displays
+the current selected directory as modeline-data and the latter one the
+current selected source-file (without path).
+</p>
+<p>In addition to these two predefined values for every special
+ECB-buffer a plain string (which is displayed) or a function can be
+specified which gets three args (name of the buffer, current selected
+directory and current selected source-file) and must return a string
+which will be displayed in the modeline (or nil if no data should be
+displayed). Such a function can add the text-property <code>help-echo</code>
+to the result-string. Then this help-string will be displayed when the
+user moves the mouse over this section of the modeline.
+</p>
+<p>If a special ECB-buffer should not display special data in its
+modeline then this buffer-name should either not being added to this
+option or added with &ldquo;No data&rdquo; (= nil as cdr).
+</p>
+<p>The whole modeline of the special ECB-buffer consists of the prefix of
+<code>ecb-mode-line-prefixes</code> and the data of
+<code>ecb-mode-line-data</code> - eventually prepended by the window-number,
+see <code>ecb-mode-line-display-window-number</code>.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-mode_002dline_002ddata_002dface"></a>User Option: <strong>mode-line-data-face</strong></dt>
+<dd><p>Face used for the data in the mode-line. See
+<code>ecb-mode-line-data</code>. For XEmacs the face should inherit from the
+face <code>modeline</code> (see <code>set-face-parent</code>)!
+</p></dd></dl>
+
+
+<dl>
+<dt><a name="index-mode_002dline_002ddisplay_002dwindow_002dnumber"></a>User Option: <strong>mode-line-display-window-number</strong></dt>
+<dd><p>Display in the modeline of every special ECB-window the window-number.
+The left-top-most window in a frame has the window-number 0 and all
+other windows are numbered with increasing numbers in the sequence,
+functions like <code>other-window</code> or <code>next-window</code> would walk
+through the frame.
+</p>
+<p>This can be used to jump to windows by number with commands like:
+</p>
+<div class="lisp">
+<pre class="lisp">  (defun my-switch-to-window-number (number)
+    ``Switch to the nth window''
+    (interactive ``P'')
+    (if (integerp number)
+        (select-window (nth number (window-list)))))
+</pre></div>
+
+<p>Currently this feature is only available for GNU Emacs 21.X, because
+neither GNU Emacs &lt; 21 nor XEmacs can evaluate dynamically forms in
+the mode-line.
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-mode_002dline_002dprefixes"></a>User Option: <strong>mode-line-prefixes</strong></dt>
+<dd><p>Prefixes shown in the modelines of the special ECB-buffers. The
+displayed prefix then looks like: &ldquo;[ &lt;PREFIX&gt;[: ]]&rdquo;, means if a
+prefix is defined for an special ECB-buffer then a single space is
+prepended and if there is additional text to display (e.g. the current
+directory in the sources buffer, see <code>ecb-mode-line-data</code>) then
+also the string &ldquo;: &rdquo; is appended.
+</p>
+<p>Everey element of this list is a cons-cell where the car is used to
+define a buffer-name and the cdr to define the modeline-prefix for
+that buffer.
+</p>
+<p>The buffer-name can either be defined as plain string or with a symbol
+which contains the buffer-name as value. The latter one is recommended
+to define a prefix for one of the builtin ECB-tree-buffers because
+then simply the related option-symbol can be used. To add a prefix for
+the builtin directories tree-buffer just set the symbol
+<code>ecb-directories-buffer-name</code> as car.
+</p>
+<p>The cdr is the prefix for a buffer and can either be a string which
+used as it is or a function-symbol which is called with three argument
+(the buffer-name, the current selected directory and the current
+selected source-file) and must return either nil (for no prefix) or a
+string which is then used a prefix. Such a function can add the
+text-property <code>help-echo</code> to the result-string. Then this
+help-string will be displayed when the user moves the mouse over this
+section of the modeline.
+</p>
+<p>If a special ECB-buffer should not have a prefix in its modeline then
+this buffer-name should either not being added to this option or added
+with &ldquo;No prefix&rdquo; (= nil as cdr).
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-mode_002dline_002dprefix_002dface"></a>User Option: <strong>mode-line-prefix-face</strong></dt>
+<dd><p>Face used for the prefix in the mode-line. See
+<code>ecb-mode-line-prefixes</code>. For XEmacs the face should inherit from
+the face <code>modeline</code> (see <code>set-face-parent</code>)!
+</p></dd></dl>
+
+<dl>
+<dt><a name="index-mode_002dline_002dwin_002dnr_002dface"></a>User Option: <strong>mode-line-win-nr-face</strong></dt>
+<dd><p>Face used for the window-number in the mode-line. See
+<code>ecb-mode-line-display-window-number</code>. For XEmacs the face should
+inherit from the face <code>modeline</code> (see <code>set-face-parent</code>)!
+</p></dd></dl>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="ecb_002dversion_002dcontrol.html#ecb_002dversion_002dcontrol" accesskey="n" rel="next">ecb-version-control</a>, Previous: <a href="ecb_002dwinman.html#ecb_002dwinman" accesskey="p" rel="prev">ecb-winman</a>, Up: <a href="Customizable-options.html#Customizable-options" accesskey="u" rel="up">Customizable options</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

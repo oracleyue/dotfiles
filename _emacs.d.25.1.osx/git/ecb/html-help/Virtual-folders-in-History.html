@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Virtual folders in History</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Virtual folders in History">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Virtual folders in History">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Elisp-programming.html#Elisp-programming" rel="next" title="Elisp programming">
+<link href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB" rel="prev" title="Window-managers and ECB">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Virtual-folders-in-History"></a>
+<div class="header">
+<p>
+Previous: <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB" accesskey="p" rel="prev">Window-managers and ECB</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Something-like-virtual-folders-with-the-ECB_002dhistory"></a>
+<h3 class="section">10.16 Something like virtual folders with the ECB-history</h3>
+
+<p>For example, there is a large project with a huge number of files, and there
+are various tasks in this project (e.g. several different bug-fixing tasks).
+So it could be convenient to group buffers according to various tasks, or with
+other words: something like virtual folders for the buffers. It can be
+fulfiled through using indirect buffers.
+</p>
+<p>See the following example:
+</p>
+<div class="example">
+<pre class="example">task_1-aaa.pl
+task_1-bbb.c
+task_1-ccc.sh
+task_2-aaa.pl
+task_2-eee.c
+task_2-ccc.sh
+task_3-xxx.java
+task_3-ccc.sh
+</pre></div>
+
+<p>This means create indirect buffers<a name="DOCF45" href="#FOOT45"><sup>45</sup></a> with a name-part which can be
+used for grouping together buffers with same name-part (here e.g. task_1- ...
+task_3-). In the example above you would create three indirect buffers for the
+filebuffer ccc.sh because this source is needed in all three tasks, two
+indirect buffers for aaa.pl because it is needed in the task-1 and task-2 and
+so on for the rest of the buffers. Make all this indirect buffers with the
+command <code>clone-indirect-buffer</code><a name="DOCF46" href="#FOOT46"><sup>46</sup></a>, which creates real clones means the indirect buffers have the same
+major-mode etc. as the base-buffer (see the manual of Emas).
+</p>
+<p>Now remember to the option <code>ecb-history-make-buckets</code> which allows a.o.
+to define a list of regular expressions to bucketize the buffers of the
+history. Use this to make one bucket for each task. So in our example a value
+</p>
+<div class="example">
+<pre class="example">(&quot;^task_1-.+&quot; &quot;^task_2-.+&quot; &quot;^task_3-.+&quot;)
+</pre></div>
+
+<p>for <code>ecb-history-make-buckets</code> would satiesfy our needs.
+</p>
+<p>This option allows to define several criterias for building buckets in the
+history-buffer all the history entries are sorted in (e.g. by major-mode,
+directory, file-extension or regular expressions).
+</p>
+<p>After that the history-window would display something like the following:
+</p>
+<div class="example">
+<pre class="example">[-] [^task_1-.+]
+ |  task_1-aaa.pl
+ |  task_1-bbb.c
+ `- task_1-ccc.sh
+[-] [^task_2-.+]
+ |  task_2-aaa.pl
+ |  task_2-eee.c
+ `- task_2-ccc.sh
+[-] [^task_3-.+]
+ |  task_3-xxx.java
+ `- task_3-ccc.sh
+</pre></div>
+
+<p>Hopefully this example could give an impression how the combination of usage
+of indirect buffers and bucketizing the history-window can be used for
+using one sources for different sake and grouping together what belongs
+together.
+</p>
+<div class="footnote">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h3><a name="FOOT45" href="#DOCF45">(45)</a></h3>
+<p>Remember the most important
+feature of indirect buffers: Changes made in one of them will immediately take
+effect in all others with the same base-buffer</p>
+<h3><a name="FOOT46" href="#DOCF46">(46)</a></h3>
+<p>Currently only available with
+GNU Emacs</p>
+</div>
+<hr>
+<div class="header">
+<p>
+Previous: <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB" accesskey="p" rel="prev">Window-managers and ECB</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

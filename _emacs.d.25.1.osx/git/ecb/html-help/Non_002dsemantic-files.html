@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Non-semantic files</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Non-semantic files">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Non-semantic files">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Setting-up-Emacs.html#Setting-up-Emacs" rel="up" title="Setting up Emacs">
+<link href="First-steps.html#First-steps" rel="next" title="First steps">
+<link href="Setting-up-CEDET_002fsemantic.html#Setting-up-CEDET_002fsemantic" rel="prev" title="Setting up CEDET/semantic">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Non_002dsemantic-files"></a>
+<div class="header">
+<p>
+Previous: <a href="Setting-up-CEDET_002fsemantic.html#Setting-up-CEDET_002fsemantic" accesskey="p" rel="prev">Setting up CEDET/semantic</a>, Up: <a href="Setting-up-Emacs.html#Setting-up-Emacs" accesskey="u" rel="up">Setting up Emacs</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Setup-for-file-types-not-supported-by-semantic"></a>
+<h4 class="subsection">1.2.3 Setup for file types not supported by semantic</h4>
+
+<p>From version 1.94 on ECB supports also parsing and displaying
+file-contents for file-types not supported by semantic (i.e. there is
+no semantic-grammar available for such file-types).
+</p>
+<p>Such non-semantic file-types can often be parsed by imenu and/or
+etags. Both of these parsing methods are now supported: ECB can
+display the results of imenu and/or etags in its Method-buffer. ECB
+uses for this speedbar-logic. Therefore the following speedbar options
+takes effect for this feature:
+</p>
+<ul class="no-bullet">
+<li>- <code>speedbar-dynamic-tags-function-list</code>
+</li><li>- <code>speedbar-tag-split-minimum-length</code>
+</li><li>- <code>speedbar-tag-regroup-maximum-length</code>
+</li><li>- <code>speedbar-tag-hierarchy-method</code>
+</li></ul>
+
+<p>Normally there should be no need for you to bother with these options,
+because the default values are suitable for most situations! But if
+you are not satisfied with the parsing/display results then you can
+change some of these options.
+</p>
+
+
+
+</body>
+</html>

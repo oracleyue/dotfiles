@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Bugs</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Bugs">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Bugs">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Conflicts-and-bugs.html#Conflicts-and-bugs" rel="up" title="Conflicts and bugs">
+<link href="FAQ.html#FAQ" rel="next" title="FAQ">
+<link href="Conflicts.html#Conflicts" rel="prev" title="Conflicts">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Bugs"></a>
+<div class="header">
+<p>
+Previous: <a href="Conflicts.html#Conflicts" accesskey="p" rel="prev">Conflicts</a>, Up: <a href="Conflicts-and-bugs.html#Conflicts-and-bugs" accesskey="u" rel="up">Conflicts and bugs</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Known-bugs"></a>
+<h3 class="section">12.2 Known bugs</h3>
+
+<p>This section describes all currently known bugs of ECB. The
+maintainers of ECB try to fix these bugs as soon as possible.
+</p>
+<a name="Extra-history_002dentries-for-JDEE-source_002dbuffers"></a>
+<h4 class="subsection">12.2.1 Extra history-entries for JDEE source-buffers</h4>
+
+<p>ECB on occasions creates an extra edit buffer for entries in the
+history window. For example, let say there are three entries in the
+history window:
+</p>
+<div class="example">
+<pre class="example">Test1
+Test2
+Test3
+</pre></div>
+
+<p>In the edit window Test1 file is edited. When clicked on Test2 entry
+in history, on occasion instead of switching to the existing buffer for
+Test2, a new edit buffer is opened for Test2 file. At this point, there
+are four entries in the history as follows:
+</p>
+<div class="example">
+<pre class="example">Test2
+Test2&lt;2&gt;
+Test1
+Test3
+</pre></div>
+
+
+
+
+</body>
+</html>

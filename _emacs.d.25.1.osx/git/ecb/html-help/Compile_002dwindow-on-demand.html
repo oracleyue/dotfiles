@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Compile-window on demand</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Compile-window on demand">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Compile-window on demand">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Non_002dsemantic-sources.html#Non_002dsemantic-sources" rel="next" title="Non-semantic sources">
+<link href="Working-with-JDEE.html#Working-with-JDEE" rel="prev" title="Working with JDEE">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Compile_002dwindow-on-demand"></a>
+<div class="header">
+<p>
+Next: <a href="Non_002dsemantic-sources.html#Non_002dsemantic-sources" accesskey="n" rel="next">Non-semantic sources</a>, Previous: <a href="Working-with-JDEE.html#Working-with-JDEE" accesskey="p" rel="prev">Working with JDEE</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Displaying-the-compile_002dwindow-on-demand"></a>
+<h3 class="section">10.12 Displaying the compile-window on demand</h3>
+
+<p>If you like displaying all output of compile/grep/etc. an all
+temp-buffers like *Help*-buffers in an extra compile-window
+(see <a href="Temp_002d-and-compile_002dbuffers.html#Temp_002d-and-compile_002dbuffers">Temp- and compile-buffers</a>) but you dislike wasting the space
+of this compile-window if you are just editing then you can get a
+compile-window &ldquo;on demand&rdquo;. Just do the following:
+</p>
+<ol>
+<li> Customize <code>ecb-compile-window-height</code> to not nil and save it for
+future sessions. This gives you an extra compile-window at the
+bottom.
+
+</li><li> Add the following to your .emacs:
+
+<div class="example">
+<pre class="example">(add-hook 'ecb-activate-hook
+          (lambda ()
+            (let ((compwin-buffer (ecb-get-compile-window-buffer)))
+            (if (not (and compwin-buffer
+                          (ecb-compilation-buffer-p compwin-buffer)))
+                (ecb-toggle-compile-window -1)))))
+</pre></div>
+
+<p>This hides the extra compile-window directly after the start of ECB
+because there is no need for a compile-window at this moment. But the
+hiding will not be done if there is a compile-window and if a
+&ldquo;compile-buffer&rdquo; in the sense of <code>ecb-compilation-buffer-p</code> is
+displayed in this compile-window. Without this additional check the
+compile-window would always be hidden after the ECB-start even when
+ECB is reactivated after a deactivation by the window-manager-support
+of ECB (see <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB">Window-managers and ECB</a>); but in these cases we want
+to preserve the state before deactivation as good as possible (see
+also option <code>ecb-split-edit-window-after-start</code>).
+</p>
+</li></ol>
+
+<p>This is all you have to do. Now if you run <code>compile</code> (or
+<code>grep</code> or other compile-modes) or display temp-buffers like
+*Help*-buffers then ECB autom. displays the compile-window at the
+bottom and display the output there.
+</p>
+<p>If you have finished with using the compile- or temp-output (e.g.
+fixing errors) then you can throw away the compile-window just by
+<code>ecb-toggle-compile-window</code> - ECB will reactivate it autom.
+before next compilation or help-buffer-display.!
+</p>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Non_002dsemantic-sources.html#Non_002dsemantic-sources" accesskey="n" rel="next">Non-semantic sources</a>, Previous: <a href="Working-with-JDEE.html#Working-with-JDEE" accesskey="p" rel="prev">Working with JDEE</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<head>
+<title>ECB - the Emacs Code Browser: Hide-show</title>
+
+<meta name="description" content="ECB - the Emacs Code Browser: Hide-show">
+<meta name="keywords" content="ECB - the Emacs Code Browser: Hide-show">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="ecb.html#Top" rel="start" title="Top">
+<link href="Command-Index.html#Command-Index" rel="index" title="Command Index">
+<link href="Concept-Index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="Common-use_002dcases.html#Common-use_002dcases" rel="up" title="Common use-cases">
+<link href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB" rel="next" title="Window-managers and ECB">
+<link href="Non_002dsemantic-sources.html#Non_002dsemantic-sources" rel="prev" title="Non-semantic sources">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.indentedblock {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+div.smalldisplay {margin-left: 3.2em}
+div.smallexample {margin-left: 3.2em}
+div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
+div.smalllisp {margin-left: 3.2em}
+kbd {font-style:oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: inherit; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: inherit; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.nocodebreak {white-space:nowrap}
+span.nolinebreak {white-space:nowrap}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<a name="Hide_002dshow"></a>
+<div class="header">
+<p>
+Next: <a href="Window_002dmanagers-and-ECB.html#Window_002dmanagers-and-ECB" accesskey="n" rel="next">Window-managers and ECB</a>, Previous: <a href="Non_002dsemantic-sources.html#Non_002dsemantic-sources" accesskey="p" rel="prev">Non-semantic sources</a>, Up: <a href="Common-use_002dcases.html#Common-use_002dcases" accesskey="u" rel="up">Common use-cases</a> &nbsp; [<a href="Concept-Index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Command-Index.html#Command-Index" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<a name="Using-hide_002dshow-from-the-methods_002dbuffer_002dmenu"></a>
+<h3 class="section">10.14 Using hide-show from the methods-buffer-menu</h3>
+
+<p>The popup-menu of the Methods-buffer offer two entries for either
+hiding or showing the block which is related to the selected tag
+(that tag for which the popup-menu was opened):
+</p>
+<ul>
+<li> &ldquo;Jump to tag and hide block&rdquo;:
+Jumps to the tag and calls <code>hs-hide-block</code> from the
+hideshow-library which is shipped with (X)Emacs. After that the block
+is hidden, i.e. only the header-line of that tag (method, variable
+etc.) is visible, the rest is hidden behind the &ldquo;...&rdquo;.
+
+</li><li> &ldquo;Jump to tag and show block&rdquo;:
+Jumps to the tag and calls <code>hs-show-block</code>. This shows the related
+hidden block if the block was hidden via <code>hs-hide-block</code> or the
+menu-entry &ldquo;Jump to tag and hide block&rdquo; (s.a.).
+</li></ul>
+
+<p>For this feature the library <samp>hideshow.el</samp> is used which should
+normally being included in the (X)Emacs-distribution. If this library
+is not loaded into Emacs, ECB does this automatically before the first
+call to one of these menu-entries.
+</p>
+<p>IMPORTANT: If in some <code>major-mode</code> hiding and showing does not
+work as you expect it to work then you must probably add an entry for
+this <code>major-mode</code> to the hideshow-variable
+<code>hs-special-modes-alist</code>. See the documentation of this variable
+for further details. One example of such a <code>major-mode</code> is
+<code>jde-mode</code> of the Java Development Environment JDEE; just add an
+entry for it like the already contained entries for <code>c++-mode</code> or
+<code>java-mode</code> and hiding and showing will work for you with JDEE
+too.
+</p>
+
+
+
+</body>
+</html>

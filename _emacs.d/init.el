@@ -37,11 +37,10 @@
 (if *use-company* (require 'init-company) (require 'init-ac))
 
 ;; completion systems
-(if *is-mac*  ;; use helm
+(if *use-helm*
     (progn (require 'init-helm)
            (require 'init-helm-swoop)
            (require 'init-helm-proj))
-  ;; use ivy for Linux
   (require 'init-ivy))
 
 ;; directory and buffer explorers
