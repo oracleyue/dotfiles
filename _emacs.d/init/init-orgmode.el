@@ -51,7 +51,7 @@
 (setq org-html-head
       "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
 (setq org-html-head-extra
-        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />")
+      "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />")
 
 ;; Markdown
 (eval-after-load "org" '(require 'ox-md nil t))

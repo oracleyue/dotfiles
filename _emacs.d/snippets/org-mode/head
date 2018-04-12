@@ -3,12 +3,12 @@
 # key: head
 # expand-env: ((yas-indent-line 'fixed))
 # --
-#+TITLE:     ${1:Title}
-#+AUTHOR:    Zuogong Yue
-#+EMAIL:     oracleyue@gmail.com
-#+DATE:      ${2:Date}
-#+STARTUP:   indent
-#+OPTIONS:   H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
+#+TITLE:         ${1:Title}
+#+AUTHOR:       Zuogong Yue
+#+EMAIL:         oracleyue@gmail.com
+#+DATE:           ${2:Date}
+#+STARTUP:  indent
+#+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
 
 $0
