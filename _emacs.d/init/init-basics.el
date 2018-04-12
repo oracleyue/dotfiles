@@ -113,6 +113,11 @@
   (auto-fill-mode 1)
   (setq-local fill-column 75))
 
+;; quick draft formulas in LaTeX
+(defun draft-formula ()
+  (interactive)
+  (find-file (expand-file-name "~/Documents/.formula.tex")))
+
 ;; supports for Chinese
 ;; setting font set
 (if(display-graphic-p)
@@ -128,12 +133,11 @@
 ;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
 ;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 
-;; highlight brackets
-(show-paren-mode t)
 ;; /smartparens/: insert pairs of parenthesis/brackets
 (require 'smartparens-config)
 (smartparens-global-mode 1)
-;; (show-smartparens-global-mode 1) ;; use show-paren-mode
+;; highlight pairs (e.g. brackets)
+(show-smartparens-global-mode 1) ;; replace show-paren-mode
 
 ;; /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)

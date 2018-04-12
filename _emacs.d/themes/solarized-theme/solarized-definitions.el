@@ -362,7 +362,6 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (info-xref (:inherit link))
                 (info-xref-visited (:inherit link-visited))
                 ;; org
-                (org-block-background (,@bg-base02))
                 (org-hide (,@fg-base03))
                 (org-todo (,@fmt-bold ,@fg-base03 ,@bg-red))
                 (org-done (,@fmt-bold ,@fg-green))
@@ -377,12 +376,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-default (:inherit default))
                 ;; (org-level-1 (:inherit outline-1))
                 ;; (org-level-2 (:inherit outline-2))
-                ;; (org-level-3 (:inherit outline-3))
-                ;; (org-level-4 (:inherit outline-4))
-                ;; (org-level-5 (:inherit outline-5))
-                ;; (org-level-6 (:inherit outline-6))
-                ;; (org-level-7 (:inherit outline-7))
-                ;; (org-level-8 (:inherit outline-8))
+                ;; ... to org-level-8
                 ;; ---- oracleyue: add ----
                 (org-level-1 (:inherit variable-pitch
                                        :height 1.02 ;;1.10
@@ -406,7 +400,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-level-8 (:inherit variable-pitch
                                        ,@fg-violet))
                 ;; ---- oracleyue: end ----
-                (org-special-keyword (,@fmt-ital ,@fg-base01))
+                (org-special-keyword (:inherit fixed-pitch
+                                               ,@fmt-ital ,@fg-base01))
                 (org-drawer (,@fmt-bold ,@fg-blue))
                 (org-column (,@fmt-revr ,@fg-cyan))
                 (org-column-title (,@fmt-bold ,@fmt-revr))
@@ -425,15 +420,21 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-headline-done (,@fg-base01))
                 (org-priority (,@fmt-ital ,@fg-base01))
                 (org-checkbox (,@fmt-bold))
-                (org-table (,@fg-cyan))
-                (org-formula (:weight bold :slant italic ,@fg-red))
-                ;; (org-code (,@fg-base01))
-                (org-code (,@fmt-none ,@fg-blue))  ;oracleyue
+                (org-table (:inherit fixed-pitch
+                            ,@fg-cyan))
+                (org-formula (:inherit fixed-pitch
+                              :weight bold :slant italic ,@fg-red))
+                (org-code (:inherit fixed-pitch
+                           ,@fmt-none ,@fg-blue))  ;oracleyue
                 (org-document-title (,@fmt-bold ,@fg-cyan))
-                (org-document-info-keyword (,@fg-base01))
-                (org-block (,@fg-base01))
-                ;; (org-verbatim (,@fmt-undr ,@fg-base01))
-                (org-verbatim (,@fmt-undr ,@fg-cyan)) ;oracleyue
+                (org-document-info (,@fg-base01))
+                (org-document-info-keyword (:inherit fixed-pitch ,@fg-base01))
+                (org-meta-line (:inherit fixed-pitch ,@fg-base01))
+                (org-block-background (:inherit fixed-pitch
+                                       ,@bg-base02))
+                (org-block (:inherit fixed-pitch ,@fg-cyan))
+                (org-verbatim (:inherit fixed-pitch
+                               ,@fmt-undr ,@fg-cyan)) ;oracleyue
                 (org-clock-overlay (,@fmt-revr ,@bg-cyan ,@fg-base03))
                 (org-agenda-structure (,@fmt-bold ,@fg-blue))
                 (org-scheduled (:weight bold :slant italic ,@fg-green))
@@ -443,7 +444,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (org-upcoming-deadline (,@fmt-bold ,@fg-red))
                 (org-agenda-restriction-lock (,@fmt-revr ,@fg-base03 ,@bg-cyan))
                 (org-time-grid (,@fg-yellow))
-                (org-latex-and-related(,@fg-orange))
+                (org-latex-and-related(:inherit fixed-pitch ,@fg-orange))
                 ;; table
                 (table-cell (,@fmt-none ,@fg-base0 ,@bg-back))
                 ;; outline - pandocBlockQuoteLeader[1–6]

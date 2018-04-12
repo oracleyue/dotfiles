@@ -15,7 +15,6 @@
 p.verse { margin-left: 5% }
 pre {
     border: 1pt solid #AEBDCC;
-    /* background-color: #FAFAFA; */
     background-color: #002B36;
     color: #93A1A1;
     font-family: 'Roboto Mono', monospace;
@@ -29,8 +28,16 @@ pre {
     margin-right: auto;
     overflow: auto;
 }
-table { border-collapse: collapse; }
-td, th { vertical-align: top;  }
+table {
+    border-collapse: separate;
+    border-spacing: 50px 0;
+    margin-bottom: 30px;
+}
+td {
+    vertical-align: top;
+    padding: 2px;
+}
+th { vertical-align: top;  }
 th.right  { text-align:center;  }
 th.left   { text-align:center;   }
 th.center { text-align:center; }
@@ -45,10 +52,14 @@ img { display: block;
       padding-top: 12px;
       padding-bottom: 12px; }
 div.inlinetask {
-    padding:10px;
+    padding:15px;
     border:2px solid gray;
     margin:10px;
     background: #ffffcc;
+}
+div.status {
+    padding-top: 80px;
+    font-style: italic;
 }
 textarea { overflow-x: auto; }
 p.postamble { text-align: center;
@@ -73,24 +84,25 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     width: 640px;
-    /* width: 720px; */
     margin: auto;
     text-align:left;
     font-family: 'Roboto', sans-serif;
     font-size: 11pt;
-    /* font-size: 13pt; */
 }
 
 hr { width: 96%; height: 1px; }
 blockquote p {
     font-size: 10pt;
-	/* font-size: inherit; */
 	font-style: italic;
+}
+
+span.underline {
+    font-size: 12pt;
+    /* border-bottom: 1px solid grey; */
 }
 
 pre.src,
 pre.example {
-    /* atom-one-dark */
     background-color: #282C34;
     color: #ABB2BF;
     font-size: 90%;

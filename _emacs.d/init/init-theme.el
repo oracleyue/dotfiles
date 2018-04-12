@@ -14,7 +14,7 @@
       (set-face-attribute 'default nil
                           :font "DejaVu Sans Mono-15")
     (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
-  (set-face-attribute 'fixed-pitch nil :family "Roboto Mono")
+  (set-face-attribute 'fixed-pitch nil :family "DejaVu Sans Mono")
   (set-face-attribute 'variable-pitch nil :family "Roboto"))
 
 ;; Theme Path
@@ -40,7 +40,7 @@
         ;; apps
         ((not (daemonp))
          (if (display-graphic-p)
-             (load-theme 'atom-one-dark t)        ;; app
+             (load-theme 'solarized t)        ;; app
            (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main

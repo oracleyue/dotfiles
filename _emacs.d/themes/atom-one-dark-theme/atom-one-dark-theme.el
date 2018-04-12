@@ -381,7 +381,7 @@
    `(org-sexp-date ((t (:foreground ,atom-one-dark-cyan))))
    ;; ---- oracleyue: add ----
    `(org-block-background
-     ((,class (;;:inherit default
+     ((,class (:inherit default
                         :background ,atom-one-dark-bg-hl))))
    `(org-block-begin-line
      ((,class (:inherit font-lock-comment-face

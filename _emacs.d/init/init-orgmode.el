@@ -20,13 +20,16 @@
 
 ;; startup styles
 (setq org-startup-folded t)
-;(setq org-startup-indented t)
+(setq org-startup-indented nil)
 
 ;; use sans-serif for all texts
-;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
+(add-hook 'org-mode-hook (lambda () (variable-pitch-mode t)))
 
 ;; set line space
-;; (add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
+(add-hook 'org-mode-hook (lambda () (setq line-spacing '0.25)))
+
+;; highlight latex fragments
+(setq org-highlight-latex-and-related '(latex script entities))
 
 ;; set apps to open files in orgmode
 (setq org-file-apps
@@ -41,16 +44,14 @@
 ;;
 
 ;; HTML
+;; enable my default html head
 (setq org-html-head-include-default-style nil)
-;; enable/disable on using global html head
-(setq use-global-org-html-head t)
 ;; local  settings: add "#+HTML_HEAD" and "#+HTML_HEAD_EXTRA" in .org files
-;; global settings: one may add "#+HTML_HEAD: " (leave empty) to disable global heads
-(when use-global-org-html-head
-  (setq org-html-head
-        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d.25.1.osx/templates/css/bootstrap.min.css\" />")
-  (setq org-html-head-extra
-        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d.25.1.osx/templates/css/style.css\" />"))
+;; global settings: one add "#+HTML_HEAD: " (leave empty) to disable global heads
+(setq org-html-head
+      "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
+(setq org-html-head-extra
+        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://cdn.rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />")
 
 ;; Markdown
 (eval-after-load "org" '(require 'ox-md nil t))
@@ -89,27 +90,25 @@
 (eval-after-load 'org
   '(progn
      (add-to-list 'org-structure-template-alist
-                  '("p" ":PROPERTIES:\n:AUTHOR:\n:CUSTOM_ID:\n:LABEL: sec:?\n:END:"))
+       '("p" ":PROPERTIES:\n:AUTHOR:\n:END:"))
      (add-to-list 'org-structure-template-alist
-                  '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
+       '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
      (add-to-list 'org-structure-template-alist
-                  '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
+       '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
      ))
 
 
 ;;
-;; Additional minor modes supports
+;; Additional supports via minor modes
 ;;
 
 ;; /smart-parens/ for org-mode
 (sp-with-modes 'org-mode
   (sp-local-pair "$" "$"
-                 :unless '(sp-latex-point-after-backslash-left))
-  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                 :unless '(sp-latex-point-after-backslash)
                  :actions '(insert wrap autoskip navigate escape))
-  (sp-local-pair "\"" "\"" :unless '(sp-point-after-word-p)
+  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
                  :actions '(insert wrap autoskip navigate escape)))
-
 
 
 

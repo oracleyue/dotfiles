@@ -14,13 +14,19 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
-;; /ParEdit/ mode
-;(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-;(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-;(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+;; /ParEdit/ mode   (replaced by /smartparens/)
+;; (autoload 'enable-paredit-mode "paredit"
+;;   "Turn on pseudo-structural editing of Lisp code." t)
+;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+
+;; /smartparens/ mode for Lisp
+;; navigation: =C-M-f= forward sexp; =C-M-b= backward sexp;
+;; killing: =C-M-k= sp-kill-sexp
+(define-key smartparens-mode-map (kbd "M-S") 'sp-split-sexp)
+(define-key smartparens-mode-map (kbd "M-J") 'sp-join-sexp)
+(define-key smartparens-mode-map (kbd "M-R") 'sp-raise-sexp)
 
 ;; MIT/GNU /Scheme/
 (setq scheme-program-name "/usr/local/bin/mit-scheme")

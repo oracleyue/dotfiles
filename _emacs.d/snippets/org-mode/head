@@ -8,6 +8,7 @@
 #+EMAIL:     oracleyue@gmail.com
 #+DATE:      ${2:Date}
 #+STARTUP:   indent
+#+OPTIONS:   H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
 
 $0
