@@ -116,6 +116,8 @@
 ;; quick draft formulas in LaTeX
 (defun draft-formula ()
   (interactive)
+  (split-window nil -8 'below)
+  (other-window 1)
   (find-file (expand-file-name "~/Documents/.formula.tex")))
 
 ;; supports for Chinese
