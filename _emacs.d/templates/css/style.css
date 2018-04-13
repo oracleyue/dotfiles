@@ -93,11 +93,11 @@ body {
 hr { width: 96%; height: 1px; }
 blockquote p {
     font-size: 10pt;
-	font-style: italic;
+    font-style: italic;
 }
 
 span.underline {
-    font-size: 12pt;
+    font-style: italic;
     border-bottom: 1px solid grey;
 }
 

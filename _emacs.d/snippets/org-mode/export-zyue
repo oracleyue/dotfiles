@@ -2,6 +2,6 @@
 # name: export options (zyue)
 # key: export
 # --
-#+OPTIONS:   H:6 num:t toc:t TeX:t LaTeX:t skip:nil todo:t ^:nil _:nil
+#+OPTIONS:   H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" media="all" href="/Users/oracleyue/.emacs.d/templates/css/bootstrap.min.css" />
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" media="all" href="/Users/oracleyue/.emacs.d/templates/css/style.css" />
