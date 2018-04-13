@@ -98,7 +98,7 @@ blockquote p {
 
 span.underline {
     font-size: 12pt;
-    /* border-bottom: 1px solid grey; */
+    border-bottom: 1px solid grey;
 }
 
 pre.src,

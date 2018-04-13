@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: align (LaTeX)
+# key: align
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{align}
+  \label{eq:${1:LABEL}}
+  $0
+\end{align}
