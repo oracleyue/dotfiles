@@ -40,7 +40,7 @@
         ;; apps
         ((not (daemonp))
          (if (display-graphic-p)
-             (load-theme 'solarized t)        ;; app
+             (load-theme 'atom-one-dark t)        ;; app
            (load-theme 'Amelie t)))               ;; terminal
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main

@@ -6,6 +6,7 @@
 ---
 title: ${1:TITLE}
 categories: ${2:Category}
+date:
 tags:
 - $0
 ---

@@ -81,13 +81,22 @@ h6 { padding: 15px 0px 15px 0px;
      font-family: 'Roboto', Sans-Serif; }
 
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    /* padding-top: 40px; */
+    /* padding-bottom: 40px; */
     width: 640px;
     margin: auto;
     text-align:left;
     font-family: 'Roboto', sans-serif;
     font-size: 11pt;
+}
+
+p {
+    padding-top: 8px;
+    padding-bottom: 0px;
+}
+p.author,p.date,p.creator,p.validation {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 hr { width: 96%; height: 1px; }

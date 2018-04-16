@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: suibi
+# key: suibi
+# group: blog
+# --
+${1:TITLE}
+====
+_date: ${2:TIME}_
+
+
+$0
