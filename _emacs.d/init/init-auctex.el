@@ -70,7 +70,7 @@
         ("v ="   "triangleq"    "Relational" nil)
         ("v ~"   "thicksim"     "Relational" nil)
 
-        ("_"     "bar"          "Accents" nil)
+        ("v ^"   "check"        "Accents" nil)
 
         ("o"     "otimes"       "Binary Op" nil)
         ("O"     "circ"         "Binary Op" nil)
@@ -86,12 +86,25 @@
         ("C-S-b" "longleftarrow"  "Arrows" nil)
         ("C-m"   "longmapsto"     "Arrows" nil)
 
-        ("C-t"   "textstyle"      "Misc" nil)     ;overwirte \tan
-        ("C-d"   "displaystyle"   "Misc" nil)  ;overwirte \det
+        ("C-t"   "textstyle"      "Misc" nil)     ;; overwirte \tan
+        ("C-d"   "displaystyle"   "Misc" nil)     ;; overwirte \det
         ))
-; More math-font in LaTeX
-(setq LaTeX-font-list (quote ((1 "" "" "\\mathcal{" "}") (2 "\\textbf{" "}" "\\mathbf{" "}") (3 "\\textsc{" "}" "\\mathscr{" "}") (5 "\\emph{" "}" "\\pmb{" "}") (6 "\\textsf{" "}" "\\mathsf{" "}") (9 "\\textit{" "}" "\\mathit{" "}") (13 "\\text{" "}") (14 "\\textnormal{" "}" "\\mathnormal{" "}") (18 "\\textrm{" "}" "\\mathrm{" "}") (19 "\\textsl{" "}" "\\mathbb{" "}") (20 "\\texttt{" "}" "\\mathtt{" "}") (21 "\\textup{" "}") (4 "" "" t))))
-;; default: (13 "\\textmd{" "}")
+
+;; More math-font in LaTeX
+(setq LaTeX-font-list
+      (quote ((1 "" "" "\\mathcal{" "}")
+              (2 "\\textbf{" "}" "\\mathbf{" "}")
+              (3 "\\textsc{" "}" "\\mathscr{" "}")
+              (4 "" "" t)
+              (5 "\\emph{" "}" "\\pmb{" "}")
+              (6 "\\textsf{" "}" "\\mathsf{" "}")
+              (9 "\\textit{" "}" "\\mathit{" "}")
+              (13 "\\text{" "}")   ;; default: (13 "\\textmd{" "}")
+              (14 "\\textnormal{" "}" "\\mathnormal{" "}")
+              (18 "\\textrm{" "}" "\\mathrm{" "}")
+              (19 "\\textsl{" "}" "\\mathbb{" "}")
+              (20 "\\texttt{" "}" "\\mathtt{" "}")
+              (21 "\\textup{" "}") )))
 
 ;; More keywords/macro fontify
 (setq font-latex-match-textual-keywords

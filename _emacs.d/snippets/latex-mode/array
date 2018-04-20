@@ -4,6 +4,6 @@
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{array}{l@{\:}l}
+\begin{array}{r@{\:}l}
   $0
 \end{array}

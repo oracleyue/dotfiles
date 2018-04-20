@@ -10,8 +10,22 @@
         company-irony-c-headers
         flycheck-irony
         irony-eldoc
-        helm-make))
-(custom/install-packages custom/modern-cc-packages)
+        helm-make
+        ))
+(when *enable-rtags*
+  (setq custom/modern-cc-packages
+        (append
+         '(rtags
+           company-rtags
+           helm-rtags
+           flycheck-rtags
+           cmake-ide)
+         custom/modern-cc-packages)))
+(unless (custom/packages-installed-p custom/modern-cc-packages)
+  (package-refresh-contents)
+  (dolist (pkg custom/modern-cc-packages)
+    (unless (package-installed-p pkg)
+      (package-install pkg))))
 
 (require 'cc-mode)
 (setq-default c-default-style "linux")
@@ -24,7 +38,7 @@
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
 ;; /google-c-style/ and /flymake-google-cpplint/ style checker
-(when y:enable-google-cpp-style
+(when *enable-gg-cpp-style*
   (require 'google-c-style)
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -37,6 +51,22 @@
   (add-hook 'c-mode-hook 'y:flymake-google-init)
   (add-hook 'c++-mode-hook 'y:flymake-google-init))
 
+(when *enable-rtags*
+  ;; see the const *enable-rtags* defined in "init-features.el"
+
+(require 'rtags)
+;; run rtags server automatically
+(rtags-start-process-unless-running)
+(rtags-enable-standard-keybindings)
+
+(setq rtags-autostart-diagnostics t)
+(setq rtags-completions-enabled t)
+(push 'company-rtags company-backends)
+
+(setq rtags-display-result-backend 'helm)
+
+) ;; close the condition on *enable-rtags*
+
 ;; /irony/+/company-irony/: code completions
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -47,8 +77,6 @@
 
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 (setq company-backends (delete 'company-semantic company-backends))
-;; (eval-after-load 'company
-;;   '(add-to-list 'company-backends 'company-irony))
 
 (require 'company-irony-c-headers)
 (defun y:add-company-backend-irony ()
@@ -94,7 +122,6 @@
 (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
 (add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
 ;; adding /company-cmake/ for ac-complete
-(require 'company-cmake)
 (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
 (defun y:company-cmake-setup ()
   (setq-local company-backends

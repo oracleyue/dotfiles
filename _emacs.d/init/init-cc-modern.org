@@ -1,6 +1,15 @@
+#+TITLE:    Modern C++ IDE for Emacs
+#+AUTHOR:   Zuogong Yue
+#+EMAIL:    oracleyue@gmail.com
+#+DATE:     20 Apr 2018
+#+STARTUP:  indent
+#+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
+
+
+
 * Modern C++ IDE for Emacs
   Features:
-  - use *rtags* for code navigation
+  - use *rtags* for code navigation (if enable by =*enable-rtags*= in =init-features.el=)
   - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
   - integrate *flycheck* with *rtags* (disabled) and *irony*
   - use *cmake-ide* to integrate cmake-based projects
@@ -8,7 +17,7 @@
 
 ** Requirements
 *** install software in OS
-1. use pip to install =cpplint= for google-cpp-style
+1. use =pip= to install =cpplint= for *google-cpp-style*
 
 2. have *cmake* installed
 
@@ -39,12 +48,17 @@
             company-irony-c-headers
             flycheck-irony
             irony-eldoc
-            rtags
-            company-rtags
-            helm-rtags
-            flycheck-rtags
-            cmake-ide
-            helm-make))
+            helm-make
+            ))
+    (when *enable-rtags*
+      (setq custom/modern-cc-packages
+            (append
+             '(rtags
+               company-rtags
+               helm-rtags
+               flycheck-rtags
+               cmake-ide)
+             custom/modern-cc-packages)))
     (unless (custom/packages-installed-p custom/modern-cc-packages)
       (package-refresh-contents)
       (dolist (pkg custom/modern-cc-packages)
@@ -79,7 +93,7 @@
 
     #+BEGIN_SRC emacs-lisp
       ;; /google-c-style/ and /flymake-google-cpplint/ style checker
-      (when y:enable-google-cpp-style
+      (when *enable-gg-cpp-style*
         (require 'google-c-style)
         (add-hook 'c-mode-common-hook 'google-set-c-style)
         (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -92,6 +106,10 @@
         (add-hook 'c-mode-hook 'y:flymake-google-init)
         (add-hook 'c++-mode-hook 'y:flymake-google-init))
     #+END_SRC
+
+** Source code navigation using gtags
+
+   See =init-gtags.el=, which also supports tag-based code navigation of other languages.
 
 ** Source code navigation using RTags
 *** Install rtags servers in OS
@@ -109,6 +127,11 @@ Put =rdm= and =rc= under your PATH.
 
 *** Setup rtags packages in Emacs
     Install rtags from MELPA.
+
+    #+BEGIN_SRC emacs-lisp
+      (when *enable-rtags*
+        ;; see the const *enable-rtags* defined in "init-features.el"
+    #+END_SRC
 
 **** use rtags for code navigation
     #+BEGIN_SRC emacs-lisp
@@ -130,6 +153,10 @@ Put =rdm= and =rc= under your PATH.
     #+BEGIN_SRC emacs-lisp
       (setq rtags-display-result-backend 'helm)
     #+END_SRC
+
+     #+BEGIN_SRC emacs-lisp
+       ) ;; close the condition on *enable-rtags*
+     #+END_SRC
 
 *** Run rtags server for projects
 Before using RTags you need to start rdm and index your project. In order to index your project, RTags requires you to export your project's compile commands with cmake.
@@ -298,11 +325,11 @@ We'll see how to automate this process with cmake-ide below.
     - =C-c ! l=: list errors
     - =C-c ! c=: menually run checker
 
-** CMake automation with cmake-ide
+** CMake automation with cmake-ide (disabled)
 *** Prerequisites
 
     Install cmake-ide from MELPA and add the following to your emacs init file:
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC
       (cmake-ide-setup)
     #+END_SRC
 

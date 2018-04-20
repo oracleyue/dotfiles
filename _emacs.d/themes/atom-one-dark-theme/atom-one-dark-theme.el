@@ -381,18 +381,27 @@
    `(org-sexp-date ((t (:foreground ,atom-one-dark-cyan))))
    ;; ---- oracleyue: add ----
    `(org-block-background
-     ((,class (:inherit default
+     ((,class (;;:inherit default
+               :inherit fixed-pitch
                         :background ,atom-one-dark-bg-hl))))
    `(org-block-begin-line
-     ((,class (:inherit font-lock-comment-face
+     ((,class (;;:inherit font-lock-comment-face
+               :inherit fixed-pitch
+                        :foreground ,atom-one-dark-mono-3
                         :slant normal))))
    `(org-block-end-line
-     ((,class (:inherit font-lock-comment-face
+     ((,class (;;:inherit font-lock-comment-face
+               :inherit fixed-pitch
+                        :foreground ,atom-one-dark-mono-3
                         :slant normal))))
    `(org-code           ;; codes enclosed by "~"
-     ((,class (:inherit font-lock-constant-face))))
+     ((,class (;;:inherit font-lock-constant-face
+               :inherit fixed-pitch
+                        :foreground ,atom-one-dark-cyan))))
    `(org-verbatim       ;; codes enclosed by "="
-     ((,class (:inherit font-lock-doc-face))))
+     ((,class (;;:inherit font-lock-doc-face
+               :inherit fixed-pitch
+                        :foreground ,atom-one-dark-green))))
    `(org-level-1
      ((,class (:inherit variable-pitch
                         :foreground ,atom-one-dark-blue

@@ -90,7 +90,7 @@
   (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
 
 ;; enable /semantic/ (CEDET) for /helm-semantic-or-imenu/ and /stickyfunc/
-(when y:enable-cedet-semantics
+(when *enable-semantics*
   (add-hook 'semantic-mode-hook
             (lambda () (when (fboundp 'semantic-default-elisp-setup)
                          (semantic-default-elisp-setup))))
@@ -102,8 +102,8 @@
 ;; /function-args/: symbol reference table over current file or projects
 ;; usages:
 ;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
-(when (and y:enable-function-args
-           y:enable-cedet-semantics)
+(when (and *enable-function-args*
+           *enable-semantics*)
   (require 'ivy)
   (require 'function-args)
   ;; enable case-insensitive searching

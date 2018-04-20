@@ -16,16 +16,13 @@
 
 
 ;; Load the corresponding complete engine
-(cond ((string-equal y:cc-complete-engine "clang")       ;; company-clang
+(cond ((string-equal *cc-engine* "native")       ;; company-clang
        (require 'init-cc-comp))
-      ((string-equal y:cc-complete-engine "irony")       ;; irony
-       (org-babel-load-file
-        (expand-file-name "init/init-cc-irony.org"
-                          user-emacs-directory)))
-      ((string-equal y:cc-complete-engine "modern")      ;; rtags + irony
-       (org-babel-load-file
-        (expand-file-name "init/init-cc-modern.org"
-                          user-emacs-directory))))
+      ((string-equal *cc-engine* "modern")       ;; rtags + irony
+       ;; (org-babel-load-file
+       ;;  (expand-file-name "init/init-cc-modern.org" user-emacs-directory))
+       (require 'init-cc-modern)))
+
 
 
 (provide 'init-cc)

@@ -9,7 +9,8 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}  % charter (for regular texts)
+\usepackage{times,helvet}  % lmodern; charter (for regular texts)
+% \usepackage[lite,straightbraces]{mtpro2}
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,

@@ -7,10 +7,10 @@
 \documentclass[a4paper,11pt]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}   % times,charter; helvet
+\usepackage{times,helvet}    % charter; newtxtext/newtxmath
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts}   % newtxtext/newtxmath
+\usepackage{latexsym,amsmath,amssymb,amsfonts}
 \usepackage{enumitem}
 
 \usepackage{setspace}  \onehalfspacing

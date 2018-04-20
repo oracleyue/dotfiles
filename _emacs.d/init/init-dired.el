@@ -65,7 +65,7 @@
 ;; ------------------------------------------------
 
 ;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
-(when (string-equal y:tree-manager "direx")
+(when (string-equal *tree-manager* "direx")
   (require 'direx)
   (push '(direx:direx-mode :position left :width 27 :dedicated t)
         popwin:special-display-config)
@@ -76,7 +76,7 @@
   (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window))
 
 ;; directory explorer in tree: /neotree/
-(when (string-equal y:tree-manager "neotree")
+(when (string-equal *tree-manager* "neotree")
   (require 'neotree)
   (setq neo-theme 'arrow)
   (global-set-key (kbd "C-x C-j") 'neotree-toggle)

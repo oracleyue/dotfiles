@@ -288,7 +288,7 @@
 
 ** Ends
    #+BEGIN_SRC emacs-lisp
-     (provide 'init-cc-modern)
+     (provide 'init-cc-irony)
      ;; ================================================
-     ;; init-cc-modern.el ends here
+     ;; init-cc-irony.el ends here
    #+END_SRC

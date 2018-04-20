@@ -434,7 +434,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                                        ,@bg-base02))
                 (org-block (:inherit fixed-pitch ,@fg-cyan))
                 (org-verbatim (:inherit fixed-pitch
-                               ,@fmt-undr ,@fg-cyan)) ;oracleyue
+                               ,@fmt-none ,@fg-cyan)) ;oracleyue
                 (org-clock-overlay (,@fmt-revr ,@bg-cyan ,@fg-base03))
                 (org-agenda-structure (,@fmt-bold ,@fg-blue))
                 (org-scheduled (:weight bold :slant italic ,@fg-green))

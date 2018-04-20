@@ -4,8 +4,8 @@
 
 
 ;; select tree window manager
-(setq y:tree-manager "neotree")
-;; (setq y:tree-manager "direx") ;; enable /direx-jedi/ in python
+(defconst *tree-manager* "neotree")
+;; (defconst *tree-manager* "direx") ;; enable /direx-jedi/ in python
 
 ;; completion system
 (if *is-mac*
@@ -20,13 +20,19 @@
       (*is-linux*
        (defconst *use-company* t)))
 
-;; features on C/C++ programming
+;; programming
+;; gtags
 (if (or *is-server-main* (not (daemonp)))
-    (setq y:enable-cedet-semantics nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
-  (setq y:enable-cedet-semantics t))
-(setq y:enable-function-args nil)       ;; /function-args/ (require semantics)
-(setq y:enable-google-cpp-style nil)    ;; /google-c-style/
-(setq y:cc-complete-engine "irony")     ;; company-clang, irony, modern
+    (defconst *enable-semantics* nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
+  (defconst *enable-semantics* t))
+(defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
+
+;; c/c++
+(defconst *enable-gg-cpp-style* nil)  ;; /google-c-style/
+(defconst *enable-rtags* nil)         ;; /rtags/
+(defconst *cc-engine* "modern")       ;; "native": company-clang
+                                      ;; "modern": irony + (rtags)
+
 
 
 (provide 'init-features)

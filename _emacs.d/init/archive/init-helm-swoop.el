@@ -7,16 +7,14 @@
       '(helm-swoop))
 (custom/install-packages custom/helm-swoop-packages)
 
-
-;; Locate the helm-swoop folder to your path
-(add-to-list 'load-path "~/.emacs.d/elisp/helm-swoop")
 (require 'helm-swoop)
 
 ;; Change the keybinds to whatever you like :)
-(global-set-key (kbd "C-c h o") 'helm-swoop)  ; default "M-i"
-(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point) ;default "M-I"
-(global-set-key (kbd "C-c h O") 'helm-multi-swoop) ;default "C-c M-i"
-(global-set-key (kbd "C-c h M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
+(global-set-key (kbd "M-s o") 'helm-swoop)    ; default "M-i"
+(global-set-key (kbd "C-c h o") 'helm-swoop)
+(global-set-key (kbd "M-s O") 'helm-swoop-back-to-last-point) ;default "M-I"
+(global-set-key (kbd "C-c M-o") 'helm-multi-swoop) ;default "C-c M-i"
+(global-set-key (kbd "C-x M-o") 'helm-multi-swoop-all) ;default "C-x M-i"
 
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
@@ -25,8 +23,9 @@
 ;; When doing evil-search, hand the word over to helm-swoop
 ;; (define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)
 
-;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
-(define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+;; Instead of helm-multi-swoop-all, use helm-multi-swoop-current-mode
+(define-key helm-swoop-map (kbd "M-m")
+  'helm-multi-swoop-current-mode-from-helm-swoop)
 
 ;; Move up and down like isearch
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)

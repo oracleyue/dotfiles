@@ -90,7 +90,7 @@
 (add-hook 'python-mode-hook 'y:company-py-setup)
 
 ;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
-(when (string-equal y:tree-manager "direx")
+(when (string-equal *tree-manager* "direx")
   (eval-after-load "python"
     '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
   (add-hook 'jedi-mode-hook 'jedi-direx:setup))

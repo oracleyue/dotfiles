@@ -7,6 +7,9 @@
 ;; ----------------------------------------------------------------------
 ;; Notes of usage
 ;; ----------------------------------------------------------------------
+;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
+;; insert 4-spaced TAB: =tab-to-tab-stop= or =M-4 SPC=
+;; rectangle mark mode: =C-x SPC= (Emacs default)
 ;; move cursor to the top/middle/bottom of the current window: "M-r"
 ;; upcase/downcase/captalize word: "M-u", "M-l", "M-c"
 ;; tranpose/swap words: "M-t"
@@ -122,17 +125,14 @@
 (global-set-key (kbd "M-w") 'y:kill-ring-save)
 (global-set-key (kbd "C-w") 'y:kill-region)
 
-;; mark the current line
-(defun y:mark-current-line ()
-  "Select the current line"
-  (interactive)
-  (end-of-line) ; move to end of line
-  (set-mark (line-beginning-position)))
-(global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
-;; "C-S-SPC" is bound to for =set-rectangular-region-anchor= in /multi-cursor/
-
-;; remove all except 1 space between characters ("M-SPC" disabled due to Alfred)
-(global-set-key (kbd "C-c SPC") 'just-one-space)
+;; ;; mark the current line
+;; (defun y:mark-current-line ()
+;;   "Select the current line"
+;;   (interactive)
+;;   (end-of-line) ; move to end of line
+;;   (set-mark (line-beginning-position)))
+;; (global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
+;; ;; "C-S-SPC" is bound to for =set-rectangular-region-anchor= in /multi-cursor/
 
 ;; unfill paragraph: the opposite of fill-paragraph
 (defun y:unfill-paragraph-or-region (&optional region)
@@ -250,12 +250,15 @@ Uses `current-date-format' for the formatting the date/time."
 (require 'gse-number-rect)
 (global-set-key (kbd "C-x r N") 'gse-number-rectangle)
 
+;; remove all except 1 space between characters ("M-SPC" disabled due to Alfred)
+;; alternative to "M-SPC": "ESC SPC" (Emacs default)
+
 ;; removing trailing whitespace
 ;(add-hook 'before-save-hook 'delete-trailing-whitespace)   ;; any files
 ;; enable in all programming modes
-(defun y:auto-remove-trailing-whitespace ()
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
-(add-hook 'prog-mode-hook 'y:auto-remove-trailing-whitespace)
+(add-to-list 'write-file-functions 'delete-trailing-whitespace)
+;; manually remove whitespaces
+;; (global-set-key (kbd "C-x M-s") 'delete-trailing-whitespace)
 
 
 ;;
@@ -273,7 +276,7 @@ Uses `current-date-format' for the formatting the date/time."
 ;; mouse events
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 ;; others
-;(global-set-key (kbd "M-S-SPC") 'set-rectangular-region-anchor)
+(global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
 
 
 ;; /expand-region/: increase the selected region by semantic units
@@ -287,7 +290,7 @@ Uses `current-date-format' for the formatting the date/time."
 (setq-default major-mode 'text-mode)
 ;; use "C-." to auto-correct words
 
-;; line wrapping settings
+;; default line wrapping
 (add-hook 'text-mode-hook 'visual-line-mode)
 
 ;; spell check for text modes

@@ -38,9 +38,7 @@
 
 ;; completion systems
 (if *use-helm*
-    (progn (require 'init-helm)
-           (require 'init-helm-swoop)
-           (require 'init-helm-proj))
+    (require 'init-helm)
   (require 'init-ivy))
 
 ;; directory and buffer explorers

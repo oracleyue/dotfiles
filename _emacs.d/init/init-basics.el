@@ -40,8 +40,7 @@
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
 (when *is-server-main*
   (setq-default cursor-type 'bar))
-(add-hook 'text-mode-hook
-          (lambda () (setq-local cursor-type 'bar)))
+;; (add-hook 'text-mode-hook (lambda () (setq-local cursor-type 'bar)))
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment
@@ -85,6 +84,11 @@
 ;; (when (string-equal system-type "darwin")
 ;;   (setq mac-command-modifier 'control)  ; use command as control
 ;;   (setq mac-option-modifier 'meta))     ; may not need
+
+;; auto-save files when stop editing
+(require 'auto-save)
+(auto-save-enable)
+(setq auto-save-slient t)
 
 ;; default browser
 (if (string-equal system-type "darwin")
@@ -139,7 +143,7 @@
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 ;; highlight pairs (e.g. brackets)
-(show-smartparens-global-mode 1) ;; replace show-paren-mode
+(show-smartparens-global-mode 1) ;; replace default /show-paren/
 
 ;; /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)

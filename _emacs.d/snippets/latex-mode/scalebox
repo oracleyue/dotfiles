@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: scalebox
+# key: sbox
+# group: macros
+# --
+\scalebox{${1:.9}}{$0}

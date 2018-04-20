@@ -29,13 +29,13 @@ pre {
     overflow: auto;
 }
 table {
-    border-collapse: separate;
-    border-spacing: 50px 0;
+    border-collapse: collapse;
+    border-spacing: 5px 0;
     margin-bottom: 30px;
 }
 td {
     vertical-align: top;
-    padding: 2px;
+    padding: 5px;
 }
 th { vertical-align: top;  }
 th.right  { text-align:center;  }
@@ -59,7 +59,8 @@ div.inlinetask {
 }
 div.status {
     padding-top: 80px;
-    font-style: italic;
+    /* font-style: italic; */
+    font-size: 12px;
 }
 textarea { overflow-x: auto; }
 p.postamble { text-align: center;
@@ -108,6 +109,15 @@ blockquote p {
 span.underline {
     font-style: italic;
     border-bottom: 1px solid grey;
+}
+
+.warning {
+    padding: 2px;
+    padding-left: 15px;
+    background-color: #ff4d4d;  /* Red */
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 pre.src,
