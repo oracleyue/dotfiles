@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>The League of Helm and Project Managements</title>
-<!-- 2018-04-20 Fri 20:57 -->
+<!-- 2018-04-24 Tue 16:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Zuogong Yue" />
@@ -195,9 +195,9 @@ Adding a header for the exported <code>.el</code> file.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">================================================================</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">/Helm/ as the main completion system</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">================================================================</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/Helm/ as the main completion system</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
 </pre>
 </div>
 
@@ -206,8 +206,8 @@ Install the additional packages to support the <code>helm</code> package
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Install required packages for more functions</span>
-(<span style="color: #C678DD;">setq</span> custom/helm-packages
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/helm-packages
       '(helm
         helm-core))
 (custom/install-packages custom/helm-packages)
@@ -222,9 +222,9 @@ Install the additional packages to support the <code>helm</code> package
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">configuration for /helm/</span>
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">helm</span>)
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">helm-config</span>)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">configuration for /helm/</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm</span>)
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-config</span>)
 </pre>
 </div>
 
@@ -256,12 +256,12 @@ List of basic keybindings in the helm sessions:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Basic keybinding:</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-c h"</span>) 'helm-command-prefix)
-(global-unset-key (kbd <span style="color: #98C379;">"C-x c"</span>))
-(define-key helm-map (kbd <span style="color: #98C379;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action)
-(define-key helm-map (kbd <span style="color: #98C379;">"C-i"</span>) 'helm-execute-persistent-action)
-(define-key helm-map (kbd <span style="color: #98C379;">"C-z"</span>) 'helm-select-action)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Basic keybinding:</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h"</span>) 'helm-command-prefix)
+(global-unset-key (kbd <span style="color: #2aa198;">"C-x c"</span>))
+(define-key helm-map (kbd <span style="color: #2aa198;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action)
+(define-key helm-map (kbd <span style="color: #2aa198;">"C-i"</span>) 'helm-execute-persistent-action)
+(define-key helm-map (kbd <span style="color: #2aa198;">"C-z"</span>) 'helm-select-action)
 </pre>
 </div>
 
@@ -270,17 +270,17 @@ More basic settings and start <code>helm</code> mode:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">More basic settings:</span>
-(<span style="color: #C678DD;">setq</span> <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">open helm buffer inside current window, not occupy whole other window</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">More basic settings:</span>
+(<span style="color: #859900;">setq</span> <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">open helm buffer inside current window, not occupy whole other window</span>
       helm-split-window-in-side-p           t
-      <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">move to end or beginning of source when reaching top or bottom of source.</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">move to end or beginning of source when reaching top or bottom of source.</span>
       helm-move-to-line-cycle-in-source     t
-      <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">search for library in `</span><span style="color: #56B6C2;">require</span><span style="color: #5C6370;">' and `</span><span style="color: #56B6C2;">declare-function</span><span style="color: #5C6370;">' sexp.</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">search for library in `</span><span style="color: #2aa198; font-style: italic;">require</span><span style="color: #93a1a1; font-style: italic;">' and `</span><span style="color: #2aa198; font-style: italic;">declare-function</span><span style="color: #93a1a1; font-style: italic;">' sexp.</span>
       helm-ff-search-library-in-sexp        t
-      <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
       helm-scroll-amount                    8
-      <span style="color: #5C6370;">; </span><span style="color: #5C6370;">helm-candidate-number-limit           500</span>
-      <span style="color: #5C6370;">; </span><span style="color: #5C6370;">helm-move-to-line-cycle-in-source     t</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-candidate-number-limit           500</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-move-to-line-cycle-in-source     t</span>
       helm-ff-file-name-history-use-recentf t)
 
 (helm-mode 1)
@@ -292,11 +292,11 @@ Control the way to split and resize the helm buffer window:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #C678DD;">setq</span> <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">default way to split window</span>
-      <span style="color: #5C6370;">; </span><span style="color: #5C6370;">helm-split-window-default-side    'right</span>
-      <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">adjust the max height for helm buffer</span>
-      <span style="color: #5C6370;">; </span><span style="color: #5C6370;">helm-autoresize-max-height 50</span>
-      <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">auto-resize buffer to fit candidates (disble golden-ratio)</span>
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">default way to split window</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-split-window-default-side    'right</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">adjust the max height for helm buffer</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-autoresize-max-height 50</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">auto-resize buffer to fit candidates (disble golden-ratio)</span>
       helm-autoresize-mode              t)
 </pre>
 </div>
@@ -313,8 +313,8 @@ Control the way to split and resize the helm buffer window:
 <div class="outline-text-5" id="text-1-3-1-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98C379;">"M-x"</span>) 'helm-M-x)
-(<span style="color: #C678DD;">setq</span> helm-M-x-fuzzy-match t) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">optional fuzzy matching for helm-M-x</span>
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"M-x"</span>) 'helm-M-x)
+(<span style="color: #859900;">setq</span> helm-M-x-fuzzy-match t) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">optional fuzzy matching for helm-M-x</span>
 </pre>
 </div>
 </div>
@@ -325,9 +325,9 @@ Control the way to split and resize the helm buffer window:
 <div class="outline-text-5" id="text-1-3-1-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98C379;">"C-x b"</span>) 'helm-mini)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">enable fuzzy matching</span>
-(<span style="color: #C678DD;">setq</span> helm-buffers-fuzzy-matching   t
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"C-x b"</span>) 'helm-mini)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">enable fuzzy matching</span>
+(<span style="color: #859900;">setq</span> helm-buffers-fuzzy-matching   t
       helm-recentf-fuzzy-match      t)
 </pre>
 </div>
@@ -346,17 +346,17 @@ overwrite the default find file action. And by setting
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98C379;">"C-x C-f"</span>) 'helm-find-files)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">skip meaningless files, e.g. .DS_Store</span>
-(<span style="color: #C678DD;">setq</span> helm-ff-skip-boring-files t)
-(delete '<span style="color: #98C379;">"\\.bbl$"</span> helm-boring-file-regexp-list)    <span style="color: #5C6370;">;</span><span style="color: #5C6370;">show .bbl file</span>
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">"\\.DS_Store$"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">".*\.synctex\.gz$"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">".*\.url$"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">"\\.dropbox$"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">"Icon.*"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">"#.*#$"</span>)
-(add-to-list 'helm-boring-file-regexp-list <span style="color: #98C379;">"\\.out$"</span>)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"C-x C-f"</span>) 'helm-find-files)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">skip meaningless files, e.g. .DS_Store</span>
+(<span style="color: #859900;">setq</span> helm-ff-skip-boring-files t)
+(delete '<span style="color: #2aa198;">"\\.bbl$"</span> helm-boring-file-regexp-list)    <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">show .bbl file</span>
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.DS_Store$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">".*\.synctex\.gz$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">".*\.url$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.dropbox$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"Icon.*"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"#.*#$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.out$"</span>)
 </pre>
 </div>
 </div>
@@ -393,7 +393,7 @@ This is to list all entries in the king ring that are available for <code>C-y</c
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98C379;">"M-y"</span>) 'helm-show-kill-ring)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"M-y"</span>) 'helm-show-kill-ring)
 </pre>
 </div>
 </div>
@@ -407,9 +407,9 @@ Default keybinding: <code>&lt;helm-prefix&gt; C-c SPC</code>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">use helm to show the mark-ring</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-c h SPC"</span>) 'helm-all-mark-rings)
-(global-set-key (kbd <span style="color: #98C379;">"C-c SPC"</span>) 'helm-all-mark-rings)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show the mark-ring</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h SPC"</span>) 'helm-all-mark-rings)
+(global-set-key (kbd <span style="color: #2aa198;">"C-c SPC"</span>) 'helm-all-mark-rings)
 </pre>
 </div>
 </div>
@@ -436,8 +436,8 @@ Functions:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">use helm to show the register</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-c h x"</span>) 'helm-register)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show the register</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h x"</span>) 'helm-register)
 </pre>
 </div>
 </div>
@@ -448,10 +448,10 @@ Functions:
 <div class="outline-text-5" id="text-1-3-2-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">use helm to show /eshell/ command history</span>
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">helm-eshell</span>)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show /eshell/ command history</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-eshell</span>)
 (add-hook 'eshell-mode-hook #'(lambda ()
-   (define-key eshell-mode-map (kbd <span style="color: #98C379;">"C-c C-l"</span>)  'helm-eshell-history)))
+   (define-key eshell-mode-map (kbd <span style="color: #2aa198;">"C-c C-l"</span>)  'helm-eshell-history)))
 </pre>
 </div>
 </div>
@@ -480,9 +480,10 @@ Quick view of useful commands: under <code>C-x C-f</code> session,
 </p>
 
 <ul class="org-ul">
-<li><code>C-s</code>: use <code>grep</code> to match patterns in the current buffer;
+<li><code>C-s</code> or <code>M-g s</code>: use <code>grep/ack</code> to match patterns in the current buffer;
 </li>
-<li><code>C-u C-s</code>: use <code>grep</code> to match patterns any files with the same extension in the current folder;
+<li><code>C-u C-s</code> or <code>C-u M-g s</code>: use <code>grep/ack</code> to match patterns any files with the
+same extension in the current folder;
 </li>
 <li><code>M-g a</code>: use <code>ag</code> to match patterns in all files in the current folder.
 </li>
@@ -493,6 +494,21 @@ Quick view of useful commands: under <code>C-x C-f</code> session,
 <p>
 or, globally, use <code>M-g a</code> that run <code>helm-do-grep-ag</code>.
 </p>
+
+<p>
+<span class="underline">Suggested practice</span>:
+</p>
+<ul class="org-ul">
+<li>use <code>ack</code> (<code>C-s</code>) to grep files: the current file, or the files in the current
+folder when the cursor is on the directory (i.e. the top line of
+<i>helm-find-files</i> buffer);
+</li>
+<li>use <code>ag</code> (<code>M-g a</code>) to grep the directory: recursively grep all files in the
+current directory
+</li>
+<li>if you want to grep files with a specific extension, use <code>C-u C-s</code>.
+</li>
+</ul>
 </div>
 
 <div id="outline-container-sec-1-3-3-1" class="outline-5">
@@ -507,8 +523,8 @@ also launch grep directly with <code>(C-u) C-s</code> or <code>(C-u) M-g s</code
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">set global-key for function: =M-g a= in session of =C-x C-f=</span>
-(global-set-key (kbd <span style="color: #98C379;">"M-g a"</span>) 'helm-do-grep-ag)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">set global-key for function: =M-g a= in session of =C-x C-f=</span>
+(global-set-key (kbd <span style="color: #2aa198;">"M-g a"</span>) 'helm-do-grep-ag)
 </pre>
 </div>
 </div>
@@ -557,33 +573,53 @@ better to use the backend to highlight result with ANSI sequences.  This can be
 done by customizing the <code>helm-grep-default-command</code> variable.
 </p>
 
+<p>
+<code>grep</code>:
+</p>
+<pre class="example">
+(setq helm-grep-default-command   ;; ~grep~
+      "grep --color=always -d skip %e -n%cH -e %p %f"
+      helm-grep-default-recurse-command
+      "grep --color=always -d recurse %e -n%cH -e %p %f")
+</pre>
+
+<p>
+<code>ack</code>:
+</p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #C678DD;">setq</span> helm-grep-default-command   <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">~grep~</span>
-      <span style="color: #98C379;">"grep --color=always -d skip %e -n%cH -e %p %f"</span>
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-grep-default-command     <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~ack~</span>
+      <span style="color: #2aa198;">"ack -Hn --color --smart-case --no-group %e %p %f"</span>
       helm-grep-default-recurse-command
-      <span style="color: #98C379;">"grep --color=always -d recurse %e -n%cH -e %p %f"</span>)
-
-(<span style="color: #C678DD;">setq</span> helm-ls-git-grep-command    <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">~git-grep~</span>
-      <span style="color: #98C379;">"git grep -n%cH --color=always --full-name -e %p %f"</span>)
-
-(<span style="color: #C678DD;">setq</span> helm-grep-ag-command        <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">~ag~ from "the-silver-searcher"</span>
-      <span style="color: #98C379;">"ag --line-numbers -S --hidden --color --color-match '31;43' \</span>
-<span style="color: #98C379;">          --nogroup %s %s %s"</span>)
-(<span style="color: #C678DD;">setq</span> helm-grep-ag-pipe-cmd-switches '(<span style="color: #98C379;">"--color-match '31;43'"</span>))
+      <span style="color: #2aa198;">"ack -H --color --smart-case --no-group %e %p %f"</span>)
 </pre>
 </div>
 
 <p>
-The following are the settings for <code>ack</code> or <code>rg</code>, if you prefer to them to replace <code>grep</code> or <code>ag</code>:
+<code>git-grep</code>:
 </p>
-<pre class="example">
-(setq helm-grep-default-command     ;; ~ack~
-      "ack -Hn --color --smart-case --no-group %e %p %f"
-      helm-grep-default-recurse-command
-      "ack -H --color --smart-case --no-group %e %p %f")
-</pre>
+<div class="org-src-container">
 
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-ls-git-grep-command    <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~git-grep~</span>
+      <span style="color: #2aa198;">"git grep -n%cH --color=always --full-name -e %p %f"</span>)
+</pre>
+</div>
+
+<p>
+<code>ag</code> (the silver searcher):
+</p>
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-grep-ag-command        <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~ag~ from "the-silver-searcher"</span>
+      <span style="color: #2aa198;">"ag --line-numbers -S --hidden --color --color-match '31;43' \</span>
+<span style="color: #2aa198;">          --nogroup %s %s %s"</span>)
+(<span style="color: #859900;">setq</span> helm-grep-ag-pipe-cmd-switches '(<span style="color: #2aa198;">"--color-match '31;43'"</span>))
+</pre>
+</div>
+
+<p>
+<code>rg</code> (riggrep):
+</p>
 <pre class="example">
 (setq helm-grep-ag-command        ;; ~rg (ripgrep)~
       "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s")
@@ -622,8 +658,8 @@ Use helm to show help doc (<code>C-h a</code>): <code>&lt;helm-prefix&gt; a</cod
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">helm for Emacs help functions</span>
-(<span style="color: #C678DD;">setq</span> helm-apropos-fuzzy-match t)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for Emacs help functions</span>
+(<span style="color: #859900;">setq</span> helm-apropos-fuzzy-match t)
 </pre>
 </div>
 
@@ -636,7 +672,7 @@ Use helm to do completion for Lisp: <code>&lt;helm-prefix&gt; &lt;tab&gt;</code>
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #C678DD;">setq</span> helm-lisp-fuzzy-completion t)
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-lisp-fuzzy-completion t)
 </pre>
 </div>
 </div>
@@ -666,9 +702,9 @@ Use helm to quick-jump to any <code>man</code> entry: <code>&lt;helm-prefix&gt; 
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">helm for system man page</span>
-(<span style="color: #C678DD;">when</span> (string-equal system-type <span style="color: #98C379;">"darwin"</span>)
-  (<span style="color: #C678DD;">setq</span> helm-man-format-switches <span style="color: #98C379;">"%s"</span>))
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for system man page</span>
+(<span style="color: #859900;">when</span> (string-equal system-type <span style="color: #2aa198;">"darwin"</span>)
+  (<span style="color: #859900;">setq</span> helm-man-format-switches <span style="color: #2aa198;">"%s"</span>))
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 </pre>
 </div>
@@ -682,8 +718,8 @@ Use Unix <code>locate</code> in helm interface: <code>&lt;helm-prefix&gt; l</cod
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">helm for system command "locate"</span>
-(<span style="color: #C678DD;">setq</span> helm-locate-fuzzy-match t)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for system command "locate"</span>
+(<span style="color: #859900;">setq</span> helm-locate-fuzzy-match t)
 </pre>
 </div>
 
@@ -951,9 +987,9 @@ Adding a header for the exported <code>.el</code> file.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">===============================================================</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Settings for /helm-swoop/</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">===============================================================</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Settings for /helm-swoop/</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
 </pre>
 </div>
 
@@ -962,12 +998,12 @@ Install the additional packages to support the <code>helm-swoop</code> package
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Install required packages for more functions</span>
-(<span style="color: #C678DD;">setq</span> custom/helm-swoop-packages
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/helm-swoop-packages
       '(helm-swoop))
 (custom/install-packages custom/helm-swoop-packages)
 
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">helm-swoop</span>)
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-swoop</span>)
 </pre>
 </div>
 </div>
@@ -982,12 +1018,12 @@ Basic keybindings that globally call <code>helm-swoop</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Change the keybinds to whatever you like :)</span>
-(global-set-key (kbd <span style="color: #98C379;">"M-g o"</span>) 'helm-swoop)    <span style="color: #5C6370;">; </span><span style="color: #5C6370;">default "M-i"</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-c h o"</span>) 'helm-swoop)
-(global-set-key (kbd <span style="color: #98C379;">"M-g O"</span>) 'helm-swoop-back-to-last-point) <span style="color: #5C6370;">;</span><span style="color: #5C6370;">default "M-I"</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-c M-o"</span>) 'helm-multi-swoop) <span style="color: #5C6370;">;</span><span style="color: #5C6370;">default "C-c M-i"</span>
-(global-set-key (kbd <span style="color: #98C379;">"C-x M-o"</span>) 'helm-multi-swoop-all) <span style="color: #5C6370;">;</span><span style="color: #5C6370;">default "C-x M-i"</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Change the keybinds to whatever you like :)</span>
+(global-set-key (kbd <span style="color: #2aa198;">"M-g o"</span>) 'helm-swoop)    <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">default "M-i"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h o"</span>) 'helm-swoop)
+(global-set-key (kbd <span style="color: #2aa198;">"M-g O"</span>) 'helm-swoop-back-to-last-point) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "M-I"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c M-o"</span>) 'helm-multi-swoop) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "C-c M-i"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-x M-o"</span>) 'helm-multi-swoop-all) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "C-x M-i"</span>
 </pre>
 </div>
 
@@ -997,22 +1033,22 @@ More keybindings that work in the sessions of <code>helm-swoop</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">When doing isearch, hand the word over to helm-swoop</span>
-(define-key isearch-mode-map (kbd <span style="color: #98C379;">"M-i"</span>) 'helm-swoop-from-isearch)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">From helm-swoop to helm-multi-swoop-all</span>
-(define-key helm-swoop-map (kbd <span style="color: #98C379;">"M-i"</span>) 'helm-multi-swoop-all-from-helm-swoop)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">When doing evil-search, hand the word over to helm-swoop</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">When doing isearch, hand the word over to helm-swoop</span>
+(define-key isearch-mode-map (kbd <span style="color: #2aa198;">"M-i"</span>) 'helm-swoop-from-isearch)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">From helm-swoop to helm-multi-swoop-all</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"M-i"</span>) 'helm-multi-swoop-all-from-helm-swoop)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">When doing evil-search, hand the word over to helm-swoop</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)</span>
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Instead of helm-multi-swoop-all, use helm-multi-swoop-current-mode</span>
-(define-key helm-swoop-map (kbd <span style="color: #98C379;">"M-m"</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Instead of helm-multi-swoop-all, use helm-multi-swoop-current-mode</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"M-m"</span>)
   'helm-multi-swoop-current-mode-from-helm-swoop)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Move up and down like isearch</span>
-(define-key helm-swoop-map (kbd <span style="color: #98C379;">"C-r"</span>) 'helm-previous-line)
-(define-key helm-swoop-map (kbd <span style="color: #98C379;">"C-s"</span>) 'helm-next-line)
-(define-key helm-multi-swoop-map (kbd <span style="color: #98C379;">"C-r"</span>) 'helm-previous-line)
-(define-key helm-multi-swoop-map (kbd <span style="color: #98C379;">"C-s"</span>) 'helm-next-line)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Move up and down like isearch</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"C-r"</span>) 'helm-previous-line)
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"C-s"</span>) 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd <span style="color: #2aa198;">"C-r"</span>) 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd <span style="color: #2aa198;">"C-s"</span>) 'helm-next-line)
 </pre>
 </div>
 </div>
@@ -1023,24 +1059,24 @@ More keybindings that work in the sessions of <code>helm-swoop</code>:
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Save buffer when helm-multi-swoop-edit complete</span>
-(<span style="color: #C678DD;">setq</span> helm-multi-swoop-edit-save t)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Save buffer when helm-multi-swoop-edit complete</span>
+(<span style="color: #859900;">setq</span> helm-multi-swoop-edit-save t)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">If this value is t, split window inside the current window</span>
-(<span style="color: #C678DD;">setq</span> helm-swoop-split-with-multiple-windows nil)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">If this value is t, split window inside the current window</span>
+(<span style="color: #859900;">setq</span> helm-swoop-split-with-multiple-windows nil)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Split direcion. 'split-window-vertically or 'split-window-horizontally</span>
-(<span style="color: #C678DD;">setq</span> helm-swoop-split-direction 'split-window-vertically)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Split direcion. 'split-window-vertically or 'split-window-horizontally</span>
+(<span style="color: #859900;">setq</span> helm-swoop-split-direction 'split-window-vertically)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">If nil, you can slightly boost invoke speed in exchange for text color</span>
-(<span style="color: #C678DD;">setq</span> helm-swoop-speed-or-color t)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">If nil, you can slightly boost invoke speed in exchange for text color</span>
+(<span style="color: #859900;">setq</span> helm-swoop-speed-or-color t)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">;; Go to the opposite side of line from the end or beginning of line</span>
-(<span style="color: #C678DD;">setq</span> helm-swoop-move-to-line-cycle t)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">;; Go to the opposite side of line from the end or beginning of line</span>
+(<span style="color: #859900;">setq</span> helm-swoop-move-to-line-cycle t)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Optional face for line numbers</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Face name is `helm-swoop-line-number-face`</span>
-(<span style="color: #C678DD;">setq</span> helm-swoop-use-line-number-face t)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Optional face for line numbers</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Face name is `helm-swoop-line-number-face`</span>
+(<span style="color: #859900;">setq</span> helm-swoop-use-line-number-face t)
 </pre>
 </div>
 </div>
@@ -1059,9 +1095,9 @@ Adding a header for the exported <code>.el</code> file.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">===============================================================</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Project Management via Projectile</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">===============================================================</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Project Management via Projectile</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
 </pre>
 </div>
 
@@ -1070,8 +1106,8 @@ Install the additional packages to support the <code>helm-projectile</code> pack
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Install required packages for more functions</span>
-(<span style="color: #C678DD;">setq</span> custom/proj-packages
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/proj-packages
       '(projectile
         helm-projectile))
 (custom/install-packages custom/proj-packages)
@@ -1085,10 +1121,10 @@ Install the additional packages to support the <code>helm-projectile</code> pack
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">/projectile/: project management</span>
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">projectile</span>)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/projectile/: project management</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">projectile</span>)
 (projectile-global-mode)
-(<span style="color: #C678DD;">setq</span> projectile-enable-caching t)
+(<span style="color: #859900;">setq</span> projectile-enable-caching t)
 </pre>
 </div>
 
@@ -1106,10 +1142,10 @@ To refresh the whole cache, use <code>projectile-invalidate-cahe</code>.
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">/helm-projectile/: browse via helm</span>
-(<span style="color: #C678DD;">require</span> '<span style="color: #56B6C2;">helm-projectile</span>)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/helm-projectile/: browse via helm</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-projectile</span>)
 (helm-projectile-on)
-(<span style="color: #C678DD;">setq</span> projectile-completion-system 'helm)
+(<span style="color: #859900;">setq</span> projectile-completion-system 'helm)
 </pre>
 </div>
 </div>
@@ -1183,7 +1219,7 @@ instantly using <code>helm-projectile-switch-project</code>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #C678DD;">setq</span> projectile-switch-project-action 'helm-projectile)
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> projectile-switch-project-action 'helm-projectile)
 </pre>
 </div>
 
@@ -1338,11 +1374,11 @@ contains the name of current file.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">adding the switch between html &lt;-&gt; js</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">html -&gt; js</span>
-(add-to-list 'projectile-other-file-alist '(<span style="color: #98C379;">"html"</span> <span style="color: #98C379;">"js"</span>))
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">js -&gt; html</span>
-(add-to-list 'projectile-other-file-alist '(<span style="color: #98C379;">"js"</span> <span style="color: #98C379;">"html"</span>))
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">adding the switch between html &lt;-&gt; js</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">html -&gt; js</span>
+(add-to-list 'projectile-other-file-alist '(<span style="color: #2aa198;">"html"</span> <span style="color: #2aa198;">"js"</span>))
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">js -&gt; html</span>
+(add-to-list 'projectile-other-file-alist '(<span style="color: #2aa198;">"js"</span> <span style="color: #2aa198;">"html"</span>))
 </pre>
 </div>
 </div>
@@ -1415,8 +1451,8 @@ project. If a region is active, use the region instead.
 
 <pre class="src src-emacs-lisp">(eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
-     (add-to-list 'grep-find-ignored-files <span style="color: #98C379;">"run"</span>)
-     (add-to-list 'grep-find-ignored-directories <span style="color: #98C379;">"obj"</span>)))
+     (add-to-list 'grep-find-ignored-files <span style="color: #2aa198;">"run"</span>)
+     (add-to-list 'grep-find-ignored-directories <span style="color: #2aa198;">"obj"</span>)))
 </pre>
 </div>
 
@@ -1503,12 +1539,12 @@ ignored by Projectile.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Ignore files/directories</span>
-(add-to-list 'projectile-globally-ignored-files <span style="color: #98C379;">"*.out"</span>)
-(add-to-list 'projectile-globally-ignored-files <span style="color: #98C379;">".DS_Store"</span>)
-(add-to-list 'projectile-globally-ignored-directories <span style="color: #98C379;">".git"</span>)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">retore projectile's native indexing (fix the bug of disabling .projectile)</span>
-(<span style="color: #C678DD;">setq</span> projectile-indexing-method 'native)
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Ignore files/directories</span>
+(add-to-list 'projectile-globally-ignored-files <span style="color: #2aa198;">"*.out"</span>)
+(add-to-list 'projectile-globally-ignored-files <span style="color: #2aa198;">".DS_Store"</span>)
+(add-to-list 'projectile-globally-ignored-directories <span style="color: #2aa198;">".git"</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">retore projectile's native indexing (fix the bug of disabling .projectile)</span>
+(<span style="color: #859900;">setq</span> projectile-indexing-method 'native)
 </pre>
 </div>
 </div>
@@ -1630,9 +1666,9 @@ ignored by Projectile.
 <div class="outline-text-4" id="text-3-3-10">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Safe Variable Declaration (suppress warnings)</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(add-to-list 'safe-local-variable-values</span>
-<span style="color: #5C6370;">;;              </span><span style="color: #5C6370;">'(project-local-include-path . ("-I./include" "-I./src")))</span>
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Safe Variable Declaration (suppress warnings)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(add-to-list 'safe-local-variable-values</span>
+<span style="color: #93a1a1; font-style: italic;">;;              </span><span style="color: #93a1a1; font-style: italic;">'(project-local-include-path . ("-I./include" "-I./src")))</span>
 </pre>
 </div>
 </div>
@@ -1646,9 +1682,9 @@ ignored by Projectile.
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #C678DD;">provide</span> '<span style="color: #56B6C2;">init-helm</span>)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">================================================</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">init-helm.el ends here</span>
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">provide</span> '<span style="color: #2aa198;">init-helm</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">init-helm.el ends here</span>
 </pre>
 </div>
 </div>
@@ -1657,7 +1693,7 @@ ignored by Projectile.
 <div id="postamble" class="status">
 <p class="date">Date: 20 Apr 2018</p>
 <p class="author">Author: Zuogong Yue</p>
-<p class="date">Created: 2018-04-20 Fri 20:57</p>
+<p class="date">Created: 2018-04-24 Tue 16:28</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

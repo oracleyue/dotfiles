@@ -5,8 +5,7 @@
 # --
 ---
 title: ${1:TITLE}
-categories: ${2:Category}
-date:
-tags:
-- $0
+categories: $0
+date: 2018-04-28
+tags: [tag1, tag2]
 ---
