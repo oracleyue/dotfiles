@@ -184,12 +184,21 @@ file for lines matching a regular expression.
 
 Quick view of useful commands: under =C-x C-f= session,
 
-- =C-s=: use ~grep~ to match patterns in the current buffer;
-- =C-u C-s=: use ~grep~ to match patterns any files with the same extension in the current folder;
+- =C-s= or =M-g s=: use ~grep/ack~ to match patterns in the current buffer;
+- =C-u C-s= or =C-u M-g s=: use ~grep/ack~ to match patterns any files with the
+  same extension in the current folder;
 - =M-g a=: use ~ag~ to match patterns in all files in the current folder.
 - =C-u M-g a=: select extension types before run ~ag~
 
 or, globally, use =M-g a= that run ~helm-do-grep-ag~.
+
+_Suggested practice_:
+- use ~ack~ (=C-s=) to grep files: the current file, or the files in the current
+  folder when the cursor is on the directory (i.e. the top line of
+  /helm-find-files/ buffer);
+- use ~ag~ (=M-g a=) to grep the directory: recursively grep all files in the
+  current directory
+- if you want to grep files with a specific extension, use =C-u C-s=.
 
 **** Usage
 From ~helm-find-files~ (=<helm-prefix> C-x C-f=), open the action menu with
@@ -225,29 +234,37 @@ By default, Helm applies its own highlights to matched items. However, it may be
 better to use the backend to highlight result with ANSI sequences.  This can be
 done by customizing the ~helm-grep-default-command~ variable.
 
-#+BEGIN_SRC emacs-lisp
+~grep~:
+#+BEGIN_SRC
   (setq helm-grep-default-command   ;; ~grep~
         "grep --color=always -d skip %e -n%cH -e %p %f"
         helm-grep-default-recurse-command
         "grep --color=always -d recurse %e -n%cH -e %p %f")
-
-  (setq helm-ls-git-grep-command    ;; ~git-grep~
-        "git grep -n%cH --color=always --full-name -e %p %f")
-
-  (setq helm-grep-ag-command        ;; ~ag~ from "the-silver-searcher"
-        "ag --line-numbers -S --hidden --color --color-match '31;43' \
-            --nogroup %s %s %s")
-  (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
 #+END_SRC
 
-The following are the settings for ~ack~ or ~rg~, if you prefer to them to replace ~grep~ or ~ag~:
-#+BEGIN_SRC
+~ack~:
+#+BEGIN_SRC emacs-lisp
 (setq helm-grep-default-command     ;; ~ack~
       "ack -Hn --color --smart-case --no-group %e %p %f"
       helm-grep-default-recurse-command
       "ack -H --color --smart-case --no-group %e %p %f")
 #+END_SRC
 
+~git-grep~:
+#+BEGIN_SRC emacs-lisp
+  (setq helm-ls-git-grep-command    ;; ~git-grep~
+        "git grep -n%cH --color=always --full-name -e %p %f")
+#+END_SRC
+
+~ag~ (the silver searcher):
+#+BEGIN_SRC emacs-lisp
+  (setq helm-grep-ag-command        ;; ~ag~ from "the-silver-searcher"
+        "ag --line-numbers -S --hidden --color --color-match '31;43' \
+            --nogroup %s %s %s")
+  (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
+#+END_SRC
+
+~rg~ (riggrep):
 #+BEGIN_SRC
   (setq helm-grep-ag-command        ;; ~rg (ripgrep)~
         "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s")

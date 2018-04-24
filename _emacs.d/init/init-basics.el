@@ -33,7 +33,7 @@
 ;; (push "PYTHONPATH" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
 
-;; user-defined environment variables
+;; environment variables
 ;; (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}")
 
 ;; cursors
@@ -149,6 +149,20 @@
 (require 'bash-completion)
 (bash-completion-setup)
 
+;; extracting .el from .org config files
+(require 'ob-tangle)
+(defun y/init-el ()
+  "To update the Emacs configurations in ~/.emacs.d/init/ written
+in orgmode."
+  (interactive)
+  (setq prepath (expand-file-name default-directory))
+  (let ((files (directory-files
+                (concat user-emacs-directory "init/") nil "\\.org$")))
+    (dolist (file files)
+      (setq file-dest (concat prepath
+                              (file-name-sans-extension file) ".el"))
+      (setq file (concat  prepath file))
+      (org-babel-tangle-file file file-dest "emacs-lisp"))))
 
 
 (provide 'init-basics)

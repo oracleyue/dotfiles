@@ -79,10 +79,10 @@
 ;; set global-key for function: =M-g a= in session of =C-x C-f=
 (global-set-key (kbd "M-g a") 'helm-do-grep-ag)
 
-(setq helm-grep-default-command   ;; ~grep~
-      "grep --color=always -d skip %e -n%cH -e %p %f"
+(setq helm-grep-default-command     ;; ~ack~
+      "ack -Hn --color --smart-case --no-group %e %p %f"
       helm-grep-default-recurse-command
-      "grep --color=always -d recurse %e -n%cH -e %p %f")
+      "ack -H --color --smart-case --no-group %e %p %f")
 
 (setq helm-ls-git-grep-command    ;; ~git-grep~
       "git grep -n%cH --color=always --full-name -e %p %f")
