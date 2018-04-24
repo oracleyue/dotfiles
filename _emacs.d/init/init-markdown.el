@@ -60,7 +60,7 @@
 ;;
 (defun draft-blog ()
   (interactive)
-  (hexo "~/Public/Dropbox/oracleyue/blog/oracleyue.github.io"))
+  (hexo "~/Files/oracleyue/oracleyue.github.io"))
 
 
 
