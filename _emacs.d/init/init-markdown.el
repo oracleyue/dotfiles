@@ -27,6 +27,9 @@
 (add-hook 'markdown-mode-hook (lambda () (variable-pitch-mode t)
                                 (setq-local cursor-type 'bar)))
 
+;; fontify code blocks
+(setq markdown-fontify-code-blocks-natively t)
+
 ;; outline view of headings
 ;; use /imenu-list/ in "init-dired", toggled by "C-x C-'"
 
@@ -39,20 +42,21 @@
 
 ;; configure markdown export styles
 (setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
-;; (setq css-default-path "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/")  ;; css files on github.com
+;; (setq css-default-path  ;; css files on github.com
+;;       "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/")
 (add-hook 'markdown-mode-hook (lambda()
-   (add-to-list 'markdown-css-paths (concat css-default-path "style.css"))
+   (add-to-list 'markdown-css-paths (concat css-default-path "style.md.css"))
    (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min.css"))))
 
 ;; Preview using /livedown.el/  (osx uses "Marked 2.app")
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
-;(require 'livedown)
-;(setq livedown:autostart nil) ; automatically open preview when opening markdown files
-;(setq livedown:open t)        ; automatically open the browser window
-;(setq livedown:port 1337)     ; port for livedown server
-; ;; use livedown to preview markdown
-;(add-hook 'markdown-mode-hook (lambda()
-;          (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
+;; (require 'livedown)
+;; (setq livedown:autostart nil) ; automatically open preview when opening markdown files
+;; (setq livedown:open t)        ; automatically open the browser window
+;; (setq livedown:port 1337)     ; port for livedown server
+;; ;; use livedown to preview markdown
+;; (add-hook 'markdown-mode-hook (lambda()
+;;           (define-key markdown-mode-map (kbd "C-c C-c C-p") 'livedown:preview)))
 
 
 ;;
@@ -60,7 +64,7 @@
 ;;
 (defun draft-blog ()
   (interactive)
-  (hexo "~/Files/oracleyue/oracleyue.github.io"))
+  (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io"))
 
 
 

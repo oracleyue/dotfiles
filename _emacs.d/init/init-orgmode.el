@@ -4,7 +4,9 @@
 
 ;; Install required packages for more functions
 (setq custom/org-packages
-      '(htmlize))
+      '(htmlize
+        org
+        ox-gfm))
 (custom/install-packages custom/org-packages)
 
 
@@ -101,9 +103,23 @@
 
 
 ;;
-;;  Presentation via Orgmode
+;; Additional Supports via Third-party Packages
 ;;
 
+;; /smart-parens/ for org-mode
+(sp-with-modes 'org-mode
+  (sp-local-pair "$" "$"
+                 :unless '(sp-latex-point-after-backslash)
+                 :actions '(insert wrap autoskip navigate escape))
+  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                 :actions '(insert wrap autoskip navigate escape)))
+
+
+;; /ox-gfm/: github flavored markdown (gfm) exporter
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
+
+;; ;; /ox-reveal/: presentation via orgmode
 ;; (use-package ox-reveal
 ;;   :commands (org-reveal)
 ;;   :init
@@ -122,19 +138,6 @@
 ;;   (setq org-reveal-center t)
 ;;   (setq org-reveal-progress t)
 ;;   (setq org-reveal-history nil))
-
-
-;;
-;; Additional Supports via Minor Modes
-;;
-
-;; /smart-parens/ for org-mode
-(sp-with-modes 'org-mode
-  (sp-local-pair "$" "$"
-                 :unless '(sp-latex-point-after-backslash)
-                 :actions '(insert wrap autoskip navigate escape))
-  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                 :actions '(insert wrap autoskip navigate escape)))
 
 
 

@@ -167,7 +167,6 @@
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber" "rubber --synctex -d %t" TeX-run-command nil t) t))
-    ;; '("Rubber" "rubber --synctex -fd %t" TeX-run-command nil t) t))
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
                  '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))

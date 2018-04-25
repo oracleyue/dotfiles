@@ -28,8 +28,8 @@
 
 \usepackage{setspace}
 \onehalfspacing
-\usepackage[parfill]{parskip}  % use newline instead of indentation
-\parskip=12pt
+% \usepackage[parfill]{parskip}  % use newline instead of indentation
+% \parskip=12pt
 \usepackage{titlesec}
 \titleformat*{\section}{\large\bfseries}
 \titleformat*{\subsection}{\normalsize\bfseries}
@@ -50,7 +50,7 @@
 
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
-\usepackage[round,sort]{natbib}   % IEEE: numbers + "unsrtnat" style
+\usepackage[round,sort]{natbib}   % IEEE: numbers + unsrtnat
 
 % theorem styles given by /amsthm/
 \theoremstyle{plain}
@@ -67,23 +67,23 @@
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
-\hypersetup{
-  pdftitle={},
-  pdfauthor={Zuogong YUE},
-  pdfcreator={Emacs version 24.5 + AUCTeX version 11.88}}
+% \include{./supports/userdef-mathsym}
 
 
 % Title, Authors and Date
 \title{${1:title}}
 \author{Zuogong YUE}
-\date{\today}
-%\author{Zuogong YUE \vspace*{1mm} \\\ \small Luxembourg Centre for Systems Biomedicine}
+\date{\small \today}
+
+\makeatletter
+\hypersetup{
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfcreator={Emacs version 25.3 + AUCTeX version 11.90}}
+\makeatother
 
 
 \begin{document}
-
-\setlength{\abovedisplayskip}{5pt}
-\setlength{\belowdisplayskip}{5pt}
 
 \maketitle
 %     \thispagestyle{empty}
@@ -110,7 +110,6 @@ $0
 
 
 
-% \newpage
 % % --------------- APPENDIX --------------
 % \section*{Appendices}
 % \addcontentsline{toc}{section}{List of appendices}
@@ -120,7 +119,6 @@ $0
 %     Appendix here ...
 
 
-% \newpage
 % % --------------- BIBLIOGRAPHY --------------
 % \def\bibfont{\footnotesize}   % using "natbib"
 % \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat

@@ -13,13 +13,10 @@
 .code-highlighted { background-color:#ffff00; }
 
 p.verse { margin-left: 5% }
-pre {
+pre, code {
     border: 0pt solid #AEBDCC;
     background-color: #F7F7F7;
     color: #4D4D4C;
-    /* border: 1pt solid #AEBDCC; */
-    /* background-color: #002B36; */
-    /* color: #93A1A1; */
     font-family: 'Roboto Mono', monospace;
     font-size: 90%;
     width: 95%;
