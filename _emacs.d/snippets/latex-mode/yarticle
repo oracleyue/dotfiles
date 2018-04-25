@@ -67,7 +67,7 @@
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
-% \include{./supports/userdef-mathsym}
+% \input{./supports/userdef-mathsym}
 
 
 % Title, Authors and Date
