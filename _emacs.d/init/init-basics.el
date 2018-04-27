@@ -152,17 +152,29 @@
 ;; extracting .el from .org config files
 (require 'ob-tangle)
 (defun y/init-el ()
-  "To update the Emacs configurations in ~/.emacs.d/init/ written
-in orgmode."
+  "Use org-babel to extract elisp code blocks from all .org files
+in ~/.emacs.d/init/ and export them using the same file names."
   (interactive)
-  (setq prepath (expand-file-name default-directory))
-  (let ((files (directory-files
-                (concat user-emacs-directory "init/") nil "\\.org$")))
+  (setq prepath (concat user-emacs-directory "init/"))
+  (let ((files (directory-files prepath nil "\\.org$")))
     (dolist (file files)
-      (setq file-dest (concat prepath
+      (setq file-dest (concat outpath
                               (file-name-sans-extension file) ".el"))
       (setq file (concat  prepath file))
       (org-babel-tangle-file file file-dest "emacs-lisp"))))
+
+(defun y/init-el-current ()
+  "Use org-babel to extract elisp code blocks from the current .org
+file and export into ~/.emacs.d/init/ with the same file name."
+  (interactive)
+  (setq outpath (concat user-emacs-directory "init/"))
+  (let ((file (buffer-file-name)))
+    (if (not (string-equal (file-name-extension file) "org"))
+        (user-error "Error: not an org-mode file")
+      (setq file-dest (concat outpath
+                              (file-name-base file) ".el"))
+      (org-babel-tangle-file file file-dest "emacs-lisp"))))
+
 
 
 (provide 'init-basics)

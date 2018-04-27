@@ -313,6 +313,10 @@ Use helm to quick-jump to any ~man~ entry: =<helm-prefix> m=
 #+END_SRC
 
 Use Unix ~find~ in helm interface: =<helm-prefix> /=
+#+BEGIN_SRC emacs-lisp
+  ;; helm find
+  (global-set-key (kbd "M-g /") 'helm-find)
+#+END_SRC
 
 Use Unix ~locate~ in helm interface: =<helm-prefix> l=
 #+BEGIN_SRC emacs-lisp
@@ -407,11 +411,11 @@ Basic keybindings that globally call =helm-swoop=:
 
 #+BEGIN_SRC emacs-lisp
   ;; Change the keybinds to whatever you like :)
-  (global-set-key (kbd "M-g o") 'helm-swoop)    ; default "M-i"
+  (global-set-key (kbd "M-g i") 'helm-swoop)    ; default "M-i"
   (global-set-key (kbd "C-c h o") 'helm-swoop)
-  (global-set-key (kbd "M-g O") 'helm-swoop-back-to-last-point) ;default "M-I"
-  (global-set-key (kbd "C-c M-o") 'helm-multi-swoop) ;default "C-c M-i"
-  (global-set-key (kbd "C-x M-o") 'helm-multi-swoop-all) ;default "C-x M-i"
+  (global-set-key (kbd "M-g I") 'helm-swoop-back-to-last-point) ;default "M-I"
+  (global-set-key (kbd "C-c M-i") 'helm-multi-swoop) ;default "C-c M-i"
+  (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
 #+END_SRC
 
 More keybindings that work in the sessions of =helm-swoop=:

@@ -1,4 +1,3 @@
-
 ;; ================================================================
 ;; /Helm/ as the main completion system
 ;; ================================================================
@@ -102,6 +101,9 @@
   (setq helm-man-format-switches "%s"))
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
+;; helm find
+(global-set-key (kbd "M-g /") 'helm-find)
+
 ;; helm for system command "locate"
 (setq helm-locate-fuzzy-match t)
 
@@ -117,11 +119,11 @@
 (require 'helm-swoop)
 
 ;; Change the keybinds to whatever you like :)
-(global-set-key (kbd "M-g o") 'helm-swoop)    ; default "M-i"
+(global-set-key (kbd "M-g i") 'helm-swoop)    ; default "M-i"
 (global-set-key (kbd "C-c h o") 'helm-swoop)
-(global-set-key (kbd "M-g O") 'helm-swoop-back-to-last-point) ;default "M-I"
-(global-set-key (kbd "C-c M-o") 'helm-multi-swoop) ;default "C-c M-i"
-(global-set-key (kbd "C-x M-o") 'helm-multi-swoop-all) ;default "C-x M-i"
+(global-set-key (kbd "M-g I") 'helm-swoop-back-to-last-point) ;default "M-I"
+(global-set-key (kbd "C-c M-i") 'helm-multi-swoop) ;default "C-c M-i"
+(global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
 
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
