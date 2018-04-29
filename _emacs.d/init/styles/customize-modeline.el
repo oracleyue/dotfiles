@@ -20,7 +20,7 @@
 ;; Spaceline
 ;;
 (defun y:use-spaceline ()
-  (if *is-mac*  ;; adjust font size
+  (if *is-mac*      ;; adjust modeline font
       (set-face-attribute 'mode-line nil
                           :font "DejaVu Sans Mono-14")
     (set-face-attribute 'mode-line nil

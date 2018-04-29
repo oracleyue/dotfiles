@@ -17,7 +17,7 @@
 
 
 ;; Font Size (Mac/Linux)
-(defun y:adjust-fontsize ()
+(defun y:adjust-default-fontsize ()
   (if *is-mac*      ;; default: 13/15(mac), 10.5/12(linux)
       (set-face-attribute 'default nil
                           :font "DejaVu Sans Mono-15")
@@ -44,8 +44,10 @@
                (select-frame frame)
                (when (display-graphic-p frame)
                  (load-theme ',theme t)
-                 (y:setup-modeline "custom")
-                 (y:adjust-fontsize)))))
+                 (if *is-mac*
+                     (y:setup-modeline "custom")
+                   (y:setup-modeline "spaceline"))
+                 (y:adjust-default-fontsize)))))
 (cond (*is-mac*
        (cond
         ;; apps
@@ -65,10 +67,10 @@
            (server-load-theme 'atom-one-dark)     ;; server
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; app
-           (load-theme 'Amelie t)))))             ;; terminal
+           (load-theme 'spacemacs-dark t)))))     ;; terminal
 (unless (daemonp)
   (y:setup-modeline "spaceline")
-  (y:adjust-fontsize))
+  (y:adjust-default-fontsize))
 
 
 ;; Frame with Transparent Background (alpha < 1)
