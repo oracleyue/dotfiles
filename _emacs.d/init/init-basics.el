@@ -86,9 +86,9 @@
 ;;   (setq mac-option-modifier 'meta))     ; may not need
 
 ;; auto-save files when stop editing
-(require 'auto-save)
-(auto-save-enable)
-(setq auto-save-slient t)
+;; (require 'auto-save)
+;; (auto-save-enable)
+;; (setq auto-save-slient t)
 
 ;; default browser
 (if (string-equal system-type "darwin")
