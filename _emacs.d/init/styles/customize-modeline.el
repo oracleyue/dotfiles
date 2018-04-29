@@ -10,16 +10,30 @@
   (when (image-type-available-p 'xpm)
     (use-package powerline
       :config
-      (setq powerline-display-buffer-size nil)
-      (setq powerline-display-mule-info nil)
-      (setq powerline-display-hud nil)
+      (setq powerline-image-apple-rgb t)   ;; fix applet bug on OSX
       (when (display-graphic-p)
         (powerline-default-theme)
         (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
 
 
 ;;
-;; Customize mode-line
+;; Spaceline
+;;
+(defun y:use-spaceline ()
+  (if *is-mac*  ;; adjust font size
+      (set-face-attribute 'mode-line nil
+                          :font "DejaVu Sans Mono-14")
+    (set-face-attribute 'mode-line nil
+                        :font "DejaVu Sans Mono-10.5"))
+  (use-package spaceline
+    :config
+    (require 'spaceline-config)
+    (setq powerline-image-apple-rgb t)    ;; fix applet bug on OSX
+    (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
+
+
+;;
+;; Customized Theme
 ;;
 (defun y:customize-modeline ()
   ;; fonts
@@ -116,11 +130,15 @@
 
 
 ;;
-;; Interface
+;; Interface to Load Modeline Theme
 ;;
-(defun y:setup-modeline ()
-  (y:customize-modeline))
-;; (y:use-powerline))
+(defun y:setup-modeline (theme)
+  "Interface to load the theme for modeline."
+  (pcase theme
+    ("custom" (y:customize-modeline))
+    ("powerline" (y:use-powerline))
+    ("spaceline" (y:use-spaceline))
+    ))
 
 
 

@@ -65,7 +65,7 @@
 
 ;; use helm to show the mark-ring
 (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
-(global-set-key (kbd "C-c SPC") 'helm-all-mark-rings)
+(global-set-key (kbd "M-g SPC") 'helm-all-mark-rings)
 
 ;; use helm to show the register
 (global-set-key (kbd "C-c h x") 'helm-register)

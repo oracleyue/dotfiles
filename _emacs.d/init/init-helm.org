@@ -148,7 +148,7 @@ Default keybinding: =<helm-prefix> C-c SPC=
 #+BEGIN_SRC emacs-lisp
   ;; use helm to show the mark-ring
   (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
-  (global-set-key (kbd "C-c SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "M-g SPC") 'helm-all-mark-rings)
 #+END_SRC
 
 **** use helm to view Emacs registers

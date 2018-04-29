@@ -24,7 +24,7 @@
   ;; fix "TAB" for code completion in cc-mode (or use "M-TAB")
   (define-key c++-mode-map (kbd "TAB") 'tab-indent-or-complete)
   ;; fix line numbering in ssh terminal
-  (setq linum-format " %d  "))
+  (setq linum-format "%4d "))
 
 
 
