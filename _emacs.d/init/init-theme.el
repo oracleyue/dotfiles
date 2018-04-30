@@ -74,11 +74,11 @@
       (*is-linux*
        (if (daemonp)
            (server-load-theme 'atom-one-dark)     ;; server
-         (y:adjust-default-fontsize)
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; app
            (load-theme 'spacemacs-dark t)))       ;; terminal
-       (y:setup-modeline "spaceline")))
+       (y:setup-modeline "spaceline")
+       (y:adjust-default-fontsize)))
 
 
 ;; Frame with Transparent Background (alpha < 1)
