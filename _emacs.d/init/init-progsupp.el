@@ -14,15 +14,15 @@
 ;; ----------------------------------------------
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
-;; basic linum padding
+;; basic linum style
 ;; (setq linum-format "%4d  ")
-
-;; customize and stylize linum
+;; advanced linum style
 (require 'linum-highlight-current-line-number)
 (setq linum-format 'linum-highlight-current-line-number)
 
 ;; enable linum-mode
 (add-hook 'sh-mode-hook 'linum-mode)
+(add-hook 'cmake-mode-hook 'linum-mode)
 (add-hook 'matlab-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'c-mode-common-hook 'linum-mode)
