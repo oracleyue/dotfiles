@@ -223,6 +223,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
           (fmt-revr   `(                                                   :inverse-video t))
           (fmt-revb   `(:weight ,bold                                      :inverse-video t))
           (fmt-revbb  `(:weight ,bright-bold                               :inverse-video t))
+          (fmt-bb  `(:weight ,bright-bold))  ;; oracleyue
           (fmt-revbbu `(:weight ,bright-bold         :underline ,underline :inverse-video t)))
       (eval-after-load 'ansi-color
         '(setf ansi-color-names-vector [,base02 ,red ,green ,yellow ,blue ,magenta ,cyan ,base00]))
@@ -250,9 +251,11 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (menu (,@fg-base0 ,@bg-base02))
                 (minibuffer-prompt (,@fmt-bold ,@fg-cyan)) ; Question
                 (mode-line ; StatusLine
-                 (,@fg-base1 ,@bg-base02 ,@fmt-revbb :box nil))
+                 ;; (,@fg-base1 ,@bg-base02 ,@fmt-revbb :box nil))
+                 (,@bg-base1 ,@fg-base02 ,@fmt-bb :box nil)) ;oracleyue
                 (mode-line-inactive    ; StatusLineNC
-                 (,@fg-base00 ,@bg-base02 ,@fmt-revbb :box nil))
+                 ;; (,@fg-base00 ,@bg-base02 ,@fmt-revbb :box nil))
+                 (,@bg-base00 ,@fg-base02 ,@fmt-bb :box nil)) ;oracleyue
                 (region (,@fg-base01 ,@bg-base03 ,@fmt-revbb)) ; Visual
                 (secondary-selection (,@bg-base02))
                 (shadow (,@fg-base01))
@@ -701,8 +704,10 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (rainbow-delimiters-depth-8-face (:inherit outline-8))
                 (rainbow-delimiters-depth-9-face (,@fg-green))
                 ;; powerline
-                (powerline-active1 (,@fg-base00 :inherit mode-line))
-                (powerline-active2 (,@fg-base0 :inherit mode-line))
+                ;; (powerline-active1 (,@fg-base00 :inherit mode-line))
+                (powerline-active1 (,@bg-base00 :inherit mode-line)) ;oracleyue
+                ;; (powerline-active2 (,@fg-base0 :inherit mode-line))
+                (powerline-active2 (,@bg-base0 :inherit mode-line)) ;oracleyue
                 (powerline-inactive1 (,@fg-base02 ,@bg-base1 :inherit mode-line-inactive))
                 (powerline-inactive2 (,@fg-base01 :inherit mode-line-inactive))
                 ;; slime

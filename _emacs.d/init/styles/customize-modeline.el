@@ -20,11 +20,6 @@
 ;; Spaceline
 ;;
 (defun y:use-spaceline ()
-  (if *is-mac*      ;; adjust modeline font
-      (set-face-attribute 'mode-line nil
-                          :font "DejaVu Sans Mono-14")
-    (set-face-attribute 'mode-line nil
-                        :font "DejaVu Sans Mono-10.5"))
   (use-package spaceline
     :config
     (require 'spaceline-config)
@@ -37,9 +32,10 @@
 ;;
 (defun y:customize-modeline ()
   ;; fonts
-  (when *is-linux*
-    (set-face-attribute 'mode-line nil
-                        :font "DejaVu Sans Mono-10.5"))
+  (set-face-attribute 'mode-line nil
+                      :font (face-attribute 'default :font))
+  (set-face-attribute 'mode-line-inactive nil
+                      :font (face-attribute 'default :font))
 
   ;; faces
   (make-face 'y/mode-line-rownum-face)

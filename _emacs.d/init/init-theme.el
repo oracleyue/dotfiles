@@ -4,8 +4,8 @@
 
 ;; Install required emacs packages
 (setq custom/theme-packages
-      '(;spaceline
-        ;powerline
+      '(;powerline
+        spaceline
         spacemacs-theme))
 (custom/install-packages custom/theme-packages)
 
@@ -22,6 +22,16 @@
       (set-face-attribute 'default nil
                           :font "DejaVu Sans Mono-15")
     (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
+  (if *is-mac*      ;; adjust modeline font
+      (progn
+        (set-face-attribute 'mode-line nil
+                            :font "DejaVu Sans Mono-14")
+        (set-face-attribute 'mode-line-inactive nil
+                            :font "DejaVu Sans Mono-14"))
+    (set-face-attribute 'mode-line nil
+                        :font "DejaVu Sans Mono-10.5")
+    (set-face-attribute 'mode-line-inactive nil
+                        :font "DejaVu Sans Mono-10.5"))
   (set-face-attribute 'fixed-pitch nil :family "DejaVu Sans Mono")
   (set-face-attribute 'variable-pitch nil :family "Roboto"))
 
@@ -44,9 +54,6 @@
                (select-frame frame)
                (when (display-graphic-p frame)
                  (load-theme ',theme t)
-                 (if *is-mac*
-                     (y:setup-modeline "custom")
-                   (y:setup-modeline "spaceline"))
                  (y:adjust-default-fontsize)))))
 (cond (*is-mac*
        (cond
@@ -54,23 +61,24 @@
         ((not (daemonp))
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; app
-           (load-theme 'spacemacs-dark t)))       ;; terminal
+           (load-theme 'spacemacs-dark t))        ;; terminal
+         (y:adjust-default-fontsize))
         ;; servers (use daemon)
         (*is-server-main*                         ;; server: main
          (server-load-theme 'solarized))
         (*is-server-coding*                       ;; server: coding
          (server-load-theme 'atom-one-dark))
         (*is-server-ac*                           ;; server: ac-mode
-         (server-load-theme 'monokai))))
+         (server-load-theme 'monokai)))
+       (y:setup-modeline "spaceline"))
       (*is-linux*
        (if (daemonp)
            (server-load-theme 'atom-one-dark)     ;; server
+         (y:adjust-default-fontsize)
          (if (display-graphic-p)
              (load-theme 'atom-one-dark t)        ;; app
-           (load-theme 'spacemacs-dark t)))))     ;; terminal
-(unless (daemonp)
-  (y:setup-modeline "spaceline")
-  (y:adjust-default-fontsize))
+           (load-theme 'spacemacs-dark t)))       ;; terminal
+       (y:setup-modeline "spaceline")))
 
 
 ;; Frame with Transparent Background (alpha < 1)
