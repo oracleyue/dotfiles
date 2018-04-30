@@ -23,6 +23,7 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
+(setq ivy-use-selectable-prompt t)  ;; make inputs selectable
 
 ;; Keybindings
 
@@ -48,12 +49,15 @@
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 
 ;; Minibuffer keybindings
-;; go to Info Page (=C-h i=) of Ivy to see the manual
+;; go to INFO page (=C-h i=) of Ivy to see the manual
 (define-key minibuffer-local-map (kbd "C-r")
   'counsel-minibuffer-history)
+;; helm-like actions
 (require 'counsel)
-(define-key counsel-find-file-map (kbd "C-o")
+(define-key ivy-switch-buffer-map (kbd "C-o")
   'counsel-recentf)
+
+;; more minibuffer actions:
 ;;  =C-M-j=: exits with the current input instead of candidates
 ;;  =M-i=: insert the current candidate into the minibuffer
 ;;  =M-o=: presents valid actions

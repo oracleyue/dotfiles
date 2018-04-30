@@ -9,7 +9,7 @@
 
 ;; completion system
 (if *is-mac*
-    (defconst *use-helm* t)
+    (defconst *use-helm* nil)
   (defconst *use-helm* nil))
 
 ;; code completion engine
