@@ -6,7 +6,32 @@
 #+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
 
+* Notes  for C/C++ Programming Environment                         :noexport:
+
+*Warning*:
+- =semantic-mode= in CEDET causes ~M-x gdb~ freeze Emacs on OSX
+
+*Features* (using =helm=):
+- use =C-c h i= to show symbol reference table
+- create =.dir-local.el= to enable completion for local codes
+- use helm-projectile to browse files in project
+    - =C-c p a= to switch between .h, .c and .cpp
+    - jump to =f= (file); =d= (directory); =b= (buffer); =e= (recent files)
+    - grep in project: =C-c p g s=
+    - multi-occur in project buffers: =C-c p o=
+- use helm-gtags to jump via tags
+    - use =C-c g c= create tags first and =C-c g u= to update
+    - use =M-.= and =M-,= to jump and jump back (see more in =init-tags.el=)
+
+*Obsolete alternatives*:
+Other configurations for C++ programming environment located in
+=./unmaintained/=:
+- =init-cc-clang.el= : use =company-mode= and =company-clang= for completion
+- =init-cc-ac.el= : use =auto-complete-mode= and =clang-complete-async=
+
+
 * Modern C++ IDE for Emacs
+
   Features:
   - use *rtags* for code navigation (if enable by =*enable-rtags*= in =init-features.el=)
   - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
@@ -445,7 +470,7 @@ personally do not use them.)
 
 ** Ends
    #+BEGIN_SRC emacs-lisp
-     (provide 'init-cc-modern)
+     (provide 'init-cc)
      ;; ================================================
-     ;; init-cc-modern.el ends here
+     ;; init-cc.el ends here
    #+END_SRC

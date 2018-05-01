@@ -1,6 +1,10 @@
 ;; ================================================================
 ;; /Company/ as the backend for intelligent completion
 ;; ================================================================
+;; completions:
+;; - =C-TAB=: ~company-complete~
+;; - =M-TAB= (or =C-M-i=): ~completion-at-point~ (Emacs default)
+
 
 ;; Install required packages for more functions
 (setq custom/company-packages
@@ -45,11 +49,6 @@
          company-dabbrev-code)
         (company-abbrev company-dabbrev)))
 
-;; other backends: and check the corresponding major-mode settings
-;(add-to-list 'company-backends 'company-xcode)
-;(add-to-list 'company-backends 'company-css)
-;(add-to-list 'company-backends 'company-nxml)
-
 ;; enable dabbrev-code for completion in string or comments
 (require 'company-dabbrev-code)
 (setq company-dabbrev-code-everywhere t)
@@ -58,7 +57,8 @@
 ;; use "list-faces-display" to show the list of faces
 
 ;; showing quick-help doc
-;; "M-x company-show-doc-buffer": default "f1" or "C-h", when the candidate list is on.
+;; "M-x company-show-doc-buffer": default "f1" or "C-h", when the candidate
+;; list is on.
 
 ;; use /company-quickhelp/
 ;; notes: random positioning is fixed by maximizing window and adding lines below
@@ -81,10 +81,10 @@
 (yas-global-mode 1)
 (setq-default mode-require-final-newline nil)
 ;; integrate yas to company-mode complete list
-(global-set-key (kbd "C-c y") 'company-yasnippet)
+;; (global-set-key (kbd "C-c y") 'company-yasnippet)
 
 
-;; Integration of "indent" + /company/ + /yas/
+;; Integration: "indent" + /company/ + /yas/
 (defun check-expansion ()
   (save-excursion
     (if (looking-at "\\_>") t
@@ -107,10 +107,11 @@
             (company-complete-common)
           (indent-for-tab-command)))))
 
-(if (display-graphic-p)
-    (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
-  ;; <tab> is not available in terminal, "TAB" is used instead
-  (global-set-key (kbd "TAB") 'tab-indent-or-complete))
+(when *integrate-TAB*
+  (if (display-graphic-p)
+      (global-set-key (kbd "<tab>") 'tab-indent-or-complete)
+    ;; <tab> is not available in terminal, "TAB" is used instead
+    (global-set-key (kbd "TAB") 'tab-indent-or-complete)))
 
 
 

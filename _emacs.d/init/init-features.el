@@ -14,6 +14,9 @@
       (defconst *use-helm* t))
   (defconst *use-helm* nil))
 
+;; integrate TAB for yasnippet, indent and company completion
+(defconst *integrate-TAB* nil)
+
 ;; code completion engine
 (cond (*is-mac*
        (if *is-server-ac*
@@ -31,8 +34,6 @@
 ;; c/c++
 (defconst *enable-gg-cpp-style* nil)  ;; /google-c-style/
 (defconst *enable-rtags* nil)         ;; /rtags/
-(defconst *cc-engine* "modern")       ;; "native": company-clang
-                                      ;; "modern": irony + (rtags)
 (defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
 
 

@@ -1,29 +1,154 @@
 ; =====================================================
-;; Programming Environment for C/C++
+;; Programming Environment for C/C++ (modern)
 ; =====================================================
-;; Warning: semantic-mode in CEDET causes "M-x gdb" freeze emacs on OSX!
-;; Features:
-;;   use "C-c h i" to show symbol reference table
-;;   create ".dir-local.el" to enable completion for local codes
-;;   use helm-projectile to browse files in project
-;;      - "C-c p a" to switch between .h, .c and .cpp
-;;      - jump to "f" (file); "d" (directory); "b" (buffer); "e" (recent files)
-;;      - grep in project: "C-c p g s"
-;;      - multi-occur in project buffers: "C-c p o"
-;;   use helm-gtags to jump via tags
-;;      - use "C-c g c" create tags first and "C-c g u" to update
-;;      - use "M-." and "M-," to jump and jump back (see more in "init-tags.el")
 
+;; check and install essential pkgs
+(setq custom/modern-cc-packages
+      '(irony
+        company-irony
+        company-irony-c-headers
+        flycheck-irony
+        irony-eldoc
+        helm-make
+        ))
+(when *enable-rtags*
+  (setq custom/modern-cc-packages
+        (append
+         '(rtags
+           company-rtags
+           helm-rtags
+           flycheck-rtags
+           cmake-ide)
+         custom/modern-cc-packages)))
+(unless (custom/packages-installed-p custom/modern-cc-packages)
+  (package-refresh-contents)
+  (dolist (pkg custom/modern-cc-packages)
+    (unless (package-installed-p pkg)
+      (package-install pkg))))
 
-;; Load the corresponding complete engine
-(cond ((string-equal *cc-engine* "native")       ;; company-clang
-       (require 'init-cc-comp))
-      ((string-equal *cc-engine* "modern")       ;; rtags + irony
-       ;; (org-babel-load-file
-       ;;  (expand-file-name "init/init-cc-modern.org" user-emacs-directory))
-       (require 'init-cc-modern)))
+(require 'cc-mode)
+(setq-default c-default-style "linux")
+(setq-default c-basic-offset 4)
 
+;; /smartparens/: insert pair of symbols
+;; when you press RET, the curly braces automatically add another newline
+(sp-with-modes '(c-mode c++-mode)
+  (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+  (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
+;; /google-c-style/ and /flymake-google-cpplint/ style checker
+(when *enable-gg-cpp-style*
+  (require 'google-c-style)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+  (defun y:flymake-google-init ()
+    (require 'flymake-google-cpplint)
+    (setq flymake-google-cpplint-command
+      (if (string-equal system-type "darwin")
+          "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
+    (flymake-google-cpplint-load))
+  (add-hook 'c-mode-hook 'y:flymake-google-init)
+  (add-hook 'c++-mode-hook 'y:flymake-google-init))
+
+(when *enable-rtags*
+  ;; see the const *enable-rtags* defined in "init-features.el"
+
+(require 'rtags)
+;; run rtags server automatically
+(rtags-start-process-unless-running)
+(rtags-enable-standard-keybindings)
+
+(setq rtags-autostart-diagnostics t)
+(setq rtags-completions-enabled t)
+(push 'company-rtags company-backends)
+
+(setq rtags-display-result-backend 'helm)
+
+) ;; close the condition on *enable-rtags*
+
+;; /irony/+/company-irony/: code completions
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(setq irony--server-executable (expand-file-name "~/.emacs.d/bin/irony-server"))
+(add-to-list 'irony-additional-clang-options "-std=c++11")
+
+(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+(setq company-backends (delete 'company-semantic company-backends))
+
+(require 'company-irony-c-headers)
+(defun y:add-company-backend-irony ()
+  (setq-local company-backends
+              (append '((company-irony-c-headers company-irony))
+                      company-backends)))
+(add-hook 'c-mode-hook 'y:add-company-backend-irony)
+(add-hook 'c++-mode-hook 'y:add-company-backend-irony)
+
+;; /flycheck/: syntax checker
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c-mode-hook 'flycheck-mode)
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+;; /function-args/: C/C++ symbol reference tables
+;; usages:
+;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
+(when (and *enable-function-args*
+           *enable-semantics*)
+  (require 'ivy)
+  (require 'function-args)
+  ;; enable case-insensitive searching
+  (set-default 'semantic-case-fold t)
+  ;; set selection interface
+  (if *use-helm*
+      (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
+    (setq moo-select-method 'ivy))
+  ;; enable function-args
+  (add-hook 'c-mode-hook 'fa-config-default)
+  (add-hook 'c++-mode-hook 'fa-config-default)
+  ;; semantic refresh: "M-x semantic-force-refresh"
+  ;; restore default keybindings
+  ;; "M-u": fa-abort; "M-o": moo-complete
+  (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
+  (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
+
+;; Compile commands in c/c++ and makefile modes
+;; use helm-make
+(global-set-key (kbd "C-c p c") 'helm-make-projectile)
+(add-hook 'c-mode-common-hook
+          (lambda () (define-key c-mode-base-map
+                       (kbd "C-c C-c") 'helm-make)))
+;; default mode for Makefile in gnome
+(add-hook 'makefile-gmake-mode-hook
+          (lambda () (define-key makefile-gmake-mode-map
+                       (kbd "C-c C-c") 'helm-make)))
+;; default mode for Makefile in Mac OS X
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (define-key makefile-bsdmake-mode-map
+                       (kbd "C-c C-c") 'helm-make)))
+;; compilation setup for cmake-mode
+(add-hook 'cmake-mode-hook
+          (lambda ()
+            (setq compile-command "cd build/ && cmake .. && make")
+            (define-key cmake-mode-map (kbd "C-c C-c") 'compile)))
+
+(put 'helm-make-build-dir 'safe-local-variable 'stringp)
+
+;; /cmake-mode/: cmake-mode.el
+(require 'cmake-mode)
+;; /cmake-font-lock/: to add more fontifying features
+(add-to-list 'load-path "~/.emacs.d/git/cmake-font-lock")
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+;; adding /company-cmake/ for ac-complete
+(add-to-list 'company-dabbrev-code-modes 'cmake-mode)
+(defun y:company-cmake-setup ()
+  (setq-local company-backends
+              (append '((company-cmake company-dabbrev-code))
+                      company-backends)))
+(add-hook 'cmake-mode-hook 'y:company-cmake-setup)
 
 (provide 'init-cc)
 ;; ================================================

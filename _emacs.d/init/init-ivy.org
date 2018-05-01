@@ -1,0 +1,191 @@
+#+TITLE:    The Family Box of Packages by abo-abo
+#+AUTHOR:   Zuogong Yue
+#+EMAIL:    oracleyue@gmail.com
+#+DATE:     01 May 2018
+#+STARTUP:  indent
+#+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
+
+
+*  Ivy - a generic completion frontend (swiper, counsel, etc.)
+
+** Requirements
+*** Install system commandline tools
+
+Tools to be installed in order to use the corresponding commands in Ivy:
+(package names in Homebrew)
+
+- ~counsel-ag~  : ~ag~ from =the_silver_searcher=
+- ~counsel-ack~ : ~ack~ from =ack=
+- ~counsel-rg~  : ~rg~ from =ripgrep=
+- ~counsel-git~ : ~git~
+- ~counsel-fzf~ : ~fzf~ (a command-line fuzzy finder)
+
+*** Install packages for Emacs
+
+  #+BEGIN_SRC emacs-lisp
+    ;; ===============================================================
+    ;; Ivy - a generic completion mechanism for Emacs
+    ;; ===============================================================
+    ;; Last modified on 31 Mar 2018
+
+
+    ;; Install required Emacs packages
+    (setq custom/ivy-ext-packages
+          '(ivy
+            counsel
+            swiper
+            counsel-projectile
+            counsel-gtags))
+    (custom/install-packages custom/ivy-ext-packages)
+  #+END_SRC
+
+** Ivy, Counsel and Swiper
+
+List of frequent commands:
+
+- grep buffer: ~swiper~ (=C-s=) or ~counsel-grep-or-swiper~ (=M-g s=)
+- grep directory (recursively):
+  - ~counsel-ag~ (=M-g a=)
+  - ~counsel-ack~ (=M-g k=)
+  - ~counsel-rg~ (=M-g r=) (for large files)
+- grep git projects:
+  - ~counsel-git~ (=C-c g=)
+  - ~counsel-git-grep~ (=C-c j=)
+- find files in directory recursively ~counsel-fzf~ (=M-g f=)
+
+*** Basics
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /Ivy + Counsel + Swiper/: by abo-abo
+  ;; ---------------------------------------------
+
+  ;; Configurations
+  (ivy-mode 1)
+  (setq ivy-height 15)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
+#+END_SRC
+
+*** Keybindings
+
+Ivy-based interface to standard commands:
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> k") 'counsel-descbinds)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+#+END_SRC
+
+
+Ivy-based interface to basic editing and programming
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC used by Alfred
+  (global-set-key (kbd "C-c i") 'counsel-semantic-or-imenu)
+#+END_SRC
+
+Ivy-based interface to shell and system tools:
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  ;; alternative ~swiper~ for very large files (one may use to replace =C-s=)
+  (global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
+  (setq counsel-grep-base-command
+   "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+  (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+  (global-set-key (kbd "M-g k") 'counsel-ack)
+  (global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
+  (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
+  ;; (global-set-key (kbd "C-x l") 'counsel-locate)
+#+END_SRC
+
+*** Minibuffer actions
+
+One may go to the INFO page (=C-h i=) of Ivy to see the complete manual.
+
+Here are the customization of minibuffer actions:
+#+BEGIN_SRC emacs-lisp
+  (define-key minibuffer-local-map (kbd "C-r")
+    'counsel-minibuffer-history)
+  ;; helm-like actions
+  (require 'counsel)
+  (define-key ivy-switch-buffer-map (kbd "C-o")
+    'counsel-recentf)
+#+END_SRC
+
+A brief summary of useful minibuffer actions:
+-  =C-M-j=: exits with the current input instead of candidates;
+-  =M-i=: insert the current candidate into the minibuffer;
+-  =M-o=: presents valid actions;
+-  =C-j=: start a new completion; otherwise, same as =RET=;
+-  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
+-  =M-n=, =M-p=: cycles through the Ivy command history;
+-  =S-SPC=: deletes the current input and rests the list.
+
+** Ivy for projectile
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /counsel-projectile/: Ivy for projectile
+  ;; ---------------------------------------------
+  (counsel-projectile-mode)
+#+END_SRC
+
+One may go to =~/.emacs.d/init/readme/= to see more the complete manual (the
+README.md from the author's github project)
+
+The most frequent used operations:
+-  =C-c p p=: switch project
+-  =C-c p f=: jump to a project file
+-  =C-c p d=: jump to a project directory
+-  =C-c p b=: jump to a project buffer
+-  =C-c p s g=: search project with grep
+-  =C-c p s s=: serach project with ag
+
+-  =C-c p SPC=: jump to a project buffer, file, or switch project
+-  =C-c p s r=: search project with rg
+-  =C-c p O=:   Org-capture into project
+
+** Ivy for GNU global tags
+
+Enable =gtags= for the given major modes:
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /counsel-gtags/: Ivy for gtags (GNU global)
+  ;; ---------------------------------------------
+  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+  (add-hook 'python-mode-hook 'counsel-gtags-mode)
+#+END_SRC
+
+Keybindings:
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'counsel-gtags
+    ;; basic jumps
+    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
+    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
+    (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+    (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+    ;; create/update tags
+    (define-key counsel-gtags-mode-map (kbd "C-c g c") 'counsel-gtags-create-tags)
+    (define-key counsel-gtags-mode-map (kbd "C-c g u") 'counsel-gtags-update-tags)
+    ;; jump over stacks/history
+    (define-key counsel-gtags-mode-map (kbd "C-c g [") 'counsel-gtags-go-backward)
+    (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
+#+END_SRC
+
+
+
+* END
+
+#+BEGIN_SRC emacs-lisp
+  (provide 'init-ivy)
+  ;; ================================================
+  ;; init-ivy.el ends here
+#+END_SRC
