@@ -51,10 +51,14 @@
 
 (define-key minibuffer-local-map (kbd "C-r")
   'counsel-minibuffer-history)
+
 ;; helm-like actions
+(require 'ivy)
 (require 'counsel)
 (define-key ivy-switch-buffer-map (kbd "C-o")
   'counsel-recentf)
+(define-key counsel-find-file-map (kbd "C-l")
+  'counsel-up-directory)
 
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile

@@ -23,7 +23,8 @@
   (use-package spaceline
     :config
     (require 'spaceline-config)
-    (setq powerline-image-apple-rgb t)    ;; fix applet bug on OSX
+    (when *is-mac*
+      (setq powerline-image-apple-rgb t))    ;; fix applet bug on OSX
     (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
 
 

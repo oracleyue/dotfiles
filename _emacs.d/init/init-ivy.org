@@ -112,10 +112,17 @@ Here are the customization of minibuffer actions:
 #+BEGIN_SRC emacs-lisp
   (define-key minibuffer-local-map (kbd "C-r")
     'counsel-minibuffer-history)
+#+END_SRC
+
+Mimic the behaviors of =helm=:
+#+BEGIN_SRC emacs-lisp
   ;; helm-like actions
+  (require 'ivy)
   (require 'counsel)
   (define-key ivy-switch-buffer-map (kbd "C-o")
     'counsel-recentf)
+  (define-key counsel-find-file-map (kbd "C-l")
+    'counsel-up-directory)
 #+END_SRC
 
 A brief summary of useful minibuffer actions:
