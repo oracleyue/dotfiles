@@ -21,12 +21,25 @@
 ;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 ;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 
-;; /smartparens/ mode for Lisp
-;; navigation: =C-M-f= forward sexp; =C-M-b= backward sexp;
-;; killing: =C-M-k= sp-kill-sexp
+;; /smartparens/ mode (enabled in =init-basics.el=)
 (define-key smartparens-mode-map (kbd "M-S") 'sp-split-sexp)
 (define-key smartparens-mode-map (kbd "M-J") 'sp-join-sexp)
 (define-key smartparens-mode-map (kbd "M-R") 'sp-raise-sexp)
+;; basic usages:
+;; + ~forward-sexp~, =C-M-f=:
+;;     move forward over a balanced expression that can be a pair or a symbol
+;; + ~backward-sexp~, =C-M-b=:
+;;   move backward
+;; + ~kill-sexp~, =C-M-k=:
+;;   kill balaced expression forward that can be a pair or a symbol
+;; + ~mark-sexp~, =C-M-<SPC>= or =C-M-@=:
+;;   put mark after following expression that can be a pair or a symbol
+;; + ~beginning-of-defun~, =C-M-a=:
+;;   move point to beginning of a function
+;; + ~end-of-defun~, =C-M-e=:
+;;   move point to end of a function
+;; + ~mark-defun~, =C-M-h=:
+;;   put a region around whole current or following function
 
 ;; MIT/GNU /Scheme/
 (setq scheme-program-name "/usr/local/bin/mit-scheme")

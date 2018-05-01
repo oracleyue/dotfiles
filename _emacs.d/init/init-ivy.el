@@ -11,7 +11,8 @@
       '(ivy
         counsel
         swiper
-        counsel-projectile))
+        counsel-projectile
+        counsel-gtags))
 (custom/install-packages custom/ivy-ext-packages)
 
 
@@ -21,6 +22,7 @@
 
 ;; Configurations
 (ivy-mode 1)
+(setq ivy-height 15)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
@@ -29,6 +31,10 @@
 
 ;; Ivy-based interface to standard commands
 (global-set-key (kbd "C-s") 'swiper)
+;; alternative ~swiper~ for very large files (one may bind =C-s=)
+(global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
+(setq counsel-grep-base-command
+ "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "<f1> l") 'counsel-find-library)
@@ -39,16 +45,17 @@
 
 ;; Ivy-based interface to editing and programs
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "M-SPC") 'counsel-mark-ring)
+(global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC used by Alfred
 (global-set-key (kbd "C-c i") 'counsel-semantic-or-imenu)
 
 ;; Ivy-based interface to shell and system tools
 (global-set-key (kbd "C-c g") 'counsel-git)
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+(global-set-key (kbd "M-g r") 'counsel-rg)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 
-;; Minibuffer keybindings
+;; Minibuffer actions:
 ;; go to INFO page (=C-h i=) of Ivy to see the manual
 (define-key minibuffer-local-map (kbd "C-r")
   'counsel-minibuffer-history)
@@ -56,8 +63,7 @@
 (require 'counsel)
 (define-key ivy-switch-buffer-map (kbd "C-o")
   'counsel-recentf)
-
-;; more minibuffer actions:
+;; more actions:
 ;;  =C-M-j=: exits with the current input instead of candidates
 ;;  =M-i=: insert the current candidate into the minibuffer
 ;;  =M-o=: presents valid actions
@@ -68,14 +74,12 @@
 
 
 ;; ---------------------------------------------
-;; /Counsel-Projectile/: Ivy for Projectile
+;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
-
-;; Configurations
 (counsel-projectile-mode)
 
 ;; Keybindings
-;; go to =./readme= to see more complete manual
+;; go to =./readme/= to see more complete manual
 ;;  =C-c p p=: switch project
 ;;  =C-c p f=: jump to a project file
 ;;  =C-c p d=: jump to a project directory
@@ -86,6 +90,26 @@
 ;;  =C-c p SPC=: jump to a project buffer, file, or switch project
 ;;  =C-c p s r=: search project with rg
 ;;  =C-c p O=:   Org-capture into project
+
+
+;; ---------------------------------------------
+;; /counsel-gtags/: Ivy for gtags (GNU global)
+;; ---------------------------------------------
+(add-hook 'c-mode-hook 'counsel-gtags-mode)
+(add-hook 'c++-mode-hook 'counsel-gtags-mode)
+(with-eval-after-load 'counsel-gtags
+  ;; basic jumps
+  (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
+  (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
+  (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+  (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+  (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+  ;; create/update tags
+  (define-key counsel-gtags-mode-map (kbd "C-c g c") 'counsel-gtags-create-tags)
+  (define-key counsel-gtags-mode-map (kbd "C-c g u") 'counsel-gtags-update-tags)
+  ;; jump over stacks/history
+  (define-key counsel-gtags-mode-map (kbd "C-c g [") 'counsel-gtags-go-backward)
+  (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
 
 
 

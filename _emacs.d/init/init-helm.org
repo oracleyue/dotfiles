@@ -275,11 +275,22 @@ done by customizing the ~helm-grep-default-command~ variable.
 *** programming supports
 **** use helm for fuzzy matching of =semantic= or =imenu= to summary C/C++ definitions
 Keybinding: =<helm-prefix> i=
+Command: ~helm-semantic-or-imenu~
 
 This function supports most programming languages, not only C/C++. Note that, to
 use =semantic=, we need to turn on the CEDET's *semantics* module.  We control
 the feature on =semantic= by the constant ~*enable-semantics*~ defined in
 =init-features.el=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match    t)
+  (with-eval-after-load 'helm-semantic      ;; default: C, python, elisp
+    (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
+#+END_SRC
 
 *** use helm for Emcas Help page
 
@@ -743,6 +754,125 @@ _Configuration_:
   ;; (add-to-list 'safe-local-variable-values
   ;;              '(project-local-include-path . ("-I./include" "-I./src")))
 #+END_SRC
+
+
+* Source code navigation via GNU Global with helm interface
+
+** Requirements
+*** Emacs packages
+
+#+BEGIN_SRC emacs-lisp
+  ;; ================================================================
+  ;; Tag Supports in Programming Environement
+  ;; ================================================================
+
+  ;; Install required packages for more functions
+  (setq custom/gtags-packages
+        '(helm-gtags))
+  (custom/install-packages custom/gtags-packages)
+#+END_SRC
+
+*** System commandline tools
+
+The tagging system we used is =GNU global= with =ctags & pygments= supports. To
+install =global=:
+- OS X: ~brew install global --with-ctags --with-pygments~
+- Arch Linux: ~pacman -S ctags python-pygments~
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "GTAGSLABEL" "pygments")
+  (setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
+#+END_SRC
+
+To create tags, choose either way as follows:
+- console: ~gtags --gtagslabel=pygments~ (no option if set env var)
+- helm-gtags: ~helm-gtags-create-tags~ (=C-c g c=)
+
+** Frontend via helm-gtags
+*** Basic settings
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-gtags)
+  (setq helm-gtags-ignore-case             t
+        helm-gtags-auto-update             t
+        helm-gtags-use-input-at-cursor     t
+        helm-gtags-pulse-at-cursor         t
+        helm-gtags-prefix-key              "\C-cg"
+        helm-gtags-suggested-key-mapping   t)
+
+  ;; Enable helm-gtags mode
+  (add-hook 'dired-mode-hook 'helm-gtags-mode)
+  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+  (add-hook 'makefile-mode-hook 'helm-gtags-mode)
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'python-mode-hook 'helm-gtags-mode)
+  (add-hook 'matlab-mode-hook 'helm-gtags-mode)
+#+END_SRC
+
+*** Keybindings
+Jumps through definitions, references, symbols or DWIM:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+  (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)    ;(definitions)
+  (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)   ;(references)
+  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol) ;(symbols)
+#+END_SRC
+
+Show list of tags in different scopes: project, file, function:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-select)
+  (define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
+  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+#+END_SRC
+
+Jumping over history/stacks:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
+  (define-key helm-gtags-mode-map (kbd "C-c g ]") 'helm-gtags-next-history)
+  (define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
+#+END_SRC
+
+Create/update tags:
+(Note: prefix "C-u" update the whole project, instead of the current file)
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
+  (define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
+#+END_SRC
+
+** More on source code navigation by tuhdo.github.io
+http://tuhdo.github.io/c-ide.html
+
+Basic concepts of tag files:
+- =GTAGS=:  definition database
+- =GRTAGS=: reference database
+- =GPATH=:  path name database
+
+Find definitions in project:
++ ~helm-gtags-dwim~: jump to a reference/tag definition/header
++ ~tags-loop-continue~: jump back to original location
++ ~helm-gtags-select~: use helm to display all available tags in a project and
+  incrementally filtering
+
+Find references in project:
++ ~helm-gtags-dwim~ or ~helm-gtags-find-rtags~: find references to functions only
++ ~helm-gtags-find-symbol~: find references to variables
+
+Find functions that current functions call:
++ ~helm-gtags-tags-in-this-function~: list all the functions that the current
+  function that point is inside calls
+
+Find files in project:
++  ~helm-gtags-find-files~: find files matching regexp. (If point is on an
+  included header file, ~helm-gtags-dwim~ automatically jumps to files)
+
+View visited tags with tag stack:
++  ~helm-gtags-show-stack~: show visited tags from newest to oldest, from top to
+  bottom.
+
+Show outline tree of definitions in current buffer via =function-args=
++ ~moo-jump-local~ (=C-M-j=): shows an outline tree of the current buffer
++ ~moo-jump-directory~ (=C-M-k=): show outline of the whole folder
 
 
 * End

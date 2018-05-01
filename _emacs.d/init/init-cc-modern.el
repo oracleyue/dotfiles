@@ -92,6 +92,28 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
+;; /function-args/: C/C++ symbol reference tables
+;; usages:
+;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
+(when (and *enable-function-args*
+           *enable-semantics*)
+  (require 'ivy)
+  (require 'function-args)
+  ;; enable case-insensitive searching
+  (set-default 'semantic-case-fold t)
+  ;; set selection interface
+  (if *use-helm*
+      (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
+    (setq moo-select-method 'ivy))
+  ;; enable function-args
+  (add-hook 'c-mode-hook 'fa-config-default)
+  (add-hook 'c++-mode-hook 'fa-config-default)
+  ;; semantic refresh: "M-x semantic-force-refresh"
+  ;; restore default keybindings
+  ;; "M-u": fa-abort; "M-o": moo-complete
+  (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
+  (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
+
 ;; Compile commands in c/c++ and makefile modes
 ;; use helm-make
 (global-set-key (kbd "C-c p c") 'helm-make-projectile)

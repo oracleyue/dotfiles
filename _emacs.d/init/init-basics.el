@@ -158,7 +158,7 @@ in ~/.emacs.d/init/ and export them using the same file names."
   (setq prepath (concat user-emacs-directory "init/"))
   (let ((files (directory-files prepath nil "\\.org$")))
     (dolist (file files)
-      (setq file-dest (concat outpath
+      (setq file-dest (concat prepath
                               (file-name-sans-extension file) ".el"))
       (setq file (concat  prepath file))
       (org-babel-tangle-file file file-dest "emacs-lisp"))))

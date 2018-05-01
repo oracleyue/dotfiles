@@ -91,6 +91,14 @@
           --nogroup %s %s %s")
 (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
 
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+(with-eval-after-load 'helm-semantic      ;; default: C, python, elisp
+  (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
+
 ;; helm for Emacs help functions
 (setq helm-apropos-fuzzy-match t)
 
@@ -204,6 +212,52 @@
 ;; Safe Variable Declaration (suppress warnings)
 ;; (add-to-list 'safe-local-variable-values
 ;;              '(project-local-include-path . ("-I./include" "-I./src")))
+
+;; ================================================================
+;; Tag Supports in Programming Environement
+;; ================================================================
+
+;; Install required packages for more functions
+(setq custom/gtags-packages
+      '(helm-gtags))
+(custom/install-packages custom/gtags-packages)
+
+(setenv "GTAGSLABEL" "pygments")
+(setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
+
+(require 'helm-gtags)
+(setq helm-gtags-ignore-case             t
+      helm-gtags-auto-update             t
+      helm-gtags-use-input-at-cursor     t
+      helm-gtags-pulse-at-cursor         t
+      helm-gtags-prefix-key              "\C-cg"
+      helm-gtags-suggested-key-mapping   t)
+
+;; Enable helm-gtags mode
+(add-hook 'dired-mode-hook 'helm-gtags-mode)
+(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+(add-hook 'makefile-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook 'helm-gtags-mode)
+(add-hook 'matlab-mode-hook 'helm-gtags-mode)
+
+(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+(define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)    ;(definitions)
+(define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)   ;(references)
+(define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol) ;(symbols)
+
+(define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
+(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+
+(define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
+(define-key helm-gtags-mode-map (kbd "C-c g ]") 'helm-gtags-next-history)
+(define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
+
+(define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
+(define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
 
 (provide 'init-helm)
 ;; ================================================

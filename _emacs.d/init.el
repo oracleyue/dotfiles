@@ -56,7 +56,7 @@
 
 ;; general programming supports
 (require 'init-progsupp)          ;; edit, vc, debug, ui ...
-(require 'init-gtags)             ;; code navigation
+;; code navigation, see /helm-gtags/ or /counsel-gtags/
 
 ;; programming environment for /Lisp/
 (require 'init-lisp)

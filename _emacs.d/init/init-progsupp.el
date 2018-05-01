@@ -43,6 +43,21 @@
 
 
 ;; ----------------------------------------------
+;; Semantic parsing and overview
+;; ----------------------------------------------
+;; /semantic/ (CEDET) for /helm-semantic-or-imenu/ and /stickyfunc/
+(when *enable-semantics*
+  (add-hook 'semantic-mode-hook
+            (lambda () (when (fboundp 'semantic-default-elisp-setup)
+                         (semantic-default-elisp-setup))))
+  ;; /stickyfunc/ shows the current function name on the top of the
+  ;; buffer when being in the middle of a long function
+  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+  (semantic-mode 1)
+  (require 'stickyfunc-enhance))
+
+
+;; ----------------------------------------------
 ;; API reference support
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
@@ -82,10 +97,8 @@
 
 
 ;; ----------------------------------------------
-;; /ECB/: GUI interface of IDE
+;; [disabled] /ECB/: GUI interface of IDE
 ;; ----------------------------------------------
-;; [SOURCE]: https://github.com/emacsmirror/ecb
-
 (when nil
   (add-to-list 'load-path "~/.emacs.d/git/ecb")
   (require 'ecb)

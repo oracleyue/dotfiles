@@ -6,7 +6,6 @@
 #+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
 
-
 * Modern C++ IDE for Emacs
   Features:
   - use *rtags* for code navigation (if enable by =*enable-rtags*= in =init-features.el=)
@@ -343,6 +342,39 @@ We'll see how to automate this process with cmake-ide below.
     You can now build your project using ~M-x cmake-ide-compile~. Additionally, cmake-ide will automatically update your RTags index as well.
 
 ** More supports for C/C++ programming
+*** Symbol reference tables by =function-args=
+
+=function-args= showing an inline arguments hint for the C/C++ function at
+point. We particularly use the following two functions: ~moo-jump-local~ and
+~moo-jump-directory~, which show a summary/table of C/C++ symbols.
+
+(See https://github.com/abo-abo/function-args for more features. However, I
+personally do not use them.)
+
+#+BEGIN_SRC emacs-lisp
+  ;; /function-args/: C/C++ symbol reference tables
+  ;; usages:
+  ;;   =moo-jump-local= "C-M-j", =moo-jump-directory= "C-M-k"
+  (when (and *enable-function-args*
+             ,*enable-semantics*)
+    (require 'ivy)
+    (require 'function-args)
+    ;; enable case-insensitive searching
+    (set-default 'semantic-case-fold t)
+    ;; set selection interface
+    (if *use-helm*
+        (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
+      (setq moo-select-method 'ivy))
+    ;; enable function-args
+    (add-hook 'c-mode-hook 'fa-config-default)
+    (add-hook 'c++-mode-hook 'fa-config-default)
+    ;; semantic refresh: "M-x semantic-force-refresh"
+    ;; restore default keybindings
+    ;; "M-u": fa-abort; "M-o": moo-complete
+    (define-key function-args-mode-map (kbd "M-u") 'upcase-word)
+    (define-key function-args-mode-map (kbd "M-o") 'open-previous-line))
+#+END_SRC
+
 *** Compilation supports for C/C++, cmake and makefile
     Install =helm-make= package, and setup as below.
     To compile the whole project, use =C-c p c= (=helm-make-projectile=); otherwise, simple run =M-x helm-make= or =M-x compile=.

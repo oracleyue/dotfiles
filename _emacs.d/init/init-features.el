@@ -9,7 +9,9 @@
 
 ;; completion system
 (if *is-mac*
-    (defconst *use-helm* nil)
+    (if (not (daemonp))
+        (defconst *use-helm* nil)
+      (defconst *use-helm* t))
   (defconst *use-helm* nil))
 
 ;; code completion engine
@@ -21,17 +23,17 @@
        (defconst *use-company* t)))
 
 ;; programming
-;; gtags
-(if (or *is-server-main* (not (daemonp)))
+;; semantics
+(if *is-server-main*
     (defconst *enable-semantics* nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
   (defconst *enable-semantics* t))
-(defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
 
 ;; c/c++
 (defconst *enable-gg-cpp-style* nil)  ;; /google-c-style/
 (defconst *enable-rtags* nil)         ;; /rtags/
 (defconst *cc-engine* "modern")       ;; "native": company-clang
                                       ;; "modern": irony + (rtags)
+(defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
 
 
 
