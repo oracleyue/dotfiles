@@ -80,7 +80,7 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 (setq-default mode-require-final-newline nil)
-;; integrate yas to company-mode complete list
+;; use company-mode complete yas list
 ;; (global-set-key (kbd "C-c y") 'company-yasnippet)
 
 
