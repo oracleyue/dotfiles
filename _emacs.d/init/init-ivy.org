@@ -43,11 +43,14 @@ Tools to be installed in order to use the corresponding commands in Ivy:
 
 List of frequent commands:
 
-- grep buffer: ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=C-s=)
+- grep buffers:
+  - ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=C-s=)
+  - ~swiper-all~ (=M-g s=) grep all buffers
+  - ~swiper-multi~ grep the selected buffers
 - grep directory (recursively):
   - ~counsel-ag~
   - ~counsel-ack~
-  - ~counsel-rg~ (=M-g s=) (for large files)
+  - ~counsel-rg~ (=M-g a=) (for large files)
 - grep git projects:
   - ~counsel-git~ (=C-c g=) (select a file tracked by git)
   - ~counsel-git-grep~ or use ~counsel-rg~ instead
@@ -71,7 +74,7 @@ List of frequent commands:
 
 Ivy-based interface to standard commands:
 #+BEGIN_SRC emacs-lisp
-  ;; (global-set-key (kbd "C-s") 'swiper)  ;; replace by counsel-grep-or-swiper
+  ;; (global-set-key (kbd "C-s") 'swiper)  ;; use counsel-grep-or-swiper
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "<f1> l") 'counsel-find-library)
@@ -93,6 +96,7 @@ Ivy-based interface to shell and system tools:
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c g") 'counsel-git)
   ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)  ;; replaced by counsel-rg
+  (global-set-key (kbd "M-g s") 'swiper-all)
   ;; alternative ~swiper~ for large files
   (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
   (setq counsel-grep-base-command
@@ -117,24 +121,40 @@ The recommended setting of additional minibuffer actions:
 #+END_SRC
 
 More customization of minibuffer actions to mimic =helm=:
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   ;; helm-like actions
   (require 'ivy)
   (require 'counsel)
-  ;; (define-key ivy-switch-buffer-map (kbd "C-o")
-  ;;   'counsel-recentf)  ;; use "C-r" set before
+  (define-key ivy-switch-buffer-map (kbd "C-o")
+    'counsel-recentf)  ;; use "C-r" instead
   (define-key counsel-find-file-map (kbd "C-l")
     'counsel-up-directory)
 #+END_SRC
 
 A brief summary of useful minibuffer actions:
+-  =C-j=: start a new completion; otherwise, same as =RET=;
+-  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
 -  =C-M-j=: exits with the current input instead of candidates;
 -  =M-i=: insert the current candidate into the minibuffer;
 -  =M-o=: presents valid actions;
--  =C-j=: start a new completion; otherwise, same as =RET=;
--  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
 -  =M-n=, =M-p=: cycles through the Ivy command history;
 -  =S-SPC=: deletes the current input and rests the list.
+
+A summary of  file name completions:
+- =C-j= (~ivy-alt-done~):
+    On a directory, restarts completion from that directory.
+    On a file or ./, exit completion with the selected candidate.
+- =DEL= (~ivy-backward-delete-char~): Restart the completion in the parent
+  directory if current input is empty.
+- =//= (~self-insert-command~):
+    Switch to the root directory.
+- =~= (~self-insert-command~):
+    Switch to the home directory.
+- =/= (~self-insert-command~): If the current input matches an existing
+  directory name exactly, switch the completion to that directory.
+- =M-r= (~ivy-toggle-regexp-quote~):
+    Toggle between input as regexp or not.
+    Switch to matching literally since file names include ., which is for matching any char in regexp mode.
 
 *** Advanced features of ripgrep and counsel-rg
 
