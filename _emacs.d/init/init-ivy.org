@@ -108,13 +108,13 @@ Ivy-based interface to shell and system tools:
 
 One may go to the INFO page (=C-h i=) of Ivy to see the complete manual.
 
-Here are the customization of minibuffer actions:
+The recommended setting of additional minibuffer actions:
 #+BEGIN_SRC emacs-lisp
   (define-key minibuffer-local-map (kbd "C-r")
     'counsel-minibuffer-history)
 #+END_SRC
 
-Mimic the behaviors of =helm=:
+More customization of minibuffer actions to mimic =helm=:
 #+BEGIN_SRC emacs-lisp
   ;; helm-like actions
   (require 'ivy)
