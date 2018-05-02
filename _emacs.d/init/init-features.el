@@ -9,9 +9,9 @@
 
 ;; completion system
 (if *is-mac*
-    (if (not (daemonp))
+    (if *is-server-main*
         (defconst *use-helm* nil)
-      (defconst *use-helm* t))
+      (defconst *use-helm* nil))
   (defconst *use-helm* nil))
 
 ;; integrate TAB for yasnippet, indent and company completion

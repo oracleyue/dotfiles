@@ -54,6 +54,8 @@
   'counsel-minibuffer-history)
 ;; ensure recentf-list loaded on startup
 (with-eval-after-load 'counsel (recentf-mode))
+;; disable recentf-list loading via ivy-switch-buffer
+;; (setq recentf-initialize-file-name-history nil)
 
 (setq counsel-git-cmd "rg --files")
 

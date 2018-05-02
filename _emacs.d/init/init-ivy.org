@@ -118,7 +118,10 @@ The recommended setting of additional minibuffer actions:
     'counsel-minibuffer-history)
   ;; ensure recentf-list loaded on startup
   (with-eval-after-load 'counsel (recentf-mode))
+  ;; disable recentf-list loading via ivy-switch-buffer
+  ;; (setq recentf-initialize-file-name-history nil)
 #+END_SRC
+(For these two additional settings, see https://github.com/abo-abo/swiper/issues/1515.)
 
 More customization of minibuffer actions to mimic =helm=:
 #+BEGIN_SRC
