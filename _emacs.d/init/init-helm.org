@@ -182,8 +182,7 @@ Functions:
 Helm grep is a Helm implementation of the grep command, which searches a text
 file for lines matching a regular expression.
 
-Quick view of useful commands: under =C-x C-f= session,
-
+Quick view of commands in the =C-x C-f= session:
 - =C-s= or =M-g s=: use ~grep/ack~ to match patterns in the current buffer;
 - =C-u C-s= or =C-u M-g s=: use ~grep/ack~ to match patterns any files with the
   same extension in the current folder;
@@ -422,11 +421,11 @@ Basic keybindings that globally call =helm-swoop=:
 
 #+BEGIN_SRC emacs-lisp
   ;; Change the keybinds to whatever you like :)
-  (global-set-key (kbd "M-g i") 'helm-swoop)    ; default "M-i"
+  (global-set-key (kbd "M-g o") 'helm-swoop)    ; default "M-i"
   (global-set-key (kbd "C-c h o") 'helm-swoop)
-  (global-set-key (kbd "M-g I") 'helm-swoop-back-to-last-point) ;default "M-I"
-  (global-set-key (kbd "C-c M-i") 'helm-multi-swoop) ;default "C-c M-i"
-  (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all) ;default "C-x M-i"
+  (global-set-key (kbd "M-g O") 'helm-swoop-back-to-last-point) ;default "M-I"
+  (global-set-key (kbd "C-c M-o") 'helm-multi-swoop) ;default "C-c M-i"
+  (global-set-key (kbd "C-x M-o") 'helm-multi-swoop-all) ;default "C-x M-i"
 #+END_SRC
 
 More keybindings that work in the sessions of =helm-swoop=:
@@ -456,7 +455,7 @@ More keybindings that work in the sessions of =helm-swoop=:
   (setq helm-multi-swoop-edit-save t)
 
   ;; If this value is t, split window inside the current window
-  (setq helm-swoop-split-with-multiple-windows nil)
+  (setq helm-swoop-split-with-multiple-windows t)
 
   ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
   (setq helm-swoop-split-direction 'split-window-vertically)

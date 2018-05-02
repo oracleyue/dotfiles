@@ -24,7 +24,7 @@
 (setq enable-recursive-minibuffers t)
 (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
 
-(global-set-key (kbd "C-s") 'swiper)
+;; (global-set-key (kbd "C-s") 'swiper)  ;; replace by counsel-grep-or-swiper
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 (global-set-key (kbd "<f1> l") 'counsel-find-library)
@@ -34,31 +34,38 @@
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 
 (global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC used by Alfred
-(global-set-key (kbd "C-c i") 'counsel-semantic-or-imenu)
+(global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC
+(global-set-key (kbd "M-g i") 'counsel-semantic-or-imenu) ;; C-c i
 
 (global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; alternative ~swiper~ for very large files (one may use to replace =C-s=)
-(global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep)  ;; replaced by counsel-rg
+;; alternative ~swiper~ for large files
+(global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
 (setq counsel-grep-base-command
  "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-(global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
-(global-set-key (kbd "M-g k") 'counsel-ack)
-(global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
+;; (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+;; (global-set-key (kbd "M-g a") 'counsel-ack)
+(global-set-key (kbd "M-g a") 'counsel-rg)    ;; large files
 (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
-;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
 
 (define-key minibuffer-local-map (kbd "C-r")
   'counsel-minibuffer-history)
+;; ensure recentf-list loaded on startup
+(with-eval-after-load 'counsel (recentf-mode))
 
 ;; helm-like actions
 (require 'ivy)
 (require 'counsel)
-(define-key ivy-switch-buffer-map (kbd "C-o")
-  'counsel-recentf)
+;; (define-key ivy-switch-buffer-map (kbd "C-o")
+;;   'counsel-recentf)  ;; use "C-r" set before
 (define-key counsel-find-file-map (kbd "C-l")
   'counsel-up-directory)
+
+(setq counsel-git-cmd "rg --files")
+
+(setq counsel-rg-base-command
+      "rg -i -M 120 --no-heading --line-number --color never %s .")
 
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile

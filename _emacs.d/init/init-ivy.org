@@ -43,14 +43,14 @@ Tools to be installed in order to use the corresponding commands in Ivy:
 
 List of frequent commands:
 
-- grep buffer: ~swiper~ (=C-s=) or ~counsel-grep-or-swiper~ (=M-g s=)
+- grep buffer: ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=C-s=)
 - grep directory (recursively):
-  - ~counsel-ag~ (=M-g a=)
-  - ~counsel-ack~ (=M-g k=)
-  - ~counsel-rg~ (=M-g r=) (for large files)
+  - ~counsel-ag~
+  - ~counsel-ack~
+  - ~counsel-rg~ (=M-g s=) (for large files)
 - grep git projects:
-  - ~counsel-git~ (=C-c g=)
-  - ~counsel-git-grep~ (=C-c j=)
+  - ~counsel-git~ (=C-c g=) (select a file tracked by git)
+  - ~counsel-git-grep~ or use ~counsel-rg~ instead
 - find files in directory recursively ~counsel-fzf~ (=M-g f=)
 
 *** Basics
@@ -71,7 +71,7 @@ List of frequent commands:
 
 Ivy-based interface to standard commands:
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s") 'swiper)
+  ;; (global-set-key (kbd "C-s") 'swiper)  ;; replace by counsel-grep-or-swiper
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (global-set-key (kbd "<f1> l") 'counsel-find-library)
@@ -85,23 +85,23 @@ Ivy-based interface to standard commands:
 Ivy-based interface to basic editing and programming
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-y") 'counsel-yank-pop)
-  (global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC used by Alfred
-  (global-set-key (kbd "C-c i") 'counsel-semantic-or-imenu)
+  (global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC
+  (global-set-key (kbd "M-g i") 'counsel-semantic-or-imenu) ;; C-c i
 #+END_SRC
 
 Ivy-based interface to shell and system tools:
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  ;; alternative ~swiper~ for very large files (one may use to replace =C-s=)
-  (global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
+  ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)  ;; replaced by counsel-rg
+  ;; alternative ~swiper~ for large files
+  (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
   (setq counsel-grep-base-command
    "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-  (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
-  (global-set-key (kbd "M-g k") 'counsel-ack)
-  (global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
+  ;; (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+  ;; (global-set-key (kbd "M-g a") 'counsel-ack)
+  (global-set-key (kbd "M-g a") 'counsel-rg)    ;; large files
   (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
-  ;; (global-set-key (kbd "C-x l") 'counsel-locate)
+  ;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
 #+END_SRC
 
 *** Minibuffer actions
@@ -112,6 +112,8 @@ The recommended setting of additional minibuffer actions:
 #+BEGIN_SRC emacs-lisp
   (define-key minibuffer-local-map (kbd "C-r")
     'counsel-minibuffer-history)
+  ;; ensure recentf-list loaded on startup
+  (with-eval-after-load 'counsel (recentf-mode))
 #+END_SRC
 
 More customization of minibuffer actions to mimic =helm=:
@@ -119,8 +121,8 @@ More customization of minibuffer actions to mimic =helm=:
   ;; helm-like actions
   (require 'ivy)
   (require 'counsel)
-  (define-key ivy-switch-buffer-map (kbd "C-o")
-    'counsel-recentf)
+  ;; (define-key ivy-switch-buffer-map (kbd "C-o")
+  ;;   'counsel-recentf)  ;; use "C-r" set before
   (define-key counsel-find-file-map (kbd "C-l")
     'counsel-up-directory)
 #+END_SRC
@@ -133,6 +135,50 @@ A brief summary of useful minibuffer actions:
 -  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
 -  =M-n=, =M-p=: cycles through the Ivy command history;
 -  =S-SPC=: deletes the current input and rests the list.
+
+*** Advanced features of ripgrep and counsel-rg
+
+(source: https://oremacs.com/2018/03/05/grep-exclude/)
+
+The main two commands in ivy that I use for Git are:
+-  ~counsel-git~: select a file tracked by Git
+-  ~counsel-rg~: grep for a line in all files tracked by Git, using =ripgrep= as
+  the backend.
+
+Among the available grep tools, ~counsel-rg~ is the fastest, especially when we
+have to deal with Git repositories that more than 1GB in size. Moreover, adding
+an =.ignore= file to the root of your project can really speed up your
+searches. In my sample project, I went from 10k files to less than 500 files.
+
+Example of =.ignore= files:
+#+BEGIN_EXAMPLE
+  /TAGS
+  ,*.min.js*
+  /Build/Output/
+  /ThirdParty/
+#+END_EXAMPLE
+
+As you can see, both file patterns and directories are supported. One other
+nifty thing that I discovered only recently is that you can use =ripgrep= as the
+backed for ~counsel-git~ in addition to ~counsel-rg~. Which means the same
+=.ignore= file is used for both commands. Here's the setting:
+
+#+BEGIN_SRC emacs-lisp
+  (setq counsel-git-cmd "rg --files")
+#+END_SRC
+
+And here's the setting for ~counsel-rg~:
+
+#+BEGIN_SRC emacs-lisp
+  (setq counsel-rg-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s .")
+#+END_SRC
+
+The main difference in comparison to the default =counsel-rg-base-command= is
+=-M 120= which means: truncate all lines that are longer than 120
+characters. This is really helpful when Emacs is accepting input from =ripgrep=: a
+megabyte long line of minified JS is not only useless since you can't see it
+whole, but it will also likely hang Emacs for a while.
 
 ** Ivy for projectile
 
