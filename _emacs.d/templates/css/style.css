@@ -32,13 +32,18 @@ pre {
     overflow: auto;
 }
 table {
-    border-collapse: collapse;
-    border-spacing: 5px 0;
-    margin-bottom: 30px;
+    border-collapse: separate;   /* collapse */
+    border-spacing: 30px 5px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 td {
     vertical-align: top;
-    padding: 5px;
+    padding-left: 0px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 th { vertical-align: top;  }
 th.right  { text-align:center;  }

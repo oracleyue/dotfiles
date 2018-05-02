@@ -9,6 +9,8 @@
       '(ivy
         counsel
         swiper
+        wgrep
+        ivy-hydra
         counsel-projectile
         counsel-gtags))
 (custom/install-packages custom/ivy-ext-packages)
@@ -44,9 +46,9 @@
 (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
 (setq counsel-grep-base-command
  "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-;; (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
-;; (global-set-key (kbd "M-g a") 'counsel-ack)
-(global-set-key (kbd "M-g a") 'counsel-rg)    ;; large files
+(global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+;; (global-set-key (kbd "M-g k") 'counsel-ack)
+(global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
 (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
 ;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
 
@@ -56,6 +58,10 @@
 (with-eval-after-load 'counsel (recentf-mode))
 ;; disable recentf-list loading via ivy-switch-buffer
 ;; (setq recentf-initialize-file-name-history nil)
+
+(when *is-mac*
+  (setq counsel-find-file-occur-cmd
+        "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
 
 (setq counsel-git-cmd "rg --files")
 

@@ -34,6 +34,8 @@ Tools to be installed in order to use the corresponding commands in Ivy:
           '(ivy
             counsel
             swiper
+            wgrep
+            ivy-hydra
             counsel-projectile
             counsel-gtags))
     (custom/install-packages custom/ivy-ext-packages)
@@ -48,9 +50,9 @@ List of frequent commands:
   - ~swiper-all~ (=M-g s=) grep all buffers
   - ~swiper-multi~ grep the selected buffers
 - grep directory (recursively):
-  - ~counsel-ag~
+  - ~counsel-ag~ (=M-g a=)
   - ~counsel-ack~
-  - ~counsel-rg~ (=M-g a=) (for large files)
+  - ~counsel-rg~ (=M-g r=) (for large files)
 - grep git projects:
   - ~counsel-git~ (=C-c g=) (select a file tracked by git)
   - ~counsel-git-grep~ or use ~counsel-rg~ instead
@@ -101,9 +103,9 @@ Ivy-based interface to shell and system tools:
   (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
   (setq counsel-grep-base-command
    "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-  ;; (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
-  ;; (global-set-key (kbd "M-g a") 'counsel-ack)
-  (global-set-key (kbd "M-g a") 'counsel-rg)    ;; large files
+  (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+  ;; (global-set-key (kbd "M-g k") 'counsel-ack)
+  (global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
   (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
   ;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
 #+END_SRC
@@ -111,7 +113,6 @@ Ivy-based interface to shell and system tools:
 *** Minibuffer actions
 
 One may go to the INFO page (=C-h i=) of Ivy to see the complete manual.
-
 The recommended setting of additional minibuffer actions:
 #+BEGIN_SRC emacs-lisp
   (define-key minibuffer-local-map (kbd "C-r")
@@ -123,18 +124,8 @@ The recommended setting of additional minibuffer actions:
 #+END_SRC
 (For these two additional settings, see https://github.com/abo-abo/swiper/issues/1515.)
 
-More customization of minibuffer actions to mimic =helm=:
-#+BEGIN_SRC
-  ;; helm-like actions
-  (require 'ivy)
-  (require 'counsel)
-  (define-key ivy-switch-buffer-map (kbd "C-o")
-    'counsel-recentf)  ;; use "C-r" instead
-  (define-key counsel-find-file-map (kbd "C-l")
-    'counsel-up-directory)
-#+END_SRC
 
-A brief summary of useful minibuffer actions:
+A brief summary of minibuffer actions in ~counsel-find-files~:
 -  =C-j=: start a new completion; otherwise, same as =RET=;
 -  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
 -  =C-M-j=: exits with the current input instead of candidates;
@@ -143,7 +134,7 @@ A brief summary of useful minibuffer actions:
 -  =M-n=, =M-p=: cycles through the Ivy command history;
 -  =S-SPC=: deletes the current input and rests the list.
 
-A summary of  file name completions:
+A summary of file name completions:
 - =C-j= (~ivy-alt-done~):
     On a directory, restarts completion from that directory.
     On a file or ./, exit completion with the selected candidate.
@@ -158,6 +149,32 @@ A summary of  file name completions:
 - =M-r= (~ivy-toggle-regexp-quote~):
     Toggle between input as regexp or not.
     Switch to matching literally since file names include ., which is for matching any char in regexp mode.
+
+*** Ivy-occur and available actions
+
+The bug is due to the incompatibility of commandline tools on OSX and Linux, for
+example =xargs -d '\n'=, =-d= is not available on OSX.
+
+#+BEGIN_SRC emacs-lisp
+  (when *is-mac*
+    (setq counsel-find-file-occur-cmd
+          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+#+END_SRC
+
+
+A summary of commands in the read-only =ivy-occur= buffer:
+(WARNING: has been changed and no longer working!)
+-  =RET= or =f= (~ivy-occur-press~):
+    call the current action on the selected candidate.
+-  =mouse-1= (~ivy-occur-click~);
+    call the current action on the selected candidate.
+-  =j= (~next-line~): move to next line.
+-  =k= (~previous-line~): move to previous line.
+-  =a= (~ivy-occur-read-action~):
+    read an action and make it current for this buffer.
+-  =o= (~ivy-occur-dispatch~):
+    read an action and call it on the selected candidate.
+-  =q= (~quit-window~): bury the current buffer.
 
 *** Advanced features of ripgrep and counsel-rg
 
@@ -202,6 +219,25 @@ The main difference in comparison to the default =counsel-rg-base-command= is
 characters. This is really helpful when Emacs is accepting input from =ripgrep=: a
 megabyte long line of minified JS is not only useless since you can't see it
 whole, but it will also likely hang Emacs for a while.
+
+*** Refactoring workflow via ivy-occur
+
+The basic idea was that he wanted to change all occurrences of an identifier in
+all files in a given directory. We do that by finding each occurrence with
+=rgrep=, making the =rgrep= result buffer writable with =wgrep=, then using
+=iedit= to change all occurrences at once.
+
+The workflow is summarized as follows:
+- run ~counsel-ag~  (or ~counsel-rg~  etc.) and call ~ivy-occur~ (=C-c C-o=)
+- in the occur buffer, toggle =wgrep= by =C-x C-q= (~ivy-wgrep-change-to-wgrep-mode~)
+- use =iedit= (=C-;=) for example to change all occurences
+- exit =iedit= (=C-;=) and =wgrep= (=C-x s= or =C-c C-c=) (~wgrep-finish-edit~)
+- kill the occur buffer after confirmation
+
+Sources:
+- https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
+- https://oremacs.com/2015/01/27/my-refactoring-workflow/
+- http://irreal.org/blog/?p=6008
 
 ** Ivy for projectile
 
@@ -256,6 +292,59 @@ Keybindings:
     (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
 #+END_SRC
 
+
+
+* Hydra - make Emacs bindings that stick around
+
+This is a package for GNU Emacs that can be used to tie related commands into a
+family of short bindings with a common prefix - a Hydra.
+
+** Supports for Counsel
+
+It requires the package =ivy-hydra=, which defines the =hydra= rules for
+=counsel=.
+
+A summary of =hydra= commands available for =counsel=:
+- use =C-o= (~hydra-ivy/body~) to invokes the hydra menu with short key
+  bindings.
+- when Hydra is active, minibuffer editing is disabled and menus display short
+  aliases:
+
+| Short | Normal    | Command name              |
+|-------+-----------+---------------------------|
+| =o=   | =C-g=     | ~keyboard-escape-quit~    |
+| =j=   | =C-n=     | ~ivy-next-line~           |
+| =k=   | =C-p=     | ~ivy-previous-line~       |
+| =h=   | =M-<=     | ~ivy-beginning-of-buffer~ |
+| =l=   | =M->=     | ~ivy-end-of-buffer~       |
+| =d=   | =C-m=     | ~ivy-done~                |
+| =f=   | =C-j=     | ~ivy-alt-done~            |
+| =g=   | =C-M-m=   | ~ivy-call~                |
+| =u=   | =C-c C-o= | ~ivy-occur~               |
+
+Hydra menu offers more additional bindings:
+-  =c= (~ivy-toggle-calling~)
+  Toggle calling the action after each candidate change. It modifies j to jg, k to kg etc.
+-  =m= (~ivy-rotate-preferred-builders~)
+  Rotate the current regexp matcher.
+-  =>= (~ivy-minibuffer-grow~)
+  Increase ivy-height for the current minibuffer.
+-  =<= (~ivy-minibuffer-shrink~)
+  Decrease ivy-height for the current minibuffer.
+-  =w= (~ivy-prev-action~)
+  Select the previous action.
+-  =s= (~ivy-next-action~)
+  Select the next action.
+-  =a= (~ivy-read-action~)
+  Use a menu to select an action.
+-  =C= (~ivy-toggle-case-fold~)
+  Toggle case folding (match both upper and lower case characters for lower case input).
+
+
+* Avy - jump to things in Emacs tree-style
+
+Avy is a GNU Emacs package for jumping to visible text using a char-based
+decision tree.
 
 
 * END

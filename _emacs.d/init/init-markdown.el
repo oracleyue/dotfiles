@@ -41,9 +41,10 @@
   (setq markdown-command "/usr/bin/multimarkdown"))
 
 ;; configure markdown export styles
-(setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
-;; (setq css-default-path  ;; css files on github.com
-;;       "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/")
+(if *use-css-local*
+    (setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
+  (setq css-default-path  ;; css files on github.com
+        "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/"))
 (add-hook 'markdown-mode-hook (lambda()
    (add-to-list 'markdown-css-paths (concat css-default-path "style.md.css"))
    (add-to-list 'markdown-css-paths (concat css-default-path "bootstrap.min.css"))))

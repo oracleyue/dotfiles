@@ -50,14 +50,16 @@
 (setq org-html-head-include-default-style nil)
 ;; local setting: add "#+HTML_HEAD" and "#+HTML_HEAD_EXTRA" in .org files
 ;; one can add "#+HTML_HEAD: " (leave empty) to disable global heads
-;; (setq org-html-head
-;;    "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/bootstrap.min.css\" />")
-;; (setq org-html-head-extra
-;;    "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/style.css\" />")
-(setq org-html-head
-   "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
-(setq org-html-head-extra
-   "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />")
+(if *use-css-local*
+    (progn
+      (setq org-html-head
+            "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/bootstrap.min.css\" />")
+      (setq org-html-head-extra
+            "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/style.css\" />"))
+  (setq org-html-head
+        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
+  (setq org-html-head-extra
+        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />"))
 
 ;; Markdown
 (eval-after-load "org" '(require 'ox-md nil t))

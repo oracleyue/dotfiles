@@ -7,6 +7,9 @@
 (defconst *tree-manager* "neotree")
 ;; (defconst *tree-manager* "direx") ;; enable /direx-jedi/ in python
 
+;; use css locally or in github
+(defconst *use-css-local* t)
+
 ;; completion system
 (if *is-mac*
     (if *is-server-main*

@@ -17,6 +17,9 @@ pre, code {
     border: 0pt solid #AEBDCC;
     background-color: #F7F7F7;
     color: #4D4D4C;
+    /* border: 1pt solid #AEBDCC; */
+    /* background-color: #002B36; */
+    /* color: #93A1A1; */
     font-family: 'Roboto Mono', monospace;
     font-size: 90%;
     width: 95%;
@@ -30,12 +33,12 @@ pre, code {
 }
 table {
     border-collapse: collapse;
-    border-spacing: 5px 0;
+    border-spacing: 20px 0;
     margin-bottom: 30px;
 }
 td {
     vertical-align: top;
-    padding: 5px;
+    padding: 10px;
 }
 th { vertical-align: top;  }
 th.right  { text-align:center;  }
