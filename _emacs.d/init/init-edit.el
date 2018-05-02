@@ -9,7 +9,6 @@
 ;; ----------------------------------------------------------------------
 ;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
 ;; insert 4-spaced TAB: =tab-to-tab-stop= or =M-4 SPC=
-;; rectangle mark mode: =C-x SPC= (Emacs default)
 ;; move cursor to the top/middle/bottom of the current window: "M-r"
 ;; upcase/downcase/captalize word: "M-u", "M-l", "M-c"
 ;; tranpose/swap words: "M-t"
@@ -54,6 +53,7 @@
 ;;      - "C-x r r [R]" to copy the *rectangle* to register
 ;;      - "C-x r g [R]" to (paste) insert text saved in register
 ;; rectangle edit:
+;;      - mark rectangle :: "C-x SPC"
 ;;      - kill rectangle :: "C-x r k"
 ;;      - copy rectangle :: "C-x r M-w"
 ;;      - yank the last killed rectangle :: "C-x r y"

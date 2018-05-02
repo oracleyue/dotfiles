@@ -1,10 +1,13 @@
 ;; ================================================================
 ;; Programming Environment for /Lisp/
 ;; ================================================================
-;; use "C-j" in *scratch*; output is in the buffer under the sexp
 ;; use "C-h e" to open *Message* buffer for elisp printout
-;; use "M-:" to evaluate elisp in mini-buffer
 ;; use "M-x ielm" to open interactive shell
+;; use "C-j" in *scratch*; output is in the buffer under the sexp
+;; use "M-:" to evaluate elisp in mini-buffer
+;; use "C-x C-e" to evaluate elisp expression before point
+;; use "C-M-x" in emacs lisp mode
+;; use "M-x eval-defun", "eval-region", "eval-buffer"
 
 ;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
@@ -41,7 +44,7 @@
 ;; + ~mark-defun~, =C-M-h=:
 ;;   put a region around whole current or following function
 
-;; MIT/GNU /Scheme/
+;; /scheme/ (MIT/GNU)
 (setq scheme-program-name "/usr/local/bin/mit-scheme")
 (require 'xscheme)
 ;; Usage:
