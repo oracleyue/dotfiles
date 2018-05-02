@@ -4,8 +4,8 @@
 ;; use "C-h e" to open *Message* buffer for elisp printout
 ;; use "M-x ielm" to open interactive shell
 ;; use "C-j" in *scratch*; output is in the buffer under the sexp
-;; use "M-:" to evaluate elisp in mini-buffer
 ;; use "C-x C-e" to evaluate elisp expression before point
+;; use "M-:" to evaluate elisp in mini-buffer
 ;; use "C-M-x" in emacs lisp mode
 ;; use "M-x eval-defun", "eval-region", "eval-buffer"
 
@@ -17,14 +17,7 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
-;; /ParEdit/ mode   (replaced by /smartparens/)
-;; (autoload 'enable-paredit-mode "paredit"
-;;   "Turn on pseudo-structural editing of Lisp code." t)
-;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-
-;; /smartparens/ mode (enabled in =init-basics.el=)
+;; /smartparens/ mode (enabled in =init-basics.el=; replace /paredit/)
 (define-key smartparens-mode-map (kbd "M-S") 'sp-split-sexp)
 (define-key smartparens-mode-map (kbd "M-J") 'sp-join-sexp)
 (define-key smartparens-mode-map (kbd "M-R") 'sp-raise-sexp)
