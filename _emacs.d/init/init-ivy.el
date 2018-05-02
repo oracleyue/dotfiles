@@ -10,7 +10,6 @@
         counsel
         swiper
         wgrep
-        ivy-hydra
         counsel-projectile
         counsel-gtags))
 (custom/install-packages custom/ivy-ext-packages)

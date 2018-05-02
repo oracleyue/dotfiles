@@ -35,7 +35,6 @@ Tools to be installed in order to use the corresponding commands in Ivy:
             counsel
             swiper
             wgrep
-            ivy-hydra
             counsel-projectile
             counsel-gtags))
     (custom/install-packages custom/ivy-ext-packages)
@@ -124,6 +123,11 @@ The recommended setting of additional minibuffer actions:
 #+END_SRC
 (For these two additional settings, see https://github.com/abo-abo/swiper/issues/1515.)
 
+Customization to restore a few =helm= actions:
+#+BEGIN_SRC (!not working)
+  (define-key minibuffer-local-map (kbd "C-o")
+    'ivy-beginning-of-buffer)
+#+END_SRC
 
 A brief summary of minibuffer actions in ~counsel-find-files~:
 -  =C-j=: start a new completion; otherwise, same as =RET=;
@@ -298,6 +302,14 @@ Keybindings:
 
 This is a package for GNU Emacs that can be used to tie related commands into a
 family of short bindings with a common prefix - a Hydra.
+
+#+BEGIN_SRC
+  ;; Install Hydra package
+  (setq custom/hydra-packages
+        '(hydra
+          ivy-hydra))
+  (custom/install-packages custom/hydra-packages)
+#+END_SRC
 
 ** Supports for Counsel
 
