@@ -295,6 +295,22 @@ We'll see how to automate this process with cmake-ide below.
         (add-hook 'c++-mode-hook 'y:add-company-backend-irony)
       #+END_SRC
 
+*** [optional] Integrate irony with Ivy
+
+We may use Ivy/Counsel for completions from Irony for C/C++, if you prefer
+Emacs's default ~complete-symbol~ or ~completion-at-point~ to company-mode.
+
+(buggy, not working well)
+#+BEGIN_SRC
+  (defun add-ivy-irony-mode-hook ()
+    (define-key irony-mode-map
+      [remap completion-at-point] 'counsel-irony)
+    (define-key irony-mode-map
+      [remap complete-symbol] 'counsel-irony))
+  (add-hook 'irony-mode-hook 'add-ivy-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+#+END_SRC
+
 *** Show eldoc for C/C++ mode via irony (disabled)
     Enable the minor mode irony-eldoc, as well as eldoc-mode. For an example, place point on top of a symbol, or inside a function call.
     #+BEGIN_SRC

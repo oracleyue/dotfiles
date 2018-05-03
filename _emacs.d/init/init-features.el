@@ -32,7 +32,7 @@
 ;; semantics
 (if *is-server-main*
     (defconst *enable-semantics* nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
-  (defconst *enable-semantics* t))
+  (defconst *enable-semantics* nil))
 
 ;; c/c++
 (defconst *enable-gg-cpp-style* nil)  ;; /google-c-style/
