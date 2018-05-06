@@ -24,10 +24,8 @@ set softtabstop=4
 set pastetoggle=<F2>
 
 " language spell checking
-set spellsuggest=best,10
-"set spell spelllang=en_us
-"autocmd FileType tex setlocal spell spelllang=en_us
-"autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+autocmd FileType tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
 " color schemes
 if ! has("gui_running")
@@ -37,10 +35,14 @@ else  " /gvim/
    colorscheme lucius
    LuciusLight
    set guioptions=a  "remove menus, using clipboard instead of primary
-   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency 
+   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
    set lines=34 columns=97
    set guifont=DejaVu\ Sans\ Mono:h12
 endif
+
+" status line
+set laststatus=2
+set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " backup
 set backup
@@ -53,22 +55,13 @@ autocmd BufReadPost *
     \endif
 
 " auto remove extra spaces
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 
 " --------------------------------------------------------------------------
-"  Emacs-like key maps
+"  Key maps
 " --------------------------------------------------------------------------
-" nnoremap <F8> :vertical wincmd gf<CR>
-" vnoremap <C-c> "+y
-
-"imap <C-A> <Home>
-"imap <C-E> <End>
-"imap <C-F> <Right>
-"imap <C-B> <Left>
-"imap <C-N> <Down>
-"imap <C-P> <Up>
-"imap <C-K> <Esc>d$a
+nnoremap <F8> :vertical wincmd gf<CR>
 
 
 " --------------------------------------------------------------------------
@@ -101,36 +94,22 @@ filetype plugin indent on    " required
 " :PluginInstall       - install(update) bundles
 " :PluginSearch foo    - search(or refresh cache first) for foo
 " :PluginClean         - confirm(or auto-approve) removal of unused bundles
-"
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-" --------------------------------------------------------
-
 
 " -----------------** TagList **--------------------------
 let Tlist_Enable_Fold_Column=0
 let Tlist_Exit_OnlyWindow=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
-
-" Taglist - Support /LaTeX/
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-let tlist_make_settings  = 'make;m:makros;t:targets'
-
-" Taglist - Support /MatLab/
 let tlist_matlab_settings = 'matlab;f:functions'
-let tlist_matlab_settings   = 'matlab;f:functions'
-
 " 'T' opens/closes the TagList window
 nmap  T :TlistToggle
 " 't' jumps to and from the TagList window
 nmap  t :TlistOpen
-" --------------------------------------------------------
-
 
 " -----------------** NerdTree **-------------------------
 nmap <C-n> :NERDTreeToggle<CR>
-" --------------------------------------------------------
 
 
 " --------------------------------------------------------------------------
