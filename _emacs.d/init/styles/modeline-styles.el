@@ -4,19 +4,6 @@
 
 
 ;;
-;; Powerline
-;;
-(defun y:use-powerline ()
-  (when (image-type-available-p 'xpm)
-    (use-package powerline
-      :config
-      (setq powerline-image-apple-rgb t)   ;; fix applet bug on OSX
-      (when (display-graphic-p)
-        (powerline-default-theme)
-        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
-
-
-;;
 ;; Spaceline
 ;;
 (defun y:use-spaceline ()
@@ -127,18 +114,18 @@
 
 
 ;;
-;; Interface to Load Modeline Theme
+;; Wraper function to load modeline themes
 ;;
-(defun y:setup-modeline (theme)
+(defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
-    ("custom" (y:customize-modeline))
-    ("powerline" (y:use-powerline))
-    ("spaceline" (y:use-spaceline))
+    ('custom    (y:customize-modeline))
+    ('spaceline (y:use-spaceline))
+    (_          (y:customize-modeline))
     ))
 
 
 
-(provide 'customize-modeline)
+(provide 'modeline-styles)
 ;; ================================================
-;; customize-modeline.el ends here
+;; modeline-styles.el ends here

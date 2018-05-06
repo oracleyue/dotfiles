@@ -21,7 +21,6 @@
         csv-mode
         engine-mode
         dash
-        direx
         ess
         expand-region
         exec-path-from-shell
@@ -77,7 +76,7 @@
 
 
 ;; User-defined functions
-(defun byte-compile-directory (directory)
+(defun y/byte-compile-directory (directory)
   "Byte-compile all *.el in the directory if the corresponding
 .elc doesn't exist."
 

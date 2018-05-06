@@ -636,3 +636,23 @@ See help of `format-time-string' for possible replacements")
        (cd "~/tmp")))
 
 ;; ----------------------------------------------------------------
+
+;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
+(when (string-equal *tree-manager* "direx")
+  (require 'direx)
+  (push '(direx:direx-mode :position left :width 27 :dedicated t)
+        popwin:special-display-config)
+  (define-key direx:direx-mode-map (kbd "<tab>") 'direx:toggle-item) ;; fix tab
+  (setq direx:leaf-icon "  "
+        direx:open-icon "▾ "
+        direx:closed-icon "▸ ")
+  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window))
+
+
+;; source code viewer via /jedi-direx/ (require /direx/ in .emacs)
+(when (string-equal *tree-manager* "direx")
+  (eval-after-load "python"
+    '(define-key python-mode-map "\C-cv" 'jedi-direx:pop-to-buffer))
+  (add-hook 'jedi-mode-hook 'jedi-direx:setup))
+
+;; ----------------------------------------------------------------

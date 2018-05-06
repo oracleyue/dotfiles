@@ -23,7 +23,7 @@
   '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
      (add-to-list 'golden-ratio-inhibit-functions 'pl/no-golden-ratio-popwin)
      (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-     (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
+     ;; (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
      (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
      (add-to-list 'golden-ratio-exclude-modes "c-mode")
      (add-to-list 'golden-ratio-exclude-modes "c++-mode")
@@ -65,17 +65,6 @@
 ;; ------------------------------------------------
 ;; Directory explorers (tree)
 ;; ------------------------------------------------
-
-;; directory explorer in tree: /direx/ (frontend for /jedi-direx/)
-(when (string-equal *tree-manager* "direx")
-  (require 'direx)
-  (push '(direx:direx-mode :position left :width 27 :dedicated t)
-        popwin:special-display-config)
-  (define-key direx:direx-mode-map (kbd "<tab>") 'direx:toggle-item) ;; fix tab
-  (setq direx:leaf-icon "  "
-        direx:open-icon "▾ "
-        direx:closed-icon "▸ ")
-  (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window))
 
 ;; directory explorer in tree: /neotree/
 (when (string-equal *tree-manager* "neotree")
@@ -121,7 +110,7 @@
                ("emacs" (or (mode . emacs-lisp-mode)
                             (name . "^\\*scratch\\*$")
                             (name . "^\\*Messages\\*$")))
-               ("tags viewer" (mode . direx:direx-mode))
+               ;; ("tags viewer" (mode . direx:direx-mode))
                ("miscellany" (or (name . "^\\*Help\\*$")
                                  (name . "^\\*Warnings\\*$")
                                  (name . "clang-complete")

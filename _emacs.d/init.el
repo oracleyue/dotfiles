@@ -9,6 +9,7 @@
 ;; constants
 (defconst *is-mac* (string-equal system-type "darwin"))
 (defconst *is-linux* (string-equal system-type "gnu/linux"))
+(defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
 (defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))

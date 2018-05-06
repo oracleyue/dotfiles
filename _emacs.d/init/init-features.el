@@ -5,7 +5,6 @@
 
 ;; select tree window manager
 (defconst *tree-manager* "neotree")
-;; (defconst *tree-manager* "direx") ;; enable /direx-jedi/ in python
 
 ;; use css locally or in github
 (defconst *use-css-local* t)

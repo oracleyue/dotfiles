@@ -2,83 +2,121 @@
 ;; Emacs Themes
 ;; ================================================================
 
-;; Install required emacs packages
-(setq custom/theme-packages
-      '(;powerline
-        spaceline
-        spacemacs-theme))
-(custom/install-packages custom/theme-packages)
+;; ;; Install required emacs packages
+;; (setq custom/theme-packages
+;;       '(spaceline
+;;         doom-themes
+;;         spacemacs-theme))
+;; (custom/install-packages custom/theme-packages)
 
 
-;; Frame Size   (note: [96,36] in Mac; 33 in Thinkpad)
+;; Themes
+
+;; Frame size   (note: [96,36] in Mac; 33 in Thinkpad)
 (if *is-mac*
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
 
+;; Modeline
+(add-to-list 'load-path "~/.emacs.d/init/styles")
+(require 'modeline-styles)
 
-;; Font Size (Mac/Linux)
-(defun y:adjust-default-fontsize ()
-  (if *is-mac*      ;; default: 13/15(mac), 10.5/12(linux)
-      (set-face-attribute 'default nil
-                          :font "DejaVu Sans Mono-15")
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
-  (if *is-mac*      ;; adjust modeline font
-      (progn
-        (set-face-attribute 'mode-line nil
-                            :font "DejaVu Sans Mono-14")
-        (set-face-attribute 'mode-line-inactive nil
-                            :font "DejaVu Sans Mono-14"))
-    (set-face-attribute 'mode-line nil
-                        :font "DejaVu Sans Mono-10.5")
-    (set-face-attribute 'mode-line-inactive nil
-                        :font "DejaVu Sans Mono-10.5"))
-  (set-face-attribute 'fixed-pitch nil :family "DejaVu Sans Mono")
-  (set-face-attribute 'variable-pitch nil :family "Roboto"))
-
-
-;; Theme Path
+;; Load-paths
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
 
+;; Variables
+(defvar zyue-theme nil
+  "A symbol representing the color theme to load.")
+(defvar zyue-modeline nil
+  "A symbol representing the modeline style to load.")
+(defvar zyue-font nil
+  "The default font to use. Expects a `font-spec'.")
+(defvar zyue-modeline-font nil
+  "The font to use for modeline. Expects a `font-spec'.")
+(defvar zyue-fixed-pitch-font nil
+  "The default font to use for fixed-pitch text. Expects a `font-spec'.")
+(defvar zyue-variable-pitch-font nil
+  "The default font to use for variable-pitch text. Expects a `font-spec'.")
+(defvar zyue-unicode-font nil
+  "Fallback font for unicode glyphs. Is ignored if :feature unicode is active.
+Expects a `font-spec'.")
 
-;; Customize ModeLine
-(add-to-list 'load-path "~/.emacs.d/init/styles")
-(load "customize-modeline" t t)
+;; Init or reload functions
+(defun zyue-init-ui (&optional frame)
+  ;; load theme
+  (if zyue-theme
+      (load-theme zyue-theme t)
+    (load-theme 'tsdh-dark t))
+  ;; load modeline style
+  (zyue-modeline-setup zyue-modeline)
+  ;; load font
+  (when (display-graphic-p)
+    (when (fontp zyue-font)
+      (set-frame-font zyue-font nil (if frame (list frame) t))
+      (set-face-attribute 'fixed-pitch frame :font zyue-font))
+    ;; ... and for Unicode characters
+    (when (fontp zyue-unicode-font)
+      (set-fontset-font t 'unicode zyue-unicode-font frame))
+    ;; ... and for variable-pitch-mode:
+    (when (fontp zyue-variable-pitch-font)
+      (set-face-attribute 'variable-pitch frame
+                          :font zyue-variable-pitch-font))
+    ;; ... and for mode-line fonts
+    (when (fontp zyue-modeline-font)
+      (set-face-attribute 'mode-line nil
+                          :font zyue-modeline-font)
+      (set-face-attribute 'mode-line-inactive nil
+                          :font zyue-modeline-font))))
 
+(defun zyue-reload-ui-in-daemon (frame)
+  "Reload the theme (and font) in an daemon frame."
+  (when (or (daemonp) (not (display-graphic-p)))
+    (with-selected-frame frame
+      (run-with-timer 0.1 nil #'zyue-init-ui))))
 
-;; Setup Theme
-(defun server-load-theme (theme)
-  (add-hook 'after-make-frame-functions
-            `(lambda (frame)
-               (select-frame frame)
-               (when (display-graphic-p frame)
-                 (load-theme ',theme t)
-                 (y:adjust-default-fontsize)))))
-(cond (*is-mac*
-       (cond
-        ;; apps
-        ((not (daemonp))
-         (if (display-graphic-p)
-             (load-theme 'atom-one-dark t)        ;; app
-           (load-theme 'spacemacs-dark t))        ;; terminal
-         (y:adjust-default-fontsize))
-        ;; servers (use daemon)
-        (*is-server-main*                         ;; server: main
-         (server-load-theme 'solarized))
-        (*is-server-coding*                       ;; server: coding
-         (server-load-theme 'atom-one-dark))
-        (*is-server-ac*                           ;; server: ac-mode
-         (server-load-theme 'monokai)))
-       (y:setup-modeline "spaceline"))
-      (*is-linux*
-       (if (daemonp)
-           (server-load-theme 'atom-one-dark)     ;; server
-         (if (display-graphic-p)
-             (load-theme 'atom-one-dark t)        ;; app
-           (load-theme 'spacemacs-dark t)))       ;; terminal
-       (y:setup-modeline "spaceline")
-       (y:adjust-default-fontsize)))
+;; Global fonts
+;; default: 13/15(mac), 10.5/12(linux)
+;; modeline: 14(mac), 10.5(linux)
+;; one may set fonts for specific themes in "./styles/THEMENAME-settings.el".
+(if *is-mac*
+    (setq
+     zyue-font (font-spec :family "DejaVu Sans Mono" :size 15)
+     zyue-unicode-font (font-spec :family "PingFang SC" :size 14)
+     zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size 14))
+  (setq
+   zyue-font (font-spec :family "DejaVu Sans Mono" :size 12)
+   zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size 11)
+   zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size 10.5)))
+(setq
+ zyue-fixed-pitch-font (font-spec :family "DejaVu Sans Mono")
+ zyue-variable-pitch-font (font-spec :family "Roboto"))
+
+;; Set different themes for app and daemons
+(when *is-linux* (setq zyue-theme 'atom-one-dark))
+(when *is-mac* (setq zyue-theme 'doom-nord-light))
+(when *is-server-main* (setq zyue-theme 'solarized))
+(when *is-terminal* (setq zyue-theme 'spacemacs-dark))
+(when *is-server-coding* (setq zyue-theme 'atom-one-dark))
+(when *is-server-ac* (setq zyue-theme 'atom-one-dark))
+
+;; Set modeline style
+(setq zyue-modeline 'spaceline)
+
+;; Additional configs for specific themes
+(pcase zyue-theme
+  ((or 'doom-one 'doom-nord-light) (require 'doom-theme-settings))
+  ((or 'spacemacs-dark 'spacemacs-light) (use-package spacemacs-theme :defer t)))
+
+;; Load the theme and fonts
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'zyue-reload-ui-in-daemon)
+  (zyue-init-ui))
+
+;; Post-process theme (if specific themes require)
+(when (functionp 'theme-post-processing)
+  (theme-post-processing))
 
 
 ;; Frame with Transparent Background (alpha < 1)

@@ -14,8 +14,14 @@
 
 ;; encodings
 (set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-(prefer-coding-system 'utf-8)
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+;; more if not working :)
+;; (setq buffer-file-coding-system 'utf-8-unix)
+;; (setq default-file-name-coding-system 'utf-8-unix)
+;; (setq default-keyboard-coding-system 'utf-8-unix)
+;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; (setq default-terminal-coding-system 'utf-8-unix)
 
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
@@ -124,14 +130,14 @@
   (other-window 1)
   (find-file (expand-file-name "~/Documents/.formula.tex")))
 
-;; supports for Chinese
+;; supports for Chinese (moved to init-theme.el)
 ;; setting font set
-(if(display-graphic-p)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "WenQuanYi Micro Hei"))))
-;; stop cursor blinking at the first letter when using pinyin or wubi
+;; (if (display-graphic-p)
+;;     (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;       (set-fontset-font (frame-parameter nil 'font)
+;;                         charset
+;;                         (font-spec :family "WenQuanYi Micro Hei"))))
+;; stop cursor blinking bug when using pinyin or wubi
 (setq redisplay-dont-pause nil)
 
 ;; /hl-sexp/: matching a pair of braces and hightlight the contents
@@ -144,6 +150,8 @@
 (smartparens-global-mode 1)
 ;; highlight pairs (e.g. brackets)
 (show-smartparens-global-mode 1) ;; replace default /show-paren/
+;; disable highlights between pairs firstly inserted
+(setq sp-highlight-pair-overlay nil)
 
 ;; /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)

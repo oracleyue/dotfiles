@@ -17,8 +17,9 @@
 ;; basic linum style
 ;; (setq linum-format "%4d  ")
 ;; advanced linum style
-(require 'linum-highlight-current-line-number)
-(setq linum-format 'linum-highlight-current-line-number)
+(use-package linum-highlight-current-line-number
+  :config
+  (setq linum-format 'linum-highlight-current-line-number))
 
 ;; enable linum-mode
 (add-hook 'sh-mode-hook 'linum-mode)
