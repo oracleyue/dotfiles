@@ -28,7 +28,7 @@ $sync ~/.jupyter/ $repopath/bash/_jupyter.osx
 # rsync editor config
 ## VIM
 $sync ~/.vimrc $repopath/editors/_vimrc
-$sync ~/.vim --exclude=.git $repopath/editors/
+$sync ~/.vim/ --exclude=bundle $repopath/editors/_vim
 
 ## Vimperator for Firefox
 $sync ~/.vimperatorrc $repopath/editors/_vimperatorrc

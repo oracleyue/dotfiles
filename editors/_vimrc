@@ -3,6 +3,7 @@
 " --------------------------------------------------------------------------
 set nu                                      " set row number
 set nocompatible                            " be iMproved
+set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
@@ -11,48 +12,37 @@ set showcmd                                 " show commands that not finished
 set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
-set t_Co=256                                " vim color scheme
-set hls                                     " set highlight search
-set noic                                    " set no case ignore
-set timeoutlen=1000 ttimeoutlen=0           " set no delay for visual mode block edit
 set title                                   " enable dynamic title
-set shiftwidth=4                            " using four blanks for tab
+
+" using 4 spaces to replace tab
+set expandtab smarttab
+set shiftwidth=4
 set softtabstop=4
 
 " dealing with copy-paste (avoid auto-indent when paste codes)
-set pastetoggle=<F6>
+" or use =:set paste= and =:set nopaste=
+set pastetoggle=<F2>
 
 " language spell checking
-" set spell spelllang=en_us
-autocmd FileType tex setlocal spell spelllang=en_us
-autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+set spellsuggest=best,10
+"set spell spelllang=en_us
+"autocmd FileType tex setlocal spell spelllang=en_us
+"autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
-
-" --------------------------------------------------------------------------
 " color schemes
-" --------------------------------------------------------------------------
 if ! has("gui_running")
-   syntax enable
    colorscheme lucius
-    "LuciusLight
    LuciusDark
-endif
-if has("gui_running")  "  For /GVIM/
-   "colorscheme github
-   "colorscheme grb256
+else  " /gvim/
    colorscheme lucius
    LuciusLight
-   "LuciusDark
    set guioptions=a  "remove menus, using clipboard instead of primary
-   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "frequency of cursor's blink
+   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency 
    set lines=34 columns=97
    set guifont=DejaVu\ Sans\ Mono:h12
 endif
 
-
-" --------------------------------------------------------------------------
-"  For backup
-" --------------------------------------------------------------------------
+" backup
 set backup
 set backupdir=/tmp
 
@@ -62,9 +52,12 @@ autocmd BufReadPost *
         \exe "normal g`\"" |
     \endif
 
+" auto remove extra spaces
+"autocmd BufWritePre * :%s/\s\+$//e
+
 
 " --------------------------------------------------------------------------
-"  Key maps
+"  Emacs-like key maps
 " --------------------------------------------------------------------------
 " nnoremap <F8> :vertical wincmd gf<CR>
 " vnoremap <C-c> "+y
