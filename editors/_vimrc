@@ -14,6 +14,10 @@ set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
 
+" fix bugs of vim (eg. taglist) on iTerm2
+" solution: iTerm2: Preferences -> Profiles -> Terminal -> uncheck "Disable
+" session-initiated window resizing"
+
 " using 4 spaces to replace tab
 set expandtab smarttab
 set shiftwidth=4
@@ -29,15 +33,13 @@ autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
 " color schemes
 if ! has("gui_running")
-   colorscheme lucius
-   LuciusDark
+    colorscheme lucius
+    LuciusDark
 else  " /gvim/
-   colorscheme lucius
-   LuciusLight
-   set guioptions=a  "remove menus, using clipboard instead of primary
-   set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-   set lines=34 columns=97
-   set guifont=DejaVu\ Sans\ Mono:h12
+    colorscheme lucius
+    LuciusLight
+    set guioptions=a  "remove menus, using clipboard instead of primary
+    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
 endif
 
 " status line
@@ -62,6 +64,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 "  Key maps
 " --------------------------------------------------------------------------
 nnoremap <F8> :vertical wincmd gf<CR>
+nnoremap <Leader>nl :nohlsearch<CR>
 
 
 " --------------------------------------------------------------------------
@@ -78,7 +81,6 @@ Plugin 'VundleVim/Vundle.vim'
 " repos on github
   Plugin 'LaTeX-Box-Team/LaTeX-Box'
   Plugin 'djoshea/vim-matlab'
-  Plugin 'scrooloose/nerdtree'
 
 " vim-scripts repos
   Plugin 'taglist.vim'
@@ -104,12 +106,7 @@ let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 let tlist_matlab_settings = 'matlab;f:functions'
 " 'T' opens/closes the TagList window
-nmap  T :TlistToggle
-" 't' jumps to and from the TagList window
-nmap  t :TlistOpen
-
-" -----------------** NerdTree **-------------------------
-nmap <C-n> :NERDTreeToggle<CR>
+nnoremap <Leader>t :TlistToggle<CR>
 
 
 " --------------------------------------------------------------------------
