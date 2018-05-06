@@ -59,6 +59,8 @@
 ;; disable recentf-list loading via ivy-switch-buffer
 ;; (setq recentf-initialize-file-name-history nil)
 
+(setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
+
 (when *is-mac*
   (setq counsel-find-file-occur-cmd
         "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))

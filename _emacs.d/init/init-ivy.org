@@ -155,6 +155,12 @@ A summary of file name completions:
     Toggle between input as regexp or not.
     Switch to matching literally since file names include ., which is for matching any char in regexp mode.
 
+*** Feature configurations
+Exclude boring files like =.DS_Store= in ~counsel-find-file~:
+#+BEGIN_SRC emacs-lisp
+  (setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
+#+END_SRC
+
 *** Ivy-occur and available actions
 
 The bug is due to the incompatibility of commandline tools on OSX and Linux, for
