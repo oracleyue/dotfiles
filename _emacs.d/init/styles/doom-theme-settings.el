@@ -6,11 +6,14 @@
 ;; (require 'doom-themes)
 
 (use-package doom-themes
-  :defer t
+  :load-path "~/.emacs.d/themes/emacs-doom-themes/"
   :config
   ;; global settings
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+  ;; terminal color supports for /doom-one/
+  ;; iTerm "background" set to #282C34, and "black" set to #1B2229
 
   ;; user font settings
   (setq
