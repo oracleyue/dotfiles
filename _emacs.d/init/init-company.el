@@ -32,11 +32,11 @@
   '(progn
      (define-key company-active-map (kbd "C-n") 'company-select-next)
      (define-key company-active-map (kbd "C-p") 'company-select-previous)))
-(global-set-key (kbd "C-<tab>") 'company-complete)  ;; see "Integration" part
+(global-set-key (kbd "M-/") 'company-complete)  ;; see "Integration" part
 
 ;; feature control
 (setq company-idle-delay              1000000  ; 0 immediate
-      company-minimum-prefix-length   2
+      company-minimum-prefix-length   3
       company-tooltip-limit           10
       company-show-numbers            t  )
 
@@ -80,8 +80,6 @@
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas-global-mode 1)
 (setq-default mode-require-final-newline nil)
-;; use company-mode complete yas list
-;; (global-set-key (kbd "C-c y") 'company-yasnippet)
 
 
 ;; Integration: "indent" + /company/ + /yas/
