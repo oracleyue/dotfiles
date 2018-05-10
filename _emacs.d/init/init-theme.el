@@ -46,9 +46,8 @@ Expects a `font-spec'.")
 ;; Init or reload functions
 (defun zyue-init-ui (&optional frame)
   ;; load theme
-  (if zyue-theme
-      (load-theme zyue-theme t)
-    (load-theme 'tsdh-dark t))
+  (when zyue-theme
+    (load-theme zyue-theme t))
   ;; load modeline style
   (zyue-modeline-setup zyue-modeline)
   ;; load font

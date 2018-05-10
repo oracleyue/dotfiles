@@ -16,12 +16,6 @@
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
-;; more if not working :)
-;; (setq buffer-file-coding-system 'utf-8-unix)
-;; (setq default-file-name-coding-system 'utf-8-unix)
-;; (setq default-keyboard-coding-system 'utf-8-unix)
-;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
-;; (setq default-terminal-coding-system 'utf-8-unix)
 
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
@@ -38,9 +32,6 @@
 (push "LANG" exec-path-from-shell-variables)
 ;; (push "PYTHONPATH" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
-
-;; environment variables
-;; (setenv "PYTHONPATH" "/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}")
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
@@ -86,10 +77,10 @@
 ;;   (text-scale-increase 0.5))
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
-;; use command as control in OS X for emacs
+;; keymap modification for OS X
 ;; (when (string-equal system-type "darwin")
 ;;   (setq mac-command-modifier 'control)  ; use command as control
-;;   (setq mac-option-modifier 'meta))     ; may not need
+;;   (setq mac-control-modifier 'super))   ; use control as super
 
 ;; auto-save files when stop editing
 ;; (require 'auto-save)
@@ -107,10 +98,9 @@
   (interactive)
   "Setup the startup folders. Used in .emacs"
   (cond ((string-equal system-type "darwin")
-         (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
-         (dired (expand-file-name "~/Public/Dropbox/Academia/Thesis"))
+         (dired (expand-file-name "~/Public/Dropbox/Academia"))
          (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
-         (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/PhD.org")))
+         (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org")))
         ((string-equal system-type "gnu/linux")
          (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
          (dired (expand-file-name "~/Workspace"))))
@@ -137,7 +127,7 @@
 ;;       (set-fontset-font (frame-parameter nil 'font)
 ;;                         charset
 ;;                         (font-spec :family "WenQuanYi Micro Hei"))))
-;; stop cursor blinking bug when using pinyin or wubi
+;; stop cursor blinking bug when using PinYin on OS X
 (setq redisplay-dont-pause nil)
 
 ;; /hl-sexp/: matching a pair of braces and hightlight the contents
