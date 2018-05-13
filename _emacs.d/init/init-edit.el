@@ -254,11 +254,14 @@ Uses `current-date-format' for the formatting the date/time."
 ;; alternative to "M-SPC": "ESC SPC" (Emacs default)
 
 ;; removing trailing whitespace
-;(add-hook 'before-save-hook 'delete-trailing-whitespace)   ;; any files
-;; enable in all programming modes
-(add-to-list 'write-file-functions 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; mode-specific ws cleanup
+(defun auto-cleanup-whitespace ()
+  (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))
+(add-hook 'prog-mode-hook #'auto-cleanup-whitespace)
+(add-hook 'LaTeX-mode-hook #'auto-cleanup-whitespace)
 ;; manually remove whitespaces
-;; (global-set-key (kbd "C-x M-s") 'delete-trailing-whitespace)
+(global-set-key (kbd "C-x M-s") 'delete-trailing-whitespace)
 
 
 ;;
@@ -300,8 +303,6 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; use /auto-fill mode/
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'turn-off-auto-fill)
-(add-hook 'markdown-mode-hook 'turn-off-auto-fill)
 
 
 ;;

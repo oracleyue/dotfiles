@@ -23,9 +23,18 @@
   "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
-;; use variable-width fonts
-(add-hook 'markdown-mode-hook (lambda () (variable-pitch-mode t)
-                                (setq-local cursor-type 'bar)))
+;; editing environment config
+(defun y:variable-pitch-and-keep-whitespaces ()
+  (setq-local cursor-type 'bar)
+  ;; use variable-width fonts
+  (variable-pitch-mode t)
+  ;; turn off auto-fill mode
+  (turn-off-auto-fill)
+  (setq-local fill-column 85)
+  ;; diable ~delete-trailing-whitespaces~ in markdown mode
+  ;; (delete 'delete-trailing-whitespace write-file-hooks)
+  )
+(add-hook 'markdown-mode-hook 'y:variable-pitch-and-keep-whitespaces)
 
 ;; fontify code blocks
 (setq markdown-fontify-code-blocks-natively t)
@@ -63,7 +72,7 @@
 ;;
 ;; /hexo/: major mode to write blogs using .md
 ;;
-(defun draft-blog ()
+(defun blog ()
   (interactive)
   (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io"))
 

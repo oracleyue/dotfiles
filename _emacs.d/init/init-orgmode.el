@@ -30,7 +30,8 @@
     (variable-pitch-mode t)    ;; use sans-serif
     (setq line-spacing '0.25)) ;; line spacing
   (setq truncate-lines t)      ;; line wraping
-  (setq fill-column 80))       ;; auto-fill mode is off
+  (turn-off-auto-fill)
+  (setq-local fill-column 80))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
 ;; highlight latex fragments
