@@ -9,6 +9,9 @@
 "map <C-Left> :set gui=notabs,navigation<CR>
 "map <C-Right> :set gui=nonavigation,tabs<CR>
 
+" Esc
+inoremap <c-[> <Esc>
+
 " -- basic movements
 noremap U u
 noremap x d

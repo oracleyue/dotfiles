@@ -14,6 +14,10 @@ set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
 
+" Esc
+"inoremap jk <Esc>
+inoremap <c-[> <Esc>
+
 " fix bugs of vim (eg. taglist) on iTerm2
 " solution: iTerm2: Preferences -> Profiles -> Terminal -> uncheck "Disable
 " session-initiated window resizing"
