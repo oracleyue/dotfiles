@@ -46,7 +46,7 @@
 (if (string-equal system-type "darwin")
     (progn
       (setq markdown-command "/usr/local/bin/multimarkdown")
-      (setq markdown-open-command "/Users/oracleyue/bin/marked"))
+      (setq markdown-open-command "/Users/oracleyue/bin/Marked2"))
   (setq markdown-command "/usr/bin/multimarkdown"))
 
 ;; configure markdown export styles
