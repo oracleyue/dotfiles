@@ -77,10 +77,10 @@
   ;; integration with /company-mode/
   (use-package company-jedi
     :config
-    (defun y:company-py-setup ()
+    (defun zyue/company-py-setup ()
       (setq-local company-backends
                   (append '(company-jedi) company-backends)))
-    (add-hook 'python-mode-hook 'y:company-py-setup)))
+    (add-hook 'python-mode-hook 'zyue/company-py-setup)))
 
 
 

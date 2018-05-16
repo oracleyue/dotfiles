@@ -67,12 +67,12 @@
   ;; add dabbev-code in backends to complete variable names
   (require 'company-dabbrev-code)
   (add-to-list 'company-dabbrev-code-modes 'ess-mode)
-  (defun y:add-company-backend-ess ()
+  (defun zyue/add-company-backend-ess ()
     (pop company-backends)
     (setq-local company-backends
                 (append '((company-R-args company-R-objects company-dabbrev-code))
                         company-backends)))
-  (add-hook 'ess-mode-hook 'y:add-company-backend-ess)
+  (add-hook 'ess-mode-hook 'zyue/add-company-backend-ess)
 
   ;; delete the unnecessary buffer *ESS*
   (kill-buffer "*ESS*")

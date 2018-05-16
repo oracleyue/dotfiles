@@ -15,7 +15,7 @@
 ;; use "whitespace-mode" to show white spaces as dots
 ;; insert-file: "C-x i"
 ;; write-file, save-as: "C-x w"
-;; open-file in read-only: "C-x C-r"
+;; open-file in read-onlzyue/ "C-x C-r"
 ;; undo: "C-/", "C-_";   redo: "C-?", "M-_";  (default by /undo-tree/)
 ;; comment line or region :: "C-\"; uncomment: "M-\"
 ;; captalize/upper/lower words: "M-c/u/l"
@@ -110,39 +110,39 @@
 (global-set-key (kbd "s-u") 'revert-buffer)
 
 ;; if region marked, kill/copy region (default C-w/M-w); otherwise, kill/copy the current line
-(defun y:kill-ring-save ()
+(defun zyue/kill-ring-save ()
         (interactive)
         (if (equal mark-active nil)
             ;;(kill-ring-save (point) (line-end-position)) ; current point TO end of line
             (kill-ring-save (line-beginning-position) (line-end-position))
           (kill-ring-save (point) (mark))))
-(defun y:kill-region ()
+(defun zyue/kill-region ()
         (interactive)
         (if (equal mark-active nil)
             ;;(kill-region (point) (line-end-position)) ; current point TO end of line
             (kill-region (line-beginning-position) (line-end-position))
           (kill-region (point) (mark))))
-(global-set-key (kbd "M-w") 'y:kill-ring-save)
-(global-set-key (kbd "C-w") 'y:kill-region)
+(global-set-key (kbd "M-w") 'zyue/kill-ring-save)
+(global-set-key (kbd "C-w") 'zyue/kill-region)
 
 ;; ;; mark the current line
-;; (defun y:mark-current-line ()
+;; (defun zyue/mark-current-line ()
 ;;   "Select the current line"
 ;;   (interactive)
 ;;   (end-of-line) ; move to end of line
 ;;   (set-mark (line-beginning-position)))
-;; (global-set-key (kbd "C-S-SPC") 'y:mark-current-line)
+;; (global-set-key (kbd "C-S-SPC") 'zyue/mark-current-line)
 ;; ;; "C-S-SPC" is bound to for =set-rectangular-region-anchor= in /multi-cursor/
 
 ;; unfill paragraph: the opposite of fill-paragraph
-(defun y:unfill-paragraph-or-region (&optional region)
+(defun zyue/unfill-paragraph-or-region (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
   (let ((fill-column (point-max))
         ;; This would override `fill-column' if it's an integer.
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
-(define-key global-map "\M-Q" 'y:unfill-paragraph-or-region)
+(define-key global-map "\M-Q" 'zyue/unfill-paragraph-or-region)
 
 ;; open a new line and jump there
 (require 'open-next-line)
@@ -152,13 +152,13 @@
 (delete-selection-mode 1)
 
 ;; kill line backwards
-(defun y:backward-kill-line ()
+(defun zyue/backward-kill-line ()
   (interactive)
   (if visual-line-mode
       (kill-visual-line 0)
     (kill-line 0)
     (indent-according-to-mode)))
-(global-set-key (kbd "C-<backspace>") 'y:backward-kill-line)
+(global-set-key (kbd "C-<backspace>") 'zyue/backward-kill-line)
 
 ;; align-regexp keybinding
 (global-set-key (kbd "C-x M-a") 'align-regexp)
@@ -169,7 +169,7 @@
 ;;
 
 ;; key bindings for comment/uncomment
-(defun y:comment-line-or-region (&optional beg end)
+(defun zyue/comment-line-or-region (&optional beg end)
   (interactive)
   (let ((beg (cond (beg beg)
                    ((region-active-p)
@@ -180,7 +180,7 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (comment-region beg end)))
-(defun y:uncomment-line-or-region (&optional beg end)
+(defun zyue/uncomment-line-or-region (&optional beg end)
   (interactive)
   (let ((beg (cond (beg beg)
                    ((region-active-p)
@@ -191,7 +191,7 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (uncomment-region beg end)))
-;; (defun y:comment-or-uncomment-region-or-line ()
+;; (defun zyue/comment-or-uncomment-region-or-line ()
 ;;     "Comments or uncomments the region or the current line if there's no active region."
 ;;     (interactive)
 ;;     (let (beg end)
@@ -199,15 +199,15 @@
 ;;             (setq beg (region-beginning) end (region-end))
 ;;             (setq beg (line-beginning-position) end (line-end-position)))
 ;;         (comment-or-uncomment-region beg end)))
-(global-set-key (kbd "C-\\") 'y:comment-line-or-region)
-(global-set-key (kbd "M-\\") 'y:uncomment-line-or-region)
-(global-set-key (kbd "C-|") 'y:uncomment-line-or-region)   ;; invalid in terminals
+(global-set-key (kbd "C-\\") 'zyue/comment-line-or-region)
+(global-set-key (kbd "M-\\") 'zyue/uncomment-line-or-region)
+(global-set-key (kbd "C-|") 'zyue/uncomment-line-or-region)   ;; invalid in terminals
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (global-undo-tree-mode)
 
 ;; toggle window split between horizontal-split and vertical-split
-(defun y:toggle-window-split ()
+(defun zyue/toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
@@ -231,7 +231,7 @@
 	  (set-window-buffer (next-window) next-win-buffer)
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
-(global-set-key (kbd "C-x |") 'y:toggle-window-split)
+(global-set-key (kbd "C-x |") 'zyue/toggle-window-split)
 
 ;; insert date
 (defvar current-date-format "%d %b %Y")  ;; %a" for weekdays

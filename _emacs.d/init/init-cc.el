@@ -1,3 +1,4 @@
+
 ; =====================================================
 ;; Programming Environment for C/C++ (modern)
 ; =====================================================
@@ -17,14 +18,14 @@
   (require 'google-c-style)
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-  (defun y:flymake-google-init ()
+  (defun zyue/flymake-google-init ()
     (require 'flymake-google-cpplint)
     (setq flymake-google-cpplint-command
       (if (string-equal system-type "darwin")
           "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
     (flymake-google-cpplint-load))
-  (add-hook 'c-mode-hook 'y:flymake-google-init)
-  (add-hook 'c++-mode-hook 'y:flymake-google-init))
+  (add-hook 'c-mode-hook 'zyue/flymake-google-init)
+  (add-hook 'c++-mode-hook 'zyue/flymake-google-init))
 
 (when *enable-rtags*
   ;; see the const *enable-rtags* defined in "init-features.el"
@@ -64,12 +65,12 @@
 
   (use-package company-irony-c-headers
     :config
-    (defun y:add-company-backend-irony ()
+    (defun zyue/add-company-backend-irony ()
       (setq-local company-backends
                   (append '((company-irony-c-headers company-irony))
                           company-backends)))
-    (add-hook 'c-mode-hook 'y:add-company-backend-irony)
-    (add-hook 'c++-mode-hook 'y:add-company-backend-irony)))
+    (add-hook 'c-mode-hook 'zyue/add-company-backend-irony)
+    (add-hook 'c++-mode-hook 'zyue/add-company-backend-irony)))
 
 ;; /flycheck/: syntax checker
 (use-package flycheck
@@ -118,11 +119,11 @@
     (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))
   ;; adding /company-cmake/ for ac-complete
   (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
-  (defun y:company-cmake-setup ()
+  (defun zyue/company-cmake-setup ()
     (setq-local company-backends
                 (append '((company-cmake company-dabbrev-code))
                         company-backends)))
-  (add-hook 'cmake-mode-hook 'y:company-cmake-setup)
+  (add-hook 'cmake-mode-hook 'zyue/company-cmake-setup)
   ;; compilation setup for cmake-mode
   (add-hook 'cmake-mode-hook
             (lambda ()

@@ -11,7 +11,7 @@
 ** Requirements
 *** Install system commandline tools
 
-Tools to be installed in order to use the corresponding commands in Ivy:
+Tools to be installed in order to use the corresponding commands in Ivzyue/
 (package names in Homebrew)
 
 - ~counsel-ag~  : ~ag~ from =the_silver_searcher=

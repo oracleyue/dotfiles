@@ -225,7 +225,7 @@
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
 
 ;; utility definitions
-(defun y:latex-remove-comments ()
+(defun zyue/latex-remove-comments ()
   (interactive)
   (query-replace-regexp "\\(^\\| *[^\\\\]\\)%.*" "" nil nil))
 

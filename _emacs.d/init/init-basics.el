@@ -94,7 +94,7 @@
   (setq browse-url-browser-function 'browse-url-firefox))
 
 ;; startup Dired folders
-(defun y:dired-open-folders-startup ()
+(defun zyue/dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
   (cond ((string-equal system-type "darwin")

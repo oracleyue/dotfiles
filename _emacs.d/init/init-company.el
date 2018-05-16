@@ -69,11 +69,11 @@
  '(define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin))
 
 ;; disable company-mode under certain major modes
-(defun y:disable-company-mode ()
+(defun zyue/disable-company-mode ()
   (company-mode -1)
   (company-quickhelp-mode -1))
-(add-hook 'LaTeX-mode-hook 'y:disable-company-mode)
-(add-hook 'org-mode-hook 'y:disable-company-mode)
+(add-hook 'LaTeX-mode-hook 'zyue/disable-company-mode)
+(add-hook 'org-mode-hook 'zyue/disable-company-mode)
 
 
 ;; /Yasnippet/ A template system

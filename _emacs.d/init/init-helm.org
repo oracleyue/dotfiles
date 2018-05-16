@@ -195,7 +195,7 @@ _Suggested practice_:
 - use ~ack~ (=C-s=) to grep files: the current file, or the files in the current
   folder when the cursor is on the directory (i.e. the top line of
   /helm-find-files/ buffer);
-- use ~ag~ (=M-g a=) to grep the directory: recursively grep all files in the
+- use ~ag~ (=M-g a=) to grep the directorzyue/ recursively grep all files in the
   current directory
 - if you want to grep files with a specific extension, use =C-u C-s=.
 
@@ -314,7 +314,7 @@ List of supported commands:
 - ~top~
 - ~calc~
 
-Use helm to quick-jump to any ~man~ entry: =<helm-prefix> m=
+Use helm to quick-jump to any ~man~ entrzyue/ =<helm-prefix> m=
 #+BEGIN_SRC emacs-lisp
   ;; helm for system man page
   (when (string-equal system-type "darwin")
@@ -344,7 +344,7 @@ Functions:
 
 Use Unix GNU-calc command in helm interface: =<helm-prefix> C-,=
 *** miscellanies
-Use helm to build regexp, test them interactively: =<helm-prefix> r=    \\
+Use helm to build regexp, test them interactivelzyue/ =<helm-prefix> r=    \\
 Functions:
 -     =[F1]= save the regexp as a string in =kill-ring=
 -     =[F2]= invoke =query-replace= with curent regexp to be replace
@@ -550,7 +550,7 @@ instantly using ~helm-projectile-switch-project~.
 #+END_SRC
 
 List of actions in the session:
--   open Dired in project's directory:      =C-d=
+-   open Dired in project's directorzyue/      =C-d=
 -   open project root in vc-dir or magit:   =M-g=
 -   switch to Esell; open a project Eshell: =M-e=
 -   grep in projects (prefix =C-u= to recursive grep):  =C-s=

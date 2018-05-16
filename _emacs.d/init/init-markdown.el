@@ -24,7 +24,7 @@
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
 ;; editing environment config
-(defun y:variable-pitch-and-keep-whitespaces ()
+(defun zyue/variable-pitch-and-keep-whitespaces ()
   (setq-local cursor-type 'bar)
   ;; use variable-width fonts
   (variable-pitch-mode t)
@@ -34,7 +34,7 @@
   ;; diable ~delete-trailing-whitespaces~ in markdown mode
   ;; (delete 'delete-trailing-whitespace write-file-hooks)
   )
-(add-hook 'markdown-mode-hook 'y:variable-pitch-and-keep-whitespaces)
+(add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)
 
 ;; fontify code blocks
 (setq markdown-fontify-code-blocks-natively t)

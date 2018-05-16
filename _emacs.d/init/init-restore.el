@@ -9,12 +9,12 @@
 (cond (*is-mac*
        (cond (*is-server-main*
               (progn
-                (y:dired-open-folders-startup)
+                (zyue/dired-open-folders-startup)
                 (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
              ((or *is-server-coding* *is-server-ac*)
               (cd (expand-file-name "~/Public/Dropbox/Workspace/matlab")))))
       (*is-linux*
-       (y:dired-open-folders-startup)
+       (zyue/dired-open-folders-startup)
        (cd "~/tmp")))
 
 ;; restore keybindings for emacs in terminal
