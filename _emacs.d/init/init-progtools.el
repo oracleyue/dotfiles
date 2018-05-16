@@ -58,7 +58,7 @@
 (when *enable-semantics*
   (semantic-mode 1)
   (semantic-default-elisp-setup)
-  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
+  ;; enable  minimal /semantic/ for /stickyfunc/ and /*-semantic-or-imenu/
   ;; stop semantic parsing (huge,slow) elisp sys libraries
   (setq-mode-local emacs-lisp-mode
                    semanticdb-find-default-throttle
@@ -109,9 +109,9 @@
 
 
 ;; ----------------------------------------------
-;; [disabled] /ECB/: GUI interface of IDE
+;; /ECB/: GUI interface of IDE
 ;; ----------------------------------------------
-(when nil
+(when *enable-ecb*
   (add-to-list 'load-path "~/.emacs.d/git/ecb")
   (require 'ecb)
   (require 'ecb-autoloads)
@@ -125,6 +125,21 @@
   (add-hook 'c-mode-hook 'ecb-activate)
   (add-hook 'c++-mode-hook 'ecb-activate)
   (add-hook 'matlab-mode-hook 'ecb-activate))
+
+
+;; ----------------------------------------------
+;; /projectile/: global config (besides helm/counsel-projectile)
+;; ----------------------------------------------
+;; Do not visit the current project's tags table if `helm-projectile-mode' or
+;; 'counsel-projectile-mode' is loaded.  Doing so prevents the unnecessary call
+;; to `visit-tags-table' function and the subsequent `find-file' call for the
+;; `TAGS' file."
+(defun zyue/advice-projectile-dont-visit-tags-table ()
+  "Don't visit the tags table as we are using gtags/global."
+  nil)
+(when (or (fboundp 'helm-gtags) (fboundp 'counsel-gtags-mode))
+  (advice-add 'projectile-visit-project-tags-table :override
+              #'zyue/advice-projectile-dont-visit-tags-table))
 
 
 

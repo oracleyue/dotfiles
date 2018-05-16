@@ -38,6 +38,9 @@
 (defconst *enable-rtags* nil)         ;; /rtags/
 (defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
 
+;; ECB IDE interface
+(defconst *enable-ecb* nil)
+
 
 
 (provide 'init-features)
