@@ -44,17 +44,28 @@
 
 
 ;; ----------------------------------------------
+;; /ediff/: comparing two files
+;; ----------------------------------------------
+(require 'ediff)
+(setq ediff-split-window-function 'split-window-horizontally)
+
+
+;; ----------------------------------------------
 ;; Semantic parsing and overview
 ;; ----------------------------------------------
-;; /semantic/ (CEDET) for /helm-semantic-or-imenu/ and /stickyfunc/
+;; /semantic/ (CEDET)
+;; required by ~helm/ivy-semantic-or-imenu~ and /stickyfunc/
 (when *enable-semantics*
-  (add-hook 'semantic-mode-hook
-            (lambda () (when (fboundp 'semantic-default-elisp-setup)
-                         (semantic-default-elisp-setup))))
-  ;; /stickyfunc/ shows the current function name on the top of the
-  ;; buffer when being in the middle of a long function
-  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
   (semantic-mode 1)
+  (semantic-default-elisp-setup)
+  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
+  ;; stop semantic parsing (huge,slow) elisp sys libraries
+  (setq-mode-local emacs-lisp-mode
+                   semanticdb-find-default-throttle
+                   (default-value 'semanticdb-find-default-throttle))
+
+  ;; /stickyfunc/ shows the function name on top of the buffer
+  (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode)
   (require 'stickyfunc-enhance))
 
 
@@ -117,6 +128,6 @@
 
 
 
-(provide 'init-progsupp)
+(provide 'init-progtools)
 ;; ================================================
-;; init-progsupp.el ends here
+;; init-progtools.el ends here

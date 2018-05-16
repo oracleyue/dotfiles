@@ -656,3 +656,27 @@ See help of `format-time-string' for possible replacements")
   (add-hook 'jedi-mode-hook 'jedi-direx:setup))
 
 ;; ----------------------------------------------------------------
+
+(when *enable-semantics*
+  (semantic-mode 1)
+  (semantic-default-elisp-setup)
+  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
+  ;; stop semantic parsing (huge,slow) elisp sys libraries
+  (setq-mode-local emacs-lisp-mode
+                   semanticdb-find-default-throttle
+                   (default-value 'semanticdb-find-default-throttle))
+  ;; alternative solution:
+  ;; (remove-hook 'completion-at-point-functions
+  ;;              'semantic-analyze-completion-at-point-function)
+  ;; (remove-hook 'completion-at-point-functions
+  ;;              'semantic-analyze-notc-completion-at-point-function)
+  ;; (remove-hook 'completion-at-point-functions
+  ;;              'semantic-analyze-nolongprefix-completion-at-point-function)
+  ;; (remove-hook 'completion-at-point-functions
+  ;;              'tags-completion-at-point-function)
+
+  ;; /stickyfunc/ shows the function name on top of the buffer
+  (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode)
+  (require 'stickyfunc-enhance))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

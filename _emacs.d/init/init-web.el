@@ -1,5 +1,5 @@
 ;; ================================================================
-;; Programming Environment for /Python/
+;; Programming Environment for Web Development
 ;; ================================================================
 
 ;; install required packages for web development
@@ -44,12 +44,6 @@
 ;; - "C-c C-k"   Replace the sexp at point with null
 ;; - "C-c C-i"   Increment the number at point
 ;; - "C-c C-d"   Decrement the number at point
-
-;; use /yaml-mode/ for .yml files
-(use-package yaml-mode
-  :load-path "~/.emacs.d/git"
-  :init
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
 
 ;; ----------------------------------------------------------------

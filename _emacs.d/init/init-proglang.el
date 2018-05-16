@@ -18,6 +18,15 @@
 (add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
 
 
+;; ---------------------------------------------
+;; major mode for /YAML/ (*.yml)
+;; ---------------------------------------------
+(use-package yaml-mode
+  :load-path "~/.emacs.d/git"
+  :init
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+
+
 
 (provide 'init-proglang)
 ;; ================================================
