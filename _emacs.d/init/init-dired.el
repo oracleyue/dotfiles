@@ -43,8 +43,7 @@
 
 ;; ------------------------------------------------
 ;; /popwin/: manage popup (temporary) buffers
-;;
-;; bug: it disables /neotree/ to create buffers.
+;; Bugs: it disables /neotree/ to create buffers.
 ;; ------------------------------------------------
 ;; (require 'popwin)
 ;; (popwin-mode 1)

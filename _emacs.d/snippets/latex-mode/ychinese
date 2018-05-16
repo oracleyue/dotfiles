@@ -7,11 +7,11 @@
 \documentclass[a4paper,11pt]{article}
 % ------ compile by XeLaTeX ------
 % rubber: module xelatex
-\usepackage[UTF8]{ctex}
-\setCJKmainfont{STXihei} % {WenQuanYi Micro Hei}
+\usepackage[UTF8]{ctex}  % use "ctexart" in documentclass
+\setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti}]{SimSun}
 
 \usepackage[T1]{fontenc}
-\usepackage{charter,helvet}   % "cochineal" for 12pt
+\usepackage{times,helvet}   % charter
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,amsthm,

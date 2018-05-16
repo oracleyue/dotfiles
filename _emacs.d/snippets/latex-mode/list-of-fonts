@@ -27,3 +27,19 @@
 % Math Fonts
 \usepackage{newtxtext,newtxmath}  % using new Times pkg
 \usepackage[lite,straightbraces]{mtpro2}    % non-free math fonts in Times
+
+% Chinese
+% (Std.) STSong, STHeiti, STXihei, STKaiTi, STFangsong
+% (Windows) SimSun, SimHei, FangSong, Microsoft Yahei
+% (Mac) PingFang SC, Hiragino Sans GB (苹果丽黑)
+% (Linux) WenQuanYi Micro Hei
+% (Adobe) Adobe Song Std, Adobe Heiti Std, Adobe FangSong Std, Adobe Kaiti Std
+% Notes:
+% - LaTeX default mainfont: STSong
+%   - bold font: STHeiti,
+%   - italic font: STKaiti
+% - LaTeX default sansfont: STXihei
+
+\usepackage[UTF8]{ctex}
+\setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti}]{SimSun}
+\setCJKsansfont{PingFang SC}  
