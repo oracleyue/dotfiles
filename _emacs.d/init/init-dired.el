@@ -17,7 +17,7 @@
 ;; /golden-ratio/: resize multiple windows
 ;; ----------------------------------------------
 (require 'golden-ratio)
-(when (string-equal "main" (daemonp))
+(when *use-golden-ratio*
   (golden-ratio-mode t))
 (eval-after-load "golden-ratio"
   '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)

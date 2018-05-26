@@ -46,6 +46,7 @@
           doom-neotree-folder-size 1.0
           doom-neotree-chevron-size 0.6)
     (doom-themes-neotree-config)  ; /all-the-icons/ required!
+    (set-default 'neo-window-fixed-size nil)  ;; allow adjust window size
 
     ;; improves org-mode fontification.
     (doom-themes-org-config)

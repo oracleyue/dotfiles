@@ -116,7 +116,7 @@ Expects a `font-spec'.")
 ;; Post-process theme (if specific themes require)
 (when (functionp 'theme-post-processing)
   (theme-post-processing))
-
+(require 'zyue-themes-neotree)
 
 ;; Frame with Transparent Background (alpha < 1)
 (defun new-alpha-frame (&optional value)

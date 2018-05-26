@@ -477,6 +477,9 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
                 (speedbar-selected-face (,@fmt-none ,@bg-base02 ,@fg-green))
                 (speedbar-separator-face (,@fmt-stnd))
                 (speedbar-tag-face (,@fmt-none ,@fg-blue))
+                ;; neotree
+                (neo-dir-link-face (,@fmt-none ,@fg-blue))
+                (neo-file-link-face (,@fmt-none))
                 ;; widgets
                 (widget-field
                  (,@fg-base1 ,@bg-base02 :box (:line-width 1 :color base2)

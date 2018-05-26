@@ -23,6 +23,9 @@
 ;; (package-initialize)           ;; required to suppress warnings
 (require 'init-packages)
 
+;; feature control
+(require 'init-features)          ;; enable/disable features
+
 ;; theme
 (require 'init-theme)
 
@@ -30,9 +33,6 @@
 (require 'init-basics)
 (require 'init-edit)
 ;; (require 'init-evil)           ;; use vim in emacs
-
-;; feature control
-(require 'init-features)          ;; enable/disable features
 
 ;; code completion engine (/company/ or /auto-complete/)
 (if *use-company* (require 'init-company) (require 'init-ac))

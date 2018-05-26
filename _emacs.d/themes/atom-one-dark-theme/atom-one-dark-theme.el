@@ -190,6 +190,10 @@
    '(dired-flagged ((t (:inherit (diff-hl-delete)))))
    '(dired-symlink ((t (:foreground "#FD5FF1"))))
 
+   ;; neotree
+   '(neo-dir-link-face ((t (:foreground "#6A9FB5"))))
+   '(neo-file-link-face ((t (:inherit ,atom-one-dark-fg))))
+
    ;; helm
    `(helm-header ((t (:foreground ,atom-one-dark-mono-2
                       :background ,atom-one-dark-bg
