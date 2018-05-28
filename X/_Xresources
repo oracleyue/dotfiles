@@ -2,7 +2,8 @@
 Xft.dpi: 96
 Xft.rgba: rgb
 Xft.hinting: 1
-Xft.hintstyle: hintslight
+!Xft.hintstyle: hintslight
+Xft.hintstyle: hintfull
 Xft.antialias: 1
 
 !----------xterm配置----------
@@ -13,8 +14,7 @@ xterm*geometry: 85x28
 xterm*scrollBar: false
 xterm*loginshell: false
 xterm*background: black
-!xterm*foreground: white
-xterm*foreground: gray
+xterm*foreground: white
 xterm*cursorBlink: true
 xterm*cursorOffTime: 600
 xterm*cursorOnTime: 600

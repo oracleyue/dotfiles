@@ -1,3 +1,8 @@
 # keep everything in .bashrc
 
 if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+
+# fcitx for non-desktop environment
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
