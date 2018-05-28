@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
+	"default_encoding": "UTF-8",
+	"font_size": 13.5,
+	"ignored_packages":
+	[
+		"Markdown",
+		"Vintage"
+	],
+	"show_encoding": true
+}

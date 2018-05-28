@@ -9,8 +9,26 @@
     { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} },
 
     //// CodeIntel
-    { "keys": ["ctrl+tab"], "command": "code_intel_auto_complete" },
+    // { "keys": ["ctrl+tab"], "command": "code_intel_auto_complete" },
 	{ "keys": ["alt+."], "command": "goto_python_definition"},
 	{ "keys": ["alt+,"], "command": "back_to_python_definition"},
-    	
+    
+    //// Emmet
+    // restore /ctrl+e/ and replaced by /ctrl+i/
+    {
+        "keys": [
+            "ctrl+i"
+        ], 
+        "args": {
+            "action": "expand_abbreviation"
+        }, 
+        "command": "run_emmet_action", 
+        "context": [
+            {
+                "key": "emmet_action_enabled.expand_abbreviation"
+            }
+        ]
+    }, 
+    {"keys": ["ctrl+e"], "command": "move_to", "args": {"to": "hardeol", "extend": false }},
+          
 ]
