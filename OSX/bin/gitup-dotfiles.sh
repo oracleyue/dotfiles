@@ -50,8 +50,8 @@ $sync ~/.vimperator/colors/oracleyue-dark.vimp \
 
 # Sublime Text
 sublpath=$HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
-cp *.sublime-keymap $repopath/editors/sublime-text/
-cp *.sublime-settings $repopath/editors/sublime-text/
+cp $sublpath/*.sublime-keymap $repopath/editors/sublime-text/
+cp $sublpath/*.sublime-settings $repopath/editors/sublime-text/
 
 
 # ===========================================
