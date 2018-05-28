@@ -33,6 +33,7 @@
        (defconst *use-company* t)))
 
 ;; programming
+
 ;; semantics
 (if *is-server-main*
     (defconst *enable-semantics* nil) ;; /helm-sematic-or-imenu/, /stickyfunc/
@@ -42,6 +43,9 @@
 (defconst *enable-gg-cpp-style* nil)  ;; /google-c-style/
 (defconst *enable-rtags* nil)         ;; /rtags/
 (defconst *enable-function-args* nil) ;; /function-args/ (require semantics)
+
+;; python
+(defconst *use-python-version* 3)
 
 ;; ECB IDE interface
 (defconst *enable-ecb* nil)

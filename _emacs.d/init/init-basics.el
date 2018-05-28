@@ -43,14 +43,10 @@
 ;; font size adjustment
 ;; use C-x C-0 first, then use +/- to tune the size.
 
-;; configure TAB
-(setq tab-stop-list
-      (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72
-                76 80 84 88 92 96 100 104 108 112 116 120)))
-;; the width of a literal tab (C-q TAB; key=9)
-(setq-default tab-width 4)
-;; use spaces instead of evil tabs, width controled by "tab-stop-list"
-(setq-default indent-tabs-mode nil)
+;; TAB
+(setq-default indent-tabs-mode nil
+              tab-stop-list ()
+              tab-width 4)
 
 ;; enable clipboard in emacs  (only need for emacs in terminal)
 ;; (setq x-select-enable-clipboard t)
@@ -98,7 +94,7 @@
   (interactive)
   "Setup the startup folders. Used in .emacs"
   (cond ((string-equal system-type "darwin")
-         (dired (expand-file-name "~/Public/Dropbox/Academia"))
+         (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
          (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
          (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org")))
         ((string-equal system-type "gnu/linux")

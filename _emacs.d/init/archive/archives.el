@@ -680,3 +680,11 @@ See help of `format-time-string' for possible replacements")
   (require 'stickyfunc-enhance))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; force to use tab in python mode
+  (when *use-tab-python*
+    (add-hook 'python-mode-hook
+              (lambda () (setq indent-tabs-mode t
+                               tab-width 4
+                               python-indent 4))))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

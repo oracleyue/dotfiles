@@ -18,11 +18,9 @@
        (cd "~/tmp")))
 
 ;; restore keybindings for emacs in terminal
-(when (and (not (display-graphic-p)) (not (daemonp)))
+(when *is-terminal*
   ;; "F10" to open menu bar or "M-`"
   (global-set-key (kbd "<f10>") 'menu-bar-open)
-  ;; fix "TAB" for code completion in cc-mode (or use "M-TAB")
-  (define-key c++-mode-map (kbd "TAB") 'tab-indent-or-complete)
   ;; fix line numbering in ssh terminal
   (setq linum-format "%4d "))
 

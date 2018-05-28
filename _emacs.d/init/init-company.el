@@ -32,7 +32,8 @@
   '(progn
      (define-key company-active-map (kbd "C-n") 'company-select-next)
      (define-key company-active-map (kbd "C-p") 'company-select-previous)))
-(global-set-key (kbd "M-/") 'company-complete)  ;; see "Integration" part
+(global-set-key (kbd "M-<tab>") 'company-complete)  ;; see "Integration" part
+(global-set-key (kbd "M-/") 'company-complete)  ;; suppl to emacs in terminal
 
 ;; feature control
 (setq company-idle-delay              1000000  ; 0 immediate
