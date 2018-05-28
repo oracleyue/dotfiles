@@ -13,7 +13,7 @@
 # essential settings
 # ===========================================
 sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
-repopath=$HOME'/Workspace/gitrepo/dotfiles'
+repopath=$HOME/Workspace/gitrepo/dotfiles
 
 
 # ===========================================
@@ -49,7 +49,9 @@ $sync ~/.vimperator/colors/oracleyue-dark.vimp \
       $repopath/editors/oracleyue-dark.vimp
 
 # Sublime Text
-$sync ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Default\ \(OSX\).sublime-keymap $repopath/editors/Default\ \(OSX\).sublime-keymap
+sublpath=$HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+$sync *.sublime-keymap $repopath/editors/sublime-text
+$sync *.sublime-settings $repopath/editors/sublime-text
 
 
 # ===========================================
