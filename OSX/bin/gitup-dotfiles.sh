@@ -49,7 +49,7 @@ $sync ~/.vimperator/colors/oracleyue-dark.vimp \
       $repopath/editors/oracleyue-dark.vimp
 
 # Sublime Text
-sublpath="$HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/"
+sublpath="$HOME/Library/Application Support/Sublime Text 3/Packages/User/"
 $sync --include="*.sublime-keymap" --exclude="*" $sublpath $repopath/editors/sublime-text/
 $sync --include="*.sublime-settings" --exclude="*" $sublpath $repopath/editors/sublime-text/
 
