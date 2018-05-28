@@ -4,7 +4,6 @@
 	{"keys": ["alt+f"], "command": "move", "args": {"by": "word_ends", "forward": true} },
 	{"keys": ["alt+d"], "command": "delete_word", "args": { "forward": true } },
 
-
     //// Markdown Preview
     { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} },
 
@@ -14,21 +13,11 @@
 	{ "keys": ["alt+,"], "command": "back_to_python_definition"},
     
     //// Emmet
-    // restore /ctrl+e/ and replaced by /ctrl+i/
+    // disable default /ctrl+e/ and /ctrl+d/ in .sublime-settings
+    // rebind /ctrl+i/ to "expand_abbreviation"
     {
-        "keys": [
-            "ctrl+i"
-        ], 
-        "args": {
-            "action": "expand_abbreviation"
-        }, 
-        "command": "run_emmet_action", 
-        "context": [
-            {
-                "key": "emmet_action_enabled.expand_abbreviation"
-            }
-        ]
+        "keys": [ "ctrl+i" ], 
+        "args": { "action": "expand_abbreviation" }, 
+        "command": "run_emmet_action"
     }, 
-    {"keys": ["ctrl+e"], "command": "move_to", "args": {"to": "hardeol", "extend": false }},
-          
 ]
