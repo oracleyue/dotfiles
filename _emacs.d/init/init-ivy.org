@@ -250,6 +250,33 @@ Sources:
 - https://oremacs.com/2015/01/27/my-refactoring-workflow/
 - http://irreal.org/blog/?p=6008
 
+*** Additional features added by users
+**** Use ivy to open recent directories
+
+The recent directories include parent directories of opened files in Emacs and
+the directories accessed in Bash shell.
+
+I used ~fasd~ to get the list of directories in shell. *Fasd* "offers quick access
+to files and directories for POSIX shells".
+
+Source: http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+
+#+BEGIN_SRC emacs-lisp
+  ;; user-defined: use ivy to open recent directories
+  (defun counsel-goto-recent-directory ()
+    "Open recent directory with dired"
+    (interactive)
+    (unless recentf-mode (recentf-mode 1))
+    (let ((collection
+           (delete-dups
+            (append (mapcar 'file-name-directory recentf-list)
+                    ;; fasd history
+                    (if (executable-find "fasd")
+                        (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+      (ivy-read "directories:" collection :action 'dired)))
+#+END_SRC
+
+
 ** Ivy for projectile
 
 #+BEGIN_SRC emacs-lisp

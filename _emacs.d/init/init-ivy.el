@@ -1,4 +1,3 @@
-
 ;; ===============================================================
 ;; Ivy - a generic completion mechanism for Emacs
 ;; ===============================================================
@@ -70,6 +69,19 @@
 
 (setq counsel-rg-base-command
       "rg -i -M 120 --no-heading --line-number --color never %s .")
+
+;; user-defined: use ivy to open recent directories
+(defun counsel-goto-recent-directory ()
+  "Open recent directory with dired"
+  (interactive)
+  (unless recentf-mode (recentf-mode 1))
+  (let ((collection
+         (delete-dups
+          (append (mapcar 'file-name-directory recentf-list)
+                  ;; fasd history
+                  (if (executable-find "fasd")
+                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
+    (ivy-read "directories:" collection :action 'dired)))
 
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile

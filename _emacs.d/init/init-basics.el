@@ -35,9 +35,8 @@
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
-(when *is-server-main*
+(when (or *is-server-main* *is-app*)
   (setq-default cursor-type 'bar))
-;; (add-hook 'text-mode-hook (lambda () (setq-local cursor-type 'bar)))
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment

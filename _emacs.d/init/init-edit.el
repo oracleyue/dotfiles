@@ -8,7 +8,8 @@
 ;; Notes of usage
 ;; ----------------------------------------------------------------------
 ;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
-;; insert 4-spaced TAB: =tab-to-tab-stop= or =M-4 SPC=
+;; insert 4-spaced TAB: =tab-to-tab-stop= or "M-i"
+;; converting TAB and 4-spaces of regions: =tabify= and =untabify=
 ;; move cursor to the top/middle/bottom of the current window: "M-r"
 ;; upcase/downcase/captalize word: "M-u", "M-l", "M-c"
 ;; tranpose/swap words: "M-t"
