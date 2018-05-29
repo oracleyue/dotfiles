@@ -288,8 +288,8 @@
 
 ; oracleyue, added: BEGIN ----------
 (require 'jedi-core)
-(defalias 'y:jedi:show-doc 'jedi:show-doc) ; or "rope-show-doc"
-(defalias 'y:jedi:show-calltip 'jedi:get-in-function-call) ; or "rope-show-calltip"
+(defalias 'zyue/jedi:show-doc 'jedi:show-doc) ; or "rope-show-doc"
+(defalias 'zyue/jedi:show-calltip 'jedi:get-in-function-call) ; or "rope-show-calltip"
 ; oracleyue, added: END ----------
 
 
@@ -326,8 +326,8 @@
     ;; Some util commands
     (define-key map "\C-c\C-v" 'python-check)
     ;; (define-key map "\C-c\C-f" 'python-eldoc-at-point)  ;oracleyue
-    (define-key map "\C-c\C-e" 'y:jedi:show-doc)              ;oracleyue, added
-    (define-key map "\C-ce" 'y:jedi:show-calltip)       ;oracleyue, added
+    (define-key map "\C-c\C-e" 'zyue/jedi:show-doc)              ;oracleyue, added
+    (define-key map "\C-ce" 'zyue/jedi:show-calltip)       ;oracleyue, added
 
     ;; Utilities
     (substitute-key-definition 'complete-symbol 'completion-at-point
@@ -375,9 +375,9 @@
          :help "Check file for errors"]
         ;; ["Help on symbol" python-eldoc-at-point      ;oracleyue
         ;;  :help "Get help on symbol at point"]
-        ["Help on symbol" y:jedi:show-doc               ;oracleyue, added
+        ["Help on symbol" zyue/jedi:show-doc               ;oracleyue, added
          :help "Get help on symbol at point by Jedi"]
-        ["Help on calltip" y:jedi:show-calltip          ;oralceyue, added
+        ["Help on calltip" zyue/jedi:show-calltip          ;oralceyue, added
          :help "Get help on calltip at point by Jedi"]
         ["Complete symbol" completion-at-point
          :help "Complete symbol before point"]))
