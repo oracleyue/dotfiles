@@ -70,8 +70,29 @@
 (setq counsel-rg-base-command
       "rg -i -M 120 --no-heading --line-number --color never %s .")
 
-;; user-defined: use ivy to open recent directories
-(defun counsel-goto-recent-directory ()
+;; use ivy to open recent directories
+;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+;; https://emacs-china.org/t/topic/5948/3?u=et2010
+(defvar counsel-recent-dir-selected "~/")
+
+(defvar counsel-recent-dir-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map  (kbd "TAB") 'counsel-recent-dir-find-file)
+    (define-key map  [(tab)] 'counsel-recent-dir-find-file)
+    map))
+
+(defun counsel-recent-dir-find-file()
+  (interactive)
+  (ivy-exit-with-action
+   (lambda(c)
+     (setq counsel-recent-dir-selected c)
+     (run-at-time 0.05 nil
+                  (lambda()
+                    (let ((default-directory counsel-recent-dir-selected))
+                      ;; (find-file counsel-recent-dir-selected)
+                      (counsel-find-file)))))))
+
+(defun counsel-recent-directory ()
   "Open recent directory with dired"
   (interactive)
   (unless recentf-mode (recentf-mode 1))
@@ -80,8 +101,13 @@
           (append (mapcar 'file-name-directory recentf-list)
                   ;; fasd history
                   (if (executable-find "fasd")
-                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-    (ivy-read "directories:" collection :action 'dired)))
+                      (split-string
+                       (shell-command-to-string "fasd -ld") "\n" t))))))
+    (ivy-read "directories:" collection
+              :keymap counsel-recent-dir-map
+              :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
+
+(global-set-key (kbd "M-g h") 'counsel-recent-directory)
 
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile

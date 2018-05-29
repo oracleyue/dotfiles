@@ -32,11 +32,10 @@
   '(progn
      (define-key company-active-map (kbd "C-n") 'company-select-next)
      (define-key company-active-map (kbd "C-p") 'company-select-previous)))
-(global-set-key (kbd "M-<tab>") 'company-complete)  ;; see "Integration" part
-(global-set-key (kbd "M-/") 'company-complete)  ;; suppl to emacs in terminal
+(global-set-key (kbd "M-/") 'company-complete)  ;; see "Integration" part
 
 ;; feature control
-(setq company-idle-delay              1000000  ; 0 immediate
+(setq company-idle-delay              0.2  ; huge value to disable auto popup
       company-minimum-prefix-length   3
       company-tooltip-limit           10
       company-show-numbers            t  )

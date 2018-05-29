@@ -12,11 +12,10 @@
 ;; Adding paths to the variable load-path
 (dolist (relpath '(""
                    "extensions/"
-                   ;; "extensions/yasnippet"            ;oracleyue
-                   ;; "extensions/auto-complete"
-                   ;; "extensions/eproject"
-                   )
-                 )
+                   ;; "extensions/yasnippet"       ;replaced by global yas
+                   ;; "extensions/auto-complete"   ;replaced by company+jedi
+                   ;; "extensions/eproject"        ;replaced by projectile
+                   ))
   (add-to-list 'load-path (concat epy-install-dir relpath)))
 
 (when (not (boundp 'yas--version))
@@ -36,7 +35,7 @@ Disable in case of versions-conflicts etc. "
 :type 'boolean
 :group 'python-mode)
 
-(defvar epy-enable-ropemacs t
+(defvar epy-enable-ropemacs nil
   "Variable to control whether enable setup-ropemacs() in epy-python.el.")
 
 (provide 'epy-setup)

@@ -6,6 +6,14 @@
 ;;    =pip install virtualenv jedi epc argparse=
 ;;    =pip install pyflakes=
 
+;; Install required Emacs packages
+;; (setq custom/py-packages
+;;       '(jedi
+;;         jedi-core
+;;         company-jedi
+;;         dtrt-indent))
+;; (custom/install-packages custom/py-packages)
+
 ;; Usages:
 ;; *edit*
 ;;   - shift selected blocks "C-c >", "C-c <"
@@ -30,7 +38,7 @@
 
 
 ;; Python Major Mode /emacs-for-python/
-(use-package emacs-for-python
+(use-package epy-init
   :load-path "~/.emacs.d/git/emacs-for-python/"
   :config
   ;; set the python interpreter
@@ -39,7 +47,8 @@
     (setq python-shell-interpreter "ipython2")) ; or "python2"
   (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
   ;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
-  ;; (setq python-shell-interpreter-args "-i --pylab --simple-prompt --no-color-info")
+  ;; (setq python-shell-interpreter-args
+  ;;       "-i --pylab --simple-prompt --no-color-info")
 
   ;; set syntax checker
   (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
@@ -57,6 +66,25 @@
   ;; load tab display style
   (add-hook 'python-mode-hook #'zyue:py-indent-display-style)
 
+  ;; supplements to python.el
+  (defun python-shell-send-line (&optional beg end)
+    (interactive)
+    (let ((beg (cond (beg beg)
+                     ((region-active-p)
+                      (region-beginning))
+                     (t (line-beginning-position))))
+          (end (cond (end end)
+                     ((region-active-p)
+                      (copy-marker (region-end)))
+                     (t (line-end-position)))))
+      (python-shell-send-region beg end)))
+  (define-key python-mode-map "\C-c\C-j" 'python-shell-send-line)
+  ;; add menu entry
+  (easy-menu-define-key python-menu [send-line]
+                        '(menu-item "Eval line" python-shell-send-line
+                                    "Eval line in inferior Python session")
+                        "Eval region")
+
   );;END: use-package (emacs-for-python)
 
 
@@ -68,6 +96,18 @@
   ;; basic settings of jedi
   (setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
   (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
+  (define-key python-mode-map "\C-ce" 'jedi:show-doc)
+  (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
+  ;; add menu entry
+  (easy-menu-define-key python-menu [jedi-show-doc]
+                        '(menu-item "Jedi show doc" jedi:show-doc
+                                    "Get help on symbol at point by Jedi")
+                        "Complete symbol")
+  (easy-menu-define-key python-menu [jedi-call-tip]
+                        '(menu-item "Jedi show calltip"
+                                    jedi:get-in-function-call
+                                    "Get help on function call-tip at point by Jedi") "Complete symbol")
+  (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
 
   ;; set virtualenv to use python2 (default: python3)
   (when (eq *use-python-version* 2)

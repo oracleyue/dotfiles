@@ -8,13 +8,22 @@
   "Installation directory of emacs-for-python")
 
 (add-to-list 'load-path epy-install-dir)
-(require 'epy-setup)
-(require 'epy-python)
-(require 'epy-completion)
-(require 'epy-editing)
-(require 'epy-nose)
-(require 'epy-bindings)
 
+;; Load everything
+;; (require 'epy-setup)
+;; (require 'epy-python)
+;; (require 'epy-completion)
+;; (require 'epy-editing)
+;; (require 'epy-nose)
+;; (require 'epy-bindings)
+
+;; Customize Loading
+(require 'epy-setup)           ;; required!
+(require 'epy-python)          ;; python facilities
+(require 'epy-editing)         ;; editing [optional]
+;; (require 'epy-nose)            ;; nose integration
+(require 'epy-bindings)        ;; suggested keybindings [optional]
 
 
 (provide 'epy-init)
+;;;epy-init.el ends here.

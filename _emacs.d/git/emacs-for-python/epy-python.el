@@ -1,15 +1,13 @@
 ;; epy-python.el - setup of python stuff
 ;; note: modified by oracleyue on 24 Aug 2017.
 
-;; fgallina/python.el
-(require 'python (concat epy-install-dir "extensions/python.el"))
-;; use emacs built-in version       ;oracleyue (debug)
-;(require 'python)
+;; use emacs built-in version
+(require 'python)
 
 ;; pymacs
 (require 'pymacs (concat epy-install-dir "extensions/pymacs.el"))
 
-;(setq epy-enable-ropemacs t)  ;oracleyue, moved to "epy-setup.el"
+;; (setq epy-enable-ropemacs t)  ;oracleyue, moved to "epy-setup.el"
 (defun setup-ropemacs ()
   "Setup the ropemacs harness"
   (message "****************************")

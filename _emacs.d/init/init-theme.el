@@ -48,6 +48,11 @@ Expects a `font-spec'.")
   ;; load theme
   (when zyue-theme
     (load-theme zyue-theme t))
+  ;; emacs ui
+  (add-to-list 'default-frame-alist
+               '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist   ;; light or dark
+               '(ns-appearance . (frame-parameter nil 'background-mode)))
   ;; load modeline style
   (zyue-modeline-setup zyue-modeline)
   ;; load font
@@ -94,8 +99,9 @@ Expects a `font-spec'.")
 
 ;; Set different themes for app and daemons
 (when *is-linux* (setq zyue-theme 'atom-one-dark))
+;; (when *is-mac* (setq zyue-theme 'solarized))
 (when *is-mac* (setq zyue-theme 'doom-nord-light))
-(when *is-server-main* (setq zyue-theme 'solarized))
+(when *is-server-main* (setq zyue-theme 'doom-nord-light))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 (when *is-server-coding* (setq zyue-theme 'atom-one-dark))
 (when *is-server-ac* (setq zyue-theme 'atom-one-dark))
