@@ -6,7 +6,7 @@
 ;;
 ;; Spaceline
 ;;
-(defun y:use-spaceline ()
+(defun zyue-use-spaceline ()
   (use-package spaceline
     :config
     (require 'spaceline-config)
@@ -18,7 +18,7 @@
 ;;
 ;; Customized Theme
 ;;
-(defun y:customize-modeline ()
+(defun zyue-customize-modeline ()
   ;; fonts
   (set-face-attribute 'mode-line nil
                       :font (face-attribute 'default :font))
@@ -119,9 +119,9 @@
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
-    ('custom    (y:customize-modeline))
-    ('spaceline (y:use-spaceline))
-    (_          (y:customize-modeline))
+    ('custom    (zyue-customize-modeline))
+    ('spaceline (zyue-use-spaceline))
+    (_          (zyue-customize-modeline))
     ))
 
 

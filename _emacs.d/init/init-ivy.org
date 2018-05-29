@@ -124,12 +124,6 @@ The recommended setting of additional minibuffer actions:
 #+END_SRC
 (For these two additional settings, see https://github.com/abo-abo/swiper/issues/1515.)
 
-Customization to restore a few =helm= actions:
-#+BEGIN_SRC (!not working)
-  (define-key minibuffer-local-map (kbd "C-o")
-    'ivy-beginning-of-buffer)
-#+END_SRC
-
 A brief summary of minibuffer actions in ~counsel-find-files~:
 -  =C-j=: start a new completion; otherwise, same as =RET=;
 -  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
@@ -249,6 +243,73 @@ Sources:
 - https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
 - https://oremacs.com/2015/01/27/my-refactoring-workflow/
 - http://irreal.org/blog/?p=6008
+
+*** Additional features added by users
+**** Use ivy to open recent directories in dired or find-file
+
+The recent directories include parent directories of opened files in Emacs and
+the directories accessed in Bash shell.
+
+The command-line tool ~fasd~ is used to get the list of directories in
+shell. *Fasd* "offers quick access to files and directories for POSIX shells".
+
+Source: http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+
+The implementation in the above blog is to open in =dired=. In addition, we
+would like to use TAB to insert the selected directory as inputs for
+~find-file~, and one can continue operations under this path. The action of
+ENTER keeps the same, i.e. open the directory in dired.
+
+Source: https://emacs-china.org/t/topic/5948
+  
+(原问题：前一个的代码是用 dired 打开，能不能按 tab 键就将选中的文件夹作为 find-file 的输
+入，然后可以接着再输入以查找这个文件夹内的文件呢？回车键不变，仍然是打开dired。)
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; use ivy to open recent directories
+  ;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+  ;; https://emacs-china.org/t/topic/5948/3?u=et2010
+  (defvar counsel-recent-dir-selected "~/")
+
+  (defvar counsel-recent-dir-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map  (kbd "TAB") 'counsel-recent-dir-find-file)
+      (define-key map  [(tab)] 'counsel-recent-dir-find-file)
+      map))
+
+  (defun counsel-recent-dir-find-file()
+    (interactive)
+    (ivy-exit-with-action
+     (lambda(c)
+       (setq counsel-recent-dir-selected c)
+       (run-at-time 0.05 nil
+                    (lambda()
+                      (let ((default-directory counsel-recent-dir-selected))
+                        ;; (find-file counsel-recent-dir-selected)
+                        (counsel-find-file)))))))
+
+  (defun counsel-recent-directory ()
+    "Open recent directory with dired"
+    (interactive)
+    (unless recentf-mode (recentf-mode 1))
+    (let ((collection
+           (delete-dups
+            (append (mapcar 'file-name-directory recentf-list)
+                    ;; fasd history
+                    (if (executable-find "fasd")
+                        (split-string
+                         (shell-command-to-string "fasd -ld") "\n" t))))))
+      (ivy-read "directories:" collection
+                :keymap counsel-recent-dir-map
+                :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
+#+END_SRC
+
+Bind a keystroke to this function:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-g h") 'counsel-recent-directory)
+#+END_SRC
 
 ** Ivy for projectile
 

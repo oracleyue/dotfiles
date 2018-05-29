@@ -17,7 +17,7 @@
 (global-set-key [f11] 'flymake-goto-next-error)
 
 ;; Rope bindings
-;; (add-hook 'python-mode-hook  ;oracleyue
+;; (add-hook 'python-mode-hook
 ;; 	  (lambda ()
 ;; 	    (define-key python-mode-map "\C-ci" 'rope-auto-import)
 ;; 	    (define-key python-mode-map "\C-c\C-d" 'rope-show-calltip)

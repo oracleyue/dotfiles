@@ -5,7 +5,6 @@
 ;; Install required packages for more functions
 (setq custom/org-packages
       '(htmlize
-        org
         ox-gfm))
 (custom/install-packages custom/org-packages)
 
@@ -75,7 +74,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (sh . t)
+   (shell . t)
    (C . t)
    (python . t)
    (R . t)
