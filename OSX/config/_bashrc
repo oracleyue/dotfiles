@@ -39,6 +39,12 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias shred='gshred -n 5'
 alias trash='trash -v'
 
+# alias for FASD
+eval "$(fasd --init auto)"
+# a: any; s: show/search/select; d: directory; f: file
+# sd: interactive directory selection; sf: interactive file selection
+# z: quick cd; zz: cd with interactive selection
+
 # alias commands for development
 alias gcc='gcc-7'
 alias g++='g++-7'
