@@ -51,6 +51,9 @@ alias java-docs="chrome http://docs.oracle.com/javase/7/docs/api/"
 alias tmux="env TERM=xterm-256color tmux"
 alias open="xdg-open"
 
+# setup fasd
+eval "$(fasd --init auto)"
+
 # oracleyue-defined commands/functions
 function gpgless() { gpg -d "$1" | less ;}
  # atlas: mount the remote folder on atlas server
