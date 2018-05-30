@@ -9,8 +9,8 @@
 
 (use-package ivy
   :ensure t
-  :diminish (ivy-mode)
-  :bind (("C-c C-r" . ivy-resume))
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x b"   . ivy-switch-buffer))
   :config
   (ivy-mode 1)
   (setq ivy-height 15)
@@ -38,6 +38,8 @@
    ;; ("M-s l"   . counsel-locate)  ;; locate
   )
   :config
+  (setq counsel-find-file-at-point t)
+  ;; tools for grep
   (setq counsel-grep-base-command
         "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
 
@@ -60,7 +62,7 @@
 
 (use-package swiper
   :ensure t
-  :requires (ivy counsel)
+  :after (ivy counsel)
   :bind
   (("C-s"   . swiper)
    ("C-S-s" . swiper-all)   

@@ -67,8 +67,8 @@ List of frequent commands:
 
   (use-package ivy
     :ensure t
-    :diminish (ivy-mode)
-    :bind (("C-c C-r" . ivy-resume))
+    :bind (("C-c C-r" . ivy-resume)
+           ("C-x b"   . ivy-switch-buffer))
     :config
     (ivy-mode 1)
     (setq ivy-height 15)
@@ -99,6 +99,8 @@ Ivy-based interface to standard commands:
      ;; ("M-s l"   . counsel-locate)  ;; locate
     )
     :config
+    (setq counsel-find-file-at-point t)
+    ;; tools for grep
     (setq counsel-grep-base-command
           "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
 
@@ -123,7 +125,7 @@ Ivy-based interface to standard commands:
 #+BEGIN_SRC emacs-lisp
   (use-package swiper
     :ensure t
-    :requires (ivy counsel)
+    :after (ivy counsel)
     :bind
     (("C-s"   . swiper)
      ("C-S-s" . swiper-all)   
