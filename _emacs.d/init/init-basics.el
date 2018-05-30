@@ -24,7 +24,8 @@
 ;; start emacs server (use =emacsclient -a "" -c= anywhere else)
 ;; (server-start)
 ;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
-(setq server-use-tcp t)
+(setq-default server-use-tcp t)
+;; if you upgrade to new versions of Emacs, remember to cleanup old files under ~/.emacs.d/server/.
 
 ;; fix PATH for emacs in Mac OS X
 (require 'exec-path-from-shell)

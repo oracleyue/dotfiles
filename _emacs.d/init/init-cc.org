@@ -452,7 +452,7 @@ personally do not use them.)
 #+BEGIN_SRC emacs-lisp
   (use-package cmake-mode
     ;; /cmake-mode/: cmake-mode.el
-    :load-path "~/.emacs.d/git/"
+    :defer t
     :config
     ;; /cmake-font-lock/: to add more fontifying features
     (use-package cmake-font-lock

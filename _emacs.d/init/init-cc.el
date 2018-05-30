@@ -1,4 +1,3 @@
-
 ; =====================================================
 ;; Programming Environment for C/C++ (modern)
 ; =====================================================
@@ -109,7 +108,7 @@
 
 (use-package cmake-mode
   ;; /cmake-mode/: cmake-mode.el
-  :load-path "~/.emacs.d/git/"
+  :defer t
   :config
   ;; /cmake-font-lock/: to add more fontifying features
   (use-package cmake-font-lock

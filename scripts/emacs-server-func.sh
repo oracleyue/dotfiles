@@ -25,7 +25,7 @@ function es() {
     fi
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
-        ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
+        ps aux | grep -i 'emacs --bg-daemon' | grep -v 'grep' \
             | awk '{print $2 "\t" $9 "\tEmacs " $12}' > $tmpfile
         while read line; do
             echo "$line" | sed 's/\0123,4\012//'
@@ -34,24 +34,24 @@ function es() {
 
     elif [[ "$1" == "stop" ]]; then
         if [[ -z $2 ]]; then
-	        kill -9 $(ps aux | grep -i 'emacs --daemon' \
+	        kill -9 $(ps aux | grep -i 'emacs --bg-daemon' \
                           | grep -v 'grep' | awk '{print $2}')
         else
             case $2 in
                 m)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "main" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 c)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 a)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 *)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "$2" | grep -v 'grep' | awk '{print $2}')
                     ;;
             esac
