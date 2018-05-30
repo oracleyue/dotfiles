@@ -90,7 +90,7 @@ Expects a `font-spec'.")
      zyue-unicode-font (font-spec :family "PingFang SC" :size 14.0)
      zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size 14.0))
   (setq
-   zyue-font (font-spec :family "DejaVu Sans Mono" :size 10.8)
+   zyue-font (font-spec :family "DejaVu Sans Mono" :size 11.0)
    zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size 10.5)
    zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size 10.5)))
 (setq

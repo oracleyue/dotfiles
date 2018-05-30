@@ -14,6 +14,9 @@
 ;; use /html-mode/ for html
 ;; use /css-mode/ for css
 
+;; use /nxml-mode/ for xml
+(setq nxml-child-indent 4 nxml-attribute-indent 4)
+
 ;; use /js2-mode/ for javescript
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
