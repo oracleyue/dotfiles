@@ -3,72 +3,80 @@
 ;; ===============================================================
 ;; Last modified on 31 Mar 2018
 
-
-;; Install required Emacs packages
-(setq custom/ivy-ext-packages
-      '(ivy
-        counsel
-        swiper
-        wgrep
-        counsel-projectile
-        counsel-gtags))
-(custom/install-packages custom/ivy-ext-packages)
-
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 
-;; Configurations
-(ivy-mode 1)
-(setq ivy-height 15)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(setq ivy-use-selectable-prompt t)  ;; make inputs selectable
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :bind (("C-c C-r" . ivy-resume))
+  :config
+  (ivy-mode 1)
+  (setq ivy-height 15)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
+)
 
-(global-set-key (kbd "C-s") 'swiper)  ;; or use counsel-grep-or-swiper
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> k") 'counsel-descbinds)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(use-package counsel
+  :ensure t
+  :bind
+  (;; basics
+   ("M-x"     . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("<f1> l"  . counsel-find-library)
+   ("<f2> k"  . counsel-descbinds)
+   ("<f2> i"  . counsel-info-lookup-symbol)
+   ("<f2> u"  . counsel-unicode-char)
+   ;; editing and code overview
+   ("M-y"     . counsel-yank-pop)
+   ("M-g SPC" . counsel-mark-ring)
+   ("M-g i"   . counsel-semantic-or-imenu)
+   ;; system tools
+   ("M-s f"   . counsel-fzf)     ;; find
+   ;; ("M-s l"   . counsel-locate)  ;; locate
+  )
+  :config
+  (setq counsel-grep-base-command
+        "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
 
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC
-(global-set-key (kbd "M-g i") 'counsel-semantic-or-imenu) ;; C-c i
+  ;; minibuffer actions
+  (define-key minibuffer-local-map (kbd "C-r")
+    'counsel-minibuffer-history)
+  ;; ensure recentf-list loaded on startup
+  (with-eval-after-load 'counsel (recentf-mode))
+  ;; disable recentf-list loading via ivy-switch-buffer
+  ;; (setq recentf-initialize-file-name-history nil)
 
-(global-set-key (kbd "C-c g") 'counsel-git)
-;; (global-set-key (kbd "C-c j") 'counsel-git-grep)  ;; replaced by counsel-rg
-(global-set-key (kbd "M-g C-s") 'swiper-all)
-;; alternative ~swiper~ for large files
-;; (global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
-(global-set-key (kbd "M-g s") 'counsel-grep)
-(setq counsel-grep-base-command
- "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-(global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
-;; (global-set-key (kbd "M-g k") 'counsel-ack)
-(global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
-(global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
-;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
+  ;; exclude boring files as =.DS_Store=
+  (setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
 
-(define-key minibuffer-local-map (kbd "C-r")
-  'counsel-minibuffer-history)
-;; ensure recentf-list loaded on startup
-(with-eval-after-load 'counsel (recentf-mode))
-;; disable recentf-list loading via ivy-switch-buffer
-;; (setq recentf-initialize-file-name-history nil)
+  ;; fix the bug for ivy-occur in OSX
+  (when *is-mac*
+    (setq counsel-find-file-occur-cmd
+          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+  )
 
-(setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
-
-(when *is-mac*
-  (setq counsel-find-file-occur-cmd
-        "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
-
-(setq counsel-git-cmd "rg --files")
-
-(setq counsel-rg-base-command
-      "rg -i -M 120 --no-heading --line-number --color never %s .")
+(use-package swiper
+  :ensure t
+  :requires (ivy counsel)
+  :bind
+  (("C-s"   . swiper)
+   ("C-S-s" . swiper-all)   
+   ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
+   ("C-c g" . counsel-git)
+   ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
+   ("M-s s" . counsel-grep)  ;; grep the current file
+   ;; grep files recursively in the folder
+   ("M-s a" . counsel-ag)    ;; C-c k
+   ("M-s k" . counsel-ack)
+   ("M-s r" . counsel-rg))
+  :config
+  (setq counsel-git-cmd "rg --files")
+  (setq counsel-rg-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s .")
+  )
 
 ;; use ivy to open recent directories
 ;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
@@ -112,28 +120,54 @@
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
-(counsel-projectile-mode)
+(use-package counsel-projectile
+  :requires projectile
+  :config
+  (counsel-projectile-mode))
 
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
-(add-hook 'c-mode-hook 'counsel-gtags-mode)
-(add-hook 'c++-mode-hook 'counsel-gtags-mode)
-(add-hook 'python-mode-hook 'counsel-gtags-mode)
+(use-package counsel-gtags
+  :config
+  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+  (add-hook 'python-mode-hook 'counsel-gtags-mode)
+  :bind (:map counsel-gtags-mode-map
+              ;; basic jumps
+              ("M-." . counsel-gtags-dwim)
+              ("M-," . counsel-gtags-go-backward)
+              ("M-t" . counsel-gtags-find-definition)
+              ("M-r" . counsel-gtags-find-reference)
+              ("M-s" . counsel-gtags-find-symbol)
+              ;; create/update tags
+              ("C-c g c" . counsel-gtags-create-tags)
+              ("C-c g u" . counsel-gtags-update-tags)
+              ;; jump over stacks/history
+              ("C-c g [" . counsel-gtags-go-backward)
+              ("C-c g ]" . counsel-gtags-go-forward))
+  )
 
-(with-eval-after-load 'counsel-gtags
-  ;; basic jumps
-  (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
-  (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
-  (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
-  (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
-  (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
-  ;; create/update tags
-  (define-key counsel-gtags-mode-map (kbd "C-c g c") 'counsel-gtags-create-tags)
-  (define-key counsel-gtags-mode-map (kbd "C-c g u") 'counsel-gtags-update-tags)
-  ;; jump over stacks/history
-  (define-key counsel-gtags-mode-map (kbd "C-c g [") 'counsel-gtags-go-backward)
-  (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
+;; ---------------------------------------------------------------
+;; Hydra: make Emacs bindings that stick around
+;; ---------------------------------------------------------------
+(use-package hydra
+  :ensure t :ensure ivy-hydra)
+
+;; ---------------------------------------------------------------
+;; Avy: jump to char/words in tree-style
+;; ---------------------------------------------------------------
+(use-package avy
+  :ensure t
+  :bind (("M-g c" . avy-goto-char)    ;; C-:
+         ("C-'"   . avy-goto-char-2)
+         ("M-g l" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)
+         ("M-g e" . avy-goto-word-0)
+         ("M-g r" . avy-resume))
+  :config
+  (avy-setup-default)
+  )
 
 (provide 'init-ivy)
 ;; ================================================

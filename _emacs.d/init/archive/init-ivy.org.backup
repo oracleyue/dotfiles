@@ -27,9 +27,8 @@ Tools to be installed in order to use the corresponding commands in Ivzyue/
     ;; Ivy - a generic completion mechanism for Emacs
     ;; ===============================================================
     ;; Last modified on 31 Mar 2018
-  #+END_SRC
-  
-  #+BEGIN_SRC 
+
+
     ;; Install required Emacs packages
     (setq custom/ivy-ext-packages
           '(ivy
@@ -58,96 +57,72 @@ List of frequent commands:
   - ~counsel-git-grep~ or use ~counsel-rg~ instead
 - find files in directory recursively ~counsel-fzf~ (=M-g f=)
 
-*** Configurations
-
+*** Basics
 #+BEGIN_SRC emacs-lisp
   ;; ---------------------------------------------
   ;; /Ivy + Counsel + Swiper/: by abo-abo
   ;; ---------------------------------------------
 
-  (use-package ivy
-    :ensure t
-    :diminish (ivy-mode)
-    :bind (("C-c C-r" . ivy-resume))
-    :config
-    (ivy-mode 1)
-    (setq ivy-height 15)
-    (setq ivy-use-virtual-buffers t)
-    (setq enable-recursive-minibuffers t)
-    (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
-  )
+  ;; Configurations
+  (ivy-mode 1)
+  (setq ivy-height 15)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
 #+END_SRC
+
+*** Keybindings
 
 Ivy-based interface to standard commands:
 #+BEGIN_SRC emacs-lisp
-  (use-package counsel
-    :ensure t
-    :bind
-    (;; basics
-     ("M-x"     . counsel-M-x)
-     ("C-x C-f" . counsel-find-file)
-     ("<f1> l"  . counsel-find-library)
-     ("<f2> k"  . counsel-descbinds)
-     ("<f2> i"  . counsel-info-lookup-symbol)
-     ("<f2> u"  . counsel-unicode-char)
-     ;; editing and code overview
-     ("M-y"     . counsel-yank-pop)
-     ("M-g SPC" . counsel-mark-ring)
-     ("M-g i"   . counsel-semantic-or-imenu)
-     ;; system tools
-     ("M-s f"   . counsel-fzf)     ;; find
-     ;; ("M-s l"   . counsel-locate)  ;; locate
-    )
-    :config
-    (setq counsel-grep-base-command
-          "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-
-    ;; minibuffer actions
-    (define-key minibuffer-local-map (kbd "C-r")
-      'counsel-minibuffer-history)
-    ;; ensure recentf-list loaded on startup
-    (with-eval-after-load 'counsel (recentf-mode))
-    ;; disable recentf-list loading via ivy-switch-buffer
-    ;; (setq recentf-initialize-file-name-history nil)
-
-    ;; exclude boring files as =.DS_Store=
-    (setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
-
-    ;; fix the bug for ivy-occur in OSX
-    (when *is-mac*
-      (setq counsel-find-file-occur-cmd
-            "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
-    )
+  (global-set-key (kbd "C-s") 'swiper)  ;; or use counsel-grep-or-swiper
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> k") 'counsel-descbinds)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
 #+END_SRC
 
+
+Ivy-based interface to basic editing and programming
 #+BEGIN_SRC emacs-lisp
-  (use-package swiper
-    :ensure t
-    :requires (ivy counsel)
-    :bind
-    (("C-s"   . swiper)
-     ("C-S-s" . swiper-all)   
-     ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
-     ("C-c g" . counsel-git)
-     ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
-     ("M-s s" . counsel-grep)  ;; grep the current file
-     ;; grep files recursively in the folder
-     ("M-s a" . counsel-ag)    ;; C-c k
-     ("M-s k" . counsel-ack)
-     ("M-s r" . counsel-rg))
-    :config
-    (setq counsel-git-cmd "rg --files")
-    (setq counsel-rg-base-command
-          "rg -i -M 120 --no-heading --line-number --color never %s .")
-    )
+  (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC
+  (global-set-key (kbd "M-g i") 'counsel-semantic-or-imenu) ;; C-c i
+#+END_SRC
+
+Ivy-based interface to shell and system tools:
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)  ;; replaced by counsel-rg
+  (global-set-key (kbd "M-g C-s") 'swiper-all)
+  ;; alternative ~swiper~ for large files
+  ;; (global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
+  (global-set-key (kbd "M-g s") 'counsel-grep)
+  (setq counsel-grep-base-command
+   "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
+  (global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k
+  ;; (global-set-key (kbd "M-g k") 'counsel-ack)
+  (global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
+  (global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
+  ;; (global-set-key (kbd "M-g l") 'counsel-locate)  ;; C-x l
 #+END_SRC
 
 *** Minibuffer actions
 
 One may go to the INFO page (=C-h i=) of Ivy to see the complete manual.
-
-To show the recentf list correctly, one have seen the configuration given
-before. To see more details, see https://github.com/abo-abo/swiper/issues/1515.
+The recommended setting of additional minibuffer actions:
+#+BEGIN_SRC emacs-lisp
+  (define-key minibuffer-local-map (kbd "C-r")
+    'counsel-minibuffer-history)
+  ;; ensure recentf-list loaded on startup
+  (with-eval-after-load 'counsel (recentf-mode))
+  ;; disable recentf-list loading via ivy-switch-buffer
+  ;; (setq recentf-initialize-file-name-history nil)
+#+END_SRC
+(For these two additional settings, see https://github.com/abo-abo/swiper/issues/1515.)
 
 A brief summary of minibuffer actions in ~counsel-find-files~:
 -  =C-j=: start a new completion; otherwise, same as =RET=;
@@ -174,16 +149,23 @@ A summary of file name completions:
     Toggle between input as regexp or not.
     Switch to matching literally since file names include ., which is for matching any char in regexp mode.
 
+*** Feature configurations
+Exclude boring files like =.DS_Store= in ~counsel-find-file~:
+#+BEGIN_SRC emacs-lisp
+  (setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
+#+END_SRC
+
 *** Ivy-occur and available actions
 
-The bug of ~ivy-occur~ is due to the incompatibility of commandline tools on OSX
-and Linux, for example =xargs -d '\n'=, =-d= is not available on OSX.
+The bug is due to the incompatibility of commandline tools on OSX and Linux, for
+example =xargs -d '\n'=, =-d= is not available on OSX.
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (when *is-mac*
     (setq counsel-find-file-occur-cmd
           "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
 #+END_SRC
+
 
 A summary of commands in the read-only =ivy-occur= buffer:
 (WARNING: has been changed and no longer working!)
@@ -226,13 +208,13 @@ nifty thing that I discovered only recently is that you can use =ripgrep= as the
 backed for ~counsel-git~ in addition to ~counsel-rg~. Which means the same
 =.ignore= file is used for both commands. Here's the setting:
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (setq counsel-git-cmd "rg --files")
 #+END_SRC
 
 And here's the setting for ~counsel-rg~:
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (setq counsel-rg-base-command
         "rg -i -M 120 --no-heading --line-number --color never %s .")
 #+END_SRC
@@ -335,10 +317,7 @@ Bind a keystroke to this function:
   ;; ---------------------------------------------
   ;; /counsel-projectile/: Ivy for projectile
   ;; ---------------------------------------------
-  (use-package counsel-projectile
-    :requires projectile
-    :config
-    (counsel-projectile-mode))
+  (counsel-projectile-mode)
 #+END_SRC
 
 One may go to =~/.emacs.d/init/readme/= to see more the complete manual (the
@@ -363,38 +342,41 @@ Enable =gtags= for the given major modes:
   ;; ---------------------------------------------
   ;; /counsel-gtags/: Ivy for gtags (GNU global)
   ;; ---------------------------------------------
-  (use-package counsel-gtags
-    :config
-    (add-hook 'c-mode-hook 'counsel-gtags-mode)
-    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    (add-hook 'python-mode-hook 'counsel-gtags-mode)
-    :bind (:map counsel-gtags-mode-map
-                ;; basic jumps
-                ("M-." . counsel-gtags-dwim)
-                ("M-," . counsel-gtags-go-backward)
-                ("M-t" . counsel-gtags-find-definition)
-                ("M-r" . counsel-gtags-find-reference)
-                ("M-s" . counsel-gtags-find-symbol)
-                ;; create/update tags
-                ("C-c g c" . counsel-gtags-create-tags)
-                ("C-c g u" . counsel-gtags-update-tags)
-                ;; jump over stacks/history
-                ("C-c g [" . counsel-gtags-go-backward)
-                ("C-c g ]" . counsel-gtags-go-forward))
-    )
+  (add-hook 'c-mode-hook 'counsel-gtags-mode)
+  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+  (add-hook 'python-mode-hook 'counsel-gtags-mode)
 #+END_SRC
+
+Keybindings:
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'counsel-gtags
+    ;; basic jumps
+    (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
+    (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
+    (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
+    (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
+    (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
+    ;; create/update tags
+    (define-key counsel-gtags-mode-map (kbd "C-c g c") 'counsel-gtags-create-tags)
+    (define-key counsel-gtags-mode-map (kbd "C-c g u") 'counsel-gtags-update-tags)
+    ;; jump over stacks/history
+    (define-key counsel-gtags-mode-map (kbd "C-c g [") 'counsel-gtags-go-backward)
+    (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
+#+END_SRC
+
+
 
 * Hydra - make Emacs bindings that stick around
 
 This is a package for GNU Emacs that can be used to tie related commands into a
 family of short bindings with a common prefix - a Hydra.
 
-#+BEGIN_SRC emacs-lisp
-  ;; ---------------------------------------------------------------
-  ;; Hydra: make Emacs bindings that stick around
-  ;; ---------------------------------------------------------------
-  (use-package hydra
-    :ensure t :ensure ivy-hydra)
+#+BEGIN_SRC
+  ;; Install Hydra package
+  (setq custom/hydra-packages
+        '(hydra
+          ivy-hydra))
+  (custom/install-packages custom/hydra-packages)
 #+END_SRC
 
 ** Supports for Counsel
@@ -438,25 +420,23 @@ Hydra menu offers more additional bindings:
 -  =C= (~ivy-toggle-case-fold~)
   Toggle case folding (match both upper and lower case characters for lower case input).
 
+
 * Avy - jump to things in Emacs tree-style
 
 Avy is a GNU Emacs package for jumping to visible text using a char-based
 decision tree.
 
 #+BEGIN_SRC emacs-lisp
-  ;; ---------------------------------------------------------------
-  ;; Avy: jump to char/words in tree-style
-  ;; ---------------------------------------------------------------
   (use-package avy
     :ensure t
-    :bind (("M-g c" . avy-goto-char)    ;; C-:
-           ("C-'"   . avy-goto-char-2)
-           ("M-g l" . avy-goto-line)
+    :bind (("C-:" . avy-goto-char)
+           ("C-'" . avy-goto-char-2)
+           ("M-g f" . avy-goto-line)
            ("M-g w" . avy-goto-word-1)
-           ("M-g e" . avy-goto-word-0)
-           ("M-g r" . avy-resume))
+           ("M-g e" . avy-goto-word-0))
     :config
     (avy-setup-default)
+    ;; (global-set-key (kbd "C-c C-j") 'avy-resume)
     )
 #+END_SRC
 
