@@ -12,10 +12,11 @@
 
 ;; Themes
 
-;; Frame size   (note: [96,36] in Mac; 33 in Thinkpad)
+;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
 (if *is-mac*
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 33))))
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
 ;; Modeline
 (add-to-list 'load-path "~/.emacs.d/init/styles")
@@ -48,15 +49,15 @@ Expects a `font-spec'.")
   ;; load theme
   (when zyue-theme
     (load-theme zyue-theme t))
-  ;; emacs ui
-  (add-to-list 'default-frame-alist
-               '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist   ;; light or dark
-               '(ns-appearance . (frame-parameter nil 'background-mode)))
   ;; load modeline style
   (zyue-modeline-setup zyue-modeline)
-  ;; load font
-  (when (display-graphic-p)
+  ;; loading after frame creations
+  (when window-system
+    ;; transparent titlebar appearance
+    (if (eq (frame-parameter frame 'background-mode) 'light)
+        (add-to-list 'default-frame-alist '(ns-appearance . light))
+      (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+    ;; load fonts
     (when (fontp zyue-font)
       (set-frame-font zyue-font nil (if frame (list frame) t))
       (set-face-attribute 'fixed-pitch frame :font zyue-font))
@@ -102,9 +103,9 @@ Expects a `font-spec'.")
 ;; (when *is-mac* (setq zyue-theme 'solarized))
 (when *is-mac* (setq zyue-theme 'doom-nord-light))
 (when *is-server-main* (setq zyue-theme 'doom-nord-light))
-(when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 (when *is-server-coding* (setq zyue-theme 'atom-one-dark))
 (when *is-server-ac* (setq zyue-theme 'atom-one-dark))
+(when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Set modeline style
 (setq zyue-modeline 'spaceline)

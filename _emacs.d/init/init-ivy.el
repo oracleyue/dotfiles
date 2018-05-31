@@ -62,7 +62,6 @@
 
 (use-package swiper
   :ensure t
-  :after (ivy counsel)
   :bind
   (("C-s"   . swiper)
    ("C-S-s" . swiper-all)   

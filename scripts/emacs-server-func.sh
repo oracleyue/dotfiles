@@ -100,9 +100,9 @@ function ec() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=main
+        $EMACSCLIENT -nc --socket-name=main
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=main $1
+        $EMACSCLIENT -nc --socket-name=main $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "main" server;'
@@ -119,9 +119,9 @@ function ecc() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=coding
+        $EMACSCLIENT -nc --socket-name=coding
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=coding $1
+        $EMACSCLIENT -nc --socket-name=coding $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "coding" server;'
@@ -138,9 +138,9 @@ function eca() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=ac-mode
+        $EMACSCLIENT -nc --socket-name=ac-mode
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=ac-mode $1
+        $EMACSCLIENT -nc --socket-name=ac-mode $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "ac-mode" server;'

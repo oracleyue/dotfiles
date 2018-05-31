@@ -15,8 +15,8 @@
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
 ;; config built-in "display-line-number-mode" (require Emacs >= 26)
-(setq-default display-line-numbers-type 'relative)
 (setq-default display-line-numbers-width 2)
+;; (setq-default display-line-numbers-type 'relative)
 (setq display-line-numbers-current-absolute t)
 ;; advanced linum style
 (use-package linum-highlight-current-line-number
