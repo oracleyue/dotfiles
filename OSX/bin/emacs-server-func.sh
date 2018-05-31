@@ -25,7 +25,7 @@ function es() {
     fi
 
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
-        ps aux | grep -i 'emacs --daemon' | grep -v 'grep' \
+        ps aux | grep -i 'emacs --bg-daemon' | grep -v 'grep' \
             | awk '{print $2 "\t" $9 "\tEmacs " $12}' > $tmpfile
         while read line; do
             echo "$line" | sed 's/\0123,4\012//'
@@ -34,24 +34,24 @@ function es() {
 
     elif [[ "$1" == "stop" ]]; then
         if [[ -z $2 ]]; then
-	        kill -9 $(ps aux | grep -i 'emacs --daemon' \
+	        kill -9 $(ps aux | grep -i 'emacs --bg-daemon' \
                           | grep -v 'grep' | awk '{print $2}')
         else
             case $2 in
                 m)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "main" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 c)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 a)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
                     ;;
                 *)
-                    kill $(ps aux | grep -i 'emacs --daemon' \
+                    kill $(ps aux | grep -i 'emacs --bg-daemon' \
                                | grep "$2" | grep -v 'grep' | awk '{print $2}')
                     ;;
             esac
@@ -100,9 +100,9 @@ function ec() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=main
+        $EMACSCLIENT -nc --socket-name=main
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=main $1
+        $EMACSCLIENT -nc --socket-name=main $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "main" server;'
@@ -119,9 +119,9 @@ function ecc() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=coding
+        $EMACSCLIENT -nc --socket-name=coding
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=coding $1
+        $EMACSCLIENT -nc --socket-name=coding $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "coding" server;'
@@ -138,9 +138,9 @@ function eca() {
     fi
 
     if [[ $# -eq 0 ]]; then
-        $EMACSCLIENT -nc --server-file=ac-mode
+        $EMACSCLIENT -nc --socket-name=ac-mode
     elif [[ -n $1 ]]; then
-        $EMACSCLIENT -nc --server-file=ac-mode $1
+        $EMACSCLIENT -nc --socket-name=ac-mode $1
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "ac-mode" server;'
