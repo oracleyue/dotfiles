@@ -14,22 +14,25 @@
 ;; ----------------------------------------------
 ;; /linum/: adding line number on left fringe
 ;; ----------------------------------------------
-;; basic linum style
-;; (setq linum-format "%4d  ")
+;; config built-in "display-line-number-mode" (require Emacs >= 26)
+(setq-default display-line-numbers-type 'relative)
+(setq-default display-line-numbers-width 2)
+(setq display-line-numbers-current-absolute t)
 ;; advanced linum style
 (use-package linum-highlight-current-line-number
   :config
   (setq linum-format 'linum-highlight-current-line-number))
-
-;; enable linum-mode
-(add-hook 'sh-mode-hook 'linum-mode)
-(add-hook 'cmake-mode-hook 'linum-mode)
-(add-hook 'matlab-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'c-mode-common-hook 'linum-mode)
-(add-hook 'ess-mode-hook 'linum-mode)   ; for R
-(add-hook 'makefile-gmake-mode-hook 'linum-mode) ; default for gnome
-(add-hook 'makefile-bsdmake-mode-hook 'linum-mode) ; default for OS X
+;; enable line numbering (or "linum-mode")
+(let ((hook-list '(sh-mode-hook
+                   cmake-mode-hook
+                   matlab-mode-hook
+                   python-mode-hook
+                   c-mode-common-hook
+                   makefile-gmake-mode-hook   ; Gnome
+                   makefile-bsdmake-mode-hook ; OS X
+                   ess-mode-hook)))  ; R
+  (dolist (hook-element hook-list)
+    (add-hook hook-element 'display-line-numbers-mode)))
 
 
 ;; ----------------------------------------------
