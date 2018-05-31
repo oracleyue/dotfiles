@@ -27,7 +27,7 @@
 ;; start daemon with name: "emacs --daemon=main"
 ;; connect to server: "emacsclient -nc --socket-name=main"
 ;; if using tcp: "emacsclient -nc --server-file=main"
-;; (setq-default server-use-tcp nil)  ;; using local socket instead tcp
+;; (setq-default server-use-tcp t)  ;; nil to use local socket instead tcp
 ;; Note:
 ;; - If using tcp, starting daemon creates a server file under "~/.emacs.d/server/";
 ;; - If you kill emacs daemon process directly by system command "kill", the server file remains there, which will stop the next start of emacs daemon.
