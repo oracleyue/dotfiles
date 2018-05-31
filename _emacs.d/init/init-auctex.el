@@ -17,11 +17,10 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
-(setq-default TeX-PDF-mode t)    ; default for pdf and forward search
+(setq-default TeX-PDF-mode t)      ; default for pdf and forward search
 (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
 (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
 
@@ -214,7 +213,7 @@
   ;; backward search: in skim's preference -> Sync -> PDF-TeX Sync support:
   ;; if using emacs server, set
   ;;  "Command": /usr/local/bin/emacsclient
-  ;;  "Arguments": --server-file=main --no-wait +%line "%file"
+  ;;  "Arguments": --socket-name=main --no-wait +%line "%file"
 
 ;; keybinding definitions
 (eval-after-load "latex"
