@@ -138,12 +138,38 @@
 ;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 
 ;; /smartparens/: insert pairs of parenthesis/brackets
-(require 'smartparens-config)
-(smartparens-global-mode 1)
-;; highlight pairs (e.g. brackets)
-(show-smartparens-global-mode 1) ;; replace default /show-paren/
-;; disable highlights between pairs firstly inserted
-(setq sp-highlight-pair-overlay nil)
+(use-package smartparens
+  :ensure t
+  :defer nil
+  :bind (:map smartparens-mode-map
+              ;; nativation
+              ("C-M-f"   . sp-forward-sexp)
+              ("C-M-b"   . sp-backward-sexp)
+              ("C-M-d"   . sp-down-sexp)
+              ("C-M-u"   . sp-up-sexp)
+              ("C-M-a"   . sp-beginning-of-sexp)
+              ("C-M-e"   . sp-end-of-sexp)
+              ;; mark
+              ("C-M-SPC" . sp-mark-sexp)
+              ;; warp, unwrap and rewrap
+              ("C-M-s"   . sp-splice-sexp)
+              ("C-M-w"   . sp-rewrap-sexp)
+              ;; kill, copy
+              ("C-M-k"   . sp-kill-sexp)
+              ;; expand and contract
+              ("C-M-p"   . sp-forward-barf-sexp)
+              ("C-M-c"   . sp-forward-slurp-sexp)
+              ;; split, join and raise
+              ("C-M-t"   . sp-split-sexp)
+              ("C-M-j"   . sp-join-sexp)
+              ("C-M-r"   . sp-raise-sexp))
+  :config
+  (require 'smartparens-config) ;; default config
+  (smartparens-global-mode 1)
+  ;; highlight pairs (e.g. brackets)
+  (show-smartparens-global-mode 1) ;; replace default /show-paren/
+  ;; disable highlights between pairs firstly inserted
+  (setq sp-highlight-pair-overlay nil))
 
 ;; /bash-completion/: TAB complete alias and functions
 (require 'bash-completion)

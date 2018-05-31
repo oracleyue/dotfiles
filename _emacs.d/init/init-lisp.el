@@ -17,11 +17,8 @@
 (define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "C-c C-f") 'eval-defun)
 
-;; /smartparens/ mode (enabled in =init-basics.el=; replace /paredit/)
-(define-key smartparens-mode-map (kbd "M-S") 'sp-split-sexp)
-(define-key smartparens-mode-map (kbd "M-J") 'sp-join-sexp)
-(define-key smartparens-mode-map (kbd "M-R") 'sp-raise-sexp)
-;; basic usages:
+;; Native editing supports
+;; suggest to use /smartparens/ or /paredit/ (enabled in =init-basics.el=)
 ;; + ~forward-sexp~, =C-M-f=:
 ;;     move forward over a balanced expression that can be a pair or a symbol
 ;; + ~backward-sexp~, =C-M-b=:
@@ -36,6 +33,7 @@
 ;;   move point to end of a function
 ;; + ~mark-defun~, =C-M-h=:
 ;;   put a region around whole current or following function
+
 
 ;; /scheme/ (MIT/GNU)
 (setq scheme-program-name "/usr/local/bin/mit-scheme")
