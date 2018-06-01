@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: hexo markdown
+# name: hexo header
 # key: hexo
+# group: meta
 # --
 #+STARTUP: showall indent
 #+OPTIONS: toc:nil

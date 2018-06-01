@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: money transfer
+# key: transfer
+# group: ledger
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+name: expenses
+#+BEGIN_SRC ledger :noweb yes
+2016/07/20 * Money transfer (from bank to cash)
+    Assets:Cash                                         120000 JPY
+    Assets:JP Bank
+#+END_SRC
