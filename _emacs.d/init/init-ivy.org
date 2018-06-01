@@ -462,6 +462,11 @@ decision tree.
     )
 #+END_SRC
 
+A quick note on the native ~goto-line~ (=M-g M-g=):
+- =M-x goto-line +40= should go 40 lines forward
+- =M-x goto-line -30= goes 30 lines backward.
+- =M-x goto-line  24= goes to line 24
+
 
 * END
 
