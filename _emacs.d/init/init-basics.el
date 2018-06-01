@@ -62,8 +62,8 @@
 (setq mark-ring-max 16)
 (setq global-mark-ring-max 32)
 
-;; mouse control (move 3 lines each time)
-(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . nil)))
+;; srcolling control (move 3 lines each time)
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . 10)))
 (setq mouse-wheel-progressive-speed nil)
 
 ;; suppress redefinition warnings
