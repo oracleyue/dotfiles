@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: income
+# key: income
+# group: ledger
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+name: income
+#+BEGIN_SRC ledger :noweb yes
+2016/07/15 * Kyoto University
+    Assets:JP Bank                                      200000 JPY
+    Income:Salary
+#+END_SRC

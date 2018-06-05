@@ -51,6 +51,8 @@
 (require 'init-markdown)          ;; markdown
 (require 'init-auctex)            ;; latex
 
+;; additional misc mode
+(require 'init-misc)
 
 ;; ----------------------------------------------------------------
 ;; Programming Environments

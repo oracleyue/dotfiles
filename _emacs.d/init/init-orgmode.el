@@ -79,6 +79,7 @@
    (python . t)
    (R . t)
    (matlab . t)
+   (ledger . t)
    (latex . t)))
 
 ;; stop asking evaluation codes when export

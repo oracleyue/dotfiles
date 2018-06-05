@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name: src with export options
+# name: src export options
 # key: srcxp
+# group: src
 # --
 #+BEGIN_SRC ${1:python} :results ${2:output} :exports ${3:code}
 $0

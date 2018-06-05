@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
-# name:src block: elisp
+# name: elisp
 # key:el
+# group: src
 # expand-env: ((yas-indent-line 'fixed))
 # --
 #+BEGIN_SRC emacs-lisp
