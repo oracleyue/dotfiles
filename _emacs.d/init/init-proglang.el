@@ -13,9 +13,9 @@
 ;; ---------------------------------------------
 ;; major mode for /AppleScript/
 ;; ---------------------------------------------
-(autoload 'applescript-mode "applescript-mode"
-  "Major mode for editing AppleScript source." t)
-(add-to-list 'auto-mode-alist '("\\.applescript$" . applescript-mode))
+(use-package apples-mode
+  :ensure t
+  :mode "\\.\\(applescri\\|sc\\)pt\\'")
 
 
 ;; ---------------------------------------------

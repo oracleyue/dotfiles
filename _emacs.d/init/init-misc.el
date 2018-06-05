@@ -14,7 +14,7 @@
 
 
 ;; /ledger-mode/: financial accounting
-(use-package ledger-mode :ensure t)
+(use-package ledger-mode :ensure t :defer t)
 ;; It also provides Babel in org-mode for ledger src blocks.
 
 
