@@ -92,7 +92,8 @@
 ;; default browser
 (if (string-equal system-type "darwin")
     (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program (expand-file-name "~/bin/web-browser")) ;use Safari
+          browse-url-generic-program
+          (expand-file-name "~/bin/web-browser")) ;use Safari
   (setq browse-url-browser-function 'browse-url-firefox))
 
 ;; startup Dired folders

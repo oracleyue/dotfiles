@@ -23,7 +23,7 @@
    zyue-variable-pitch-font
    (font-spec
     :family "SF Compact Display"
-    :size 14
+    :size 15
     :width 'extra-condensed
     :weight 'normal
     :slant 'normal

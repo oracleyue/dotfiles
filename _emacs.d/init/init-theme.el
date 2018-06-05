@@ -36,8 +36,6 @@
   "The default font to use. Expects a `font-spec'.")
 (defvar zyue-modeline-font nil
   "The font to use for modeline. Expects a `font-spec'.")
-(defvar zyue-fixed-pitch-font nil
-  "The default font to use for fixed-pitch text. Expects a `font-spec'.")
 (defvar zyue-variable-pitch-font nil
   "The default font to use for variable-pitch text. Expects a `font-spec'.")
 (defvar zyue-unicode-font nil
@@ -94,9 +92,7 @@ Expects a `font-spec'.")
    zyue-font (font-spec :family "DejaVu Sans Mono" :size 11.0)
    zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size 10.5)
    zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size 10.5)))
-(setq
- zyue-fixed-pitch-font (font-spec :family "DejaVu Sans Mono")
- zyue-variable-pitch-font (font-spec :family "Roboto"))
+(setq zyue-variable-pitch-font (font-spec :family "Roboto"))
 
 ;; Set different themes for app and daemons
 (when *is-linux* (setq zyue-theme 'atom-one-dark))
