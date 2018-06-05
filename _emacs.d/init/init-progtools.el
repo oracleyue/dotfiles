@@ -12,38 +12,36 @@
 
 
 ;; ----------------------------------------------
-;; /linum/: adding line number on left fringe
+;; line numbering
 ;; ----------------------------------------------
-;; config built-in "display-line-number-mode" (require Emacs >= 26)
-(setq-default display-line-numbers-width 2)
-(setq-default display-line-numbers-type 'relative)
-(setq display-line-numbers-current-absolute t)
-;; advanced linum style
-(use-package linum-highlight-current-line-number
-  :config
-  (setq linum-format 'linum-highlight-current-line-number))
-;; enable line numbering (or "linum-mode")
-(let ((hook-list '(sh-mode-hook
-                   cmake-mode-hook
-                   matlab-mode-hook
-                   python-mode-hook
-                   c-mode-common-hook
-                   makefile-gmake-mode-hook   ; Gnome
-                   makefile-bsdmake-mode-hook ; OS X
-                   ess-mode-hook)))  ; R
-  (dolist (hook-element hook-list)
-    (add-hook hook-element 'display-line-numbers-mode)))
+;; use built-in "display-line-number-mode" (require Emacs >= 26)
+(use-package display-line-numbers
+  :init
+  (setq-default display-line-numbers-width 2)
+  (setq-default display-line-numbers-type 'relative)
+  (setq display-line-numbers-current-absolute t)
+  ;; change line-number background
+  ;; (set-face-background 'line-number (face-background 'org-block))
+  ;; highlight current line
+  (set-face-foreground 'line-number-current-line "goldenrod")
+  (set-face-bold 'line-number-current-line t)
+  ;; enable line numbering (or "linum-mode")
+  (let ((hook-list '(sh-mode-hook
+                     cmake-mode-hook
+                     matlab-mode-hook
+                     python-mode-hook
+                     c-mode-common-hook
+                     makefile-gmake-mode-hook   ; Gnome
+                     makefile-bsdmake-mode-hook ; OS X
+                     ess-mode-hook)))  ; R
+    (dolist (hook-element hook-list)
+      (add-hook hook-element 'display-line-numbers-mode))))
 
 
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
-(require 'iedit)
-(when (eq 'monokai (car custom-enabled-themes))
-  (set-face-attribute 'iedit-occurrence nil
-                      :foreground "#272822"
-                      :background "#E6DB74"
-                      :weight 'normal))
+(use-package iedit :ensure t)
 
 
 ;; ----------------------------------------------

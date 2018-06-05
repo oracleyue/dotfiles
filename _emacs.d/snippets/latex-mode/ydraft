@@ -7,7 +7,7 @@
 \documentclass[a4paper,11pt]{article}
 
 \usepackage[utf8]{inputenc}
-\usepackage{times,helvet}    % charter; newtxtext/newtxmath
+% \usepackage{times,helvet}    % charter; newtxtext/newtxmath
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts}

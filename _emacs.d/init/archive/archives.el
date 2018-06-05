@@ -688,3 +688,17 @@ See help of `format-time-string' for possible replacements")
                                python-indent 4))))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;; advanced linum style
+(use-package linum-highlight-current-line-number
+  :config
+  (setq linum-format 'linum-highlight-current-line-number))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(require 'iedit)
+(when (eq 'monokai (car custom-enabled-themes))
+  (set-face-attribute 'iedit-occurrence nil
+                      :foreground "#272822"
+                      :background "#E6DB74"
+                      :weight 'normal))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

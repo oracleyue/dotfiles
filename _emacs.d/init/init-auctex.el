@@ -136,7 +136,8 @@
 
 ;; Set master files for multiple documents
 ;; use "C-c _" to query for master files
-(setq-default TeX-master 'dwim)
+(setq-default TeX-master t)
+;; (setq-default TeX-master 'dwim)
 
 ;; Bibliography for RefTeX
 (setq reftex-default-bibliography '("./ref/library.bib"))

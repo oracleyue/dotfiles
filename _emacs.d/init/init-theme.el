@@ -100,7 +100,6 @@ Expects a `font-spec'.")
 
 ;; Set different themes for app and daemons
 (when *is-linux* (setq zyue-theme 'atom-one-dark))
-;; (when *is-mac* (setq zyue-theme 'solarized))
 (when *is-mac* (setq zyue-theme 'doom-nord-light))
 (when *is-server-main* (setq zyue-theme 'doom-nord-light))
 (when *is-server-coding* (setq zyue-theme 'atom-one-dark))

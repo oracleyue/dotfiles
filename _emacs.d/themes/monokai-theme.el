@@ -486,6 +486,12 @@ Takes and optional `FRAME' as reference."
                              :background ,monokai-bg
                              :bold t))))
 
+     ;; iedit (oracleyue)
+     `(iedit-occurrence
+       ((,class (:foreground "#272822"
+                             :background "#E6DB74"
+                             :weight normal))))
+
      ;; man
      `(Man-overstrike
        ((,class (:foreground ,blue
