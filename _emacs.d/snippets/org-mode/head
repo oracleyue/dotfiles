@@ -1,8 +1,7 @@
 # -*- mode: snippet -*-
-# name: org header
+# name: header
 # key: head
 # expand-env: ((yas-indent-line 'fixed))
-# group: meta
 # --
 #+TITLE:    ${1:Title}
 #+AUTHOR:   Zuogong Yue

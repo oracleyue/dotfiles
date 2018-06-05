@@ -242,12 +242,6 @@
 Uses `current-date-format' for the formatting the date/time."
   (interactive)
   (insert (format-time-string current-date-format (current-time))))
-(defun insert-date-short ()
-  "insert the current date and time into current buffer.
-Uses `current-date-format' for the formatting the date/time."
-  (interactive)
-  (let ((current-date-format "%Y/%m/%d"))
-    (insert (format-time-string current-date-format (current-time)))))
 (defun insert-time ()
   "insert the current time (1-week scope) into the current buffer."
   (interactive)

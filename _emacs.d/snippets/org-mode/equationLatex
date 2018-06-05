@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: equation
+# name: equation (LaTeX)
 # key: eq
-# group: latex
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{equation}

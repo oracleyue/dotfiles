@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: src +noweb
 # key: noweb
-# group: src
 # --
 #+name: ${1:script name}
 #+begin_src ${2:language} :noweb yes :exports ${3:none}
