@@ -1,12 +1,9 @@
-;; ================================================================
+;; ===============================================================
 ;; Settings for /Org-mode/
-;; ================================================================
+;; ===============================================================
 
-;; Install required packages for more functions
-(setq custom/org-packages
-      '(htmlize
-        ox-gfm))
-(custom/install-packages custom/org-packages)
+;; Required software in the system:
+;; - "ledger": financial accounting
 
 
 ;;
@@ -47,6 +44,8 @@
 ;; Export Settings
 
 ;; HTML
+(use-package htmlize :ensure t)  ;; code block fontification
+;; using css styles
 (setq org-html-head-include-default-style nil)
 ;; local setting: add "#+HTML_HEAD" and "#+HTML_HEAD_EXTRA" in .org files
 ;; one can add "#+HTML_HEAD: " (leave empty) to disable global heads
@@ -74,12 +73,13 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (shell . t)
-   (C . t)
-   (python . t)
-   (R . t)
-   (matlab . t)
-   (latex . t)))
+   (shell      . t)
+   (C          . t)
+   (python     . t)
+   (R          . t)
+   (matlab     . t)
+   (ledger     . t)  ;; use ~ledger~ for finance accounting
+   (latex      . t)))
 
 ;; stop asking evaluation codes when export
 (setq org-export-babel-evaluate nil)
@@ -108,7 +108,7 @@
 ;; Additional Supports via Third-party Packages
 ;;
 
-;; /smart-parens/ for org-mode
+;; additional config of /smartparens/ for org-mode
 (sp-with-modes 'org-mode
   (sp-local-pair "$" "$"
                  :unless '(sp-latex-point-after-backslash)
@@ -118,8 +118,12 @@
 
 
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
-(eval-after-load "org"
-  '(require 'ox-gfm nil t))
+(use-package ox-gfm
+  :ensure t
+  :config
+  (eval-after-load "org"
+    '(require 'ox-gfm nil t)))
+
 
 ;; ;; /ox-reveal/: presentation via orgmode
 ;; (use-package ox-reveal
@@ -140,6 +144,11 @@
 ;;   (setq org-reveal-center t)
 ;;   (setq org-reveal-progress t)
 ;;   (setq org-reveal-history nil))
+
+
+;; /ledger-mode/: financial accounting
+(use-package ledger-mode
+  :ensure t)
 
 
 

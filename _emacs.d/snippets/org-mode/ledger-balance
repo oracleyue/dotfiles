@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: balance
+# key: balance
+# group: ledger
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+name: balance
+#+BEGIN_SRC ledger :cmdline bal :noweb yes
+<<startup>>
+<<income>>
+<<expenses>>
+#+END_SRC

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: abstract
 # key: abs
+# group: latex
 # --
 #+BEGIN_ABSTRACT
 ${1:This is an *abstract* in Org-mode.}

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: bmatrix
 # key: bm
+# group: latex
 # expand-env: ((yas-indent-line 'fixed))
 # --
 #+BEGIN_HTML

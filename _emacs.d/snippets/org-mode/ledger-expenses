@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: expenses
+# key: expenses
+# group: ledger
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+name: expenses
+#+BEGIN_SRC ledger :noweb yes
+2016/07/12 * App Store
+    Expenses:App                                           500 JPY
+    Assets:Itunes
+#+END_SRC
