@@ -34,8 +34,8 @@
    ("M-g SPC" . counsel-mark-ring)
    ("M-g i"   . counsel-semantic-or-imenu)
    ;; system tools
-   ("M-s f"   . counsel-fzf)     ;; find
-   ;; ("M-s l"   . counsel-locate)  ;; locate
+   ("M-g f"   . counsel-fzf)     ;; find
+   ;; ("M-g l"   . counsel-locate)  ;; locate
   )
   :config
   (setq counsel-find-file-at-point t)
@@ -68,11 +68,11 @@
    ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
    ("C-c g" . counsel-git)
    ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
-   ("M-s s" . counsel-grep)  ;; grep the current file
+   ("M-g s" . counsel-grep)  ;; grep the current file
    ;; grep files recursively in the folder
-   ("M-s a" . counsel-ag)    ;; C-c k
-   ("M-s k" . counsel-ack)
-   ("M-s r" . counsel-rg))
+   ("M-g a" . counsel-ag)    ;; C-c k
+   ("M-g k" . counsel-ack)
+   ("M-g r" . counsel-rg))
   :config
   (setq counsel-git-cmd "rg --files")
   (setq counsel-rg-base-command
