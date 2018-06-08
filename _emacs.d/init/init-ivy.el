@@ -160,12 +160,11 @@
 ;; ---------------------------------------------------------------
 (use-package avy
   :ensure t
-  :bind (("C-'"   . avy-goto-char)   ;; C-:
-         ("M-'"   . avy-goto-char-2) ;; C-'
-         ("M-g c" . avy-goto-char)
-         ("M-g g" . avy-goto-line)
-         ("M-g w" . avy-goto-word-1)
-         ;; ("M-g e" . avy-goto-word-0)  ;; too many candiates
+  :bind (("C-'"     . avy-goto-char)   ;; C-:
+         ("M-'"     . avy-goto-char-2) ;; C-'
+         ("M-g g"   . avy-goto-line)
+         ("M-g w"   . avy-goto-word-1)
+         ;; ("M-g e"   . avy-goto-word-0)  ;; too many candiates
          ("M-g M-r" . avy-resume))
   :config
   (avy-setup-default)

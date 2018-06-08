@@ -30,6 +30,9 @@
 ;;      - list all available encodings with "M-x list-coding-systems"
 ;;      - declare a file with a particular character encoding:
 ;;          add "-*- coding: utf-8 -*-" in the first line of your files
+;; change encodings:   utf-8-unix, utf-8-dos
+;;      - change when saving using "C-x C-m f"
+;;      - force it immediately by using "C-x C-m c <encoding> RET C-x C-w RET"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
 ;; remove all except 1 space between characters :: "C-c SPC" (built-in: M-SPC)
@@ -91,9 +94,6 @@
 ;; use set-goal-column to do vertical editing :: "C-x C-n"; to remove "C-u C-x C-n"
 ;; insert date :: "M-x insert-date"
 ;; toggle window split (horizontal <-> vertical) :: "C-x |"
-;; change encodings:   utf-8-unix, utf-8-dos
-;;      - change when saving using "C-x C-m f"
-;;      - force it immediately by using "C-x C-m c <encoding> RET C-x C-w RET"
 ;; change End-of-Line:
 ;;      - "M-x set-buffer-file-coding-system utf-8-unix" or use "C-x RET f"
 ;; open the *Messages* buffer :: "C-h e"

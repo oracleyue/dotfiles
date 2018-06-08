@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: List of Math Pkgs
+# key: math
+# group: info
+# --
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,mathtools}
+
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{dsfont}     % use \mathds{1} for doublestroke digits
+\usepackage{empheq}     % to deal with parentheses + subfunctions

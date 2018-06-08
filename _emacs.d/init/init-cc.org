@@ -37,7 +37,7 @@ Other configurations for C++ programming environment located in
   - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
   - integrate *flycheck* with *rtags* (disabled) and *irony*
   - use *cmake-ide* to integrate cmake-based projects
-  - use *helm-make* as alternative compilation
+  - use *helm-make* as an alternative compile command, if using helm.
 
 ** Requirements
 *** install software in OS
@@ -282,23 +282,6 @@ Install irony-mode from MELPA and add the following to your emacs init file:
     (add-hook 'c-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 #+END_SRC
-*** Use Irony for C/C++ projects
-Like RTags, Irony requires a compilation database. To create one, if using
-=cmake=, run the following:
-
-#+BEGIN_SRC sh
-  $ cd /path/to/project/build/
-  $ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
-#+END_SRC
-
-For other C++ projects which aren't CMake-based, use the excellent tool =bear=
-to emit the =compile_commands.json= file. It's as easy as:
-
-#+BEGIN_SRC sh
-  $ make clean
-  $ bear make
-#+END_SRC
-
 *** Integrate Irony and Irony-c-headers in Company
 
 To integrate company-mode with Irony and add supports for C++ headers completion,
@@ -344,6 +327,57 @@ place point on top of a symbol, or inside a function call.
 
 #+BEGIN_SRC
   (add-hook 'irony-mode-hook #'irony-eldoc)
+#+END_SRC
+
+*** Use Irony for C/C++ projects
+Like RTags, Irony requires a compilation database. To create one, if using
+=cmake=, run the following:
+
+#+BEGIN_SRC sh
+  $ cd /path/to/project/build/
+  $ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+#+END_SRC
+
+A good practice is to create a makefile in the project root as a wrapper to run cmake and build commands, e.g.
+
+#+BEGIN_SRC makefile
+  .PHONY: clean cmake build
+
+  cmake:
+      cd ./build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
+  clean:
+      rm -rf ./build/*
+  build:
+      cd ./build && make
+#+END_SRC
+
+For non-CMake based C++ projects , use the excellent tool =bear= to emit the
+=compile_commands.json= file. Note that, due to "System Integrity Protection" on
+OS X (https://support.apple.com/en-us/HT204899), ~bear make~ might provide empty
+json.  To make ~bear~ work, you have to use build tools not offered in the
+directories protected by the SIP. In my setup, I use compilers ~gcc~/~clang~
+provided by the packages =gcc=/=llvm= installed via =homebrew=. Moreover, we
+also has to use ~make~ that is not shipped by OS X. I use homebrew to install
+GNU make, which provides the binary ~gmake~ (it is =make=, but prefixed with =g=
+by default to differentiate from the original one). We run the following to
+generate compilation json:
+#+BEGIN_SRC sh
+  $ make clean
+  $ bear gmake
+#+END_SRC
+and an example of makefile is shown as below:
+#+BEGIN_SRC makefile
+  CXX = /usr/local/bin/g++-7
+  CXXFLAGS = -I./include -std=c++11
+
+  run: main.o
+      $(CXX) $(LDFLAGS)  -o $@ $^
+  main.o: main.cpp include/Vec.hpp
+      $(CXX) $(CXXFLAGS) -c -o $@ $<
+
+  .Phony: clean
+  clean:
+      rm main.o run
 #+END_SRC
 
 ** Syntax checking with Flycheck
@@ -482,14 +516,16 @@ use =C-c p c= (=helm-make-projectile=); otherwise, simple run =M-x helm-make= or
 =M-x compile=.
 #+BEGIN_SRC emacs-lisp
   ;; Compile commands in c/c++ and makefile modes using helm-make
-  (use-package helm-make
-    :bind (("C-c p c" . helm-make-projectile)
-           :map c-mode-base-map
-           ("C-c C-c" . helm-make)
-           :map makefile-gmake-mode-map   ;; makefile in Linux
-           ("C-c C-c" . helm-make)
-           :map makefile-bsdmake-mode-map ;; makefile in BSD
-           ("C-c C-c" . helm-make)))
+  (when *use-helm*
+    (use-package helm-make
+      :bind (("C-c p c" . helm-make-projectile)
+             :map c-mode-base-map
+             ("C-c C-c" . helm-make)
+             :map makefile-gmake-mode-map   ;; makefile in Linux
+             ("C-c C-c" . helm-make)
+             :map makefile-bsdmake-mode-map ;; makefile in BSD
+             ("C-c C-c" . helm-make)))
+    )
 #+END_SRC
 
 If the Makefile is in different directories, e.g. created by *cmake*, we need to
