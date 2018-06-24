@@ -14,9 +14,20 @@
       (setq powerline-image-apple-rgb t))    ;; fix applet bug on OSX
     (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
 
+;;
+;; Doomline
+;;
+(defun zyue-use-doomline ()
+  ;; dependencies
+  (use-package shrink-path :ensure t)
+  (use-package eldoc-eval :ensure t)
+  (use-package all-the-icons :ensure t)
+  ;; load doom-modeline (under "~/.emacs.d/git/")
+  (require 'doom-modeline)
+  (doom-modeline-init))
 
 ;;
-;; Customized Theme
+;; Customized modeline
 ;;
 (defun zyue-customize-modeline ()
   ;; fonts
@@ -112,15 +123,15 @@
                  "---"
                  )))
 
-
 ;;
-;; Wraper function to load modeline themes
+;; Wraper function to load modeline
 ;;
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
     ('custom    (zyue-customize-modeline))
     ('spaceline (zyue-use-spaceline))
+    ('doomline  (zyue-use-doomline))
     (_          (zyue-customize-modeline))
     ))
 
