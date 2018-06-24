@@ -6,37 +6,13 @@
 #+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
 
-* Notes  for C/C++ Environments                                    :noexport:
-
-*Warning*:
-- =semantic-mode= in CEDET causes ~M-x gdb~ freeze Emacs on OSX
-
-*Features* (using =helm=):
-- use =C-c h i= to show symbol reference table
-- create =.dir-local.el= to enable completion for local codes
-- use helm-projectile to browse files in project
-    - =C-c p a= to switch between .h, .c and .cpp
-    - jump to =f= (file); =d= (directory); =b= (buffer); =e= (recent files)
-    - grep in project: =C-c p g s=
-    - multi-occur in project buffers: =C-c p o=
-- use helm-gtags to jump via tags
-    - use =C-c g c= create tags first and =C-c g u= to update
-    - use =M-.= and =M-,= to jump and jump back (see more in =init-tags.el=)
-
-*Obsolete alternatives*:
-Other configurations for C++ programming environment located in
-=./unmaintained/=:
-- =init-cc-clang.el= : use =company-mode= and =company-clang= for completion
-- =init-cc-ac.el= : use =auto-complete-mode= and =clang-complete-async=
-
-
 * Modern C++ IDE for Emacs
 
   Features:
+  - use *irony-mode* for code completion (use *company* as auto-complete engine)
   - use *rtags* for code navigation (if enable by =*enable-rtags*= in =init-features.el=)
-  - use *irony-mode*, *rtags* for code completion (use *company* as ac-engine)
   - integrate *flycheck* with *rtags* (disabled) and *irony*
-  - use *cmake-ide* to integrate cmake-based projects
+  - use *cmake-ide* (disabled) to integrate cmake-based projects
   - use *helm-make* as an alternative compile command, if using helm.
 
 ** Requirements
@@ -167,8 +143,15 @@ to the =company-backends=.
       ;;   :config
       ;;   (push 'company-rtags company-backends))
       ;; integration with helm
-      (when *use-helm*
-        (setq rtags-display-result-backend 'helm))))
+      (if *use-helm*
+          (use-package helm-rtags
+            :ensure t
+            :config
+            (setq rtags-display-result-backend 'helm))
+        (use-package ivy-rtags
+          :ensure t
+          :config
+          (setq rtags-display-result-backend 'ivy)))))
 #+END_SRC
 
 *** Use RTags for C/C++ projects
@@ -194,12 +177,8 @@ directory I start
 #+END_SRC
 
 For other C++ projects which aren't CMake-based, use the excellent tool =bear=
-to emit the =compile_commands.json= file. It's as easy as:
-
-#+BEGIN_SRC sh
-  $ make clean
-  $ bear make
-#+END_SRC
+to emit the =compile_commands.json= file. See more details in Section - "Use
+Irony for C/C++ Projects".
 
 *** Usages
 **** Basic movements
@@ -428,7 +407,7 @@ We use =flycheck-irony= from MELPA to perform syntax checking via =irony=:
 - =C-c ! l=: list errors
 - =C-c ! c=: menually run checker
 
-** CMake automation with cmake-ide (disabled)
+** [disabled] CMake automation with cmake-ide
 *** Prerequisites
 
     Install cmake-ide from MELPA and add the following to your emacs init file:
@@ -481,7 +460,7 @@ personally do not use them.)
       (define-key function-args-mode-map (kbd "M-o") 'open-previous-line)))
 #+END_SRC
 
-*** Major modes to edit CMake files
+*** CMake mode
 
 #+BEGIN_SRC emacs-lisp
   (use-package cmake-mode
@@ -524,8 +503,7 @@ use =C-c p c= (=helm-make-projectile=); otherwise, simple run =M-x helm-make= or
              :map makefile-gmake-mode-map   ;; makefile in Linux
              ("C-c C-c" . helm-make)
              :map makefile-bsdmake-mode-map ;; makefile in BSD
-             ("C-c C-c" . helm-make)))
-    )
+             ("C-c C-c" . helm-make))))
 #+END_SRC
 
 If the Makefile is in different directories, e.g. created by *cmake*, we need to
@@ -541,7 +519,7 @@ Due to the local variable settings, Emacs will ask if the variable =helm-make-bu
   (put 'helm-make-build-dir 'safe-local-variable 'stringp)
 #+END_SRC
 
-*** Major modes for doxygen documentations (disabled)
+*** [disabled] Major modes for doxygen documentations
 To use =doxymacs=, setup the following in your init file:
 
 #+BEGIN_SRC
@@ -563,3 +541,27 @@ To use =doxymacs=, setup the following in your init file:
   ;; ================================================
   ;; init-cc.el ends here
 #+END_SRC
+
+
+* Notes                                                            :noexport:
+
+*Warning*:
+- =semantic-mode= in CEDET causes ~M-x gdb~ freeze Emacs on OSX
+
+*Features* (using =helm=):
+- use =C-c h i= to show symbol reference table
+- create =.dir-local.el= to enable completion for local codes
+- use helm-projectile to browse files in project
+    - =C-c p a= to switch between .h, .c and .cpp
+    - jump to =f= (file); =d= (directory); =b= (buffer); =e= (recent files)
+    - grep in project: =C-c p g s=
+    - multi-occur in project buffers: =C-c p o=
+- use helm-gtags to jump via tags
+    - use =C-c g c= create tags first and =C-c g u= to update
+    - use =M-.= and =M-,= to jump and jump back (see more in =init-tags.el=)
+
+*Obsolete alternatives*:
+Other configurations for C++ programming environment located in
+=./unmaintained/=:
+- =init-cc-clang.el= : use =company-mode= and =company-clang= for completion
+- =init-cc-ac.el= : use =auto-complete-mode= and =clang-complete-async=

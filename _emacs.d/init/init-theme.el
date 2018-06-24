@@ -26,6 +26,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/github.com")
 
 ;; Variables
 (defvar zyue-theme nil
@@ -98,7 +99,7 @@ Expects a `font-spec'.")
 (when *is-linux* (setq zyue-theme 'atom-one-dark))
 (when *is-mac* (setq zyue-theme 'doom-nord-light))
 (when *is-server-main* (setq zyue-theme 'doom-nord-light))
-(when *is-server-coding* (setq zyue-theme 'atom-one-dark))
+(when *is-server-coding* (setq zyue-theme 'doom-one))
 (when *is-server-ac* (setq zyue-theme 'atom-one-dark))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 

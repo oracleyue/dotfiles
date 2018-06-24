@@ -18,7 +18,7 @@
 (use-package display-line-numbers
   :init
   (setq-default display-line-numbers-width 2)
-  (setq-default display-line-numbers-type 'relative)
+  ;; (setq-default display-line-numbers-type 'relative)
   (setq display-line-numbers-current-absolute t)
   ;; change line-number background
   ;; (set-face-background 'line-number (face-background 'org-block))

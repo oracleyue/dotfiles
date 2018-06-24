@@ -235,17 +235,18 @@
 (global-set-key (kbd "C-x |") 'zyue/toggle-window-split)
 
 ;; insert date
-(defvar current-date-format "%d %b %Y")  ;; %a" for weekdays
-(defvar current-time-format "%H:%M:%S")
 (defun insert-date ()
   "insert the current date and time into current buffer.
 Uses `current-date-format' for the formatting the date/time."
   (interactive)
-  (insert (format-time-string current-date-format (current-time))))
+  (insert (format-time-string "%d %b %Y" (current-time))))
+(defun insert-date-digits ()
+  (interactive)
+  (insert (format-time-string "%Y/%m/%d" (current-time))))
 (defun insert-time ()
   "insert the current time (1-week scope) into the current buffer."
   (interactive)
-  (insert (format-time-string current-time-format (current-time))))
+  (insert (format-time-string "%H:%M:%S" (current-time))))
 
 ;; adding incremental numbers to lines
 (require 'gse-number-rect)
@@ -260,6 +261,7 @@ Uses `current-date-format' for the formatting the date/time."
 (defun auto-cleanup-whitespace ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))
 (add-hook 'prog-mode-hook #'auto-cleanup-whitespace)
+(add-hook 'matlab-mode-hook #'auto-cleanup-whitespace)
 (add-hook 'LaTeX-mode-hook #'auto-cleanup-whitespace)
 ;; manually remove whitespaces
 (global-set-key (kbd "C-x M-s") 'delete-trailing-whitespace)

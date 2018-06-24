@@ -19,7 +19,8 @@ $sync ~/.emacs.d/init.el $repopath/_emacs.d/init.el
 $sync ~/.emacs.d/init $repopath/_emacs.d/
 $sync --exclude="clang-complete" --exclude="*.pyc" \
       ~/.emacs.d/git $repopath/_emacs.d/
-$sync ~/.emacs.d/themes $repopath/_emacs.d/
+$sync --exclude="github" \
+      ~/.emacs.d/themes $repopath/_emacs.d/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d/
 $sync ~/.emacs.d/templates $repopath/_emacs.d/
 

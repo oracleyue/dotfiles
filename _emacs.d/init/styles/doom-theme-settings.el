@@ -6,7 +6,7 @@
 ;; (require 'doom-themes)
 
 (use-package doom-themes
-  :load-path "~/.emacs.d/themes/emacs-doom-themes/"
+  :load-path "~/.emacs.d/themes/github/emacs-doom-themes/"
   :config
   ;; global settings
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled

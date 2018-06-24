@@ -72,9 +72,8 @@
 (defun zyue/disable-company-mode ()
   (company-mode -1)
   (company-quickhelp-mode -1))
-(add-hook 'LaTeX-mode-hook 'zyue/disable-company-mode)
+(add-hook 'text-mode-hook 'zyue/disable-company-mode)
 (add-hook 'org-mode-hook 'zyue/disable-company-mode)
-
 
 ;; /Yasnippet/ A template system
 (require 'yasnippet) ;; not yasnippet-bundle

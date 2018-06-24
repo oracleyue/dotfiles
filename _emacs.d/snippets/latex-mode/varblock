@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: block with given width
+# key: block
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{center}
+    \begin{minipage}{.8\textwidth}
+      \begin{block}{}
+      $0
+      \end{block}
+    \end{minipage}
+\end{center}

@@ -72,11 +72,13 @@
 ;; increase memeory for emacs to avoid garbage collections slow it down
 (setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
 
+;; text scale amount (=C-x C-0=)
+(setq text-scale-mode-step 1.05)
+
 ;; use variable-width font types in text-mode
 ;; (defun y-variable-width-text-mode ()
 ;;   (interactive)
-;;   (variable-pitch-mode t)
-;;   (text-scale-increase 0.5))
+;;   (variable-pitch-mode t))
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; keymap modification for OS X

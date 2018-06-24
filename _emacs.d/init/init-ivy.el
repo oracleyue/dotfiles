@@ -122,7 +122,7 @@
 ;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
 (use-package counsel-projectile
-  :requires projectile
+  :ensure t
   :config
   (counsel-projectile-mode))
 
@@ -134,6 +134,7 @@
   (add-hook 'c-mode-hook 'counsel-gtags-mode)
   (add-hook 'c++-mode-hook 'counsel-gtags-mode)
   (add-hook 'python-mode-hook 'counsel-gtags-mode)
+  (add-hook 'matlab-mode-hook 'counsel-gtags-mode)
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
               ("M-." . counsel-gtags-dwim)
@@ -163,6 +164,7 @@
   :bind (("C-'"     . avy-goto-char)   ;; C-:
          ("M-'"     . avy-goto-char-2) ;; C-'
          ("M-g g"   . avy-goto-line)
+         ("M-g M-g" . avy-goto-line)
          ("M-g w"   . avy-goto-word-1)
          ;; ("M-g e"   . avy-goto-word-0)  ;; too many candiates
          ("M-g M-r" . avy-resume))

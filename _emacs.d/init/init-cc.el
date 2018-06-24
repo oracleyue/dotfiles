@@ -40,8 +40,15 @@
     ;;   :config
     ;;   (push 'company-rtags company-backends))
     ;; integration with helm
-    (when *use-helm*
-      (setq rtags-display-result-backend 'helm))))
+    (if *use-helm*
+        (use-package helm-rtags
+          :ensure t
+          :config
+          (setq rtags-display-result-backend 'helm))
+      (use-package ivy-rtags
+        :ensure t
+        :config
+        (setq rtags-display-result-backend 'ivy)))))
 
 ;; /irony/+/company-irony/: code completions
 (use-package irony
@@ -139,8 +146,7 @@
            :map makefile-gmake-mode-map   ;; makefile in Linux
            ("C-c C-c" . helm-make)
            :map makefile-bsdmake-mode-map ;; makefile in BSD
-           ("C-c C-c" . helm-make)))
-  )
+           ("C-c C-c" . helm-make))))
 
 (provide 'init-cc)
 ;; ================================================

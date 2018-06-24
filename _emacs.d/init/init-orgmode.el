@@ -26,7 +26,7 @@
 ;; view styles
 (defun y/set-view-style-orgmode ()
   (when *is-server-main*
-    (variable-pitch-mode t)    ;; use sans-serif
+    ;; (variable-pitch-mode t)    ;; use sans-serif
     (setq line-spacing '0.25)) ;; line spacing
   (setq truncate-lines t)      ;; line wraping
   (turn-off-auto-fill)
