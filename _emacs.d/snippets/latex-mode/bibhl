@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: highlight bib entries
+# key: bibhl
+# group: templates
+# --
+\usepackage[style=ieee]{biblatex} % numeric; authoryear; alphabetic
+\renewcommand*{\cite}{\autocite}
+\addbibresource{./ref/library.bib}
+% highlight entries in the category "highlight"
+\DeclareBibliographyCategory{highlight}
+\AtEveryBibitem{\ifcategory{highlight}{\color{red}}{}}
+% add entries to the "highlight" category
+\addtocategory{highlight}{%
+  Aalto2018, Hayden2016a,
+}
+% adding "\printbibliography" at the end of document to print references

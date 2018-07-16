@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Using biblatex
+# key: biblatex
+# group: info
+# --
+% use default styles (numeric; authoryear; alphabetic)
+\usepackage[style=numeric-comp,sorting=none]{biblatex}
+\usepackage[style=authoryear,natbib=true]{biblatex}
+\renewcommand*{\cite}{\autocite}
+
+% use APA styles
+\usepackage[style=apa, language=english]{biblatex}
+\DeclareLanguageMapping{english}{english-apa}
+\renewcommand*{\cite}{\autocite} % or \parencite
+
+% use IEEE/Nature/Science style
+\usepackage[style=ieee]{biblatex} % nature; science; phys; mla
+
+% adding bib library
+\addbibresource{./ref/library.bib}
+
+% highlight entries in the category "highlight"
+\DeclareBibliographyCategory{highlight}
+\AtEveryBibitem{\ifcategory{highlight}{\color{red}}{}}
+% add entries to the "highlight" category
+\addtocategory{highlight}{%
+  Aalto2018, Hayden2016a,
+}
+
+% adding "\printbibliography" at the end of document to print references
+\AtNextBibliography{\small}
+\setlength\bibitemsep{0.5\baselineskip}
+\printbibliography

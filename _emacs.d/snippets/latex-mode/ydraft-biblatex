@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Draft Template
+# name: Draft Template (biblatex)
 # key: draft
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
@@ -23,7 +23,10 @@
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
-\usepackage[round,sort]{natbib}
+
+\usepackage[style=authoryear,natbib=true]{biblatex} % ieee
+\renewcommand*{\cite}{\autocite}
+\addbibresource{./ref/library.bib}
 
 
 \begin{document}
@@ -35,7 +38,7 @@
 
 % ----------------- MAIN --------------------
 
-$0
+
 
 
 
@@ -44,8 +47,8 @@ $0
 
 
 % --------------- BIBLIOGRAPHY --------------
-% \def\bibfont{\small}
-% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; natbib
-% \bibliography{./ref/library}
+\AtNextBibliography{\small}
+\setlength\bibitemsep{0.5\baselineskip}
+\printbibliography
 
 \end{document}

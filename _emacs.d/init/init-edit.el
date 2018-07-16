@@ -35,7 +35,8 @@
 ;;      - force it immediately by using "C-x C-m c <encoding> RET C-x C-w RET"
 ;; =open-previous-line= :: "M-o"
 ;; =open-next-line= :: "C-o"
-;; remove all except 1 space between characters :: "C-c SPC" (built-in: M-SPC)
+;; remove all except 1 space between characters :: "ESC SPC" (due to Alfred)
+;;      =just-one-space= (built-in: M-SPC)
 ;; zap-to-char :: "M-z [e]"  (kills from the current point to a character)
 ;; kill line backwards :: "M-0 C-k" (built-in) OR "C-<backspace>"
 ;; kill one sentence backwards :: "C-x Backspace"

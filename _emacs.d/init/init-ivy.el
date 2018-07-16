@@ -130,11 +130,7 @@
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
 (use-package counsel-gtags
-  :config
-  (add-hook 'c-mode-hook 'counsel-gtags-mode)
-  (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-  (add-hook 'python-mode-hook 'counsel-gtags-mode)
-  (add-hook 'matlab-mode-hook 'counsel-gtags-mode)
+  :ensure t
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
               ("M-." . counsel-gtags-dwim)
@@ -148,6 +144,8 @@
               ;; jump over stacks/history
               ("C-c g [" . counsel-gtags-go-backward)
               ("C-c g ]" . counsel-gtags-go-forward))
+  :hook ((c-mode c++-mode python-mode matlab-mode) . counsel-gtags-mode)
+  ;; :config (setq counsel-gtags-auto-update t)
   )
 
 ;; ---------------------------------------------------------------
@@ -163,6 +161,7 @@
   :ensure t
   :bind (("C-'"     . avy-goto-char)   ;; C-:
          ("M-'"     . avy-goto-char-2) ;; C-'
+         ("M-g c"   . avy-goto-char)
          ("M-g g"   . avy-goto-line)
          ("M-g M-g" . avy-goto-line)
          ("M-g w"   . avy-goto-word-1)

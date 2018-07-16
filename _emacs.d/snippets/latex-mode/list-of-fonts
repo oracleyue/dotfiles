@@ -43,3 +43,7 @@
 \usepackage[UTF8]{ctex}
 \setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti}]{SimSun}
 \setCJKsansfont{PingFang SC}  
+
+
+% Nice fonts for Powerpoint or Keynote
+% - Century Schoolbook

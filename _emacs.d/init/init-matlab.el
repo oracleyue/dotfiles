@@ -9,10 +9,15 @@
 (setq matlab-shell-command "/usr/local/bin/matlab")
 (setq matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
 (load "matlab-load" t t)
-(add-hook 'matlab-mode-hook (lambda () (setq matlab-fill-column 70)))
 
 ;; enable CEDTE feature support
 ;(matlab-cedet-setup)
+
+;; update/fix displays
+(defun zyue-matlab-customize-display ()
+  (setq matlab-fill-column 70)
+  (set-face-attribute 'font-lock-type-face nil :slant 'normal))
+(add-hook 'matlab-mode-hook 'zyue-matlab-customize-display)
 
 ;; enable /company-dabbrev-code/ for /matlab-mode/
 (require 'company-dabbrev-code)

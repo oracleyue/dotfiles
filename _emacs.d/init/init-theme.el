@@ -104,8 +104,7 @@ Expects a `font-spec'.")
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Set modeline style
-(if *is-app*
-    (setq zyue-modeline 'doomline)
+(if *is-server-main* (setq zyue-modeline 'doomline)
   (setq zyue-modeline 'spaceline))
 
 ;; Additional configs for specific themes
