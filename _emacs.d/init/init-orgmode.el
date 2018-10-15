@@ -43,6 +43,9 @@
               ("\\.x?html?\\'" . default)
               ("\\.pdf\\'" . default))))
 
+;; disable company mode
+(setq company-global-modes '(not org-mode))
+
 
 ;; Export Settings
 
@@ -123,25 +126,17 @@
   '(require 'ox-gfm nil t))
 
 
-;; ;; /ox-reveal/: presentation via orgmode
-;; (use-package ox-reveal
-;;   :commands (org-reveal)
-;;   :init
-;;   (add-hook 'after-init-hook #'org-reveal)
-;;   :config
-;;   (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-;;   (setq org-reveal-theme "black")
-;;   (setq org-reveal-width 1200)
-;;   (setq org-reveal-height 1000)
-;;   (setq org-reveal-margin "0.1")
-;;   (setq org-reveal-min-scale "0.5")
-;;   (setq org-reveal-max-scale "2.5")
-;;   (setq org-reveal-transition "cube")
-;;   (setq org-reveal-plugins '(classList markdown zoom notes))
-;;   (setq org-reveal-control t)
-;;   (setq org-reveal-center t)
-;;   (setq org-reveal-progress t)
-;;   (setq org-reveal-history nil))
+;; /ox-reveal/: presentation via orgmode
+(use-package ox-reveal
+  :config
+  (if *use-css-local*
+      (setq org-reveal-root "file:///Users/oracleyue/Workspace/github/reveal.js/")
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"))
+  (setq org-reveal-theme "black")
+  (setq org-reveal-plugins '(highlight))
+  (setq org-reveal-progress t)
+  (setq org-reveal-title-slide
+        "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
 
 

@@ -42,7 +42,7 @@
 
 ;; cursors
 (setq-default cursor-type 'box)  ;"bar", "box" (default)
-(when (or *is-server-main* *is-app*)
+(when (or *is-server-main* *is-app* *is-server-plain*)
   (setq-default cursor-type 'bar))
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 

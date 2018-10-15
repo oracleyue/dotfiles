@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Annotations
+# key: soul
+# group: preambles
+# --
+% annotations
+\usepackage{soul}  % \hl, \st, \ul
+\setstcolor{red}
+\setulcolor{blue}
+\newcommand{\add}[1]{{\color{red} #1}}
+\newcommand{\mk}[1]{{\color{blue} #1}}
+\newcommand{\cm}[1]{{\color{blue} (Yue: #1)}}
+\newcommand{\rep}[2]{\st{#1}\textcolor{red}{#2}}

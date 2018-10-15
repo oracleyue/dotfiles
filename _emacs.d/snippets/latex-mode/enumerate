@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: enumerate
+# key: enum
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{enumerate}[label=\arabic*) ]
+\item $0
+\end{enumerate}

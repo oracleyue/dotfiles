@@ -220,7 +220,7 @@
 (eval-after-load "latex"
   '(progn
      ;; define keybindings to refresh and fontify buffer
-     (define-key LaTeX-mode-map (kbd "C-S-f") 'font-lock-fontify-buffer)
+     ;; (define-key LaTeX-mode-map (kbd "C-S-f") 'font-lock-fontify-buffer)
      ;; macro completions (flushed by flyspell.el)
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
 

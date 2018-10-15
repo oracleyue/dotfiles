@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: columns
+# key: col
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{columns}[t,onlytextwidth]
+  \begin{column}{.5\textwidth}
+      $0
+  \end{column}
+
+  \begin{column}{.5\textwidth}
+
+  \end{column}
+\end{columns}

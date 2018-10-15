@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: Using biblatex
 # key: biblatex
-# group: info
+# group: preambles
 # --
 % use default styles (numeric; authoryear; alphabetic)
 \usepackage[style=numeric-comp,sorting=none]{biblatex}

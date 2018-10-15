@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: export options (zyue)
 # key: export
+# group: options
 # --
 #+OPTIONS:   H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" media="all" href="/Users/oracleyue/.emacs.d/templates/css/bootstrap.min.css" />

@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: export options (sphinx)
 # key: export
+# group: options
 # --
 #+LANGUAGE:  en
 #+OPTIONS:   H:4 toc:t num:2

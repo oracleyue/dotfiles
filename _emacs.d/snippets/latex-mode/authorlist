@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: List of authors
 # key: author
-# group: info
+# group: preambles
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \author{Zuogon Yue$^{1}$, Johan Thunberg$^{1*}$ and Jorge Gon\c{c}alves$^{1}$%  <-this % stops a space

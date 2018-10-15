@@ -24,7 +24,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
 
-\usepackage[style=authoryear,natbib=true]{biblatex} % ieee
+\usepackage[style=authoryear,natbib=true]{biblatex}  % ieee
 \renewcommand*{\cite}{\autocite}
 \addbibresource{./ref/library.bib}
 
@@ -33,7 +33,7 @@
 
 % \title{}
 % \author{}
-% \date{\today}
+% \date{\small\today}
 % \maketitle
 
 % ----------------- MAIN --------------------

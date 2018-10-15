@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: export options (solarized)
 # key: export
+# group: options
 # --
 #+LANGUAGE:   en
 #+OPTIONS:    H:6 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t

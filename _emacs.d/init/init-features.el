@@ -8,7 +8,7 @@
 
 ;; use golden-ratio mode
 (if *is-server-main*
-    (defconst *use-golden-ratio* t)
+    (defconst *use-golden-ratio* nil)
   (defconst *use-golden-ratio* nil))
 
 ;; use css locally or in github

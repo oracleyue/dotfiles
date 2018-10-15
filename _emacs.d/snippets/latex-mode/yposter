@@ -5,10 +5,9 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% LaTeX poster template
-% Created by Nathaniel Johnston
-% August 2009
-% http://www.nathanieljohnston.com/index.php/2009/08/latex-poster-template/
+% LCSB LaTeX poster template
+% Modified based on the template by Nathaniel Johnston
+% Sept 2018
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[final]{beamer}
@@ -16,8 +15,8 @@
 \usepackage{graphicx}
 \usepackage{ragged2e}
 \usepackage[percent]{overpic}
-\usepackage{lipsum}
-\usepackage{bbm}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{unsrtnat}
 
 %-----------------------------------------------------------
 % Define the column width and poster size
@@ -50,6 +49,15 @@
 \setbeamercolor{block body}{fg=black,bg=white}
 \setbeamercolor{block alerted title}{fg=white,bg=black}
 \setbeamercolor{block alerted body}{fg=black,bg=white}
+
+%-----------------------------------------------------------
+% Bibliography customization (if using \bibilography{...})
+%-----------------------------------------------------------
+\setbeamertemplate{bibliography entry author}{}
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+\setbeamercolor{bibliography entry}{fg=black}
 
 %-----------------------------------------------------------
 % Name and authors of poster/paper/research
@@ -108,8 +116,6 @@
 % boxing text
 \newcommand\mybox[2][]{\tikz[overlay]\node[fill=#1,draw=#1,inner sep=3pt, anchor=text, rectangle, rounded corners=2mm] {#2};\phantom{#2}}
 
-
-
 % ----------------------------------------------------------------
 % Main body of poster
 % ----------------------------------------------------------------
@@ -121,17 +127,20 @@
 \usepackage{helvet}
 \usepackage{times}
 %\renewcommand{\familydefault}{\sfdefault}
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,mathtools,dsfont}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \renewcommand\footnotesize{\small}
 
+% \input{supports/userdef-mathsym}
 
 %-----------------------------------------------------------
 % Start the poster itself
 %-----------------------------------------------------------
 
 % setup the top background/template
-\usebackgroundtemplate{\includegraphics[width=\paperwidth]{poster-layout/top-blue.jpg}}
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]
+  {poster-layout/top-blue.jpg}}
 
 \begin{document}
 \begin{frame}[t]
@@ -159,7 +168,7 @@
 
       \begin{block}{\textsf{Introduction}}
         \large
-        bla bla bla...
+        bla bla bla... \cite{Goncalves2008}
       \end{block}
 
       \vspace{1cm}
@@ -185,7 +194,7 @@
 
         \begin{figure}[htb]   %htbp!H
           \centering
-          \includegraphics[width=.8\textwidth]{poster-layout/top-red}
+          \includegraphics[width=.8\textwidth]{logo/LCSB-logo-long}
         \end{figure}
         \vspace*{.5cm}
       \end{myblock}
@@ -235,37 +244,12 @@
       \vspace{1cm}
       \begin{block}{\textsf{References}}
         { \small
-          \begin{thebibliography}{1}
-
-          \bibitem{GW}
-            \justifying{
-              J.~Goncalves and S.~Warnick.
-              ``Necessary and Sufficient Conditions for Dynamical Structure
-              Reconstruction of LTI Networks''.
-              \emph{Automatic Control, IEEE Transactions on},
-              \textbf{53}(7):1670--1674, 2008.
-            }
-
-          \bibitem{GN}
-            \justifying{
-              S.~Gibson and B.~Ninness.
-              ``Robust maximum-likelihood estimation of multivariable dynamic
-              systems''. \emph{Automatica}, \textbf{41}(10):1667-1682, 2005.
-            }
-
-            % \bibitem{Wipf}
-            %   \justifying{
-            %   D.P.~Wipf, B.D.~Rao.
-            %   ``Sparse Bayesian learning for basis selection''.
-            %   \emph{Signal Processing, IEEE Transactions on},
-            %   \textbf{52}(8):2153-2164, 2004.
-            % }
-
-          \end{thebibliography}
+          \bibliography{./ref/library}
         }
       \end{block}
 
     \end{column}% END of the right half-page
+
     % \begin{column}{\sepwid}\end{column}      % padding to the right margin
 
   \end{columns}

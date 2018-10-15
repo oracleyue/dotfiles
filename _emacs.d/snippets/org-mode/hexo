@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: hexo header
+# name: hexo blog
 # key: hexo
-# group: meta
+# group: templates
 # --
 #+STARTUP: showall indent
 #+OPTIONS: toc:nil

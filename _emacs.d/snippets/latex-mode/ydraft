@@ -30,7 +30,7 @@
 
 % \title{}
 % \author{}
-% \date{\today}
+% \date{\small\today}
 % \maketitle
 
 % ----------------- MAIN --------------------

@@ -11,6 +11,7 @@
 (defconst *is-linux* (string-equal system-type "gnu/linux"))
 (defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
 (defconst *is-app* (and (display-graphic-p) (not (daemonp))))
+(defconst *is-server-plain* (eq t (daemonp)))
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
 (defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))
