@@ -1,0 +1,7 @@
+List of Install Extensions for Gnome
+(https://extensions.gnome.org/)
+
+- Dash to Dock
+- Hide Top Bar
+- No Title Bar
+- TopIcons Plus
