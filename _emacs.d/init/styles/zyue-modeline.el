@@ -90,3 +90,7 @@
                                            (emacs-uptime "Uptime:%hh"))))
                "---"
                ))
+
+
+(provide 'zyue-modeline)
+;;; zyue-modeline.el ends here

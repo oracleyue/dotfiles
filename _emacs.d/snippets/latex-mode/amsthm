@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: amsthm env settings
+# key: amsthm
+# group: preambles
+# expand-env: ((yas-indent-line 'fixed))
+# --
+% math env
+\usepackage{amsthm}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}

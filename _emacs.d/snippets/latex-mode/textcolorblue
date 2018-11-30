@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: color text (blue)
+# key: blue
+# group: macros
+# --
+\textcolor{blue}{$0}

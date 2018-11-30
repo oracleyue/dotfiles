@@ -8,7 +8,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-% \usepackage{times,helvet}    % charter; newtxtext/newtxmath
+\usepackage{times,helvet}    % charter; newtxtext/newtxmath
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts}
@@ -28,10 +28,11 @@
 
 \begin{document}
 
-% \title{}
-% \author{}
-% \date{\small\today}
-% \maketitle
+\title{}
+\author{}
+\date{\small\today}
+\maketitle
+% \thispagestyle{empty}
 
 % ----------------- MAIN --------------------
 

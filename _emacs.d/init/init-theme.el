@@ -20,7 +20,7 @@
 
 ;; Modeline
 (add-to-list 'load-path "~/.emacs.d/init/styles")
-(require 'modeline-styles)
+(require 'load-modeline)
 
 ;; Load-paths
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")

@@ -63,8 +63,9 @@
 (use-package swiper
   :ensure t
   :bind
-  (("C-s"   . swiper)
-   ("C-S-s" . swiper-all)   
+  (;; ("C-s"   . swiper)
+   ("M-s s"   . swiper)
+   ("M-s M-s" . swiper)
    ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
    ("C-c g" . counsel-git)
    ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead

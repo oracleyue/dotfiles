@@ -30,7 +30,7 @@
     (setq line-spacing '0.25)) ;; line spacing
   (setq truncate-lines t)      ;; line wraping
   (turn-off-auto-fill)
-  (setq-local fill-column 80))
+  (setq-local fill-column 90))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
 ;; highlight latex fragments

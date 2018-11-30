@@ -48,6 +48,8 @@
 ;; /ediff/: comparing two files
 ;; ----------------------------------------------
 (require 'ediff)
+;; (setq ediff-diff-options "-w")  ;; ignore white spaces
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
 
 

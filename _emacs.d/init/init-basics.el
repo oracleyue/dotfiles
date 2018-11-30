@@ -11,6 +11,7 @@
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq-default fill-column 80)
+;; (setq-default case-fold-search nil)  ;; case-sensitive search
 
 ;; encodings
 (set-language-environment "UTF-8")

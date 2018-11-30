@@ -4,8 +4,10 @@
 
 
 ;;
-;; Spaceline
+;; Styles for Modeline
 ;;
+
+;; Spaceline
 (defun zyue-use-spaceline ()
   (use-package spaceline
     :config
@@ -14,9 +16,7 @@
       (setq powerline-image-apple-rgb t))    ;; fix applet bug on OSX
     (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
 
-;;
 ;; Doomline
-;;
 (defun zyue-use-doomline ()
   ;; dependencies
   (use-package shrink-path :ensure t)
@@ -26,14 +26,11 @@
   (require 'doom-modeline)
   (doom-modeline-init))
 
-;;
 ;; Customized modeline
-;;
 (defun zyue-customize-modeline ()
-)
-;;
+  (require 'zyue-modeline))
+
 ;; Wraper function to load modeline
-;;
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
@@ -44,7 +41,12 @@
     ))
 
 
+;;
+;; Misc for Modeline (e.g., Nyan cat, parrot)
+;;
 
-(provide 'modeline-styles)
+
+
+(provide 'load-modeline)
 ;; ================================================
-;; modeline-styles.el ends here
+;; load-modeline.el ends here

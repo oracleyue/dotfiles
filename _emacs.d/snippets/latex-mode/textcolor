@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: text in color
-# key: tc
+# name: color text (red)
+# key: red
 # group: macros
 # --
-\textcolor{${1:red}}{$0}
+\textcolor{red}{$0}

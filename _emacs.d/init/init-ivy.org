@@ -46,12 +46,13 @@ Tools to be installed in order to use the corresponding commands in Ivzyue/
 List of frequent commands:
 
 - grep buffers:
-  - ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=C-s=)
-  - ~swiper-all~ (=M-g s=) grep all buffers
+  - ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=M-s s=)
+  - ~swiper-all~  grep all buffers
   - ~swiper-multi~ grep the selected buffers
+  - ~counsel-grep~ (=M-g s=)    
 - grep directory (recursively):
   - ~counsel-ag~ (=M-g a=)
-  - ~counsel-ack~
+  - ~counsel-ack~ (=M-g k=)
   - ~counsel-rg~ (=M-g r=) (for large files)
 - grep git projects:
   - ~counsel-git~ (=C-c g=) (select a file tracked by git)
@@ -126,8 +127,9 @@ Ivy-based interface to standard commands:
   (use-package swiper
     :ensure t
     :bind
-    (("C-s"   . swiper)
-     ("C-S-s" . swiper-all)   
+    (;; ("C-s"   . swiper)
+     ("M-s s"   . swiper)
+     ("M-s M-s" . swiper)
      ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
      ("C-c g" . counsel-git)
      ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead

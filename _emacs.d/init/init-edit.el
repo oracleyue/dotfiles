@@ -302,8 +302,8 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; spell check for text modes
 (add-hook 'text-mode-hook 'flyspell-mode)
-;; (setq ispell-dictionary "british")
-(setq ispell-dictionary "american")
+(setq ispell-dictionary "british")
+;; (setq ispell-dictionary "american")
 
 ;; use /auto-fill mode/
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
