@@ -310,6 +310,18 @@ Uses `current-date-format' for the formatting the date/time."
 
 
 ;;
+;; ----------- Settings of /prog-mode/ ------------
+;;
+(defun zyue/toggle-line-spacing ()
+  "Toggle line spacing between no extra space to extra half line height."
+  (interactive)
+  (if line-spacing
+      (setq line-spacing nil)
+    (setq line-spacing 0.5))
+  (redraw-frame (selected-frame)))
+
+
+;;
 ;; ------------------- Keybindings for Terminals -------------------
 ;;
 (unless (display-graphic-p)

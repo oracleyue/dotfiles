@@ -41,7 +41,7 @@
 % {pf}{PROOF} + \qed        {pf*}{Proof of Theorem 2}
 
 % command definitions for math symbols
-\input{userdef-mathsymb.tex}
+\input{supports/userdef-mathsym.tex}
 
 \hypersetup{
   pdftitle={},
