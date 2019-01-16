@@ -43,10 +43,6 @@
               ("\\.x?html?\\'" . default)
               ("\\.pdf\\'" . default))))
 
-;; disable company mode
-(setq company-global-modes '(not org-mode))
-
-
 ;; Export Settings
 
 ;; HTML

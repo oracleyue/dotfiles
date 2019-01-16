@@ -17,8 +17,7 @@
 (defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))
 
 ;; stop emacs automatically editing .emacs
-(setq custom-file
-      (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 ;;(load custom-file 'noerror 'nomessage)
 
 ;; packages
@@ -28,8 +27,8 @@
 ;; feature control
 (require 'init-features)          ;; enable/disable features
 
-;; theme
-(require 'init-theme)
+;; UI (theme, modeline, etc.)
+(require 'init-ui)
 
 ;; basics
 (require 'init-basics)
@@ -40,9 +39,7 @@
 (if *use-company* (require 'init-company) (require 'init-ac))
 
 ;; completion systems
-(if *use-helm*
-    (require 'init-helm)
-  (require 'init-ivy))
+(if *use-helm* (require 'init-helm) (require 'init-ivy))
 
 ;; directory and buffer explorers
 (require 'init-dired)             ;; directory explorers
@@ -69,11 +66,14 @@
 ;; programming environment for /HTML, js/
 (require 'init-web)
 
-;; programming environment for /C C++/
-(if *use-company* (require 'init-cc) (require 'init-cc-ac))
-
-;; programming environment for /Python/
-(if *use-company* (require 'init-py) (require 'init-py-ac))
+;; programming environment for /C C++/ and /Python/
+(if (and *use-lsp* *use-company*)
+    (require 'init-lsp)
+  ;; C/C++
+  (if *use-company* (require 'init-cc) (require 'init-cc-ac))
+  ;; Python
+  (if *use-company* (require 'init-py) (require 'init-py-ac))
+  )
 
 ;; programming environment for /R/
 (if *use-company* (require 'init-r) (require 'init-r-ac))

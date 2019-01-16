@@ -10,6 +10,7 @@
 ;; Spaceline
 (defun zyue-use-spaceline ()
   (use-package spaceline
+    :ensure t
     :config
     (require 'spaceline-config)
     (when *is-mac*
@@ -22,9 +23,11 @@
   (use-package shrink-path :ensure t)
   (use-package eldoc-eval :ensure t)
   (use-package all-the-icons :ensure t)
-  ;; load doom-modeline (under "~/.emacs.d/git/")
-  (require 'doom-modeline)
-  (doom-modeline-init))
+  (use-package doom-modeline
+    :ensure t
+    :config
+    (setq doom-modeline-height 30)
+    (doom-modeline-init)))
 
 ;; Customized modeline
 (defun zyue-customize-modeline ()
@@ -47,6 +50,6 @@
 
 
 
-(provide 'load-modeline)
+(provide 'modeline-settings)
 ;; ================================================
-;; load-modeline.el ends here
+;; modeline-settings.el ends here

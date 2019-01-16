@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: List of authors
-# key: author
+# name: list of authors
+# key: list
 # group: preambles
 # expand-env: ((yas-indent-line 'fixed))
 # --

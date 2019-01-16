@@ -24,13 +24,14 @@
 ;; integrate TAB for yasnippet, indent and company completion
 (defconst *integrate-TAB* nil)
 
-;; code completion engine
+;; code intelligence
 (cond (*is-mac*
        (if *is-server-ac*
            (defconst *use-company* nil) ;; use auto-complete
          (defconst *use-company* t)))
       (*is-linux*
        (defconst *use-company* t)))
+(defconst *use-lsp* nil)  ;; use LSP as a unified codeIntel
 
 ;; programming
 

@@ -100,15 +100,19 @@
 ;; ----------------------------------------------
 ;; /gud/: debug supports, e.g. gdb, pdb
 ;; ----------------------------------------------
-;; - usages: "M-x pdb", "M-x gud-gdb"
+;; usages: "M-x pdb"
 ;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
-;; - notes: keybindings compatible with JetBrains
+;; notes: default keybindings
+;; =C-c C-s= step in         =C-c C-n= next
+;; =C-c C-f= step out        =C-c C-r= continue
+;; =C-c C-b= set breakpoint  =C-c C-d= delete breakpoint
+
 (when (string-equal system-type "darwin")
   (setq gdb-non-stop-setting nil))
-(global-set-key (kbd "<f7>") 'gud-step);; equiv step in
-(global-set-key (kbd "<f8>") 'gud-next) ;; equiv step over
-(global-set-key (kbd "<f9>") 'gud-cont) ;; equiv continue
-(global-set-key (kbd "S-<f8>") 'gud-finish) ;; equiv step out
+(require 'gud)
+(define-key gud-mode-map (kbd "<f7>") #'gud-next) ;; setp
+(define-key gud-mode-map (kbd "<f8>") #'gud-step) ;; setp in
+(define-key gud-mode-map (kbd "S-<f8>") #'gud-finish) ;; setp out
 
 
 ;; ----------------------------------------------

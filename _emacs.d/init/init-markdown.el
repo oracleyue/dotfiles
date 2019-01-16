@@ -35,7 +35,7 @@
     (set-face-font 'markdown-code-face zyue-font)
     (set-face-font 'markdown-inline-code-face zyue-font)
     ;; turn off auto-fill mode
-    (turn-off-auto-fill)
+    ;; (turn-off-auto-fill)
     (setq-local fill-column 85))
   (add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)
 

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: List of Math Pkgs
-# key: math
+# name: list of math pkgs
+# key: list
 # group: preambles
 # --
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,mathtools}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: tikz:mindmap:node
+# key: node
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+node[concept] {$0}
+[clockwise from=${1:0}]

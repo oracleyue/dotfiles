@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tikz:mindmap:child
+# key: child
+# group: macros
+# expand-env: ((yas-indent-line 'fixed))
+# --
+child[concept color=${1:red}] { node[concept] {$0} }

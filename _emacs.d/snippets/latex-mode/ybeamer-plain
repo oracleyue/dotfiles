@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Beamer Template (Plain)
+# name: Beamer Template (plain; BibLaTeX)
 # key: beamer
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

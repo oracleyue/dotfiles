@@ -36,8 +36,9 @@
 ;;     then evaluate buffer in iPython
 
 
-
+;; ----------------------------------------------------------------
 ;; Python Major Mode /emacs-for-python/
+;; ----------------------------------------------------------------
 (use-package epy-init
   :load-path "~/.emacs.d/git/emacs-for-python/"
   :config
@@ -52,6 +53,9 @@
 
   ;; set syntax checker
   (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
+
+  ;; set gud debugger
+  (setq gud-pdb-command-name "python -m pdb")
 
   ;; indenting
   (defun zyue:py-indent-display-style ()
@@ -84,11 +88,12 @@
                         '(menu-item "Eval line" python-shell-send-line
                                     "Eval line in inferior Python session")
                         "Eval region")
-
   );;END: use-package (emacs-for-python)
 
 
+;; ----------------------------------------------------------------
 ;; Auto-completion by /Jedi/ (using /company-jedi/)
+;; ----------------------------------------------------------------
 (use-package jedi
   :config
   (jedi-mode 1) ;; not necessary for company, but for code nagivation
@@ -121,6 +126,19 @@
       (setq-local company-backends
                   (append '(company-jedi) company-backends)))
     (add-hook 'python-mode-hook 'zyue/company-py-setup)))
+
+;; ----------------------------------------------------------------
+;; Emacs suuport for Jupyter Notebook
+;; ----------------------------------------------------------------
+;; Usage:
+;; start the Jupyter notebook server by call =M-x ein:jupyter-server-start=
+
+(use-package ein
+  :ensure t
+  :config
+  (require 'ein)
+  (require 'ein-notebook)
+  (require 'ein-subpackages))
 
 
 

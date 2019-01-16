@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: tweak HTML colors
+# key: htmlcolors
+# group: demos
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{article}
+
+\usepackage[margin=30mm]{geometry}
+\usepackage[parfill]{parskip}
+
+\usepackage[rgb]{xcolor}
+
+% Theme: Tomorrow Day
+\definecolor{twd-color01}{HTML}{ffffff}
+\definecolor{twd-color02}{HTML}{efefef}
+\definecolor{twd-color03}{HTML}{d6d6d6}
+\definecolor{twd-color04}{HTML}{8e908c}
+\definecolor{twd-color05}{HTML}{4d4d4c}
+\definecolor{twd-color06}{HTML}{c82829}
+\definecolor{twd-color07}{HTML}{f5871f}
+\definecolor{twd-color08}{HTML}{eab700}
+\definecolor{twd-color09}{HTML}{718c00}
+\definecolor{twd-color10}{HTML}{3e999f}
+\definecolor{twd-color11}{HTML}{4271ae}
+\definecolor{twd-color12}{HTML}{8959a8}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
+\begin{document}
+
+Theme: Tomorrow Day
+
+\tikz \filldraw[fill=twd-color01, draw=black] (0,0) circle (.5) node{01};
+\tikz \filldraw[fill=twd-color02, draw=black] (0,0) circle (.5) node{02};
+\tikz \filldraw[fill=twd-color03, draw=black] (0,0) circle (.5) node{03};
+\tikz \filldraw[fill=twd-color04, draw=black] (0,0) circle (.5) node{04};
+\tikz \filldraw[fill=twd-color05, draw=black] (0,0) circle (.5) node{05};
+\tikz \filldraw[fill=twd-color06, draw=black] (0,0) circle (.5) node{06};
+\tikz \filldraw[fill=twd-color07, draw=black] (0,0) circle (.5) node{07};
+\tikz \filldraw[fill=twd-color08, draw=black] (0,0) circle (.5) node{08};
+\tikz \filldraw[fill=twd-color09, draw=black] (0,0) circle (.5) node{09};
+\tikz \filldraw[fill=twd-color10, draw=black] (0,0) circle (.5) node{10};
+\tikz \filldraw[fill=twd-color11, draw=black] (0,0) circle (.5) node{11};
+\tikz \filldraw[fill=twd-color12, draw=black] (0,0) circle (.5) node{12};
+
+\end{document}

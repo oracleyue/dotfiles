@@ -20,13 +20,13 @@
 
 ;; Modeline
 (add-to-list 'load-path "~/.emacs.d/init/styles")
-(require 'load-modeline)
+(require 'modeline-settings)
 
 ;; Load-paths
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/github.com")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/github")
 
 ;; Variables
 (defvar zyue-theme nil
@@ -130,6 +130,6 @@ Expects a `font-spec'.")
 
 
 
-(provide 'init-theme)
+(provide 'init-ui)
 ;; ================================================
-;; init-theme.el ends here
+;; init-ui.el ends here

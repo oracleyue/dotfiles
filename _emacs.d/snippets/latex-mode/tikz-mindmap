@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name: tikz: mindmap
+# key: tikz
+# group: demos
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+\usepackage{verbatim}
+
+% --- preview setup ---
+\usepackage[graphics,tightpage,active]{preview}
+\setlength{\PreviewBorder}{2pt}
+\PreviewEnvironment{tikzpicture}
+% --- (DO NOT EDIT!) ---
+
+\begin{document}
+\pagestyle{empty}
+
+\begin{comment}
+:Title: Computer science mindmap
+:Tags: Manual, Mindmap
+
+Version 1.09 of PGF/TikZ added a library for drawing mindmaps. Here's an example
+from the manual.
+
+:Author: Till Tantau
+:Source: The PGF/TikZ manual
+\end{comment}
+
+\begin{tikzpicture}
+  \path[mindmap,text=white,concept color=black,
+    level 1 concept/.append style = {sibling angle=90}]
+  node[concept] {Computer Science}
+  [clockwise from=0]
+  child[concept color=green!50!black] {
+    node[concept] {practical}
+    [clockwise from=90]
+    child { node[concept] {algorithms} }
+    child { node[concept] {data structures} }
+    child { node[concept] {pro\-gramming languages} }
+    child { node[concept] {software engineer\-ing} }
+  }
+  child[concept color=blue] {
+    node[concept] {applied}
+    [clockwise from=-30]
+    child { node[concept] {databases} }
+    child { node[concept] {WWW} }
+  }
+  child[concept color=red] { node[concept] {technical} }
+  child[concept color=orange] { node[concept] {theoretical} };
+\end{tikzpicture}
+
+\end{document}

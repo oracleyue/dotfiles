@@ -59,6 +59,7 @@ function es() {
 
     elif [[ "$1" == "start" ]]; then
         if [[ -z $2 ]]; then
+            $EMACS --daemon
             $EMACS --daemon=main
             $EMACS --daemon=coding
         else

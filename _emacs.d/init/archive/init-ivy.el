@@ -1,118 +1,176 @@
 ;; ===============================================================
-;; Ivy    : a generic completion mechanism for Emacs.
-;; Counsel: Ivy-enhanced versions of common Emacs commands.
-;; Swiper : an Ivy-enhanced alternative to isearch.
+;; Ivy - a generic completion mechanism for Emacs
 ;; ===============================================================
 ;; Last modified on 31 Mar 2018
-
-
-;; Install required Emacs packages
-(setq custom/ivy-ext-packages
-      '(ivy
-        counsel
-        swiper
-        counsel-projectile
-        counsel-gtags))
-(custom/install-packages custom/ivy-ext-packages)
-
 
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 
-;; Configurations
-(ivy-mode 1)
-(setq ivy-height 15)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(setq ivy-use-selectable-prompt t)  ;; make inputs selectable
+(use-package ivy
+  :ensure t
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x b"   . ivy-switch-buffer))
+  :config
+  (ivy-mode 1)
+  (setq ivy-height 15)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)  ;; make inputs selectable
+)
 
-;; Keybindings
+(use-package counsel
+  :ensure t
+  :bind
+  (;; basics
+   ("M-x"     . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("<f1> l"  . counsel-find-library)
+   ("<f2> k"  . counsel-descbinds)
+   ("<f2> i"  . counsel-info-lookup-symbol)
+   ("<f2> u"  . counsel-unicode-char)
+   ;; editing and code overview
+   ("M-y"     . counsel-yank-pop)
+   ("M-g SPC" . counsel-mark-ring)
+   ("M-g i"   . counsel-semantic-or-imenu)
+   ;; system tools
+   ("M-g f"   . counsel-fzf)     ;; find
+   ;; ("M-g l"   . counsel-locate)  ;; locate
+  )
+  :config
+  (setq counsel-find-file-at-point t)
+  ;; tools for grep
+  (setq counsel-grep-base-command
+        "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
 
-;; Ivy-based interface to standard commands
-(global-set-key (kbd "C-s") 'swiper)
-;; alternative ~swiper~ for very large files (one may bind =C-s=)
-(global-set-key (kbd "M-g s") 'counsel-grep-or-swiper)
-(setq counsel-grep-base-command
- "rg -i -M 120 --no-heading --line-number --color never '%s' %s")
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> k") 'counsel-descbinds)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
+  ;; minibuffer actions
+  (define-key minibuffer-local-map (kbd "C-r")
+    'counsel-minibuffer-history)
+  ;; ensure recentf-list loaded on startup
+  (with-eval-after-load 'counsel (recentf-mode))
+  ;; disable recentf-list loading via ivy-switch-buffer
+  ;; (setq recentf-initialize-file-name-history nil)
 
-;; Ivy-based interface to editing and programs
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "M-g SPC") 'counsel-mark-ring)  ;; M-SPC used by Alfred
-(global-set-key (kbd "C-c i") 'counsel-semantic-or-imenu)
+  ;; exclude boring files as =.DS_Store=
+  (setq counsel-find-file-ignore-regexp "\\.DS_Store\\'")
 
-;; Ivy-based interface to shell and system tools
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "M-g a") 'counsel-ag)    ;; C-c k  counsel-ack
-(global-set-key (kbd "M-g r") 'counsel-rg)    ;; large files
-(global-set-key (kbd "M-g f") 'counsel-fzf)   ;; helm-find
-;; (global-set-key (kbd "C-x l") 'counsel-locate)
+  ;; fix the bug for ivy-occur in OSX
+  (when *is-mac*
+    (setq counsel-find-file-occur-cmd
+          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+  )
 
-;; Minibuffer actions:
-;; go to INFO page (=C-h i=) of Ivy to see the manual
-(define-key minibuffer-local-map (kbd "C-r")
-  'counsel-minibuffer-history)
-;; helm-like actions
-(require 'counsel)
-(define-key ivy-switch-buffer-map (kbd "C-o")
-  'counsel-recentf)
-;; more actions:
-;;  =C-M-j=: exits with the current input instead of candidates
-;;  =M-i=: insert the current candidate into the minibuffer
-;;  =M-o=: presents valid actions
-;;  =C-j=: start a new completion; otherwise, same as =RET=
-;;  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=
-;;  =M-n=, =M-p=: cycles through the Ivy command history
-;;  =S-SPC=: deletes the current input and rests the list
+(use-package swiper
+  :ensure t
+  :bind
+  (;; ("C-s"   . swiper)
+   ("M-s s"   . swiper)
+   ("M-s M-s" . swiper)
+   ;; ("C-s"   . counsel-grep-or-swiper)  ;; alternative for large files
+   ("C-c g" . counsel-git)
+   ;; ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
+   ("M-g s" . counsel-grep)  ;; grep the current file
+   ;; grep files recursively in the folder
+   ("M-g a" . counsel-ag)    ;; C-c k
+   ("M-g k" . counsel-ack)
+   ("M-g r" . counsel-rg))
+  :config
+  (setq counsel-git-cmd "rg --files")
+  (setq counsel-rg-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s .")
+  )
 
+;; use ivy to open recent directories
+;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+;; https://emacs-china.org/t/topic/5948/3?u=et2010
+(defvar counsel-recent-dir-selected "~/")
+
+(defvar counsel-recent-dir-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map  (kbd "TAB") 'counsel-recent-dir-find-file)
+    (define-key map  [(tab)] 'counsel-recent-dir-find-file)
+    map))
+
+(defun counsel-recent-dir-find-file()
+  (interactive)
+  (ivy-exit-with-action
+   (lambda(c)
+     (setq counsel-recent-dir-selected c)
+     (run-at-time 0.05 nil
+                  (lambda()
+                    (let ((default-directory counsel-recent-dir-selected))
+                      ;; (find-file counsel-recent-dir-selected)
+                      (counsel-find-file)))))))
+
+(defun counsel-recent-directory ()
+  "Open recent directory with dired"
+  (interactive)
+  (unless recentf-mode (recentf-mode 1))
+  (let ((collection
+         (delete-dups
+          (append (mapcar 'file-name-directory recentf-list)
+                  ;; fasd history
+                  (if (executable-find "fasd")
+                      (split-string
+                       (shell-command-to-string "fasd -ld") "\n" t))))))
+    (ivy-read "directories:" collection
+              :keymap counsel-recent-dir-map
+              :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
+
+(global-set-key (kbd "M-g h") 'counsel-recent-directory)
 
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
-(counsel-projectile-mode)
-
-;; Keybindings
-;; go to =./readme/= to see more complete manual
-;;  =C-c p p=: switch project
-;;  =C-c p f=: jump to a project file
-;;  =C-c p d=: jump to a project directory
-;;  =C-c p b=: jump to a project buffer
-;;  =C-c p s g=: search project with grep
-;;  =C-c p s s=: serach project with ag
-;; new commands:
-;;  =C-c p SPC=: jump to a project buffer, file, or switch project
-;;  =C-c p s r=: search project with rg
-;;  =C-c p O=:   Org-capture into project
-
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode))
 
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
-(add-hook 'c-mode-hook 'counsel-gtags-mode)
-(add-hook 'c++-mode-hook 'counsel-gtags-mode)
-(with-eval-after-load 'counsel-gtags
-  ;; basic jumps
-  (define-key counsel-gtags-mode-map (kbd "M-.") 'counsel-gtags-dwim)
-  (define-key counsel-gtags-mode-map (kbd "M-,") 'counsel-gtags-go-backward)
-  (define-key counsel-gtags-mode-map (kbd "M-t") 'counsel-gtags-find-definition)
-  (define-key counsel-gtags-mode-map (kbd "M-r") 'counsel-gtags-find-reference)
-  (define-key counsel-gtags-mode-map (kbd "M-s") 'counsel-gtags-find-symbol)
-  ;; create/update tags
-  (define-key counsel-gtags-mode-map (kbd "C-c g c") 'counsel-gtags-create-tags)
-  (define-key counsel-gtags-mode-map (kbd "C-c g u") 'counsel-gtags-update-tags)
-  ;; jump over stacks/history
-  (define-key counsel-gtags-mode-map (kbd "C-c g [") 'counsel-gtags-go-backward)
-  (define-key counsel-gtags-mode-map (kbd "C-c g ]") 'counsel-gtags-go-forward))
+(use-package counsel-gtags
+  :ensure t
+  :bind (:map counsel-gtags-mode-map
+              ;; basic jumps
+              ("M-." . counsel-gtags-dwim)
+              ("M-," . counsel-gtags-go-backward)
+              ("M-t" . counsel-gtags-find-definition)
+              ("M-r" . counsel-gtags-find-reference)
+              ("M-s" . counsel-gtags-find-symbol)
+              ;; create/update tags
+              ("C-c g c" . counsel-gtags-create-tags)
+              ("C-c g u" . counsel-gtags-update-tags)
+              ;; jump over stacks/history
+              ("C-c g [" . counsel-gtags-go-backward)
+              ("C-c g ]" . counsel-gtags-go-forward))
+  :hook ((c-mode c++-mode python-mode matlab-mode) . counsel-gtags-mode)
+  ;; :config (setq counsel-gtags-auto-update t)
+  )
 
+;; ---------------------------------------------------------------
+;; Hydra: make Emacs bindings that stick around
+;; ---------------------------------------------------------------
+(use-package hydra
+  :ensure t :ensure ivy-hydra)
 
+;; ---------------------------------------------------------------
+;; Avy: jump to char/words in tree-style
+;; ---------------------------------------------------------------
+(use-package avy
+  :ensure t
+  :bind (("C-'"     . avy-goto-char)   ;; C-:
+         ("M-'"     . avy-goto-char-2) ;; C-'
+         ("M-g c"   . avy-goto-char)
+         ("M-g g"   . avy-goto-line)
+         ("M-g M-g" . avy-goto-line)
+         ("M-g w"   . avy-goto-word-1)
+         ;; ("M-g e"   . avy-goto-word-0)  ;; too many candiates
+         ("M-g M-r" . avy-resume))
+  :config
+  (avy-setup-default)
+  )
 
 (provide 'init-ivy)
 ;; ================================================

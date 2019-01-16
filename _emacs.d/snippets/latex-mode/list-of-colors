@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: list of HTML colors
+# key: list
+# group: preambles
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\usepackage[rgb]{xcolor}
+
+% Theme: Tomorrow Day
+\definecolor{tw-white} {HTML}{ffffff}
+\definecolor{tw-gray1} {HTML}{efefef}
+\definecolor{tw-gray2} {HTML}{d6d6d6}
+\definecolor{tw-gray3} {HTML}{8e908c}
+\definecolor{tw-black} {HTML}{4d4d4c}
+\definecolor{tw-red}   {HTML}{c82829}
+\definecolor{tw-orange}{HTML}{f5871f}
+\definecolor{tw-yellow}{HTML}{eab700}
+\definecolor{tw-green} {HTML}{718c00}
+\definecolor{tw-aqua}  {HTML}{3e999f}
+\definecolor{tw-blue}  {HTML}{4271ae}
+\definecolor{tw-purple}{HTML}{8959a8}
+
+% Theme: Tomorrow Night
+\definecolor{twn-white} {HTML}{cccccc}
+\definecolor{twn-gray1} {HTML}{999999}
+\definecolor{twn-gray2} {HTML}{515151}
+\definecolor{twn-gray3} {HTML}{393939}
+\definecolor{twn-black} {HTML}{2d2d2d}
+\definecolor{twn-red}   {HTML}{f2777a}
+\definecolor{twn-orange}{HTML}{f99157}
+\definecolor{twn-yellow}{HTML}{ffcc66}
+\definecolor{twn-green} {HTML}{99cc99}
+\definecolor{twn-aqua}  {HTML}{66cccc}
+\definecolor{twn-blue}  {HTML}{6699cc}
+\definecolor{twn-purple}{HTML}{cc99cc}
