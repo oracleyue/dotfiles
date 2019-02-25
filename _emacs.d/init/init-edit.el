@@ -265,7 +265,7 @@ Uses `current-date-format' for the formatting the date/time."
 (add-hook 'matlab-mode-hook #'auto-cleanup-whitespace)
 (add-hook 'LaTeX-mode-hook #'auto-cleanup-whitespace)
 ;; manually remove whitespaces
-(global-set-key (kbd "C-x M-s") 'delete-trailing-whitespace)
+(global-set-key (kbd "M-s k") 'delete-trailing-whitespace)
 
 
 ;;
@@ -319,6 +319,13 @@ Uses `current-date-format' for the formatting the date/time."
       (setq line-spacing nil)
     (setq line-spacing 0.5))
   (redraw-frame (selected-frame)))
+
+;; line wrapping
+;; note: "wrap at window edge" cause issues in company
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq-default truncate-lines t)
+            (setq fill-column *fill-column-mono*)))
 
 
 ;;

@@ -20,23 +20,28 @@
         )
   (ivy-mode +1)
   :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
-         ;; new functions:
          ("C-c C-r" . ivy-resume))
   )
 
-(use-package ivy-posframe
-  :ensure t
-  :after (ivy)
-  :config
-  (setq ivy-fixed-height-minibuffer nil
-        ivy-posframe-parameters
-        `((min-width . 90)
-          (min-height .,ivy-height)
-          (internal-border-width . 10)))
-  (push '(swiper . ivy-posframe-display-at-window-bottom-left)
-        ivy-display-functions-alist)
-  (push '(t . ivy-posframe-display-at-point) ivy-display-functions-alist)
-  (ivy-posframe-enable))
+(when *use-posframe*
+  (use-package ivy-posframe
+    :ensure t
+    :after (ivy)
+    :config
+    (setq ivy-fixed-height-minibuffer nil
+          ;; ivy-display-function #'ivy-posframe-display-at-point
+          ivy-posframe-parameters
+          `((min-width . 90)
+            (min-height . ,ivy-height)
+            (internal-border-width . 10)))
+    (setq ivy-display-functions-alist nil)
+    (push '(t . ivy-posframe-display-at-point) ivy-display-functions-alist)
+    ;; (push '(ivy-completion-in-region . ivy-posframe-display-at-point)
+    ;;       ivy-display-functions-alist)
+    (push '(swiper . ivy-posframe-display-at-window-bottom-left)
+          ivy-display-functions-alist)
+    (ivy-posframe-enable))
+  )
 
 (use-package counsel
   :ensure t
@@ -47,10 +52,12 @@
          ([remap imenu]                    . counsel-imenu)
          ([remap recentf-open-files]       . counsel-recentf)
          ([remap org-capture]              . counsel-org-capture)
-         ([remape swiper]                  . counsel-grep-or-swiper)
+         ([remap swiper]                   . counsel-grep-or-swiper) ;; large files
          ([remap describe-face]            . counsel-describe-face)
          ([remap describe-function]        . counsel-describe-function)
          ([remap describe-variable]        . counsel-describe-variable)
+         ;; completion
+         ;; ([remap completion-at-point]      . counsel-company)
          ;; editing and code overview
          ("M-y"     . counsel-yank-pop)
          ("M-g SPC" . counsel-mark-ring)
@@ -61,6 +68,7 @@
          )
 
   :config
+  (push '(counsel-yank-pop . 10) ivy-height-alist)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
         "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)"

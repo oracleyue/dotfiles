@@ -36,7 +36,7 @@
     (set-face-font 'markdown-inline-code-face zyue-font)
     ;; turn off auto-fill mode
     ;; (turn-off-auto-fill)
-    (setq-local fill-column 85))
+    (setq-local fill-column *fill-column-sans*))
   (add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)
 
   ;; fontify code blocks

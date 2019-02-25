@@ -16,13 +16,12 @@
 ;; For /AUCTeX-Mode/
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (setq-default TeX-PDF-mode t)      ; default for pdf and forward search
 (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
-(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+;; (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
 
 ;; More extensions in AUCTeX-mode
  (setq auto-mode-alist
@@ -140,8 +139,10 @@
 ;; (setq-default TeX-master 'dwim)
 
 ;; Bibliography for RefTeX
-(setq reftex-default-bibliography '("./ref/library.bib"))
-(setq reftex-bibliography-commands '("bibliography" "nobibliography" "addbibresource"))
+(setq reftex-default-bibliography
+      '("./library.bib" "./ref/library.bib" "../ref/library.bib"))
+;; (setq reftex-bibliography-commands
+;;       '("bibliography" "nobibliography" "addbibresource"))
 
 ;; Customize Compilation
 ;; modifying commands
@@ -182,11 +183,15 @@
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-       '("backup tex" "./supports/texbackup.sh" TeX-run-command nil t) t))
+       '("backup tex" "./supports/texbackup.sh %t" TeX-run-command nil t) t))
 
 (eval-after-load "tex"
    '(add-to-list 'TeX-command-list
-       '("update mathsym" "./supports/mathsym_update.sh" TeX-run-command nil t) t))
+       '("backup tex (All)" "./supports/texbackup.sh" TeX-run-command nil t) t))
+
+(eval-after-load "tex"
+   '(add-to-list 'TeX-command-list
+       '("update mathsym" "./supports/mathsym-update.sh" TeX-run-command nil t) t))
 
 ;; use latexmk
 (unless (file-exists-p (expand-file-name "~/.latexmkrc"))
@@ -219,8 +224,7 @@
 ;; keybinding definitions
 (eval-after-load "latex"
   '(progn
-     ;; define keybindings to refresh and fontify buffer
-     ;; (define-key LaTeX-mode-map (kbd "C-S-f") 'font-lock-fontify-buffer)
+     ;; refresh and fontify buffer: =font-lock-fontify-buffer=
      ;; macro completions (flushed by flyspell.el)
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
 

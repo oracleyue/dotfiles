@@ -12,3 +12,4 @@ cd github
 
 # list of clones
 git clone https://github.com/fuxialexander/emacs-doom-themes
+

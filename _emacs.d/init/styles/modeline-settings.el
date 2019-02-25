@@ -3,11 +3,9 @@
 ;; ================================================================
 
 
-;;
-;; Styles for Modeline
-;;
-
+;; ---------------------------------------------
 ;; Spaceline
+;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
     :ensure t
@@ -17,7 +15,9 @@
       (setq powerline-image-apple-rgb t))    ;; fix applet bug on OSX
     (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
 
+;; ---------------------------------------------
 ;; Doomline
+;; ---------------------------------------------
 (defun zyue-use-doomline ()
   ;; dependencies
   (use-package shrink-path :ensure t)
@@ -29,7 +29,9 @@
     (setq doom-modeline-height 30)
     (doom-modeline-init)))
 
+;; ---------------------------------------------
 ;; Customized modeline
+;; ---------------------------------------------
 (defun zyue-customize-modeline ()
   (require 'zyue-modeline))
 
@@ -43,11 +45,13 @@
     (_          (zyue-customize-modeline))
     ))
 
-
-;;
+;; ---------------------------------------------
 ;; Misc for Modeline (e.g., Nyan cat, parrot)
-;;
-
+;; ---------------------------------------------
+(use-package nyan-mode
+  :disabled
+  :init (setq nyan-bar-length 24)
+  (nyan-mode))
 
 
 (provide 'modeline-settings)

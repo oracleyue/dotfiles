@@ -1,17 +1,27 @@
 ;; ================================================================
 ;; Directory Explorers and Window Management
 ;; ================================================================
+;; Last modified on 18 Jan 2019
 
 
 ;; ----------------------------------------------
 ;; Basic settings for window management
 ;; ----------------------------------------------
-
 ;; use "super-<left>", "super-<right>" to move between frames
-
-;; use "S-<left>", "S-<right>", "S-<up>", "S-<down>" to move between splitted windows
+;; use "S-<left>", "S-<right>", "S-<up>", "S-<down>" to move between
+;; splitted windows
 (windmove-default-keybindings)
 
+;; ----------------------------------------------
+;; numbering windows
+;; ----------------------------------------------
+(use-package winum
+  :ensure t
+  :config
+  (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
+  (winum-mode))
+;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
+;; =C-x w `=: select window by number, which is inserted in minibuffer
 
 ;; ----------------------------------------------
 ;; /golden-ratio/: resize multiple windows
@@ -40,14 +50,12 @@
   "Disable golden-ratio if BUFNAME is the name of a visible buffer."
   (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
 
-
 ;; ------------------------------------------------
 ;; /popwin/: manage popup (temporary) buffers
 ;; Bugs: it disables /neotree/ to create buffers.
 ;; ------------------------------------------------
 ;; (require 'popwin)
 ;; (popwin-mode 1)
-
 
 ;; ------------------------------------------------
 ;; Directory explorer (regular, /dired/)
@@ -59,7 +67,6 @@
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 ;; suppress errors due to no support of "ls --dired" on osx
 (when (string= system-type "darwin") (setq dired-use-ls-dired nil))
-
 
 ;; ------------------------------------------------
 ;; Directory explorers (tree)
@@ -74,7 +81,6 @@
   (setq neo-show-hidden-files nil)
   (eval-after-load "neotree"      ;; toggle by "H" in neotree
     '(setq neo-hidden-regexp-list '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
-
 
 ;; ------------------------------------------------
 ;; /ibuffer/: manage opened buffers
@@ -133,7 +139,6 @@
 ;; don't ask for confirmation to delete marked buffers
 (setq ibuffer-expert t)
 
-
 ;; ------------------------------------------------
 ;; /imenu-list/: show imenu entries in side bar
 ;; ------------------------------------------------
@@ -145,15 +150,13 @@
 ;; (setq imenu-list-auto-resize t)
 (setq imenu-list-focus-after-activation t)
 
-
-; ------------------------------------------------
+;; ------------------------------------------------
 ;; /TRAMP/: manage ssh and remote access
-; ------------------------------------------------
+;; ------------------------------------------------
 (setq tramp-default-method "ssh")
 ;; usages:
 ;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
 ;; - "C-x C-f /sudo::/etc/hosts"
-
 
 ;; ----------------------------------------------
 ;; /engine-mode/: manage web search

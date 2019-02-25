@@ -82,6 +82,9 @@
                                                   'help-echo "Buffer is read-only"))))
                "] "
 
+               ;; load nyan nyan
+               '(:eval (when nyan-mode (list (nyan-create))))
+
                ;; add the time, with the date and the emacs uptime in the tooltip
                "  ---"
                '(:eval (propertize (format-time-string "%H:%M")

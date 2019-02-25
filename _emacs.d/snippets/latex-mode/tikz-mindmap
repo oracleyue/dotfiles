@@ -18,17 +18,6 @@
 \begin{document}
 \pagestyle{empty}
 
-\begin{comment}
-:Title: Computer science mindmap
-:Tags: Manual, Mindmap
-
-Version 1.09 of PGF/TikZ added a library for drawing mindmaps. Here's an example
-from the manual.
-
-:Author: Till Tantau
-:Source: The PGF/TikZ manual
-\end{comment}
-
 \begin{tikzpicture}
   \path[mindmap,text=white,concept color=black,
     level 1 concept/.append style = {sibling angle=90}]

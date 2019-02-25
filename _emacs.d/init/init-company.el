@@ -18,15 +18,16 @@
 (use-package company
   :ensure t
   :init
-  (setq company-idle-delay                  0.2
+  (setq company-idle-delay                  nil  ;; nil to disable; 0.5
 	    company-tooltip-limit               10
+        company-tooltip-minimum-width       40
 	    company-minimum-prefix-length       3
         company-show-numbers                t
+	    company-tooltip-align-annotations   t
+	    company-require-match               'never
 	    company-dabbrev-downcase            nil
 	    company-dabbrev-ignore-case         nil
 	    ;; company-dabbrev-code-other-buffers t
-	    company-tooltip-align-annotations   t
-	    company-require-match               'never
 	    company-global-modes
 	    '(not comint-mode erc-mode message-mode help-mode gud-mode
               text-mode latex-mode org-mode markdown-mode)
@@ -55,13 +56,12 @@
   (setq company-dabbrev-code-everywhere t)
   )
 
-(use-package company-posframe
-  :ensure t
-  :if (display-graphic-p)
-  :after company
-  :init
-  (setq company-tooltip-minimum-width 50)
-  :hook (company-mode . company-posframe-mode))
+(when *use-posframe*
+  (use-package company-posframe
+    :ensure t
+    :if (display-graphic-p)
+    :after company
+    :hook (company-mode . company-posframe-mode)))
 
 ;; /Yasnippet/ A template system
 (use-package yasnippet

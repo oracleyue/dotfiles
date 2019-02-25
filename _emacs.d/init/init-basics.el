@@ -3,6 +3,7 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
+
 ;; basics
 (setq inhibit-startup-screen t)
 (column-number-mode t)
@@ -10,7 +11,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq-default fill-column 80)
 ;; (setq-default case-fold-search nil)  ;; case-sensitive search
 
 ;; encodings
@@ -33,6 +33,11 @@
 ;; - If using tcp, starting daemon creates a server file under "~/.emacs.d/server/";
 ;; - If you kill emacs daemon process directly by system command "kill", the server file remains there, which will stop the next start of emacs daemon.
 ;; - The right way to kill the server is using ~kill-emacs~, which may be setup as =emacsclient -nc --server-file=main --eval "(kill-emacs)"=, which automatically delete the server file.
+
+;; fill-column
+(defconst *fill-column-sans* 90)
+(defconst *fill-column-mono* 75)
+(setq-default fill-column *fill-column-mono*)
 
 ;; fix PATH for emacs in Mac OS X
 (require 'exec-path-from-shell)
@@ -87,10 +92,8 @@
   (setq mac-command-modifier 'control)  ; use command as control
   (setq mac-control-modifier 'super))   ; use control as super
 
-;; auto-save files when stop editing
-;; (require 'auto-save)
-;; (auto-save-enable)
-;; (setq auto-save-slient t)
+;; show size of files (in modeline)
+(size-indication-mode t)
 
 ;; default browser
 (if (string-equal system-type "darwin")
@@ -117,7 +120,7 @@
   (interactive)
   (find-file (expand-file-name "~/Documents/.email.tmp.md"))
   (auto-fill-mode 1)
-  (setq-local fill-column 75))
+  (setq-local fill-column *fill-column-mono*))
 
 ;; quick draft formulas in LaTeX
 (defun draft-formula ()
@@ -126,7 +129,7 @@
   (other-window 1)
   (find-file (expand-file-name "~/Documents/.formula.tex")))
 
-;; supports for Chinese (moved to init-theme.el)
+;; supports for Chinese (moved to init-ui.el)
 ;; setting font set
 ;; (if (display-graphic-p)
 ;;     (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -136,12 +139,23 @@
 ;; stop cursor blinking bug when using PinYin on OS X
 (setq redisplay-dont-pause nil)
 
+;; ----------------------------------------------
+;; auto-save files when stop editing
+;; ----------------------------------------------
+;; (require 'auto-save)
+;; (auto-save-enable)
+;; (setq auto-save-slient t)
+
+;; ----------------------------------------------
 ;; /hl-sexp/: matching a pair of braces and hightlight the contents
+;; ----------------------------------------------
 ;; (require 'hl-sexp)
 ;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
 ;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 
+;; ----------------------------------------------
 ;; /smartparens/: insert pairs of parenthesis/brackets
+;; ----------------------------------------------
 (use-package smartparens
   :ensure t
   :defer nil
@@ -151,8 +165,10 @@
               ("C-M-b"   . sp-backward-sexp)
               ("C-M-d"   . sp-down-sexp)
               ("C-M-u"   . sp-up-sexp)
-              ("C-M-a"   . sp-beginning-of-sexp)
-              ("C-M-e"   . sp-end-of-sexp)
+              ("C-M-n"   . sp-next-sexp)
+              ("C-M-p"   . sp-previous-sexp)
+              ("C-S-a"   . sp-beginning-of-sexp)
+              ("C-S-e"   . sp-end-of-sexp)
               ;; mark
               ("C-M-SPC" . sp-mark-sexp)
               ;; warp, unwrap and rewrap
@@ -161,8 +177,10 @@
               ;; kill, copy
               ("C-M-k"   . sp-kill-sexp)
               ;; expand and contract
-              ("C-M-p"   . sp-forward-barf-sexp)
-              ("C-M-c"   . sp-forward-slurp-sexp)
+              ("C-<right>"    . sp-forward-slurp-sexp)
+              ("C-<left>"     . sp-forward-barf-sexp)
+              ("C-M-<left>"   . sp-forward-slurp-sexp)
+              ("C-M-<right>"  . sp-forward-barf-sexp)
               ;; split, join and raise
               ("C-M-t"   . sp-split-sexp)
               ("C-M-j"   . sp-join-sexp)
@@ -173,9 +191,14 @@
   ;; highlight pairs (e.g. brackets)
   (show-smartparens-global-mode 1) ;; replace default /show-paren/
   ;; disable highlights between pairs firstly inserted
-  (setq sp-highlight-pair-overlay nil))
+  (setq sp-highlight-pair-overlay nil)
+  ;; disable smartparens for specific modes
+  ;; (add-to-list 'sp-ignore-modes-list 'latex-mode)
+  )
 
+;; ----------------------------------------------
 ;; /bash-completion/: TAB complete alias and functions
+;; ----------------------------------------------
 (require 'bash-completion)
 (bash-completion-setup)
 

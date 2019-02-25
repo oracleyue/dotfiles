@@ -21,7 +21,7 @@
 
 ;; startup styles
 (setq org-startup-folded t)
-(setq org-startup-indented nil)
+(setq org-startup-indented t)
 
 ;; view styles
 (defun y/set-view-style-orgmode ()
@@ -30,7 +30,7 @@
     (setq line-spacing '0.25)) ;; line spacing
   (setq truncate-lines t)      ;; line wraping
   (turn-off-auto-fill)
-  (setq-local fill-column 90))
+  (setq-local fill-column *fill-column-sans*))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
 ;; highlight latex fragments

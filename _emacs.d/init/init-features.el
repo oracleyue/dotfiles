@@ -7,19 +7,17 @@
 (defconst *tree-manager* "neotree")
 
 ;; use golden-ratio mode
-(if *is-server-main*
-    (defconst *use-golden-ratio* nil)
-  (defconst *use-golden-ratio* nil))
+(defconst *use-golden-ratio* nil)
 
 ;; use css locally or in github
 (defconst *use-css-local* t)
 
 ;; completion system
-(if *is-mac*
-    (if *is-server-main*
-        (defconst *use-helm* nil)
-      (defconst *use-helm* nil))
-  (defconst *use-helm* nil))
+(defconst *use-helm* nil)
+(defconst *use-ivy* (not *use-helm*))
+
+;; popups
+(defconst *use-posframe* nil)
 
 ;; integrate TAB for yasnippet, indent and company completion
 (defconst *integrate-TAB* nil)

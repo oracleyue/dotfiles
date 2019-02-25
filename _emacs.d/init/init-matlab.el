@@ -15,7 +15,7 @@
 
 ;; update/fix displays
 (defun zyue-matlab-customize-display ()
-  (setq matlab-fill-column 70)
+  (setq matlab-fill-column fill-column)
   (set-face-attribute 'font-lock-type-face nil :slant 'normal))
 (add-hook 'matlab-mode-hook 'zyue-matlab-customize-display)
 

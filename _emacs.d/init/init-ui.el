@@ -105,7 +105,7 @@ Expects a `font-spec'.")
 
 ;; Set modeline style
 (if *is-server-main* (setq zyue-modeline 'doomline)
-  (setq zyue-modeline 'spaceline))
+  (setq zyue-modeline 'spaceline))  ;; custom
 
 ;; Additional configs for specific themes
 (pcase zyue-theme

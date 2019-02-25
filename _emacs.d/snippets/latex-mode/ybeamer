@@ -4,9 +4,9 @@
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\documentclass[xcolor={dvipsnames},aspectratio=169]{beamer}
+\documentclass[xcolor={dvipsnames},aspectratio=1610]{beamer}
 % options: notes,handout; aspectratio=169,1610,149,54,43,32
-\usepackage[bg]{styles/zyuebeamer}  % bibentry, txmath, sans, charter, bg
+\usepackage[bg]{styles/zyuebeamer}  % bibentry, txmath, sans, charter, bg, notoc
 % \usepackage{styles/zyuebeamerdark} % accent=cyan, sans
 
 % Packages

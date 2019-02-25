@@ -55,7 +55,13 @@
   (epy-setup-checker "pyflakes %f")          ; use *flymake* checker
 
   ;; set gud debugger
-  (setq gud-pdb-command-name "python -m pdb")
+  ;; (setq gud-pdb-command-name "python -m pdb")
+  (defadvice pdb (before gud-query-cmdline activate)
+    "Provide a better default command line when called interactively."
+    (interactive
+     (list (gud-query-cmdline 'python
+                              (concat "-m pdb "
+	 		                          (file-name-nondirectory buffer-file-name))))))
 
   ;; indenting
   (defun zyue:py-indent-display-style ()
@@ -89,7 +95,6 @@
                                     "Eval line in inferior Python session")
                         "Eval region")
   );;END: use-package (emacs-for-python)
-
 
 ;; ----------------------------------------------------------------
 ;; Auto-completion by /Jedi/ (using /company-jedi/)
@@ -125,7 +130,14 @@
     (defun zyue/company-py-setup ()
       (setq-local company-backends
                   (append '(company-jedi) company-backends)))
-    (add-hook 'python-mode-hook 'zyue/company-py-setup)))
+    (add-hook 'python-mode-hook 'zyue/company-py-setup))
+
+  ;; integration with /ivy/
+  (when *use-ivy*
+    (require 'counsel)
+    (define-key python-mode-map (kbd "C-M-i") 'counsel-jedi))
+
+  ) ;; end of use-package(jedi)
 
 ;; ----------------------------------------------------------------
 ;; Emacs suuport for Jupyter Notebook
