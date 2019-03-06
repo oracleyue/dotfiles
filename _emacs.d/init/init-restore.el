@@ -5,6 +5,9 @@
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)
 
+;; unset keys
+(global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer
+
 ;; open default Dired folders on startup
 (cond (*is-mac*
        (cond (*is-server-main*

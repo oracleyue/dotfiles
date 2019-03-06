@@ -59,13 +59,20 @@
 \title{\LARGE \bf
   Here is the Title
 }
-\author{Zuogong Yue, Johan Thunberg$^{*}$ and Jorge Gon\c{c}alves%  <-this % stops a space
-  \thanks{This work was supported by Fonds National de la Recherche Luxembourg (Ref.~9247977).}
-  \thanks{All authors are with Luxembourg Centre for Systems Biomedicine (LCSB),
+\author{Zuogong Yue$^1$, Johan Thunberg$^2$, Lennart Ljung$^3$ and
+  Jorge Gon\\c{c}alves$^1$%
+  \thanks{This work was supported by Fonds National de la Recherche
+    Luxembourg (Ref.~9247977).}%
+  \thanks{$^1$ Zuogong Yue and Jorge Gon\\c{c}alves are with
+    Luxembourg Centre for Systems Biomedicine (LCSB),
     University of Luxembourg,
-    7 Avenue des Hauts Fourneaux, 4362, Esch-sur-Alzette, Luxembourg.}%
-  \thanks{\hspace*{0mm}$^{*}$For correspondence, \href{mailto:johan.thunberg@uni.lu}{\tt
-        johan.thunberg@uni.lu}}%
+    7 Avenue des Hauts Fourneaux, 4362, Esch-sur-Alzette, Luxembourg.}
+  \thanks{$^2$ Johan Thunberg is with School of Information Technology,
+    Halmstad University, SE-30118 Halmstad, Sweden.}
+  \thanks{$^3$ Lennart Ljung is with Department of Electrical Engineering,
+    Link\\"oping University, Link\\"{o}ping, SE-58183, Sweden.}
+  \thanks{\hspace*{0mm}$^{*}$For correspondence,
+  \href{mailto:johan.thunberg@uni.lu}{\tt johan.thunberg@uni.lu}}
 }
 
 

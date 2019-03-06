@@ -302,8 +302,14 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; spell check for text modes
 (add-hook 'text-mode-hook 'flyspell-mode)
-(setq ispell-dictionary "british")
-;; (setq ispell-dictionary "american")
+(defun zyue/toggle-dictionary ()
+  "Toggle flyspell dictionary between the American and the British."
+  (interactive)
+  (if (string-equal ispell-dictionary "british")
+      (setq ispell-dictionary "american")
+    (setq ispell-dictionary "british"))
+  (ispell-kill-ispell t)
+  (message "%s" ispell-dictionary))
 
 ;; use /auto-fill mode/
 (add-hook 'text-mode-hook 'turn-on-auto-fill)

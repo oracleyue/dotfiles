@@ -18,7 +18,7 @@
 (use-package company
   :ensure t
   :init
-  (setq company-idle-delay                  nil  ;; nil to disable; 0.5
+  (setq company-idle-delay                  0.2  ;; nil to disable; 0.5
 	    company-tooltip-limit               10
         company-tooltip-minimum-width       40
 	    company-minimum-prefix-length       3

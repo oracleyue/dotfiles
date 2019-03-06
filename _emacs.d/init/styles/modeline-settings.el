@@ -27,6 +27,8 @@
     :ensure t
     :config
     (setq doom-modeline-height 30)
+    ;; use buffer name; show the full-path file name when moving mouse over it
+    ;; (setq doom-modeline-buffer-file-name-style 'buffer-name)
     (doom-modeline-init)))
 
 ;; ---------------------------------------------
