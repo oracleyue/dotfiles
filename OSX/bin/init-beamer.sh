@@ -1,1 +1,1 @@
-/Users/oracleyue/Public/Dropbox/Academia/Manuscripts/archive/init-beamer.sh
+/Users/oracleyue/Public/Dropbox/Academia/latex_templ/init-beamer.sh

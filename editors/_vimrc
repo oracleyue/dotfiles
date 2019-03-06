@@ -1,5 +1,5 @@
 " --------------------------------------------------------------------------
-" Global Settings
+" Basic settings
 " --------------------------------------------------------------------------
 set nu                                      " set row number
 set nocompatible                            " be iMproved
@@ -14,8 +14,8 @@ set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
 
-" Esc
-"inoremap jk <Esc>
+" ESC
+inoremap jk <Esc>
 inoremap <c-[> <Esc>
 
 " fix bugs of vim (eg. taglist) on iTerm2
@@ -75,26 +75,23 @@ nnoremap <Leader>nl :nohlsearch<CR>
 " Plugins
 " --------------------------------------------------------------------------
 
-" ------------------** Vundle **--------------------------
+" Vundle
+" -----------------
 filetype off				" required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-
 " List of installed plugins:
 " repos on github
   Plugin 'LaTeX-Box-Team/LaTeX-Box'
   Plugin 'djoshea/vim-matlab'
-
 " vim-scripts repos
   Plugin 'taglist.vim'
   Plugin 'jamessan/vim-gnupg'
   Plugin 'scrooloose/nerdcommenter'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 " Help
 " :PluginList          - list configured bundles
 " :PluginInstall       - install(update) bundles
@@ -102,7 +99,8 @@ filetype plugin indent on    " required
 " :PluginClean         - confirm(or auto-approve) removal of unused bundles
 " see :h vundle for more details or wiki for FAQ
 
-" -----------------** TagList **--------------------------
+" Taglist
+" -----------------
 let Tlist_Enable_Fold_Column=0
 let Tlist_Exit_OnlyWindow=1
 let Tlist_GainFocus_On_ToggleOpen=1
@@ -114,6 +112,6 @@ nnoremap <Leader>t :TlistToggle<CR>
 
 
 " --------------------------------------------------------------------------
-" others
+" misc
 " --------------------------------------------------------------------------
 syntax on

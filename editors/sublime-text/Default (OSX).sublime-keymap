@@ -8,7 +8,6 @@
     { "keys": ["alt+m"], "command": "markdown_preview", "args": {"target": "browser", "parser":"markdown"} },
 
     //// CodeIntel
-    // { "keys": ["ctrl+tab"], "command": "code_intel_auto_complete" },
 	{ "keys": ["alt+."], "command": "goto_python_definition"},
 	{ "keys": ["alt+,"], "command": "back_to_python_definition"},
     
@@ -20,4 +19,7 @@
         "args": { "action": "expand_abbreviation" }, 
         "command": "run_emmet_action"
     }, 
+
+    //// DashDoc
+    { "keys": ["super+h"], "command": "dash_doc" },
 ]

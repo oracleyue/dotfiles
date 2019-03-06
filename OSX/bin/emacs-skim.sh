@@ -5,14 +5,14 @@
 # following:
 # - test if a frame of the Emacs server "main" has been created;
 # - if not, create one; otherwise, connect the available frame.
-
+# When using client, run server first by
+#   ~$ emacs --daemon=main
+#
 # Copyright (c) 2014-2017, Zuogong YUE
 # Licensed under the GNU General Public License
 #
-# Last modified on 31 May 2018
+# Last modified on 10 Jul 2018
 
-# run server first by
-#     ~$ emacs --daemon=main
 
 status=$(/usr/local/bin/emacsclient --no-wait --socket-name=main \
                                     --eval "(display-graphic-p)")

@@ -10,10 +10,18 @@ GPG_TTY=`tty`
 export GPG_TTY
 
 # pathes
-export PATH=/Users/oracleyue/bin:/usr/local/sbin:${PATH}
+export PATH=/Users/oracleyue/bin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
-# export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:${PYTHONPATH}
+# Python
+export PYTHONPATH=/Users/oracleyue/.local/lib/python3.7/site-packages
+# Latex
 # export BSTINPUTS=$(kpsepath bst)
+# CUDA
+export PATH=${PATH}:/Developer/NVIDIA/CUDA-9.0/bin
+export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-9.0/lib:$DYLD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+# Anaconda
+#export PATH=${PATH}:/anaconda3/bin
 
 # alias
 alias ll='ls -Alh'
@@ -38,12 +46,14 @@ alias gitup='git add . && git ci -m "regular update" && git push'
 alias updatedb='/usr/libexec/locate.updatedb'
 alias shred='gshred -n 5'
 alias trash='trash -v'
+alias lsblk='diskutil list'
 
 # alias for FASD
 eval "$(fasd --init auto)"
 # a: any; s: show/search/select; d: directory; f: file
 # sd: interactive directory selection; sf: interactive file selection
 # z: quick cd; zz: cd with interactive selection
+alias j='fasd_cd -d'  # same as "z"
 
 # alias commands for development
 alias gcc='gcc-7'
@@ -54,6 +64,7 @@ alias matlab-term='matlab -nosplash -nodesktop'
 
 # environment variables
 export EDITOR=vim
+# export EA_EDITOR='emacsclient --socket-name=any -nc'   # Emacs-Anywhere
 export GTAGSLABEL=pygments      # "gtags" in GNU global
 export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 

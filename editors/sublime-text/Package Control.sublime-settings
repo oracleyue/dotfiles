@@ -5,18 +5,18 @@
 	],
 	"installed_packages":
 	[
-		"Alignment",
 		"ApplySyntax",
-		"AutoFileName",
+		"ayu",
 		"BracketHighlighter",
 		"CMake",
+		"Codecs33",
 		"Color Highlighter",
-		"Emmet",
-		"GitGutter",
+		"ConvertToUTF8",
+		"DashDoc",
+		"FileIcons",
 		"MarkdownEditing",
 		"MarkdownPreview",
 		"Package Control",
-		"SublimeCodeIntel",
-		"SublimeGit"
+		"SublimeCodeIntel"
 	]
 }

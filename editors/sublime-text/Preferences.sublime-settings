@@ -1,11 +1,14 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
+	"color_scheme": "Packages/ayu/ayu-light.tmTheme",
 	"default_encoding": "UTF-8",
-	"font_size": 13.5,
+	"font_face": "Roboto Mono",
+	"font_size": 14,
 	"ignored_packages":
 	[
 		"Markdown",
 		"Vintage"
 	],
-	"show_encoding": true
+	"scroll_past_end": true,
+	"show_encoding": true,
+	"theme": "ayu-light.sublime-theme"
 }
