@@ -47,6 +47,11 @@
     :ensure t
     :config
     (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
+    ;; tweak colors
+    (when (eq zyue-theme 'doom-one)
+      (setq highlight-indent-guides-auto-enabled nil)
+      (set-face-foreground 'highlight-indent-guides-character-face
+                           "#3e6a44a85124"))
     (highlight-indent-guides-mode))
   ;; highlight current line
   (hl-line-mode t))
