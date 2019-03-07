@@ -39,6 +39,21 @@
 
 
 ;; ----------------------------------------------
+;; highlight indentation and current line
+;; ----------------------------------------------
+(defun zyue/edit-hl-config()
+  ;; highlight indentation
+  (use-package highlight-indent-guides
+    :ensure t
+    :config
+    (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
+    (highlight-indent-guides-mode))
+  ;; highlight current line
+  (hl-line-mode t))
+(add-hook 'python-mode-hook 'zyue/edit-hl-config)
+
+
+;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
 (use-package iedit :ensure t)

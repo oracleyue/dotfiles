@@ -17,7 +17,7 @@
 (defconst *use-ivy* (not *use-helm*))
 
 ;; popups
-(defconst *use-posframe* nil)
+(defconst *use-posframe* t)
 
 ;; integrate TAB for yasnippet, indent and company completion
 (defconst *integrate-TAB* nil)

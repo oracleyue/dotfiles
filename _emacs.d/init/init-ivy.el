@@ -25,6 +25,7 @@
 
 (when *use-posframe*
   (use-package ivy-posframe
+    :load-path "git/ivy-posframe"
     :ensure t
     :after (ivy)
     :config
