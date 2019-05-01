@@ -46,7 +46,7 @@ Tools to be installed in order to use the corresponding commands in Ivzyue/
 List of frequent commands:
 
 - grep buffers:
-  - ~swiper~ or ~counsel-grep-or-swiper~ (large files) (=M-s s=)
+  - ~swiper~ (=C-s=) or ~counsel-grep-or-swiper~ (large files)
   - ~swiper-all~  grep all buffers
   - ~swiper-multi~ grep the selected buffers
   - ~counsel-grep~ (=M-g s=)    
@@ -57,6 +57,9 @@ List of frequent commands:
 - grep git projects:
   - ~counsel-git~ (=C-c g=) (select a file tracked by git)
   - ~counsel-git-grep~ or use ~counsel-rg~ instead
+- bookmark files (Emacs default)
+  - use =C-x r m= to create a bookmark for a file; use =C-x r b= and keywords to open bookmarked files
+  - use =M-g b= to list bookmarks via Ivy
 - find files in directory recursively ~counsel-fzf~ (=M-g f=)
 
 *** Configurations
@@ -130,7 +133,7 @@ Ivy-based interface to standard commands:
            ("M-g i"   . counsel-semantic-or-imenu)
            ;; system tools
            ("M-g f"   . counsel-fzf)     ;; find
-           ;; ("M-g l"   . counsel-locate)  ;; locate
+           ("M-g l"   . counsel-locate)  ;; locate
            )
 
     :config
@@ -169,11 +172,16 @@ Use swiper for quick search in buffers, files and directories:
     :ensure t
     :defer 1
     :bind
-    (("C-s"   . swiper)
-     ("M-g s" . counsel-grep)  ;; grep the current file
+    (;; buffer
+     ("C-s"   . swiper)
+     ("C-S-s" . swiper-all)
+     ("s-f"   . swiper-isearch)   
+     ("M-g s" . counsel-grep)
      ;; git project
      ("C-c g" . counsel-git)
      ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
+     ;; bookmark (Emacs default; =C-x r b= to create bookmark)
+     ("M-g b" . counsel-bookmark)
      ;; grep files recursively in the folder
      ("M-g a" . counsel-ag)    ;; C-c k
      ("M-g k" . counsel-ack)

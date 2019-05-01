@@ -65,7 +65,7 @@
          ("M-g i"   . counsel-semantic-or-imenu)
          ;; system tools
          ("M-g f"   . counsel-fzf)     ;; find
-         ;; ("M-g l"   . counsel-locate)  ;; locate
+         ("M-g l"   . counsel-locate)  ;; locate
          )
 
   :config
@@ -100,11 +100,16 @@
   :ensure t
   :defer 1
   :bind
-  (("C-s"   . swiper)
-   ("M-g s" . counsel-grep)  ;; grep the current file
+  (;; buffer
+   ("C-s"   . swiper)
+   ("C-S-s" . swiper-all)
+   ("s-f"   . swiper-isearch)   
+   ("M-g s" . counsel-grep)
    ;; git project
    ("C-c g" . counsel-git)
    ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
+   ;; bookmark (Emacs default; =C-x r b= to create bookmark)
+   ("M-g b" . counsel-bookmark)
    ;; grep files recursively in the folder
    ("M-g a" . counsel-ag)    ;; C-c k
    ("M-g k" . counsel-ack)

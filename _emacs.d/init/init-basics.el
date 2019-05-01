@@ -93,6 +93,9 @@
 ;; show size of files (in modeline)
 (size-indication-mode t)
 
+;; line moving (bug on Mac: moving jaggly sometime)
+(setq line-move-visual nil)
+
 ;; default browser
 (if (string-equal system-type "darwin")
     (setq browse-url-browser-function 'browse-url-generic
@@ -187,7 +190,10 @@
   (require 'smartparens-config) ;; default config
   (smartparens-global-mode 1)
   ;; highlight pairs (e.g. brackets)
-  (show-smartparens-global-mode 1) ;; replace default /show-paren/
+  ;; (show-smartparens-global-mode 1)
+  (with-eval-after-load 'smartparens  ;; use default /show-paren/
+    (show-smartparens-global-mode -1)
+    (show-paren-mode t))  ;; fixes huge delay when hit Enter after "do" in bash "FOR" loop
   ;; disable highlights between pairs firstly inserted
   (setq sp-highlight-pair-overlay nil)
   ;; disable smartparens for specific modes
