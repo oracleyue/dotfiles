@@ -2,7 +2,7 @@
 	"extensions":
 	[
 		"sh",
-		"bash",
-		"zsh"
+		"zsh",
+		"bash"
 	]
 }

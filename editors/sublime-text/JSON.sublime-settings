@@ -3,9 +3,9 @@
 	[
 		".jscsrc",
 		".csslintrc",
+		".bowerrc",
 		"geojson",
 		".jshintrc",
-		".eslintrc",
-		".bowerrc"
+		".eslintrc"
 	]
 }
