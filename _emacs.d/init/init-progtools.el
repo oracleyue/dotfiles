@@ -63,6 +63,21 @@
 ;; ----------------------------------------------
 (use-package iedit :ensure t)
 
+;; ----------------------------------------------
+;; /symbol-overlay/: highlight symbols to improve readability
+;; ----------------------------------------------
+(use-package symbol-overlay
+  :ensure t
+  :bind (("M-i" . symbol-overlay-put)
+         ("M-n" . symbol-overlay-jump-next)
+         ("M-p" . symbol-overlay-jump-prev)
+         ("M-N" . symbol-overlay-switch-forward)
+         ("M-P" . symbol-overlay-switch-backward)
+         ("M-C" . symbol-overlay-remove-all)
+         ([M-f3] . symbol-overlay-remove-all))
+  :hook ((prog-mode . symbol-overlay-mode)
+         (iedit-mode . (lambda () (symbol-overlay-mode -1)))
+         (iedit-mode-end . symbol-overlay-mode)))
 
 ;; ----------------------------------------------
 ;; /ediff/: comparing two files
@@ -71,7 +86,6 @@
 ;; (setq ediff-diff-options "-w")  ;; ignore white spaces
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
-
 
 ;; ----------------------------------------------
 ;; Semantic parsing and overview
@@ -90,7 +104,6 @@
   ;; /stickyfunc/ shows the function name on top of the buffer
   (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode)
   (require 'stickyfunc-enhance))
-
 
 ;; ----------------------------------------------
 ;; API reference support

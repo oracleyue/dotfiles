@@ -204,10 +204,17 @@
 ;; PDF Viewers
 (cond
  ((string-equal system-type "gnu/linux")
-  ; Use Evince as viewer, enable source <-> PDF sync
-  (setq TeX-output-view-style
-        (quote  (("^pdf$" "." "evince -f %o")
-                 ("^html?$" "." "firefox %o"))))
+  (setq linux-desktop-env "kde") ;; "gnome"
+  ;; Enable TeX <-> PDF sync
+  (if (string-equal linux-desktop-env "gnome")
+      ;; Use Evince; the default works
+      (setq TeX-output-view-style
+            (quote  (("^pdf$" "." "evince -f %o")
+                     ("^html?$" "." "firefox %o"))))
+    ;; Use Okular
+    (setq TeX-view-program-list
+          '(("Okular" "okular --unique %o#src:%n%b")))
+    (setq TeX-view-program-selection '((output-pdf "Okular"))))
   )
  ((string-equal system-type "darwin")
   ;; use skim as default pdf viewer
