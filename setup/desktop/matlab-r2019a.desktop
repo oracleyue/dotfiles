@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=MATLAB R2019a
+Comment=Scientific computing environment
+Icon=/usr/local/share/icons/matlab.png
+MimeType=text/x-matlab
+Exec=matlab -desktop
+Categories=Development;Math;Science
+StartupNotify=true
+#Uncomment the following line if you've got several matlab icons in the launcher
+#StartupWMClass=com-mathworks-util-PostVMInit
