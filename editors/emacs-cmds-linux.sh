@@ -38,6 +38,8 @@ function es() {
 
     elif [[ "$1" == "start" ]]; then
         /usr/bin/emacs --daemon
+        # if not set LC_CTYPE globally, use:
+        # LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs --daemon
 
     else
         echo 'Usages: '
