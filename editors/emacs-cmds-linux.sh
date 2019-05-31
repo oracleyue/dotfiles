@@ -31,19 +31,21 @@
 
 function es() {
     if [[ $# -eq 0 ]] || [[ "$1" == "list" ]]; then
-        systemctl status --user emacs
+        ps aux | grep emacs
 
     elif [[ "$1" == "stop" ]]; then
-        systemctl stop --user emacs
+        /usr/bin/emacsclient --eval "(kill-emacs)"
 
-    elif [[ "$1" == "restart" ]]; then
-        systemctl restart --user emacs
+    elif [[ "$1" == "start" ]]; then
+        /usr/bin/emacs --daemon
+        # if not set LC_CTYPE globally, use:
+        # LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs --daemon
 
     else
         echo 'Usages: '
-        echo '  - es: check server status;'
-        echo '  - es stop: kill the emacs server'
-        echo '  - es restart: restart the emacs server'
+        echo '  - es (list): check server list;'
+        echo '  - es stop  : kill the emacs server;'
+        echo '  - es start : start the emacs server.'
     fi
 }
 
