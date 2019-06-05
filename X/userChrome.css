@@ -1,0 +1,5 @@
+/* To use this settings, copy it to ~/.thunderbird/PROFILE_NAME/chrome/ */
+
+/* Global UI font */
+* { font-family: Roboto !important;
+}
