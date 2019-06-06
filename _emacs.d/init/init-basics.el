@@ -47,7 +47,7 @@
 (exec-path-from-shell-initialize)
 
 ;; cursors
-(setq-default cursor-type 'box)  ;"bar", "box" (default)
+(setq-default cursor-type 'bar)  ;"bar", "box" (default)
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment

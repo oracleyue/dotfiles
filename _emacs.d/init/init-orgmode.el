@@ -10,8 +10,10 @@
 
 
 ;;
-;; Configuratoins of Orgmode
+;; Configuratoins of Org-Mode
 ;;
+
+;; /Basic/
 
 (global-font-lock-mode 1)
 ;; (global-set-key "\C-cl" 'org-store-link)
@@ -43,7 +45,7 @@
               ("\\.x?html?\\'" . default)
               ("\\.pdf\\'" . default))))
 
-;; Export Settings
+;; /Export Settings/
 
 ;; HTML
 (setq org-html-head-include-default-style nil)
@@ -63,8 +65,7 @@
 ;; Markdown
 (eval-after-load "org" '(require 'ox-md nil t))
 
-
-;; Code Blocks and Babel
+;; /Code Blocks and Babel/
 
 ;; use syntax highlighting in org code blocks
 (setq org-src-fontify-natively t)
@@ -89,14 +90,14 @@
       (cons '(:exports . "both")
              (assq-delete-all :exports org-babel-default-header-args)))
 
+;; /Easy-Templates for LaTeX macros/
 
-;; Easy-Templates for LaTeX macros
 (eval-after-load 'org
   '(progn
      (add-to-list 'org-structure-template-alist
        '("w" "#+BEGIN_WARNING\n?\n#+END_WARNING"))
      (add-to-list 'org-structure-template-alist
-       '("p" ":PROPERTIES:\n:AUTHOR:\n:END:"))
+       '("tex" "#+BEGIN_LATEX\n?\n#+END_LATEX"))
      (add-to-list 'org-structure-template-alist
        '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
      (add-to-list 'org-structure-template-alist
@@ -108,7 +109,7 @@
 ;; Additional Supports via Third-party Packages
 ;;
 
-;; /smart-parens/ for org-mode
+;; /smartparens/ for org-mode
 (sp-with-modes 'org-mode
   (sp-local-pair "$" "$"
                  :unless '(sp-latex-point-after-backslash)
@@ -116,11 +117,9 @@
   (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
                  :actions '(insert wrap autoskip navigate escape)))
 
-
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
 (eval-after-load "org"
   '(require 'ox-gfm nil t))
-
 
 ;; /ox-reveal/: presentation via orgmode
 (use-package ox-reveal
