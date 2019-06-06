@@ -1,0 +1,16 @@
+KDE:
+- Roboto 14pt
+- DejaVu Sans Mono 14pt
+
+Terminal:
+- Monospace: DejaVu Sans Mono 10.5pt
+
+Thunderbird:
+- Sans: Roboto
+- Serif: FreeSerif
+- Monospace: SF Mono
+
+Emacs:
+- Sans: SF Sans
+- Monospace: SF Mono
+- Unicode: Sarasa Mono SC
