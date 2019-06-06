@@ -47,8 +47,9 @@
 (exec-path-from-shell-initialize)
 
 ;; cursors
-(setq-default cursor-type 'bar)  ;"bar", "box" (default)
-(blink-cursor-mode t)  ;-1 stops cursor blinking
+(when (string-equal system-type "darwin")
+  (setq-default cursor-type 'bar)) ; "bar", "box" (default)
+(blink-cursor-mode t)  ; -1 stops cursor blinking
 
 ;; font size adjustment
 ;; use C-x C-0 first, then use +/- to tune the size.
