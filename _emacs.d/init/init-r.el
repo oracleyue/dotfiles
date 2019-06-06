@@ -75,7 +75,7 @@
   (add-hook 'ess-mode-hook 'zyue/add-company-backend-ess)
 
   ;; delete the unnecessary buffer *ESS*
-  (kill-buffer "*ESS*")
+  ;(kill-buffer "*ESS*")
 
   ) ;; END of ess-site
 

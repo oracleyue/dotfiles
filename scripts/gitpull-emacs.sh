@@ -23,6 +23,6 @@ $sync $repopath/_emacs.d/init.el ~/.emacs.d/init.el
 $sync $repopath/_emacs.d/init ~/.emacs.d/
 $sync --exclude="clang-complete" --exclude="*.pyc" \
       $repopath/_emacs.d/git ~/.emacs.d/
-$sync --exclude="github" $repopath/_emacs.d/themes ~/.emacs.d/
+$sync $repopath/_emacs.d/themes ~/.emacs.d/
 $sync $repopath/_emacs.d/snippets ~/.emacs.d/
 $sync $repopath/_emacs.d/templates ~/.emacs.d/

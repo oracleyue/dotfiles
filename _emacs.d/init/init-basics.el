@@ -47,7 +47,7 @@
 (exec-path-from-shell-initialize)
 
 ;; cursors
-(setq-default cursor-type 'bar)  ;"bar", "box" (default)
+(setq-default cursor-type 'box)  ;"bar", "box" (default)
 (blink-cursor-mode t)  ;-1 stops cursor blinking
 
 ;; font size adjustment
@@ -107,13 +107,9 @@
 (defun zyue/dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
-  (cond ((string-equal system-type "darwin")
-         (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
-         (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
-         (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org")))
-        ((string-equal system-type "gnu/linux")
-         (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
-         (dired (expand-file-name "~/Workspace"))))
+  (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
+  (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
+  (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org"))
   (switch-to-buffer "*scratch*"))
 
 ;; quick start email editing

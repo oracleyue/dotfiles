@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: latex env
+# key: tex
+# group: src
+# --
+#+BEGIN_LATEX
+$0
+#+END_LATEX

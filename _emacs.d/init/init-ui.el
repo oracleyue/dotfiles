@@ -15,7 +15,7 @@
 ;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
 (if *is-mac*
     (setq default-frame-alist '((width . 96) (height . 36)))
-  (setq default-frame-alist '((width . 96) (height . 33))))
+  (setq default-frame-alist '((width . 96) (height . 32))))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
 ;; Modeline
@@ -96,7 +96,7 @@ Expects a `font-spec'.")
 (setq zyue-variable-pitch-font (font-spec :family "Roboto"))
 
 ;; Set different themes for app and daemons
-(when *is-linux* (setq zyue-theme 'atom-one-dark))
+(when *is-linux* (setq zyue-theme 'doom-nord-light))
 (when *is-mac* (setq zyue-theme 'doom-nord-light))
 (when *is-server-main* (setq zyue-theme 'doom-nord-light))
 (when *is-server-coding* (setq zyue-theme 'doom-one))
@@ -104,7 +104,8 @@ Expects a `font-spec'.")
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Set modeline style
-(if *is-server-main* (setq zyue-modeline 'doomline)
+(if (or *is-server-main* *is-linux*)
+    (setq zyue-modeline 'doomline)
   (setq zyue-modeline 'spaceline))  ;; custom
 
 ;; Additional configs for specific themes

@@ -18,7 +18,7 @@
               (cd (expand-file-name "~/Public/Dropbox/Workspace/matlab")))))
       (*is-linux*
        (zyue/dired-open-folders-startup)
-       (cd "~/tmp")))
+       (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
 
 ;; restore keybindings for emacs in terminal
 (when *is-terminal*

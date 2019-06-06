@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mostly used macros
+# key: macro
+# group: preambles
+# --
+\newcommand{\bm}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+\newcommand{\yue}[1]{{\color{red}\upshape {[Zuogong: #1]}}}
+\newcommand{\note}[1]{{\color{blue}\upshape {[Note: #1]}}}
