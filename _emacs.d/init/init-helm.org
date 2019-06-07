@@ -27,10 +27,12 @@ files*), you need to the following apps, if you need to use:
 
     Install the additional packages to support the =helm= package
     #+BEGIN_SRC emacs-lisp
-      ;; Install required packages for more functions
       (setq custom/helm-packages
             '(helm
-              helm-core))
+              helm-swoop
+              projectile
+              helm-projectile
+              helm-gtags))
       (custom/install-packages custom/helm-packages)
     #+END_SRC
 

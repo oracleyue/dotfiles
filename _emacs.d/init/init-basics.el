@@ -3,6 +3,13 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
+;; Install required Emacs packages
+(setq custom/basic-packages
+      '(smartparens
+        bash-completion
+        exec-path-from-shell))
+(custom/install-packages custom/basic-packages)
+
 
 ;; basics
 (setq inhibit-startup-screen t)
@@ -155,7 +162,6 @@
 ;; /smartparens/: insert pairs of parenthesis/brackets
 ;; ----------------------------------------------
 (use-package smartparens
-  :ensure t
   :defer nil
   :bind (:map smartparens-mode-map
               ;; nativation

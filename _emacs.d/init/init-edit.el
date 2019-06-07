@@ -3,9 +3,15 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
+;; Install required Emacs packages
+(setq custom/edit-packages
+      '(multiple-cursors
+        undo-tree
+        expand-region))
+(custom/install-packages custom/edit-packages)
 
 ;; ----------------------------------------------------------------------
-;; Notes of usage
+;; Notes of Usages
 ;; ----------------------------------------------------------------------
 ;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
 ;; insert 4-spaced TAB: =tab-to-tab-stop= or "M-i"
@@ -100,7 +106,6 @@
 ;; open the *Messages* buffer :: "C-h e"
 ;; flyspell-auto-correct-word :: "C-."
 ;; ----------------------------------------------------------------------
-
 
 
 ;;

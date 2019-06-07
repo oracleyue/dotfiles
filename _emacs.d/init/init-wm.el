@@ -3,6 +3,15 @@
 ;; ================================================================
 ;; Last modified on 18 Jan 2019
 
+;; Install required Emacs packages
+(setq custom/wm-packages
+      '(winum
+        golden-ratio
+        neotree
+        imenu-list
+        engine-mode))
+(custom/install-packages custom/wm-packages)
+
 
 ;; ----------------------------------------------
 ;; Basic settings for window management
@@ -186,6 +195,6 @@
 
 
 
-(provide 'init-dired)
+(provide 'init-wm)
 ;; ================================================
-;; init-dired.el ends here
+;; init-wm.el ends here

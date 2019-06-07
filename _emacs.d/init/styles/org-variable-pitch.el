@@ -55,8 +55,9 @@
   :group 'org
   :prefix "ovp-")
 
-(defcustom ovp-font "SF Mono"
+(defcustom ovp-font "DejaVu Sans Mono"
   "Monospace font to use with ‘org-variable-pitch-minor-mode’.")
+
 (defface ovp-face
   `((t . (:family ,ovp-font :height 1.0)))
   "Face for initial space and list item bullets.

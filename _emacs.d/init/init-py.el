@@ -7,12 +7,12 @@
 ;;    =pip install pyflakes=
 
 ;; Install required Emacs packages
-;; (setq custom/py-packages
-;;       '(jedi
-;;         jedi-core
-;;         company-jedi
-;;         dtrt-indent))
-;; (custom/install-packages custom/py-packages)
+(setq custom/py-packages
+      '(jedi
+        company-jedi
+        ein
+        dtrt-indent))
+(custom/install-packages custom/py-packages)
 
 ;; Usages:
 ;; *edit*
@@ -70,7 +70,6 @@
           python-indent-guess-indent-offset nil))
   ;; detect using tab or spaces
   (use-package dtrt-indent
-    :ensure t
     :init
     (add-hook 'python-mode-hook #'dtrt-indent-mode))
   ;; load tab display style
@@ -146,7 +145,6 @@
 ;; start the Jupyter notebook server by call =M-x ein:jupyter-server-start=
 
 (use-package ein
-  :ensure t
   :config
   (require 'ein)
   (require 'ein-notebook)

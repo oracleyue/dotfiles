@@ -1,7 +1,18 @@
+;; ================================================================
 ;; Programming Environment for /R/
-(use-package ess-site
-  :config
+;; ================================================================
 
+;; Install required Emacs packages
+(setq custom/r-packages
+      '(ess
+        key-combo))
+(custom/install-packages custom/r-packages)
+
+
+;; Configrations
+(use-package ess-site
+  :defer nil
+  :config
   ;; set additional font lock
   (setq ess-R-font-lock-keywords
         (quote
@@ -32,6 +43,7 @@
 
   ;; adding operator support in ESS via /key-combo/
   (use-package key-combo
+    :defer nil
     :config
     (key-combo-mode 1)
 

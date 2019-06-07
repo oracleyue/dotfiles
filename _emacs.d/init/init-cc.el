@@ -115,12 +115,9 @@
 
 (use-package cmake-mode
   ;; /cmake-mode/: cmake-mode.el
-  :ensure t
-  :defer t
   :config
   ;; /cmake-font-lock/: to add more fontifying features
   (use-package cmake-font-lock
-    :ensure t
     :config
     (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
     (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))

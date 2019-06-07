@@ -2,6 +2,12 @@
 ;; Programming Supports for Minority Languages
 ;; ================================================================
 
+;; Install required Emacs packages
+(setq custom/proglang-packages
+      '(apples-mode
+        julia-mode))
+(custom/install-packages custom/proglang-packages)
+
 
 ;; ---------------------------------------------
 ;; major mode for /VimScript/ (e.g. ".vimrc")
@@ -14,7 +20,6 @@
 ;; major mode for /AppleScript/
 ;; ---------------------------------------------
 (use-package apples-mode
-  :ensure t
   :mode "\\.\\(applescri\\|sc\\)pt\\'")
 
 

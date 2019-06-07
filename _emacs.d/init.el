@@ -3,6 +3,7 @@
 
 ;; load paths
 (add-to-list 'load-path "~/.emacs.d/init")
+(add-to-list 'load-path "~/.emacs.d/init/ext")
 (add-to-list 'load-path "~/.emacs.d/init/unmaintained")
 (add-to-list 'load-path "~/.emacs.d/git")
 
@@ -22,7 +23,7 @@
 
 ;; packages
 ;; (package-initialize)           ;; required to suppress warnings
-(require 'init-packages)
+(require 'init-pkg)
 
 ;; feature control
 (require 'init-features)          ;; enable/disable features
@@ -42,7 +43,7 @@
 (if *use-helm* (require 'init-helm) (require 'init-ivy))
 
 ;; directory and buffer explorers
-(require 'init-dired)             ;; directory explorers
+(require 'init-wm)             ;; directory explorers
 
 ;; major modes for document editing
 (require 'init-orgmode)           ;; org-mode

@@ -1,4 +1,7 @@
-;; ---------------- emacs package system -------------------
+;; ------------------------------------------------
+;; Emacs package management system
+;; ------------------------------------------------
+
 ;; packages installed by /homebrew/
 (when (string-equal system-type "darwin")
   (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
@@ -15,39 +18,11 @@
     (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
     ;; (pop package-archives)  ;; remove "gnu" archive
     )
-;; ---------------------------------------------------------
 
-;; List of Required Packages
-(setq custom/packages
-      '(auctex
-        bash-completion
-        csv-mode
-        engine-mode
-        dash
-        ess
-        expand-region
-        exec-path-from-shell
-        flycheck
-        flymake-easy
-        flymake-google-cpplint
-        function-args
-        golden-ratio
-        google-c-style
-        iedit
-        imenu-list
-        julia-mode
-        key-combo
-        magit
-        markdown-mode
-        matlab-mode
-        multiple-cursors
-        neotree
-        popwin
-        smartparens
-        srefactor
-        stickyfunc-enhance
-        undo-tree
-        zeal-at-point))
+
+;; ------------------------------------------------
+;; Functions for package installations
+;; ------------------------------------------------
 
 ;; Functions to check and install packages
 (defun custom/packages-installed-p (pkg-list)
@@ -74,11 +49,15 @@
       (unless (package-installed-p pkg)
         (package-install pkg)))))
 
-;; Install packages that have not yet been installed
-(custom/install-packages custom/packages)
+;; To install packages, call
+;; (custom/install-packages YOUR_PACKAGE_LIST)
 
 
-;; User-defined functions
+;; ------------------------------------------------
+;; Functions for elisp compilation
+;; ------------------------------------------------
+
+;; Easy compiling .el files
 (defun y/byte-compile-directory (directory)
   "Byte-compile all *.el in the directory if the corresponding
 .elc doesn't exist."
@@ -89,6 +68,11 @@
              (concat (expand-file-name (file-name-base fname)
                                        directory) ".elc"))
       (byte-compile-file (expand-file-name fname directory)))))
+
+
+;; ------------------------------------------------
+;; Functions for init configs in org-mode
+;; ------------------------------------------------
 
 ;; extracting .el from .org config files
 (require 'ob-tangle)
@@ -118,6 +102,6 @@ file and export into ~/.emacs.d/init/ with the same file name."
 
 
 
-(provide 'init-packages)
+(provide 'init-pkg)
 ;; ================================================
-;; init-packages.el ends here
+;; init-pkg.el ends here

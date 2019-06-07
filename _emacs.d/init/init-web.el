@@ -8,8 +8,10 @@
         emmet-mode
         json-reformat
         json-snatcher
-        json-mode))
+        json-mode
+        popwin))
 (custom/install-packages custom/web-packages)
+
 
 ;; use /html-mode/ for html
 ;; use /css-mode/ for css
@@ -50,7 +52,6 @@
 
 
 ;; ----------------------------------------------------------------
-;;
 ;; use comprehensive mode /web-mode/ for web development
 ;;
 ;; (require 'web-mode)

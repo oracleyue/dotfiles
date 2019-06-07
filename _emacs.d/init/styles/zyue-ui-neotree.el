@@ -309,5 +309,5 @@ pane and are highlighted incorrectly."
     ;; Shorter pwd in neotree
     (advice-add #'neo-buffer--insert-root-entry :override #'zyue--neo-buffer--insert-root-entry)))
 
-(provide 'zyue-themes-neotree)
-;;; zyue-themes-neotree.el ends here
+(provide 'zyue-ui-neotree)
+;;; zyue-ui-neotree.el ends here

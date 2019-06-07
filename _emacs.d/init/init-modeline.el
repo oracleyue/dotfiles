@@ -1,6 +1,15 @@
 ;; ================================================================
-;; Mode-Line Customizations
+;; Modeline Customizations
 ;; ================================================================
+
+;; Install required emacs packages
+(setq custom/modeline-packages
+      '(spaceline
+        doom-modeline
+        shrink-path
+        eldoc-eval
+        all-the-icons))
+(custom/install-packages custom/modeline-packages)
 
 
 ;; ---------------------------------------------
@@ -8,7 +17,6 @@
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
-    :ensure t
     :config
     (require 'spaceline-config)
     (when *is-mac*
@@ -20,9 +28,9 @@
 ;; ---------------------------------------------
 (defun zyue-use-doomline ()
   ;; dependencies
-  (use-package shrink-path :ensure t)
-  (use-package eldoc-eval :ensure t)
-  (use-package all-the-icons :ensure t)
+  (use-package shrink-path)
+  (use-package eldoc-eval)
+  (use-package all-the-icons)
   (use-package doom-modeline
     :ensure t
     :config
@@ -56,6 +64,6 @@
   (nyan-mode))
 
 
-(provide 'modeline-settings)
+(provide 'init-modeline)
 ;; ================================================
-;; modeline-settings.el ends here
+;; init-modeline.el ends here

@@ -1,6 +1,7 @@
-;;
-;; ------------- Restore Original Settings ---------------
-;;
+;; ================================================================
+;; Restore Original Settings
+;; ================================================================
+
 
 ;; restore "M-c" for capitalize words
 (global-set-key (kbd "M-c") 'capitalize-word)

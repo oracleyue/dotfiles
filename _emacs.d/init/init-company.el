@@ -1,6 +1,14 @@
 ;; ================================================================
 ;; /Company/ as the backend for code intelligent completion
 ;; ================================================================
+
+;; Install required Emacs packages
+(setq custom/company-packages
+      '(company
+        company-posframe
+        yasnippet))
+(custom/install-packages custom/company-packages)
+
 ;; Usage:
 ;; - =M-/=: ~company-complete~
 ;; - =M-TAB= (or =C-M-i=): ~completion-at-point~ (Emacs default)
@@ -11,7 +19,8 @@
 ;; 4. "C-w" see the source (partially support)
 ;; (5.) "M-tab" calls "completion-at-point" which gives candidates in helm
 
-;; global settings for completion
+
+;; Global settings for completion
 (setq completion-ignore-case t) ;; filter candidate case-insensitive
 
 ;; /Company/ for code completion

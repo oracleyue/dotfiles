@@ -3,11 +3,12 @@
 ;; ================================================================
 
 ;; Install required packages in Emacs
-;; (setq custom/md-packages
-;;       '(markdown-mode
-;;         imenu-list
-;;         hexo))
-;; (custom/install-packages custom/md-packages)
+(setq custom/markdown-packages
+      '(markdown-mode
+        imenu-list
+        ;; livedown
+        hexo))
+(custom/install-packages custom/markdown-packages)
 
 ;; Install packages in the system
 ;; - require "multimarkdown" or "markdown" in shell
@@ -18,7 +19,6 @@
 ;;
 
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
@@ -48,7 +48,7 @@
 
   ;; outline view of headings
   ;; use /imenu-list/ in "init-dired", toggled by "C-x C-'"
-  (use-package imenu-list :ensure t)
+  (use-package imenu-list)
 
   ;; configure compile commands
   (if (string-equal system-type "darwin")

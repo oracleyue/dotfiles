@@ -1,6 +1,13 @@
 ;; ================================================================
 ;; Programming Environment for /Lisp/
 ;; ================================================================
+
+;; Install required Emacs packages
+(setq custom/lisp-packages
+      '(smartparens))
+(custom/install-packages custom/lisp-packages)
+
+;; Usages:
 ;; use "C-h e" to open *Message* buffer for elisp printout
 ;; use "M-x ielm" to open interactive shell
 ;; use "C-j" in *scratch*; output is in the buffer under the sexp
@@ -8,6 +15,9 @@
 ;; use "M-:" to evaluate elisp in mini-buffer
 ;; use "C-M-x" in emacs lisp mode
 ;; use "M-x eval-defun", "eval-region", "eval-buffer"
+
+
+;; Configurations
 
 ;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)

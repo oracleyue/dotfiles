@@ -5,7 +5,9 @@
 ;; Install required packages for more functions
 (setq custom/org-packages
       '(htmlize
-        ox-gfm))
+        smartparens
+        ox-gfm
+        ox-reveal))
 (custom/install-packages custom/org-packages)
 
 

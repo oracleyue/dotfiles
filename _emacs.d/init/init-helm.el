@@ -5,10 +5,14 @@
 ;; Install required packages for more functions
 (setq custom/helm-packages
       '(helm
-        helm-core))
+        helm-swoop
+        projectile
+        helm-projectile
+        helm-gtags))
 (custom/install-packages custom/helm-packages)
 
-;; configuration for /helm/
+
+;; Configurations for /helm/
 (require 'helm)
 (require 'helm-config)
 

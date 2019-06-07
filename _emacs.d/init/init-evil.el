@@ -1,11 +1,15 @@
-; ================================
+;; ================================================================
 ;; Settings for /evil-mode/
+;; ================================================================
 
-;; Enable evil-leader
-(require 'evil-leader)
-(global-evil-leader-mode)
+;; Install required Emacs packages
+(setq custom/evil-packages
+      '(evil
+        evil-leader))
+(custom/install-packages custom/evil-packages)
 
-;; Enable evil-mode
+
+;; Configure Evil Mode
 (require 'evil)
 ;(evil-mode 1)
 
@@ -32,6 +36,8 @@
 (define-key evil-normal-state-map "\M-?" nil)
 
 ;; For keybindings defined by /evil-leader/
+(require 'evil-leader)
+(global-evil-leader-mode)
 (evil-leader/set-key
     "cc" 'comment-region
     "cu" 'uncomment-region

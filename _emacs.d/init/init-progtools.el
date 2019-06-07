@@ -2,6 +2,19 @@
 ;; General Programming Supports
 ;; ===============================================================
 
+;; Install required Emacs packages
+(setq custom/progtools-packages
+      '(magit
+        flycheck
+        flymake-easy
+        iedit
+        symbol-overlay
+        stickyfunc-enhance
+        dash-at-point
+        zeal-at-point
+        projectile))
+(custom/install-packages custom/progtools-packages)
+
 
 ;; ---------------------------------------------
 ;; /magit/: version control
