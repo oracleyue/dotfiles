@@ -7,6 +7,9 @@
 ;; - Sarasa Mono SC;
 ;; - Iosevka;
 
+(setq xfu-doom-themes-gitrepo "~/.emacs.d/themes/github/emacs-doom-themes")
+(unless (file-directory-p xfu-doom-themes-gitrepo)
+  (shell-command "cd ~/.emacs.d/themes; ./themes-dl.sh"))
 
 (use-package doom-themes
   :load-path "~/.emacs.d/themes/github/emacs-doom-themes/"

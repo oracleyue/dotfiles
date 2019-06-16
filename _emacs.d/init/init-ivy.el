@@ -18,6 +18,8 @@
         enable-recursive-minibuffers t
         ivy-use-selectable-prompt t  ;; make inputs selectable
         )
+  ;; disable popup windows for completion-at-point; use minibuffer
+  (setq ivy-display-functions-alist nil)
   (ivy-mode +1)
   :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
          ("C-c C-r" . ivy-resume))
@@ -103,7 +105,7 @@
   (;; buffer
    ("C-s"   . swiper)
    ("C-S-s" . swiper-all)
-   ("s-f"   . swiper-isearch)   
+   ("s-f"   . swiper-isearch)
    ("M-g s" . counsel-grep)
    ;; git project
    ("C-c g" . counsel-git)
