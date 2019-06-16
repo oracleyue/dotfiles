@@ -84,6 +84,9 @@ List of frequent commands:
           enable-recursive-minibuffers t
           ivy-use-selectable-prompt t  ;; make inputs selectable
           )
+    ;; disable popup windows for completion-at-point; use minibuffer
+    (setq ivy-display-functions-alist nil)
+    ;; enable Ivy
     (ivy-mode +1)
     :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
            ("C-c C-r" . ivy-resume))
