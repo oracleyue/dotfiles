@@ -144,11 +144,11 @@
 ;; Usage:
 ;; start the Jupyter notebook server by call =M-x ein:jupyter-server-start=
 
-(use-package ein
-  :config
-  (require 'ein)
-  (require 'ein-notebook)
-  (require 'ein-subpackages))
+;; (use-package ein
+;;   :config
+;;   (require 'ein)
+;;   (require 'ein-notebook)
+;;   (require 'ein-subpackages))
 
 
 

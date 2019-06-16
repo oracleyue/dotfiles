@@ -11,7 +11,7 @@
 
 ;; Configrations
 (use-package ess-site
-  :defer nil
+  :demand t
   :config
   ;; set additional font lock
   (setq ess-R-font-lock-keywords
@@ -32,18 +32,11 @@
   ;; disable understore behaviors
   (ess-toggle-underscore nil)
 
-  ;; code completion:
-  ;; use built-in: ess-indent-or-complete (use "TAB", mini-buffer)
+  ;; code completion: (built-in) ess-indent-or-complete
   ;; (setq ess-tab-complete-in-script t)
-  ;; use company-mode
-  (if *integrate-TAB*
-      (if (display-graphic-p)
-          (define-key ess-mode-map (kbd "<tab>") 'tab-indent-or-complete)
-        (define-key ess-mode-map (kbd "TAB") 'tab-indent-or-complete)))
 
   ;; adding operator support in ESS via /key-combo/
   (use-package key-combo
-    :defer nil
     :config
     (key-combo-mode 1)
 
@@ -85,10 +78,6 @@
                 (append '((company-R-args company-R-objects company-dabbrev-code))
                         company-backends)))
   (add-hook 'ess-mode-hook 'zyue/add-company-backend-ess)
-
-  ;; delete the unnecessary buffer *ESS*
-  ;(kill-buffer "*ESS*")
-
   ) ;; END of ess-site
 
 

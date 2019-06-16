@@ -3,10 +3,10 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/proglang-packages
+(setq custom/lang-packages
       '(apples-mode
         julia-mode))
-(custom/install-packages custom/proglang-packages)
+(custom/install-packages custom/lang-packages)
 
 
 ;; ---------------------------------------------
@@ -33,6 +33,6 @@
 
 
 
-(provide 'init-proglang)
+(provide 'init-lang)
 ;; ================================================
-;; init-proglang.el ends here
+;; init-lang.el ends here

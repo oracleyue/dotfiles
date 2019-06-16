@@ -15,7 +15,7 @@
               (progn
                 (zyue/dired-open-folders-startup)
                 (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts"))))
-             ((or *is-server-coding* *is-server-ac*)
+             (*is-server-coding*
               (cd (expand-file-name "~/Public/Dropbox/Workspace/matlab")))))
       (*is-linux*
        (zyue/dired-open-folders-startup)

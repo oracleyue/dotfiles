@@ -15,7 +15,6 @@
 (defconst *is-server-plain* (eq t (daemonp)))
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
-(defconst *is-server-ac* (string-equal "ac-mode" (daemonp)))
 
 ;; stop emacs automatically editing .emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -57,33 +56,33 @@
 ;; Programming Environments
 ;; ----------------------------------------------------------------
 
-;; general programming supports
+;; Supporting tools
 (require 'init-progtools)          ;; edit, vc, debug, ui ...
 ;; code navigation, see /helm-gtags/ or /counsel-gtags/
 
-;; programming environment for /Lisp/
+;; Language Server Protocol support
+(if *use-lsp* (require 'init-lsp))
+
+;; /Lisp/
 (require 'init-lisp)
 
-;; programming environment for /HTML, js/
+;; web development (html, css, js)
 (require 'init-web)
 
-;; programming environment for /C C++/ and /Python/
-(if (and *use-lsp* *use-company*)
-    (require 'init-lsp)
-  ;; C/C++
-  (if *use-company* (require 'init-cc) (require 'init-cc-ac))
-  ;; Python
-  (if *use-company* (require 'init-py) (require 'init-py-ac))
-  )
+;; /C C++/
+(require 'init-cc)
 
-;; programming environment for /R/
-(if *use-company* (require 'init-r) (require 'init-r-ac))
+;; /Python/
+(if *use-lsp* (require 'init-python) (require 'init-py))
 
-;; programming environment for /MATLAB/
+;; /R/
+(require 'init-r)
+
+;; /MATLAB/
 (require 'init-matlab)
 
-;; major-modes for minority languages
-(require 'init-proglang)
+;; Minority Languages
+(require 'init-lang)
 
 
 ;; ----------------------------------------------------------------

@@ -83,6 +83,7 @@ Expects a `font-spec'.")
      zyue-modeline-font (font-spec :family "SF Mono" :size 14.0)
      zyue-unicode-font (font-spec :family "Sarasa Mono SC" :size 14.0)
      ;; ovp-font "Iosevka"  ;; used in /org-variable-pitch.el/
+     ovp-font zyue-font
      zyue-variable-pitch-font (font-spec :family "SF Compact Display" :size 15))
   (setq
    zyue-font (font-spec :family "DejaVu Sans Mono" :size 11.0)
@@ -91,11 +92,9 @@ Expects a `font-spec'.")
    zyue-variable-pitch-font (font-spec :family "Roboto")))
 
 ;; Themes for different app and daemons
-(when *is-linux* (setq zyue-theme 'doom-nord-light))
-(when *is-mac* (setq zyue-theme 'doom-nord-light))
+(setq zyue-theme 'doom-nord-light)
 (when *is-server-main* (setq zyue-theme 'doom-nord-light))
 (when *is-server-coding* (setq zyue-theme 'doom-one))
-(when *is-server-ac* (setq zyue-theme 'atom-one-dark))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline

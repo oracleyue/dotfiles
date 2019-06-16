@@ -23,7 +23,6 @@
     (global-set-key (kbd "C-c h g") 'magit-status)
   (global-set-key (kbd "C-x g") 'magit-status))
 
-
 ;; ----------------------------------------------
 ;; line numbering
 ;; ----------------------------------------------
@@ -49,27 +48,6 @@
                      ess-mode-hook)))  ; R
     (dolist (hook-element hook-list)
       (add-hook hook-element 'display-line-numbers-mode))))
-
-
-;; ----------------------------------------------
-;; highlight indentation and current line
-;; ----------------------------------------------
-(defun zyue/edit-hl-config()
-  ;; highlight indentation
-  (use-package highlight-indent-guides
-    :ensure t
-    :config
-    (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
-    ;; tweak colors
-    (when (eq zyue-theme 'doom-one)
-      (setq highlight-indent-guides-auto-enabled nil)
-      (set-face-foreground 'highlight-indent-guides-character-face
-                           "#3e6a44a85124"))
-    (highlight-indent-guides-mode))
-  ;; highlight current line
-  (hl-line-mode t))
-(add-hook 'python-mode-hook 'zyue/edit-hl-config)
-
 
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
