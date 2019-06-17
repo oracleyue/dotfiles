@@ -1,0 +1,7 @@
+clang-complete
+*.pyc
+lsp-mode
+lsp-ui
+lsp-python
+company-lsp
+ivy-posframe

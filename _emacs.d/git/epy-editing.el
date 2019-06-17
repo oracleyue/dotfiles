@@ -1,10 +1,9 @@
+;; From: https://github.com/gabrielelanaro/emacs-for-python
 ;; Notes: having been modified by oracleyue.
-;; Last modified on 24 Aug 2017
+;; Last modified on Jun 2019
 
 
-;; Ibuffer by default
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
+;; Adding spaces smartly between operators
 (require 'smart-operator)
 
 ;; Open Next Line
@@ -120,23 +119,9 @@ original" (interactive)
 	      'python-shell-send-block)))
 
 
-;; Other useful stuff
-
-; delete seleted text when typing
+; Delete seleted text when typing
 (delete-selection-mode 1)
-
-; highlight brackets
-;(show-paren-mode t)
-
-; highlight current line & highlight indentation
-(defun epy-edit-hl-config()
-  ;; highlight indentation
-  (require 'highlight-indentation)
-  (highlight-indentation)
-  ;; highlight current line
-  (hl-line-mode t))
-;; (add-hook 'python-mode-hook 'epy-edit-hl-config) ;; enabled in "init-progtools.el"
-
 
 
 (provide 'epy-editing)
+;; epy-editing.el Ends here

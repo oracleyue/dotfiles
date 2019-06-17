@@ -17,7 +17,7 @@ $sync ~/.emacs.d/init.el $repopath/_emacs.d/init.el
 
 # rsync .emacs.d (essential packages)
 $sync ~/.emacs.d/init $repopath/_emacs.d/
-$sync --exclude-from="$HOME/.emacs.d/git/exclude-list" \
+$sync --exclude-from="$HOME/.emacs.d/git/_exclude-list" \
       ~/.emacs.d/git $repopath/_emacs.d/
 $sync --exclude="github" \
       ~/.emacs.d/themes $repopath/_emacs.d/
