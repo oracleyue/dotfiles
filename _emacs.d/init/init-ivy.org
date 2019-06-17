@@ -7,7 +7,6 @@
 
 
 * Ivy - a generic completion frontend (swiper, counsel, etc.)
-
 ** Requirements
 *** Install system commandline tools
 
@@ -41,8 +40,7 @@ Tools to be installed in order to use the corresponding commands in Ivzyue/
             counsel-gtags
             hydra
             ivy-hydra
-            avy
-            ivy-dash))
+            avy))
     (custom/install-packages custom/ivy-packages)
   #+END_SRC
 

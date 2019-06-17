@@ -3,11 +3,24 @@
 ;; ===============================================================
 ;; Last modified on 31 Mar 2018
 
+;; Install required Emacs packages
+(setq custom/ivy-packages
+      '(ivy
+        counsel
+        swiper
+        ivy-posframe
+        wgrep
+        counsel-projectile
+        counsel-gtags
+        hydra
+        ivy-hydra
+        avy))
+(custom/install-packages custom/ivy-packages)
+
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 (use-package ivy
-  :ensure t
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
@@ -20,6 +33,7 @@
         )
   ;; disable popup windows for completion-at-point; use minibuffer
   (setq ivy-display-functions-alist nil)
+  ;; enable Ivy
   (ivy-mode +1)
   :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
          ("C-c C-r" . ivy-resume))
@@ -28,7 +42,6 @@
 (when *use-posframe*
   (use-package ivy-posframe
     :load-path "git/ivy-posframe"
-    :ensure t
     :after (ivy)
     :config
     (setq ivy-fixed-height-minibuffer nil
@@ -47,7 +60,6 @@
   )
 
 (use-package counsel
-  :ensure t
   :after (ivy)
   :bind (([remap execute-extended-command] . counsel-M-x)
          ([remap find-file]                . counsel-find-file)
@@ -99,13 +111,12 @@
   )
 
 (use-package swiper
-  :ensure t
   :defer 1
   :bind
   (;; buffer
    ("C-s"   . swiper)
    ("C-S-s" . swiper-all)
-   ("s-f"   . swiper-isearch)
+   ("s-f"   . swiper-isearch)   
    ("M-g s" . counsel-grep)
    ;; git project
    ("C-c g" . counsel-git)
@@ -160,7 +171,6 @@
 ;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
 (use-package counsel-projectile
-  :ensure t
   :after projectile
   :commands (counsel-projectile-find-file
              counsel-projectile-find-dir
@@ -181,7 +191,6 @@
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
 (use-package counsel-gtags
-  :ensure t
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
               ("C-c g ." . counsel-gtags-dwim)
@@ -202,14 +211,12 @@
 ;; ---------------------------------------------------------------
 ;; Hydra: make Emacs bindings that stick around
 ;; ---------------------------------------------------------------
-(use-package hydra
-  :ensure t :ensure ivy-hydra)
+(use-package hydra)
 
 ;; ---------------------------------------------------------------
 ;; Avy: jump to char/words in tree-style
 ;; ---------------------------------------------------------------
 (use-package avy
-  :ensure t
   :bind (("C-'"     . avy-goto-char)   ;; C-:
          ("M-'"     . avy-goto-char-2) ;; C-'
          ("M-g c"   . avy-goto-char)
