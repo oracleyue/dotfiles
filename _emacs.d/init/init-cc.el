@@ -2,6 +2,30 @@
 ;; Programming Environment for C/C++ (modern)
 ; =====================================================
 
+;; check and install essential pkgs
+(setq custom/modern-cc-packages
+      '(google-c-style
+        flymake-google-cpplint
+        irony
+        company-irony
+        company-irony-c-headers
+        flycheck-irony
+        function-args
+        ;; irony-eldoc
+        cmake-ide
+        cmake-font-lock
+        ;; helm-make
+        ))
+(when *enable-rtags*
+  (setq custom/modern-cc-packages
+        (append
+         '(rtags
+           ;; helm-rtags
+           ivy-rtags
+           flycheck-rtags)
+         custom/modern-cc-packages)))
+(custom/install-packages custom/modern-cc-packages)
+
 (require 'cc-mode)
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
@@ -115,9 +139,12 @@
 
 (use-package cmake-mode
   ;; /cmake-mode/: cmake-mode.el
+  :ensure t
+  :defer t
   :config
   ;; /cmake-font-lock/: to add more fontifying features
   (use-package cmake-font-lock
+    :ensure t
     :config
     (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
     (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))

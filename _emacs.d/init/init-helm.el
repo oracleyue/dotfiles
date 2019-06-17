@@ -2,7 +2,6 @@
 ;; /Helm/ as the main completion system
 ;; ================================================================
 
-;; Install required packages for more functions
 (setq custom/helm-packages
       '(helm
         helm-swoop
@@ -11,8 +10,7 @@
         helm-gtags))
 (custom/install-packages custom/helm-packages)
 
-
-;; Configurations for /helm/
+;; configuration for /helm/
 (require 'helm)
 (require 'helm-config)
 
