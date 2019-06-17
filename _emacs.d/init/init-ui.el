@@ -93,8 +93,8 @@ Expects a `font-spec'.")
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)
-(when *is-server-main* (setq zyue-theme 'doom-nord-light))
-(when *is-server-coding* (setq zyue-theme 'doom-one))
+(when (or *is-server-coding* *is-server-linux*)
+  (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline

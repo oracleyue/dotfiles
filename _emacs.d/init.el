@@ -4,17 +4,7 @@
 ;; load paths
 (add-to-list 'load-path "~/.emacs.d/init")
 (add-to-list 'load-path "~/.emacs.d/init/ext")
-(add-to-list 'load-path "~/.emacs.d/init/unmaintained")
 (add-to-list 'load-path "~/.emacs.d/git")
-
-;; constants
-(defconst *is-mac* (string-equal system-type "darwin"))
-(defconst *is-linux* (string-equal system-type "gnu/linux"))
-(defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
-(defconst *is-app* (and (display-graphic-p) (not (daemonp))))
-(defconst *is-server-plain* (eq t (daemonp)))
-(defconst *is-server-main* (string-equal "main" (daemonp)))
-(defconst *is-server-coding* (string-equal "coding" (daemonp)))
 
 ;; stop emacs automatically editing .emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
