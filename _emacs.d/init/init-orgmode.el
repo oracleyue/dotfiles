@@ -63,6 +63,10 @@
         "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
   (setq org-html-head-extra
         "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />"))
+;; use newer Mathjax
+(require 'ox-html)
+(setcdr (assoc 'path org-html-mathjax-options)
+        '("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"))
 
 ;; Markdown
 (eval-after-load "org" '(require 'ox-md nil t))

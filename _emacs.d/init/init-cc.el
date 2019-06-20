@@ -5,10 +5,11 @@
 ;; check and install essential pkgs
 (setq custom/modern-cc-packages
       '(google-c-style
-        flymake-google-cpplint
+        ;; flymake-google-cpplint
         irony
         company-irony
         company-irony-c-headers
+        flycheck
         flycheck-irony
         function-args
         ;; irony-eldoc
@@ -36,19 +37,24 @@
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-;; /google-c-style/ and /flymake-google-cpplint/ style checker
+;; /google-c-style/ and /flycheck-google-cpplint/ style checker
 (when *enable-gg-cpp-style*
-  (require 'google-c-style)
-  (add-hook 'c-mode-common-hook 'google-set-c-style)
-  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-  (defun zyue/flymake-google-init ()
-    (require 'flymake-google-cpplint)
-    (setq flymake-google-cpplint-command
-      (if (string-equal system-type "darwin")
-          "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
-    (flymake-google-cpplint-load))
-  (add-hook 'c-mode-hook 'zyue/flymake-google-init)
-  (add-hook 'c++-mode-hook 'zyue/flymake-google-init))
+  (use-package google-c-style
+    :config
+    (add-hook 'c-mode-common-hook 'google-set-c-style)
+    (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+  (use-package flycheck-google-cpplint
+    :load-path "git/"
+    :after flycheck
+    :config
+    (eval-after-load 'flycheck
+      '(progn
+         (require 'flycheck-google-cpplint)
+         (setq flycheck-c/c++-googlelint-executable
+               (if (string-equal system-type "darwin")
+                   "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
+         (flycheck-add-next-checker 'c/c++-clang
+                                    '(warning . c/c++-googlelint))))))
 
 (when *enable-rtags*
   ;; see the const *enable-rtags* defined in "init-features.el"
@@ -66,11 +72,9 @@
     ;; integration with helm
     (if *use-helm*
         (use-package helm-rtags
-          :ensure t
           :config
           (setq rtags-display-result-backend 'helm))
       (use-package ivy-rtags
-        :ensure t
         :config
         (setq rtags-display-result-backend 'ivy)))))
 
@@ -101,12 +105,6 @@
                           company-backends)))
     (add-hook 'c-mode-hook 'zyue/add-company-backend-irony)
     (add-hook 'c++-mode-hook 'zyue/add-company-backend-irony)))
-
-;; /flycheck/: syntax checker
-(use-package flycheck
-  :config
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode))
 
 ;; /flycheck-irony/ using /irony/
 (use-package flycheck-irony
@@ -139,12 +137,9 @@
 
 (use-package cmake-mode
   ;; /cmake-mode/: cmake-mode.el
-  :ensure t
-  :defer t
   :config
   ;; /cmake-font-lock/: to add more fontifying features
   (use-package cmake-font-lock
-    :ensure t
     :config
     (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
     (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))

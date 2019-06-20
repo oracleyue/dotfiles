@@ -6,7 +6,6 @@
 (setq custom/progtools-packages
       '(magit
         flycheck
-        flymake-easy
         iedit
         symbol-overlay
         stickyfunc-enhance
@@ -17,11 +16,29 @@
 
 
 ;; ---------------------------------------------
+;; /flycheck/: modern syntax checking
+;; ---------------------------------------------
+;; Warning: ensure /epl/ package being up-to-date
+(use-package flycheck
+  :demand t
+  :hook ((c-mode      . flycheck-mode)
+         (c++-mode    . flycheck-mode)
+         (ess-mode    . flycheck-mode)
+         (python-mode . flycheck-mode))
+  :config
+  ;; check only when opening or saving files
+  (setq flycheck-check-syntax-automatically
+        '(save mode-enabled)))
+
+;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
-(if *use-helm*
-    (global-set-key (kbd "C-c h g") 'magit-status)
-  (global-set-key (kbd "C-x g") 'magit-status))
+(use-package magit
+  :demand t
+  :config
+  (if *use-helm*
+      (global-set-key (kbd "C-c h g") 'magit-status)
+    (global-set-key (kbd "C-x g") 'magit-status)))
 
 ;; ----------------------------------------------
 ;; line numbering

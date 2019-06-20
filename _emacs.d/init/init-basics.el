@@ -132,7 +132,9 @@
   (interactive)
   (split-window nil -8 'below)
   (other-window 1)
-  (find-file (expand-file-name "~/Documents/.formula.tex")))
+  (find-file (expand-file-name "~/Documents/.formula.tex"))
+  (with-current-buffer ".formula.tex"
+    (LaTeX-mode)))
 
 ;; supports for Chinese (moved to init-ui.el)
 ;; setting font set

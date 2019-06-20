@@ -413,8 +413,24 @@ The most frequent used operations:
 -  =C-c p O=:   Org-capture into project
 
 ** Ivy for GNU global tags
+In order to use full features of =counsel-gtags=, you have to make install all packages in
+your OS. Here is a list:
+- GNU global
+- Exuberant Ctags
+- Python package: Pygments
 
-Enable =gtags= for the given major modes:
+Note in Arch Linux, you need to set the following two environment variables in your
+=.bashrc= or =.profile=:
+#+BEGIN_SRC bash
+  export GTAGSCONF=/usr/share/gtags/gtags.conf
+  export GTAGSLABEL=pygments      # "gtags" in GNU global
+#+END_SRC
+Alternatively, without setting =GTAGSCONF=, run: 
+#+BEGIN_SRC bash
+$ cp /usr/share/gtags/gtags.conf ~/.globalrc
+#+END_SRC
+
+The following sets the shortcuts for frequently used commands in =counsel-gtags=.
 #+BEGIN_SRC emacs-lisp
   ;; ---------------------------------------------
   ;; /counsel-gtags/: Ivy for gtags (GNU global)
@@ -424,6 +440,8 @@ Enable =gtags= for the given major modes:
                 ;; basic jumps
                 ("C-c g ." . counsel-gtags-dwim)
                 ("C-c g ," . counsel-gtags-go-backward)
+                ("M-."     . counsel-gtags-dwim)              
+                ("M-,"     . counsel-gtags-go-backward)
                 ("C-c g t" . counsel-gtags-find-definition)
                 ("C-c g r" . counsel-gtags-find-reference)
                 ("C-c g s" . counsel-gtags-find-symbol)

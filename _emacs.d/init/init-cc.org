@@ -48,10 +48,11 @@
     ;; check and install essential pkgs
     (setq custom/modern-cc-packages
           '(google-c-style
-            flymake-google-cpplint
+            ;; flymake-google-cpplint
             irony
             company-irony
             company-irony-c-headers
+            flycheck
             flycheck-irony
             function-args
             ;; irony-eldoc
@@ -91,11 +92,13 @@
          (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
      #+END_SRC
 
-*** Google C++ style and its flymake checker
-    Install =google-c-style= and =flymake-google-cpplint=.
+*** Google C++ style and its flymake/flycheck checker
+    Install =google-c-style= and, =flymake-google-cpplint= or =flycheck-google-cpplint=
+    (in =.emacs.d/git/=).  
+    
     You also need to install Python package =cpplint= by =pip=.
 
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC
       ;; /google-c-style/ and /flymake-google-cpplint/ style checker
       (when *enable-gg-cpp-style*
         (require 'google-c-style)
@@ -111,6 +114,28 @@
         (add-hook 'c++-mode-hook 'zyue/flymake-google-init))
     #+END_SRC
 
+    #+BEGIN_SRC emacs-lisp
+      ;; /google-c-style/ and /flycheck-google-cpplint/ style checker
+      (when *enable-gg-cpp-style*
+        (use-package google-c-style
+          :config
+          (add-hook 'c-mode-common-hook 'google-set-c-style)
+          (add-hook 'c-mode-common-hook 'google-make-newline-indent))
+        (use-package flycheck-google-cpplint
+          :load-path "git/"
+          :after flycheck
+          :config
+          (eval-after-load 'flycheck
+            '(progn
+               (require 'flycheck-google-cpplint)
+               (setq flycheck-c/c++-googlelint-executable
+                     (if (string-equal system-type "darwin")
+                         "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
+               (flycheck-add-next-checker 'c/c++-clang
+                                          '(warning . c/c++-googlelint))))))
+
+    #+END_SRC
+    
 ** Source code navigation using RTags
 *** Install rtags servers in OS
 Build and install RTags using the RTags Quickstart Guide. Alternatively install RTags using your distribution's package manager.
@@ -151,11 +176,9 @@ to the =company-backends=.
       ;; integration with helm
       (if *use-helm*
           (use-package helm-rtags
-            :ensure t
             :config
             (setq rtags-display-result-backend 'helm))
         (use-package ivy-rtags
-          :ensure t
           :config
           (setq rtags-display-result-backend 'ivy)))))
 #+END_SRC
@@ -368,15 +391,7 @@ and an example of makefile is shown as below:
 ** Syntax checking with Flycheck
 *** Prerequisites
 
-Install =flycheck= from MELPA and add the following to your emacs init file:
-
-#+BEGIN_SRC emacs-lisp
-  ;; /flycheck/: syntax checker
-  (use-package flycheck
-    :config
-    (add-hook 'c++-mode-hook 'flycheck-mode)
-    (add-hook 'c-mode-hook 'flycheck-mode))
-#+END_SRC
+Install =flycheck= from MELPA and add the following to your emacs init file
 
 ***  [disabled] Integrating RTags with Flycheck
 
@@ -471,12 +486,9 @@ personally do not use them.)
 #+BEGIN_SRC emacs-lisp
   (use-package cmake-mode
     ;; /cmake-mode/: cmake-mode.el
-    :ensure t
-    :defer t
     :config
     ;; /cmake-font-lock/: to add more fontifying features
     (use-package cmake-font-lock
-      :ensure t
       :config
       (autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
       (add-hook 'cmake-mode-hook 'cmake-font-lock-activate))

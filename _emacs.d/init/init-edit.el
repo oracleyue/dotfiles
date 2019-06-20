@@ -328,7 +328,7 @@ Uses `current-date-format' for the formatting the date/time."
   (interactive)
   (if line-spacing
       (setq line-spacing nil)
-    (setq line-spacing 0.5))
+    (setq line-spacing 0.2))
   (redraw-frame (selected-frame)))
 
 ;; line wrapping
