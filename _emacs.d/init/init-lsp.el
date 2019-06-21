@@ -3,6 +3,9 @@
 ;; https://github.com/emacs-lsp/lsp-mode#supported-languages
 ;; ================================================================
 
+;; Install LSP language servers
+;; - Python: pip install python-language-server
+
 ;; Install required Emacs packages
 (setq custom/lsp-packages
       '(lsp-mode
@@ -28,7 +31,7 @@
     :ensure nil
     :init
     (setq lsp-clients-python-library-directories
-          '("/usr/local/lib/python3.6/"))))
+          '("/usr/local/lib/" "/usr/lib/"))))
 
 (use-package lsp-ui
   :demand t
