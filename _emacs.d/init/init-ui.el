@@ -52,6 +52,8 @@ Expects a `font-spec'.")
     (if (eq (frame-parameter frame 'background-mode) 'light)
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+    ;; check and choose fonts
+    (zyue-font-checking)
     ;; load fonts
     (when (fontp zyue-font)
       (set-frame-font zyue-font nil (if frame (list frame) t))
@@ -77,29 +79,29 @@ Expects a `font-spec'.")
       (run-with-timer 0.1 nil #'zyue-init-ui))))
 
 ;; Fonts
-(when *is-mac*   (setq fs-normal 15.0 fs-small 14.0))
-(when *is-linux* (setq fs-normal 11.0 fs-small 10.5))
-(if (and (find-font (font-spec :family "SF Mono"))
-         (find-font (font-spec :family "SF Compact Display")))
+(defun zyue-font-checking ()
+  (when *is-mac*   (setq fs-normal 15.0 fs-small 14.0))
+  (when *is-linux* (setq fs-normal 11.0 fs-small 10.5))
+  (if (and (find-font (font-spec :family "SF Mono"))
+           (find-font (font-spec :family "SF Compact Display")))
+      (setq
+       zyue-font (font-spec :family "SF Mono" :size fs-normal)
+       zyue-modeline-font (font-spec :family "SF Mono" :size fs-small)
+       ovp-font zyue-font  ;; "Iosevka"; used in /org-variable-pitch.el/
+       zyue-variable-pitch-font (font-spec :family "SF Compact Display" :size fs-normal))
     (setq
-     zyue-font (font-spec :family "SF Mono" :size fs-normal)
-     zyue-modeline-font (font-spec :family "SF Mono" :size fs-small)
-     ovp-font zyue-font  ;; "Iosevka"; used in /org-variable-pitch.el/
-     zyue-variable-pitch-font (font-spec :family "SF Compact Display" :size fs-normal))
-  (setq
-   zyue-font (font-spec :family "DejaVu Sans Mono" :size fs-normal)
-   zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size fs-small)
-   zyue-variable-pitch-font (font-spec :family "DejaVu Sans" :size fs-normal)))
-(cond
- ((find-font (font-spec :family "Sarasa Mono SC"))
-  (setq zyue-unicode-font (font-spec :family "Sarasa Mono SC" :size fs-small)))
- ((find-font (font-spec :family "WenQuanYi Micro Hei"))
-  (setq zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size fs-small))))
+     zyue-font (font-spec :family "DejaVu Sans Mono" :size fs-normal)
+     zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size fs-small)
+     zyue-variable-pitch-font (font-spec :family "DejaVu Sans" :size fs-normal)))
+  (cond
+   ((find-font (font-spec :family "Sarasa Mono SC"))
+    (setq zyue-unicode-font (font-spec :family "Sarasa Mono SC" :size fs-small)))
+   ((find-font (font-spec :family "WenQuanYi Micro Hei"))
+    (setq zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size fs-small)))))
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)
-(when (or *is-server-coding* *is-server-linux*)
-  (setq zyue-theme 'doom-one))
+(when *is-server-coding* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline
