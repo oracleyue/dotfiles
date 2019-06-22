@@ -1,0 +1,14 @@
+! Keymap for HHKB Pro 2
+! Swap Control and Super/Command
+
+clear control
+clear mod4
+
+! Swap Super and Control
+keycode 37 = Super_L
+!keycode 105 = Super_R
+keycode 133 = Control_L
+keycode 134 = Control_R
+
+add control = Control_L Control_R
+add mod4 = Super_L Super_R Super_L Hyper_L
