@@ -46,9 +46,6 @@ $sync ~/.globalrc $repopath
 $sync ~/.local/share/applications/emacs*.desktop $repopath/applications
 $sync ~/.local/share/applications/matlab*.desktop $repopath/applications
 
-# Thunderbird user config files (~/.thunderbird/PROFILE_NAME/chrome/)
-$sync ~/.thunderbird/*.default/chrome $repopath
-
 # Pull updates first from github.com
 cd $repopath
 git add -A && git ci -m "backup Arch linux configs" && git push
