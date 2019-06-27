@@ -7,10 +7,17 @@
 ;;    =pip install pyflakes=
 ;;    =pip install autopep8=
 
+;; If you want to use Miscrosoft Python Language Server (mspyls)
+;;    install "VSCode" and set its "jediEnable" to false to install mspyls
+;;    =pacman -S fd=
+
 ;; Install required Emacs packages
 (setq custom/py-packages
       '(dtrt-indent))
 (custom/install-packages custom/py-packages)
+(if (and *use-lsp* *use-mspyls*)
+    (custom/install-packages '(lsp-python-ms))
+  (custom/install-packages '(jedi company-jedi)))
 
 ;; Usages:
 ;; *edit*
@@ -27,7 +34,7 @@
 
 
 ;; ------------------------------------------------
-;; Environment Configurations
+;; Environment
 ;; ------------------------------------------------
 (use-package python
   :ensure nil
@@ -106,6 +113,73 @@
   ;; Abo-abo's lpy (To-do)
 
 ) ;; End of use-package python
+
+
+;; ------------------------------------------------
+;; Code Auto-completion
+;; ------------------------------------------------
+(if *use-lsp*
+    ;; use "pyls" by default
+
+    (when *use-mspyls*
+      ;; use Microsoft Python Language Server for Auto-completion
+      (use-package lsp-python-ms
+        :demand t
+        :hook (python-mode . lsp)
+        :config
+        ;; for executable of language server, if it's not symlinked on your PATH
+        (setq lsp-python-ms-executable
+              (string-trim (shell-command-to-string
+                            "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode-oss/extensions | tail -1")))
+        ;; for dev build of language server
+        (setq lsp-python-ms-dir
+              (file-name-directory lsp-python-ms-executable)))
+      )
+
+  (use-package jedi
+    :ensure nil
+    :config
+    (jedi-mode 1) ;; not necessary for company, but for code nagivation
+
+    ;; basic settings of jedi
+    (setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
+    (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
+    (define-key python-mode-map "\C-ce" 'jedi:show-doc)
+    (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
+    ;; add menu entry
+    (easy-menu-define-key python-menu [jedi-show-doc]
+                          '(menu-item "Jedi show doc" jedi:show-doc
+                                      "Get help on symbol at point by Jedi")
+                          "Complete symbol")
+    (easy-menu-define-key python-menu [jedi-call-tip]
+                          '(menu-item "Jedi show calltip"
+                                      jedi:get-in-function-call
+                                      "Get help on function call-tip at point by Jedi") "Complete symbol")
+    (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
+
+    ;; set virtualenv to use python2 (default: python3)
+    (when (eq *use-python-version* 2)
+      (setq jedi:environment-virtualenv
+            (list "virtualenv2" "--system-site-packages")))
+
+    ;; integration with /company-mode/
+    (use-package company-jedi
+      :ensure nil
+      :config
+      (defun zyue/company-py-setup ()
+        (setq-local company-backends
+                    (append '(company-jedi) company-backends)))
+      (add-hook 'python-mode-hook 'zyue/company-py-setup))
+
+    ;; integration with /ivy/
+    (when *use-ivy*
+      (require 'counsel)
+      (define-key python-mode-map (kbd "C-M-i") 'counsel-jedi))
+
+    ) ;; end of use-package(jedi)
+
+  ) ;; end of (if *use-lsp*)
+
 
 
 (provide 'init-python)
