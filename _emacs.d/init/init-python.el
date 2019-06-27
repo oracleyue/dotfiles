@@ -116,7 +116,7 @@
 
 
 ;; ------------------------------------------------
-;; Code Auto-completion
+;; Code Auto-completion: LSP (pyls/mspyls) or Jedi
 ;; ------------------------------------------------
 (if *use-lsp*
     ;; use "pyls" by default
@@ -130,23 +130,20 @@
         ;; for executable of language server, if it's not symlinked on your PATH
         (setq lsp-python-ms-executable
               (string-trim (shell-command-to-string
-                            "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode-oss/extensions | tail -1")))
+                            ;; "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode-oss/extensions | tail -1"
+                            "find $HOME/.vscode-oss/extensions -name 'Microsoft.Python.LanguageServer' | tail -1"
+                            )))
         ;; for dev build of language server
         (setq lsp-python-ms-dir
               (file-name-directory lsp-python-ms-executable)))
       )
 
-  (use-package jedi
-    :ensure nil
+  ;; integration with /company-mode/
+  (use-package company-jedi
     :config
-    (jedi-mode 1) ;; not necessary for company, but for code nagivation
-
-    ;; basic settings of jedi
-    (setq jedi:get-in-function-call-delay 200)  ;; set huge to disable auto show
-    (setq jedi:tooltip-method nil)  ;popup, pos-tip OR nil (use minibuffer)
+    ;; add jedi function to menus
     (define-key python-mode-map "\C-ce" 'jedi:show-doc)
     (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
-    ;; add menu entry
     (easy-menu-define-key python-menu [jedi-show-doc]
                           '(menu-item "Jedi show doc" jedi:show-doc
                                       "Get help on symbol at point by Jedi")
@@ -157,26 +154,11 @@
                                       "Get help on function call-tip at point by Jedi") "Complete symbol")
     (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
 
-    ;; set virtualenv to use python2 (default: python3)
-    (when (eq *use-python-version* 2)
-      (setq jedi:environment-virtualenv
-            (list "virtualenv2" "--system-site-packages")))
-
-    ;; integration with /company-mode/
-    (use-package company-jedi
-      :ensure nil
-      :config
-      (defun zyue/company-py-setup ()
-        (setq-local company-backends
-                    (append '(company-jedi) company-backends)))
-      (add-hook 'python-mode-hook 'zyue/company-py-setup))
-
-    ;; integration with /ivy/
-    (when *use-ivy*
-      (require 'counsel)
-      (define-key python-mode-map (kbd "C-M-i") 'counsel-jedi))
-
-    ) ;; end of use-package(jedi)
+    ;; setup company backends
+    (defun zyue/company-py-setup ()
+      (setq-local company-backends
+                  (append '(company-jedi) company-backends)))
+    (add-hook 'python-mode-hook 'zyue/company-py-setup))
 
   ) ;; end of (if *use-lsp*)
 
