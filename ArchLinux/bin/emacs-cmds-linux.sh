@@ -47,7 +47,7 @@ function es() {
             case $2 in
                 m)
                     kill $(ps aux | grep -i 'emacs --daemon' \
-                               | grep "main" | grep -v 'grep' | awk '{print $2}')
+                               | grep -v 'grep' | awk '{print $2}')
                     ;;
                 c)
                     kill $(ps aux | grep -i 'emacs --bg-daemon' \
