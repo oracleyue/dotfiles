@@ -7,9 +7,10 @@
 ;;    =pip install pyflakes=
 ;;    =pip install autopep8=
 
-;; If you want to use Miscrosoft Python Language Server (mspyls)
-;;    install "VSCode" and set its "jediEnable" to false to install mspyls
-;;    =pacman -S fd=
+;; If you use default pyls in LSP mode, you need to install
+;;    =pip install python-language-server=
+;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
+;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
 
 ;; Install required Emacs packages
 (setq custom/py-packages
