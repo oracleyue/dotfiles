@@ -1,3 +1,5 @@
-Backup of dot files under /home
+List of configurations:
 
---- From oracleyue's Thinkpad x230
+- Common configurations for Linux and Mac OS X, like bash, X, vim, $HOME/bin, etc.
+
+- And my personalized Emacs :D

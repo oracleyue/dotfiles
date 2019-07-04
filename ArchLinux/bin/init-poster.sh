@@ -1,0 +1,1 @@
+/home/zyue/Public/Dropbox/Academia/latex_templ/init-poster.sh
