@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: spagplot
+# key: spagplot
+# group: functions
+# expand-env: ((yas-indent-line 'fixed))
+# --
+spagplot <- function(x, y, ylimit, xlabel, ylabel, heading) {
+    meany <- apply(y, 1, mean)
+    matplot(x, y, type="l", lty=1, xlab=xlabel, ylab=ylabel,
+            ylim=ylimit, xaxt="n", col="lightblue")
+    axis(side=1, at=x)
+    matpoints(x, y, type="p", pch=1, col="lightblue")
+    title(main=heading)
+    lines(x, meany, type="l", lwd=2, col="red")
+}

@@ -21,11 +21,12 @@
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
+         ("\\.md\\'"       . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown")
   :config
-  ;; editing
+
+  ;; use variable-width fonts
   (defun zyue/variable-pitch-and-keep-whitespaces ()
     (setq-local cursor-type 'bar)
     ;; use variable-width fonts
@@ -34,10 +35,9 @@
     (set-face-font 'markdown-pre-face zyue-font)
     (set-face-font 'markdown-code-face zyue-font)
     (set-face-font 'markdown-inline-code-face zyue-font)
-    ;; turn off auto-fill mode
-    ;; (turn-off-auto-fill)
+    ;; fill columns
     (setq-local fill-column *fill-column-sans*))
-  (add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)
+  ;; (add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)
 
   ;; fontify code blocks
   (setq markdown-fontify-code-blocks-natively t)
@@ -61,17 +61,23 @@
   (if *use-css-local*
       (setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
     (setq css-default-path  ;; css files on github.com
-        "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/"))
-  (add-hook 'markdown-mode-hook (lambda()
-     (add-to-list 'markdown-css-paths (concat css-default-path "style.md.css"))
-     (add-to-list 'markdown-css-paths
-                  (concat css-default-path "bootstrap.min.css"))))
+          "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/"))
+  (add-to-list 'markdown-css-paths
+               (concat css-default-path "github.md.css"))
+  ;; using "style.md.css" requires "bootstrap.min.css"
+
+  ;; use mathjax
+  (setq markdown-xhtml-header-content
+        (concat "<script type=\"text/javascript\" async src=\""
+                "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"
+                "\"></script>"))
 
   );End of use-package(markdown-mode)
 
 ;; use /livedown.el/ for preview  (osx uses "Marked 2.app")
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
 (use-package livedown
+  :disabled
   :load-path "~/.emacs.d/git"
   :init
   (setq livedown-autostart nil) ; auto open preview when opening markdown files

@@ -26,7 +26,7 @@
 (defconst *use-ivy* (not *use-helm*))
 
 ;; posframe
-(defconst *use-posframe* t)
+(defconst *use-posframe* nil)
 
 ;; code intelligence
 (defconst *use-company* t) ;; auto-complete no longer supported
