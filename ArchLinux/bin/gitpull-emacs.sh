@@ -8,7 +8,7 @@
 
 
 # essential bash settings
-sync='/usr/bin/rsync -rlptD -P --exclude=.DS_Store'
+sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
 repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # push updates to github.com
@@ -21,13 +21,8 @@ $sync $repopath/_emacs.d/init.el ~/.emacs.d/init.el
 
 # rsync .emacs.d (essential packages)
 $sync $repopath/_emacs.d/init ~/.emacs.d/
-$sync --exclude-from="$HOME/.emacs.d/git/_exclude-list" \
+$sync --exclude="clang-complete" --exclude="*.pyc" \
       $repopath/_emacs.d/git ~/.emacs.d/
-<<<<<<< HEAD:scripts/gitpull-emacs.sh
-$sync --exclude="github" \
-      $repopath/_emacs.d/themes ~/.emacs.d/
-=======
 $sync --exclude="github" $repopath/_emacs.d/themes ~/.emacs.d/
->>>>>>> d8dc0c307967fedbd3b13f4a2b875054bfccafbd:ArchLinux/bin/gitpull-emacs.sh
 $sync $repopath/_emacs.d/snippets ~/.emacs.d/
 $sync $repopath/_emacs.d/templates ~/.emacs.d/
