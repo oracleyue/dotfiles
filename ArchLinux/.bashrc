@@ -32,7 +32,8 @@ alias grep='grep -i'
 #alias ack='ack -Hn --no-group --no-color'
 alias ack='ack -Hni'
 alias gitup='git add . && git ci -m "regular update" && git push'
-function open() { dolphin $1; }
+#function open() { dolphin $1; }
+alias open='xdg-open'
 alias youtube-dl-best="youtube-dl -f 'best[ext=mp4]' --playlist-items"
 alias youtube-dl-best480="youtube-dl -f 'best[ext=mp4][height<=480]' --playlist-items"
 alias youtube-dl-video480audioM4a="youtube-dl -f 'bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]' --playlist-items"
@@ -43,7 +44,6 @@ eval "$(fasd --init auto)"
 # a: any; s: show/search/select; d: directory; f: file
 # sd: interactive directory selection; sf: interactive file selection
 # z: quick cd; zz: cd with interactive selection
-alias j='fasd_cd -d'  # same as "z"
 
 # alias commands for development
 alias matlab-term='matlab -nosplash -nodesktop'
