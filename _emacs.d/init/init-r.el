@@ -11,7 +11,7 @@
 ;; R packages: linter for R "lintr"
 
 
-;; Configrations
+;; ESS configrations
 (use-package ess-site
   :demand t
   :config
@@ -22,6 +22,7 @@
   ;; - using built-in "ess-indent-or-complete" (C-M-i)
   ;; - using /company/: "company-R-args", "company-R-objects"
   ;;   and dabbev-code for variable names
+  (setq ess-use-company t)
   (use-package company-dabbrev-code
     :after company
     :config
@@ -29,39 +30,40 @@
     (defun zyue/add-company-backend-ess ()
       (pop company-backends)
       (setq-local company-backends
-                  (append '((company-R-args company-R-objects company-dabbrev-code))
+                  (append '((company-R-args company-R-objects company-R-library
+                                            company-dabbrev-code))
                           company-backends)))
     (add-hook 'ess-mode-hook 'zyue/add-company-backend-ess))
+  )
 
-  ;; adding operator support in ESS via /key-combo/
-  (use-package key-combo
-    :config
-    (key-combo-mode 1)
+;; Quick operators by /key-combo/
+(use-package key-combo
+  :init
+  (add-hook 'ess-mode-hook '(lambda() (key-combo-mode t)))
+  (add-hook 'inferior-ess-mode-hook '(lambda() (key-combo-mode t)))
 
-    (add-hook 'ess-mode-hook '(lambda() (key-combo-mode t)))
-    (add-hook 'inferior-ess-mode-hook '(lambda() (key-combo-mode t)))
-
-    (defvar key-combo-ess-default
-      '((">"  . (" > " " %>% "))
-        ("_"  . ("_" " <- "))
-        ("="  . (" = " " == "))
-        ("$"  . ("$" " %$% "))
-        ("<>" . " %<>% ")
-        ("*"  . ("*" " * "))
-        ("%" . ("%" "%*%" "%%"))
-        ("^"  . ("^" " ^ "))
-        ("/"  . ("/" " / "))
-        ("~" . " ~ ")
-        (":" . (":" "::" ":::"))
-        (":="  . " := ") ; data.table
-        ("->"  . " -> ")
-        ("<-"  . " <- ")
-        ))
-
-    (key-combo-define-hook '(ess-mode-hook inferior-ess-mode-hook)
-                           'ess-key-combo-load-default key-combo-ess-default))
-
-  ) ;; END of ess-site
+  (defvar key-combo-ess-default
+    '((">"  . (" > " " %>% " " %>>% "))
+      ("$"  . ("$" " %$% "))
+      ("<>" . " %<>% ")
+      ("%"  . ("%" "%%"))  ; not working!
+      ("^"  . ("^" " ^ "))
+      ("!"  . ("!" " != "))
+      (":"  . (":" "::" ":::"))
+      (":=" . " := ") ; data.table
+      ("->" . " -> ")
+      ("<-" . " <- ")
+      (","  . (", " ","))
+      ("~"  . (" ~ " "~"))
+      ("="  . (" = " " == " "="))
+      ("*"  . (" * " " %*% " " ** "))
+      ("/"  . (" / " "/"))
+      ("+"  . (" + " "+"))
+      ("-"  . (" - " "-"))
+      ("|"  . (" | " "|"))
+      ))
+  (key-combo-define-hook '(ess-mode-hook inferior-ess-mode-hook)
+                         'ess-key-combo-load-default key-combo-ess-default))
 
 
 

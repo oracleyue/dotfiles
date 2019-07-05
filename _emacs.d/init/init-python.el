@@ -7,18 +7,10 @@
 ;;    =pip install pyflakes=
 ;;    =pip install autopep8=
 
-;; If you use default pyls in LSP mode, you need to install
-;;    =pip install python-language-server=
-;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
-;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
-
 ;; Install required Emacs packages
 (setq custom/py-packages
       '(dtrt-indent))
 (custom/install-packages custom/py-packages)
-(if (and *use-lsp* *use-mspyls*)
-    (custom/install-packages '(lsp-python-ms))
-  (custom/install-packages '(jedi company-jedi)))
 
 ;; Usages:
 ;; *edit*
@@ -35,7 +27,7 @@
 
 
 ;; ------------------------------------------------
-;; Environment
+;; Environment Configurations
 ;; ------------------------------------------------
 (use-package python
   :ensure nil
@@ -114,55 +106,6 @@
   ;; Abo-abo's lpy (To-do)
 
 ) ;; End of use-package python
-
-
-;; ------------------------------------------------
-;; Code Auto-completion: LSP (pyls/mspyls) or Jedi
-;; ------------------------------------------------
-(if *use-lsp*
-    ;; use "pyls" by default
-
-    (when *use-mspyls*
-      ;; use Microsoft Python Language Server for Auto-completion
-      (use-package lsp-python-ms
-        :demand t
-        :hook (python-mode . lsp)
-        :config
-        ;; for executable of language server, if it's not symlinked on your PATH
-        (setq lsp-python-ms-executable
-              (string-trim (shell-command-to-string
-                            ;; "fd -a ^Microsoft.Python.LanguageServer$ $HOME/.vscode-oss/extensions | tail -1"
-                            "find $HOME/.vscode-oss/extensions -name 'Microsoft.Python.LanguageServer' | tail -1"
-                            )))
-        ;; for dev build of language server
-        (setq lsp-python-ms-dir
-              (file-name-directory lsp-python-ms-executable)))
-      )
-
-  ;; integration with /company-mode/
-  (use-package company-jedi
-    :config
-    ;; add jedi function to menus
-    (define-key python-mode-map "\C-ce" 'jedi:show-doc)
-    (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
-    (easy-menu-define-key python-menu [jedi-show-doc]
-                          '(menu-item "Jedi show doc" jedi:show-doc
-                                      "Get help on symbol at point by Jedi")
-                          "Complete symbol")
-    (easy-menu-define-key python-menu [jedi-call-tip]
-                          '(menu-item "Jedi show calltip"
-                                      jedi:get-in-function-call
-                                      "Get help on function call-tip at point by Jedi") "Complete symbol")
-    (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
-
-    ;; setup company backends
-    (defun zyue/company-py-setup ()
-      (setq-local company-backends
-                  (append '(company-jedi) company-backends)))
-    (add-hook 'python-mode-hook 'zyue/company-py-setup))
-
-  ) ;; end of (if *use-lsp*)
-
 
 
 (provide 'init-python)

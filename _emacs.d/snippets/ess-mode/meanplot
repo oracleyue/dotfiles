@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: meanplot
+# key: meanplot
+# group: functions
+# expand-env: ((yas-indent-line 'fixed))
+# --
+meanplot <- function(x, means, xlabel, ylabel, heading,
+                     legnames, legloc) {
+    matplot(x, means, type="l", lty=1, xlab=xlabel, ylab=ylabel,
+            xaxt="n", col=c("blue", "red"))
+    axis(side=1, at=x)
+    matpoints(x, means, type="p", pch=1:2, col=c("blue", "red"))
+    title(main=heading)
+    legend(legloc, legnames, lty=1, col=c("blue", "red"),
+           pch=1:2)
+}
