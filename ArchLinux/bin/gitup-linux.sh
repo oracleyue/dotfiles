@@ -43,7 +43,7 @@ $sync ~/.Rprofile $repopath
 $sync ~/.globalrc $repopath
 
 # systemd services
-$sync ~/.config/systemd/user/ $repopath/systemd
+$sync ~/.config/systemd/user/*.service $repopath/systemd
 
 # Desktop files in ~/.local/share/applications/
 $sync ~/.local/share/applications/emacs*.desktop $repopath/applications
