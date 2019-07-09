@@ -42,12 +42,17 @@ $sync ~/.Rprofile $repopath
 # GNU Global (one may update by copying from /usr/share/gtags/gtags.conf)
 $sync ~/.globalrc $repopath
 
+# $HOME/.config
 # systemd services
-$sync ~/.config/systemd/user/*.service $repopath/systemd
+$sync ~/.config/systemd/user/*.service $repopath/.config/systemd/user
+# i3 and i3blocks (window manager)
+$sync ~/.config/i3       $repopath/.config
+$sync ~/.config/i3blocks $repopath/.config
+# vifm (file manager)
+$sync ~/.config/vifm     $repopath/.config
 
-# Desktop files in ~/.local/share/applications/
-$sync ~/.local/share/applications/emacs*.desktop $repopath/applications
-$sync ~/.local/share/applications/matlab*.desktop $repopath/applications
+# Desktop shortcuts
+$sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
 
 # Pull updates first from github.com
 cd $repopath
