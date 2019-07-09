@@ -42,6 +42,9 @@ $sync ~/.Rprofile $repopath
 # GNU Global (one may update by copying from /usr/share/gtags/gtags.conf)
 $sync ~/.globalrc $repopath
 
+# systemd services
+$sync ~/.config/systemd/user/ $repopath/systemd
+
 # Desktop files in ~/.local/share/applications/
 $sync ~/.local/share/applications/emacs*.desktop $repopath/applications
 $sync ~/.local/share/applications/matlab*.desktop $repopath/applications

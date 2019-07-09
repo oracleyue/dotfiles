@@ -1,0 +1,15 @@
+[Unit]
+Description=Emacs daemon service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+Environment=XMODIFIERS=@im=fcitx
+Environment=GTK_IM_MODULE=fcitx
+Environment=QT_IM_MODULE=fcitx
+Environment=LC_CTYPE=zh_CN.UTF-8
+Restart=always
+
+[Install]
+WantedBy=default.target

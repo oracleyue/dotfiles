@@ -62,12 +62,13 @@ function es() {
 
     elif [[ "$1" == "start" ]]; then
         if [[ -z $2 ]]; then
-            LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs --daemon
+            #LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs --daemon
+            /usr/bin/emacs --daemon
             /usr/bin/emacs --bg-daemon=coding
         else
             case $2 in
                 m)
-                    LC_CTYPE=zh_CN.UTF-8 /usr/bin/emacs --daemon
+                    /usr/bin/emacs --daemon
                     ;;
                 c)
                     /usr/bin/emacs --bg-daemon=coding
