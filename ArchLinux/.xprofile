@@ -1,5 +1,4 @@
-# Enable fcitx in Gnome (!NOT working, since default gnome use Wayland)
-# adding them manually in =etc/environment=
+# Enable fcitx (if Wayland, add them manually in =etc/environment=)
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
@@ -9,4 +8,4 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=zh_CN.UTF-8
 
 # Swap keys for apps running on Xorg
-#xmodmap ~/.Xmodmap
+xmodmap ~/.Xmodmap

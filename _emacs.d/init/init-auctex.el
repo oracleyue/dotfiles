@@ -213,27 +213,27 @@
                  '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
 ;; PDF Viewers
+(if (getenv "WM") (setq linux-desktop-env (getenv "WM"))
+  (setq linux-desktop-env "kde"))
 (cond
  ((string-equal system-type "gnu/linux")
-  (setq linux-desktop-env "kde") ;; "gnome"
   ;; Enable TeX <-> PDF sync
-  (if (string-equal linux-desktop-env "gnome")
-      ;; Use Evince; the default works
-      (setq TeX-output-view-style
-            (quote  (("^pdf$" "." "evince -f %o")
-                     ("^html?$" "." "firefox %o"))))
-    ;; Use Okular
-    (setq TeX-view-program-list
-          '(("Okular" "okular --unique %o#src:%n%b")))
-    (setq TeX-view-program-selection '((output-pdf "Okular"))))
-  )
+  (cond ((string= linux-desktop-env "gnome")
+         ;; Use Evince
+         (setq TeX-view-program-selection '((output-pdf "Evince"))))
+        ((string= linux-desktop-env "kde")
+         ;; Use Okular
+         (setq TeX-view-program-selection '((output-pdf "Okular"))))
+        ((string= linux-desktop-env "i3")
+         ;; Use Zathura
+         (setq TeX-view-program-selection '((output-pdf "Zathura"))))))
  ((string-equal system-type "darwin")
   ;; use skim as default pdf viewer
   ;; skim's displayline is used for forward search (from .tex to .pdf)
   ;; option -b highlights the current line; option -g opens Skim in the background
-  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+  (setq TeX-view-program-selection '((output-pdf "Skim")))
   (setq TeX-view-program-list
-     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))))
+        '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -b %n %o %b")))))
   ;; backward search: in skim's preference -> Sync -> PDF-TeX Sync support:
   ;; if using emacs server, set
   ;;  "Command": /usr/local/bin/emacsclient

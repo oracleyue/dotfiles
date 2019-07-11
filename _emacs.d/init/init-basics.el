@@ -51,6 +51,7 @@
 (push "LC_ALL" exec-path-from-shell-variables)
 (push "LANG" exec-path-from-shell-variables)
 ;; (push "PYTHONPATH" exec-path-from-shell-variables)
+(push "WM" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
 
 ;; cursors

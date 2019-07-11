@@ -1,0 +1,2 @@
+xorg-xinit
+i3

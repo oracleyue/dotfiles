@@ -12,10 +12,10 @@ label=🎼
 interval=once
 signal=11
 
-[news]
-label=📰
-interval=once
-signal=6
+# [news]
+# label=📰
+# interval=once
+# signal=6
 
 #[iplocate]
 #interval=30

@@ -27,8 +27,11 @@ xterm*renderFont: true
 xterm*preeditType: Root
 xterm*xftAntialias: true
 xterm*faceName: DejaVu Sans Mono:pixelsize=14
-!xterm*faceName: Noto Mono:pixelsize=14
+!xterm*faceName: Noto Mono:pixelsize=12
 xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=14
+
+! For "st" terminal
+*.font: Mono:pixelsize=14
 
 !tango颜色搭配
 xterm*color0: #1e1e1e

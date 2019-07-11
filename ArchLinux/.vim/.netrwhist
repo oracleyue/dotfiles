@@ -1,10 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/oracleyue/tmp/vundle'
-let g:netrw_dirhist_2='/Users/oracleyue/tmp/vundle/test'
-let g:netrw_dirhist_3='/Users/oracleyue/.oracleyue/info'
-let g:netrw_dirhist_4='/Users/oracleyue/.oracleyue/info/archive'
-let g:netrw_dirhist_5='/Users/oracleyue/.oracleyue/info'
-let g:netrw_dirhist_6='/Users/oracleyue/.oracleyue/info/archive'
-let g:netrw_dirhist_7='/home/zyue/.config/systemd/user'
-let g:netrw_dirhist_8='/home/zyue/Workspace/gitrepo/dotfiles/ArchLinux/systemd'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/zyue/.config/i3'
+let g:netrw_dirhist_2='/home/zyue/.config'
+let g:netrw_dirhist_3='/home/zyue/.config/i3'
+let g:netrw_dirhist_4='/home/zyue/.config/i3blocks'

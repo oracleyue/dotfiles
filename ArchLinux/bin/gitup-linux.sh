@@ -50,6 +50,10 @@ $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3blocks $repopath/.config
 # vifm (file manager)
 $sync ~/.config/vifm     $repopath/.config
+# sxhkd
+$sync ~/.config/sxhkd     $repopath/.config
+# zathura
+$sync ~/.config/zathura     $repopath/.config
 
 # Desktop shortcuts
 $sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
