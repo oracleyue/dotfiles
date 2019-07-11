@@ -8,15 +8,11 @@ gaps outer 15
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 
-# #---Essential Functions---# #
+# #---Essential and zyue's---# #
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'monospace-10'"
 
 # #---Dropdown Windows---# #

@@ -7,14 +7,12 @@ export TERMINAL="st"
 export BROWSER="chromium"
 export READER="zathura"
 export FILE="vifm"
-#export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
-#export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
-#export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
-export WM="i3"
+export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+export WMEmacs="i3"
 
 # From larbs's ".xprofile"
 setbg &		# Set the background
-sxhkd &	    # Bind keys
+sxhkd &	        # Bind keys
 xset r rate 300 50 &	# Speed xrate up
 unclutter &		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
@@ -25,6 +23,11 @@ dunst &			# dunst for notifications
 
 xmodmap ~/.Xmodmap
 xrdb ~/.Xresources
+
+# Gnome keyring
+dbus-update-activation-environment --systemd DISPLAY
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 
 # Auto-start i3
 exec i3
