@@ -8,9 +8,6 @@ export GPG_TTY
 # add PATH
 export PATH=/home/zyue/bin:$PATH
 
-# Chinese
-#export LC_CTYPE=zh_CN.UTF-8
-
 # alias
 alias ls='ls --color=auto -t'
 alias ll='ls -Alh --color=auto -t'
