@@ -58,6 +58,9 @@ $sync ~/.config/sxhkd     $repopath/.config
 # zathura
 $sync ~/.config/zathura     $repopath/.config
 
+# $HOME/.local
+# LARBS's bin/ for i3
+$sync ~/.local/bin $repopath/.local
 # Desktop shortcuts
 $sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
 
