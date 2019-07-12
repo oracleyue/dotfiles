@@ -1,13 +1,16 @@
 #!/bin/sh
 
-# From larbs's ".profile"
+# From LARBS's ".profile"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export EDITOR="vim"
-export TERMINAL="st"
-export BROWSER="chromium"
+export TERMINAL="konsole"
+export BROWSER="chromium --password-store=kwallet5"
 export READER="zathura"
 export FILE="vifm"
-export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
+# Themes
+export XDG_CURRENT_DESKTOP="KDE"
+export QT_STYLE_OVERRIDE="Breeze"
+# Emacs
 export WMEmacs="i3"
 
 # From larbs's ".xprofile"
@@ -18,11 +21,13 @@ unclutter &		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
 dunst &			# dunst for notifications
 
-# Source Xprofile
-# [ -f "$HOME/.xprofile" ] && . ~/.xprofile
-
+# X settings
+[ -f "$HOME/.xprofile" ] && . ~/.xprofile
 xmodmap ~/.Xmodmap
 xrdb ~/.Xresources
+
+# start fcitx for i3
+fcitx &
 
 # Auto-start i3
 exec i3

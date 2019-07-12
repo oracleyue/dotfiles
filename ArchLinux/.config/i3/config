@@ -13,10 +13,11 @@ set $mod Mod4
 bindsym $mod+Return exec i3-sensible-terminal
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'monospace-10'"
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'monospace-10'"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# integrate gnome-keyring
-exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+# integrate kde keyring
+exec --no-startup-id /usr/bin/kwalletd5
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.

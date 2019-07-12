@@ -12,8 +12,8 @@ export PATH=/home/zyue/bin:$PATH
 #export LC_CTYPE=zh_CN.UTF-8
 
 # alias
-alias ls='ls --color=auto'
-alias ll='ls -Alh --color=auto'
+alias ls='ls --color=auto -t'
+alias ll='ls -Alh --color=auto -t'
 alias la='ls -a --color=auto'
 alias view='vim -R'
 alias em='emacs -nw'
