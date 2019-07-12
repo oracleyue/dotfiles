@@ -32,6 +32,9 @@ $sync ~/.xprofile $repopath
 $sync ~/.Xresources $repopath
 $sync ~/.xinitrc $repopath
 
+# git config
+$sync ~/.gitconfig $repopath
+
 # latexmk
 $sync ~/.latexmkrc $repopath
 

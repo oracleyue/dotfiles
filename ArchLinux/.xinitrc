@@ -1,4 +1,5 @@
 #!/bin/sh
+# Used only for "startx" and thus for "i3".
 
 # From LARBS's ".profile"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"

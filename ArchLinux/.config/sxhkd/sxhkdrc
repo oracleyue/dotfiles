@@ -29,6 +29,8 @@ super + shift + w
 	$BROWSER
 super + shift + g
 	gimp
+super + o
+    goldendict
 
 # Et cetera...
 super + grave
