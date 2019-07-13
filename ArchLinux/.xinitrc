@@ -15,8 +15,6 @@ xset r rate 300 50 &	# Speed xrate up
 unclutter & 			# Remove mouse when idle
 xcompmgr &		 		# xcompmgr for transparency
 dunst & 				# dunst for notifications
-# config dmenu
-source ~/.dmenurc
 
 # X settings
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile

@@ -187,20 +187,20 @@ for_window [class="GoldenDict"] floating enable resize set 800 500
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
+	i3bar_command  i3bar
 	status_command i3status
 	position bottom
     # font pango:monospace 10
 	strip_workspace_numbers yes
 
     colors {
-           background #222222
+           background #383c4a
            statusline #eeeeee
            separator  #666666
            #                  border  backgr. text
-           focused_workspace  #4c7899 #285577 #ffffff
+           focused_workspace  #4c7899 #5294e2 #ffffff
            active_workspace   #333333 #5f676a #ffffff
-           inactive_workspace #333333 #222222 #888888
+           inactive_workspace #333333 #4b5162 #ffffff
            urgent_workspace   #2f343a #900000 #ffffff
     }
 }

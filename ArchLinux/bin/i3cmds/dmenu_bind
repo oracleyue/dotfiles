@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f $HOME/.dmenurc ]; then
+if [ -f $HOME/.config/dmenurc ]; then
     source $HOME/.config/dmenurc
 fi
-
+echo $DMENU_OPTIONS
 dmenu_run $DMENU_OPTIONS
