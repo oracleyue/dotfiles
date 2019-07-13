@@ -16,21 +16,22 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles/ArchLinux/'
 # List of rsync files
 
 # bashrc
-$sync ~/.bashrc $repopath
+$sync ~/.bashrc       $repopath
 $sync ~/.bash_profile $repopath
+$sync ~/.profile $repopath
 
 # bin scripts
 $sync ~/bin $repopath
 
 # vim
 $sync ~/.vimrc $repopath
-$sync ~/.vim $repopath
+$sync ~/.vim   $repopath
 
 # X configs
-$sync ~/.Xmodmap* $repopath
-$sync ~/.xprofile $repopath
+$sync ~/.Xmodmap*   $repopath
+$sync ~/.xprofile   $repopath
 $sync ~/.Xresources $repopath
-$sync ~/.xinitrc $repopath
+$sync ~/.xinitrc    $repopath
 
 # git config
 $sync ~/.gitconfig $repopath
@@ -50,18 +51,17 @@ $sync ~/.globalrc $repopath
 $sync ~/.config/systemd/user/*.service $repopath/.config/systemd/user
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
-$sync ~/.config/i3blocks $repopath/.config
+$sync ~/.config/i3status $repopath/.config
+$sync ~/.config/dmenurc  $repopath/.config
 # vifm (file manager)
 $sync ~/.config/vifm     $repopath/.config
 # sxhkd
-$sync ~/.config/sxhkd     $repopath/.config
+$sync ~/.config/sxhkd    $repopath/.config
 # zathura
-$sync ~/.config/zathura     $repopath/.config
+$sync ~/.config/zathura  $repopath/.config
 
 # $HOME/.local
-# LARBS's bin/ for i3
-$sync ~/.local/bin $repopath/.local
-# Desktop shortcuts
+# desktop shortcuts
 $sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
 
 # Pull updates first from github.com

@@ -1,31 +1,33 @@
 #!/bin/sh
-# Used only for "startx" and thus for "i3".
+# For i3, used by "startx"
 
-# From LARBS's ".profile"
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export PATH=$PATH:$HOME/bin/i3cmds
 export EDITOR="vim"
 export TERMINAL="konsole"
 export BROWSER="chromium --password-store=kwallet5"
-export READER="zathura"
-export FILE="vifm"
-# Themes
-export XDG_CURRENT_DESKTOP="KDE"
-export QT_STYLE_OVERRIDE="Breeze"
-# Emacs
-export WMEmacs="i3"
+export VIEWER="zathura"
+export FILEMANAGER="vifm"
+export WMEmacs="i3"  # help Emacs adjust its config
 
-# From larbs's ".xprofile"
-setbg &		# Set the background
-sxhkd &	        # Bind keys
+# Support processes
+#sxhkd &	             # Bind keys
 xset r rate 300 50 &	# Speed xrate up
-unclutter &		# Remove mouse when idle
-xcompmgr &		# xcompmgr for transparency
-dunst &			# dunst for notifications
+unclutter & 			# Remove mouse when idle
+xcompmgr &		 		# xcompmgr for transparency
+dunst & 				# dunst for notifications
+# config dmenu
+source ~/.dmenurc
 
 # X settings
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 xmodmap ~/.Xmodmap
 xrdb ~/.Xresources
+
+# Themes
+export XDG_CURRENT_DESKTOP="KDE"
+# export QT_QPA_PLATFORMTHEME="qt5ct"
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+xwallpaper --zoom ~/.config/wall.png
 
 # start fcitx for i3
 fcitx &

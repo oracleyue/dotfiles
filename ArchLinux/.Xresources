@@ -5,9 +5,6 @@ Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.antialias: 1
 
-! For "st" terminal
-*.font: Mono:pixelsize=14
-
 !----------xterm配置----------
 !外观
 xterm*termName: xterm-256color
