@@ -30,7 +30,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn Roboto-10 -nf '#DCDCCC' -nb '#2C2C2C' -sb '#93E0E3' -sf '#2C2C2C'"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn Roboto-10 -nf '#DCDCCC' -nb '#2C2C2C' -sb '#93E0E3' -sf '#2C2C2C'"
 #bindsym $mod+d exec dmenu_bind
 
 # integrate kde keyring
