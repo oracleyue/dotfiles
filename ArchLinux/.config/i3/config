@@ -189,8 +189,8 @@ for_window [class="GoldenDict"] floating enable resize set 800 550
 # Themes
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
 # class                 border  bground text    indicator child_border
-client.focused          #2C2C2C #93E0E3 #2C2C2C #2C2C2C   #2C2C2C
-client.focused_inactive #2C2C2C #3F3F3F #DCDCCC #3F3F3F   #3F3F3F
+client.focused          #2C2C2C #93E0E3 #2C2C2C #3F3F3F   #3F3F3F
+client.focused_inactive #2C2C2C #3F3F3F #DCDCCC #343434   #343434
 client.unfocused        #2C2C2C #343434 #DCDCCC #343434   #343434
 client.urgent           #2C2C2C #900000 #FFFFFF #900000   #900000
 client.placeholder      #2C2C2C #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
