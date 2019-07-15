@@ -52,8 +52,9 @@ $sync ~/.config/systemd/user/*.service $repopath/.config/systemd/user
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config
-# vifm (file manager)
+# file managers: vifm, ranger
 $sync ~/.config/vifm     $repopath/.config
+$sync ~/.config/ranger       $repopath/.config
 # sxhkd
 $sync ~/.config/sxhkd    $repopath/.config
 # zathura

@@ -6,7 +6,7 @@ export EDITOR="vim"
 export TERMINAL="konsole"
 export BROWSER="chromium --password-store=kwallet5"
 export VIEWER="zathura"
-export FILE="vifm"
+export FILE="ranger"
 export WMEmacs="i3"  # help Emacs adjust its config
 
 # Support processes
