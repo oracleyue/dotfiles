@@ -30,7 +30,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn Roboto-10 -nb #1d1f21 -nf #ffffff -sf #1d1f21 -sb #81a2be"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn Roboto-10 -nf '#DCDCCC' -nb '#2C2C2C' -sb '#93E0E3' -sf '#2C2C2C'"
 #bindsym $mod+d exec dmenu_bind
 
 # integrate kde keyring
@@ -96,7 +96,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+#set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -130,6 +130,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
+bindsym $mod+Control+l exec --no-startup-id blurlock
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
@@ -183,36 +184,40 @@ bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 
 # Window definitions
-for_window [class="GoldenDict"] floating enable resize set 800 500
+for_window [class="GoldenDict"] floating enable resize set 800 550
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
+# Themes
+# go to https://thomashunter.name/i3-configurator/ to use color palletes
+# class                 border  bground text    indicator child_border
+client.focused          #2C2C2C #93E0E3 #2C2C2C #2C2C2C   #2C2C2C
+client.focused_inactive #2C2C2C #3F3F3F #DCDCCC #3F3F3F   #3F3F3F
+client.unfocused        #2C2C2C #343434 #DCDCCC #343434   #343434
+client.urgent           #2C2C2C #900000 #FFFFFF #900000   #900000
+client.placeholder      #2C2C2C #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
+client.background       #FFFFFF
+# start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command  i3bar
-	status_command i3status
-	#position bottom
-	position top
-    # font pango:monospace 10
-	strip_workspace_numbers yes
-
-    colors {
-           background #1d1f21
-           statusline #eeeeee
-           separator  #666666
-           #                  border  backgr. text
-           focused_workspace  #1d1f21 #81a2be #ffffff
-           active_workspace   #1d1f21 #5f676a #ffffff
-           inactive_workspace #1d1f21 #4b5162 #ffffff
-           urgent_workspace   #1d1f21 #900000 #ffffff
-    }
+  i3bar_command  i3bar
+  status_command i3status
+  position top
+  # font pango:monospace 10
+  strip_workspace_numbers yes
+  colors {
+    background #2C2C2C
+    statusline #FFFFFF
+    separator  #3F3F3F
+    #                  border  backgr. text
+    focused_workspace  #2C2C2C #93E0E3 #2C2C2C
+    active_workspace   #2C2C2C #3F3F3F #DCDCCC
+    inactive_workspace #2C2C2C #3F3F3F #DCDCCC
+    urgent_workspace   #2C2C2C #900000 #DCDCCC
+    binding_mode       #2C2C2C #900000 #DCDCCC
+  }
 }
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
-# Theme colors
-# class                 border  backgr. text    indic.   child_border
-client.focused          #556064 #556064 #80FFF9 #FDF6E3
-client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
-client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-client.placeholder      #000000 #0c0c0c #ffffff #000000
-client.background       #2B2C2B
+# Default workspace for applications
+assign [class="Thunderbird"] $ws1
+assign [class="Chromium"]    $ws2
+

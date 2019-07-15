@@ -7,18 +7,19 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-        interval = 5
-        color_good = "#81a2be"
-        color_bad = "#cc6666"
-#	color_degraded = " "
-	}
+  output_format = "i3bar"
+  interval = 5
+  colors = true
+  color_good = "#93E0E3"
+  color_degraded = "#DCA3A3"
+  color_bad = "#EC93D3"
+}
 
 order += "cpu_usage"
 # order += "load"
 # order += "disk /"
 # order += "disk /home"
-order += "wireless _first_"
+# order += "wireless _first_"
 order += "ethernet _first_"
 # order += "battery 1"
 order += "tztime local"

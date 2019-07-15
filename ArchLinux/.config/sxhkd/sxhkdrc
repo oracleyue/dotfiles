@@ -11,7 +11,7 @@ super + i
 super + shift + a
 	$TERMINAL -e pulsemixer
 super + o
-    goldendict    
+        goldendict
 # super + shift + w
 # 	$BROWSER
 

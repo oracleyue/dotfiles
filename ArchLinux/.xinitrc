@@ -19,16 +19,16 @@ dunst & 		# dunst for notifications
 # X settings
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 xmodmap ~/.Xmodmap
-xrdb ~/.Xresources
+xrdb -merge ~/.Xresources
 
 # Themes
 export XDG_CURRENT_DESKTOP="KDE"
-# export QT_QPA_PLATFORMTHEME="qt5ct"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 xwallpaper --zoom ~/.config/wall.png
 
-# start fcitx for i3
+# Autostart apps
 fcitx &
+dropbox &
 
 # Auto-start i3
 exec i3
