@@ -52,7 +52,6 @@ $sync ~/.config/systemd/user/*.service $repopath/.config/systemd/user
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config
-$sync ~/.config/dmenurc  $repopath/.config
 # vifm (file manager)
 $sync ~/.config/vifm     $repopath/.config
 # sxhkd

@@ -30,8 +30,8 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec dmenu_bind
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn Roboto-10 -nb #383c4a -nf #ffffff -sf #222222 -sb #a660c2"
+#bindsym $mod+d exec dmenu_bind
 
 # integrate kde keyring
 exec --no-startup-id /usr/bin/kwalletd5
@@ -189,7 +189,8 @@ for_window [class="GoldenDict"] floating enable resize set 800 500
 bar {
 	i3bar_command  i3bar
 	status_command i3status
-	position bottom
+	#position bottom
+	position top
     # font pango:monospace 10
 	strip_workspace_numbers yes
 
@@ -198,10 +199,11 @@ bar {
            statusline #eeeeee
            separator  #666666
            #                  border  backgr. text
-           focused_workspace  #4c7899 #5294e2 #ffffff
-           active_workspace   #333333 #5f676a #ffffff
-           inactive_workspace #333333 #4b5162 #ffffff
-           urgent_workspace   #2f343a #900000 #ffffff
+           focused_workspace  #383c4a #a660c3 #ffffff
+           #focused_workspace  #4c7899 #5294e2 #ffffff
+           active_workspace   #383c4a #5f676a #ffffff
+           inactive_workspace #383c4a #4b5162 #ffffff
+           urgent_workspace   #383c4a #900000 #ffffff
     }
 }
 # hide/unhide i3status bar
