@@ -10,11 +10,11 @@ export FILE="vifm"
 export WMEmacs="i3"  # help Emacs adjust its config
 
 # Support processes
-#sxhkd &	             # Bind keys
+sxhkd &	                # Bind keys
 xset r rate 300 50 &	# Speed xrate up
-unclutter & 			# Remove mouse when idle
-xcompmgr &		 		# xcompmgr for transparency
-dunst & 				# dunst for notifications
+unclutter & 		# Remove mouse when idle
+xcompmgr &		# xcompmgr for transparency
+dunst & 		# dunst for notifications
 
 # X settings
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
