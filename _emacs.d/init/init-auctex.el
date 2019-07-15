@@ -213,8 +213,6 @@
                  '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
 ;; PDF Viewers
-(if (getenv "WM") (setq linux-desktop-env (getenv "WM"))
-  (setq linux-desktop-env "kde"))
 (cond
  ((string-equal system-type "gnu/linux")
   ;; Enable TeX <-> PDF sync

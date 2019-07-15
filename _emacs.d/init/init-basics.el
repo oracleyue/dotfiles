@@ -19,6 +19,8 @@
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; (setq-default case-fold-search nil)  ;; case-sensitive search
+(when (string= linux-desktop-env "i3")
+  (menu-bar-mode -1))
 
 ;; encodings
 (set-language-environment "UTF-8")

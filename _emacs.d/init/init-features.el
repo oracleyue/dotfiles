@@ -12,6 +12,11 @@
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
 (defconst *is-server-linux* (and *is-server* *is-linux*))
 
+;; desktop environment
+(if (getenv "WMEmacs")
+    (setq linux-desktop-env (getenv "WMEmacs"))
+  (setq linux-desktop-env "kde"))
+
 ;; select tree window manager
 (defconst *tree-manager* "neotree")
 
