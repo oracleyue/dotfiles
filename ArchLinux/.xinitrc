@@ -24,7 +24,7 @@ xrdb -merge ~/.Xresources
 # Themes
 export XDG_CURRENT_DESKTOP="KDE"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-xwallpaper --zoom ~/.config/wall.png
+xwallpaper --zoom ~/.config/wallpaper.jpg
 
 # Autostart apps
 fcitx &

@@ -91,12 +91,14 @@ XF86MonBrightnessUp
 # 	lmc back {10,120}
 
 # Function keys
-# # Show readme
-# super + F1
-# 	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
-# # Change display
-# super + F3
-# 	displayselect
+# Show readme (~/bin/kbindhelp)
+super + F1
+        $TERMINAL -e kbindhelp
+super + F2
+        $VIEWER $HOME/Books/References/symbols.pdf
+# Change display
+super + F3
+	displayselect
 # # Hibernate
 # super + F4
 # 	prompt 'Hibernate computer?' 'sudo systemctl suspend'

@@ -1,0 +1,11 @@
+#!/bin/bash
+# This script is to show documents of keybindings for i3 wm.
+
+hd1='================ i3.config ================'
+hd2='================ sxhkdrc ================'
+doc1=$HOME/.config/i3/config
+doc2=$HOME/.config/sxhkd/sxhkdrc
+
+(echo; echo; echo $hd1; echo; echo; cat $doc1; \
+ echo; echo; echo $hd2; echo; echo; cat $doc2) \
+    | less

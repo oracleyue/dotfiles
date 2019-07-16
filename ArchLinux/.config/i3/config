@@ -183,9 +183,6 @@ bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 
-# Window definitions
-for_window [class="GoldenDict"] floating enable resize set 800 550
-
 # Themes
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
 # class                 border  bground text    indicator child_border
@@ -216,6 +213,11 @@ bar {
 }
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
+
+# Window definitions
+for_window [class="GoldenDict"] floating enable resize set 800 550
+for_window [class="okular"] floating enable resize set 800 1000
+for_window [class="gwenview"] floating enable
 
 # Default workspace for applications
 assign [class="Thunderbird"] $ws1
