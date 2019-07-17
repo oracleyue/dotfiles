@@ -65,12 +65,12 @@ alias matlab-term='matlab -nosplash -nodesktop'
 # environment variables
 export EDITOR=vim
 # export EA_EDITOR='emacsclient --socket-name=any -nc'   # Emacs-Anywhere
-export GTAGSLABEL=pygments      # "gtags" in GNU global
+export GTAGSLABEL=pygments          # "gtags" in GNU global
 export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 
 # env variables for shorthands of paths
 export BLOGPATH=${HOME}/Public/Dropbox/oracleyue/oracleyue.github.io
-alias blog="cd $BLOGPATH; hexo list post"
+alias  blog="cd $BLOGPATH; hexo list post"
 export scgPATH="scg:/home/zuogong/Workspace/thesis"
 
 # colorize the bash
