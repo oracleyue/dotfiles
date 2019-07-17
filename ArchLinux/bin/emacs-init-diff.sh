@@ -12,16 +12,19 @@ localPath=${HOME}/.emacs.d/init
 repoPath=${HOME}/Workspace/gitrepo/dotfiles/_emacs.d/init
 tmpfile="_diff.tmp"
 
+cd $localPath
+
 echo "init.el" > $tmpfile
 echo "----------------" >> $tmpfile
 diff $localPath/../init.el $repoPath/../init.el >> $tmpfile
 echo "" >> $tmpfile
-for file in $localPath/*.el; do
-    fname=${file##*/}
-    echo $fname >> $tmpfile
+for file in $(find . -name "*.el"); do
+    # file=${file##*/}
+    echo $file >> $tmpfile
     echo "----------------" >> $tmpfile
-    diff $localPath/$fname $repoPath/$fname >> $tmpfile
+    diff $localPath/$file $repoPath/$file >> $tmpfile
     echo "" >> $tmpfile
 done
 
 cat $tmpfile
+rm $tmpfile

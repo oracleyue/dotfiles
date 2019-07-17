@@ -53,7 +53,8 @@ URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select,cl
 URxvt.colorUL: #4682B4
 !! url-select
 URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
+!URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
+URxvt.url-select.launcher: urxvt -e w3m
 URxvt.url-select.underline: true
 !! keyboard-select:
 URxvt.keysym.M-Escape: perl:keyboard-select:activate

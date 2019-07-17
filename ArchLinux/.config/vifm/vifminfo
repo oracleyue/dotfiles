@@ -15,18 +15,6 @@ r2
 
 # Left window history (oldest to newest):
 d/home/zyue
-	bin
-15
-d/home/zyue/bin
-	..
-0
-d/home/zyue
-	Desktop
-3
-d/home/zyue/Desktop
-	Variational Inference A Review for Statisticians.pdf
-12
-d/home/zyue
 	..
 0
 d/home
@@ -59,6 +47,19 @@ d/home/zyue/.config/i3
 d/home/zyue/Public/Dropbox/Workspace/Matlab/vCIG
 	GTAGS
 7
+d/home/zyue
+	Documents
+4
+d/home/zyue/Documents
+	..
+0
+d/home/zyue
+	Pictures
+8
+d/home/zyue/Pictures
+	v2-95db177bac0a3694cb1954016ec6ab9e_b.jpg
+3
+d
 
 # Right window history (oldest to newest):
 D/home/zyue
@@ -70,6 +71,10 @@ D/home/zyue/.config/i3
 D/home/zyue/Public/Dropbox/Workspace/Matlab/vCIG
 	..
 0
+D/home/zyue
+	..
+0
+D
 
 # Command line history (oldest to newest):
 :q

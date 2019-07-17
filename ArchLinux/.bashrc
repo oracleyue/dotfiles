@@ -30,7 +30,7 @@ alias grep='grep -i'
 alias ack='ack -Hni'
 alias gitup='git add . && git ci -m "regular update" && git push'
 #function open() { dolphin $1; }
-alias open='xdg-open'
+alias open='mimeopen'  # from pkg "perl-file-mimeinfo"
 alias youtube-dl-best="youtube-dl -f 'best[ext=mp4]' --playlist-items"
 alias youtube-dl-best480="youtube-dl -f 'best[ext=mp4][height<=480]' --playlist-items"
 alias youtube-dl-video480audioM4a="youtube-dl -f 'bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]' --playlist-items"
