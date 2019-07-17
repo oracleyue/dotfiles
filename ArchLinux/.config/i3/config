@@ -130,7 +130,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
-bindsym $mod+Control+l exec --no-startup-id blurlock
+# bindsym $mod+Control+l exec --no-startup-id blurlock
+bindsym $mod+Control+l exec --no-startup-id "i3lock -e -i ~/.config/wallpaper.png"
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
