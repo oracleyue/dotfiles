@@ -1,58 +1,112 @@
-!----------x配置----------
+!  ____ _____
+! |  _ \_   _|  Derek Taylor (DistroTube)
+! | | | || |    http://www.youtube.com/c/DistroTube
+! | |_| || |    http://www.gitlab.com/dwt1/
+! |____/ |_|
+
+
 Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
 Xft.rgba: rgb
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.antialias: 1
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
 
-!----------xterm配置----------
-!外观
-xterm*termName: xterm-256color
-xterm*geometry: 85x28
-xterm*scrollBar: false
-xterm*loginshell: false
-xterm*background: black
-xterm*foreground: white
-xterm*cursorBlink: true
-xterm*cursorOffTime: 600
-xterm*cursorOnTime: 600
+XTerm*renderFont: true
+XTerm*faceName: xft:monospace
+XTerm*faceSize: 12
+XTerm*utf8: 2
+XTerm*locale: true
 
-!语言和字体
-xterm*utf8: 1
-xterm*locale: true
-xterm*utf8Title: true
-xterm*renderFont: true
-xterm*preeditType: Root
-xterm*xftAntialias: true
-xterm*faceName: DejaVu Sans Mono:pixelsize=14
-xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=14
+XTerm.vt100.translations: #override \n\
+  Ctrl <Key> j: smaller-vt-font() \n\
+  Ctrl <Key> k: larger-vt-font()
 
-!tango颜色搭配
-xterm*color0: #1e1e1e
-xterm*color1: #cc0000
-xterm*color2: #4e9a06
-xterm*color3: #c4a000
-xterm*color4: #3465a4
-xterm*color5: #75507b
-xterm*color6: #0b939b
-xterm*color7: #d3d7cf
-xterm*color8: #555753
-xterm*color9: #ef2929
-xterm*color10: #8ae234
-xterm*color11: #fce94f
-xterm*color12: #729fcf
-xterm*color13: #ad7fa8
-xterm*color14: #00f5e9
-xterm*color15: #eeeeec
 
-!修复alt键
-xterm*eightBitInput: false
-xterm*metaSendsEscape: true
+! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+XTerm*loginshell: true
 
-!修复shift中英文切换
-!xterm*VT100*translations: #override \n\
-!    Shift <KeyRelease>:insert-seven-bit()
+! I like a LOT of scrollback...
+XTerm*savelines: 16384
 
-!粘贴
-xterm*VT100.Translations: #override \n\
-    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY,CLIPBOARD,CUT_BUFFER0)
+! double-click to select whole URLs :D
+XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+URxvt*imLocale: en_US.UTF-8
+URxvt*termName: rxvt-unicode-256color
+Urxvt*buffered: false
+URxvt.intensityStyles: false
+URxvt.font: xft:Inconsolata:size=13, \
+            xft:DejaVu Sans Mono:size=13, \
+            xft:Ubuntu Mono:size=13, \
+            xft:Droid Sans Mono:size=13, \
+            xft:RobotoMono:size=13, \
+            xft:Noto Sans Mono:size=13, \
+            xft:monospace:style=Medium:size=13
+URxvt.saveLines: 2000
+URxvt.scrollBar: false
+URxvt.cursorColor: white
+
+!! Extensions
+URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select,clipboard
+URxvt.colorUL: #4682B4
+!! url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
+URxvt.url-select.underline: true
+!! keyboard-select:
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+!! resize-font
+URxvt.resize-font.smaller: C-j
+URxvt.resize-font.bigger:  C-k
+!! Matcher
+URxvt.url-launcher:	urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
+URxvt.matcher.button: 1
+!!clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt*depth: 32
+
+! Theme: eighties
+
+! special
+URxvt*foreground:  #d3d0c8
+URxvt*background:  [90]#2d2d2d
+URxvt*cursorColor: #d3d0c8
+
+XTerm*foreground:  #d3d0c8
+XTerm*background:  #2d2d2d
+XTerm*cursorColor: #d3d0c8
+
+! black
+*.color0:       #2d2d2d
+*.color8:       #747369
+
+! red
+*.color1:       #f2777a
+*.color9:       #f2777a
+
+! green
+*.color2:       #99cc99
+*.color10:      #99cc99
+
+! yellow
+*.color3:       #ffcc66
+*.color11:      #ffcc66
+
+! blue
+*.color4:       #6699cc
+*.color12:      #6699cc
+
+! magenta
+*.color5:       #cc99cc
+*.color13:      #cc99cc
+
+! cyan
+*.color6:       #66cccc
+*.color14:      #66cccc
+
+! white
+*.color7:       #d3d0c8
+*.color15:      #f2f0ec

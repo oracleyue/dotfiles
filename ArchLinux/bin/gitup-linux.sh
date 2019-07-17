@@ -28,10 +28,10 @@ $sync ~/.vimrc $repopath
 $sync ~/.vim   $repopath
 
 # X configs
-$sync ~/.Xmodmap*   $repopath
-$sync ~/.xprofile   $repopath
-$sync ~/.Xresources $repopath
-$sync ~/.xinitrc    $repopath
+$sync ~/.Xmodmap*    $repopath
+$sync ~/.xprofile    $repopath
+$sync ~/.Xresources* $repopath
+$sync ~/.xinitrc     $repopath
 
 # git config
 $sync ~/.gitconfig $repopath

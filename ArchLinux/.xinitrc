@@ -3,7 +3,7 @@
 
 export PATH=$PATH:$HOME/bin/i3cmds
 export EDITOR="vim"
-export TERMINAL="konsole"
+export TERMINAL="urxvt"  #konsole
 export BROWSER="chromium --password-store=kwallet5"
 export VIEWER="zathura"
 export FILE="ranger"
