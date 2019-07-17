@@ -52,12 +52,11 @@
 (require 'exec-path-from-shell)
 (push "LC_ALL" exec-path-from-shell-variables)
 (push "LANG" exec-path-from-shell-variables)
-;; (push "PYTHONPATH" exec-path-from-shell-variables)
-(push "WM" exec-path-from-shell-variables)
 (exec-path-from-shell-initialize)
 
 ;; cursors
-(when (string-equal system-type "darwin")
+(if *is-server-coding*
+    (setq-default cursor-type 'box)
   (setq-default cursor-type 'bar)) ; "bar", "box" (default)
 (blink-cursor-mode t)  ; -1 stops cursor blinking
 

@@ -1,0 +1,87 @@
+# -*- mode: snippet -*-
+# name: ICASSP Conference
+# key: icassp
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass{article}
+\usepackage{spconf}
+% ICASSP:  spconf.sty  - ICASSP/ICIP LaTeX style file, and
+%          IEEEbib.bst - IEEE bibliography style file.
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,
+            mathtools, amsthm}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{empheq}     % to deal with parentheses + subfunctions
+\usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
+
+\usepackage{algorithm, algpseudocode}
+\usepackage{float, graphicx, caption, subcaption}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
+            urlcolor=cyan,filecolor=red]{hyperref}
+% \usepackage{minted}
+%   \usemintedstyle{pastie}
+\usepackage{cite}
+
+% theorem environment definitions
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% command definitions for math symbols
+% \input{userdef-mathsymb.tex}
+
+% ---------------- END Preambles ----------------
+
+\title{TITLE HERE}
+
+\name{Zuogong Yue$^{\dagger}$, Padma Sundaram$^{\ddagger}$, Zhichao Wang$^{\dagger}$ and
+  Victor Solo$^{\star\dagger}$%
+  \thanks{$^*$ Corresponding author (email: \texttt{v.solo@unsw.edu.au}). This
+    work is supported by the Australian Research Council.}}
+
+\address{ $^{\dagger}$ School of Electrical Engineering and
+  Telecommunications, University of New Soutch Wales, \\ Sydney, NSW, AUSTRALIA\\
+  $^{\ddagger}$ Martinos Center for Biomedical Imaging, Harvard Medical
+  School, Charlestown, MA, USA }
+
+\begin{document}
+\maketitle
+
+% ---------------- ABSTRACT ----------------
+\begin{abstract}
+  bla bla bla ...
+\end{abstract}
+
+\begin{keywords}
+One, two, three, four, five
+\end{keywords}
+
+% ----------------- MAIN --------------------
+
+\section{Introduction}
+
+bla bla
+
+
+
+
+
+
+\vfill\pagebreak
+% --------------- BIBLIOGRAPHY --------------
+\bibliographystyle{IEEEbib}
+\bibliography{./ref/library}
+
+\end{document}
