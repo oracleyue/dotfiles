@@ -42,11 +42,11 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+## alternatively, you can use the cursor keys:
+#bindsym $mod+left focus left
+#bindsym $mod+down focus down
+#bindsym $mod+up focus up
+#bindsym $mod+right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -109,6 +109,10 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 #bindsym $mod+0 workspace $ws10
+
+# switch to prev or next workspace
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
