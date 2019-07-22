@@ -234,3 +234,6 @@ for_window [class="Thunderbird"] border pixel 4
 assign [class="Thunderbird"] $ws1
 assign [class="Chromium"]    $ws2
 
+# Screen Shots
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym $mod+Print exec gnome-screenshot -i
