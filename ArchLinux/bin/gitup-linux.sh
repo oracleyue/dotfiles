@@ -51,6 +51,8 @@ $sync ~/.globalrc $repopath
 $sync ~/.config/systemd/user/*.service $repopath/.config/systemd/user
 # font config
 $sync ~/.config/fontconfig $repopath/.config
+# mimeapps.list
+$sync ~/.config/mimeapps.list $repopath/.config
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config

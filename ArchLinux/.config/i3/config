@@ -203,7 +203,8 @@ bar {
   i3bar_command  i3bar
   #status_command i3status
   status_command exec $HOME/bin/i3cmds/net-speed.sh
-  position top
+  #position top
+  position bottom
   # font pango:monospace 10
   strip_workspace_numbers yes
   colors {
