@@ -31,7 +31,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf #D3D0C8 -nb #2D2D2D -sb #66CCCC -sf #2D2D2D"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf '#DCDCCC' -nb '#2C2C2C' -sb '#93E0E3' -sf '#2C2C2C'"
 #bindsym $mod+d exec dmenu_bind
 
 # integrate kde keyring
@@ -189,34 +189,34 @@ bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 
-# Themes: eighties
+# Themes
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
-# go to https://terminal.sexy for themes
 # class                 border  bground text    indicator child_border
-client.focused          #2D2D2D #66CCCC #2D2D2D #3F3F3F   #3F3F3F
-client.focused_inactive #2D2D2D #3F3F3F #D3D0C8 #343434   #343434
-client.unfocused        #2D2D2D #343434 #D3D0C8 #343434   #343434
-client.urgent           #2D2D2D #900000 #FFFFFF #900000   #900000
-client.placeholder      #2D2D2D #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
+client.focused          #2C2C2C #93E0E3 #2C2C2C #3F3F3F   #3F3F3F
+client.focused_inactive #2C2C2C #3F3F3F #DCDCCC #343434   #343434
+client.unfocused        #2C2C2C #343434 #DCDCCC #343434   #343434
+client.urgent           #2C2C2C #900000 #FFFFFF #900000   #900000
+client.placeholder      #2C2C2C #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
 client.background       #FFFFFF
 # start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
   i3bar_command  i3bar
   #status_command i3status
   status_command exec $HOME/bin/i3cmds/net-speed.sh
-  position bottom #top
+  #position top
+  position bottom
   # font pango:monospace 10
   strip_workspace_numbers yes
   colors {
-    background #2D2D2D
+    background #2C2C2C
     statusline #FFFFFF
     separator  #3F3F3F
     #                  border  backgr. text
-    focused_workspace  #2D2D2D #66CCCC #2D2D2D
-    active_workspace   #2D2D2D #3F3F3F #D3D0C8
-    inactive_workspace #2D2D2D #3F3F3F #D3D0C8
-    urgent_workspace   #2D2D2D #900000 #D3D0C8
-    binding_mode       #2D2D2D #900000 #D3D0C8
+    focused_workspace  #2C2C2C #93E0E3 #2C2C2C
+    active_workspace   #2C2C2C #3F3F3F #DCDCCC
+    inactive_workspace #2C2C2C #3F3F3F #DCDCCC
+    urgent_workspace   #2C2C2C #900000 #DCDCCC
+    binding_mode       #2C2C2C #900000 #DCDCCC
   }
 }
 # hide/unhide i3status bar
