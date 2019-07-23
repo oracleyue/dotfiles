@@ -1,6 +1,21 @@
+" basic
 set statusbar-h-padding 2
 set statusbar-v-padding 2
 set page-padding 1
+set guioptions ''
+
+" themes
+set font "RobotoMono normal 10"
+set default-bg "#2D2D2D"
+set inputbar-bg "#2D2D2D"
+set completion-bg "#2D2D2D"
+set tabbar-bg "#2D2D2D"
+set statusbar-bg "#2D2D2D"
+set notification-bg "#2D2D2D"
+set default-fg "#D3D0C8"
+set inputbar-fg "#D3D0C8"
+
+" keybindings
 map u scroll half-up
 map d scroll half-down
 map D toggle_page_mode
