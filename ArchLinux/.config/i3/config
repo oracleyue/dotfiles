@@ -223,6 +223,7 @@ bar {
 bindsym $mod+m bar mode toggle
 
 # Window definitions
+# use =xprop= in bash (and click the target window) to determine class names
 for_window [class="GoldenDict"] floating enable resize set 800 550
 for_window [class="okular"] floating enable resize set 800 1000
 for_window [class="gwenview"] floating enable
