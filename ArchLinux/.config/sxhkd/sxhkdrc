@@ -95,7 +95,7 @@ XF86MonBrightnessUp
 super + F1
         $TERMINAL -e kbindhelp
 super + F2
-        $VIEWER $HOME/Books/References/symbols.pdf
+        zathura $HOME/Books/References/symbols.pdf
 # Change display
 super + F3
 	displayselect
