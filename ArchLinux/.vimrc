@@ -32,8 +32,10 @@ set softtabstop=4
 " usage:
 " ="*y= and ="*p= to copy/paste using system PRIMARY
 " =*+y= and ="+p= to copy/paste using system CLIPBOARD
-noremap <Leader>y "+y
-noremap <Leader>p "+p
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 " paste without auto-indent (use =:set paste= and =:set nopaste=)
 set pastetoggle=<F2>
 
