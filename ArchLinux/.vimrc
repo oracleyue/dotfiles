@@ -27,8 +27,14 @@ set expandtab smarttab
 set shiftwidth=4
 set softtabstop=4
 
-" dealing with copy-paste (avoid auto-indent when paste codes)
-" or use =:set paste= and =:set nopaste=
+" primary or clipboard for X11
+" requires +clipboard support (check by =vim --version=; archlinux =gvim=)
+" usage:
+" ="*y= and ="*p= to copy/paste using system PRIMARY
+" =*+y= and ="+p= to copy/paste using system CLIPBOARD
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+" paste without auto-indent (use =:set paste= and =:set nopaste=)
 set pastetoggle=<F2>
 
 " language spell checking
@@ -36,7 +42,7 @@ autocmd FileType tex setlocal spell spelllang=en_us
 autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
 " color schemes
-if ! has("gui_running")
+if !has("gui_running")
     colorscheme lucius
     LuciusDark
 else  " /gvim/
@@ -44,6 +50,7 @@ else  " /gvim/
     LuciusLight
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
+    set guifont=RobotoMono\ 11
 endif
 
 " status line
