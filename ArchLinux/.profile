@@ -6,5 +6,4 @@
 
 # Enable Chinese for certain apps in i3
 export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="zh_CN.UTF-8"

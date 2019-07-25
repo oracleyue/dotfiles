@@ -42,8 +42,9 @@ eval "$(fasd --init auto)"
 # sd: interactive directory selection; sf: interactive file selection
 # z: quick cd; zz: cd with interactive selection
 
-# alias commands for development
+# alias commands
 alias matlab-term='matlab -nosplash -nodesktop'
+alias blog="cd $BLOGPATH; hexo list post"
 
 # environment variables
 export EDITOR=vim
@@ -51,15 +52,10 @@ export EDITOR=vim
 export GTAGSLABEL=pygments      # "gtags" in GNU global
 export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 
-# env variables for shorthands of paths
-export BLOGPATH=${HOME}/Public/Dropbox/oracleyue/oracleyue.github.io
-alias blog="cd $BLOGPATH; hexo list post"
-
 # colorize the bash
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 # export PS1='\[\033[0;32m\]\u@\h\[\033[00m\]:\[\033[0;34m\]\w\[\033[00m\]\$ '
-# export PS1='\[\e[0;36m\][\t]\[\e[00m\] \[\e[0;32m\]\u@\h\[\e[00m\]:\[\e[0;34m\]\w\[\e[00m\]\$ '
 # Source: https://bbs.archlinux.org/viewtopic.php?pid=1068202#p1068202
 PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]$(hostname)'; fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
 
