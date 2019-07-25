@@ -32,7 +32,6 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf #D3D0C8 -nb #2D2D2D -sb #66CCCC -sf #2D2D2D"
-#bindsym $mod+d exec dmenu_bind
 
 # integrate kde keyring
 exec --no-startup-id /usr/bin/kwalletd5
@@ -226,7 +225,7 @@ bindsym $mod+m bar mode toggle
 # Use =xprop= in bash (and click the target window) to determine class names
 # To move floating windows, hold $mod key and use mouse to drag
 for_window [class="GoldenDict"] floating enable resize set 800 550
-for_window [class="okular"] floating enable resize set 800 1000
+for_window [class="okular"] floating enable resize set 850 1000
 for_window [class="gwenview"] floating enable
 for_window [class="dolphin"] floating enable
 for_window [class="Chromium"] border pixel 0
