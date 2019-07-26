@@ -15,8 +15,6 @@ set default-fg "#D3D0C8"
 set inputbar-fg "#D3D0C8"
 
 " keybindings
-unmap q
-map <C-q> quit
 map u scroll half-up
 map d scroll half-down
 map r reload
