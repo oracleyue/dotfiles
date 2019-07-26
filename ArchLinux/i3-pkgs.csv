@@ -1,5 +1,4 @@
 #TAG,NAME IN REPO (or git url), DESCRIPTIONS
-
  , xorg-xinit, starts the graphical server (use "startx")
  , i3, window manager and additional packages
  , dmenu, dynamic menu for X
@@ -8,20 +7,17 @@
  , unclutter, hides an inactive mouse
  , sxhkd, key binder
  , xorg-xprop, tool to detect window properties
- 
  , ranger, file manager
  , ursvt-perls, terminal
  , gvim, editor
  , zathura, pdf reader
  , sxiv, mini image viewer
  , w3m, terminal browser for preview images in ranger
- 
  , fcitx, chinese input tool
  , fcitx-libpinyin, pinyin library
  , fcitx-gtk2, IM module
  , fcitx-gtk3, IM module
  , fcitx-qt5, IM module
-
  , ttf-dejavu, font
  , noto-fonts, font
  , ttf-droid, font
@@ -29,4 +25,4 @@
  , ttf-roboto, sans font
 A, ttf-roboto-mono, monospace font
  , ttf-inconsolata, monospace font
- , wqy-microhei, Chinese font 
+ , wqy-microhei, Chinese font
