@@ -37,13 +37,14 @@ URxvt*imLocale: en_US.UTF-8
 URxvt*termName: rxvt-unicode-256color
 Urxvt*buffered: false
 URxvt.intensityStyles: false
-URxvt.font: xft:RobotoMono:size=11, \
-            xft:DejaVu Sans Mono:size=12, \
-            xft:Inconsolata:size=12, \
-            xft:Ubuntu Mono:size=12, \
-            xft:Droid Sans Mono:size=12, \
-            xft:Noto Sans Mono:size=12, \
-            xft:monospace:style=Medium:size=12
+URxvt.font: \
+    xft:RobotoMono:size=11, \
+    xft:Inconsolata:size=14, \
+    xft:DejaVu Sans Mono:size=12, \
+    xft:Noto Sans Mono:size=12, \
+    xft:Droid Sans Mono:size=12, \
+    xft:WenQuanYi Micro Hei Mono:size=12, \
+    xft:monospace:style=Medium:size=12
 URxvt.saveLines: 2000
 URxvt.scrollBar: false
 URxvt.cursorColor: white

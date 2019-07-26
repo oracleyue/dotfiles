@@ -1,0 +1,11 @@
+ttf-dejavu
+noto-fonts
+ttf-droid
+gnu-free-fonts
+
+ttf-roboto
+
+ttf-roboto-mono
+ttf-inconsolata
+
+wqy-microhei
