@@ -8,7 +8,7 @@
 , sxhkd, key binder
 , xorg-xprop, tool to detect window properties
 , ranger, file manager
-, ursvt-perls, terminal
+, urxvt-perls, terminal
 , gvim, editor
 , zathura, pdf reader
 , sxiv, mini image viewer
