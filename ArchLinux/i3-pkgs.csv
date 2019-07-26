@@ -7,17 +7,20 @@
 , unclutter, hides an inactive mouse
 , sxhkd, key binder
 , xorg-xprop, tool to detect window properties
+
 , ranger, file manager
 , urxvt-perls, terminal
 , gvim, editor
 , zathura, pdf reader
 , sxiv, mini image viewer
 , w3m, terminal browser for preview images in ranger
+
 , fcitx, chinese input tool
 , fcitx-libpinyin, pinyin library
 , fcitx-gtk2, IM module
 , fcitx-gtk3, IM module
 , fcitx-qt5, IM module
+
 , ttf-dejavu, font
 , noto-fonts, font
 , ttf-droid, font
