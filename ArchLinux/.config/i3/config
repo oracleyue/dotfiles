@@ -225,9 +225,10 @@ bindsym $mod+m bar mode toggle
 # Use =xprop= in bash (and click the target window) to determine class names
 # To move floating windows, hold $mod key and use mouse to drag
 for_window [class="GoldenDict"] floating enable resize set 800 550
+for_window [class="dolphin"] floating enable
 for_window [class="okular"] floating enable resize set 850 1000
 for_window [class="gwenview"] floating enable
-for_window [class="dolphin"] floating enable
+for_window [class="smplayer"] floating enable
 for_window [class="Chromium"] border pixel 0
 for_window [class="Thunderbird"] border pixel 4
 for_window [instance="Msgcompose" class="Thunderbird"] floating enable
