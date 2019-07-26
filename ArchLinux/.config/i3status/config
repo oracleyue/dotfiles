@@ -34,8 +34,8 @@ cpu_usage {
 }
 
 memory {
-  #format = "RAM %used | %available"
-  format = "RAM %available/%used"
+  #format = " RAM %used | %available "
+  format = " RAM %available/%used "
   threshold_degraded = "1G"
   format_degraded = "MEMORY < %available"
 }
@@ -97,7 +97,7 @@ tztime local {
 # }
 
 volume master {
-  format = "♪: %volume"
-  format_muted = "♪: muted (%volume)"
+  format = " ♪: %volume"
+  format_muted = " ♪: muted (%volume)"
   device = "pulse:1"
 }
