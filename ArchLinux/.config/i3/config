@@ -10,6 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 for_window [class="^.*"] border pixel 2
+#default_border pixel 2
+#default_floating_border pixel 2
 gaps inner 15
 gaps outer 5
 set $mod Mod4
@@ -232,6 +234,7 @@ for_window [class="smplayer"] floating enable
 for_window [class="Chromium"] border pixel 0
 for_window [class="Thunderbird"] border pixel 4
 for_window [instance="Msgcompose" class="Thunderbird"] floating enable
+for_window [instance="Calendar" class="Thunderbird"] floating enable
 for_window [instance="sun-awt-X11-XFramePeer" title="Figure*" class="MATLAB*"] floating enable
 
 # Default workspace for applications
