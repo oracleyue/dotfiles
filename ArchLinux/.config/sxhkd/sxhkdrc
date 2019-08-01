@@ -12,6 +12,8 @@ super + shift + a
 	$TERMINAL -e pulsemixer
 super + o
         goldendict
+super + p
+        dolphin
 # super + shift + w
 # 	$BROWSER
 
