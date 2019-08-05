@@ -40,18 +40,18 @@ $sync ~/.jupyter/ $repopath/OSX/config/_jupyter
 # ===========================================
 
 # VIM
-$sync ~/.vimrc $repopath/editors/_vimrc
-$sync ~/.vim/ --exclude=bundle $repopath/editors/_vim
+$sync ~/.vimrc $repopath/OSX/editors/_vimrc
+$sync ~/.vim/ --exclude=bundle $repopath/OSX/editors/_vim
 
 # Vimperator for Firefox
-$sync ~/.vimperatorrc $repopath/editors/_vimperatorrc
+$sync ~/.vimperatorrc $repopath/OSX/editors/_vimperatorrc
 $sync ~/.vimperator/colors/oracleyue-dark.vimp \
-      $repopath/editors/oracleyue-dark.vimp
+      $repopath/OSX/editors/oracleyue-dark.vimp
 
 # Sublime Text
 sublpath="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-cp "$sublpath/"*.sublime-keymap $repopath/editors/sublime-text/
-cp "$sublpath/"*.sublime-settings $repopath/editors/sublime-text/
+cp "$sublpath/"*.sublime-keymap $repopath/OSX/editors/sublime-text/
+cp "$sublpath/"*.sublime-settings $repopath/OSX/editors/sublime-text/
 
 
 # ===========================================
