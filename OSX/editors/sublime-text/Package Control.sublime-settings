@@ -1,0 +1,22 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ApplySyntax",
+		"ayu",
+		"BracketHighlighter",
+		"CMake",
+		"Codecs33",
+		"Color Highlighter",
+		"ConvertToUTF8",
+		"DashDoc",
+		"FileIcons",
+		"MarkdownEditing",
+		"MarkdownPreview",
+		"Package Control",
+		"SublimeCodeIntel"
+	]
+}
