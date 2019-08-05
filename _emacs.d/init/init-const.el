@@ -55,6 +55,6 @@
 
 
 
-(provide 'init-features)
+(provide 'init-const)
 ;; ================================================
-;; init-features.el ends here
+;; init-const.el ends here

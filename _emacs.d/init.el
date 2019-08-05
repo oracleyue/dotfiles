@@ -14,8 +14,8 @@
 ;; (package-initialize)           ;; required to suppress warnings
 (require 'init-pkg)
 
-;; feature control
-(require 'init-features)          ;; enable/disable features
+;; constants
+(require 'init-const)             ;; enable/disable features
 
 ;; UI (theme, modeline, etc.)
 (require 'init-ui)
