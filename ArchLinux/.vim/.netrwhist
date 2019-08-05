@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/zyue/.config/i3blocks'
-let g:netrw_dirhist_2='/home/zyue/.config/i3'
-let g:netrw_dirhist_3='/home/zyue/.config/i3status'
-let g:netrw_dirhist_4='/home/zyue/.config'
-let g:netrw_dirhist_5='/home/zyue/.config/i3'
-let g:netrw_dirhist_6='/home/zyue/Workspace/gitrepo/dotfiles/config'
-let g:netrw_dirhist_7='/home/zyue/.config'
-let g:netrw_dirhist_8='/home/zyue/.config/fontconfig'
-let g:netrw_dirhist_9='/home/zyue/.config/sxhkd'
+let g:netrw_dirhist_cnt =0
