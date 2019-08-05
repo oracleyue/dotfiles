@@ -1,6 +1,4 @@
-" --------------------------------------------------------------------------
-" Basic settings
-" --------------------------------------------------------------------------
+" basics
 set nu                                      " set row number
 set nocompatible                            " be iMproved
 set t_Co=256                                " vim color scheme
@@ -13,6 +11,9 @@ set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
+set backup                                  " backup
+set backupdir=/tmp
+syntax on                                   " syntax
 
 " ESC
 inoremap jk <Esc>
@@ -27,6 +28,11 @@ set expandtab smarttab
 set shiftwidth=4
 set softtabstop=4
 
+" copy/paste via clipboard/primary (no diff on Win and OSX)
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 " dealing with copy-paste (avoid auto-indent when paste codes)
 " or use =:set paste= and =:set nopaste=
 set pastetoggle=<F2>
@@ -50,33 +56,20 @@ endif
 set laststatus=2
 set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
-" backup
-set backup
-set backupdir=/tmp
-
-" set cursor to the last position
-autocmd BufReadPost *
-    \if line("'\"") > 0 && line("'\"") <= line("$") |
-        \exe "normal g`\"" |
-    \endif
-
-" auto remove extra spaces
-autocmd BufWritePre * :%s/\s\+$//e
-
-
 " --------------------------------------------------------------------------
-"  Key maps
+"  Keybindings and Auto Functions
 " --------------------------------------------------------------------------
 nnoremap <F8> :vertical wincmd gf<CR>
 nnoremap <Leader>nl :nohlsearch<CR>
 
+" auto remove extra spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 " --------------------------------------------------------------------------
 " Plugins
 " --------------------------------------------------------------------------
 
-" Vundle
-" -----------------
+" ---- Vundle ----
 filetype off				" required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -99,8 +92,7 @@ filetype plugin indent on    " required
 " :PluginClean         - confirm(or auto-approve) removal of unused bundles
 " see :h vundle for more details or wiki for FAQ
 
-" Taglist
-" -----------------
+" ---- Taglist ----
 let Tlist_Enable_Fold_Column=0
 let Tlist_Exit_OnlyWindow=1
 let Tlist_GainFocus_On_ToggleOpen=1
@@ -110,8 +102,3 @@ let tlist_matlab_settings = 'matlab;f:functions'
 " 'T' opens/closes the TagList window
 nnoremap <Leader>t :TlistToggle<CR>
 
-
-" --------------------------------------------------------------------------
-" misc
-" --------------------------------------------------------------------------
-syntax on
