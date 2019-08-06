@@ -9,13 +9,6 @@ export VIEWER="zathura"
 export FILE="ranger"
 export WMEmacs="i3"  # help Emacs adjust its config
 
-# Support processes
-sxhkd &	                # Bind keys
-xset r rate 300 50 &	# Speed xrate up
-unclutter & 		# Remove mouse when idle
-xcompmgr &		# xcompmgr for transparency
-dunst & 		# dunst for notifications
-
 # X settings
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 xmodmap ~/.Xmodmap
@@ -26,10 +19,16 @@ export XDG_CURRENT_DESKTOP="KDE"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 xwallpaper --zoom ~/.config/i3/wallpaper.jpg
 
+# Support processes
+sxhkd &	                # Bind keys
+xset r rate 300 50 &	# Speed xrate up
+unclutter & 		# Remove mouse when idle
+xcompmgr &		# xcompmgr for transparency
+dunst & 		# dunst for notifications
+
 # Autostart apps
 fcitx &
 dropbox &
 
-# Auto-start i3
+# Start i3 (manually start i3 in TTY: startx /usr/bin/i3)
 exec i3
-# Manually start i3 in TTY: startx /usr/bin/i3

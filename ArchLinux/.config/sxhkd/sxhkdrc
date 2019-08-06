@@ -95,9 +95,9 @@ XF86MonBrightnessUp
 # Function keys
 # Show readme (~/bin/kbindhelp)
 super + F1
-        $TERMINAL -e kbindhelp
+        $TERMINAL -e $HOME/bin/i3cmds/kbindhelp
 super + F2
-        zathura $HOME/Books/References/symbols.pdf
+        $VIEWER $HOME/Books/References/symbols.pdf
 # Change display
 super + F3
 	displayselect
