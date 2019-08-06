@@ -1,5 +1,4 @@
 " vim: filetype=vifm
-source ~/.config/vifm/vifmshortcuts
 
 set vicmd=$EDITOR
 set syscalls
@@ -14,7 +13,7 @@ set smartcase
 set nohlsearch
 set incsearch
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
-colorscheme luke
+colorscheme luke "dwt1
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -29,7 +28,7 @@ map x :!sxiv -ft * 2>/dev/null &<CR>
 nnoremap o :file &<cr>
 map E :!$EDITOR %f<CR>
 map mkd :mkdir<space>
-map bg :!setbg %f &<CR>
+"map bg :!setbg %f &<CR>
 map X :!ext %f &<CR>
 nnoremap s :shell<cr>
 nnoremap w :view<cr>
