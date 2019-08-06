@@ -64,6 +64,12 @@ $sync ~/.config/sxhkd    $repopath/.config
 # zathura
 $sync ~/.config/zathura  $repopath/.config
 
+# gtk and kde/qt settings
+# use KDE's System Settings for Qt apps; one may also use it for gtk application styles
+$sync ~/.gtkrc-2.0       $repopath
+$sync ~/.config/gtk-3.0  $repopath/.config
+$sync ~/.kde4            $repopath
+
 # $HOME/.local
 # desktop shortcuts
 $sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
