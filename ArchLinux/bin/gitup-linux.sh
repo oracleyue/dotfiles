@@ -56,8 +56,7 @@ $sync ~/.config/mimeapps.list $repopath/.config
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config
-# file managers: vifm, ranger
-$sync ~/.config/vifm     $repopath/.config
+# file manager ranger
 $sync ~/.config/ranger   $repopath/.config
 # sxhkd
 $sync ~/.config/sxhkd    $repopath/.config
