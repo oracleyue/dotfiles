@@ -18,10 +18,10 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles/ArchLinux/'
 # bashrc
 $sync ~/.bashrc       $repopath
 $sync ~/.bash_profile $repopath
-$sync ~/.profile $repopath
+$sync ~/.profile      $repopath
 
 # bin scripts
-$sync ~/bin $repopath
+$sync ~/bin    $repopath
 
 # vim
 $sync ~/.vimrc $repopath
@@ -57,7 +57,7 @@ $sync ~/.config/mimeapps.list $repopath/.config
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config
 # file manager ranger
-$sync ~/.config/ranger   $repopath/.config
+$sync --exclude=__* ~/.config/ranger $repopath/.config
 # sxhkd
 $sync ~/.config/sxhkd    $repopath/.config
 # zathura
