@@ -90,10 +90,10 @@ function es() {
 # =======================================================
 
 # emacsclient: main
-function ec() {
+function em() {
     /usr/bin/emacsclient -nc $@
 }
 # emacsclient: coding
-function ecc() {
+function ec() {
     /usr/bin/emacsclient -nc --socket-name=coding $@
 }

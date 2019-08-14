@@ -13,7 +13,7 @@ alias ls='ls --color=auto -t'
 alias ll='ls -Alh --color=auto -t'
 alias la='ls -a --color=auto'
 alias view='vim -R'
-alias em='emacs -nw'
+alias enw='emacs -nw'
 source $HOME/bin/emacs-cmds-linux.sh
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
