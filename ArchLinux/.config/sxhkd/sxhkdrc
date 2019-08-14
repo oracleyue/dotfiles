@@ -82,7 +82,6 @@ XF86MonBrightnessUp
 # # Increase volume
 # super + {equal,plus}
 # 	lmc up {5,15}
-# # Decrease volume
 # super {_,shift +} + minus
 # 	lmc down {5,15}
 # # Seek foward in song
@@ -120,4 +119,8 @@ super + F3
 # super + F12
 # 	$TERMINAL -e sudo -A nmtui
 
-
+# View and copy AcFun emoji
+# when found and opened, press "C-x C-c" to copy the image
+# into clipboard. Request "xclip" installed
+super + m
+        sxiv -t ~/Downloads/acfun_emoji/

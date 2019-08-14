@@ -62,6 +62,8 @@ $sync --exclude=__* ~/.config/ranger $repopath/.config
 $sync ~/.config/sxhkd    $repopath/.config
 # zathura
 $sync ~/.config/zathura  $repopath/.config
+# sxiv for key-handler
+$sync ~/.config/sxiv     $repopath/.config
 
 # gtk and kde/qt settings
 # use KDE's System Settings for Qt apps; one may also use it for gtk application styles

@@ -221,7 +221,7 @@ bar {
   }
 }
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
 
 # Window definitions
 # Use =xprop= in bash (and click the target window) to determine class names
