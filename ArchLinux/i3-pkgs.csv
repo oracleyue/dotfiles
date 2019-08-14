@@ -7,6 +7,7 @@
 , unclutter, hides an inactive mouse
 , sxhkd, key binder
 , xorg-xprop, tool to detect window properties
+, xclip, terminal tool for X-clipboard
 
 , ranger, file manager
 , urxvt-perls, terminal
