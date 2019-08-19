@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# env variables
 DAEMON=/usr/bin/aria2c
 PID_NAME=aria2c
 PID=$(ps ux | awk '/aria2c/ && !/awk/ {print $2}')
-CONFIG_PATH='/path/to/aria2.conf'
-TRACKER_URL='https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt'
+CONFIG_PATH=${HOME}/.config/aria2/aria2.conf
+# check https://github.com/ngosang/trackerslist
+TRACKERLIST_NAME='trackers_best.txt'
+TRACKER_URL='https://raw.githubusercontent.com/ngosang/trackerslist/master/'${TRACKERLIST_NAME}
 
-#####
-
-
+# functions
 check_running() {
     PID=`ps ux | awk '/aria2c/ && !/awk/ {print $2}'`
     if [ -z $PID ]; then
@@ -24,10 +25,11 @@ do_update() {
         echo -e "\nbt-tracker=${list}" >> ${CONFIG_PATH}
         echo 'bt-tracker added!'
     else
-        sed -i '' "s@^bt-tracker.*@bt-tracker=$list@g" ${CONFIG_PATH}
+        sed -i "s@^bt-tracker.*@bt-tracker=${list}@g" ${CONFIG_PATH}
         echo 'bt-tracker updated!'
     fi
-	do_restart
+    RET_VAL=1
+    # do_restart
 }
 
 do_start() {
@@ -72,14 +74,18 @@ do_status() {
     esac
 }
 
-case "$1" in
-    start|stop|restart|status|update)
-    do_$1
-    ;;
-    *)
-    echo "Usage: $0 { start | stop | restart | status |update }"
-    RET_VAL=1
-    ;;
-esac
-
+# interface
+if [[ $# -eq 0 ]]; then
+    do_update
+else
+    case "$1" in
+        start|stop|restart|status|update)
+            do_$1
+            ;;
+        *)
+            echo "Usage: $0 { start | stop | restart | status |update }"
+            RET_VAL=1
+            ;;
+    esac
+fi
 exit $RET_VAL

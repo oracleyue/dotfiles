@@ -1,0 +1,22 @@
+continue
+on-download-complete=exit
+
+# files
+dir=${HOME}/Downloads
+file-allocation=none
+min-split-size=10M
+log-level=warn
+
+# connections
+max-connection-per-server=4
+max-concurrent-downloads=2
+
+# speeds
+max-overall-upload-limit=1M
+max-upload-limit=128K
+
+# bt
+bt-seed-unverified
+seed-ratio=1.0
+seed-time=240
+bt-tracker=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.internetwarriors.net:1337/announce,udp://tracker.opentrackr.org:1337/announce
