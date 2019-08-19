@@ -64,6 +64,8 @@ $sync ~/.config/sxhkd    $repopath/.config
 $sync ~/.config/zathura  $repopath/.config
 # sxiv for key-handler
 $sync ~/.config/sxiv     $repopath/.config
+# aria2 for downloading
+$sync ~/.config/aria2    $repopath/.config
 
 # gtk and kde/qt settings
 # use KDE's System Settings for Qt apps; one may also use it for gtk application styles

@@ -1,23 +1,25 @@
 [Added Associations]
+application/rtf=libreoffice-writer.desktop;org.kde.kate.desktop;okularApplication_txt.desktop;vim.desktop;emacsclient-code.desktop;emacsclient.desktop;gvim.desktop;code-oss.desktop;
 
 [Default Applications]
-inode/directory=org.kde.dolphin.desktop;
-application/pdf=org.kde.okular.desktop;
 application/chm=kchmviewer.desktop;
 application/html=chromium.desktop;
+application/pdf=org.kde.okular.desktop;
+application/rtf=libreoffice-writer.desktop;
 application/xhtml+xml=chromium.desktop;
+image/bmp=org.kde.gwenview.desktop;
+image/gif=org.kde.gwenview.desktop;
+image/jpeg=org.kde.gwenview.desktop;
+image/jpg=org.kde.gwenview.desktop
+image/png=org.kde.gwenview.desktop;
+inode/directory=org.kde.dolphin.desktop;
 message/rfc822=thunderbird.desktop
 text/html=chromium.desktop;
 text/plain=org.kde.kate.desktop;
 text/x-matlab=org.kde.kate.desktop;
 text/x-objcsrc=org.kde.kate.desktop;
 video/mp4=smplayer.desktop;
+x-scheme-handler/franz=Electron.desktop
 x-scheme-handler/http=chromium.desktop;
 x-scheme-handler/https=chromium.desktop;
 x-scheme-handler/mailto=thunderbird.desktop;
-image/jpeg=org.kde.gwenview.desktop;
-image/jpg=org.kde.gwenview.desktop
-image/png=org.kde.gwenview.desktop;
-image/bmp=org.kde.gwenview.desktop;
-image/gif=org.kde.gwenview.desktop;
-x-scheme-handler/franz=Electron.desktop
