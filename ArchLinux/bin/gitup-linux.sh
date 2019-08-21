@@ -75,7 +75,8 @@ $sync ~/.config/kdeglobals $repopath/.config
 
 # $HOME/.local
 # desktop shortcuts
-$sync ~/.local/share/applications/*.desktop $repopath/.local/share/applications
+$sync ~/.local/share/applications/emacs*.desktop $repopath/.local/share/applications
+$sync ~/.local/share/applications/matlab*.desktop $repopath/.local/share/applications
 
 # Pull updates first from github.com
 cd $repopath
