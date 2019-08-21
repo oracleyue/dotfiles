@@ -11,7 +11,7 @@
 
 
 sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
-repopath=$HOME'/Workspace/gitrepo/dotfiles/ArchLinux/'
+repopath=$HOME'/Workspace/gitrepo/dotfiles/ArchLinux'
 
 # List of rsync files
 
