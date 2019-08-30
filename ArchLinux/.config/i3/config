@@ -202,14 +202,15 @@ client.placeholder      #2D2D2D #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
 client.background       #FFFFFF
 # start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-  i3bar_command  i3bar
+  i3bar_command  i3bar --transparency
   status_command i3status
   #status_command exec $HOME/bin/i3cmds/net-speed.sh
   position bottom #top
   # font pango:monospace 10
   strip_workspace_numbers yes
   colors {
-    background #2D2D2D
+    # last two digits are Alpha for bg transparency
+    background #2D2D2D95
     statusline #FFFFFF
     separator  #3F3F3F
     #                  border  backgr. text
