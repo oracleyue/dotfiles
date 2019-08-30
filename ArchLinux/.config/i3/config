@@ -209,8 +209,9 @@ bar {
   # font pango:monospace 10
   strip_workspace_numbers yes
   colors {
-    # last two digits are Alpha for bg transparency
-    background #2D2D2D95
+    background #2D2D2D
+    # add two more digits as the Alpha for bg transparency
+    #background #2D2D2D95
     statusline #FFFFFF
     separator  #3F3F3F
     #                  border  backgr. text
