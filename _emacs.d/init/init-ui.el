@@ -53,7 +53,7 @@ Expects a `font-spec'.")
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
     ;; transparent background
-    (set-bg-alpha '(95 90))
+    (set-bg-alpha '(95 85))
     ;; check and choose fonts
     (zyue-font-checking)
     ;; load fonts
@@ -128,14 +128,14 @@ Expects a `font-spec'.")
 (require 'zyue-ui-neotree)
 
 ;; Transparent effect (alpha < 1)
-(global-set-key [(f11)] 'loop-alpha)
-(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
 (defun set-bg-alpha (value)
   "This function set the Alpha value of frames to make background
 transparent. VALUE is a list (A, AB), where A is the Alpha value
 of the focused frame and AB is the unfocused."
   (set-frame-parameter (selected-frame) 'alpha value)
   (add-to-list 'default-frame-alist (cons 'alpha value)))
+;; (global-set-key [(f11)] 'loop-alpha)
+(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
 (defun loop-alpha ()
   (interactive)
   (let ((h (car alpha-list)))                ;; head value will set to
