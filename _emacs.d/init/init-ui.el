@@ -53,7 +53,7 @@ Expects a `font-spec'.")
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
     ;; transparent background
-    (set-bg-alpha '(95 65))
+    (set-bg-alpha '(95 90))
     ;; check and choose fonts
     (zyue-font-checking)
     ;; load fonts
@@ -131,6 +131,9 @@ Expects a `font-spec'.")
 (global-set-key [(f11)] 'loop-alpha)
 (setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
 (defun set-bg-alpha (value)
+  "This function set the Alpha value of frames to make background
+transparent. VALUE is a list (A, AB), where A is the Alpha value
+of the focused frame and AB is the unfocused."
   (set-frame-parameter (selected-frame) 'alpha value)
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 (defun loop-alpha ()
