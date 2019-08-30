@@ -52,6 +52,8 @@ Expects a `font-spec'.")
     (if (eq (frame-parameter frame 'background-mode) 'light)
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+    ;; transparent background
+    (set-bg-alpha '(95 65))
     ;; check and choose fonts
     (zyue-font-checking)
     ;; load fonts
@@ -125,11 +127,18 @@ Expects a `font-spec'.")
   (theme-post-processing))
 (require 'zyue-ui-neotree)
 
-;; Transparent background (alpha < 1)
-(defun new-alpha-frame (&optional value)
+;; Transparent effect (alpha < 1)
+(global-set-key [(f11)] 'loop-alpha)
+(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
+(defun set-bg-alpha (value)
+  (set-frame-parameter (selected-frame) 'alpha value)
+  (add-to-list 'default-frame-alist (cons 'alpha value)))
+(defun loop-alpha ()
   (interactive)
-  (or value (setq value 95))
-  (make-frame '((alpha . value))))
+  (let ((h (car alpha-list)))                ;; head value will set to
+    ((lambda (a ab) (set-bg-alpha (list a ab)))
+     (car h) (car (cdr h)))
+    (setq alpha-list (cdr (append alpha-list (list h))))))
 
 
 
