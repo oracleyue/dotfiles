@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: title
+# key: t
+# group: templates
+# --
+#+TITLE: ${1:Title}
+
+$0

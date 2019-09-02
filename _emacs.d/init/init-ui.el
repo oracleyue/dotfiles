@@ -53,7 +53,8 @@ Expects a `font-spec'.")
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
     ;; transparent background
-    (set-bg-alpha '(95 85))
+    (when *is-linux*
+      (set-bg-alpha '(100 85)))
     ;; check and choose fonts
     (zyue-font-checking)
     ;; load fonts

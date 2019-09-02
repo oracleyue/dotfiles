@@ -9,6 +9,7 @@
         golden-ratio
         neotree
         imenu-list
+        deft
         engine-mode))
 (custom/install-packages custom/wm-packages)
 
@@ -25,7 +26,6 @@
 ;; numbering windows
 ;; ----------------------------------------------
 (use-package winum
-  :ensure t
   :config
   (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
   (winum-mode))
@@ -166,6 +166,18 @@
 ;; usages:
 ;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
 ;; - "C-x C-f /sudo::/etc/hosts"
+
+;; ----------------------------------------------
+;; /deft/: Organise and browse notes
+;; ----------------------------------------------
+(use-package deft
+  :commands (deft)
+  :bind (("C-x C-g" . deft-find-file))
+  :config
+  (setq deft-extensions '("org" "md")
+        deft-default-extension "org"
+        deft-directory  "~/Public/Dropbox/oracleyue/OrgNote")
+  (setq deft-recursive t))
 
 ;; ----------------------------------------------
 ;; /engine-mode/: manage web search
