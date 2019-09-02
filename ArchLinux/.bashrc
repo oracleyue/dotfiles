@@ -36,6 +36,8 @@ alias youtube-dl-best480="youtube-dl -f 'best[ext=mp4][height<=480]' --playlist-
 alias youtube-dl-video480audioM4a="youtube-dl -f 'bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]' --playlist-items"
 alias trim-youtube-names='prename "s/-[A-z0-9-]*.mp4/.mp4/"'
 alias wget-child='wget -r -np -R "index.html*"'
+alias wine='env LC_CTYPE=en_US.UTF-8 wine'
+alias winecfg='env LC_CTYPE=en_US.UTF-8 winecfg'
 
 # alias for FASD
 eval "$(fasd --init auto)"
