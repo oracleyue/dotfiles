@@ -26,16 +26,19 @@
 
 ;; view styles
 (defun y/set-view-style-orgmode ()
-  (when *is-server-main*
-    ;; use sans-serif
-    (require 'org-variable-pitch)
-    (org-variable-pitch-minor-mode t)
-    ;; line spacing
-    (setq line-spacing '0.25))
   ;; line wraping
   (setq truncate-lines t)
   (turn-off-auto-fill)
-  (setq-local fill-column *fill-column-sans*))
+  (if *is-server-main*
+      (progn
+        ;; use sans-serif
+        (require 'org-variable-pitch)
+        (org-variable-pitch-minor-mode t)
+        ;; line spacing
+        (setq line-spacing '0.25)
+        ;; fill-column for sans
+        (setq-local fill-column *fill-column-sans*))
+    (setq-local fill-column *fill-column-mono*)))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
 ;; highlight latex fragments

@@ -142,7 +142,7 @@ of the focused frame and AB is the unfocused."
 (require 'zyue-ui-neotree)
 
 ;; Loop over transparent effects
-(global-set-key [(f11)] 'loop-alpha)
+;; (global-set-key [(f11)] 'loop-alpha)
 (setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
 (defun loop-alpha ()
   (interactive)

@@ -70,6 +70,11 @@
 
 ;; enable clipboard in emacs  (only need for emacs in terminal)
 ;; (setq x-select-enable-clipboard t)
+;; paste from PRIMARY (same as middle mouse click)
+(defun paste-primary-selection ()
+  (interactive)
+  (insert (x-get-selection 'PRIMARY)))
+(global-set-key (kbd "S-<insert>") 'paste-primary-selection)
 
 ;; configure mark-ring
 (setq set-mark-command-repeat-pop nil)
