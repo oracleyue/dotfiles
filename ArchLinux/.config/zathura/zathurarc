@@ -11,6 +11,7 @@ set inputbar-bg "#2D2D2D"
 set completion-bg "#2D2D2D"
 set statusbar-bg "#2D2D2D"
 set notification-bg "#2D2D2D"
+set notification-fg "#D3D0C8"
 set default-fg "#D3D0C8"
 set inputbar-fg "#D3D0C8"
 
