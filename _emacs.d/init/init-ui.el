@@ -38,6 +38,15 @@
 (defvar zyue-unicode-font nil
   "Fallback font for unicode glyphs. Is ignored if :feature unicode is active.
 Expects a `font-spec'.")
+;; [bugs]: setting a Chinese font may show unicode icons incorrectly
+
+;; Transparent effect (alpha < 1)
+(defun set-bg-alpha (value)
+  "This function set the Alpha value of frames to make background
+transparent. VALUE is a list (A, AB), where A is the Alpha value
+of the focused frame and AB is the unfocused."
+  (set-frame-parameter (selected-frame) 'alpha value)
+  (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Init or reload functions
 (defun zyue-init-ui (&optional frame)
@@ -96,15 +105,19 @@ Expects a `font-spec'.")
      zyue-font (font-spec :family "DejaVu Sans Mono" :size fs-normal)
      zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size fs-small)
      zyue-variable-pitch-font (font-spec :family "DejaVu Sans" :size fs-normal)))
-  (cond
-   ((find-font (font-spec :family "Sarasa Mono SC"))
-    (setq zyue-unicode-font (font-spec :family "Sarasa Mono SC" :size fs-small)))
-   ((find-font (font-spec :family "WenQuanYi Micro Hei"))
-    (setq zyue-unicode-font (font-spec :family "WenQuanYi Micro Hei" :size fs-small)))))
+  ;; Chinese fonts: "Sarasa Mono SC", "WenQuanYi Micro Hei"
+  ;; ...
+  ;; Font for all unicode characters
+  (catch 'loop
+    (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
+      (when (member font (font-family-list))
+        (setq zyue-unicode-font (font-spec :family font))
+        (set-fontset-font t 'unicode font nil 'prepend)
+        (throw 'loop t)))))
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)
-(when *is-server-coding* (setq zyue-theme 'doom-one))
+(when *is-server-coding* (setq zyue-theme 'atom-one-dark))  ;; doom-one
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline
@@ -128,14 +141,8 @@ Expects a `font-spec'.")
   (theme-post-processing))
 (require 'zyue-ui-neotree)
 
-;; Transparent effect (alpha < 1)
-(defun set-bg-alpha (value)
-  "This function set the Alpha value of frames to make background
-transparent. VALUE is a list (A, AB), where A is the Alpha value
-of the focused frame and AB is the unfocused."
-  (set-frame-parameter (selected-frame) 'alpha value)
-  (add-to-list 'default-frame-alist (cons 'alpha value)))
-;; (global-set-key [(f11)] 'loop-alpha)
+;; Loop over transparent effects
+(global-set-key [(f11)] 'loop-alpha)
 (setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
 (defun loop-alpha ()
   (interactive)

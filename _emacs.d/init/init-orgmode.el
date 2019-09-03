@@ -6,16 +6,13 @@
 (setq custom/org-packages
       '(htmlize
         smartparens
+        org-bullets
         ox-gfm
         ox-reveal))
 (custom/install-packages custom/org-packages)
 
 
-;;
-;; Configuratoins of Org-Mode
-;;
-
-;; /Basic/
+;; /Basic configurations/
 
 (global-font-lock-mode 1)
 ;; (global-set-key "\C-cl" 'org-store-link)
@@ -30,9 +27,13 @@
 ;; view styles
 (defun y/set-view-style-orgmode ()
   (when *is-server-main*
-    ;; (variable-pitch-mode t)    ;; use sans-serif
-    (setq line-spacing '0.25)) ;; line spacing
-  (setq truncate-lines t)      ;; line wraping
+    ;; use sans-serif
+    (require 'org-variable-pitch)
+    (org-variable-pitch-minor-mode t)
+    ;; line spacing
+    (setq line-spacing '0.25))
+  ;; line wraping
+  (setq truncate-lines t)
   (turn-off-auto-fill)
   (setq-local fill-column *fill-column-sans*))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
@@ -110,10 +111,12 @@
        '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
      ))
 
-
-;;
-;; Additional Supports via Third-party Packages
-;;
+;; Prettify UI
+(use-package org-bullets
+  :if (char-displayable-p ?◉)
+  :hook (org-mode . org-bullets-mode)
+  ;; :init (setq org-bullets-bullet-list '("●" "◉" "⚫" "•"))
+  )
 
 ;; /smartparens/ for org-mode
 (sp-with-modes 'org-mode
@@ -140,10 +143,7 @@
   (setq org-reveal-title-slide
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
-
-;;
 ;; User-defined utility enhancement
-;;
 
 (defun zyue/org-screenshot ()
   "Take a screenshot into a time stamped unique-named file in the

@@ -409,15 +409,15 @@
    `(org-level-1
      ((,class (:inherit variable-pitch
                         :foreground ,atom-one-dark-blue
-                        :height 1.03))))  ;; 1.1
+                        :height 1.05))))  ;; 1.1
    `(org-level-2
      ((,class (:inherit variable-pitch
                         :foreground ,atom-one-dark-red-1
-                        :height 1.02))))  ;; 1.05
+                        :height 1.04))))  ;; 1.05
    `(org-level-3
      ((,class (:inherit variable-pitch
                         :foreground ,atom-one-dark-purple
-                        :height 1.02))))  ;; 1.03
+                        :height 1.03))))  ;; 1.03
    `(org-level-4
      ((,class (:inherit variable-pitch
                         :foreground ,atom-one-dark-cyan

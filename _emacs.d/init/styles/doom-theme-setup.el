@@ -37,9 +37,11 @@
 
     ;; improves org-mode fontification.
     (doom-themes-org-config)
-    ;; customize font pitch
-    (require 'org-variable-pitch)
-    (add-hook 'org-mode-hook 'org-variable-pitch-minor-mode))
+
+    ;; use variable-width fonts
+    ;; (require 'org-variable-pitch)
+    ;; (add-hook 'org-mode-hook 'org-variable-pitch-minor-mode)
+    )
   )
 
 
