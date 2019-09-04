@@ -66,6 +66,10 @@ $sync ~/.config/sxhkd    $repopath/.config
 $sync ~/.config/zathura  $repopath/.config
 # sxiv for key-handler
 $sync ~/.config/sxiv     $repopath/.config
+# mpd; ncmpcpp (music player demo and client)
+$sync ~/.config/mpd/mpd.conf     $repopath/.config/mpd
+$sync ~/.config/ncmpcpp/bindings $repopath/.config/ncmpcpp
+$sync ~/.config/ncmpcpp/config   $repopath/.config/ncmpcpp
 # aria2 for downloading
 $sync ~/.config/aria2    $repopath/.config
 

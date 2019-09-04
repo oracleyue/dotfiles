@@ -4,8 +4,7 @@ conky.config = {
 --	color2 = '2ECC71',    
 	color2 = '66CCCC',    
 	cpu_avg_samples = 2,
---	default_color = 'F9FAF9',    
-	default_color = 'D3D0C8',
+	default_color = 'F9FAF9',
 	double_buffer = true,
     font = 'Bitstream Vera Sans:size=9',
 	gap_x = 25,
@@ -14,12 +13,7 @@ conky.config = {
 	no_buffers = true,    
 	own_window = true,
 	own_window_type = 'override',
-    -- use transparency
     own_window_transparent = true,
-    -- use semi-transparency
---  own_window_transparent = false,
---  own_window_argb_visual = true,
---  own_window_argb_value = 75,
 	update_interval = 2.0,
 	use_xft = true,
 }
@@ -43,7 +37,8 @@ conky.text = [[
     ${color2}file manager (ranger/Dolphin) - ${color}mod+r/p
     ${color2}htop - ${color}mod+i
     ${color2}dictionary - ${color}mod+o
-    ${color2}emoji - ${color}mod+m    
+    ${color2}music player - ${color}mod+m
+    ${color2}emoji - ${color}mod+j
 
     ${color2}help (i3) - ${color}mod+F1
     ${color2}help (LaTeX) - ${color}mod+F2

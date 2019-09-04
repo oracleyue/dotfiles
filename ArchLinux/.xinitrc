@@ -24,11 +24,12 @@ sxhkd &	                # Bind keys
 xset r rate 300 50 &	# Speed xrate up
 unclutter & 		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
-dunst & 		# dunst for notifications
 
 # Autostart apps
 fcitx &
 dropbox &
+mpd >/dev/null 2>&1 &
+mpc update >/dev/null 2>&1
 
 # Start i3 (manually start i3 in TTY: startx /usr/bin/i3)
 exec i3

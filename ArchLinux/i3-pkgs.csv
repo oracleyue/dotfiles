@@ -16,6 +16,8 @@
 , zathura, pdf reader
 , sxiv, mini image viewer
 , w3m, terminal browser for preview images in ranger
+, mpd, music player demo
+, ncmpcpp, mpd client
 
 , fcitx, chinese input tool
 , fcitx-libpinyin, pinyin library
