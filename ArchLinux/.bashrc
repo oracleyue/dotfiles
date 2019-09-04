@@ -9,8 +9,8 @@ export GPG_TTY
 export PATH=/home/zyue/bin:$PATH
 
 # alias
-alias ls='ls --color=auto -t'
-alias ll='ls -Alh --color=auto -t'
+alias ls='ls --color=auto'
+alias ll='ls -Alh --color=auto'
 alias la='ls -a --color=auto'
 alias view='vim -R'
 alias enw='emacs -nw'
