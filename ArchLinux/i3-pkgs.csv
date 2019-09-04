@@ -6,6 +6,7 @@
 , xwallpaper, sets the wallpaper
 , unclutter, hides an inactive mouse
 , sxhkd, key binder
+, conky, desktop widget to show help/info
 , xorg-xprop, tool to detect window properties
 , xclip, terminal tool for X-clipboard
 
