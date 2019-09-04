@@ -4,6 +4,7 @@ conky.config = {
 --	color2 = '2ECC71',    
 	color2 = '66CCCC',    
 	cpu_avg_samples = 2,
+--	default_color = 'F9FAF9',    
 	default_color = 'D3D0C8',
 	double_buffer = true,
     font = 'Bitstream Vera Sans:size=9',
