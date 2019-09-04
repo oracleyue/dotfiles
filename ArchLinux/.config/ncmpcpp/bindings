@@ -437,13 +437,16 @@
 #  jump_to_position_in_song
 #
 #def_key "l"
-#  show_lyrics
+def_key "L"
+  show_lyrics
 #
 #def_key "ctrl-v"
 #  select_range
 #
 #def_key "v"
 #  reverse_selection
+def_key "v"
+  show_visualizer
 #
 #def_key "V"
 #  remove_selection
@@ -540,4 +543,16 @@
 #
 #def_key "q"
 #  quit
-#
+
+
+# my VIM-like keybindings
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+def_key "h"
+    previous_column
+def_key "l"
+    next_column
+def_key "l"
+    play_item

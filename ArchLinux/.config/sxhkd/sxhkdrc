@@ -4,7 +4,7 @@ super + r
 super + i
 	$TERMINAL -e htop
 super + m
-	$TERMINAL -e ncmpcpp    
+	$TERMINAL -e ncmpcpp
 super + shift + a
 	$TERMINAL -e pulsemixer
 super + o
@@ -14,10 +14,10 @@ super + p
 
 # Et cetera...
 super + Insert
-	showclip    
+	showclip
 # browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
 # copy the image into clipboard. Request "xclip" installed)
-super + j
+super + shift + m
     sxiv -t ~/Downloads/acfun_emoji/
 
 # Audio
@@ -54,8 +54,8 @@ XF86MonBrightnessUp
 super + F1
         $TERMINAL -e $HOME/bin/i3cmds/kbindhelp
 super + F2
-        $VIEWER $HOME/Books/References/symbols.pdf        
+        $VIEWER $HOME/Books/References/symbols.pdf
 # Change display
 super + F3
 	displayselect
-    
+
