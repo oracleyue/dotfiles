@@ -56,6 +56,8 @@ $sync ~/.config/mimeapps.list $repopath/.config
 # i3 and i3blocks (window manager)
 $sync ~/.config/i3       $repopath/.config
 $sync ~/.config/i3status $repopath/.config
+# conky as desktop widgets to show help/info
+$sync ~/.config/conky    $repopath/.config
 # file manager ranger
 $sync --exclude=__* ~/.config/ranger $repopath/.config
 # sxhkd

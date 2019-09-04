@@ -1,0 +1,44 @@
+conky.config = {
+	alignment = 'bottom_left',
+	background = true,
+--	color2 = '2ECC71',    
+	color2 = '66CCCC',    
+	cpu_avg_samples = 2,
+	default_color = 'D3D0C8',
+	double_buffer = true,
+    font = 'Bitstream Vera Sans:size=9',
+	gap_x = 25,
+	gap_y = 45,
+	minimum_width = 450,
+	no_buffers = true,
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	update_interval = 2.0,
+	use_xft = true,
+}
+conky.text = [[
+    ${color2}open terminal - ${color}mod+Enter
+    ${color2}dmenu - ${color}mod+d
+    ${color2}kill focused - ${color}mod+Shift+q
+    ${color2}toggle split direction - ${color}mod+t
+    ${color2}navigate/move focused - ${color}mod+(Shift+)h/i/j/k
+    ${color2}resize focused - ${color}mod+Shift+y/u/i/o
+    ${color2}switch/send to workspace - ${color}mod+(Shift+)1-9
+    ${color2}navigate workspaces - ${color}mod+Left/Right
+    ${color2}toggle fullscreen - ${color}mod+f
+    ${color2}change layout - ${color}mod+s/w/e
+    ${color2}change gaps - ${color}mod+Shift+d/t
+    ${color2}toggle floating - ${color}mod+Shift+Space
+    ${color2}screen shot - ${color}PrtScr, mod+PrtScr
+    ${color2}lock - ${color}mod+Ctrl+l
+    ${color2}exit - ${color}mod+0
+
+    ${color2}file manager (ranger/Dolphin) - ${color}mod+r/p
+    ${color2}htop - ${color}mod+i
+    ${color2}dictionary - ${color}mod+o
+    ${color2}emoji - ${color}mod+m    
+
+    ${color2}help (i3) - ${color}mod+F1
+    ${color2}help (LaTeX) - ${color}mod+F2
+]]

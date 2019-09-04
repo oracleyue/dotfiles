@@ -82,7 +82,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -249,3 +249,7 @@ assign [class="Chromium"]    $ws2
 # Screen Shots
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
 bindsym $mod+Print exec gnome-screenshot -i
+
+# Start Conky to show help/info as desktop widget
+exec --no-startup-id "$HOME/bin/i3cmds/start_conky"
+
