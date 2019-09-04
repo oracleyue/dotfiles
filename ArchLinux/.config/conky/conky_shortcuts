@@ -9,11 +9,16 @@ conky.config = {
     font = 'Bitstream Vera Sans:size=9',
 	gap_x = 25,
 	gap_y = 45,
-	minimum_width = 450,
-	no_buffers = true,
+	minimum_width = 200,
+	no_buffers = true,    
 	own_window = true,
 	own_window_type = 'override',
-	own_window_transparent = true,
+    -- use transparency
+    own_window_transparent = true,
+    -- use semi-transparency
+--  own_window_transparent = false,
+--  own_window_argb_visual = true,
+--  own_window_argb_value = 75,
 	update_interval = 2.0,
 	use_xft = true,
 }
