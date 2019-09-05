@@ -54,7 +54,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 !! Extensions
-URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select,clipboard
+URxvt.perl-ext-common: default,matcher,url-select,keyboard-select,clipboard
 URxvt.colorUL: #4682B4
 !! url-select
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -63,7 +63,7 @@ URxvt.url-select.launcher: urxvt -e w3m
 URxvt.url-select.underline: true
 !! keyboard-select:
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
-!! resize-font
+!! resize-font (add "resize-font" to "URxvt.perl-ext-common")
 !URxvt.resize-font.smaller: C-j
 !URxvt.resize-font.bigger:  C-k
 !! Matcher
