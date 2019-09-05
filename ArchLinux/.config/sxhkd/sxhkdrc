@@ -1,12 +1,12 @@
 # Basic binds
 super + r
-	$TERMINAL -e $FILE
+    $TERMINAL -e $FILE
 super + i
-	$TERMINAL -e htop
+    $TERMINAL -e htop
 super + m
-	$TERMINAL -e ncmpcpp
+    $TERMINAL -e ncmpcpp
 super + shift + a
-	$TERMINAL -e pulsemixer
+    $TERMINAL -e pulsemixer
 super + o
     goldendict
 super + p
@@ -14,48 +14,48 @@ super + p
 
 # Et cetera...
 super + Insert
-	showclip
+    showclip
 # browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
 # copy the image into clipboard. Request "xclip" installed)
-super + shift + m
+super + x
     sxiv -t ~/Downloads/acfun_emoji/
 
 # Audio
 XF86Launch1
-	xset dpms force off
+    xset dpms force off
 XF86AudioMute
-	lmc mute
+    lmc mute
 XF86AudioLowerVolume
-	lmc down 5
+    lmc down 5
 shift+XF86AudioLowerVolume
-	lmc down 10
+    lmc down 10
 control+XF86AudioLowerVolume
-	lmc down 1
+    lmc down 1
 XF86AudioRaiseVolume
-	lmc up 5
+    lmc up 5
 shift+XF86AudioRaiseVolume
-	lmc up 10
+    lmc up 10
 control+XF86AudioRaiseVolume
-	lmc up 1
+    lmc up 1
 XF86AudioNext
-	lmc next
+    lmc next
 XF86AudioPlay
-	lmc toggle
+    lmc toggle
 XF86AudioPrev
-	lmc prev
+    lmc prev
 XF86AudioStop
-	lmc toggle
+    lmc toggle
 XF86MonBrightnessDown
-	xbacklight -dec 15
+    xbacklight -dec 15
 XF86MonBrightnessUp
-	xbacklight -inc 15
+    xbacklight -inc 15
 
 # Show help docs
 super + F1
-        $TERMINAL -e $HOME/bin/i3cmds/kbindhelp
+    $TERMINAL -e $HOME/bin/i3cmds/kbindhelp
 super + F2
-        $VIEWER $HOME/Books/References/symbols.pdf
+    $VIEWER $HOME/Books/References/symbols.pdf
 # Change display
 super + F3
-	displayselect
+    displayselect
 

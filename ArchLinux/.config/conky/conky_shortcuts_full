@@ -18,10 +18,14 @@ conky.config = {
     use_xft = true,
 }
 conky.text = [[
+    ${color2}open terminal - ${color}mod+Enter
+    ${color2}dmenu - ${color}mod+d
     ${color2}kill focused - ${color}mod+Shift+q
     ${color2}split direction - ${color}mod+t
     ${color2}navigate/move focused - ${color}mod+(Shift+)h/i/j/k
     ${color2}resize focused - ${color}mod+Shift+y/u/i/o
+    ${color2}switch/send to workspace - ${color}mod+(Shift+)1-9
+    ${color2}navigate workspaces - ${color}mod+Left/Right
     ${color2}toggle fullscreen - ${color}mod+f
     ${color2}change layout - ${color}mod+s/w/e
     ${color2}change gaps - ${color}mod+Shift+d/t
