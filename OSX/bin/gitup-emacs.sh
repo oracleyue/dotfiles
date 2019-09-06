@@ -27,7 +27,7 @@ $sync ~/.emacs.d/templates $repopath/_emacs.d/
 # rsync important scripts
 $sync ~/bin/gitup-emacs.sh $repopath/scripts/
 $sync ~/bin/gitpull-emacs.sh $repopath/scripts/
-$sync ~/bin/emacs-server-func.sh $repopath/scripts/
+$sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
 
 # push updates to github.com
 cd $repopath
