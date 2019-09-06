@@ -31,6 +31,18 @@
   "A symbol representing the modeline style to load.")
 (defvar zyue-font nil
   "The default font to use. Expects a `font-spec'.")
+(defvar zyue-modeline-font nil
+  "The font to use for modeline. Expects a `font-spec'.")
+(defvar zyue-variable-pitch-font nil
+  "The default font to use for variable-pitch text. Expects a `font-spec'.")
+
+;; Transparent effect (alpha < 1)
+(defun set-bg-alpha (value)
+  "This function set the Alpha value of frames to make background
+transparent. VALUE is a list (A, AB), where A is the Alpha value
+of the focused frame and AB is the unfocused."
+  (set-frame-parameter (selected-frame) 'alpha value)
+  (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Init or reload functions
 (defun zyue-init-ui (&optional frame)
@@ -46,9 +58,24 @@
         (add-to-list 'default-frame-alist '(ns-appearance . light))
       (add-to-list 'default-frame-alist '(ns-appearance . dark)))
     ;; transparent background
-    (when *is-linux* (set-bg-alpha '(100 85)))
+    (when *is-linux*
+      (set-bg-alpha '(100 85)))
     ;; check and choose fonts
-    (check-and-load-fonts)))
+    (zyue-check-and-load-fonts)
+    ;; load fonts
+    (when (fontp zyue-font)
+      (set-frame-font zyue-font nil (if frame (list frame) t))
+      (set-face-attribute 'fixed-pitch frame :font zyue-font))
+    ;; ... and for variable-pitch-mode:
+    (when (fontp zyue-variable-pitch-font)
+      (set-face-attribute 'variable-pitch frame
+                          :font zyue-variable-pitch-font))
+    ;; ... and for mode-line fonts
+    (when (fontp zyue-modeline-font)
+      (set-face-attribute 'mode-line nil
+                          :font zyue-modeline-font)
+      (set-face-attribute 'mode-line-inactive nil
+                          :font zyue-modeline-font))))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -56,52 +83,38 @@
     (with-selected-frame frame
       (run-with-timer 0.1 nil #'zyue-init-ui))))
 
-;; Transparent effect (alpha < 1)
-(defun set-bg-alpha (value)
-  "This function set the Alpha value of frames to make background
-transparent. VALUE is a list (A, AB), where A is the Alpha value
-of the focused frame and AB is the unfocused."
-  (set-frame-parameter (selected-frame) 'alpha value)
-  (add-to-list 'default-frame-alist (cons 'alpha value)))
-
 ;; Fonts
-(defun check-and-load-fonts (&optional frame)
-  (when *is-mac*   (setq height-n 150 height-s 140))
-  (when *is-linux* (setq height-n 110 height-s 105))
-  ;; Specify default font
-  (catch 'loop
-    (dolist (font '("SF Mono" "DejaVu Sans Mono" "RobotoMono"
-                    "Inconsolata" "Menlo" "Consolas"))
-      (when (member font (font-family-list))
-        (setq ovp-font (font-spec :family font)) ;; "Iosevka"; used in /org-variable-pitch.el/
-        (set-face-attribute 'default frame :font font :height height-n)
-        (set-face-attribute 'fixed-pitch frame :font font)
-        (set-face-attribute 'mode-line nil :height height-s)
-        (set-face-attribute 'mode-line-inactive nil :height height-s)
-        (throw 'loop t))))
-  ;; Specify variable-width font
-  (catch 'loop
-    (dolist (font '("SF Compact Display" "DejaVu Sans" "Roboto"))
-      (when (member font (font-family-list))
-        (set-face-attribute 'variable-pitch frame :font font :height height-n)
-        (throw 'loop t))))
-  ;; Specify font for all unicode characters
-  (catch 'loop
-    (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
-      (when (member font (font-family-list))
-        (set-fontset-font t 'unicode font nil 'prepend)
-        (throw 'loop t))))
+(defun zyue-check-and-load-fonts ()
+  (when *is-mac*   (setq fs-normal 15.0 fs-small 14.0))
+  (when *is-linux* (setq fs-normal 11.0 fs-small 10.5))
+  (if (and (find-font (font-spec :family "SF Mono"))
+           (find-font (font-spec :family "SF Compact Display")))
+      (setq
+       zyue-font (font-spec :family "SF Mono" :size fs-normal)
+       zyue-modeline-font (font-spec :family "SF Mono" :size fs-small)
+       ovp-font zyue-font  ;; "Iosevka"; used in /org-variable-pitch.el/
+       zyue-variable-pitch-font (font-spec :family "SF Compact Display" :size fs-normal))
+    (setq
+     zyue-font (font-spec :family "DejaVu Sans Mono" :size fs-normal)
+     zyue-modeline-font (font-spec :family "DejaVu Sans Mono" :size fs-small)
+     zyue-variable-pitch-font (font-spec :family "DejaVu Sans" :size fs-normal)))
   ;; Specify font for Chinese
   (catch 'loop
     (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei" "Microsoft Yahei"))
       (when (member font (font-family-list))
-        (set-fontset-font t '(#x4e00 . #x9fff) font)
+        ;; (set-fontset-font t '(#x4e00 . #x9fff) font)
+        (set-fontset-font t '(#x4e00 . #x9fff) (font-spec :family font :size fs-small))
         (throw 'loop t))))
-  )
+  ;; Font for all unicode characters
+  (catch 'loop
+    (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
+      (when (member font (font-family-list))
+        (set-fontset-font t 'unicode font nil 'prepend)
+        (throw 'loop t)))))
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)
-(when *is-server-coding* (setq zyue-theme 'doom-one))  ;; doom-one
+(when *is-server-coding* (setq zyue-theme 'atom-one-dark))  ;; doom-one
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline

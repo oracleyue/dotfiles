@@ -10,107 +10,8 @@
         expand-region))
 (custom/install-packages custom/edit-packages)
 
-;; ----------------------------------------------------------------------
-;; Notes of Usages
-;; ----------------------------------------------------------------------
-;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
-;; insert 4-spaced TAB: =tab-to-tab-stop= or "M-i"
-;; converting TAB and 4-spaces of regions: =tabify= and =untabify=
-;; move cursor to the top/middle/bottom of the current window: "M-r"
-;; upcase/downcase/captalize word: "M-u", "M-l", "M-c"
-;; tranpose/swap words: "M-t"
-;; use "whitespace-mode" to show white spaces as dots
-;; insert-file: "C-x i"
-;; write-file, save-as: "C-x w"
-;; open-file in read-onlzyue/ "C-x C-r"
-;; undo: "C-/", "C-_";   redo: "C-?", "M-_";  (default by /undo-tree/)
-;; comment line or region :: "C-\"; uncomment: "M-\"
-;; captalize/upper/lower words: "M-c/u/l"
-;; encodings:   "utf-8-unix"
-;;      - open a file with specific coding system: =revert-buffer-with-coding-system=
-;;      - set a encoding system for saving file: =set-buffer-file-coding-system=
-;;      - find out the current coding system used for opening and saving files:
-;;          =describe-current-coding-system=
-;;      - find out what encoding system was used to decode current file:
-;;          =describe-variable= "buffer-file-coding-system"
-;;      - list all available encodings with "M-x list-coding-systems"
-;;      - declare a file with a particular character encoding:
-;;          add "-*- coding: utf-8 -*-" in the first line of your files
-;; change encodings:   utf-8-unix, utf-8-dos
-;;      - change when saving using "C-x C-m f"
-;;      - force it immediately by using "C-x C-m c <encoding> RET C-x C-w RET"
-;; =open-previous-line= :: "M-o"
-;; =open-next-line= :: "C-o"
-;; remove all except 1 space between characters :: "ESC SPC" (due to Alfred)
-;;      =just-one-space= (built-in: M-SPC)
-;; zap-to-char :: "M-z [e]"  (kills from the current point to a character)
-;; kill line backwards :: "M-0 C-k" (built-in) OR "C-<backspace>"
-;; kill one sentence backwards :: "C-x Backspace"
-;; word count in region :: "M-="
-;; reread file on disk :: "s-u" (s: super/command); "C-x C-v"
-;; toggle overwrite mode :: "M-x overwrite-mode"
-;; mark rings to jump:
-;;      - set mark :: "C-SPC C-SPC"
-;;      - jump to previous mark :: "C-u C-SPC"  after it, just "C-SPC" to continue jumping
-;;      - jump to mark saved in global-mark ring :: "C-x C-SPC"
-;;      - exchange the cursor and the previous mark :: "C-x C-x"
-;;      - use helm-all-mark-rings to show mark ring :: "C-c h SPC"
-;; register to jump:
-;;      - record the position of point in register [r] :: "C-x r SPC [r]"
-;;      - jump to the position saved in register [r] :: "C-x r j [r]"
-;;      - use helm-register to show the list :: "C-c h x"
-;; register to copy/paste:
-;;      - "C-x r s [R]" to copy the region in register
-;;      - "C-x r r [R]" to copy the *rectangle* to register
-;;      - "C-x r g [R]" to (paste) insert text saved in register
-;; rectangle edit:
-;;      - mark rectangle :: "C-x SPC"
-;;      - kill rectangle :: "C-x r k"
-;;      - copy rectangle :: "C-x r M-w"
-;;      - yank the last killed rectangle :: "C-x r y"
-;;      - delete the region-rectangle :: "C-x r d"
-;;      - open rectangle, shifting text right :: "C-x r o"
-;;      - blank out rectangle :: "C-x r c"
-;;      - prefix each line with a string :: "C-x r t"
-;; kill rings to yank:
-;;      - "C-w / M-w" to kill or copy the mark region or the current line; "C-y" to yank
-;;      - show kill ring and select to yank :: "M-y"
-;; mark the whole buffer: "C-x h"
-;; join the current line to the above one: "M-^"
-;; fill/unfill paragraph/region:
-;;      - "M-q"/"M-Q"
-;;      - set fill-column: "C-x f"
-;; split long lines up to a prefixed length: use auto-fill mode
-;;      - set fill-column :: "C-x f"
-;;      - split paragraph or all in region :: "M-q"
-;; align comments :: "M-x align", "M-x align-regexp" ("C-x M-a") (prefix "C-u" for options)
-;; use iedit :: "C-;"
-;; use multi-cursor:
-;;      - select one word "C->", then hit "C-g" to place multiple cursors
-;;      - to place cursors in front of each lines:
-;;        select multiple lines, then hit "C-S-l C-S-l" to place cursors
-;;        OR
-;;        select nothing and hit "C->", then edit
-;;      - (disabled) use "C-S-SPC" to mark rectangular region
-;; set rectangular region :: "C-x SPC" (built-in)
-;; back-to-indenentation :: "M-m"  ==  "C-a TAB"
-;; indent region in python-mode
-;;      - python-indent-shift-right "C-c >"
-;;      - python-indent-shift-left  "C-c <"
-;; add incremental numbers to lines :: "C-x r N" (built-in; now bound to new func)
-;; use set-goal-column to do vertical editing :: "C-x C-n"; to remove "C-u C-x C-n"
-;; insert date :: "M-x insert-date"
-;; toggle window split (horizontal <-> vertical) :: "C-x |"
-;; change End-of-Line:
-;;      - "M-x set-buffer-file-coding-system utf-8-unix" or use "C-x RET f"
-;; open the *Messages* buffer :: "C-h e"
-;; flyspell-auto-correct-word :: "C-."
-;; ----------------------------------------------------------------------
 
-
-;;
 ;; ------------- Basic Editing Extensions ---------------
-;;
 
 ;; revert-buffer: update buffer if the file in disk has changed
 ;; default keybinding: "s-u" (s: super/win/command)
@@ -171,9 +72,7 @@
 (global-set-key (kbd "C-x M-a") 'align-regexp)
 
 
-;;
 ;; ------- More Editing-related Extensions ---------
-;;
 
 ;; key bindings for comment/uncomment
 (defun zyue/comment-line-or-region (&optional beg end)
@@ -273,9 +172,7 @@ Uses `current-date-format' for the formatting the date/time."
 (global-set-key (kbd "M-s k") 'delete-trailing-whitespace)
 
 
-;;
 ;; ----------- Powerful Minor Modes ------------
-;;
 
 ;; /multiple-cursors/: edit with multiple cursors
 (require 'multiple-cursors)
@@ -296,9 +193,8 @@ Uses `current-date-format' for the formatting the date/time."
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 
-;;
 ;; ----------- Settings of /text-mode/ ------------
-;;
+
 (setq-default major-mode 'text-mode)
 ;; use "C-." to auto-correct words
 
@@ -320,9 +216,8 @@ Uses `current-date-format' for the formatting the date/time."
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 
-;;
 ;; ----------- Settings of /prog-mode/ ------------
-;;
+
 (defun zyue/toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height."
   (interactive)
@@ -339,9 +234,8 @@ Uses `current-date-format' for the formatting the date/time."
             (setq fill-column *fill-column-mono*)))
 
 
-;;
-;; ------------------- Keybindings for Terminals -------------------
-;;
+;; ---------- Keybindings for Terminals ------------
+
 (unless (display-graphic-p)
   (require 'open-next-line)   ;; if not using /emacs-python/
   (global-set-key (kbd "C-o") 'open-next-line))

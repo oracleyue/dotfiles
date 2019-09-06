@@ -27,7 +27,7 @@
         ivy-height 15
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
-        ivy-use-virtual-buffers t
+        ivy-use-virtual-buffers t ;; add recent files to ivy-switch-buffer
         enable-recursive-minibuffers t
         ivy-use-selectable-prompt t  ;; make inputs selectable
         )
@@ -73,14 +73,16 @@
          ([remap describe-variable]        . counsel-describe-variable)
          ;; completion
          ;; ([remap completion-at-point]      . counsel-company)
-         ;; editing and code overview
+         ;; kill-ring
          ("M-y"     . counsel-yank-pop)
+         ;; mark-ring
          ("M-g SPC" . counsel-mark-ring)
-         ("M-g i"   . counsel-semantic-or-imenu)
-         ;; system tools
-         ("M-g f"   . counsel-fzf)     ;; find
-         ("M-g l"   . counsel-locate)  ;; locate
-         )
+         ;; register
+         ("M-g r"   . counsel-register)
+         ;; bookmark (Emacs default; =C-x r b= to create bookmark)
+         ("M-g b"   . counsel-bookmark)
+         ;; code overview
+         ("M-g i"   . counsel-semantic-or-imenu))
 
   :config
   (push '(counsel-yank-pop . 10) ivy-height-alist)
@@ -116,19 +118,23 @@
   (;; buffer
    ("C-s"   . swiper)
    ("C-S-s" . swiper-all)
-   ("s-f"   . swiper-isearch)   
+   ("s-f"   . swiper-isearch)
    ("M-g s" . counsel-grep)
    ;; git project
    ("C-c g" . counsel-git)
    ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
-   ;; bookmark (Emacs default; =C-x r b= to create bookmark)
-   ("M-g b" . counsel-bookmark)
    ;; grep files recursively in the folder
-   ("M-g a" . counsel-ag)    ;; C-c k
-   ("M-g k" . counsel-ack)
-   ("M-g r" . counsel-rg)))
+   ("M-g a" . counsel-ag)
+   ;; ("M-g a" . counsel-ack)
+   ("M-g k" . counsel-rg)
+   ;; system-wide files
+   ("M-g f" . counsel-fzf)     ;; find
+   ("M-g l" . counsel-locate)  ;; locate
+   ))
 
-;; use ivy to open recent directories
+;; ---------------------------------------------
+;; User-Extension: open recent directories
+;; ---------------------------------------------
 ;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
 ;; https://emacs-china.org/t/topic/5948/3?u=et2010
 (defvar counsel-recent-dir-selected "~/")
@@ -195,7 +201,7 @@
               ;; basic jumps
               ("C-c g ." . counsel-gtags-dwim)
               ("C-c g ," . counsel-gtags-go-backward)
-              ("M-."     . counsel-gtags-dwim)              
+              ("M-."     . counsel-gtags-dwim)
               ("M-,"     . counsel-gtags-go-backward)
               ("C-c g t" . counsel-gtags-find-definition)
               ("C-c g r" . counsel-gtags-find-reference)
@@ -211,12 +217,12 @@
   )
 
 ;; ---------------------------------------------------------------
-;; Hydra: make Emacs bindings that stick around
+;; /Hydra/: make Emacs bindings that stick around
 ;; ---------------------------------------------------------------
 (use-package hydra)
 
 ;; ---------------------------------------------------------------
-;; Avy: jump to char/words in tree-style
+;; /Avy/: jump to char/words in tree-style
 ;; ---------------------------------------------------------------
 (use-package avy
   :bind (("C-'"     . avy-goto-char)   ;; C-:
@@ -239,6 +245,8 @@
 (use-package ivy-dash
   :load-path "git"
   :bind (("M-g d" . dash-in-ivy)))
+
+
 
 (provide 'init-ivy)
 ;; ================================================
