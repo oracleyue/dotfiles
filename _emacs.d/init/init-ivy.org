@@ -1,0 +1,561 @@
+#+TITLE:    The Family Box of Packages by abo-abo
+#+AUTHOR:   Zuogong Yue
+#+EMAIL:    oracleyue@gmail.com
+#+DATE:     01 May 2018
+#+STARTUP:  indent
+#+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
+
+
+* Ivy - a generic completion frontend (swiper, counsel, etc.)
+** Requirements
+*** Install system commandline tools
+
+Tools to be installed in order to use the corresponding commands in Ivzyue/
+(package names in Homebrew)
+
+- ~counsel-ag~  : ~ag~ from =the_silver_searcher=
+- ~counsel-ack~ : ~ack~ from =ack=
+- ~counsel-rg~  : ~rg~ from =ripgrep=
+- ~counsel-git~ : ~git~
+- ~counsel-fzf~ : ~fzf~ (a command-line fuzzy finder)
+
+*** Install packages for Emacs
+
+  #+BEGIN_SRC emacs-lisp
+    ;; ===============================================================
+    ;; Ivy - a generic completion mechanism for Emacs
+    ;; ===============================================================
+    ;; Last modified on 31 Mar 2018
+  #+END_SRC
+  
+  #+BEGIN_SRC emacs-lisp
+    ;; Install required Emacs packages
+    (setq custom/ivy-packages
+          '(ivy
+            counsel
+            swiper
+            ivy-posframe
+            wgrep
+            counsel-projectile
+            counsel-gtags
+            hydra
+            ivy-hydra
+            avy))
+    (custom/install-packages custom/ivy-packages)
+  #+END_SRC
+
+** Ivy, Counsel and Swiper
+
+List of frequent commands:
+
+- grep buffers:
+  - ~swiper~ (=C-s=) or ~counsel-grep-or-swiper~ (large files)
+  - ~swiper-all~  grep all buffers
+  - ~swiper-multi~ grep the selected buffers
+  - ~counsel-grep~ (=M-g s=)    
+- grep directory (recursively):
+  - ~counsel-ag~ (=M-g a=)
+  - ~counsel-ack~ (=M-g k=)
+  - ~counsel-rg~ (=M-g r=) (for large files)
+- grep git projects:
+  - ~counsel-git~ (=C-c g=) (select a file tracked by git)
+  - ~counsel-git-grep~ or use ~counsel-rg~ instead
+- bookmark files (Emacs default)
+  - use =C-x r m= to create a bookmark for a file; use =C-x r b= and keywords to open bookmarked files
+  - use =M-g b= to list bookmarks via Ivy
+- find files in directory recursively ~counsel-fzf~ (=M-g f=)
+
+*** Configurations
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /Ivy + Counsel + Swiper/: by abo-abo
+  ;; ---------------------------------------------
+  (use-package ivy
+    :config
+    (setq ivy-initial-inputs-alist nil
+          ivy-wrap t
+          ivy-height 15
+          ivy-fixed-height-minibuffer t
+          ivy-format-function #'ivy-format-function-line
+          ivy-use-virtual-buffers t
+          enable-recursive-minibuffers t
+          ivy-use-selectable-prompt t  ;; make inputs selectable
+          )
+    ;; disable popup windows for completion-at-point; use minibuffer
+    (setq ivy-display-functions-alist nil)
+    ;; enable Ivy
+    (ivy-mode +1)
+    :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
+           ("C-c C-r" . ivy-resume))
+    )
+#+END_SRC
+
+Use posframe to show Ivy completions:
+#+BEGIN_SRC emacs-lisp
+  (when *use-posframe*
+    (use-package ivy-posframe
+      :load-path "git/ivy-posframe"
+      :after (ivy)
+      :config
+      (setq ivy-fixed-height-minibuffer nil
+            ;; ivy-display-function #'ivy-posframe-display-at-point
+            ivy-posframe-parameters
+            `((min-width . 90)
+              (min-height . ,ivy-height)
+              (internal-border-width . 10)))
+      (setq ivy-display-functions-alist nil)
+      (push '(t . ivy-posframe-display-at-point) ivy-display-functions-alist)
+      ;; (push '(ivy-completion-in-region . ivy-posframe-display-at-point)
+      ;;       ivy-display-functions-alist)
+      (push '(swiper . ivy-posframe-display-at-window-bottom-left)
+            ivy-display-functions-alist)
+      (ivy-posframe-enable))
+    )
+#+END_SRC
+
+Ivy-based interface to standard commands:
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :after (ivy)
+    :bind (([remap execute-extended-command] . counsel-M-x)
+           ([remap find-file]                . counsel-find-file)
+           ([remap find-library]             . find-library)
+           ([remap imenu]                    . counsel-imenu)
+           ([remap recentf-open-files]       . counsel-recentf)
+           ([remap org-capture]              . counsel-org-capture)
+           ([remap swiper]                   . counsel-grep-or-swiper) ;; large files
+           ([remap describe-face]            . counsel-describe-face)
+           ([remap describe-function]        . counsel-describe-function)
+           ([remap describe-variable]        . counsel-describe-variable)
+           ;; completion
+           ;; ([remap completion-at-point]      . counsel-company)
+           ;; editing and code overview
+           ("M-y"     . counsel-yank-pop)
+           ("M-g SPC" . counsel-mark-ring)
+           ("M-g i"   . counsel-semantic-or-imenu)
+           ;; system tools
+           ("M-g f"   . counsel-fzf)     ;; find
+           ("M-g l"   . counsel-locate)  ;; locate
+           )
+
+    :config
+    (push '(counsel-yank-pop . 10) ivy-height-alist)
+    (setq counsel-find-file-at-point t)
+    (setq counsel-find-file-ignore-regexp
+          "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)"
+          counsel-grep-base-command
+          "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
+          counsel-git-cmd "rg --files"
+          counsel-rg-base-command
+          "rg -i -M 120 --no-heading --line-number --color never %s .")
+          ;; counsel-rg-base-command
+          ;; "rg -zS --no-heading --line-number --color never %s ."
+          ;; counsel-ag-base-command "ag -zS --nocolor --nogroup %s"
+          ;; counsel-pt-base-command "pt -zS --nocolor --nogroup -e %s"
+
+    ;; minibuffer actions
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+    ;; ensure recentf-list loaded on startup
+    (with-eval-after-load 'counsel (recentf-mode))
+    ;; disable recentf-list loading via ivy-switch-buffer
+    ;; (setq recentf-initialize-file-name-history nil)
+
+    ;; fix the bug for ivy-occur in OSX
+    (when *is-mac*
+      (setq counsel-find-file-occur-cmd
+            "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+    )
+#+END_SRC
+
+Use swiper for quick search in buffers, files and directories:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :defer 1
+    :bind
+    (;; buffer
+     ("C-s"   . swiper)
+     ("C-S-s" . swiper-all)
+     ("s-f"   . swiper-isearch)   
+     ("M-g s" . counsel-grep)
+     ;; git project
+     ("C-c g" . counsel-git)
+     ("C-c j" . counsel-git-grep)  ;; use counsel-rg instead
+     ;; bookmark (Emacs default; =C-x r b= to create bookmark)
+     ("M-g b" . counsel-bookmark)
+     ;; grep files recursively in the folder
+     ("M-g a" . counsel-ag)    ;; C-c k
+     ("M-g k" . counsel-ack)
+     ("M-g r" . counsel-rg)))
+#+END_SRC
+
+*** Minibuffer actions
+
+One may go to the INFO page (=C-h i=) of Ivy to see the complete manual.
+
+To show the recentf list correctly, one have seen the configuration given
+before. To see more details, see https://github.com/abo-abo/swiper/issues/1515.
+
+A brief summary of minibuffer actions in ~counsel-find-files~:
+-  =C-j=: start a new completion; otherwise, same as =RET=;
+-  =TAB=: attempts partial completion; =TAB TAB= same as =C-j=;
+-  =C-M-j=: exits with the current input instead of candidates;
+-  =M-i=: insert the current candidate into the minibuffer;
+-  =M-o=: presents valid actions;
+-  =M-n=, =M-p=: cycles through the Ivy command history;
+-  =S-SPC=: deletes the current input and rests the list.
+
+A summary of file name completions:
+- =C-j= (~ivy-alt-done~):
+    On a directory, restarts completion from that directory.
+    On a file or ./, exit completion with the selected candidate.
+- =DEL= (~ivy-backward-delete-char~): Restart the completion in the parent
+  directory if current input is empty.
+- =//= (~self-insert-command~):
+    Switch to the root directory.
+- =~= (~self-insert-command~):
+    Switch to the home directory.
+- =/= (~self-insert-command~): If the current input matches an existing
+  directory name exactly, switch the completion to that directory.
+- =M-r= (~ivy-toggle-regexp-quote~):
+    Toggle between input as regexp or not.
+    Switch to matching literally since file names include ., which is for matching any char in regexp mode.
+
+*** Ivy-occur and available actions
+
+The bug of ~ivy-occur~ is due to the incompatibility of commandline tools on OSX
+and Linux, for example =xargs -d '\n'=, =-d= is not available on OSX.
+
+#+BEGIN_SRC
+  (when *is-mac*
+    (setq counsel-find-file-occur-cmd
+          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+#+END_SRC
+
+A summary of commands in the read-only =ivy-occur= buffer:
+(WARNING: has been changed and no longer working!)
+-  =RET= or =f= (~ivy-occur-press~):
+    call the current action on the selected candidate.
+-  =mouse-1= (~ivy-occur-click~);
+    call the current action on the selected candidate.
+-  =j= (~next-line~): move to next line.
+-  =k= (~previous-line~): move to previous line.
+-  =a= (~ivy-occur-read-action~):
+    read an action and make it current for this buffer.
+-  =o= (~ivy-occur-dispatch~):
+    read an action and call it on the selected candidate.
+-  =q= (~quit-window~): bury the current buffer.
+
+*** Advanced features of ripgrep and counsel-rg
+
+(source: https://oremacs.com/2018/03/05/grep-exclude/)
+
+The main two commands in ivy that I use for Git are:
+-  ~counsel-git~: select a file tracked by Git
+-  ~counsel-rg~: grep for a line in all files tracked by Git, using =ripgrep= as
+  the backend.
+
+Among the available grep tools, ~counsel-rg~ is the fastest, especially when we
+have to deal with Git repositories that more than 1GB in size. Moreover, adding
+an =.ignore= file to the root of your project can really speed up your
+searches. In my sample project, I went from 10k files to less than 500 files.
+
+Example of =.ignore= files:
+#+BEGIN_EXAMPLE
+  /TAGS
+  ,*.min.js*
+  /Build/Output/
+  /ThirdParty/
+#+END_EXAMPLE
+
+As you can see, both file patterns and directories are supported. One other
+nifty thing that I discovered only recently is that you can use =ripgrep= as the
+backed for ~counsel-git~ in addition to ~counsel-rg~. Which means the same
+=.ignore= file is used for both commands. Here's the setting:
+
+#+BEGIN_SRC
+  (setq counsel-git-cmd "rg --files")
+#+END_SRC
+
+And here's the setting for ~counsel-rg~:
+
+#+BEGIN_SRC
+  (setq counsel-rg-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s .")
+#+END_SRC
+
+The main difference in comparison to the default =counsel-rg-base-command= is
+=-M 120= which means: truncate all lines that are longer than 120
+characters. This is really helpful when Emacs is accepting input from =ripgrep=: a
+megabyte long line of minified JS is not only useless since you can't see it
+whole, but it will also likely hang Emacs for a while.
+
+*** Refactoring workflow via ivy-occur
+
+The basic idea was that he wanted to change all occurrences of an identifier in
+all files in a given directory. We do that by finding each occurrence with
+=rgrep=, making the =rgrep= result buffer writable with =wgrep=, then using
+=iedit= to change all occurrences at once.
+
+The workflow is summarized as follows:
+- run ~counsel-ag~  (or ~counsel-rg~  etc.) and call ~ivy-occur~ (=C-c C-o=)
+- in the occur buffer, toggle =wgrep= by =C-x C-q= (~ivy-wgrep-change-to-wgrep-mode~)
+- use =iedit= (=C-;=) for example to change all occurences
+- exit =iedit= (=C-;=) and =wgrep= (=C-x s= or =C-c C-c=) (~wgrep-finish-edit~)
+- kill the occur buffer after confirmation
+
+Sources:
+- https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/
+- https://oremacs.com/2015/01/27/my-refactoring-workflow/
+- http://irreal.org/blog/?p=6008
+
+*** Additional features added by users
+**** Use ivy to open recent directories in dired or find-file
+
+The recent directories include parent directories of opened files in Emacs and
+the directories accessed in Bash shell.
+
+The command-line tool ~fasd~ is used to get the list of directories in
+shell. *Fasd* "offers quick access to files and directories for POSIX shells".
+
+Source: http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+
+The implementation in the above blog is to open in =dired=. In addition, we
+would like to use TAB to insert the selected directory as inputs for
+~find-file~, and one can continue operations under this path. The action of
+ENTER keeps the same, i.e. open the directory in dired.
+
+Source: https://emacs-china.org/t/topic/5948
+  
+(原问题：前一个的代码是用 dired 打开，能不能按 tab 键就将选中的文件夹作为 find-file 的输
+入，然后可以接着再输入以查找这个文件夹内的文件呢？回车键不变，仍然是打开dired。)
+
+
+#+BEGIN_SRC emacs-lisp
+  ;; use ivy to open recent directories
+  ;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
+  ;; https://emacs-china.org/t/topic/5948/3?u=et2010
+  (defvar counsel-recent-dir-selected "~/")
+
+  (defvar counsel-recent-dir-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map  (kbd "TAB") 'counsel-recent-dir-find-file)
+      (define-key map  [(tab)] 'counsel-recent-dir-find-file)
+      map))
+
+  (defun counsel-recent-dir-find-file()
+    (interactive)
+    (ivy-exit-with-action
+     (lambda(c)
+       (setq counsel-recent-dir-selected c)
+       (run-at-time 0.05 nil
+                    (lambda()
+                      (let ((default-directory counsel-recent-dir-selected))
+                        ;; (find-file counsel-recent-dir-selected)
+                        (counsel-find-file)))))))
+
+  (defun counsel-recent-directory ()
+    "Open recent directory with dired"
+    (interactive)
+    (unless recentf-mode (recentf-mode 1))
+    (let ((collection
+           (delete-dups
+            (append (mapcar 'file-name-directory recentf-list)
+                    ;; fasd history
+                    (if (executable-find "fasd")
+                        (split-string
+                         (shell-command-to-string "fasd -ld") "\n" t))))))
+      (ivy-read "directories:" collection
+                :keymap counsel-recent-dir-map
+                :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
+
+  (global-set-key (kbd "M-g h") 'counsel-recent-directory)
+#+END_SRC
+
+** Ivy for projectile
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /counsel-projectile/: Ivy for projectile
+  ;; ---------------------------------------------
+  (use-package counsel-projectile
+    :after projectile
+    :commands (counsel-projectile-find-file
+               counsel-projectile-find-dir
+               counsel-projectile-switch-to-buffer
+               counsel-projectile-grep
+               counsel-projectile-ag
+               counsel-projectile-switch-project)
+    :init
+    :bind
+    (([remap projectile-find-file]        . counsel-projectile-find-file)
+     ([remap projectile-find-dir]         . counsel-projectile-find-dir)
+     ([remap projectile-switch-to-buffer] . counsel-projectile-switch-to-buffer)
+     ([remap projectile-grep]             . counsel-projectile-grep)
+     ([remap projectile-ag]               . counsel-projectile-ag)
+     ([remap projectile-switch-project]   . counsel-projectile-switch-project)))
+#+END_SRC
+
+One may go to =~/.emacs.d/init/readme/= to see more the complete manual (the
+README.md from the author's github project)
+
+The most frequent used operations:
+-  =C-c p p=: switch project
+-  =C-c p f=: jump to a project file
+-  =C-c p d=: jump to a project directory
+-  =C-c p b=: jump to a project buffer
+-  =C-c p s g=: search project with grep
+-  =C-c p s s=: serach project with ag
+
+-  =C-c p SPC=: jump to a project buffer, file, or switch project
+-  =C-c p s r=: search project with rg
+-  =C-c p O=:   Org-capture into project
+
+** Ivy for GNU global tags
+In order to use full features of =counsel-gtags=, you have to make install all packages in
+your OS. Here is a list:
+- GNU global
+- Exuberant Ctags
+- Python package: Pygments
+
+Note in Arch Linux, you need to set the following two environment variables in your
+=.bashrc= or =.profile=:
+#+BEGIN_SRC bash
+  export GTAGSCONF=/usr/share/gtags/gtags.conf
+  export GTAGSLABEL=pygments      # "gtags" in GNU global
+#+END_SRC
+Alternatively, without setting =GTAGSCONF=, run: 
+#+BEGIN_SRC bash
+$ cp /usr/share/gtags/gtags.conf ~/.globalrc
+#+END_SRC
+
+The following sets the shortcuts for frequently used commands in =counsel-gtags=.
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------
+  ;; /counsel-gtags/: Ivy for gtags (GNU global)
+  ;; ---------------------------------------------
+  (use-package counsel-gtags
+    :bind (:map counsel-gtags-mode-map
+                ;; basic jumps
+                ("C-c g ." . counsel-gtags-dwim)
+                ("C-c g ," . counsel-gtags-go-backward)
+                ("M-."     . counsel-gtags-dwim)              
+                ("M-,"     . counsel-gtags-go-backward)
+                ("C-c g t" . counsel-gtags-find-definition)
+                ("C-c g r" . counsel-gtags-find-reference)
+                ("C-c g s" . counsel-gtags-find-symbol)
+                ;; create/update tags
+                ("C-c g c" . counsel-gtags-create-tags)
+                ("C-c g u" . counsel-gtags-update-tags)
+                ;; jump over stacks/history
+                ("C-c g [" . counsel-gtags-go-backward)
+                ("C-c g ]" . counsel-gtags-go-forward))
+    :hook ((c-mode c++-mode python-mode matlab-mode) . counsel-gtags-mode)
+    ;; :config (setq counsel-gtags-auto-update t)
+    )
+#+END_SRC
+
+* Hydra - make Emacs bindings that stick around
+
+This is a package for GNU Emacs that can be used to tie related commands into a
+family of short bindings with a common prefix - a Hydra.
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------------------------
+  ;; Hydra: make Emacs bindings that stick around
+  ;; ---------------------------------------------------------------
+  (use-package hydra)
+#+END_SRC
+
+** Supports for Counsel
+
+It requires the package =ivy-hydra=, which defines the =hydra= rules for
+=counsel=.
+
+A summary of =hydra= commands available for =counsel=:
+- use =C-o= (~hydra-ivy/body~) to invokes the hydra menu with short key
+  bindings.
+- when Hydra is active, minibuffer editing is disabled and menus display short
+  aliases:
+
+| Short | Normal    | Command name              |
+|-------+-----------+---------------------------|
+| =o=   | =C-g=     | ~keyboard-escape-quit~    |
+| =j=   | =C-n=     | ~ivy-next-line~           |
+| =k=   | =C-p=     | ~ivy-previous-line~       |
+| =h=   | =M-<=     | ~ivy-beginning-of-buffer~ |
+| =l=   | =M->=     | ~ivy-end-of-buffer~       |
+| =d=   | =C-m=     | ~ivy-done~                |
+| =f=   | =C-j=     | ~ivy-alt-done~            |
+| =g=   | =C-M-m=   | ~ivy-call~                |
+| =u=   | =C-c C-o= | ~ivy-occur~               |
+
+Hydra menu offers more additional bindings:
+-  =c= (~ivy-toggle-calling~)
+  Toggle calling the action after each candidate change. It modifies j to jg, k to kg etc.
+-  =m= (~ivy-rotate-preferred-builders~)
+  Rotate the current regexp matcher.
+-  =>= (~ivy-minibuffer-grow~)
+  Increase ivy-height for the current minibuffer.
+-  =<= (~ivy-minibuffer-shrink~)
+  Decrease ivy-height for the current minibuffer.
+-  =w= (~ivy-prev-action~)
+  Select the previous action.
+-  =s= (~ivy-next-action~)
+  Select the next action.
+-  =a= (~ivy-read-action~)
+  Use a menu to select an action.
+-  =C= (~ivy-toggle-case-fold~)
+  Toggle case folding (match both upper and lower case characters for lower case input).
+
+* Avy - jump to things in Emacs tree-style
+
+Avy is a GNU Emacs package for jumping to visible text using a char-based
+decision tree.
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------------------------
+  ;; Avy: jump to char/words in tree-style
+  ;; ---------------------------------------------------------------
+  (use-package avy
+    :bind (("C-'"     . avy-goto-char)   ;; C-:
+           ("M-'"     . avy-goto-char-2) ;; C-'
+           ("M-g c"   . avy-goto-char)
+           ("M-g g"   . avy-goto-line)
+           ("M-g M-g" . avy-goto-line)
+           ("M-g w"   . avy-goto-word-1)
+           ;; ("M-g e"   . avy-goto-word-0)  ;; too many candiates
+           ("M-g M-r" . avy-resume))
+    :config
+    (avy-setup-default)
+    )
+#+END_SRC
+
+* Ivy-based Packages
+
+#+BEGIN_SRC emacs-lisp
+  ;; ---------------------------------------------------------------
+  ;; Ivy-based Packages (mini-functions)
+  ;; ---------------------------------------------------------------
+#+END_SRC
+
+** Ivy-based Dash search
+
+Use Ivy to search items of Dash in Emacs,  like searching in Dash:
+
+#+BEGIN_SRC emacs-lisp
+  ;; Ivy-based Dash search
+  (use-package ivy-dash
+    :load-path "git"
+    :bind (("M-g d" . dash-in-ivy)))
+#+END_SRC
+
+
+* END
+
+#+BEGIN_SRC emacs-lisp
+  (provide 'init-ivy)
+  ;; ================================================
+  ;; init-ivy.el ends here
+#+END_SRC

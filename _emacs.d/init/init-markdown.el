@@ -32,10 +32,10 @@
     ;; use variable-width fonts
     (variable-pitch-mode t)
     ;; restore fixed-pitch fonts
-    (setq font-name (face-attribute 'fixed-pitch :family))
-    (set-face-font 'markdown-pre-face font-name)
-    (set-face-font 'markdown-code-face font-name)
-    (set-face-font 'markdown-inline-code-face font-name)
+    (let ((font-name (face-attribute 'default :family)))
+      (set-face-font 'markdown-pre-face font-name)
+      (set-face-font 'markdown-code-face font-name)
+      (set-face-font 'markdown-inline-code-face font-name))
     ;; fill columns
     (setq-local fill-column *fill-column-sans*))
   ;; (add-hook 'markdown-mode-hook 'zyue/variable-pitch-and-keep-whitespaces)

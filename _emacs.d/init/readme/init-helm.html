@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-04-30 Mon 18:31 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The League of Helm and Project Managements</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Zuogong Yue" />
+<link rel="stylesheet" type="text/css" media="all" href="https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" media="all" href="https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">The League of Helm and Project Managements</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6f8ccd7">1. Helm: the incremental completion framework</a>
+<ul>
+<li><a href="#orgabca5f2">1.1. Requirements</a>
+<ul>
+<li><a href="#org2e509bf">1.1.1. install software on the OS</a></li>
+<li><a href="#org1b51025">1.1.2. install packages on Emacs</a></li>
+</ul>
+</li>
+<li><a href="#orge329515">1.2. Basics configurations</a></li>
+<li><a href="#orgb1e79e5">1.3. Functionality</a>
+<ul>
+<li><a href="#orgbb19a08">1.3.1. enhance Emacs basic functionality</a>
+<ul>
+<li><a href="#orgefa67b8">1.3.1.1. use helm to run M-x</a></li>
+<li><a href="#orgea761ab">1.3.1.2. use helm to deal with mini-buffer</a></li>
+<li><a href="#orgfa367a1">1.3.1.3. use helm to find/open files</a></li>
+<li><a href="#org3e15814">1.3.1.4. resume the previous helm session</a></li>
+<li><a href="#org08057d2">1.3.1.5. use helm to show "occur" (see <i>helm-swoop</i> for better functions)</a></li>
+</ul>
+</li>
+<li><a href="#orgede05ef">1.3.2. show history of ring, register and shell command</a>
+<ul>
+<li><a href="#org7708cb1">1.3.2.1. use helm to show kill-ring</a></li>
+<li><a href="#org54dcda2">1.3.2.2. view the local/global mark rings in helm</a></li>
+<li><a href="#org361d065">1.3.2.3. use helm to view Emacs registers</a></li>
+<li><a href="#orgb78a347">1.3.2.4. use helm to show <i>eshell</i> command history</a></li>
+<li><a href="#orgf6a7d1a">1.3.2.5. use helm to show <i>shell</i> command history</a></li>
+</ul>
+</li>
+<li><a href="#org3b06bac">1.3.3. use live grep in helm</a>
+<ul>
+<li><a href="#org908dff0">1.3.3.1. Usage</a></li>
+<li><a href="#org205655b">1.3.3.2. Marked files</a></li>
+<li><a href="#orgb8457c4">1.3.3.3. Recursive</a></li>
+<li><a href="#org54001c1">1.3.3.4. Highlight results</a></li>
+</ul>
+</li>
+<li><a href="#orgf55cda5">1.3.4. programming supports</a>
+<ul>
+<li><a href="#orgb82df00">1.3.4.1. use helm for fuzzy matching of <code>semantic</code> or <code>imenu</code> to summary C/C++ definitions</a></li>
+</ul>
+</li>
+<li><a href="#org2ecc4e7">1.3.5. use helm for Emcas Help page</a></li>
+<li><a href="#org12313cd">1.3.6. use helm to run system commands</a></li>
+<li><a href="#orgc5489a5">1.3.7. miscellanies</a></li>
+</ul>
+</li>
+<li><a href="#org7077be1">1.4. Summary of Keybindings</a></li>
+</ul>
+</li>
+<li><a href="#org83bef53">2. Helm-Swoop: more powerful helm-occur</a>
+<ul>
+<li><a href="#org073bcf9">2.1. Install packages on Emacs</a></li>
+<li><a href="#orgd50b22b">2.2. Keybindings</a></li>
+<li><a href="#orgfdead47">2.3. Configurations on Features</a></li>
+</ul>
+</li>
+<li><a href="#orgd229348">3. Exploring large projects with Projectile and Helm Projectile</a>
+<ul>
+<li><a href="#org678bcf4">3.1. Install Emacs packages</a></li>
+<li><a href="#org8c02c5c">3.2. Package: <code>projectile</code></a></li>
+<li><a href="#org115c600">3.3. Package: <code>helm-proctile</code></a>
+<ul>
+<li><a href="#org1f34b63">3.3.1. Enable helm-projectile</a></li>
+<li><a href="#org14768fe">3.3.2. Basic commands</a></li>
+<li><a href="#orgd30c42e">3.3.3. All-in-one command</a></li>
+<li><a href="#org835eaa4">3.3.4. Enter project portal</a></li>
+<li><a href="#org6fc8164">3.3.5. File management</a>
+<ul>
+<li><a href="#org93c3ff8">3.3.5.1. Command: <code>helm-projectile-find-file</code>, <code>C-c p f</code></a></li>
+<li><a href="#org8c04bc7">3.3.5.2. Command: <code>helm-projectile-find-file-in-known-projects</code>, <code>C-c p F</code></a></li>
+<li><a href="#org5e249d5">3.3.5.3. Command: <code>helm-projectile-find-file-dwim</code>, <code>C-c p g</code></a></li>
+<li><a href="#orgddeae70">3.3.5.4. Command: <code>helm-projectile-find-dir</code>, <code>C-c p d</code></a></li>
+<li><a href="#org390a726">3.3.5.5. Command: <code>helm-projectile-recentf</code>, <code>C-c p e</code></a></li>
+<li><a href="#orgeaddbe0">3.3.5.6. Command: <code>helm-projectile-find-other-file</code>, <code>C-c p a</code></a></li>
+<li><a href="#org900b9f9">3.3.5.7. [IMPORTANT] Caching</a></li>
+</ul>
+</li>
+<li><a href="#org3864504">3.3.6. Virtual directory manager</a></li>
+<li><a href="#orgfc9ffe0">3.3.7. Buffer management:</a></li>
+<li><a href="#org34f8966">3.3.8. Search in project</a>
+<ul>
+<li><a href="#orgf7fd082">3.3.8.1. Command: <code>helm-projectile-grep</code>, <code>C-c p s g</code></a></li>
+<li><a href="#org87e96ec">3.3.8.2. Command: <code>helm-projectile-ack</code>, <code>C-c p s a</code></a></li>
+<li><a href="#org937601c">3.3.8.3. Command: <code>helm-projectile-ag</code>, <code>C-c p s s</code></a></li>
+</ul>
+</li>
+<li><a href="#orgd4a97e3">3.3.9. Summary of keybindings</a></li>
+<li><a href="#org48f9544">3.3.10. Suppress warnings from project-local variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4b615f9">4. Source code navigation via GNU Global with helm interface</a>
+<ul>
+<li><a href="#orgd581616">4.1. Requirements</a>
+<ul>
+<li><a href="#orgd7e4724">4.1.1. Emacs packages</a></li>
+<li><a href="#org2bf653c">4.1.2. System commandline tools</a></li>
+</ul>
+</li>
+<li><a href="#org56e8efa">4.2. Frontend via helm-gtags</a>
+<ul>
+<li><a href="#org84ae0d0">4.2.1. Basic settings</a></li>
+<li><a href="#org384edd7">4.2.2. Keybindings</a></li>
+</ul>
+</li>
+<li><a href="#org5c6b694">4.3. More on source code navigation by tuhdo.github.io</a></li>
+</ul>
+</li>
+<li><a href="#orga8fe44c">5. End</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org6f8ccd7" class="outline-2">
+<h2 id="org6f8ccd7"><span class="section-number-2">1</span> Helm: the incremental completion framework</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgabca5f2" class="outline-3">
+<h3 id="orgabca5f2"><span class="section-number-3">1.1</span> Requirements</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org2e509bf" class="outline-4">
+<h4 id="org2e509bf"><span class="section-number-4">1.1.1</span> install software on the OS</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+In order to use features on live grep (see Section: <b>use helm to find/open
+files</b>), you need to the following apps, if you need to use:
+</p>
+<ul class="org-ul">
+<li><code>grep</code>: the default grep on Linux/Unix;</li>
+<li><code>ack</code> or <code>ack-grep</code>: the improved grep (OS X: <code>brew install ack</code>)</li>
+<li><code>ag</code>: a faster grep from <code>the_silver_searcher</code> (OS X: <code>brew install the_silver_searcher</code>)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1b51025" class="outline-4">
+<h4 id="org1b51025"><span class="section-number-4">1.1.2</span> install packages on Emacs</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+Adding a header for the exported <code>.el</code> file.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/Helm/ as the main completion system</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
+</pre>
+</div>
+
+<p>
+Install the additional packages to support the <code>helm</code> package
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/helm-packages
+      '(helm
+        helm-core))
+(custom/install-packages custom/helm-packages)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge329515" class="outline-3">
+<h3 id="orge329515"><span class="section-number-3">1.2</span> Basics configurations</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">configuration for /helm/</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm</span>)
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-config</span>)
+</pre>
+</div>
+
+<div class="WARNING">
+<p>
+<code>semantic-mode</code> in CEDET causes <code>M-x gdb</code> hangs emacs in Mac OS X!
+</p>
+
+</div>
+
+<p>
+Since the default <code>C-x c</code> is quite close to <code>C-x C-c</code>, which quits Emacs.
+Changed to <code>C-c h</code> (labeled by <code>&lt;helm-prefix&gt;</code> in our later description). Note:
+We must set <code>C-c h</code> globally, because we cannot change <code>helm-command-prefix-key</code>
+once <code>helm-config</code> is loaded.
+</p>
+
+<p>
+List of basic keybindings in the helm sessions:
+</p>
+<ul class="org-ul">
+<li><code>&lt;tab&gt;</code>, <code>C-i</code> or <code>TAB</code>: run persistent actions;</li>
+<li><code>C-z</code>: list available actions;</li>
+<li><code>C-o</code>: switch between helm sources (e.g. jump from the historical list to the current list).</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Basic keybinding:</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h"</span>) 'helm-command-prefix)
+(global-unset-key (kbd <span style="color: #2aa198;">"C-x c"</span>))
+(define-key helm-map (kbd <span style="color: #2aa198;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action)
+(define-key helm-map (kbd <span style="color: #2aa198;">"C-i"</span>) 'helm-execute-persistent-action)
+(define-key helm-map (kbd <span style="color: #2aa198;">"C-z"</span>) 'helm-select-action)
+
+</pre>
+</div>
+
+<p>
+More basic settings and start <code>helm</code> mode:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">More basic settings:</span>
+(<span style="color: #859900;">setq</span> <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">open helm buffer inside current window, not occupy whole other window</span>
+      helm-split-window-in-side-p           t
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">move to end or beginning of source when reaching top or bottom of source.</span>
+      helm-move-to-line-cycle-in-source     t
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">search for library in `</span><span style="color: #2aa198; font-style: italic;">require</span><span style="color: #93a1a1; font-style: italic;">' and `</span><span style="color: #2aa198; font-style: italic;">declare-function</span><span style="color: #93a1a1; font-style: italic;">' sexp.</span>
+      helm-ff-search-library-in-sexp        t
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+      helm-scroll-amount                    8
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-candidate-number-limit           500</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-move-to-line-cycle-in-source     t</span>
+      helm-ff-file-name-history-use-recentf t)
+
+(helm-mode 1)
+</pre>
+</div>
+
+<p>
+Control the way to split and resize the helm buffer window:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">default way to split window</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-split-window-default-side    'right</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">adjust the max height for helm buffer</span>
+      <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">helm-autoresize-max-height 50</span>
+      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">auto-resize buffer to fit candidates (disble golden-ratio)</span>
+      helm-autoresize-mode              t)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb1e79e5" class="outline-3">
+<h3 id="orgb1e79e5"><span class="section-number-3">1.3</span> Functionality</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgbb19a08" class="outline-4">
+<h4 id="orgbb19a08"><span class="section-number-4">1.3.1</span> enhance Emacs basic functionality</h4>
+<div class="outline-text-4" id="text-1-3-1">
+</div>
+<div id="outline-container-orgefa67b8" class="outline-5">
+<h5 id="orgefa67b8"><span class="section-number-5">1.3.1.1</span> use helm to run M-x</h5>
+<div class="outline-text-5" id="text-1-3-1-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"M-x"</span>) 'helm-M-x)
+(<span style="color: #859900;">setq</span> helm-M-x-fuzzy-match t) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">optional fuzzy matching for helm-M-x</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgea761ab" class="outline-5">
+<h5 id="orgea761ab"><span class="section-number-5">1.3.1.2</span> use helm to deal with mini-buffer</h5>
+<div class="outline-text-5" id="text-1-3-1-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"C-x b"</span>) 'helm-mini)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">enable fuzzy matching</span>
+(<span style="color: #859900;">setq</span> helm-buffers-fuzzy-matching   t
+      helm-recentf-fuzzy-match      t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfa367a1" class="outline-5">
+<h5 id="orgfa367a1"><span class="section-number-5">1.3.1.3</span> use helm to find/open files</h5>
+<div class="outline-text-5" id="text-1-3-1-3">
+<p>
+Default keybinding: <code>&lt;helm-prefix&gt; C-x C-f</code>; in this session, <code>C-c i</code> will insert the
+current absolute path into the current buffer. Here we rebind the key to
+overwrite the default find file action. And by setting
+<code>helm-boring-file-regexp-list</code> to avoid showing useless temporary files.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"C-x C-f"</span>) 'helm-find-files)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">skip meaningless files, e.g. .DS_Store</span>
+(<span style="color: #859900;">setq</span> helm-ff-skip-boring-files t)
+(delete '<span style="color: #2aa198;">"\\.bbl$"</span> helm-boring-file-regexp-list)    <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">show .bbl file</span>
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.DS_Store$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">".*\.synctex\.gz$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">".*\.url$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.dropbox$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"Icon.*"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"#.*#$"</span>)
+(add-to-list 'helm-boring-file-regexp-list <span style="color: #2aa198;">"\\.out$"</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3e15814" class="outline-5">
+<h5 id="org3e15814"><span class="section-number-5">1.3.1.4</span> resume the previous helm session</h5>
+<div class="outline-text-5" id="text-1-3-1-4">
+<p>
+Keybinding: <code>&lt;helm-prefix&gt; b</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org08057d2" class="outline-5">
+<h5 id="org08057d2"><span class="section-number-5">1.3.1.5</span> use helm to show "occur" (see <i>helm-swoop</i> for better functions)</h5>
+<div class="outline-text-5" id="text-1-3-1-5">
+<p>
+Keybinding: <code>&lt;helm-prefix&gt; M-s o</code>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgede05ef" class="outline-4">
+<h4 id="orgede05ef"><span class="section-number-4">1.3.2</span> show history of ring, register and shell command</h4>
+<div class="outline-text-4" id="text-1-3-2">
+</div>
+<div id="outline-container-org7708cb1" class="outline-5">
+<h5 id="org7708cb1"><span class="section-number-5">1.3.2.1</span> use helm to show kill-ring</h5>
+<div class="outline-text-5" id="text-1-3-2-1">
+<p>
+This is to list all entries in the king ring that are available for <code>C-y</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #2aa198;">"M-y"</span>) 'helm-show-kill-ring)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org54dcda2" class="outline-5">
+<h5 id="org54dcda2"><span class="section-number-5">1.3.2.2</span> view the local/global mark rings in helm</h5>
+<div class="outline-text-5" id="text-1-3-2-2">
+<p>
+Default keybinding: <code>&lt;helm-prefix&gt; C-c SPC</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show the mark-ring</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h SPC"</span>) 'helm-all-mark-rings)
+(global-set-key (kbd <span style="color: #2aa198;">"M-g SPC"</span>) 'helm-all-mark-rings)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org361d065" class="outline-5">
+<h5 id="org361d065"><span class="section-number-5">1.3.2.3</span> use helm to view Emacs registers</h5>
+<div class="outline-text-5" id="text-1-3-2-3">
+<p>
+Keybinding: <code>&lt;helm-prefix&gt; C-x r i</code>
+</p>
+
+<p>
+Functions:
+</p>
+<ul class="org-ul">
+<li><code>[F1]</code> insert register content into buffer</li>
+<li><code>[F2]</code> append an active region to current content in highlighting register</li>
+<li><code>[F3]</code> prepend an active region to current content in highlighting register</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show the register</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h x"</span>) 'helm-register)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb78a347" class="outline-5">
+<h5 id="orgb78a347"><span class="section-number-5">1.3.2.4</span> use helm to show <i>eshell</i> command history</h5>
+<div class="outline-text-5" id="text-1-3-2-4">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">use helm to show /eshell/ command history</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-eshell</span>)
+(add-hook 'eshell-mode-hook #'(lambda ()
+   (define-key eshell-mode-map (kbd <span style="color: #2aa198;">"C-c C-l"</span>)  'helm-eshell-history)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6a7d1a" class="outline-5">
+<h5 id="orgf6a7d1a"><span class="section-number-5">1.3.2.5</span> use helm to show <i>shell</i> command history</h5>
+<div class="outline-text-5" id="text-1-3-2-5">
+<pre class="example">
+(define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3b06bac" class="outline-4">
+<h4 id="org3b06bac"><span class="section-number-4">1.3.3</span> use live grep in helm</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Helm grep is a Helm implementation of the grep command, which searches a text
+file for lines matching a regular expression.
+</p>
+
+<p>
+Quick view of useful commands: under <code>C-x C-f</code> session,
+</p>
+
+<ul class="org-ul">
+<li><code>C-s</code> or <code>M-g s</code>: use <code>grep/ack</code> to match patterns in the current buffer;</li>
+<li><code>C-u C-s</code> or <code>C-u M-g s</code>: use <code>grep/ack</code> to match patterns any files with the
+same extension in the current folder;</li>
+<li><code>M-g a</code>: use <code>ag</code> to match patterns in all files in the current folder.</li>
+<li><code>C-u M-g a</code>: select extension types before run <code>ag</code></li>
+</ul>
+
+<p>
+or, globally, use <code>M-g a</code> that run <code>helm-do-grep-ag</code>.
+</p>
+
+<p>
+<span class="underline">Suggested practice</span>:
+</p>
+<ul class="org-ul">
+<li>use <code>ack</code> (<code>C-s</code>) to grep files: the current file, or the files in the current
+folder when the cursor is on the directory (i.e. the top line of
+<i>helm-find-files</i> buffer);</li>
+<li>use <code>ag</code> (<code>M-g a</code>) to grep the directory: recursively grep all files in the
+current directory</li>
+<li>if you want to grep files with a specific extension, use <code>C-u C-s</code>.</li>
+</ul>
+</div>
+
+<div id="outline-container-org908dff0" class="outline-5">
+<h5 id="org908dff0"><span class="section-number-5">1.3.3.1</span> Usage</h5>
+<div class="outline-text-5" id="text-1-3-3-1">
+<p>
+From <code>helm-find-files</code> (<code>&lt;helm-prefix&gt; C-x C-f</code>), open the action menu with
+<code>C-z</code> and choose grep. A prefix argument will launch recursive grep.  You can
+also launch grep directly with <code>(C-u) C-s</code> or <code>(C-u) M-g s</code>
+(i.e. <code>helm-ff-run-grep</code>) without switching to the action menu.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">set global-key for function: =M-g a= in session of =C-x C-f=</span>
+(global-set-key (kbd <span style="color: #2aa198;">"M-g a"</span>) 'helm-do-grep-ag)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org205655b" class="outline-5">
+<h5 id="org205655b"><span class="section-number-5">1.3.3.2</span> Marked files</h5>
+<div class="outline-text-5" id="text-1-3-3-2">
+<p>
+To grep marked files, just mark some files with <code>C-&lt;space&gt;</code> and launch
+grep. Marked files can be from different directories.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb8457c4" class="outline-5">
+<h5 id="orgb8457c4"><span class="section-number-5">1.3.3.3</span> Recursive</h5>
+<div class="outline-text-5" id="text-1-3-3-3">
+<p>
+Go to the root of the directory you want to grep in, then hit <code>C-z</code> to open the
+action menu and choose grep with a prefix argument (<code>C-u</code>).
+</p>
+
+<p>
+You will be prompted for types of files to search. Wildcard syntax like <code>\*.el</code>
+(which searches only files ending in <code>.el</code>) is allowed. With <code>ack-grep</code> you will
+be prompted instead for ack-grep types, see ack-grep documentation on how define
+types in your <code>.ackrc</code> file.
+</p>
+
+<p>
+By default, the extension of the file at point is used when the cursor is on a
+file name. If the cursor is at root of a directory, all the file name extensions
+found in the directory and not matching the variable <code>grep-find-ignored-files</code>
+are inserted into the prompt.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org54001c1" class="outline-5">
+<h5 id="org54001c1"><span class="section-number-5">1.3.3.4</span> Highlight results</h5>
+<div class="outline-text-5" id="text-1-3-3-4">
+<p>
+By default, Helm applies its own highlights to matched items. However, it may be
+better to use the backend to highlight result with ANSI sequences.  This can be
+done by customizing the <code>helm-grep-default-command</code> variable.
+</p>
+
+<p>
+<code>grep</code>:
+</p>
+<pre class="example">
+(setq helm-grep-default-command   ;; ~grep~
+      "grep --color=always -d skip %e -n%cH -e %p %f"
+      helm-grep-default-recurse-command
+      "grep --color=always -d recurse %e -n%cH -e %p %f")
+</pre>
+
+<p>
+<code>ack</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-grep-default-command     <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~ack~</span>
+      <span style="color: #2aa198;">"ack -Hn --color --smart-case --no-group %e %p %f"</span>
+      helm-grep-default-recurse-command
+      <span style="color: #2aa198;">"ack -H --color --smart-case --no-group %e %p %f"</span>)
+</pre>
+</div>
+
+<p>
+<code>git-grep</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-ls-git-grep-command    <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~git-grep~</span>
+      <span style="color: #2aa198;">"git grep -n%cH --color=always --full-name -e %p %f"</span>)
+</pre>
+</div>
+
+<p>
+<code>ag</code> (the silver searcher):
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-grep-ag-command        <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">~ag~ from "the-silver-searcher"</span>
+      <span style="color: #2aa198;">"ag --line-numbers -S --hidden --color --color-match '31;43' \</span>
+<span style="color: #2aa198;">          --nogroup %s %s %s"</span>)
+(<span style="color: #859900;">setq</span> helm-grep-ag-pipe-cmd-switches '(<span style="color: #2aa198;">"--color-match '31;43'"</span>))
+</pre>
+</div>
+
+<p>
+<code>rg</code> (riggrep):
+</p>
+<pre class="example">
+(setq helm-grep-ag-command        ;; ~rg (ripgrep)~
+      "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s")
+(setq helm-grep-ag-pipe-cmd-switches
+      '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'"))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf55cda5" class="outline-4">
+<h4 id="orgf55cda5"><span class="section-number-4">1.3.4</span> programming supports</h4>
+<div class="outline-text-4" id="text-1-3-4">
+</div>
+<div id="outline-container-orgb82df00" class="outline-5">
+<h5 id="orgb82df00"><span class="section-number-5">1.3.4.1</span> use helm for fuzzy matching of <code>semantic</code> or <code>imenu</code> to summary C/C++ definitions</h5>
+<div class="outline-text-5" id="text-1-3-4-1">
+<p>
+Keybinding: <code>&lt;helm-prefix&gt; i</code>
+Command: <code>helm-semantic-or-imenu</code>
+</p>
+
+<p>
+This function supports most programming languages, not only C/C++. Note that, to
+use <code>semantic</code>, we need to turn on the CEDET's <b>semantics</b> module.  We control
+the feature on <code>semantic</code> by the constant <code>*enable-semantics*</code> defined in
+<code>init-features.el</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+(<span style="color: #859900;">with-eval-after-load</span> 'helm-semantic      <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">default: C, python, elisp</span>
+  (<span style="color: #859900;">push</span> '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (<span style="color: #859900;">push</span> '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (<span style="color: #859900;">push</span> '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+  (nbutlast helm-semantic-display-style 2)) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">remove the default elisp setting</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2ecc4e7" class="outline-4">
+<h4 id="org2ecc4e7"><span class="section-number-4">1.3.5</span> use helm for Emcas Help page</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+Use helm to show help doc (<code>C-h a</code>): <code>&lt;helm-prefix&gt; a</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for Emacs help functions</span>
+(<span style="color: #859900;">setq</span> helm-apropos-fuzzy-match t)
+</pre>
+</div>
+
+<p>
+Use helm to show info: <code>&lt;helm-prefix&gt; h &lt;key&gt;</code> (<code>&lt;key&gt;</code>: <code>g, i, r</code>)
+</p>
+
+<p>
+Use helm to do completion for Lisp: <code>&lt;helm-prefix&gt; &lt;tab&gt;</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> helm-lisp-fuzzy-completion t)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org12313cd" class="outline-4">
+<h4 id="org12313cd"><span class="section-number-4">1.3.6</span> use helm to run system commands</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+List of supported commands:
+</p>
+<ul class="org-ul">
+<li><code>man</code></li>
+<li><code>find</code></li>
+<li><code>locate</code></li>
+<li><code>top</code></li>
+<li><code>calc</code></li>
+</ul>
+
+<p>
+Use helm to quick-jump to any <code>man</code> entry: <code>&lt;helm-prefix&gt; m</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for system man page</span>
+(<span style="color: #859900;">when</span> (string-equal system-type <span style="color: #2aa198;">"darwin"</span>)
+  (<span style="color: #859900;">setq</span> helm-man-format-switches <span style="color: #2aa198;">"%s"</span>))
+(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+</pre>
+</div>
+
+<p>
+Use Unix <code>find</code> in helm interface: <code>&lt;helm-prefix&gt; /</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm find</span>
+(global-set-key (kbd <span style="color: #2aa198;">"M-g /"</span>) 'helm-find)
+</pre>
+</div>
+
+<p>
+Use Unix <code>locate</code> in helm interface: <code>&lt;helm-prefix&gt; l</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">helm for system command "locate"</span>
+(<span style="color: #859900;">setq</span> helm-locate-fuzzy-match t)
+</pre>
+</div>
+
+<p>
+Show Unix <code>top</code> in helm interface: <code>&lt;helm-prefix&gt; t</code> <br />
+Functions:
+</p>
+<ul class="org-ul">
+<li><code>[C-c C-u]</code>  : refresh "helm-top"</li>
+<li><code>[M-c]</code>           : sort by <code>shell commands</code></li>
+<li><code>[M-p]</code>           : sort by <code>cpu usage</code></li>
+<li><code>[M-u]</code>           : sort by <code>user</code></li>
+<li><code>[M-m]</code>           : sort by <code>memory</code></li>
+</ul>
+
+<p>
+Use Unix GNU-calc command in helm interface: <code>&lt;helm-prefix&gt; C-,</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5489a5" class="outline-4">
+<h4 id="orgc5489a5"><span class="section-number-4">1.3.7</span> miscellanies</h4>
+<div class="outline-text-4" id="text-1-3-7">
+<p>
+Use helm to build regexp, test them interactively: <code>&lt;helm-prefix&gt; r</code>    <br />
+Functions:
+</p>
+<ul class="org-ul">
+<li><code>[F1]</code> save the regexp as a string in <code>kill-ring</code></li>
+<li><code>[F2]</code> invoke <code>query-replace</code> with curent regexp to be replace</li>
+<li><code>[F3]</code> save the regexp as is in the current helm prompt</li>
+</ul>
+
+<p>
+Quickly view and copy hexadecimal values of colors: <code>&lt;helm-prefix&gt; c</code>
+</p>
+
+<p>
+Instant eval Emacs Lisp expression in helm buffer: <code>&lt;helm-prefix&gt; C-:</code>
+</p>
+<pre class="example">
+(global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7077be1" class="outline-3">
+<h3 id="org7077be1"><span class="section-number-3">1.4</span> Summary of Keybindings</h3>
+<div class="outline-text-3" id="text-1-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keybindings</th>
+<th scope="col" class="org-left">Commands</th>
+<th scope="col" class="org-left">Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>M-x</code></td>
+<td class="org-left">helm-M-x</td>
+<td class="org-left">List commands</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-y</code></td>
+<td class="org-left">helm-show-kill-ring</td>
+<td class="org-left">Shows the content of the kill ring</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x b</code></td>
+<td class="org-left">helm-mini</td>
+<td class="org-left">Shows open buffers, recently opened files</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x C-f</code></td>
+<td class="org-left">helm-find-files</td>
+<td class="org-left">The helm version for find-file</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-s</code></td>
+<td class="org-left">helm-ff-run-grep</td>
+<td class="org-left">Run grep from within helm-find-files</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-o</code></td>
+<td class="org-left">Switch between Helm sources in helm session</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h i</code></td>
+<td class="org-left">helm-semantic-or-imenu</td>
+<td class="org-left">Helm interface to semantic/imenu</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h m</code></td>
+<td class="org-left">helm-man-woman</td>
+<td class="org-left">Jump to any man entry</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h /</code></td>
+<td class="org-left">helm-find</td>
+<td class="org-left">Helm interface to find</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h l</code></td>
+<td class="org-left">helm-locate</td>
+<td class="org-left">Helm interface to locate</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h o</code></td>
+<td class="org-left">helm-occur</td>
+<td class="org-left">Similar to occur</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h a</code></td>
+<td class="org-left">helm-apropos</td>
+<td class="org-left">Describes commands, functions, variables</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h h g</code></td>
+<td class="org-left">helm-info-gnus</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h h i</code></td>
+<td class="org-left">helm-info-at-point</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h h r</code></td>
+<td class="org-left">helm-info-emacs</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h &lt;tab&gt;</code></td>
+<td class="org-left">helm-lisp-completion-at-point</td>
+<td class="org-left">Provides a list of available functions</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h b</code></td>
+<td class="org-left">helm-resume</td>
+<td class="org-left">Resumes a previous helm session</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-h SPC</code></td>
+<td class="org-left">helm-all-mark-rings</td>
+<td class="org-left">Views content of local and global mark rings</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h r</code></td>
+<td class="org-left">helm-regex</td>
+<td class="org-left">Visualizes regex matches</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h x</code></td>
+<td class="org-left">helm-register</td>
+<td class="org-left">Shows content of registers</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h t</code></td>
+<td class="org-left">helm-top</td>
+<td class="org-left">Helm interface to top</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h s</code></td>
+<td class="org-left">helm-surfraw</td>
+<td class="org-left">Command line interface to many web search engines</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h g</code></td>
+<td class="org-left">helm-google-suggest</td>
+<td class="org-left">Interactively enter search terms and get results from Google in helm buffer</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h c</code></td>
+<td class="org-left">helm-color</td>
+<td class="org-left">Lists all available faces</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h M-:</code></td>
+<td class="org-left">helm-eval-expression-with-eldoc</td>
+<td class="org-left">Get instant results for Emacs lisp expressions in the helm buffer</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c h C-,</code></td>
+<td class="org-left">helm-calcul-expression</td>
+<td class="org-left">Helm interface to calc</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c C-l</code></td>
+<td class="org-left">helm-eshell-history</td>
+<td class="org-left">Interface to eshell history</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c C-l</code></td>
+<td class="org-left">helm-comint-input-ring</td>
+<td class="org-left">Interface to shell history</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c C-l</code></td>
+<td class="org-left">helm-mini-buffer-history</td>
+<td class="org-left">Interface to mini-buffer history</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org83bef53" class="outline-2">
+<h2 id="org83bef53"><span class="section-number-2">2</span> Helm-Swoop: more powerful helm-occur</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org073bcf9" class="outline-3">
+<h3 id="org073bcf9"><span class="section-number-3">2.1</span> Install packages on Emacs</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Adding a header for the exported <code>.el</code> file.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Settings for /helm-swoop/</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+</pre>
+</div>
+
+<p>
+Install the additional packages to support the <code>helm-swoop</code> package
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/helm-swoop-packages
+      '(helm-swoop))
+(custom/install-packages custom/helm-swoop-packages)
+
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-swoop</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd50b22b" class="outline-3">
+<h3 id="orgd50b22b"><span class="section-number-3">2.2</span> Keybindings</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Basic keybindings that globally call <code>helm-swoop</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Change the keybinds to whatever you like :)</span>
+(global-set-key (kbd <span style="color: #2aa198;">"M-g i"</span>) 'helm-swoop)    <span style="color: #93a1a1; font-style: italic;">; </span><span style="color: #93a1a1; font-style: italic;">default "M-i"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c h o"</span>) 'helm-swoop)
+(global-set-key (kbd <span style="color: #2aa198;">"M-g I"</span>) 'helm-swoop-back-to-last-point) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "M-I"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-c M-i"</span>) 'helm-multi-swoop) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "C-c M-i"</span>
+(global-set-key (kbd <span style="color: #2aa198;">"C-x M-i"</span>) 'helm-multi-swoop-all) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">default "C-x M-i"</span>
+</pre>
+</div>
+
+<p>
+More keybindings that work in the sessions of <code>helm-swoop</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">When doing isearch, hand the word over to helm-swoop</span>
+(define-key isearch-mode-map (kbd <span style="color: #2aa198;">"M-i"</span>) 'helm-swoop-from-isearch)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">From helm-swoop to helm-multi-swoop-all</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"M-i"</span>) 'helm-multi-swoop-all-from-helm-swoop)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">When doing evil-search, hand the word over to helm-swoop</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)</span>
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Instead of helm-multi-swoop-all, use helm-multi-swoop-current-mode</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"M-m"</span>)
+  'helm-multi-swoop-current-mode-from-helm-swoop)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Move up and down like isearch</span>
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"C-r"</span>) 'helm-previous-line)
+(define-key helm-swoop-map (kbd <span style="color: #2aa198;">"C-s"</span>) 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd <span style="color: #2aa198;">"C-r"</span>) 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd <span style="color: #2aa198;">"C-s"</span>) 'helm-next-line)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdead47" class="outline-3">
+<h3 id="orgfdead47"><span class="section-number-3">2.3</span> Configurations on Features</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Save buffer when helm-multi-swoop-edit complete</span>
+(<span style="color: #859900;">setq</span> helm-multi-swoop-edit-save t)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">If this value is t, split window inside the current window</span>
+(<span style="color: #859900;">setq</span> helm-swoop-split-with-multiple-windows nil)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Split direcion. 'split-window-vertically or 'split-window-horizontally</span>
+(<span style="color: #859900;">setq</span> helm-swoop-split-direction 'split-window-vertically)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">If nil, you can slightly boost invoke speed in exchange for text color</span>
+(<span style="color: #859900;">setq</span> helm-swoop-speed-or-color t)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">;; Go to the opposite side of line from the end or beginning of line</span>
+(<span style="color: #859900;">setq</span> helm-swoop-move-to-line-cycle t)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Optional face for line numbers</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Face name is `helm-swoop-line-number-face`</span>
+(<span style="color: #859900;">setq</span> helm-swoop-use-line-number-face t)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd229348" class="outline-2">
+<h2 id="orgd229348"><span class="section-number-2">3</span> Exploring large projects with Projectile and Helm Projectile</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org678bcf4" class="outline-3">
+<h3 id="org678bcf4"><span class="section-number-3">3.1</span> Install Emacs packages</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Adding a header for the exported <code>.el</code> file.
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Project Management via Projectile</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">===============================================================</span>
+</pre>
+</div>
+
+<p>
+Install the additional packages to support the <code>helm-projectile</code> package
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/proj-packages
+      '(projectile
+        helm-projectile))
+(custom/install-packages custom/proj-packages)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c02c5c" class="outline-3">
+<h3 id="org8c02c5c"><span class="section-number-3">3.2</span> Package: <code>projectile</code></h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/projectile/: project management</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">projectile</span>)
+(projectile-global-mode)
+(<span style="color: #859900;">setq</span> projectile-enable-caching t)
+</pre>
+</div>
+
+<p>
+To refresh the whole cache, use <code>projectile-invalidate-cahe</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org115c600" class="outline-3">
+<h3 id="org115c600"><span class="section-number-3">3.3</span> Package: <code>helm-proctile</code></h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org1f34b63" class="outline-4">
+<h4 id="org1f34b63"><span class="section-number-4">3.3.1</span> Enable helm-projectile</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">/helm-projectile/: browse via helm</span>
+(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-projectile</span>)
+(helm-projectile-on)
+(<span style="color: #859900;">setq</span> projectile-completion-system 'helm)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org14768fe" class="outline-4">
+<h4 id="org14768fe"><span class="section-number-4">3.3.2</span> Basic commands</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<ul class="org-ul">
+<li><code>helm-projectile-switch-project</code>         : <code>C-c p p</code></li>
+<li><code>helm-projectile-find-file</code>              : <code>C-c p f</code></li>
+<li><code>helm-projectile-find-file-dwim</code>         : <code>C-c p g</code></li>
+<li><code>helm-projectile-fi-other-file</code>        : <code>C-c p a</code></li>
+<li>Virtual directory manager
+<ul class="org-ul">
+<li>create a Dired buffer of project files : <code>C-c f</code></li>
+<li>add more files to the Dired buffer     : <code>C-c a</code></li>
+</ul></li>
+<li><code>helm-projectile-ack</code>                    : <code>C-c p s a</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd30c42e" class="outline-4">
+<h4 id="orgd30c42e"><span class="section-number-4">3.3.3</span> All-in-one command</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<p>
+<span class="underline">Command</span>: <code>helm-projectile</code>, <code>C-c p h</code>
+</p>
+
+<p>
+<span class="underline">Usage</span>: this command, by default, is the combination of these 5 commands:
+</p>
+
+<ul class="org-ul">
+<li><code>helm-projectile-switch-to-buffer</code></li>
+<li><code>helm-projectile-find-file</code></li>
+<li><code>helm-projectile-switch-project</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org835eaa4" class="outline-4">
+<h4 id="org835eaa4"><span class="section-number-4">3.3.4</span> Enter project portal</h4>
+<div class="outline-text-4" id="text-3-3-4">
+<p>
+<span class="underline">Command</span>: <code>helm-projectile-switch-project</code>, <code>C-c p p</code>
+</p>
+
+<p>
+<span class="underline">Usage</span>: This is the very first command you need to use before using other
+commands, because it is the entrance to all of your projects and the only
+command that can be used outside of a project, aside from
+<code>helm-projectile-find-file-in-known-projects</code>. The command lists all visited
+projects. If you first use Projectile, you have to visit at least a project
+supported by Projectile to let it remember the location of this project. The
+next time you won't have to manually navigate to that project but jump to it
+instantly using <code>helm-projectile-switch-project</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">setq</span> projectile-switch-project-action 'helm-projectile)
+</pre>
+</div>
+
+<p>
+List of actions in the session:
+</p>
+<ul class="org-ul">
+<li>open Dired in project's directory:      <code>C-d</code></li>
+<li>open project root in vc-dir or magit:   <code>M-g</code></li>
+<li>switch to Esell; open a project Eshell: <code>M-e</code></li>
+<li>grep in projects (prefix <code>C-u</code> to recursive grep):  <code>C-s</code></li>
+<li>compile project, run <code>compile</code> at the project root: <code>C-c</code></li>
+<li>remove projects (delete marked projects from the list of known projects): <code>M-D</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6fc8164" class="outline-4">
+<h4 id="org6fc8164"><span class="section-number-4">3.3.5</span> File management</h4>
+<div class="outline-text-4" id="text-3-3-5">
+</div>
+<div id="outline-container-org93c3ff8" class="outline-5">
+<h5 id="org93c3ff8"><span class="section-number-5">3.3.5.1</span> Command: <code>helm-projectile-find-file</code>, <code>C-c p f</code></h5>
+<div class="outline-text-5" id="text-3-3-5-1">
+<p>
+<span class="underline">Usage</span>: This command lists all files in a project for users to narrow down to
+wanted files. Some frequently used actions that cover open, rename, copy,
+delete,search and other miscelaneous operations. Once you mastered the actions
+of helm-projectile-find-file, you master the actions of other commands as well
+since the actions of other commands are just a subset of
+helm-projectile-find-file actions. All the key bindings associated with actions
+are only available while a Helm buffer is active. You can think of actions as an
+mini version of M-x: only applicable commands are listed, and even those
+commands have key bindings. Prefix argument can be applied, when possible.
+</p>
+
+<p>
+<b>Open</b>
+</p>
+<ul class="org-ul">
+<li>Find file: <code>RET</code> to open files; <code>M-SPC</code> to mark files; <code>M-a</code> to mark all</li>
+<li>Find file other window: <code>C-c o</code></li>
+<li>Find file as root: <code>C-c r</code></li>
+</ul>
+
+<p>
+<b>Move and Reanme</b>
+</p>
+<ul class="org-ul">
+<li>Rename files: <code>M-R</code>; <code>M-SPC</code> to mark files</li>
+</ul>
+
+<p>
+<b>Copy and Delete</b>
+</p>
+<ul class="org-ul">
+<li>Copy files: <code>M-C</code></li>
+<li>Delete files: <code>M-D</code> or <code>C-c d</code></li>
+</ul>
+
+<p>
+<b>Search and Replace</b>
+</p>
+<ul class="org-ul">
+<li>Grep files: <code>C-s</code> (add prefix <code>C-u</code> for resursive grep)</li>
+<li>Zgrep: <code>M-g z</code> (add prefix <code>C-u</code> for resursive grep), invoking grep on cpmressed files</li>
+<li>Locate (using Unix <code>locate</code>): <code>C-x C-f</code> (add <code>C-u</code> to specify locate db)</li>
+</ul>
+
+<p>
+<b>Miscellanies</b>
+</p>
+<ul class="org-ul">
+<li>Insert as org link (C-c @): Insert the current file that highlighted as an Org link.</li>
+<li>Ediff files: <code>C-=</code></li>
+<li>Ediff Merge files: <code>C-c =</code>, when exactly two files are selected</li>
+<li>Etags: <code>M-.</code>, invoking Etags using helm</li>
+<li>Switch to Eshell: <code>M-e</code></li>
+<li>Eshell command on files: <code>M-!</code></li>
+<li>Symlink files: <code>M-S</code>, using absolute path</li>
+<li>Relsymlink files: using relative path</li>
+<li>Hardlink files: <code>M-H</code></li>
+<li>Checksum file: generate file checksum and insert checksum in <code>kill-ring</code></li>
+<li>Print file: <code>C-c p</code> (add <code>C-u</code> to refresh)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8c04bc7" class="outline-5">
+<h5 id="org8c04bc7"><span class="section-number-5">3.3.5.2</span> Command: <code>helm-projectile-find-file-in-known-projects</code>, <code>C-c p F</code></h5>
+</div>
+
+<div id="outline-container-org5e249d5" class="outline-5">
+<h5 id="org5e249d5"><span class="section-number-5">3.3.5.3</span> Command: <code>helm-projectile-find-file-dwim</code>, <code>C-c p g</code></h5>
+</div>
+
+<div id="outline-container-orgddeae70" class="outline-5">
+<h5 id="orgddeae70"><span class="section-number-5">3.3.5.4</span> Command: <code>helm-projectile-find-dir</code>, <code>C-c p d</code></h5>
+<div class="outline-text-5" id="text-3-3-5-4">
+<ul class="org-ul">
+<li>open Dired in project's directory</li>
+<li>switch to Eshell: <code>M-e</code></li>
+<li>grep in projects: <code>C-s</code> (add prefix <code>C-u</code> for recurse grep)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org390a726" class="outline-5">
+<h5 id="org390a726"><span class="section-number-5">3.3.5.5</span> Command: <code>helm-projectile-recentf</code>, <code>C-c p e</code></h5>
+</div>
+
+<div id="outline-container-orgeaddbe0" class="outline-5">
+<h5 id="orgeaddbe0"><span class="section-number-5">3.3.5.6</span> Command: <code>helm-projectile-find-other-file</code>, <code>C-c p a</code></h5>
+<div class="outline-text-5" id="text-3-3-5-6">
+<p>
+<span class="underline">Usage</span>: switch between files with the same name but different extensions.  With
+prefix argument <code>C-u</code>, enable flex-matching that match any file that contains
+contains the name of current file.
+</p>
+
+<p>
+<span class="underline">Variable</span>: <code>projectile-other-file-alist</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">adding the switch between html &lt;-&gt; js</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">html -&gt; js</span>
+(add-to-list 'projectile-other-file-alist '(<span style="color: #2aa198;">"html"</span> <span style="color: #2aa198;">"js"</span>))
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">js -&gt; html</span>
+(add-to-list 'projectile-other-file-alist '(<span style="color: #2aa198;">"js"</span> <span style="color: #2aa198;">"html"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org900b9f9" class="outline-5">
+<h5 id="org900b9f9"><span class="section-number-5">3.3.5.7</span> [IMPORTANT] Caching</h5>
+<div class="outline-text-5" id="text-3-3-5-7">
+<ul class="org-ul">
+<li>command: <code>projectile-invalidate-cache</code>, <code>C-c p i</code></li>
+<li>command: <code>projectile-cache-current-file</code>, <code>C-c p z</code></li>
+<li>command: <code>projectile-purge-file-from-cache</code></li>
+<li>command: <code>projectile-purge-dir-from-cache</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3864504" class="outline-4">
+<h4 id="org3864504"><span class="section-number-4">3.3.6</span> Virtual directory manager</h4>
+<div class="outline-text-4" id="text-3-3-6">
+<p>
+When in a <b>helm-projectile-find-file</b> session:
+</p>
+<ul class="org-ul">
+<li>create Dired buffer from files: <code>C-c f</code></li>
+<li>add files to Dired buffer: <code>C-c a</code></li>
+<li>remove entry from from Dired buffer: <code>C-c d</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfc9ffe0" class="outline-4">
+<h4 id="orgfc9ffe0"><span class="section-number-4">3.3.7</span> Buffer management:</h4>
+<div class="outline-text-4" id="text-3-3-7">
+<p>
+<span class="underline">Command</span>: <code>helm-projectile-switch-project</code> <code>C-c p b</code>
+</p>
+
+<p>
+<span class="underline">Usage</span>: List all opened buffers in current project. The command has a similar
+subset of actions in <code>helm-projectile-find-file</code>, so once you mastered the
+actions in <code>helm-projectile-find-file</code>, except instead of opening files, you
+open buffers instead.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org34f8966" class="outline-4">
+<h4 id="org34f8966"><span class="section-number-4">3.3.8</span> Search in project</h4>
+<div class="outline-text-4" id="text-3-3-8">
+</div>
+<div id="outline-container-orgf7fd082" class="outline-5">
+<h5 id="orgf7fd082"><span class="section-number-5">3.3.8.1</span> Command: <code>helm-projectile-grep</code>, <code>C-c p s g</code></h5>
+<div class="outline-text-5" id="text-3-3-8-1">
+<p>
+This is a replacement command for <code>projectile-grep</code> that uses Helm
+interface. When a symbol is at point, this command uses that symbol and search
+at project root for every occurrence of this symbol in all non-ignored files in
+project. If a region is active, use the region instead.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(eval-after-load 'grep
+  '(when (boundp 'grep-find-ignored-files)
+     (add-to-list 'grep-find-ignored-files <span style="color: #2aa198;">"run"</span>)
+     (add-to-list 'grep-find-ignored-directories <span style="color: #2aa198;">"obj"</span>)))
+</pre>
+</div>
+
+<p>
+<span class="underline">Configuration</span>:
+</p>
+
+<p>
+You can specify directory to exclude when searching by customize either one of
+these variables:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>: list of file names which rgrep and lgrep shall
+exclude. <code>helm-projectile-grep</code> also uses this variable.</li>
+
+<li><code>grep-find-ignored-directories</code>: list of names of sub-directories which
+rgrep shall not recurse into. <code>helm-projectile-grep</code> also uses this variable.</li>
+
+<li><code>projectile-globally-ignored-files</code>: list of files globally ignored by
+Projectile.</li>
+
+<li><code>projectile-globally-ignored-directories</code>: list of directories globally
+ignored by Projectile.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org87e96ec" class="outline-5">
+<h5 id="org87e96ec"><span class="section-number-5">3.3.8.2</span> Command: <code>helm-projectile-ack</code>, <code>C-c p s a</code></h5>
+<div class="outline-text-5" id="text-3-3-8-2">
+<p>
+<span class="underline">Configuration</span>:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>: list of file names which rgrep and lgrep shall
+exclude, and <code>helm-projectile-ack</code> also uses this variable.</li>
+
+<li><code>grep-find-ignored-directories</code>: list of names of sub-directories which
+rgrep shall not recurse into. <code>helm-projectile-ack</code> also uses this variable.</li>
+
+<li><code>projectile-globally-ignored-files</code>: a list of files globally ignored by
+Projectile.</li>
+
+<li><code>projectile-globally-ignored-directories</code>: a list of directories globally
+ignored by Projectile.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org937601c" class="outline-5">
+<h5 id="org937601c"><span class="section-number-5">3.3.8.3</span> Command: <code>helm-projectile-ag</code>, <code>C-c p s s</code></h5>
+<div class="outline-text-5" id="text-3-3-8-3">
+<p>
+<span class="underline">Configuration</span>:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>: list of file names which rgrep and lgrep shall
+exclude, and <code>helm-projectile-ack</code> also uses this variable.</li>
+
+<li><code>grep-find-ignored-directories</code>: list of names of sub-directories which
+rgrep shall not recurse into. <code>helm-projectile-ack</code> also uses this variable.</li>
+
+<li><code>projectile-globally-ignored-files</code>: a list of files globally ignored by
+Projectile.</li>
+
+<li><code>projectile-globally-ignored-directories</code>: a list of directories globally
+ignored by Projectile.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Ignore files/directories</span>
+(add-to-list 'projectile-globally-ignored-files <span style="color: #2aa198;">"*.out"</span>)
+(add-to-list 'projectile-globally-ignored-files <span style="color: #2aa198;">".DS_Store"</span>)
+(add-to-list 'projectile-globally-ignored-directories <span style="color: #2aa198;">".git"</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">retore projectile's native indexing (fix the bug of disabling .projectile)</span>
+(<span style="color: #859900;">setq</span> projectile-indexing-method 'native)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd4a97e3" class="outline-4">
+<h4 id="orgd4a97e3"><span class="section-number-4">3.3.9</span> Summary of keybindings</h4>
+<div class="outline-text-4" id="text-3-3-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keybindings</th>
+<th scope="col" class="org-left">Commands</th>
+<th scope="col" class="org-left">Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-c p h</code></td>
+<td class="org-left">helm-projectile</td>
+<td class="org-left">Helm interface to projectile</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p p</code></td>
+<td class="org-left">helm-projectile-switch-project</td>
+<td class="org-left">Switches to another projectile project</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p f</code></td>
+<td class="org-left">helm-projectile-find-file</td>
+<td class="org-left">Lists all files in a project</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p F</code></td>
+<td class="org-left">helm-projectile-find-file-in-known-projects</td>
+<td class="org-left">Find file in all known projects</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p g</code></td>
+<td class="org-left">helm-projectile-find-file-dwim</td>
+<td class="org-left">Find file based on context at point</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p d</code></td>
+<td class="org-left">helm-projectile-find-dir</td>
+<td class="org-left">Lists available directories in current project</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p e</code></td>
+<td class="org-left">helm-projectile-recentf</td>
+<td class="org-left">Lists recently opened files in current project</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p a</code></td>
+<td class="org-left">helm-projectile-find-other-file</td>
+<td class="org-left">Switch between files with same name but different extensions</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p i</code></td>
+<td class="org-left">projectile-invalidate-cache</td>
+<td class="org-left">Invalidate cache</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p z</code></td>
+<td class="org-left">projectile-cache-current-file</td>
+<td class="org-left">Add the file of current selected buffer to cache</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p b</code></td>
+<td class="org-left">helm-projectile-switch-to-buffer</td>
+<td class="org-left">List all open buffers in current project</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p s g</code></td>
+<td class="org-left">helm-projectile-grep</td>
+<td class="org-left">Searches for symbol starting from project root</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p s a</code></td>
+<td class="org-left">helm-projectile-ack</td>
+<td class="org-left">Same as above but using ack</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-c p s s</code></td>
+<td class="org-left">helm-projectile-ag</td>
+<td class="org-left">Same as above but using ag</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org48f9544" class="outline-4">
+<h4 id="org48f9544"><span class="section-number-4">3.3.10</span> Suppress warnings from project-local variables</h4>
+<div class="outline-text-4" id="text-3-3-10">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Safe Variable Declaration (suppress warnings)</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">(add-to-list 'safe-local-variable-values</span>
+<span style="color: #93a1a1; font-style: italic;">;;              </span><span style="color: #93a1a1; font-style: italic;">'(project-local-include-path . ("-I./include" "-I./src")))</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4b615f9" class="outline-2">
+<h2 id="org4b615f9"><span class="section-number-2">4</span> Source code navigation via GNU Global with helm interface</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgd581616" class="outline-3">
+<h3 id="orgd581616"><span class="section-number-3">4.1</span> Requirements</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-orgd7e4724" class="outline-4">
+<h4 id="orgd7e4724"><span class="section-number-4">4.1.1</span> Emacs packages</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Tag Supports in Programming Environement</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================================</span>
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Install required packages for more functions</span>
+(<span style="color: #859900;">setq</span> custom/gtags-packages
+      '(helm-gtags))
+(custom/install-packages custom/gtags-packages)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2bf653c" class="outline-4">
+<h4 id="org2bf653c"><span class="section-number-4">4.1.2</span> System commandline tools</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+The tagging system we used is <code>GNU global</code> with <code>ctags &amp; pygments</code> supports. To
+install <code>global</code>:
+</p>
+<ul class="org-ul">
+<li>OS X: <code>brew install global --with-ctags --with-pygments</code></li>
+<li>Arch Linux: <code>pacman -S ctags python-pygments</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(setenv <span style="color: #2aa198;">"GTAGSLABEL"</span> <span style="color: #2aa198;">"pygments"</span>)
+(setenv <span style="color: #2aa198;">"GTAGSLIBPATH"</span> (concat (getenv <span style="color: #2aa198;">"HOME"</span>) <span style="color: #2aa198;">"/.gtags/"</span>)) <span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">if tag system libs</span>
+</pre>
+</div>
+
+<p>
+To create tags, choose either way as follows:
+</p>
+<ul class="org-ul">
+<li>console: <code>gtags --gtagslabel=pygments</code> (no option if set env var)</li>
+<li>helm-gtags: <code>helm-gtags-create-tags</code> (<code>C-c g c</code>)</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org56e8efa" class="outline-3">
+<h3 id="org56e8efa"><span class="section-number-3">4.2</span> Frontend via helm-gtags</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-org84ae0d0" class="outline-4">
+<h4 id="org84ae0d0"><span class="section-number-4">4.2.1</span> Basic settings</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">require</span> '<span style="color: #2aa198;">helm-gtags</span>)
+(<span style="color: #859900;">setq</span> helm-gtags-ignore-case             t
+      helm-gtags-auto-update             t
+      helm-gtags-use-input-at-cursor     t
+      helm-gtags-pulse-at-cursor         t
+      helm-gtags-prefix-key              <span style="color: #2aa198;">"\C-cg"</span>
+      helm-gtags-suggested-key-mapping   t)
+
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">Enable helm-gtags mode</span>
+(add-hook 'dired-mode-hook 'helm-gtags-mode)
+(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+(add-hook 'makefile-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook 'helm-gtags-mode)
+(add-hook 'matlab-mode-hook 'helm-gtags-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org384edd7" class="outline-4">
+<h4 id="org384edd7"><span class="section-number-4">4.2.2</span> Keybindings</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+Jumps through definitions, references, symbols or DWIM:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"M-."</span>) 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"M-,"</span>) 'helm-gtags-pop-stack)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"M-t"</span>) 'helm-gtags-find-tag)    <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">(definitions)</span>
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"M-r"</span>) 'helm-gtags-find-rtag)   <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">(references)</span>
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"M-s"</span>) 'helm-gtags-find-symbol) <span style="color: #93a1a1; font-style: italic;">;</span><span style="color: #93a1a1; font-style: italic;">(symbols)</span>
+</pre>
+</div>
+
+<p>
+Show list of tags in different scopes: project, file, function:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g s"</span>) 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g f"</span>) 'helm-gtags-parse-file)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g a"</span>) 'helm-gtags-tags-in-this-function)
+</pre>
+</div>
+
+<p>
+Jumping over history/stacks:
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g ["</span>) 'helm-gtags-previous-history)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g ]"</span>) 'helm-gtags-next-history)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g h"</span>) 'helm-gtags-show-stack)
+</pre>
+</div>
+
+<p>
+Create/update tags:
+(Note: prefix "C-u" update the whole project, instead of the current file)
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g c"</span>) 'helm-gtags-create-tags)
+(define-key helm-gtags-mode-map (kbd <span style="color: #2aa198;">"C-c g u"</span>) 'helm-gtags-update-tags)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5c6b694" class="outline-3">
+<h3 id="org5c6b694"><span class="section-number-3">4.3</span> More on source code navigation by tuhdo.github.io</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+<a href="http://tuhdo.github.io/c-ide.html">http://tuhdo.github.io/c-ide.html</a>
+</p>
+
+<p>
+Basic concepts of tag files:
+</p>
+<ul class="org-ul">
+<li><code>GTAGS</code>:  definition database</li>
+<li><code>GRTAGS</code>: reference database</li>
+<li><code>GPATH</code>:  path name database</li>
+</ul>
+
+<p>
+Find definitions in project:
+</p>
+<ul class="org-ul">
+<li><code>helm-gtags-dwim</code>: jump to a reference/tag definition/header</li>
+<li><code>tags-loop-continue</code>: jump back to original location</li>
+<li><code>helm-gtags-select</code>: use helm to display all available tags in a project and
+incrementally filtering</li>
+</ul>
+
+<p>
+Find references in project:
+</p>
+<ul class="org-ul">
+<li><code>helm-gtags-dwim</code> or <code>helm-gtags-find-rtags</code>: find references to functions only</li>
+<li><code>helm-gtags-find-symbol</code>: find references to variables</li>
+</ul>
+
+<p>
+Find functions that current functions call:
+</p>
+<ul class="org-ul">
+<li><code>helm-gtags-tags-in-this-function</code>: list all the functions that the current
+function that point is inside calls</li>
+</ul>
+
+<p>
+Find files in project:
+</p>
+<ul class="org-ul">
+<li><code>helm-gtags-find-files</code>: find files matching regexp. (If point is on an
+included header file, <code>helm-gtags-dwim</code> automatically jumps to files)</li>
+</ul>
+
+<p>
+View visited tags with tag stack:
+</p>
+<ul class="org-ul">
+<li><code>helm-gtags-show-stack</code>: show visited tags from newest to oldest, from top to
+bottom.</li>
+</ul>
+
+<p>
+Show outline tree of definitions in current buffer via <code>function-args</code>
+</p>
+<ul class="org-ul">
+<li><code>moo-jump-local</code> (<code>C-M-j</code>): shows an outline tree of the current buffer</li>
+<li><code>moo-jump-directory</code> (<code>C-M-k</code>): show outline of the whole folder</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga8fe44c" class="outline-2">
+<h2 id="orga8fe44c"><span class="section-number-2">5</span> End</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #859900;">provide</span> '<span style="color: #2aa198;">init-helm</span>)
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">================================================</span>
+<span style="color: #93a1a1; font-style: italic;">;; </span><span style="color: #93a1a1; font-style: italic;">init-helm.el ends here</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 20 Apr 2018</p>
+<p class="author">Author: Zuogong Yue</p>
+<p class="date">Created: 2018-04-30 Mon 18:31</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

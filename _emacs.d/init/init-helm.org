@@ -1,0 +1,884 @@
+#+TITLE:    The League of Helm and Project Managements
+#+AUTHOR:   Zuogong Yue
+#+EMAIL:    oracleyue@gmail.com
+#+DATE:     20 Apr 2018
+#+STARTUP:  indent
+#+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
+
+
+* Helm: the incremental completion framework
+
+** Requirements
+*** install software on the OS
+
+In order to use features on live grep (see Section: *use helm to find/open
+files*), you need to the following apps, if you need to use:
+- ~grep~: the default grep on Linux/Unix;
+- ~ack~ or ~ack-grep~: the improved grep (OS X: ~brew install ack~)
+- ~ag~: a faster grep from =the_silver_searcher= (OS X: ~brew install the_silver_searcher~)
+
+*** install packages on Emacs
+    Adding a header for the exported =.el= file.
+    #+BEGIN_SRC emacs-lisp
+      ;; ================================================================
+      ;; /Helm/ as the main completion system
+      ;; ================================================================
+    #+END_SRC
+
+    Install the additional packages to support the =helm= package
+    #+BEGIN_SRC emacs-lisp
+      (setq custom/helm-packages
+            '(helm
+              helm-swoop
+              projectile
+              helm-projectile
+              helm-gtags))
+      (custom/install-packages custom/helm-packages)
+    #+END_SRC
+
+** Basics configurations
+#+BEGIN_SRC emacs-lisp
+  ;; configuration for /helm/
+  (require 'helm)
+  (require 'helm-config)
+#+END_SRC
+
+#+BEGIN_WARNING
+=semantic-mode= in CEDET causes ~M-x gdb~ hangs emacs in Mac OS X!
+#+END_WARNING
+
+Since the default =C-x c= is quite close to =C-x C-c=, which quits Emacs.
+Changed to =C-c h= (labeled by =<helm-prefix>= in our later description). Note:
+We must set =C-c h= globally, because we cannot change =helm-command-prefix-key=
+once =helm-config= is loaded.
+
+List of basic keybindings in the helm sessions:
+- =<tab>=, =C-i= or =TAB=: run persistent actions;
+- =C-z=: list available actions;
+- =C-o=: switch between helm sources (e.g. jump from the historical list to the current list).
+
+#+BEGIN_SRC emacs-lisp
+  ;; Basic keybinding:
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z") 'helm-select-action)
+
+#+END_SRC
+
+More basic settings and start =helm= mode:
+#+BEGIN_SRC emacs-lisp
+  ;; More basic settings:
+  (setq ;; open helm buffer inside current window, not occupy whole other window
+        helm-split-window-in-side-p           t
+        ;; move to end or beginning of source when reaching top or bottom of source.
+        helm-move-to-line-cycle-in-source     t
+        ;; search for library in `require' and `declare-function' sexp.
+        helm-ff-search-library-in-sexp        t
+        ;; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-scroll-amount                    8
+        ; helm-candidate-number-limit           500
+        ; helm-move-to-line-cycle-in-source     t
+        helm-ff-file-name-history-use-recentf t)
+
+  (helm-mode 1)
+#+END_SRC
+
+Control the way to split and resize the helm buffer window:
+#+BEGIN_SRC emacs-lisp
+  (setq ;; default way to split window
+        ; helm-split-window-default-side    'right
+        ;; adjust the max height for helm buffer
+        ; helm-autoresize-max-height 50
+        ;; auto-resize buffer to fit candidates (disble golden-ratio)
+        helm-autoresize-mode              t)
+#+END_SRC
+** Functionality
+*** enhance Emacs basic functionality
+**** use helm to run M-x
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+#+END_SRC
+
+**** use helm to deal with mini-buffer
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  ;; enable fuzzy matching
+  (setq helm-buffers-fuzzy-matching   t
+        helm-recentf-fuzzy-match      t)
+#+END_SRC
+
+**** use helm to find/open files
+
+Default keybinding: =<helm-prefix> C-x C-f=; in this session, =C-c i= will insert the
+current absolute path into the current buffer. Here we rebind the key to
+overwrite the default find file action. And by setting
+=helm-boring-file-regexp-list= to avoid showing useless temporary files.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  ;; skip meaningless files, e.g. .DS_Store
+  (setq helm-ff-skip-boring-files t)
+  (delete '"\\.bbl$" helm-boring-file-regexp-list)    ;show .bbl file
+  (add-to-list 'helm-boring-file-regexp-list "\\.DS_Store$")
+  (add-to-list 'helm-boring-file-regexp-list ".*\.synctex\.gz$")
+  (add-to-list 'helm-boring-file-regexp-list ".*\.url$")
+  (add-to-list 'helm-boring-file-regexp-list "\\.dropbox$")
+  (add-to-list 'helm-boring-file-regexp-list "Icon.*")
+  (add-to-list 'helm-boring-file-regexp-list "#.*#$")
+  (add-to-list 'helm-boring-file-regexp-list "\\.out$")
+#+END_SRC
+
+**** resume the previous helm session
+Keybinding: =<helm-prefix> b=
+
+**** use helm to show "occur" (see /helm-swoop/ for better functions)
+Keybinding: =<helm-prefix> M-s o=
+
+*** show history of ring, register and shell command
+**** use helm to show kill-ring
+This is to list all entries in the king ring that are available for =C-y=.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+#+END_SRC
+
+**** view the local/global mark rings in helm
+Default keybinding: =<helm-prefix> C-c SPC=
+#+BEGIN_SRC emacs-lisp
+  ;; use helm to show the mark-ring
+  (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "M-g SPC") 'helm-all-mark-rings)
+#+END_SRC
+
+**** use helm to view Emacs registers
+Keybinding: =<helm-prefix> C-x r i=
+
+Functions:
+-     =[F1]= insert register content into buffer
+-     =[F2]= append an active region to current content in highlighting register
+-     =[F3]= prepend an active region to current content in highlighting register
+
+#+BEGIN_SRC emacs-lisp
+  ;; use helm to show the register
+  (global-set-key (kbd "C-c h x") 'helm-register)
+#+END_SRC
+
+**** use helm to show /eshell/ command history
+#+BEGIN_SRC emacs-lisp
+  ;; use helm to show /eshell/ command history
+  (require 'helm-eshell)
+  (add-hook 'eshell-mode-hook #'(lambda ()
+     (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+#+END_SRC
+
+**** use helm to show /shell/ command history
+#+BEGIN_SRC
+  (define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
+#+END_SRC
+
+*** use live grep in helm
+
+Helm grep is a Helm implementation of the grep command, which searches a text
+file for lines matching a regular expression.
+
+Quick view of commands in the =C-x C-f= session:
+- =C-s= or =M-g s=: use ~grep/ack~ to match patterns in the current buffer;
+- =C-u C-s= or =C-u M-g s=: use ~grep/ack~ to match patterns any files with the
+  same extension in the current folder;
+- =M-g a=: use ~ag~ to match patterns in all files in the current folder.
+- =C-u M-g a=: select extension types before run ~ag~
+
+or, globally, use =M-g a= that run ~helm-do-grep-ag~.
+
+_Suggested practice_:
+- use ~ack~ (=C-s=) to grep files: the current file, or the files in the current
+  folder when the cursor is on the directory (i.e. the top line of
+  /helm-find-files/ buffer);
+- use ~ag~ (=M-g a=) to grep the directorzyue/ recursively grep all files in the
+  current directory
+- if you want to grep files with a specific extension, use =C-u C-s=.
+
+**** Usage
+From ~helm-find-files~ (=<helm-prefix> C-x C-f=), open the action menu with
+=C-z= and choose grep. A prefix argument will launch recursive grep.  You can
+also launch grep directly with =(C-u) C-s= or =(C-u) M-g s=
+(i.e. ~helm-ff-run-grep~) without switching to the action menu.
+
+#+BEGIN_SRC emacs-lisp
+  ;; set global-key for function: =M-g a= in session of =C-x C-f=
+  (global-set-key (kbd "M-g a") 'helm-do-grep-ag)
+#+END_SRC
+
+**** Marked files
+To grep marked files, just mark some files with =C-<space>= and launch
+grep. Marked files can be from different directories.
+
+**** Recursive
+Go to the root of the directory you want to grep in, then hit =C-z= to open the
+action menu and choose grep with a prefix argument (=C-u=).
+
+You will be prompted for types of files to search. Wildcard syntax like =\*.el=
+(which searches only files ending in =.el=) is allowed. With =ack-grep= you will
+be prompted instead for ack-grep types, see ack-grep documentation on how define
+types in your =.ackrc= file.
+
+By default, the extension of the file at point is used when the cursor is on a
+file name. If the cursor is at root of a directory, all the file name extensions
+found in the directory and not matching the variable ~grep-find-ignored-files~
+are inserted into the prompt.
+
+**** Highlight results
+By default, Helm applies its own highlights to matched items. However, it may be
+better to use the backend to highlight result with ANSI sequences.  This can be
+done by customizing the ~helm-grep-default-command~ variable.
+
+~grep~:
+#+BEGIN_SRC
+  (setq helm-grep-default-command   ;; ~grep~
+        "grep --color=always -d skip %e -n%cH -e %p %f"
+        helm-grep-default-recurse-command
+        "grep --color=always -d recurse %e -n%cH -e %p %f")
+#+END_SRC
+
+~ack~:
+#+BEGIN_SRC emacs-lisp
+(setq helm-grep-default-command     ;; ~ack~
+      "ack -Hn --color --smart-case --no-group %e %p %f"
+      helm-grep-default-recurse-command
+      "ack -H --color --smart-case --no-group %e %p %f")
+#+END_SRC
+
+~git-grep~:
+#+BEGIN_SRC emacs-lisp
+  (setq helm-ls-git-grep-command    ;; ~git-grep~
+        "git grep -n%cH --color=always --full-name -e %p %f")
+#+END_SRC
+
+~ag~ (the silver searcher):
+#+BEGIN_SRC emacs-lisp
+  (setq helm-grep-ag-command        ;; ~ag~ from "the-silver-searcher"
+        "ag --line-numbers -S --hidden --color --color-match '31;43' \
+            --nogroup %s %s %s")
+  (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
+#+END_SRC
+
+~rg~ (riggrep):
+#+BEGIN_SRC
+  (setq helm-grep-ag-command        ;; ~rg (ripgrep)~
+        "rg --color=always --colors 'match:fg:black' --colors 'match:bg:yellow' --smart-case --no-heading --line-number %s %s %s")
+  (setq helm-grep-ag-pipe-cmd-switches
+        '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'"))
+#+END_SRC
+
+*** programming supports
+**** use helm for fuzzy matching of =semantic= or =imenu= to summary C/C++ definitions
+Keybinding: =<helm-prefix> i=
+Command: ~helm-semantic-or-imenu~
+
+This function supports most programming languages, not only C/C++. Note that, to
+use =semantic=, we need to turn on the CEDET's *semantics* module.  We control
+the feature on =semantic= by the constant ~*enable-semantics*~ defined in
+=init-features.el=.
+
+#+BEGIN_SRC emacs-lisp
+  (setq helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match    t)
+  (with-eval-after-load 'helm-semantic      ;; default: C, python, elisp
+    (push '(c++-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (push '(c-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (push '(emacs-lisp-mode . semantic-format-tag-summarize) helm-semantic-display-style)
+    (nbutlast helm-semantic-display-style 2)) ;; remove the default elisp setting
+#+END_SRC
+
+*** use helm for Emcas Help page
+
+Use helm to show help doc (=C-h a=): =<helm-prefix> a=
+#+BEGIN_SRC emacs-lisp
+  ;; helm for Emacs help functions
+  (setq helm-apropos-fuzzy-match t)
+#+END_SRC
+
+Use helm to show info: =<helm-prefix> h <key>= (=<key>=: =g, i, r=)
+
+Use helm to do completion for Lisp: =<helm-prefix> <tab>=
+#+BEGIN_SRC emacs-lisp
+  (setq helm-lisp-fuzzy-completion t)
+#+END_SRC
+
+*** use helm to run system commands
+List of supported commands:
+- ~man~
+- ~find~
+- ~locate~
+- ~top~
+- ~calc~
+
+Use helm to quick-jump to any ~man~ entrzyue/ =<helm-prefix> m=
+#+BEGIN_SRC emacs-lisp
+  ;; helm for system man page
+  (when (string-equal system-type "darwin")
+    (setq helm-man-format-switches "%s"))
+  (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+#+END_SRC
+
+Use Unix ~find~ in helm interface: =<helm-prefix> /=
+#+BEGIN_SRC emacs-lisp
+  ;; helm find
+  (global-set-key (kbd "M-g /") 'helm-find)
+#+END_SRC
+
+Use Unix ~locate~ in helm interface: =<helm-prefix> l=
+#+BEGIN_SRC emacs-lisp
+  ;; helm for system command "locate"
+  (setq helm-locate-fuzzy-match t)
+#+END_SRC
+
+Show Unix ~top~ in helm interface: =<helm-prefix> t= \\
+Functions:
+-     =[C-c C-u]=  : refresh "helm-top"
+-     =[M-c]=           : sort by ~shell commands~
+-     =[M-p]=           : sort by ~cpu usage~
+-     =[M-u]=           : sort by ~user~
+-     =[M-m]=           : sort by ~memory~
+
+Use Unix GNU-calc command in helm interface: =<helm-prefix> C-,=
+*** miscellanies
+Use helm to build regexp, test them interactivelzyue/ =<helm-prefix> r=    \\
+Functions:
+-     =[F1]= save the regexp as a string in =kill-ring=
+-     =[F2]= invoke =query-replace= with curent regexp to be replace
+-     =[F3]= save the regexp as is in the current helm prompt
+
+Quickly view and copy hexadecimal values of colors: =<helm-prefix> c=
+
+Instant eval Emacs Lisp expression in helm buffer: =<helm-prefix> C-:=
+#+BEGIN_SRC
+  (global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
+#+END_SRC
+
+** Summary of Keybindings
+
+|---------------+---------------------------------------------+-----------------------------------------------------------------------------|
+| Keybindings   | Commands                                    | Descriptions                                                                |
+|---------------+---------------------------------------------+-----------------------------------------------------------------------------|
+| =M-x=         | helm-M-x                                    | List commands                                                               |
+| =M-y=         | helm-show-kill-ring                         | Shows the content of the kill ring                                          |
+| =C-x b=       | helm-mini                                   | Shows open buffers, recently opened files                                   |
+| =C-x C-f=     | helm-find-files                             | The helm version for find-file                                              |
+| =C-s=         | helm-ff-run-grep                            | Run grep from within helm-find-files                                        |
+| =C-o=         | Switch between Helm sources in helm session |                                                                             |
+| =C-c h i=     | helm-semantic-or-imenu                      | Helm interface to semantic/imenu                                            |
+| =C-c h m=     | helm-man-woman                              | Jump to any man entry                                                       |
+| =C-c h /=     | helm-find                                   | Helm interface to find                                                      |
+| =C-c h l=     | helm-locate                                 | Helm interface to locate                                                    |
+| =C-c h o=     | helm-occur                                  | Similar to occur                                                            |
+| =C-c h a=     | helm-apropos                                | Describes commands, functions, variables                                    |
+| =C-c h h g=   | helm-info-gnus                              |                                                                             |
+| =C-c h h i=   | helm-info-at-point                          |                                                                             |
+| =C-c h h r=   | helm-info-emacs                             |                                                                             |
+| =C-c h <tab>= | helm-lisp-completion-at-point               | Provides a list of available functions                                      |
+| =C-c h b=     | helm-resume                                 | Resumes a previous helm session                                             |
+| =C-h SPC=     | helm-all-mark-rings                         | Views content of local and global mark rings                                |
+| =C-c h r=     | helm-regex                                  | Visualizes regex matches                                                    |
+| =C-c h x=     | helm-register                               | Shows content of registers                                                  |
+| =C-c h t=     | helm-top                                    | Helm interface to top                                                       |
+| =C-c h s=     | helm-surfraw                                | Command line interface to many web search engines                           |
+| =C-c h g=     | helm-google-suggest                         | Interactively enter search terms and get results from Google in helm buffer |
+| =C-c h c=     | helm-color                                  | Lists all available faces                                                   |
+| =C-c h M-:=   | helm-eval-expression-with-eldoc             | Get instant results for Emacs lisp expressions in the helm buffer           |
+| =C-c h C-,=   | helm-calcul-expression                      | Helm interface to calc                                                      |
+| =C-c C-l=     | helm-eshell-history                         | Interface to eshell history                                                 |
+| =C-c C-l=     | helm-comint-input-ring                      | Interface to shell history                                                  |
+| =C-c C-l=     | helm-mini-buffer-history                    | Interface to mini-buffer history                                            |
+|---------------+---------------------------------------------+-----------------------------------------------------------------------------|
+
+
+* Helm-Swoop: more powerful helm-occur
+
+** Install packages on Emacs
+
+Adding a header for the exported =.el= file.
+#+BEGIN_SRC emacs-lisp
+  ;; ===============================================================
+  ;; Settings for /helm-swoop/
+  ;; ===============================================================
+#+END_SRC
+
+Install the additional packages to support the =helm-swoop= package
+#+BEGIN_SRC emacs-lisp
+  ;; Install required packages for more functions
+  (setq custom/helm-swoop-packages
+        '(helm-swoop))
+  (custom/install-packages custom/helm-swoop-packages)
+
+  (require 'helm-swoop)
+#+END_SRC
+
+** Keybindings
+
+Basic keybindings that globally call =helm-swoop=:
+
+#+BEGIN_SRC emacs-lisp
+  ;; Change the keybinds to whatever you like :)
+  (global-set-key (kbd "M-g o") 'helm-swoop)    ; default "M-i"
+  (global-set-key (kbd "C-c h o") 'helm-swoop)
+  (global-set-key (kbd "M-g O") 'helm-swoop-back-to-last-point) ;default "M-I"
+  (global-set-key (kbd "C-c M-o") 'helm-multi-swoop) ;default "C-c M-i"
+  (global-set-key (kbd "C-x M-o") 'helm-multi-swoop-all) ;default "C-x M-i"
+#+END_SRC
+
+More keybindings that work in the sessions of =helm-swoop=:
+
+#+BEGIN_SRC emacs-lisp
+  ;; When doing isearch, hand the word over to helm-swoop
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  ;; From helm-swoop to helm-multi-swoop-all
+  (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  ;; When doing evil-search, hand the word over to helm-swoop
+  ;; (define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)
+
+  ;; Instead of helm-multi-swoop-all, use helm-multi-swoop-current-mode
+  (define-key helm-swoop-map (kbd "M-m")
+    'helm-multi-swoop-current-mode-from-helm-swoop)
+
+  ;; Move up and down like isearch
+  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+
+** Configurations on Features
+#+BEGIN_SRC emacs-lisp
+  ;; Save buffer when helm-multi-swoop-edit complete
+  (setq helm-multi-swoop-edit-save t)
+
+  ;; If this value is t, split window inside the current window
+  (setq helm-swoop-split-with-multiple-windows t)
+
+  ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+  (setq helm-swoop-split-direction 'split-window-vertically)
+
+  ;; If nil, you can slightly boost invoke speed in exchange for text color
+  (setq helm-swoop-speed-or-color t)
+
+  ;; ;; Go to the opposite side of line from the end or beginning of line
+  (setq helm-swoop-move-to-line-cycle t)
+
+  ;; Optional face for line numbers
+  ;; Face name is `helm-swoop-line-number-face`
+  (setq helm-swoop-use-line-number-face t)
+#+END_SRC
+
+
+* Exploring large projects with Projectile and Helm Projectile
+
+** Install Emacs packages
+
+Adding a header for the exported =.el= file.
+#+BEGIN_SRC emacs-lisp
+  ;; ===============================================================
+  ;; Project Management via Projectile
+  ;; ===============================================================
+#+END_SRC
+
+Install the additional packages to support the =helm-projectile= package
+#+BEGIN_SRC emacs-lisp
+  ;; Install required packages for more functions
+  (setq custom/proj-packages
+        '(projectile
+          helm-projectile))
+  (custom/install-packages custom/proj-packages)
+#+END_SRC
+
+** Package: =projectile=
+
+#+BEGIN_SRC emacs-lisp
+  ;; /projectile/: project management
+  (require 'projectile)
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+#+END_SRC
+
+To refresh the whole cache, use ~projectile-invalidate-cahe~.
+
+** Package: =helm-proctile=
+*** Enable helm-projectile
+
+#+BEGIN_SRC emacs-lisp
+  ;; /helm-projectile/: browse via helm
+  (require 'helm-projectile)
+  (helm-projectile-on)
+  (setq projectile-completion-system 'helm)
+#+END_SRC
+
+*** Basic commands
+
+-  ~helm-projectile-switch-project~         : =C-c p p=
+-  ~helm-projectile-find-file~              : =C-c p f=
+-  ~helm-projectile-find-file-dwim~         : =C-c p g=
+-  ~helm-projectile-fi-other-file~        : =C-c p a=
+-  Virtual directory manager
+   - create a Dired buffer of project files : =C-c f=
+   - add more files to the Dired buffer     : =C-c a=
+-  ~helm-projectile-ack~                    : =C-c p s a=
+
+*** All-in-one command
+_Command_: =helm-projectile=, =C-c p h=
+
+_Usage_: this command, by default, is the combination of these 5 commands:
+
+-   ~helm-projectile-switch-to-buffer~
+-   ~helm-projectile-find-file~
+-   ~helm-projectile-switch-project~
+
+*** Enter project portal
+_Command_: =helm-projectile-switch-project=, =C-c p p=
+
+_Usage_: This is the very first command you need to use before using other
+commands, because it is the entrance to all of your projects and the only
+command that can be used outside of a project, aside from
+~helm-projectile-find-file-in-known-projects~. The command lists all visited
+projects. If you first use Projectile, you have to visit at least a project
+supported by Projectile to let it remember the location of this project. The
+next time you won't have to manually navigate to that project but jump to it
+instantly using ~helm-projectile-switch-project~.
+
+#+BEGIN_SRC emacs-lisp
+  (setq projectile-switch-project-action 'helm-projectile)
+#+END_SRC
+
+List of actions in the session:
+-   open Dired in project's directorzyue/      =C-d=
+-   open project root in vc-dir or magit:   =M-g=
+-   switch to Esell; open a project Eshell: =M-e=
+-   grep in projects (prefix =C-u= to recursive grep):  =C-s=
+-   compile project, run =compile= at the project root: =C-c=
+-   remove projects (delete marked projects from the list of known projects): =M-D=
+
+*** File management
+**** Command: ~helm-projectile-find-file~, =C-c p f=
+
+_Usage_: This command lists all files in a project for users to narrow down to
+wanted files. Some frequently used actions that cover open, rename, copy,
+delete,search and other miscelaneous operations. Once you mastered the actions
+of helm-projectile-find-file, you master the actions of other commands as well
+since the actions of other commands are just a subset of
+helm-projectile-find-file actions. All the key bindings associated with actions
+are only available while a Helm buffer is active. You can think of actions as an
+mini version of M-x: only applicable commands are listed, and even those
+commands have key bindings. Prefix argument can be applied, when possible.
+
+*Open*
+-   Find file: =RET= to open files; =M-SPC= to mark files; =M-a= to mark all
+-   Find file other window: =C-c o=
+-   Find file as root: =C-c r=
+
+*Move and Reanme*
+-   Rename files: =M-R=; =M-SPC= to mark files
+
+*Copy and Delete*
+-   Copy files: =M-C=
+-   Delete files: =M-D= or =C-c d=
+
+*Search and Replace*
+-   Grep files: =C-s= (add prefix =C-u= for resursive grep)
+-   Zgrep: =M-g z= (add prefix =C-u= for resursive grep), invoking grep on cpmressed files
+-   Locate (using Unix ~locate~): =C-x C-f= (add =C-u= to specify locate db)
+
+*Miscellanies*
+-   Insert as org link (C-c @): Insert the current file that highlighted as an Org link.
+-   Ediff files: =C-==
+-   Ediff Merge files: =C-c ==, when exactly two files are selected
+-   Etags: =M-.=, invoking Etags using helm
+-   Switch to Eshell: =M-e=
+-   Eshell command on files: =M-!=
+-   Symlink files: =M-S=, using absolute path
+-   Relsymlink files: using relative path
+-   Hardlink files: =M-H=
+-   Checksum file: generate file checksum and insert checksum in ~kill-ring~
+-   Print file: =C-c p= (add =C-u= to refresh)
+
+**** Command: ~helm-projectile-find-file-in-known-projects~, =C-c p F=
+
+**** Command: ~helm-projectile-find-file-dwim~, =C-c p g=
+
+**** Command: ~helm-projectile-find-dir~, =C-c p d=
+
++   open Dired in project's directory
++   switch to Eshell: =M-e=
++   grep in projects: =C-s= (add prefix =C-u= for recurse grep)
+
+**** Command: ~helm-projectile-recentf~, =C-c p e=
+
+**** Command: ~helm-projectile-find-other-file~, =C-c p a=
+
+_Usage_: switch between files with the same name but different extensions.  With
+prefix argument =C-u=, enable flex-matching that match any file that contains
+contains the name of current file.
+
+_Variable_: ~projectile-other-file-alist~
+
+#+BEGIN_SRC emacs-lisp
+  ;; adding the switch between html <-> js
+  ;; html -> js
+  (add-to-list 'projectile-other-file-alist '("html" "js"))
+  ;; js -> html
+  (add-to-list 'projectile-other-file-alist '("js" "html"))
+#+END_SRC
+
+**** [IMPORTANT] Caching
+-   command: ~projectile-invalidate-cache~, =C-c p i=
+-   command: ~projectile-cache-current-file~, =C-c p z=
+-   command: ~projectile-purge-file-from-cache~
+-   command: ~projectile-purge-dir-from-cache~
+
+*** Virtual directory manager
+
+When in a *helm-projectile-find-file* session:
+-   create Dired buffer from files: =C-c f=
+-   add files to Dired buffer: =C-c a=
+-   remove entry from from Dired buffer: =C-c d=
+
+*** Buffer management:
+
+_Command_: ~helm-projectile-switch-project~ =C-c p b=
+
+_Usage_: List all opened buffers in current project. The command has a similar
+subset of actions in ~helm-projectile-find-file~, so once you mastered the
+actions in ~helm-projectile-find-file~, except instead of opening files, you
+open buffers instead.
+
+*** Search in project
+
+**** Command: ~helm-projectile-grep~, =C-c p s g=
+
+This is a replacement command for ~projectile-grep~ that uses Helm
+interface. When a symbol is at point, this command uses that symbol and search
+at project root for every occurrence of this symbol in all non-ignored files in
+project. If a region is active, use the region instead.
+
+#+BEGIN_SRC emacs-lisp
+  (eval-after-load 'grep
+    '(when (boundp 'grep-find-ignored-files)
+       (add-to-list 'grep-find-ignored-files "run")
+       (add-to-list 'grep-find-ignored-directories "obj")))
+#+END_SRC
+
+_Configuration_:
+
+You can specify directory to exclude when searching by customize either one of
+these variables:
+
+-   =grep-find-ignored-files=: list of file names which rgrep and lgrep shall
+    exclude. ~helm-projectile-grep~ also uses this variable.
+
+-   =grep-find-ignored-directories=: list of names of sub-directories which
+    rgrep shall not recurse into. ~helm-projectile-grep~ also uses this variable.
+
+-   =projectile-globally-ignored-files=: list of files globally ignored by
+    Projectile.
+
+-   =projectile-globally-ignored-directories=: list of directories globally
+    ignored by Projectile.
+
+**** Command: ~helm-projectile-ack~, =C-c p s a=
+
+_Configuration_:
+
+-   =grep-find-ignored-files=: list of file names which rgrep and lgrep shall
+    exclude, and ~helm-projectile-ack~ also uses this variable.
+
+-   =grep-find-ignored-directories=: list of names of sub-directories which
+    rgrep shall not recurse into. ~helm-projectile-ack~ also uses this variable.
+
+-   =projectile-globally-ignored-files=: a list of files globally ignored by
+    Projectile.
+
+-   =projectile-globally-ignored-directories=: a list of directories globally
+    ignored by Projectile.
+
+**** Command: ~helm-projectile-ag~, =C-c p s s=
+
+_Configuration_:
+
+-   =grep-find-ignored-files=: list of file names which rgrep and lgrep shall
+    exclude, and ~helm-projectile-ack~ also uses this variable.
+
+-   =grep-find-ignored-directories=: list of names of sub-directories which
+    rgrep shall not recurse into. ~helm-projectile-ack~ also uses this variable.
+
+-   =projectile-globally-ignored-files=: a list of files globally ignored by
+    Projectile.
+
+-   =projectile-globally-ignored-directories=: a list of directories globally
+    ignored by Projectile.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Ignore files/directories
+  (add-to-list 'projectile-globally-ignored-files "*.out")
+  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+  (add-to-list 'projectile-globally-ignored-directories ".git")
+  ;; retore projectile's native indexing (fix the bug of disabling .projectile)
+  (setq projectile-indexing-method 'native)
+#+END_SRC
+
+*** Summary of keybindings
+
+|-------------+---------------------------------------------+--------------------------------------------------------------|
+| Keybindings | Commands                                    | Descriptions                                                 |
+|-------------+---------------------------------------------+--------------------------------------------------------------|
+| =C-c p h=   | helm-projectile                             | Helm interface to projectile                                 |
+| =C-c p p=   | helm-projectile-switch-project              | Switches to another projectile project                       |
+| =C-c p f=   | helm-projectile-find-file                   | Lists all files in a project                                 |
+| =C-c p F=   | helm-projectile-find-file-in-known-projects | Find file in all known projects                              |
+| =C-c p g=   | helm-projectile-find-file-dwim              | Find file based on context at point                          |
+| =C-c p d=   | helm-projectile-find-dir                    | Lists available directories in current project               |
+| =C-c p e=   | helm-projectile-recentf                     | Lists recently opened files in current project               |
+| =C-c p a=   | helm-projectile-find-other-file             | Switch between files with same name but different extensions |
+| =C-c p i=   | projectile-invalidate-cache                 | Invalidate cache                                             |
+| =C-c p z=   | projectile-cache-current-file               | Add the file of current selected buffer to cache             |
+| =C-c p b=   | helm-projectile-switch-to-buffer            | List all open buffers in current project                     |
+| =C-c p s g= | helm-projectile-grep                        | Searches for symbol starting from project root               |
+| =C-c p s a= | helm-projectile-ack                         | Same as above but using ack                                  |
+| =C-c p s s= | helm-projectile-ag                          | Same as above but using ag                                   |
+|-------------+---------------------------------------------+--------------------------------------------------------------|
+
+
+*** Suppress warnings from project-local variables
+
+#+BEGIN_SRC emacs-lisp
+  ;; Safe Variable Declaration (suppress warnings)
+  ;; (add-to-list 'safe-local-variable-values
+  ;;              '(project-local-include-path . ("-I./include" "-I./src")))
+#+END_SRC
+
+
+* Source code navigation via GNU Global with helm interface
+
+** Requirements
+*** Emacs packages
+
+#+BEGIN_SRC emacs-lisp
+  ;; ================================================================
+  ;; Tag Supports in Programming Environement
+  ;; ================================================================
+
+  ;; Install required packages for more functions
+  (setq custom/gtags-packages
+        '(helm-gtags))
+  (custom/install-packages custom/gtags-packages)
+#+END_SRC
+
+*** System commandline tools
+
+The tagging system we used is =GNU global= with =ctags & pygments= supports. To
+install =global=:
+- OS X: ~brew install global --with-ctags --with-pygments~
+- Arch Linux: ~pacman -S ctags python-pygments~
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "GTAGSLABEL" "pygments")
+  (setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
+#+END_SRC
+
+To create tags, choose either way as follows:
+- console: ~gtags --gtagslabel=pygments~ (no option if set env var)
+- helm-gtags: ~helm-gtags-create-tags~ (=C-c g c=)
+
+** Frontend via helm-gtags
+*** Basic settings
+#+BEGIN_SRC emacs-lisp
+  (require 'helm-gtags)
+  (setq helm-gtags-ignore-case             t
+        helm-gtags-auto-update             t
+        helm-gtags-use-input-at-cursor     t
+        helm-gtags-pulse-at-cursor         t
+        helm-gtags-prefix-key              "\C-cg"
+        helm-gtags-suggested-key-mapping   t)
+
+  ;; Enable helm-gtags mode
+  (add-hook 'dired-mode-hook 'helm-gtags-mode)
+  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+  (add-hook 'makefile-mode-hook 'helm-gtags-mode)
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'python-mode-hook 'helm-gtags-mode)
+  (add-hook 'matlab-mode-hook 'helm-gtags-mode)
+#+END_SRC
+
+*** Keybindings
+Jumps through definitions, references, symbols or DWIM:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+  (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)    ;(definitions)
+  (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)   ;(references)
+  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol) ;(symbols)
+#+END_SRC
+
+Show list of tags in different scopes: project, file, function:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g s") 'helm-gtags-select)
+  (define-key helm-gtags-mode-map (kbd "C-c g f") 'helm-gtags-parse-file)
+  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+#+END_SRC
+
+Jumping over history/stacks:
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g [") 'helm-gtags-previous-history)
+  (define-key helm-gtags-mode-map (kbd "C-c g ]") 'helm-gtags-next-history)
+  (define-key helm-gtags-mode-map (kbd "C-c g h") 'helm-gtags-show-stack)
+#+END_SRC
+
+Create/update tags:
+(Note: prefix "C-u" update the whole project, instead of the current file)
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
+  (define-key helm-gtags-mode-map (kbd "C-c g u") 'helm-gtags-update-tags)
+#+END_SRC
+
+** More on source code navigation by tuhdo.github.io
+http://tuhdo.github.io/c-ide.html
+
+Basic concepts of tag files:
+- =GTAGS=:  definition database
+- =GRTAGS=: reference database
+- =GPATH=:  path name database
+
+Find definitions in project:
++ ~helm-gtags-dwim~: jump to a reference/tag definition/header
++ ~tags-loop-continue~: jump back to original location
++ ~helm-gtags-select~: use helm to display all available tags in a project and
+  incrementally filtering
+
+Find references in project:
++ ~helm-gtags-dwim~ or ~helm-gtags-find-rtags~: find references to functions only
++ ~helm-gtags-find-symbol~: find references to variables
+
+Find functions that current functions call:
++ ~helm-gtags-tags-in-this-function~: list all the functions that the current
+  function that point is inside calls
+
+Find files in project:
++  ~helm-gtags-find-files~: find files matching regexp. (If point is on an
+  included header file, ~helm-gtags-dwim~ automatically jumps to files)
+
+View visited tags with tag stack:
++  ~helm-gtags-show-stack~: show visited tags from newest to oldest, from top to
+  bottom.
+
+Show outline tree of definitions in current buffer via =function-args=
++ ~moo-jump-local~ (=C-M-j=): shows an outline tree of the current buffer
++ ~moo-jump-directory~ (=C-M-k=): show outline of the whole folder
+
+
+* End
+#+BEGIN_SRC emacs-lisp
+  (provide 'init-helm)
+  ;; ================================================
+  ;; init-helm.el ends here
+#+END_SRC

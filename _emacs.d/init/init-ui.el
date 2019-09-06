@@ -48,7 +48,7 @@
     ;; transparent background
     (when *is-linux* (set-bg-alpha '(100 85)))
     ;; check and choose fonts
-    (check-and-load-fonts)))
+    (check-and-load-fonts frame)))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -66,24 +66,25 @@ of the focused frame and AB is the unfocused."
 
 ;; Fonts
 (defun check-and-load-fonts (&optional frame)
-  (when *is-mac*   (setq height-n 150 height-s 140))
-  (when *is-linux* (setq height-n 110 height-s 105))
-  ;; Specify default font
+  (when *is-mac*   (setq size-n 15 height-s 140))
+  (when *is-linux* (setq size-n 11 height-s 105))
+  ;; Specify default/fixed-width fonts
   (catch 'loop
     (dolist (font '("SF Mono" "DejaVu Sans Mono" "RobotoMono"
                     "Inconsolata" "Menlo" "Consolas"))
       (when (member font (font-family-list))
-        (setq ovp-font (font-spec :family font)) ;; "Iosevka"; used in /org-variable-pitch.el/
-        (set-face-attribute 'default frame :font font :height height-n)
-        (set-face-attribute 'fixed-pitch frame :font font)
-        (set-face-attribute 'mode-line nil :height height-s)
-        (set-face-attribute 'mode-line-inactive nil :height height-s)
+        (setq zyue-font (font-spec :family font :size size-n)
+              ovp-font zyue-font) ;; used in /org-variable-pitch.el/
+        (set-face-attribute 'default frame :font zyue-font)
+        (set-face-attribute 'fixed-pitch frame :font zyue-font)
+        (set-face-attribute 'mode-line frame :height height-s)
+        (set-face-attribute 'mode-line-inactive frame :height height-s)
         (throw 'loop t))))
   ;; Specify variable-width font
   (catch 'loop
     (dolist (font '("SF Compact Display" "DejaVu Sans" "Roboto"))
       (when (member font (font-family-list))
-        (set-face-attribute 'variable-pitch frame :font font :height height-n)
+        (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
   ;; Specify font for all unicode characters
   (catch 'loop
@@ -93,9 +94,16 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei" "Microsoft Yahei"))
+    (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei"
+                    "LiHei Pro" "Microsoft Yahei"))
       (when (member font (font-family-list))
-        (set-fontset-font t '(#x4e00 . #x9fff) font)
+        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+          (set-fontset-font (frame-parameter nil 'font)
+  		                    charset
+  		                    (font-spec :family font :size size-n)))
+        ;; rescale to equal widths (2 EN = 1 SC)
+        (setq face-font-rescale-alist '(("Sarasa Mono SC" . 1.2)
+                                        ("WenQuanYi Micro Hei" . 1.2)))
         (throw 'loop t))))
   )
 
@@ -106,9 +114,7 @@ of the focused frame and AB is the unfocused."
 
 ;; Modeline
 (require 'init-modeline)
-(if (or *is-server-main* *is-linux*)
-    (setq zyue-modeline 'doomline)
-  (setq zyue-modeline 'spaceline))  ;; custom
+(setq zyue-modeline 'doomline) ;; spaceline
 
 ;; Setup themes
 (pcase zyue-theme
