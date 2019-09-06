@@ -95,7 +95,7 @@ function es() {
 # =======================================================
 
 # emacsclient: main
-function ec() {
+function em() {
     if [[ $(uname) == "Linux" ]]; then
         EMACSCLIENT="/usr/bin/emacsclient"
     else
@@ -114,7 +114,7 @@ function ec() {
 }
 
 # emacsclient: coding
-function ecc() {
+function ec() {
     if [[ $(uname) == "Linux" ]]; then
         EMACSCLIENT="/usr/bin/emacsclient"
     else

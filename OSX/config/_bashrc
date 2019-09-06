@@ -27,8 +27,8 @@ export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
 alias ll='ls -Alh'
 alias la='ls -a'
 alias view='vim -R'
-alias em='emacs -nw'
-source $HOME/bin/emacs-server-func.sh
+#alias em='emacs -nw'
+source $HOME/bin/emacs-cmds-osx.sh
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
