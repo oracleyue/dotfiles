@@ -143,14 +143,9 @@
   (with-current-buffer ".formula.tex"
     (LaTeX-mode)))
 
-;; supports for Chinese (moved to init-ui.el)
-;; setting font set
-;; (if (display-graphic-p)
-;;     (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;       (set-fontset-font (frame-parameter nil 'font)
-;;                         charset
-;;                         (font-spec :family "WenQuanYi Micro Hei"))))
-;; stop cursor blinking bug when using PinYin on OS X
+;; Chinese
+;; font set in "init-ui.el"
+;; stop cursor blinking bug when typing Chinese/Japanese on OS X
 (setq redisplay-dont-pause nil)
 
 ;; ----------------------------------------------

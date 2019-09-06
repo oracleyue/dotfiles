@@ -95,17 +95,17 @@ of the focused frame and AB is the unfocused."
   ;; Specify font for Chinese
   (catch 'loop
     (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei"
-                    "LiHei Pro" "Microsoft Yahei"))
+                    "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
         (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
   		                    charset
   		                    (font-spec :family font :size size-n)))
         ;; rescale to equal widths (2 EN = 1 SC)
-        (setq face-font-rescale-alist '(("Sarasa Mono SC" . 1.2)
-                                        ("WenQuanYi Micro Hei" . 1.2)))
-        (throw 'loop t))))
-  )
+        (setq face-font-rescale-alist
+              '(("Sarasa Mono SC" . 1.2) ("WenQuanYi Micro Hei" . 1.2)
+                ("PingFang SC"    . 1.2) ("Microsoft Yahei"     . 1.2)))
+        (throw 'loop t)))))
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)

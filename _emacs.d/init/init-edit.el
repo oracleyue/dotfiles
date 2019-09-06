@@ -234,13 +234,6 @@ Uses `current-date-format' for the formatting the date/time."
             (setq fill-column *fill-column-mono*)))
 
 
-;; ---------- Keybindings for Terminals ------------
-
-(unless (display-graphic-p)
-  (require 'open-next-line)   ;; if not using /emacs-python/
-  (global-set-key (kbd "C-o") 'open-next-line))
-
-
 
 (provide 'init-edit)
 ;; ================================================
