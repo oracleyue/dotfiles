@@ -73,6 +73,7 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
+  "Plugin 'vim-airline/vim-airline'
   "Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
