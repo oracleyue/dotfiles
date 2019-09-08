@@ -36,7 +36,7 @@ endif
 
 " status line
 set laststatus=2
-set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
+"set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
@@ -71,6 +71,7 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
   Plugin 'taglist.vim'
 " repos on github
+  "Plugin 'majutsushi/tagbar'   " replace old taglist
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
@@ -92,15 +93,16 @@ let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 let tlist_matlab_settings = 'matlab;f:functions'
-" opens/closes the TagList window
 nnoremap <Leader>t :TlistToggle<CR>
 
-" fix bugs of vim (eg. taglist) on iTerm2
-" solution: iTerm2: Preferences -> Profiles -> Terminal -> uncheck "Disable
-" session-initiated window resizing"
+" ---- Tagbar ----
+"let g:tagbar_autofocus=0
+"let g:tagbar_width=40
+"nmap <Leader>t :TagbarToggle<CR>
+"autocmd BufEnter *.py :call tagbar#autoopen(0)
+"autocmd BufWinLeave *.py :TagbarClose
 
 " ---- NERDTree ----
 map <Leader>T :NERDTreeToggle<CR>
 " close vim if only NERDTree window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
