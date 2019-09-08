@@ -36,7 +36,7 @@ $sync ~/.jupyter/ $repopath
 
 # VIM
 $sync ~/.vimrc $repopath
-$sync ~/.vim/ --exclude=bundle $repopath
+$sync ~/.vim --exclude=bundle $repopath
 
 # Vimperator for Firefox
 $sync ~/.vimperatorrc $repopath/apps/vimperator/_vimperatorrc
