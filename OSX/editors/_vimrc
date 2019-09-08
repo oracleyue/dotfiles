@@ -11,6 +11,9 @@ set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
+set expandtab smarttab                      " using 4 spaces to replace tab
+set shiftwidth=4
+set softtabstop=4
 set backup                                  " backup
 set backupdir=/tmp
 syntax on                                   " syntax
@@ -23,11 +26,6 @@ inoremap <c-[> <Esc>
 " solution: iTerm2: Preferences -> Profiles -> Terminal -> uncheck "Disable
 " session-initiated window resizing"
 
-" using 4 spaces to replace tab
-set expandtab smarttab
-set shiftwidth=4
-set softtabstop=4
-
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
 noremap <Leader>p "*p
@@ -36,10 +34,6 @@ noremap <Leader>P "+p
 " dealing with copy-paste (avoid auto-indent when paste codes)
 " or use =:set paste= and =:set nopaste=
 set pastetoggle=<F2>
-
-" language spell checking
-autocmd FileType tex setlocal spell spelllang=en_us
-autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
 " color schemes
 if ! has("gui_running")
@@ -52,13 +46,17 @@ else  " /gvim/
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
 endif
 
-" more keybindings
-nnoremap <F8> :vertical wincmd gf<CR>
-nnoremap <Leader>nl :nohlsearch<CR>
-
 " status line
 set laststatus=2
 set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
+
+" keybindings
+nnoremap <F8> :vertical wincmd gf<CR>
+nnoremap <Leader>nl :nohlsearch<CR>
+
+" language spell checking
+autocmd FileType tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
 
 " auto remove extra spaces
 autocmd BufWritePre * :%s/\s\+$//e
@@ -79,8 +77,6 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
-  Plugin 'djoshea/vim-matlab'
-  Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
