@@ -3,6 +3,7 @@ set nocompatible                            " be iMproved
 set nu                                      " set row number
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
+set encoding=utf-8                          " utf-8
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
@@ -73,7 +74,6 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
-  "Plugin 'vim-airline/vim-airline'
   "Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
