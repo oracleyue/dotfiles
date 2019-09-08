@@ -1,0 +1,39 @@
+[user]
+	name = oracleyue
+	email = oracleyue@gmail.com
+[core]
+	editor = vim
+[color]
+	ui = true
+[difftool.latex]
+        cmd = git-latexdiff \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[alias]
+	ldiff = difftool -t latex
+        ld = difftool -t latex HEAD~1
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD^
+        uncommit = reset --soft HEAD^
+
+	last = log -1 HEAD -U1 --word-diff
+	graph = log --graph --oneline --decorate
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short 
+
+	type = cat-file -t
+	up = remote update
+        uno = status -uno
+        version = describe --always
+[push]
+	default = matching
+[merge]
+	tool = vimdiff
+[user]
+        name = Zuogong Yue
+        email = zuogong.yue@uni.lu
+[credential]
+	helper = osxkeychain

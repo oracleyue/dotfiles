@@ -19,19 +19,26 @@ repopath=$HOME/Workspace/gitrepo/dotfiles/OSX
 # bash
 # ===========================================
 $sync ~/.bashrc $repopath
+$sync ~/.bash_profile $repopath
 $sync ~/.tmux.conf* $repopath
 $sync ~/.screenrc $repopath
 
 # ===========================================
 # config files under $HOME
 # ===========================================
+$sync ~/.gitconfig $repopath
+$sync ~/.gitignore $repopath
+$sync ~/.projectile $repopath
+$sync ~/.globalrc $repopath
+$sync ~/.Xresources $repopath
 $sync ~/.latexmkrc $repopath
 $sync ~/.Renviron $repopath
 $sync ~/.Rprofile $repopath
 $sync ~/.jupyter $repopath
+$sync ~/.ctags $repopath
 
 # ===========================================
-# editors
+# apps
 # ===========================================
 
 # VIM
@@ -54,10 +61,9 @@ cp "$sublpath/"*.sublime-settings $repopath/apps/sublime-text/
 $sync --exclude-from="$HOME/bin/exclude-list" --delete ~/bin $repopath
 
 # ===========================================
-# "~/Library/texmf" on OSX
+# "~/Library" on OSX
 # ===========================================
-cd $repopath/config
-tar -czf texmf.tar.gz -C ~/Library/texmf .
+$sync ~/Library/texmf $repopath/Library
 
 # ===========================================
 # push updates to github.com

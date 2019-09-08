@@ -1,0 +1,64 @@
+!----------x配置----------
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.antialias: 1
+
+!----------xterm配置----------
+!外观
+xterm*termName: xterm-256color
+xterm*geometry: 80x27
+xterm*scrollBar: false
+xterm*loginshell: false
+!xterm*background: black
+!xterm*foreground: white
+xterm*cursorBlink: true
+xterm*cursorOffTime: 600
+xterm*cursorOnTime: 600
+
+xterm*saveLines: 4096
+xterm*scrollKey: true
+
+!语言和字体
+xterm*utf8: 1
+xterm*locale: true
+xterm*utf8Title: true
+xterm*renderFont: true
+xterm*preeditType: Root
+xterm*xftAntialias: true
+xterm*faceName: DejaVu Sans Mono:pixelsize=13
+!xterm*faceName: Droid Sans Mono:pixelsize=13
+!xterm*faceNameDoublesize: WenQuanYi MicroHei Mono:pixelsize=13
+
+!tango颜色搭配
+xterm*color0: #1e1e1e
+xterm*color1: #cc0000
+xterm*color2: #4e9a06
+xterm*color3: #c4a000
+xterm*color4: #3465a4
+xterm*color5: #75507b
+xterm*color6: #0b939b
+xterm*color7: #d3d7cf
+xterm*color8: #555753
+xterm*color9: #ef2929
+xterm*color10: #8ae234
+xterm*color11: #fce94f
+xterm*color12: #729fcf
+xterm*color13: #ad7fa8
+xterm*color14: #00f5e9
+xterm*color15: #eeeeec
+
+!修复alt键
+xterm*eightBitInput: false
+xterm*metaSendsEscape: true
+
+!修复shift中英文切换
+!xterm*VT100*translations: #override \n\
+!    Shift <KeyRelease>:insert-seven-bit()
+
+!粘贴
+xterm*selectToClipboard: true 
+!xterm*VT100.Translations: #override \n\
+!    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY,CLIPBOARD, CUT_BUFFER0)
+
