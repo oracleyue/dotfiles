@@ -1,6 +1,6 @@
 " basics
-set nu                                      " set row number
 set nocompatible                            " be iMproved
+set nu                                      " set row number
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
 set showmatch                               " show mathced brackets
@@ -42,8 +42,8 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-" dealing with copy-paste (avoid auto-indent when paste codes)
-" or use =:set paste= and =:set nopaste=
+" paste from clipboard without auto-indentation
+" enable by =:set paste= (to disable =:set nopaste=)
 set pastetoggle=<F2>
 
 " keybindings
@@ -73,6 +73,7 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
+  "Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
