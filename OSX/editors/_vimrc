@@ -52,15 +52,13 @@ else  " /gvim/
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
 endif
 
+" more keybindings
+nnoremap <F8> :vertical wincmd gf<CR>
+nnoremap <Leader>nl :nohlsearch<CR>
+
 " status line
 set laststatus=2
 set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
-
-" --------------------------------------------------------------------------
-"  Keybindings and Auto Functions
-" --------------------------------------------------------------------------
-nnoremap <F8> :vertical wincmd gf<CR>
-nnoremap <Leader>nl :nohlsearch<CR>
 
 " auto remove extra spaces
 autocmd BufWritePre * :%s/\s\+$//e
@@ -75,13 +73,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " List of installed plugins:
-" repos on github
-  Plugin 'LaTeX-Box-Team/LaTeX-Box'
-  Plugin 'djoshea/vim-matlab'
 " vim-scripts repos
   Plugin 'taglist.vim'
-  Plugin 'jamessan/vim-gnupg'
+" repos on github
   Plugin 'scrooloose/nerdcommenter'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'jamessan/vim-gnupg'
+  Plugin 'djoshea/vim-matlab'
+  Plugin 'LaTeX-Box-Team/LaTeX-Box'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,6 +98,10 @@ let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 let tlist_matlab_settings = 'matlab;f:functions'
-" 'T' opens/closes the TagList window
+" opens/closes the TagList window
 nnoremap <Leader>t :TlistToggle<CR>
 
+" ---- NERDTree ----
+map <Leader>T :NERDTreeToggle<CR>
+" close vim if only NERDTree window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
