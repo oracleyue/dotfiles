@@ -27,8 +27,6 @@ $sync ~/.screenrc $repopath
 # config files under $HOME
 # ===========================================
 $sync ~/.gitconfig $repopath
-$sync ~/.gitignore $repopath
-$sync ~/.projectile $repopath
 $sync ~/.globalrc $repopath
 $sync ~/.Xresources $repopath
 $sync ~/.latexmkrc $repopath
@@ -36,6 +34,12 @@ $sync ~/.Renviron $repopath
 $sync ~/.Rprofile $repopath
 $sync ~/.jupyter $repopath
 $sync ~/.ctags $repopath
+
+# ===========================================
+# template files
+# ===========================================
+$sync ~/.gitignore  $repopath/templates/_gitignore
+$sync ~/.projectile $repopath/templates/_projectile
 
 # ===========================================
 # apps
