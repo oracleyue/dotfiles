@@ -28,7 +28,7 @@ $sync ~/.screenrc $repopath
 $sync ~/.latexmkrc $repopath
 $sync ~/.Renviron $repopath
 $sync ~/.Rprofile $repopath
-$sync ~/.jupyter/ $repopath
+$sync ~/.jupyter $repopath
 
 # ===========================================
 # editors
