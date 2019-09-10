@@ -127,8 +127,7 @@
       ;; use Microsoft Python Language Server for Auto-completion
       (use-package lsp-python-ms
         :demand t
-        ;; :hook (python-mode . lsp)
-        :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp)))
+        :hook (python-mode . lsp)
         :config
         ;; set Microsfot language server; installing mspyls in VSCode by disabling jedi
         (when *is-mac*   (setq vscode-path "~/.vscode/extensions "))
