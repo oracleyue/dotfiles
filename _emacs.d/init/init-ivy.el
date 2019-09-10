@@ -22,6 +22,7 @@
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 (use-package ivy
+  :demand
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
@@ -330,7 +331,7 @@
                  (all-the-icons-octicon "file-directory" :height 0.9 :v-adjust -0.05))
                 (t (all-the-icons-icon-for-file (file-name-nondirectory filename) :height 0.9 :v-adjust -0.05)))))
       (advice-add #'ivy-rich-bookmark-type :override #'ivy-rich-bookmark-type-plus))
-    :hook ((ivy-mode . ivy-rich-mode)
+    :hook (;; (ivy-mode . ivy-rich-mode)
            (ivy-rich-mode . (lambda ()
                               (setq ivy-virtual-abbreviate
                                     (or (and ivy-rich-mode 'abbreviate) 'name)))))
@@ -347,10 +348,10 @@
           '(ivy-switch-buffer
             (:columns
              ((ivy-rich-buffer-icon)
-              (ivy-rich-candidate (:width 30))
+              (ivy-rich-candidate (:width 40))
               (ivy-rich-switch-buffer-size (:width 7))
               (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
-              (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))
+              (ivy-rich-switch-buffer-major-mode (:width 18 :face warning))
               (ivy-rich-switch-buffer-project (:width 15 :face success))
               (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))
              :predicate
@@ -359,10 +360,10 @@
             ivy-switch-buffer-other-window
             (:columns
              ((ivy-rich-buffer-icon)
-              (ivy-rich-candidate (:width 30))
+              (ivy-rich-candidate (:width 40))
               (ivy-rich-switch-buffer-size (:width 7))
               (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
-              (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))
+              (ivy-rich-switch-buffer-major-mode (:width 18 :face warning))
               (ivy-rich-switch-buffer-project (:width 15 :face success))
               (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))
              :predicate
@@ -488,7 +489,8 @@
              ((ivy-rich-file-icon)
               (ivy-rich-candidate))
              :delimiter "\t"))))
-  )
+  :config
+  (ivy-rich-mode 1))
 
 ;; ---------------------------------------------------------------
 ;; Ivy-based Packages

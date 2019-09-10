@@ -65,9 +65,9 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
+(when *is-mac*   (setq size-n 15 height-s 140))
+(when *is-linux* (setq size-n 11 height-s 105))
 (defun check-and-load-fonts (&optional frame)
-  (when *is-mac*   (setq size-n 15 height-s 140))
-  (when *is-linux* (setq size-n 11 height-s 105))
   ;; Specify default/fixed-width fonts
   (catch 'loop
     (dolist (font '("SF Mono" "DejaVu Sans Mono" "RobotoMono"
@@ -106,6 +106,9 @@ of the focused frame and AB is the unfocused."
               '(("Sarasa Mono SC" . 1.2) ("WenQuanYi Micro Hei" . 1.2)
                 ("PingFang SC"    . 1.2) ("Microsoft Yahei"     . 1.2)))
         (throw 'loop t))))
+  ;; Fix face bugs in ivy-switch-buffer
+  (with-eval-after-load 'ivy
+    (set-face-attribute 'ivy-org nil :font zyue-font :weight 'bold))
   )
 
 ;; Themes for different app and daemons
@@ -140,7 +143,6 @@ of the focused frame and AB is the unfocused."
     ((lambda (a ab) (set-bg-alpha (list a ab)))
      (car h) (car (cdr h)))
     (setq alpha-list (cdr (append alpha-list (list h))))))
-
 
 
 (provide 'init-ui)
