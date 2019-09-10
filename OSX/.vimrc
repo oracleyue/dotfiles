@@ -71,7 +71,6 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
   Plugin 'taglist.vim'
 " repos on github
-  "Plugin 'majutsushi/tagbar'   " replace old taglist
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
@@ -93,13 +92,6 @@ let Tlist_GainFocus_On_ToggleOpen=0
 let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 nnoremap <Leader>t :TlistToggle<CR>
-
-" ---- Tagbar ----
-"let g:tagbar_autofocus=0
-"let g:tagbar_width=40
-"nmap <Leader>t :TagbarToggle<CR>
-"autocmd BufEnter *.py :call tagbar#autoopen(0)
-"autocmd BufWinLeave *.py :TagbarClose
 
 " ---- NERDTree ----
 map <Leader>T :NERDTreeToggle<CR>
