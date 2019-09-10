@@ -234,7 +234,6 @@ Uses `current-date-format' for the formatting the date/time."
             (setq fill-column *fill-column-mono*)))
 
 
-
 (provide 'init-edit)
 ;; ================================================
 ;; init-edit.el ends here

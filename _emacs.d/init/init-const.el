@@ -17,8 +17,11 @@
     (setq linux-desktop-env (getenv "WMEmacs"))
   (setq linux-desktop-env "kde"))
 
+;; icons support for Ivy, Dired
+(defconst *enable-all-the-icons* t)
+
 ;; select tree window manager
-(defconst *tree-manager* "neotree")
+(defconst *tree-manager* "neotree")  ;; neotree; treemacs
 
 ;; use golden-ratio mode
 (defconst *use-golden-ratio* nil)
@@ -53,7 +56,6 @@
 
 ;; ECB IDE interface
 (defconst *enable-ecb* nil)
-
 
 
 (provide 'init-const)

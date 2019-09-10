@@ -19,8 +19,6 @@
 
 ;; UI (theme, modeline, etc.)
 (require 'init-ui)
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-;; (load-theme 'atom-one-dark t)
 
 ;; basics
 (require 'init-basics)
@@ -28,7 +26,7 @@
 ;; (require 'init-evil)           ;; use vim in emacs
 
 ;; code completion engine (/company/ or /auto-complete/)
-(if *use-company* (require 'init-company) (require 'init-ac))
+(require 'init-company)
 
 ;; completion systems
 (if *use-helm* (require 'init-helm) (require 'init-ivy))
