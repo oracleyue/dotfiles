@@ -36,7 +36,7 @@ endif
 
 " status line
 set laststatus=2
-"set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
+set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
@@ -89,10 +89,9 @@ filetype plugin indent on    " required
 " ---- Taglist ----
 let Tlist_Enable_Fold_Column=0
 let Tlist_Exit_OnlyWindow=1
-let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_GainFocus_On_ToggleOpen=0
 let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-let tlist_matlab_settings = 'matlab;f:functions'
 nnoremap <Leader>t :TlistToggle<CR>
 
 " ---- Tagbar ----
