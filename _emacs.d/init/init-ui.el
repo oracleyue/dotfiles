@@ -97,7 +97,7 @@ of the focused frame and AB is the unfocused."
     (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei"
                     "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
-        (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (dolist (charset '(kana han cjk-misc bopomofo)) ;; symbol
           (set-fontset-font (frame-parameter nil 'font)
   		                    charset
   		                    (font-spec :family font :size size-n)))
@@ -105,7 +105,8 @@ of the focused frame and AB is the unfocused."
         (setq face-font-rescale-alist
               '(("Sarasa Mono SC" . 1.2) ("WenQuanYi Micro Hei" . 1.2)
                 ("PingFang SC"    . 1.2) ("Microsoft Yahei"     . 1.2)))
-        (throw 'loop t)))))
+        (throw 'loop t))))
+  )
 
 ;; Themes for different app and daemons
 (setq zyue-theme 'doom-nord-light)
