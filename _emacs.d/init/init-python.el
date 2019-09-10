@@ -7,10 +7,19 @@
 ;;    =pip install pyflakes=
 ;;    =pip install autopep8=
 
+;; If you use default pyls in LSP mode, you need to install
+;;    =pip install python-language-server=
+;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
+;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
+
 ;; Install required Emacs packages
 (setq custom/py-packages
-      '(dtrt-indent))
+      '(dtrt-indent
+        highlight-indent-guides))
 (custom/install-packages custom/py-packages)
+(if (and *use-lsp* *use-mspyls*)
+    (custom/install-packages '(lsp-python-ms))
+  (custom/install-packages '(jedi company-jedi)))
 
 ;; Usages:
 ;; *edit*
@@ -18,7 +27,8 @@
 ;;   - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
 ;;
 ;; *source navigation*
-;;   - /helm-semantic-or-imenu/: "C-c h i"
+;;   - helm-semantic-or-imenu: "C-c h i"
+;;   - counsel-semantic-or-imenu: "M-g i"
 ;;
 ;; *debug*:
 ;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
@@ -27,10 +37,9 @@
 
 
 ;; ------------------------------------------------
-;; Environment Configurations
+;; Environment
 ;; ------------------------------------------------
 (use-package python
-  :ensure nil
   :config
   (if (eq *use-python-version* 3)
       (setq python-shell-interpreter "ipython3") ; use ipython; may slow down openning files
@@ -106,6 +115,55 @@
   ;; Abo-abo's lpy (To-do)
 
 ) ;; End of use-package python
+
+
+;; ------------------------------------------------
+;; Code Auto-completion: LSP (pyls/mspyls) or Jedi
+;; ------------------------------------------------
+(if *use-lsp*
+    ;; use "pyls" by default
+
+    (when *use-mspyls*
+      ;; use Microsoft Python Language Server for Auto-completion
+      (use-package lsp-python-ms
+        :demand t
+        ;; :hook (python-mode . lsp)
+        :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp)))
+        :config
+        ;; set Microsfot language server; installing mspyls in VSCode by disabling jedi
+        (when *is-mac*   (setq vscode-path "~/.vscode/extensions "))
+        (when *is-linux* (setq vscode-path "~/.vscode-oss/extensions "))
+        (setq lsp-python-ms-executable
+              (string-trim (shell-command-to-string
+                            (concat "find " vscode-path "-name 'Microsoft.Python.LanguageServer' | tail -1"))))
+        (setq lsp-python-ms-dir
+              (file-name-directory lsp-python-ms-executable)))
+      )
+
+  ;; integration with /company-mode/
+  (use-package company-jedi
+    :config
+    ;; add jedi function to menus
+    (define-key python-mode-map "\C-ce" 'jedi:show-doc)
+    (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
+    (easy-menu-define-key python-menu [jedi-show-doc]
+                          '(menu-item "Jedi show doc" jedi:show-doc
+                                      "Get help on symbol at point by Jedi")
+                          "Complete symbol")
+    (easy-menu-define-key python-menu [jedi-call-tip]
+                          '(menu-item "Jedi show calltip"
+                                      jedi:get-in-function-call
+                                      "Get help on function call-tip at point by Jedi") "Complete symbol")
+    (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
+
+    ;; setup company backends
+    (defun zyue/company-py-setup ()
+      (setq-local company-backends
+                  (append '(company-jedi) company-backends)))
+    (add-hook 'python-mode-hook 'zyue/company-py-setup))
+
+  ) ;; end of (if *use-lsp*)
+
 
 
 (provide 'init-python)

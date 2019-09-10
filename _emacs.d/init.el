@@ -65,7 +65,7 @@
 (require 'init-cc)
 
 ;; /Python/
-(if *use-lsp* (require 'init-python) (require 'init-py))
+(require 'init-python)
 
 ;; /R/
 (require 'init-r)
