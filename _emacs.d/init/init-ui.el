@@ -129,8 +129,7 @@ of the focused frame and AB is the unfocused."
 
 ;; Post-processing (if specific themes require)
 (when (functionp 'theme-post-processing)
-  (theme-post-processing))
-(require 'zyue-ui-neotree)
+  (theme-post-processing))  ;; for doom-themes
 
 ;; Loop over transparent effects
 ;; (global-set-key [(f11)] 'loop-alpha)

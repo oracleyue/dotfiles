@@ -36,12 +36,7 @@
     (set-default 'neo-window-fixed-size nil)  ;; allow adjust window size
 
     ;; improves org-mode fontification.
-    (doom-themes-org-config)
-
-    ;; use variable-width fonts
-    ;; (require 'org-variable-pitch)
-    ;; (add-hook 'org-mode-hook 'org-variable-pitch-minor-mode)
-    )
+    (doom-themes-org-config))
   )
 
 
