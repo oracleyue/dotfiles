@@ -36,7 +36,7 @@
 ;; code intelligence
 (defconst *use-company* t) ;; auto-complete no longer supported
 (defconst *use-lsp* t)     ;; use LSP as a unified codeIntel
-(defconst *use-mspyls* nil)  ;; use Microsoft pyls
+(defconst *use-mspyls* t)  ;; use Microsoft pyls
 
 ;; semantics
 (if *is-server-main*
