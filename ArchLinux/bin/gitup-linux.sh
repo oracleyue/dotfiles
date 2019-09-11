@@ -86,4 +86,7 @@ $sync ~/.local/share/applications/matlab*.desktop $repopath/.local/share/applica
 
 # Pull updates first from github.com
 cd $repopath
-git add -A && git ci -m "backup Arch linux configs" && git push
+git add -A
+#git ci -m "backup Arch linux configs"
+git ci
+git push
