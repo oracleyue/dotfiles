@@ -27,6 +27,7 @@ $sync ~/.emacs.d/templates $repopath/_emacs.d/
 # push updates to github.com
 cd $repopath
 git add -A
-git commit -m "update emacs config from Linux"
+#git commit -m "update emacs config from Linux"
+git commit
 git push
 cd ~

@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/zyue/.config/sxiv/exec'
+let g:netrw_dirhist_5='/home/zyue/.config/sxiv'
+let g:netrw_dirhist_4='/home/zyue/.config/conky'
 let g:netrw_dirhist_3='/home/zyue/.config/mpd/playlists'
 let g:netrw_dirhist_2='/home/zyue/.config/mpd'
 let g:netrw_dirhist_1='/home/zyue/.config'

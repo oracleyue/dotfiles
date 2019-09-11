@@ -20,7 +20,6 @@ conky.config = {
 conky.text = [[
     ${color2}kill focused - ${color}mod+Shift+q
     ${color2}split direction - ${color}mod+t
-    ${color2}navigate/move focused - ${color}mod+(Shift+)h/i/j/k
     ${color2}resize focused - ${color}mod+Shift+y/u/i/o
     ${color2}toggle fullscreen - ${color}mod+f
     ${color2}change layout - ${color}mod+s/w/e
