@@ -65,8 +65,9 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
-(when *is-mac*   (setq size-n 15 height-s 140))
-(when *is-linux* (setq size-n 11 height-s 105))
+(when *is-mac*   (setq height-n 150 height-s 140))
+(when *is-linux* (setq height-n 110 height-s 105))
+(setq size-n (/ height-n 10.0))
 (defun check-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
@@ -94,17 +95,18 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("Sarasa Mono SC" "WenQuanYi Micro Hei"
+    (dolist (font '("WenQuanYi Micro Hei" "Sarasa Mono SC"
                     "PingFang SC" "Microsoft Yahei"))
-      (when (member font (font-family-list))
-        (dolist (charset '(kana han cjk-misc bopomofo)) ;; symbol
+      (when (find-font (font-spec :name font))
+        ;; font-family-list not working in Linux for Chinese fonts
+        (dolist (charset '(kana han cjk-misc bopomofo))  ;; remove "symbol"
           (set-fontset-font (frame-parameter nil 'font)
   		                    charset
   		                    (font-spec :family font :size size-n)))
-        ;; rescale to equal widths (2 EN = 1 SC)
+        ;; rescale to equal widths (2 EN = 1 SC); NOT working in Linux
         (setq face-font-rescale-alist
-              '(("Sarasa Mono SC" . 1.2) ("WenQuanYi Micro Hei" . 1.2)
-                ("PingFang SC"    . 1.2) ("Microsoft Yahei"     . 1.2)))
+              '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC"  . 1.2)
+                ("PingFang SC"      . 1.2)    ("Microsoft Yahei" . 1.2)))
         (throw 'loop t))))
   ;; Fix face bugs in ivy-switch-buffer
   (with-eval-after-load 'ivy
