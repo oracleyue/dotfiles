@@ -5,11 +5,13 @@ super + i
     $TERMINAL -e htop
 super + m
     $TERMINAL -e ncmpcpp
+super + p
+	mpc toggle >/dev/null 2>&1
 super + shift + a
     $TERMINAL -e pulsemixer
 super + o
     goldendict
-super + p
+super + shift + p
     dolphin
 
 # Et cetera...
