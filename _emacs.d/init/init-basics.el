@@ -122,7 +122,9 @@
 (defun zyue/dired-open-folders-startup ()
   (interactive)
   "Setup the startup folders. Used in .emacs"
-  (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
+  (if *is-mac*
+      (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
+    (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote")))
   (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
   (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org"))
   (switch-to-buffer "*scratch*"))
