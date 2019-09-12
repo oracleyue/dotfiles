@@ -194,7 +194,7 @@ bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
 # go to https://terminal.sexy for themes
 # class                 border  bground text    indicator child_border
-client.focused          #2D2D2D #66CCCC #2D2D2D #3F3F3F   #5F5F5F
+client.focused          #2D2D2D #66CCCC #2D2D2D #3F3F3F   #3F3F3F
 client.focused_inactive #2D2D2D #3F3F3F #D3D0C8 #343434   #343434
 client.unfocused        #2D2D2D #343434 #D3D0C8 #343434   #343434
 client.urgent           #2D2D2D #900000 #FFFFFF #900000   #900000

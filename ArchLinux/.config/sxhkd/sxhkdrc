@@ -1,6 +1,6 @@
 # Basic binds
 super + r
-    $TERMINAL -e $FILE
+    $TERMINAL -e $FILE $HOME
 super + i
     $TERMINAL -e htop
 super + m
