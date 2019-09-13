@@ -2,26 +2,35 @@
 ;; Emacs package management system
 ;; ------------------------------------------------
 
-;; packages installed by /homebrew/
+;; packages path using /homebrew/
 (when (string-equal system-type "darwin")
   (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-  (normal-top-level-add-subdirs-to-load-path)))
+    (normal-top-level-add-subdirs-to-load-path)))
 
-;; package management by ELPA
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (add-to-list 'package-archives
-                 '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-    (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.milkbox.net/packages/") t)
-    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-    ;; (pop package-archives)  ;; remove "gnu" archive
-    )
+;; setup package archives
+(require 'package)
+(setq package-archives
+      '(("gnu"   . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")
+        ("org"   . "http://orgmode.org/elpa/")))
 
+;; initialize packages
+(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+  (setq package-enable-at-startup nil)          ; To prevent initializing twice
+  (package-initialize))
+
+;; setup /use-package/
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; set before loading /use-package/
+(eval-and-compile
+  (setq use-package-always-ensure t)
+  (setq use-package-always-defer t))
 
 ;; ------------------------------------------------
-;; Functions for package installations
+;; Customized functions for package installation
 ;; ------------------------------------------------
 
 ;; Functions to check and install packages
@@ -52,7 +61,6 @@
 ;; To install packages, call
 ;; (custom/install-packages YOUR_PACKAGE_LIST)
 
-
 ;; ------------------------------------------------
 ;; Functions for elisp compilation
 ;; ------------------------------------------------
@@ -69,9 +77,8 @@
                                        directory) ".elc"))
       (byte-compile-file (expand-file-name fname directory)))))
 
-
 ;; ------------------------------------------------
-;; Functions for init configs in org-mode
+;; Functions for init config in org-mode
 ;; ------------------------------------------------
 
 ;; extracting .el from .org config files
@@ -101,7 +108,6 @@ file and export into ~/.emacs.d/init/ with the same file name."
       (org-babel-tangle-file file file-dest "emacs-lisp"))))
 
 
-
-(provide 'init-pkg)
+(provide 'init-package)
 ;; ================================================
-;; init-pkg.el ends here
+;; init-package.el ends here

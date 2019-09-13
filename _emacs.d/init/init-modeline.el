@@ -3,13 +3,13 @@
 ;; ================================================================
 
 ;; Install required emacs packages
-(setq custom/modeline-packages
-      '(spaceline
-        doom-modeline
-        shrink-path
-        eldoc-eval
-        all-the-icons))
-(custom/install-packages custom/modeline-packages)
+;; (setq custom/modeline-packages
+;;       '(spaceline
+;;         doom-modeline
+;;         shrink-path
+;;         eldoc-eval
+;;         all-the-icons))
+;; (custom/install-packages custom/modeline-packages)
 
 
 ;; ---------------------------------------------
@@ -17,6 +17,7 @@
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
+    :demand
     :config
     (require 'spaceline-config)
     (when *is-mac*
@@ -32,7 +33,7 @@
   (use-package eldoc-eval)
   (use-package all-the-icons)
   (use-package doom-modeline
-    :ensure t
+    :demand
     :config
     (setq doom-modeline-height 30)
     ;; use buffer name; show the full-path file name when moving mouse over it
@@ -59,6 +60,7 @@
 ;; Misc for Modeline (e.g., Nyan cat, parrot)
 ;; ---------------------------------------------
 (use-package nyan-mode
+  :ensure nil
   :disabled
   :init (setq nyan-bar-length 24)
   (nyan-mode))

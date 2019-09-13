@@ -3,13 +3,13 @@
 ;; ================================================================
 
 ;; Install required packages for more functions
-(setq custom/org-packages
-      '(htmlize
-        smartparens
-        org-bullets
-        ox-gfm
-        ox-reveal))
-(custom/install-packages custom/org-packages)
+;; (setq custom/org-packages
+;;       '(htmlize
+;;         smartparens
+;;         org-bullets
+;;         ox-gfm
+;;         ox-reveal))
+;; (custom/install-packages custom/org-packages)
 
 
 ;; /Basic configurations/
@@ -130,8 +130,9 @@
                  :actions '(insert wrap autoskip navigate escape)))
 
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
-(eval-after-load "org"
-  '(require 'ox-gfm nil t))
+(use-package ox-gfm
+  :config
+  (eval-after-load "org" '(require 'ox-gfm nil t)))
 
 ;; /ox-reveal/: presentation via orgmode
 (use-package ox-reveal
@@ -147,7 +148,6 @@
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
 ;; User-defined utility enhancement
-
 (defun zyue/org-screenshot ()
   "Take a screenshot into a time stamped unique-named file in the
 same directory as the org-buffer and insert a link to this file."

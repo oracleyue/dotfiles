@@ -5,12 +5,12 @@
 ;; constants
 (defconst *is-mac* (string-equal system-type "darwin"))
 (defconst *is-linux* (string-equal system-type "gnu/linux"))
+(defconst *is-win* (string-equal system-type "windows-nt"))
 (defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
 (defconst *is-app* (and (display-graphic-p) (not (daemonp))))
 (defconst *is-server* (not (not (daemonp))))
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
-(defconst *is-server-linux* (and *is-server* *is-linux*))
 
 ;; desktop environment
 (if (getenv "WMEmacs")
@@ -30,8 +30,8 @@
 (defconst *use-css-local* t)
 
 ;; completion system
-(defconst *use-helm* nil)
-(defconst *use-ivy* (not *use-helm*))
+(defconst *use-ivy*  t)
+(defconst *use-helm* (not *use-ivy*))
 
 ;; posframe
 (defconst *use-posframe* nil)

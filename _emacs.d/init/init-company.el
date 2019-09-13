@@ -3,11 +3,11 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/company-packages
-      '(company
-        company-posframe
-        yasnippet))
-(custom/install-packages custom/company-packages)
+;; (setq custom/company-packages
+;;       '(company
+;;         company-posframe
+;;         yasnippet))
+;; (custom/install-packages custom/company-packages)
 
 ;; Usage:
 ;; - =M-/=: ~company-complete~
@@ -25,7 +25,7 @@
 
 ;; /Company/ for code completion
 (use-package company
-  :ensure t
+  :demand
   :init
   (setq company-idle-delay                  0.2  ;; nil to disable; 0.5
 	    company-tooltip-limit               10
@@ -67,19 +67,17 @@
 
 (when *use-posframe*
   (use-package company-posframe
-    :ensure t
+    :demand
     :if (display-graphic-p)
     :after company
     :hook (company-mode . company-posframe-mode)))
 
 ;; /Yasnippet/ A template system
 (use-package yasnippet
-  :ensure t
-  :defer 1
+  :demand
   :config
   (yas-global-mode 1)
   (setq-default mode-require-final-newline nil))
-
 
 
 (provide 'init-company)

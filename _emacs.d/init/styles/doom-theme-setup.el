@@ -12,9 +12,12 @@
   (shell-command "cd ~/.emacs.d/themes; ./themes-dl.sh"))
 
 (use-package doom-themes
+  :ensure nil
+  :demand
   :load-path "~/.emacs.d/themes/github/emacs-doom-themes/"
   :config
   ;; global settings
+  (require 'doom-themes)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
@@ -38,7 +41,6 @@
     ;; improves org-mode fontification.
     (doom-themes-org-config))
   )
-
 
 
 (provide 'doom-theme-setup)

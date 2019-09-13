@@ -3,16 +3,16 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/r-packages
-      '(ess
-        flycheck
-        key-combo))
-(custom/install-packages custom/r-packages)
+;; (setq custom/r-packages
+;;       '(ess
+;;         flycheck
+;;         key-combo))
+;; (custom/install-packages custom/r-packages)
 ;; R packages: linter for R "lintr"
 
 
 ;; ESS configrations
-(use-package ess-site
+(use-package ess
   :demand t
   :config
   ;; syntax checking (use flycheck)
@@ -24,6 +24,7 @@
   ;;   and dabbev-code for variable names
   (setq ess-use-company t)
   (use-package company-dabbrev-code
+    :ensure nil
     :after company
     :config
     (add-to-list 'company-dabbrev-code-modes 'ess-mode)
@@ -64,7 +65,6 @@
       ))
   (key-combo-define-hook '(ess-mode-hook inferior-ess-mode-hook)
                          'ess-key-combo-load-default key-combo-ess-default))
-
 
 
 (provide 'init-r)

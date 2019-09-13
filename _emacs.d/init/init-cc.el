@@ -3,30 +3,32 @@
 ; =====================================================
 
 ;; check and install essential pkgs
-(setq custom/modern-cc-packages
-      '(google-c-style
-        ;; flymake-google-cpplint
-        irony
-        company-irony
-        company-irony-c-headers
-        flycheck
-        flycheck-irony
-        function-args
-        ;; irony-eldoc
-        cmake-ide
-        cmake-font-lock
-        ;; helm-make
-        ))
-(when *enable-rtags*
-  (setq custom/modern-cc-packages
-        (append
-         '(rtags
-           ;; helm-rtags
-           ivy-rtags
-           flycheck-rtags)
-         custom/modern-cc-packages)))
-(custom/install-packages custom/modern-cc-packages)
+;; (setq custom/modern-cc-packages
+;;       '(google-c-style
+;;         ;; flymake-google-cpplint
+;;         irony
+;;         company-irony
+;;         company-irony-c-headers
+;;         flycheck
+;;         flycheck-irony
+;;         function-args
+;;         ;; irony-eldoc
+;;         cmake-ide
+;;         cmake-font-lock
+;;         ;; helm-make
+;;         ))
+;; (when *enable-rtags*
+;;   (setq custom/modern-cc-packages
+;;         (append
+;;          '(rtags
+;;            ;; helm-rtags
+;;            ivy-rtags
+;;            flycheck-rtags)
+;;          custom/modern-cc-packages)))
+;; (custom/install-packages custom/modern-cc-packages)
 
+
+;; C/C++ major mode
 (require 'cc-mode)
 (setq-default c-default-style "linux")
 (setq-default c-basic-offset 4)
@@ -37,25 +39,21 @@
   (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
   (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET"))))
 
-;; /google-c-style/ and /flycheck-google-cpplint/ style checker
+;; /google-c-style/ and /flymake-google-cpplint/ style checker
 (when *enable-gg-cpp-style*
-  (use-package google-c-style
-    :config
-    (add-hook 'c-mode-common-hook 'google-set-c-style)
-    (add-hook 'c-mode-common-hook 'google-make-newline-indent))
-  (use-package flycheck-google-cpplint
-    :load-path "git/"
-    :after flycheck
-    :config
-    (eval-after-load 'flycheck
-      '(progn
-         (require 'flycheck-google-cpplint)
-         (setq flycheck-c/c++-googlelint-executable
-               (if (string-equal system-type "darwin")
-                   "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
-         (flycheck-add-next-checker 'c/c++-clang
-                                    '(warning . c/c++-googlelint))))))
+  (require 'google-c-style)
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+  (defun zyue/flymake-google-init ()
+    (require 'flymake-google-cpplint)
+    (setq flymake-google-cpplint-command
+      (if (string-equal system-type "darwin")
+          "/usr/local/bin/cpplint" "/usr/bin/cpplint"))
+    (flymake-google-cpplint-load))
+  (add-hook 'c-mode-hook 'zyue/flymake-google-init)
+  (add-hook 'c++-mode-hook 'zyue/flymake-google-init))
 
+;; /rtags/ for code navigation
 (when *enable-rtags*
   ;; see the const *enable-rtags* defined in "init-features.el"
   (use-package rtags

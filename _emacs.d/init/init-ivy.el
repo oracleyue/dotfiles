@@ -4,19 +4,19 @@
 ;; Last modified on 31 Mar 2018
 
 ;; Install required Emacs packages
-(setq custom/ivy-packages
-      '(ivy
-        counsel
-        swiper
-        ivy-posframe
-        wgrep
-        counsel-projectile
-        counsel-gtags
-        hydra
-        ivy-hydra
-        avy
-        ivy-rich))
-(custom/install-packages custom/ivy-packages)
+;; (setq custom/ivy-packages
+;;       '(ivy
+;;         counsel
+;;         swiper
+;;         ivy-posframe
+;;         wgrep
+;;         counsel-projectile
+;;         counsel-gtags
+;;         hydra
+;;         ivy-hydra
+;;         avy
+;;         ivy-rich))
+;; (custom/install-packages custom/ivy-packages)
 
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
@@ -43,6 +43,7 @@
 
 (when *use-posframe*
   (use-package ivy-posframe
+    :ensure nil
     :load-path "git/ivy-posframe"
     :after (ivy)
     :config
@@ -175,28 +176,10 @@
 (global-set-key (kbd "M-g h") 'counsel-recent-directory)
 
 ;; ---------------------------------------------
-;; /counsel-projectile/: Ivy for projectile
-;; ---------------------------------------------
-(use-package counsel-projectile
-  :after projectile
-  :commands (counsel-projectile-find-file
-             counsel-projectile-find-dir
-             counsel-projectile-switch-to-buffer
-             counsel-projectile-grep
-             counsel-projectile-ag
-             counsel-projectile-switch-project)
-  :init
-  :bind
-  (([remap projectile-find-file]        . counsel-projectile-find-file)
-   ([remap projectile-find-dir]         . counsel-projectile-find-dir)
-   ([remap projectile-switch-to-buffer] . counsel-projectile-switch-to-buffer)
-   ([remap projectile-grep]             . counsel-projectile-grep)
-   ([remap projectile-ag]               . counsel-projectile-ag)
-   ([remap projectile-switch-project]   . counsel-projectile-switch-project)))
-
-;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
+(setenv "GTAGSLABEL" "pygments")
+(setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
 (use-package counsel-gtags
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
@@ -498,6 +481,7 @@
 
 ;; Ivy for Dash (Mac only)
 (use-package ivy-dash
+  :ensure nil
   :load-path "git"
   :bind (("M-g d" . dash-in-ivy)))
 

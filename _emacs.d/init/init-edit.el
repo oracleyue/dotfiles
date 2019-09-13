@@ -4,11 +4,11 @@
 ;; Last modified on 15 Sep 2017
 
 ;; Install required Emacs packages
-(setq custom/edit-packages
-      '(multiple-cursors
-        undo-tree
-        expand-region))
-(custom/install-packages custom/edit-packages)
+;; (setq custom/edit-packages
+;;       '(multiple-cursors
+;;         undo-tree
+;;         expand-region))
+;; (custom/install-packages custom/edit-packages)
 
 
 ;; ------------- Basic Editing Extensions ---------------
@@ -110,7 +110,8 @@
 (global-set-key (kbd "C-|") 'zyue/uncomment-line-or-region)   ;; invalid in terminals
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
-(global-undo-tree-mode)
+(use-package undo-tree
+  :config (global-undo-tree-mode))
 
 ;; toggle window split between horizontal-split and vertical-split
 (defun zyue/toggle-window-split ()
@@ -175,22 +176,24 @@ Uses `current-date-format' for the formatting the date/time."
 ;; ----------- Powerful Minor Modes ------------
 
 ;; /multiple-cursors/: edit with multiple cursors
-(require 'multiple-cursors)
-;; mark many occurrences in region
-(global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
-;; mark one more occurrence by regexp match
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-;; mouse events
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
-;; others
-(global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
-
+(use-package multiple-cursors
+  :config
+  ;; mark many occurrences in region
+  (global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
+  ;; mark one more occurrence by regexp match
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  ;; mouse events
+  (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+  ;; others
+  (global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
+  )
 
 ;; /expand-region/: increase the selected region by semantic units
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
 
 
 ;; ----------- Settings of /text-mode/ ------------

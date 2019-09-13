@@ -29,7 +29,6 @@
   (setq linum-format "%4d "))
 
 
-
 (provide 'init-restore)
 ;; ================================================
 ;; init-restore.el ends here

@@ -3,9 +3,9 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/lisp-packages
-      '(smartparens))
-(custom/install-packages custom/lisp-packages)
+;; (setq custom/lisp-packages
+;;       '(smartparens))
+;; (custom/install-packages custom/lisp-packages)
 
 ;; Usages:
 ;; use "C-h e" to open *Message* buffer for elisp printout

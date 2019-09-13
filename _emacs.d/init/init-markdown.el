@@ -3,12 +3,12 @@
 ;; ================================================================
 
 ;; Install required packages in Emacs
-(setq custom/markdown-packages
-      '(markdown-mode
-        imenu-list
-        ;; livedown
-        hexo))
-(custom/install-packages custom/markdown-packages)
+;; (setq custom/markdown-packages
+;;       '(markdown-mode
+;;         imenu-list
+;;         ;; livedown
+;;         hexo))
+;; (custom/install-packages custom/markdown-packages)
 
 ;; Install packages in the system
 ;; - require "multimarkdown" or "markdown" in shell
@@ -79,6 +79,7 @@
 ;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
 (use-package livedown
   :disabled
+  :ensure nil
   :load-path "~/.emacs.d/git"
   :init
   (setq livedown-autostart nil) ; auto open preview when opening markdown files
@@ -99,12 +100,10 @@
 ;; /hexo/: major mode to write blogs using .md
 ;;
 (use-package hexo
-  :ensure t
   :config
   (defun blog ()
     (interactive)
     (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
-
 
 
 (provide 'init-markdown)

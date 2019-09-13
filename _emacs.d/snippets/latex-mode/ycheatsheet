@@ -1,0 +1,142 @@
+# -*- mode: snippet -*-
+# name: Cheatsheet Template
+# key: cheatsheet
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[fontsize=9pt, paper=letter, headings=normal, landscape]{scrartcl}
+% This is a template (with demo texts) to create cheat sheet via LaTeX.
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times,helvet}    % charter; newtxtext/newtxmath
+\usepackage[scaled=0.95]{inconsolata}
+
+\RedeclareSectionCommands[beforeskip=-.5\baselineskip,
+afterskip=.1\baselineskip]{section,subsection,subsubsection}
+
+\usepackage[margin=0.25in]{geometry}
+\usepackage{tabularx}
+\usepackage{multicol}\usepackage{enumitem}
+\usepackage{etoolbox, letltxmacro}
+
+\setlength\parindent{0pt}
+\setlength\columnsep{15pt}
+
+% define a commandlist environment based on description
+\newenvironment{commandlist}{\begin{description}[noitemsep]}{\end{description}}
+\AtBeginEnvironment{commandlist}{%
+  \LetLtxMacro{\commanditem}{\item}
+  \let\olditem\item
+  \renewcommand\item[1][]{\olditem[{#1}]\raggedright\dotfill}}%
+\addtokomafont{descriptionlabel}{\ttfamily\mdseries}
+\newenvironment{notes}{\vspace*{10mm}\small}{}
+
+\begin{document}
+
+\section*{Emacs Cheat Sheet}
+\begin{multicols*}{3}
+
+  % ---------------------------------------------------------
+  % COLUMN 1
+  % ---------------------------------------------------------
+  \subsection*{General Emacs Commands}
+
+  \begin{commandlist}
+  \item[Ctl-x Ctl-c] quit
+  \item[Ctl-g] break (i.e. interrupt dialog/command)
+  \item[Ctl-/] Emacs undo
+  \item[Ctl-R] Redo (via evil and undo-tree)
+  \item[Ctl-s, Ctl-r] search forward / backward
+  \item[M-\%] query replace
+  \item[M-!] run shell command
+  \item[M-|] run shell command on selected text
+  \end{commandlist}
+
+  \begin{commandlist}
+  \item[M-x untabify] convert tabs to spaces (all or region)
+  \end{commandlist}
+
+  \begin{commandlist}
+  \item [Ctrl-\char`\\] toggle input method
+  \item [Ctrl-x RET Ctrl-\char`\\] set input method
+  \item[M-x set-input-method RET Tex] enable \TeX\ style input of symbols
+  \item[M-x insert-char] insert unicode character
+  \end{commandlist}
+
+  \subsection*{Getting help}
+
+  \begin{commandlist}
+  \item[Ctrl-h v] describe a variable.
+  \item[M-x describe-variable] \\ display the value and documentation of a global variable
+  \item[Ctrl-h f] describe a function
+  \item[M-x describe-function] same as bove
+  \item[M-x set-variable] \\ change a global variable; like to \verb|(setq ...)| in init file
+  \item[M-x eval-region] \\ evalute Emacs lisp code in region, useful for changing init file
+  \end{commandlist}
+
+
+  \vspace*{\fill}
+  \columnbreak
+  % ---------------------------------------------------------
+  % COLUMN 2
+  % ---------------------------------------------------------
+
+  \subsection*{\texttt{<leader>} commands, all modes}
+
+  These are my customizations using the \verb|evil-leader| package.
+  All commands are prefaced with \texttt{<leader>}, where:
+  \begin{center}
+    \texttt{<leader>} = \texttt{<SPC>}
+  \end{center}
+
+  \begin{commandlist}
+  \item[x] execute extended command (\texttt{M-x})
+  \item[w] save buffer
+  \item[k] kill buffer
+  \item[b] switch buffer
+  \item[e] open (find) file
+  \item[t] transpose chars
+  \item[a] org-mode agenda
+  \item[n] org-mode capture (take note)
+  \item[\#] toggle line numbers mode
+  \item[\char`\\] split window right
+  \item[-] split window below
+  \item[0] delete current window
+  \item[1]  delete other windows
+  \item[\char`\[\ \textrm{or} \char`\]] move to other ``window'' (Emacs splits)
+  \item[\{ \textrm{or} \}] move to other ``frame'' (OS window)
+  \end{commandlist}
+
+  \subsection*{\texttt{<leader>} commands, code}
+
+  \begin{commandlist}
+  \item[ci] comment/uncomment lines
+  \item[cl] quick comment/uncomment to a specific line
+  \item[cc] copy and comment lines
+  \item[cp] comment/uncomment paragraphs
+  \item[cr] comment/uncomment region
+  \item[cb] draw comment box around region
+  \end{commandlist}
+
+
+  \vspace*{\fill}
+  \columnbreak
+  % ---------------------------------------------------------
+  % COLUMN 3
+  % ---------------------------------------------------------
+
+  \subsection*{\texttt{<leader>} commands, auctex mode}
+  \begin{commandlist}
+  \item[l] compile and view \LaTeX\ file
+  \end{commandlist}
+
+  \begin{notes}
+    $^*$ The configuration files of \texttt{ranger} are in
+    \texttt{\textasciitilde/.config/ranger/}, where \texttt{rc.conf} defines
+    the keybindings and \texttt{rifle.conf} sets how files should be opened
+    or executed.
+  \end{notes}
+
+\end{multicols*}
+\end{document}

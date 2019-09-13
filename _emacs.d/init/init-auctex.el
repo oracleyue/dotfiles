@@ -3,10 +3,10 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/auctex-packages
-      '(auctex
-        smartparens))
-(custom/install-packages custom/auctex-packages)
+;; (setq custom/auctex-packages
+;;       '(auctex
+;;         smartparens))
+;; (custom/install-packages custom/auctex-packages)
 
 ;; Usages:
 ;; 1. if AuxTeX fails to fontify the buffer on time, run "M-x font-lock-fontify-buffer"

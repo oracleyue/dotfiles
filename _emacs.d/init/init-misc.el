@@ -3,10 +3,10 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/misc-packages
-      '(goldendict
-        ledger-mode))
-(custom/install-packages custom/misc-packages)
+;; (setq custom/misc-packages
+;;       '(goldendict
+;;         ledger-mode))
+;; (custom/install-packages custom/misc-packages)
 
 
 ;; /goldendict/: use GoldenDict in Emacs
@@ -18,9 +18,8 @@
           "/Applications/GoldenDict.app/Contents/MacOS/GoldenDict")))
 
 ;; /ledger-mode/: financial accounting
-(use-package ledger-mode :defer t)
+(use-package ledger-mode)
 ;; It also provides Babel in org-mode for ledger src blocks.
-
 
 
 (provide 'init-misc)

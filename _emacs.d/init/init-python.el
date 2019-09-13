@@ -13,13 +13,13 @@
 ;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
 
 ;; Install required Emacs packages
-(setq custom/py-packages
-      '(dtrt-indent
-        highlight-indent-guides))
-(custom/install-packages custom/py-packages)
-(if (and *use-lsp* *use-mspyls*)
-    (custom/install-packages '(lsp-python-ms))
-  (custom/install-packages '(jedi company-jedi)))
+;; (setq custom/py-packages
+;;       '(dtrt-indent
+;;         highlight-indent-guides))
+;; (custom/install-packages custom/py-packages)
+;; (if (and *use-lsp* *use-mspyls*)
+;;     (custom/install-packages '(lsp-python-ms))
+;;   (custom/install-packages '(jedi company-jedi)))
 
 ;; Usages:
 ;; *edit*
@@ -37,9 +37,10 @@
 
 
 ;; ------------------------------------------------
-;; Environment
+;; Python Environment
 ;; ------------------------------------------------
 (use-package python
+  :ensure nil
   :config
   (if (eq *use-python-version* 3)
       (setq python-shell-interpreter "ipython3") ; use ipython; may slow down openning files
@@ -75,7 +76,6 @@
   (defun zyue-edit-hl-config()
     ;; highlight indentation
     (use-package highlight-indent-guides
-      :ensure t
       :config
       (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
       ;; tweak colors

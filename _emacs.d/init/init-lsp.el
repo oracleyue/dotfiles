@@ -7,17 +7,17 @@
 ;; - Python: pip install python-language-server
 
 ;; Install required Emacs packages
-(setq custom/lsp-packages
-      '(lsp-mode
-        lsp-ui
-        company-lsp))
-(custom/install-packages custom/lsp-packages)
+;; (setq custom/lsp-packages
+;;       '(lsp-mode
+;;         lsp-ui
+;;         company-lsp))
+;; (custom/install-packages custom/lsp-packages)
 ;; Warning: you have to keep "dash" and "company" modes update-to-date
 ;; whenever update lsp packages.
 
 
 (use-package lsp-mode
-  :demand t
+  ;; :demand
   :hook ((python-mode . lsp))
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
@@ -34,7 +34,7 @@
           '("/usr/local/lib/" "/usr/lib/"))))
 
 (use-package lsp-ui
-  :demand t
+  ;; :demand
   ;; :custom-face
   ;; (lsp-ui-doc-background ((t (:background nil))))
   :bind (:map lsp-ui-mode-map
@@ -56,9 +56,8 @@
     (setq mode-line-format nil)))
 
 (use-package company-lsp
-  :demand t
+  ;; :demand
   :init (setq company-lsp-cache-candidates 'auto))
-
 
 
 (provide 'init-lsp)

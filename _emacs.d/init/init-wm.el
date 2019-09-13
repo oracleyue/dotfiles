@@ -4,15 +4,15 @@
 ;; Last modified on 18 Jan 2019
 
 ;; Install required Emacs packages
-(setq custom/wm-packages
-      '(winum
-        golden-ratio
-        neotree
-        imenu-list
-        deft
-        engine-mode
-        all-the-icons-dired))
-(custom/install-packages custom/wm-packages)
+;; (setq custom/wm-packages
+;;       '(winum
+;;         golden-ratio
+;;         neotree
+;;         imenu-list
+;;         deft
+;;         engine-mode
+;;         all-the-icons-dired))
+;; (custom/install-packages custom/wm-packages)
 
 
 ;; ----------------------------------------------
@@ -36,36 +36,38 @@
 ;; ----------------------------------------------
 ;; /golden-ratio/: resize multiple windows
 ;; ----------------------------------------------
-(require 'golden-ratio)
 (when *use-golden-ratio*
-  (golden-ratio-mode t))
-(eval-after-load "golden-ratio"
-  '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
-     (add-to-list 'golden-ratio-inhibit-functions 'pl/no-golden-ratio-popwin)
-     (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-     ;; (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
-     (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
-     (add-to-list 'golden-ratio-exclude-modes "c-mode")
-     (add-to-list 'golden-ratio-exclude-modes "c++-mode")
-     (add-to-list 'golden-ratio-exclude-modes "ess-mode")
-     (add-to-list 'golden-ratio-exclude-modes "python-mode")))
-(defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
-                               (symbol-value 'helm-alive-p)))
-(defun pl/no-golden-ratio-popwin ()
-  "Disable golden-ratio for popwin buffer."
-  (or (pl/no-golden-ratio-for-buffers " *guide-key*")
-      (pl/no-golden-ratio-for-buffers " *popwin-dummy*")
-      (pl/no-golden-ratio-for-buffers "*Ilist*")))
-(defun pl/no-golden-ratio-for-buffers (bufname)
-  "Disable golden-ratio if BUFNAME is the name of a visible buffer."
-  (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
+  (use-package golden-ratio
+    :config
+    (golden-ratio-mode t)
+    (eval-after-load "golden-ratio"
+      '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+         (add-to-list 'golden-ratio-inhibit-functions 'pl/no-golden-ratio-popwin)
+         (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+         ;; (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
+         (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
+         (add-to-list 'golden-ratio-exclude-modes "c-mode")
+         (add-to-list 'golden-ratio-exclude-modes "c++-mode")
+         (add-to-list 'golden-ratio-exclude-modes "ess-mode")
+         (add-to-list 'golden-ratio-exclude-modes "python-mode")))
+    (defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
+                                   (symbol-value 'helm-alive-p)))
+    (defun pl/no-golden-ratio-popwin ()
+      "Disable golden-ratio for popwin buffer."
+      (or (pl/no-golden-ratio-for-buffers " *guide-key*")
+          (pl/no-golden-ratio-for-buffers " *popwin-dummy*")
+          (pl/no-golden-ratio-for-buffers "*Ilist*")))
+    (defun pl/no-golden-ratio-for-buffers (bufname)
+      "Disable golden-ratio if BUFNAME is the name of a visible buffer."
+      (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
+    ))
 
 ;; ------------------------------------------------
 ;; /popwin/: manage popup (temporary) buffers
 ;; Bugs: it disables /neotree/ to create buffers.
 ;; ------------------------------------------------
-;; (require 'popwin)
-;; (popwin-mode 1)
+(use-package popwin
+  :config (popwin-mode 1))
 
 ;; ------------------------------------------------
 ;; Directory explorer (regular, /dired/)
@@ -84,14 +86,16 @@
 
 ;; directory explorer in tree: /neotree/
 (when (string-equal *tree-manager* "neotree")
-  (require 'neotree)
-  (setq neo-theme 'arrow)
-  (global-set-key (kbd "C-x C-j") 'neotree-toggle)
-  (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
-  (setq neo-show-hidden-files nil)
-  (eval-after-load "neotree"      ;; toggle by "H" in neotree
-    '(setq neo-hidden-regexp-list
-           '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
+  (use-package neotree
+    :config
+    (setq neo-theme 'arrow)
+    (global-set-key (kbd "C-x C-j") 'neotree-toggle)
+    (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
+    (setq neo-show-hidden-files nil)
+    (eval-after-load "neotree"      ;; toggle by "H" in neotree
+      '(setq neo-hidden-regexp-list
+             '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
+  )
 ;; directory explorer in tree: /treemacs/
 (when (string-equal *tree-manager* "treemacs")
   (require 'init-treemacs))
@@ -158,11 +162,11 @@
 ;; ------------------------------------------------
 ;; Integrations:
 ;;   - /markdown-mode/ to show headings
-
-(require 'imenu-list)
-(global-set-key (kbd "C-x C-'") #'imenu-list-smart-toggle)
-;; (setq imenu-list-auto-resize t)
-(setq imenu-list-focus-after-activation t)
+(use-package imenu-list
+  :config
+  (global-set-key (kbd "C-x C-'") #'imenu-list-smart-toggle)
+  ;; (setq imenu-list-auto-resize t)
+  (setq imenu-list-focus-after-activation t))
 
 ;; ------------------------------------------------
 ;; /TRAMP/: manage ssh and remote access

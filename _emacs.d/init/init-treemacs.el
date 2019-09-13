@@ -3,11 +3,11 @@
 ;; ================================================================
 
 ;; Install required Emacs packages
-(setq custom/treemacs-packages
-      '(treemacs
-        treemacs-projectile
-        treemacs-magit))
-(custom/install-packages custom/treemacs-packages)
+;; (setq custom/treemacs-packages
+;;       '(treemacs
+;;         treemacs-projectile
+;;         treemacs-magit))
+;; (custom/install-packages custom/treemacs-packages)
 
 
 (use-package treemacs

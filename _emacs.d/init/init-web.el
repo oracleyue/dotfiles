@@ -3,14 +3,14 @@
 ;; ================================================================
 
 ;; install required packages for web development
-(setq custom/web-packages
-      '(js2-mode
-        emmet-mode
-        json-reformat
-        json-snatcher
-        json-mode
-        popwin))
-(custom/install-packages custom/web-packages)
+;; (setq custom/web-packages
+;;       '(js2-mode
+;;         emmet-mode
+;;         json-reformat
+;;         json-snatcher
+;;         json-mode
+;;         popwin))
+;; (custom/install-packages custom/web-packages)
 
 
 ;; use /html-mode/ for html
@@ -24,24 +24,27 @@
 
 ;; /emmet-mode/ for zen-coding
 ;; useage: "C-j" to expand
-(require 'emmet-mode)
-(add-hook 'html-mode-hook 'emmet-mode) ;; auto-start on any web files
-(add-hook 'css-mode-hook 'emmet-mode) ;; auto-start on any web files
+(use-package emmet-mode
+  :config
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook 'emmet-mode))
 
 ;; use /json-mode/ for json
-(require 'json-mode)
-;; add json-path to popup window
-(require 'popwin)
-(defun popwin:json-mode-show-path ()
-  (interactive)
-  (json-mode-show-path)
-  (delete-windows-on "*json-path*")
-  (popwin:popup-buffer "*json-path*"))
-(push "*json-path*" popwin:special-display-config)  ;; not work, fix later
-(add-hook 'json-mode-hook
-          (lambda () (define-key json-mode-map
-                       (kbd "C-c C-p") 'popwin:json-mode-show-path)))
-;; usages:
+(use-package json-mode
+  :config
+  ;; add json-path to popup window (if enabled in "init-wm.el")
+  ;; (require 'popwin)
+  ;; (defun popwin:json-mode-show-path ()
+  ;;   (interactive)
+  ;;   (json-mode-show-path)
+  ;;   (delete-windows-on "*json-path*")
+  ;;   (popwin:popup-buffer "*json-path*"))
+  ;; (push "*json-path*" popwin:special-display-config)  ;; not work, fix later
+  ;; (add-hook 'json-mode-hook
+  ;;           (lambda () (define-key json-mode-map
+  ;;                        (kbd "C-c C-p") 'popwin:json-mode-show-path)))
+  )
+;; Usages:
 ;; - "C-c C-f"   format the region/buffer with =json-reformat=
 ;; - "C-c C-p"   display a path to the object at point with =json-snatcher=
 ;; - "C-c P"     copy a path to the object at point to the kill ring with =json-snatcher=
@@ -58,7 +61,6 @@
 ;; (add-to-list 'auto-mode-alist '("\\.[x]?html\\'" . web-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 ;; ----------------------------------------------------------------
-
 
 
 (provide 'init-web)

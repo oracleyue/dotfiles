@@ -3,16 +3,15 @@
 ;; ===============================================================
 
 ;; Install required Emacs packages
-(setq custom/progtools-packages
-      '(magit
-        flycheck
-        iedit
-        symbol-overlay
-        stickyfunc-enhance
-        dash-at-point
-        zeal-at-point
-        projectile))
-(custom/install-packages custom/progtools-packages)
+;; (setq custom/progtools-packages
+;;       '(magit
+;;         flycheck
+;;         iedit
+;;         symbol-overlay
+;;         stickyfunc-enhance
+;;         dash-at-point
+;;         zeal-at-point))
+;; (custom/install-packages custom/progtools-packages)
 
 
 ;; ---------------------------------------------
@@ -69,13 +68,12 @@
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
-(use-package iedit :ensure t)
+(use-package iedit)
 
 ;; ----------------------------------------------
 ;; /symbol-overlay/: highlight symbols to improve readability
 ;; ----------------------------------------------
 (use-package symbol-overlay
-  :ensure t
   :bind (("M-i" . symbol-overlay-put)
          ("M-n" . symbol-overlay-jump-next)
          ("M-p" . symbol-overlay-jump-prev)
@@ -110,33 +108,38 @@
                    (default-value 'semanticdb-find-default-throttle))
 
   ;; /stickyfunc/ shows the function name on top of the buffer
-  (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode)
-  (require 'stickyfunc-enhance))
+  (use-package stickyfunc-enhance
+    :config
+    (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode))
+  )
 
 ;; ----------------------------------------------
 ;; API reference support
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 (when (string-equal system-type "darwin")
-  (require 'dash-at-point)
-  (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
-  ; specify docsets to search in different modes
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "cpp,eigen,boost,gsl")
-         (python-mode . "python,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r")
-         (sh-mode . "bash"))))
+  (use-package dash-at-point
+    :config
+    (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
+                                        ; specify docsets to search in different modes
+    (set 'dash-at-point-mode-alist
+         '((c-mode . "c,gsl,gl4")
+           (c++-mode . "cpp,eigen,boost,gsl")
+           (python-mode . "python,numpy,scipy,matplotlib,pandas")
+           (ess-mode . "r")
+           (sh-mode . "bash"))))
+  )
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
 (when (string-equal system-type "gnu/linux")
-  (require 'zeal-at-point)
-  (global-set-key (kbd "C-c d") 'zeal-at-point)
-  (set 'dash-at-point-mode-alist
-       '((c-mode . "c,gsl,gl4")
-         (c++-mode . "c++,eigen,boost,gsl")
-         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
-         (ess-mode . "r"))))
-
+  (use-package zeal-at-point
+    :config
+    (global-set-key (kbd "C-c d") 'zeal-at-point)
+    (set 'dash-at-point-mode-alist
+         '((c-mode . "c,gsl,gl4")
+           (c++-mode . "c++,eigen,boost,gsl")
+           (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
+           (ess-mode . "r"))))
+  )
 
 ;; ----------------------------------------------
 ;; /gud/: debug supports, e.g. gdb, pdb
@@ -175,22 +178,6 @@
   (add-hook 'matlab-mode-hook 'ecb-activate))
 
 
-;; ----------------------------------------------
-;; /projectile/: global config (besides helm/counsel-projectile)
-;; ----------------------------------------------
-;; Do not visit the current project's tags table if `helm-projectile-mode' or
-;; 'counsel-projectile-mode' is loaded.  Doing so prevents the unnecessary call
-;; to `visit-tags-table' function and the subsequent `find-file' call for the
-;; `TAGS' file."
-(defun zyue/advice-projectile-dont-visit-tags-table ()
-  "Don't visit the tags table as we are using gtags/global."
-  nil)
-(when (or (fboundp 'helm-gtags) (fboundp 'counsel-gtags-mode))
-  (advice-add 'projectile-visit-project-tags-table :override
-              #'zyue/advice-projectile-dont-visit-tags-table))
-
-
-
-(provide 'init-progtools)
+(provide 'init-programming)
 ;; ================================================
-;; init-progtools.el ends here
+;; init-programming.el ends here

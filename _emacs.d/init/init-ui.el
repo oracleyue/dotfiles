@@ -3,9 +3,9 @@
 ;; ================================================================
 
 ;; Install required emacs packages
-(setq custom/theme-packages
-      '(spacemacs-theme))
-(custom/install-packages custom/theme-packages)
+;; (setq custom/theme-packages
+;;       '(spacemacs-theme))
+;; (custom/install-packages custom/theme-packages)
 
 ;; Git clone themes from github:
 ;; If using "doom-themes", go to "~/.emacs.d/themes" and run "./themes-dl.sh"
@@ -21,7 +21,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/github")
 (add-to-list 'load-path "~/.emacs.d/init/styles")
 
 ;; Variables

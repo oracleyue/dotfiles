@@ -4,11 +4,11 @@
 ;; Last modified on 15 Sep 2017
 
 ;; Install required Emacs packages
-(setq custom/basic-packages
-      '(smartparens
-        bash-completion
-        exec-path-from-shell))
-(custom/install-packages custom/basic-packages)
+;; (setq custom/basic-packages
+;;       '(smartparens
+;;         bash-completion
+;;         exec-path-from-shell))
+;; (custom/install-packages custom/basic-packages)
 
 
 ;; basics
@@ -49,10 +49,11 @@
 (setq-default fill-column *fill-column-mono*)
 
 ;; fix PATH for emacs in Mac OS X
-(require 'exec-path-from-shell)
-(push "LC_ALL" exec-path-from-shell-variables)
-(push "LANG" exec-path-from-shell-variables)
-(exec-path-from-shell-initialize)
+(use-package exec-path-from-shell
+  :config
+  (push "LC_ALL" exec-path-from-shell-variables)
+  (push "LANG" exec-path-from-shell-variables)
+  (exec-path-from-shell-initialize))
 
 ;; cursors
 (if *is-server-coding*
@@ -212,9 +213,8 @@
 ;; ----------------------------------------------
 ;; /bash-completion/: TAB complete alias and functions
 ;; ----------------------------------------------
-(require 'bash-completion)
-(bash-completion-setup)
-
+(use-package bash-completion
+  :config (bash-completion-setup))
 
 
 (provide 'init-basics)

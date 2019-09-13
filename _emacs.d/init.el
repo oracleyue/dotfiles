@@ -1,6 +1,9 @@
 ;; This file bootstraps the configuration, which is divided into a
 ;; number of other files.
 
+(when (version< emacs-version "25.1")
+  (error "This requires Emacs 25.1 and above!"))
+
 ;; load paths
 (add-to-list 'load-path "~/.emacs.d/init")
 (add-to-list 'load-path "~/.emacs.d/init/ext")
@@ -12,7 +15,7 @@
 
 ;; packages
 ;; (package-initialize)           ;; required to suppress warnings
-(require 'init-pkg)
+(require 'init-package)
 
 ;; constants
 (require 'init-const)             ;; enable/disable features
@@ -23,16 +26,18 @@
 ;; basics
 (require 'init-basics)
 (require 'init-edit)
-;; (require 'init-evil)           ;; use vim in emacs
 
-;; code completion engine (/company/ or /auto-complete/)
+;; code completion engine
 (require 'init-company)
 
-;; completion systems
-(if *use-helm* (require 'init-helm) (require 'init-ivy))
+;; completion systems (if prefer helm, load "init-helm.el")
+(require 'init-ivy)
 
 ;; directory and buffer explorers
 (require 'init-wm)             ;; directory explorers
+
+;; project management
+(require 'init-projectile)
 
 ;; major modes for document editing
 (require 'init-orgmode)           ;; org-mode
@@ -47,8 +52,8 @@
 ;; ----------------------------------------------------------------
 
 ;; Supporting tools
-(require 'init-progtools)          ;; edit, vc, debug, ui ...
-;; code navigation, see /helm-gtags/ or /counsel-gtags/
+(require 'init-programming)          ;; edit, vc, debug, ui ...
+;; For tags, see /helm-gtags/ or /counsel-gtags/ in "init-helm.el" or "init-ivy.el"
 
 ;; Language Server Protocol support
 (if *use-lsp* (require 'init-lsp))
