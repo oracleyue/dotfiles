@@ -3,26 +3,13 @@
 ;; ===============================================================
 ;; Last modified on 31 Mar 2018
 
-;; Install required Emacs packages
-;; (setq custom/ivy-packages
-;;       '(ivy
-;;         counsel
-;;         swiper
-;;         ivy-posframe
-;;         wgrep
-;;         counsel-projectile
-;;         counsel-gtags
-;;         hydra
-;;         ivy-hydra
-;;         avy
-;;         ivy-rich))
-;; (custom/install-packages custom/ivy-packages)
 
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 (use-package ivy
   :demand
+  :diminish ivy-mode " +Ivy"
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t

@@ -2,12 +2,6 @@
 ;; Programming Supports for Minority Languages
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/lang-packages
-;;       '(apples-mode
-;;         julia-mode))
-;; (custom/install-packages custom/lang-packages)
-
 
 ;; ---------------------------------------------
 ;; major mode for /VimScript/ (e.g. ".vimrc")

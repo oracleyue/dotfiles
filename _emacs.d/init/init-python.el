@@ -12,15 +12,6 @@
 ;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
 ;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
 
-;; Install required Emacs packages
-;; (setq custom/py-packages
-;;       '(dtrt-indent
-;;         highlight-indent-guides))
-;; (custom/install-packages custom/py-packages)
-;; (if (and *use-lsp* *use-mspyls*)
-;;     (custom/install-packages '(lsp-python-ms))
-;;   (custom/install-packages '(jedi company-jedi)))
-
 ;; Usages:
 ;; *edit*
 ;;   - shift selected blocks "C-c >", "C-c <"
@@ -162,7 +153,6 @@
     (add-hook 'python-mode-hook 'zyue/company-py-setup))
 
   ) ;; end of (if *use-lsp*)
-
 
 
 (provide 'init-python)

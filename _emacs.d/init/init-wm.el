@@ -3,17 +3,6 @@
 ;; ================================================================
 ;; Last modified on 18 Jan 2019
 
-;; Install required Emacs packages
-;; (setq custom/wm-packages
-;;       '(winum
-;;         golden-ratio
-;;         neotree
-;;         imenu-list
-;;         deft
-;;         engine-mode
-;;         all-the-icons-dired))
-;; (custom/install-packages custom/wm-packages)
-
 
 ;; ----------------------------------------------
 ;; Basic settings for window management
@@ -181,7 +170,7 @@
 ;; ----------------------------------------------
 (use-package deft
   :commands (deft)
-  :bind (("C-x C-g" . deft-find-file))
+  :bind (("C-x f" . deft-find-file))
   :config
   (setq deft-extensions '("org" "md")
         deft-default-extension "org"

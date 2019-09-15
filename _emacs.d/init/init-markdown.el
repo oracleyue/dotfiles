@@ -2,14 +2,6 @@
 ;; /Markdown/: major mode for Markdown
 ;; ================================================================
 
-;; Install required packages in Emacs
-;; (setq custom/markdown-packages
-;;       '(markdown-mode
-;;         imenu-list
-;;         ;; livedown
-;;         hexo))
-;; (custom/install-packages custom/markdown-packages)
-
 ;; Install packages in the system
 ;; - require "multimarkdown" or "markdown" in shell
 
@@ -94,7 +86,6 @@
 
 ;; OR use /flymd/ for live preview
 ;; https://github.com/mola-T/flymd
-
 
 ;;
 ;; /hexo/: major mode to write blogs using .md

@@ -2,11 +2,6 @@
 ;; Programming Environment for /Lisp/
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/lisp-packages
-;;       '(smartparens))
-;; (custom/install-packages custom/lisp-packages)
-
 ;; Usages:
 ;; use "C-h e" to open *Message* buffer for elisp printout
 ;; use "M-x ielm" to open interactive shell
@@ -17,7 +12,13 @@
 ;; use "M-x eval-defun", "eval-region", "eval-buffer"
 
 
-;; Configurations
+;; /eldoc/: documentation for lisp family languages
+(use-package eldoc
+  :diminish eldoc-mode
+  :config
+  (global-eldoc-mode -1)
+  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+  (add-hook 'scheme-mode-hook #'eldoc-mode))
 
 ;; To make "C-x C-e" use pretty-print; output is shown in minibuffer
 (global-set-key [remap eval-last-sexp] 'pp-eval-last-sexp)
@@ -51,7 +52,6 @@
 ;; Usage:
 ;;  - "M-x run-scheme" to invoke the Scheme process
 ;;  - "M-o" to send the buffer to the Scheme process
-
 
 
 (provide 'init-lisp)

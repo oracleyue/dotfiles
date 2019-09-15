@@ -2,6 +2,7 @@
 ;; Select or Enable Features
 ;; ================================================================
 
+
 ;; constants
 (defconst *is-mac* (string-equal system-type "darwin"))
 (defconst *is-linux* (string-equal system-type "gnu/linux"))

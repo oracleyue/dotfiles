@@ -2,6 +2,7 @@
 ;; Emacs package management system
 ;; ------------------------------------------------
 
+
 ;; packages path using /homebrew/
 (when (string-equal system-type "darwin")
   (let ((default-directory "/usr/local/share/emacs/site-lisp/"))

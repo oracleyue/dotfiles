@@ -12,9 +12,8 @@
   (shell-command "cd ~/.emacs.d/themes; ./themes-dl.sh"))
 
 (use-package doom-themes
-  :ensure nil
+  :load-path "themes/github/emacs-doom-themes"
   :demand
-  :load-path "~/.emacs.d/themes/github/emacs-doom-themes/"
   :config
   ;; global settings
   (require 'doom-themes)

@@ -2,13 +2,7 @@
 ;; Programming Environment for /R/
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/r-packages
-;;       '(ess
-;;         flycheck
-;;         key-combo))
-;; (custom/install-packages custom/r-packages)
-;; R packages: linter for R "lintr"
+;; Install R packages: linter for R "lintr"
 
 
 ;; ESS configrations

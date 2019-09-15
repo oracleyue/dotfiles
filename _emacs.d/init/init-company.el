@@ -2,13 +2,6 @@
 ;; /Company/ as the backend for code intelligent completion
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/company-packages
-;;       '(company
-;;         company-posframe
-;;         yasnippet))
-;; (custom/install-packages custom/company-packages)
-
 ;; Usage:
 ;; - =M-/=: ~company-complete~
 ;; - =M-TAB= (or =C-M-i=): ~completion-at-point~ (Emacs default)
@@ -26,6 +19,7 @@
 ;; /Company/ for code completion
 (use-package company
   :demand
+  :diminish company-mode
   :init
   (setq company-idle-delay                  0.2  ;; nil to disable; 0.5
 	    company-tooltip-limit               10
@@ -75,6 +69,7 @@
 ;; /Yasnippet/ A template system
 (use-package yasnippet
   :demand
+  :diminish yas-minor-mode
   :config
   (yas-global-mode 1)
   (setq-default mode-require-final-newline nil))

@@ -3,13 +3,6 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
-;; Install required Emacs packages
-;; (setq custom/basic-packages
-;;       '(smartparens
-;;         bash-completion
-;;         exec-path-from-shell))
-;; (custom/install-packages custom/basic-packages)
-
 
 ;; basics
 (setq inhibit-startup-screen t)
@@ -50,6 +43,7 @@
 
 ;; fix PATH for emacs in Mac OS X
 (use-package exec-path-from-shell
+  :demand
   :config
   (push "LC_ALL" exec-path-from-shell-variables)
   (push "LANG" exec-path-from-shell-variables)
@@ -169,7 +163,8 @@
 ;; /smartparens/: insert pairs of parenthesis/brackets
 ;; ----------------------------------------------
 (use-package smartparens
-  :defer nil
+  :demand
+  :diminish smartparens-mode
   :bind (:map smartparens-mode-map
               ;; nativation
               ("C-M-f"   . sp-forward-sexp)

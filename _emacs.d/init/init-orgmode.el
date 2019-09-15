@@ -2,18 +2,8 @@
 ;; Settings for /Org-mode/
 ;; ================================================================
 
-;; Install required packages for more functions
-;; (setq custom/org-packages
-;;       '(htmlize
-;;         smartparens
-;;         org-bullets
-;;         ox-gfm
-;;         ox-reveal))
-;; (custom/install-packages custom/org-packages)
 
-
-;; /Basic configurations/
-
+;; /Basics/
 (global-font-lock-mode 1)
 ;; (global-set-key "\C-cl" 'org-store-link)
 ;; (global-set-key "\C-cc" 'org-capture)
@@ -175,7 +165,6 @@ same directory as the org-buffer and insert a link to this file."
       (insert (concat "[[file:" filename "]]")))
   (org-display-inline-images))
 (global-set-key (kbd "C-c s c") 'zyue/org-screenshot)
-
 
 
 (provide 'init-orgmode)

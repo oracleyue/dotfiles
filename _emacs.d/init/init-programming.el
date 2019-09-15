@@ -2,17 +2,6 @@
 ;; General Programming Supports
 ;; ===============================================================
 
-;; Install required Emacs packages
-;; (setq custom/progtools-packages
-;;       '(magit
-;;         flycheck
-;;         iedit
-;;         symbol-overlay
-;;         stickyfunc-enhance
-;;         dash-at-point
-;;         zeal-at-point))
-;; (custom/install-packages custom/progtools-packages)
-
 
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking
@@ -68,12 +57,14 @@
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
-(use-package iedit)
+(use-package iedit :demand)
 
 ;; ----------------------------------------------
 ;; /symbol-overlay/: highlight symbols to improve readability
 ;; ----------------------------------------------
 (use-package symbol-overlay
+  :demand
+  :diminish symbol-overlay-mode
   :bind (("M-i" . symbol-overlay-put)
          ("M-n" . symbol-overlay-jump-next)
          ("M-p" . symbol-overlay-jump-prev)

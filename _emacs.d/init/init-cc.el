@@ -2,31 +2,6 @@
 ;; Programming Environment for C/C++ (modern)
 ; =====================================================
 
-;; check and install essential pkgs
-;; (setq custom/modern-cc-packages
-;;       '(google-c-style
-;;         ;; flymake-google-cpplint
-;;         irony
-;;         company-irony
-;;         company-irony-c-headers
-;;         flycheck
-;;         flycheck-irony
-;;         function-args
-;;         ;; irony-eldoc
-;;         cmake-ide
-;;         cmake-font-lock
-;;         ;; helm-make
-;;         ))
-;; (when *enable-rtags*
-;;   (setq custom/modern-cc-packages
-;;         (append
-;;          '(rtags
-;;            ;; helm-rtags
-;;            ivy-rtags
-;;            flycheck-rtags)
-;;          custom/modern-cc-packages)))
-;; (custom/install-packages custom/modern-cc-packages)
-
 
 ;; C/C++ major mode
 (require 'cc-mode)
@@ -164,6 +139,7 @@
            ("C-c C-c" . helm-make)
            :map makefile-bsdmake-mode-map ;; makefile in BSD
            ("C-c C-c" . helm-make))))
+
 
 (provide 'init-cc)
 ;; ================================================

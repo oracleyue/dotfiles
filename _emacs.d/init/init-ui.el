@@ -2,13 +2,9 @@
 ;; Emacs Themes
 ;; ================================================================
 
-;; Install required emacs packages
-;; (setq custom/theme-packages
-;;       '(spacemacs-theme))
-;; (custom/install-packages custom/theme-packages)
-
-;; Git clone themes from github:
-;; If using "doom-themes", go to "~/.emacs.d/themes" and run "./themes-dl.sh"
+;; Download themes from github:
+;; If using "doom-themes" or "eclipse-themes", go to "~/.emacs.d/themes"
+;; and run "./themes-dl.sh"
 
 
 ;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
@@ -17,11 +13,16 @@
   (setq default-frame-alist '((width . 96) (height . 32))))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
-;; Loading paths
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/solarized-theme")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/atom-one-dark-theme")
+;; Load paths
 (add-to-list 'load-path "~/.emacs.d/init/styles")
+(let ((base "~/.emacs.d/themes"))
+  (add-to-list 'custom-theme-load-path base)
+  (dolist (subfolder (directory-files base))
+    (let ((name (concat base "/" subfolder)))
+      (when (and (file-directory-p name)
+                 (not (equal subfolder ".."))
+                 (not (equal subfolder ".")))
+        (add-to-list 'custom-theme-load-path name)))))
 
 ;; Variables
 (defvar zyue-theme nil
@@ -113,18 +114,22 @@ of the focused frame and AB is the unfocused."
   )
 
 ;; Themes for different app and daemons
-(setq zyue-theme 'doom-nord-light)
+(setq zyue-theme 'eclipse)
 (when *is-server-coding* (setq zyue-theme 'doom-one))  ;; doom-one
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline
 (require 'init-modeline)
-(setq zyue-modeline 'doomline) ;; spaceline
+(setq zyue-modeline 'powerline) ;; powerline; spaceline; doomline; custom
 
 ;; Setup themes
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light) (require 'doom-theme-setup))
-  ((or 'spacemacs-dark 'spacemacs-light) (use-package spacemacs-theme :defer t)))
+  ((or 'spacemacs-dark 'spacemacs-light)
+   (use-package spacemacs-theme :demand))
+  ('eclipse (use-package eclipse-theme
+              :load-path "themes/github/eclipse-theme"
+              :demand)))
 
 ;; UI loading
 (if (daemonp)

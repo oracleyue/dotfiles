@@ -2,15 +2,23 @@
 ;; Modeline Customizations
 ;; ================================================================
 
-;; Install required emacs packages
-;; (setq custom/modeline-packages
-;;       '(spaceline
-;;         doom-modeline
-;;         shrink-path
-;;         eldoc-eval
-;;         all-the-icons))
-;; (custom/install-packages custom/modeline-packages)
 
+;; ---------------------------------------------
+;; Powerline
+;; ---------------------------------------------
+(defun zyue-use-powerline ()
+  (when (image-type-available-p 'xpm)
+    (use-package powerline
+      :demand
+      :config
+      (setq powerline-display-buffer-size nil)
+      (setq powerline-display-mule-info nil)
+      (setq powerline-display-hud nil)
+      (when *is-mac*  ;; fix applet bug on OSX
+        (setq powerline-image-apple-rgb t))
+      (when (display-graphic-p)
+        (powerline-default-theme)
+        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
 
 ;; ---------------------------------------------
 ;; Spaceline
@@ -20,8 +28,8 @@
     :demand
     :config
     (require 'spaceline-config)
-    (when *is-mac*
-      (setq powerline-image-apple-rgb t))    ;; fix applet bug on OSX
+    (when *is-mac*  ;; fix applet bug on OSX
+      (setq powerline-image-apple-rgb t))
     (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
 
 ;; ---------------------------------------------
@@ -51,6 +59,7 @@
   "Interface to load the theme for modeline."
   (pcase theme
     ('custom    (zyue-customize-modeline))
+    ('powerline (zyue-use-powerline))
     ('spaceline (zyue-use-spaceline))
     ('doomline  (zyue-use-doomline))
     (_          (zyue-customize-modeline))

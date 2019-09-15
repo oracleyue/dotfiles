@@ -2,12 +2,6 @@
 ;; Collections of Misc Modes for Assistance
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/misc-packages
-;;       '(goldendict
-;;         ledger-mode))
-;; (custom/install-packages custom/misc-packages)
-
 
 ;; /goldendict/: use GoldenDict in Emacs
 (use-package goldendict

@@ -6,12 +6,6 @@
 ;; Install LSP language servers
 ;; - Python: pip install python-language-server
 
-;; Install required Emacs packages
-;; (setq custom/lsp-packages
-;;       '(lsp-mode
-;;         lsp-ui
-;;         company-lsp))
-;; (custom/install-packages custom/lsp-packages)
 ;; Warning: you have to keep "dash" and "company" modes update-to-date
 ;; whenever update lsp packages.
 

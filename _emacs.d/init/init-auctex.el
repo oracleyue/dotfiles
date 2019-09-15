@@ -2,12 +2,6 @@
 ;; Editing Environment for /LaTeX/
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/auctex-packages
-;;       '(auctex
-;;         smartparens))
-;; (custom/install-packages custom/auctex-packages)
-
 ;; Usages:
 ;; 1. if AuxTeX fails to fontify the buffer on time, run "M-x font-lock-fontify-buffer"
 ;; 2. "C-M-a" go to the beginning of the current environment;
@@ -24,7 +18,6 @@
 
 
 ;; Configurations of /AUCTeX/
-
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)

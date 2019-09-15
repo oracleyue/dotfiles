@@ -2,12 +2,6 @@
 ;; Project Management
 ;; ===============================================================
 
-;; Install required Emacs packages
-;; (setq custom/proj-packages
-;;       '(projectile
-;;         counsel-projectile))
-;; (custom/install-packages custom/proj-packages)
-
 
 ;; ---------------------------------------------
 ;; /projectile/: project management

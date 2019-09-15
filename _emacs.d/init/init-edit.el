@@ -3,13 +3,6 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
-;; Install required Emacs packages
-;; (setq custom/edit-packages
-;;       '(multiple-cursors
-;;         undo-tree
-;;         expand-region))
-;; (custom/install-packages custom/edit-packages)
-
 
 ;; ------------- Basic Editing Extensions ---------------
 
@@ -111,6 +104,8 @@
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (use-package undo-tree
+  :demand
+  :diminish undo-tree-mode
   :config (global-undo-tree-mode))
 
 ;; toggle window split between horizontal-split and vertical-split
@@ -177,6 +172,7 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; /multiple-cursors/: edit with multiple cursors
 (use-package multiple-cursors
+  :demand
   :config
   ;; mark many occurrences in region
   (global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
@@ -192,6 +188,7 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; /expand-region/: increase the selected region by semantic units
 (use-package expand-region
+  :demand
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 

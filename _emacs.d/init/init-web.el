@@ -2,24 +2,15 @@
 ;; Programming Environment for Web Development
 ;; ================================================================
 
-;; install required packages for web development
-;; (setq custom/web-packages
-;;       '(js2-mode
-;;         emmet-mode
-;;         json-reformat
-;;         json-snatcher
-;;         json-mode
-;;         popwin))
-;; (custom/install-packages custom/web-packages)
 
+;; Use /html-mode/ for html
 
-;; use /html-mode/ for html
-;; use /css-mode/ for css
+;; Use /css-mode/ for css
 
-;; use /nxml-mode/ for xml
+;; Use /nxml-mode/ for xml
 (setq nxml-child-indent 4 nxml-attribute-indent 4)
 
-;; use /js2-mode/ for javescript
+;; Use /js2-mode/ for javescript
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; /emmet-mode/ for zen-coding
@@ -29,7 +20,7 @@
   (add-hook 'html-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook 'emmet-mode))
 
-;; use /json-mode/ for json
+;; Use /json-mode/ for json
 (use-package json-mode
   :config
   ;; add json-path to popup window (if enabled in "init-wm.el")
@@ -55,7 +46,7 @@
 
 
 ;; ----------------------------------------------------------------
-;; use comprehensive mode /web-mode/ for web development
+;; Use comprehensive mode /web-mode/ for web development
 ;;
 ;; (require 'web-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.[x]?html\\'" . web-mode))

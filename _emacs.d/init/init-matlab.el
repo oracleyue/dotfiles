@@ -2,12 +2,6 @@
 ;; Programming Environment for /MATLAB/
 ;; ================================================================
 
-;; Install required Emacs packages
-;; (setq custom/matlab-packages
-;;       '(matlab-mode
-;;         company))
-;; (custom/install-packages custom/matlab-packages)
-
 
 ;; Configurations
 (use-package matlab-mode
