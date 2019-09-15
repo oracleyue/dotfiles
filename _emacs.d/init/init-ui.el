@@ -114,13 +114,15 @@ of the focused frame and AB is the unfocused."
   )
 
 ;; Themes for different app and daemons
-(setq zyue-theme 'eclipse)
-(when *is-server-coding* (setq zyue-theme 'doom-one))  ;; doom-one
+(setq zyue-theme 'eclipse)  ;; eclipse, doom-nord-light
+(when *is-server-coding* (setq zyue-theme 'doom-one))  ;; doom-one, atom-one-dark
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
 
 ;; Modeline
 (require 'init-modeline)
-(setq zyue-modeline 'powerline) ;; powerline; spaceline; doomline; custom
+;; powerline, spaceline, doomline, custom
+(setq zyue-modeline 'powerline)
+(when *is-server-coding* (setq zyue-modeline 'doomline))
 
 ;; Setup themes
 (pcase zyue-theme
