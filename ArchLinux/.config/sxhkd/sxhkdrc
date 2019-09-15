@@ -15,9 +15,7 @@ super + shift + p
     dolphin
 
 # Et cetera...
-super + Insert
-    showclip
-# browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
+# Browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
 # copy the image into clipboard. Request "xclip" installed)
 super + x
     sxiv -t ~/Downloads/acfun_emoji/

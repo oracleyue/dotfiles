@@ -1,10 +1,9 @@
-" --------------------------------------------------------------------------
-" Basic settings
-" --------------------------------------------------------------------------
-set nu                                      " set row number
+" basics
 set nocompatible                            " be iMproved
+set nu                                      " set row number
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
+set encoding=utf-8                          " utf-8
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
@@ -13,38 +12,20 @@ set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
+set expandtab smarttab                      " using 4 spaces to replace tab
+set shiftwidth=4
+set softtabstop=4
+set backspace=indent,eol,start              " enable BACKSPACE on Mac
+set backup                                  " backup
+set backupdir=/tmp
+syntax on                                   " syntax
 
 " ESC
 inoremap jk <Esc>
 inoremap <c-[> <Esc>
 
-" fix bugs of vim (eg. taglist) on iTerm2
-" solution: iTerm2: Preferences -> Profiles -> Terminal -> uncheck "Disable
-" session-initiated window resizing"
-
-" using 4 spaces to replace tab
-set expandtab smarttab
-set shiftwidth=4
-set softtabstop=4
-
-" primary or clipboard for X11
-" requires +clipboard support (check by =vim --version=; archlinux =gvim=)
-" usage:
-" ="*y= and ="*p= to copy/paste using system PRIMARY
-" =*+y= and ="+p= to copy/paste using system CLIPBOARD
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-" paste without auto-indent (use =:set paste= and =:set nopaste=)
-set pastetoggle=<F2>
-
-" language spell checking
-autocmd FileType tex setlocal spell spelllang=en_us
-autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
-
 " color schemes
-if !has("gui_running")
+if ! has("gui_running")
     colorscheme lucius
     LuciusDark
 else  " /gvim/
@@ -52,52 +33,49 @@ else  " /gvim/
     LuciusLight
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-    set guifont=RobotoMono\ 11
 endif
 
 " status line
 set laststatus=2
 set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
-" backup
-set backup
-set backupdir=/tmp
+" copy/paste via clipboard/primary (no diff on Win and OSX)
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+" paste from clipboard without auto-indentation
+" enable by =:set paste= (to disable =:set nopaste=)
+set pastetoggle=<F2>
 
-" set cursor to the last position
-autocmd BufReadPost *
-    \if line("'\"") > 0 && line("'\"") <= line("$") |
-        \exe "normal g`\"" |
-    \endif
-
-" auto remove extra spaces
-autocmd BufWritePre * :%s/\s\+$//e
-
-
-" --------------------------------------------------------------------------
-"  Key maps
-" --------------------------------------------------------------------------
+" keybindings
 nnoremap <F8> :vertical wincmd gf<CR>
 nnoremap <Leader>nl :nohlsearch<CR>
 
+" language spell checking
+autocmd FileType tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+
+" auto remove extra spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 " --------------------------------------------------------------------------
 " Plugins
 " --------------------------------------------------------------------------
 
-" Vundle
-" -----------------
+" ---- Vundle ----
 filetype off				" required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " List of installed plugins:
-" repos on github
-  Plugin 'LaTeX-Box-Team/LaTeX-Box'
-  Plugin 'djoshea/vim-matlab'
 " vim-scripts repos
   Plugin 'taglist.vim'
-  Plugin 'jamessan/vim-gnupg'
+" repos on github
   Plugin 'scrooloose/nerdcommenter'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'jamessan/vim-gnupg'
+  "Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -108,19 +86,15 @@ filetype plugin indent on    " required
 " :PluginClean         - confirm(or auto-approve) removal of unused bundles
 " see :h vundle for more details or wiki for FAQ
 
-" Taglist
-" -----------------
+" ---- Taglist ----
 let Tlist_Enable_Fold_Column=0
 let Tlist_Exit_OnlyWindow=1
-let Tlist_GainFocus_On_ToggleOpen=1
+let Tlist_GainFocus_On_ToggleOpen=0
 let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-let tlist_matlab_settings = 'matlab;f:functions'
-" 'T' opens/closes the TagList window
 nnoremap <Leader>t :TlistToggle<CR>
 
-
-" --------------------------------------------------------------------------
-" misc
-" --------------------------------------------------------------------------
-syntax on
+" ---- NERDTree ----
+map <Leader>T :NERDTreeToggle<CR>
+" close vim if only NERDTree window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

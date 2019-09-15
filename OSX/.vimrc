@@ -15,6 +15,7 @@ set title                                   " enable dynamic title
 set expandtab smarttab                      " using 4 spaces to replace tab
 set shiftwidth=4
 set softtabstop=4
+set backspace=indent,eol,start              " enable BACKSPACE on Mac
 set backup                                  " backup
 set backupdir=/tmp
 syntax on                                   " syntax
