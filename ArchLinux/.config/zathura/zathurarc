@@ -2,7 +2,7 @@
 set statusbar-h-padding 2
 set statusbar-v-padding 2
 set page-padding 1
-set guioptions ''
+set guioptions 's'
 
 " themes
 set font "RobotoMono normal 10"

@@ -192,9 +192,9 @@ bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 
 # Themes: eighties
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
-# go to https://terminal.sexy for themes
+# go to https://terminal.sexy for themes 
 # class                 border  bground text    indicator child_border
-client.focused          #2D2D2D #66CCCC #2D2D2D #3F3F3F   #4F4F4F
+client.focused          #66CCCC #66CCCC #2D2D2D #66CCCC   #66CCCC
 client.focused_inactive #2D2D2D #3F3F3F #D3D0C8 #343434   #343434
 client.unfocused        #2D2D2D #343434 #D3D0C8 #343434   #343434
 client.urgent           #2D2D2D #900000 #FFFFFF #900000   #900000
@@ -237,8 +237,8 @@ for_window [class="smplayer"] floating enable
 for_window [class="ark"] floating enable
 for_window [class="Chromium"] border pixel 0
 for_window [title="Save File" class="Chromium"] border pixel 4
-for_window [instance="Msgcompose" class="Thunderbird"] floating enable border pixel 4
-for_window [instance="Calendar" class="Thunderbird"] floating enable border pixel 4
+for_window [instance="Msgcompose" class="Thunderbird"] floating enable
+for_window [instance="Calendar" class="Thunderbird"] floating enable
 for_window [instance="Steam" class="Steam"] floating enable
 for_window [instance="sun-awt-X11-XFramePeer" title="Figure*" class="MATLAB*"] floating enable
 for_window [title="Remmina Remote Desktop Client" class="org.remmina.Remmina"] floating enable
