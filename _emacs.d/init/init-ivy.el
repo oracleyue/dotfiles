@@ -9,7 +9,7 @@
 ;; ---------------------------------------------
 (use-package ivy
   :demand
-  :diminish ivy-mode " +Ivy"
+  :diminish ivy-mode
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
