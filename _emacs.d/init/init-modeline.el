@@ -25,6 +25,7 @@
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
+    :ensure nil
     :demand
     :config
     (require 'spaceline-config)
