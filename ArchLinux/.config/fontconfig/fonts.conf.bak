@@ -2,14 +2,6 @@
 <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
 <fontconfig>
     <description>zyue linux font config</description>
-
-    <!-- Font directory list -->
-    <dir>/usr/share/fonts</dir>
-    <dir>/usr/local/share/fonts</dir>
-    <dir prefix="xdg">fonts</dir>
-    <!-- the following element will be removed in the future -->
-    <dir>~/.fonts</dir>
-
     <!-- Disable bitmap font -->
     <match target="font">
         <edit name="embeddedbitmap" mode="assign">
@@ -18,30 +10,24 @@
     </match>
     <!-- Font hinting -->
     <match target="font">
-        <edit mode="assign" name="hinting">
-            <bool>true</bool>
+        <edit name="hinting" mode="assign">
+            <bool>false</bool>
         </edit>
     </match>
     <match target="font">
-        <edit mode="assign" name="hintstyle">
-            <const>hintslight</const>
+        <edit name="hintstyle" mode="assign">
+            <const>hintnone</const>
         </edit>
     </match>
     <!-- Antialias -->
-    <match target="font" >
-        <edit name="antialias" mode="assign">
-            <bool>true</bool>
-        </edit>
-    </match>
-
-    <!-- English default fonts: Roboto and FreeSerif, SF Mono -->
+    <!-- English default fonts -->
     <match>
         <test qual="any" name="family">
             <string>serif</string>
         </test>
-        <edit name="family" mode="prepend" binding="strong" >
-            <string>Times New Roman</string>
+        <edit binding="strong" name="family" mode="prepend">
             <string>FreeSerif</string>
+            <string>Times New Roman</string>
             <string>Noto Serif</string>
             <string>DejaVu Serif</string>
         </edit>
@@ -50,9 +36,9 @@
         <test qual="any" name="family">
             <string>sans-serif</string>
         </test>
-        <edit name="family" mode="prepend" binding="strong" >
-            <string>Arial</string>
+        <edit binding="strong" name="family" mode="prepend">
             <string>Roboto</string>
+            <string>Arial</string>
             <string>Noto Sans</string>
             <string>DejaVu Sans</string>
         </edit>
@@ -61,17 +47,16 @@
         <test qual="any" name="family">
             <string>monospace</string>
         </test>
-        <edit name="family" mode="prepend" binding="strong" >
+        <edit binding="strong" name="family" mode="prepend">
             <string>SF Mono</string>
             <string>RobotoMono</string>
             <string>Inconsolata</string>
             <string>DejaVu Sans Mono</string>
         </edit>
     </match>
-
     <!-- Chinese default fonts -->
     <match>
-        <test name="lang" compare="contains">
+        <test compare="contains" name="lang">
             <string>zh</string>
         </test>
         <test name="family">
@@ -79,10 +64,11 @@
         </test>
         <edit name="family" mode="prepend">
             <string>WenQuanYi Micro Hei</string>
+            <string>Sarasa Mono SC</string>
         </edit>
     </match>
     <match>
-        <test name="lang" compare="contains">
+        <test compare="contains" name="lang">
             <string>zh</string>
         </test>
         <test name="family">
@@ -90,10 +76,11 @@
         </test>
         <edit name="family" mode="prepend">
             <string>WenQuanYi Micro Hei</string>
+            <string>Sarasa Mono SC</string>
         </edit>
     </match>
     <match>
-        <test name="lang" compare="contains">
+        <test compare="contains" name="lang">
             <string>zh</string>
         </test>
         <test name="family">
@@ -101,11 +88,19 @@
         </test>
         <edit name="family" mode="prepend">
             <string>WenQuanYi Micro Hei Mono</string>
+            <string>Sarasa Mono SC</string>
         </edit>
     </match>
-
-    <!--Windows & Linux Chinese fonts -->
-    <!--Mapping uninstalled fonts to available fonts. -->
+    <!-- Mac & Linux font substitution -->
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>Helvetica</string>
+        </test>
+        <edit binding="same" name="family" mode="assign">
+            <string>Arial</string>
+        </edit>
+    </match>
+    <!-- Windows & Linux font substitution -->
     <match target="pattern">
         <test qual="any" name="family">
             <string>WenQuanYi Zen Hei</string>
@@ -139,27 +134,22 @@
         </edit>
     </match>
     <match target="pattern">
-        <test qual="any" name="family">
-            <string>SimSun-18030</string>
+        <test qual="any" name="family">            
+            <string>宋体</string>
         </test>
         <edit binding="same" name="family" mode="assign">
             <string>WenQuanYi Micro Hei</string>
         </edit>
-    </match>
-
+    </match>    
     <!-- For Thunderbird, lowering default font size to 11 for uniformity -->
     <!-- This will disable font size settings in .Xresources-->
     <!--<match target="pattern">-->
-        <!--<test qual="any" name="family"><string>monospace</string></test>-->
-        <!--<edit name="pixelsize" mode="assign"><int>11</int></edit>-->
+    <!--<test qual="any" name="family"><string>monospace</string></test>-->
+    <!--<edit name="pixelsize" mode="assign"><int>11</int></edit>-->
     <!--</match>-->
-
-    <!-- Load local system customization file -->
-    <include ignore_missing="yes">conf.d</include>
-    <!-- Font cache directory list -->
-    <cachedir>/var/cache/fontconfig</cachedir>
-    <cachedir prefix="xdg">fontconfig</cachedir>
-    <!-- the following element will be removed in the future -->
-    <cachedir>~/.fontconfig</cachedir>
-
+    <match target="font">
+        <edit name="antialias" mode="assign">
+            <bool>true</bool>
+        </edit>
+    </match>
 </fontconfig>
