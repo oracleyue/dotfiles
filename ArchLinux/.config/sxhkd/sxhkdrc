@@ -6,13 +6,13 @@ super + i
 super + m
     $TERMINAL -e ncmpcpp
 super + p
-	mpc toggle >/dev/null 2>&1
+    mpc toggle >/dev/null 2>&1
 super + shift + a
     $TERMINAL -e pulsemixer
 super + o
     goldendict >/dev/null 2>&1
 super + shift + p
-    dolphin
+    dolphin >/dev/null 2>&1
 
 # Et cetera...
 # Browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
