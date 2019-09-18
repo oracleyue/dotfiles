@@ -16,6 +16,7 @@
 ;; numbering windows
 ;; ----------------------------------------------
 (use-package winum
+  :demand
   :config
   (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
   (winum-mode))

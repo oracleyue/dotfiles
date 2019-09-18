@@ -1,8 +1,5 @@
-;; fonts
-(set-face-attribute 'mode-line nil
-                    :font (face-attribute 'default :font))
-(set-face-attribute 'mode-line-inactive nil
-                    :font (face-attribute 'default :font))
+;; This provides a plain modeline customization.
+
 
 ;; faces
 (make-face 'y/mode-line-rownum-face)
@@ -95,5 +92,6 @@
                ))
 
 
-(provide 'zyue-modeline)
-;;; zyue-modeline.el ends here
+(provide 'plain-modeline)
+;; ================================================================
+;; plain-modeline.el ends here

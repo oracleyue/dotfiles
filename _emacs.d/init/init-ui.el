@@ -48,7 +48,9 @@
     ;; transparent background
     (when *is-linux* (set-bg-alpha '(100 85)))
     ;; check and choose fonts
-    (check-and-load-fonts frame)))
+    (check-and-load-fonts frame)
+    ;; fix faces
+    (fix-faces frame)))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -107,30 +109,33 @@ of the focused frame and AB is the unfocused."
         (setq face-font-rescale-alist
               '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC"  . 1.2)
                 ("PingFang SC"      . 1.2)    ("Microsoft Yahei" . 1.2)))
-        (throw 'loop t))))
+        (throw 'loop t)))))
+;; Fix faces that fail to display correctly in some themes, OS or monitors
+(defun fix-faces (&optional fram)
   ;; Fix face bugs in ivy-switch-buffer
   (with-eval-after-load 'ivy
     (set-face-attribute 'ivy-org nil :font zyue-font :weight 'bold))
+  ;; Multiple-cursors (the other cursor bars are invisible in Linux)
+  (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
+    (with-eval-after-load 'multiple-cursors
+      (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF")))
   )
 
-;; Themes for different app and daemons
-(setq zyue-theme 'doom-nord-light)  ;; eclipse, doom-nord-light
-(when *is-linux* (setq zyue-theme 'eclipse))
-(when *is-server-coding* (setq zyue-theme 'doom-one))  ;; doom-one, atom-one-dark
-(when *is-terminal* (setq zyue-theme 'spacemacs-dark))
-
-;; Modeline
+;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
-;; powerline, spaceline, doomline, custom
 (setq zyue-modeline 'doomline)
-(when *is-linux* (setq zyue-modeline 'powerline))
-(when *is-server-coding* (setq zyue-modeline 'doomline))
+
+;; Themes (eclipse, doom-nord-light, doom-one, atom-one-dark)
+(setq zyue-theme 'doom-nord-light)
+(when *is-server-coding* (setq zyue-theme 'doom-one))
+(when *is-terminal*
+  (setq zyue-theme 'doom-one zyue-modeline 'plain))
 
 ;; Setup themes
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light) (require 'doom-theme-setup))
   ((or 'spacemacs-dark 'spacemacs-light)
-   (use-package spacemacs-theme :demand))
+   (use-package spacemacs-theme))
   ('eclipse (use-package eclipse-theme
               :load-path "themes/github/eclipse-theme"
               :demand)))

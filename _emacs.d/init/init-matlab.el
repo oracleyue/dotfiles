@@ -31,6 +31,10 @@
     (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
                    :actions '(insert wrap autoskip navigate)))
 
+  ;; ================================================================
+  ;; Support Extensions for MATLAB
+  ;; ================================================================
+
   ;; Add "align" supports for matlab: align both "=" and "%"
   ;; alternatively, use "align-regexp" ("C-x M-a" defined in "init-basic.el"),
   ;; one may prefix "C-u" for more arguments.
@@ -47,6 +51,7 @@
                              (regexp . "\\(\\s-*\\)\\(=.*\\s-*\\)$")
                              (modes . '(matlab-mode))
                              (repeat . nil)))))
+
   )
 
 

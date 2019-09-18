@@ -25,13 +25,12 @@
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
-    :ensure nil
     :demand
     :config
     (require 'spaceline-config)
+    (spaceline-emacs-theme)
     (when *is-mac*  ;; fix applet bug on OSX
-      (setq powerline-image-apple-rgb t))
-    (spaceline-emacs-theme)))  ;; OR spaceline-spacemacs-theme
+      (setq powerline-image-apple-rgb t))))  ;; OR spaceline-spacemacs-theme
 
 ;; ---------------------------------------------
 ;; Doomline
@@ -52,18 +51,18 @@
 ;; ---------------------------------------------
 ;; Customized modeline
 ;; ---------------------------------------------
-(defun zyue-customize-modeline ()
-  (require 'zyue-modeline))
+(defun zyue-plain-modeline ()
+  (require 'plain-modeline))
 
 ;; Wraper function to load modeline
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
-    ('custom    (zyue-customize-modeline))
+    ('plain     (zyue-plain-modeline))
     ('powerline (zyue-use-powerline))
     ('spaceline (zyue-use-spaceline))
     ('doomline  (zyue-use-doomline))
-    (_          (zyue-customize-modeline))
+    (_          (zyue-plain-modeline))
     ))
 
 ;; ---------------------------------------------
