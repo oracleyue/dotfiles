@@ -99,17 +99,19 @@ of the focused frame and AB is the unfocused."
   (catch 'loop
     (dolist (font '("WenQuanYi Micro Hei" "Sarasa Mono SC"
                     "PingFang SC" "Microsoft Yahei"))
-      (when (find-font (font-spec :name font))
-        ;; font-family-list not working in Linux for Chinese fonts
+      (when (member font (font-family-list))
+        ;; Note: when LC_CTYPE=zh_CN.UTF-8, use (find-font (font-spec :name font))
+        ;; since Chinese font names appear in (font-family-list) as unicode codes.
         (dolist (charset '(kana han cjk-misc bopomofo))  ;; remove "symbol"
           (set-fontset-font (frame-parameter nil 'font)
   		                    charset
   		                    (font-spec :family font :size size-n)))
-        ;; rescale to equal widths (2 EN = 1 SC); NOT working in Linux
-        (setq face-font-rescale-alist
-              '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC"  . 1.2)
-                ("PingFang SC"      . 1.2)    ("Microsoft Yahei" . 1.2)))
-        (throw 'loop t)))))
+        (throw 'loop t))))
+  ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
+  (setq face-font-rescale-alist
+        '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
+          ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
+  )
 ;; Fix faces that fail to display correctly in some themes, OS or monitors
 (defun fix-faces (&optional fram)
   ;; Fix face bugs in ivy-switch-buffer
