@@ -50,7 +50,7 @@
      (define-key company-active-map (kbd "C-n") 'company-select-next)
      (define-key company-active-map (kbd "C-p") 'company-select-previous)))
 
-  (global-set-key (kbd "s-/") 'company-complete-common)
+  (global-set-key (kbd "C-<tab>") 'company-complete-common)
   ;; default: "<M-tab>" or "M-C-i" ("<M-TAB>") for =completion-at-point=
   ;; default: "M-/" for =dabbrev-expand=
 
