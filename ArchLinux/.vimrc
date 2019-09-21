@@ -12,6 +12,8 @@ set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
+set textwidth=0                             " no auto line wrapping
+set wrapmargin=0
 set expandtab smarttab                      " using 4 spaces to replace tab
 set shiftwidth=4
 set softtabstop=4

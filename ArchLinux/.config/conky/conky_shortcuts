@@ -18,6 +18,7 @@ conky.config = {
     use_xft = true,
 }
 conky.text = [[
+    ${color}${font Bitstream Vera Sans:bold:size=9}i3$font
     ${color2}kill focused - ${color}mod+Shift+q
     ${color2}split direction - ${color}mod+t
     ${color2}resize focused - ${color}mod+Shift+y/u/i/o
@@ -25,16 +26,16 @@ conky.text = [[
     ${color2}change layout - ${color}mod+s/w/e
     ${color2}change gaps - ${color}mod+Shift+d/t
     ${color2}toggle floating - ${color}mod+Shift+Space
-    ${color2}screen shot - ${color}PrtScr, mod+PrtScr
-    ${color2}lock - ${color}mod+Ctrl+l
-    ${color2}exit - ${color}mod+0
+    ${color2}exit (lock) - ${color}mod+0 (mod+Ctrl+l)
 
-    ${color2}file manager (ranger/Dolphin) - ${color}mod+r/p
+    ${color}${font Bitstream Vera Sans:bold:size=9}app$font
+    ${color2}ranger/dolphin - ${color}mod+r/Shift+p
     ${color2}htop - ${color}mod+i
     ${color2}dictionary - ${color}mod+o
-    ${color2}music player - ${color}mod+m
+    ${color2}music player- ${color}mod+m/p
     ${color2}emoji - ${color}mod+x
+    ${color2}screenshot - ${color}PrtScr; mod+PrtScr
 
-    ${color2}help (i3) - ${color}mod+F1
-    ${color2}help (LaTeX) - ${color}mod+F2
+    ${color}${font Bitstream Vera Sans:bold:size=9}help$font
+    ${color2}i3/latex  - ${color}mod+F1/F2
 ]]

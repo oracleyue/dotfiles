@@ -15,8 +15,12 @@ super + shift + p
     dolphin >/dev/null 2>&1
 
 # Et cetera...
-# Browse and copy AcFun emoji (when found and opened, press "C-x C-c" to
-# copy the image into clipboard. Request "xclip" installed)
+# screen snapshot
+super + Print
+    gnome-screenshot -i
+# browse emoji
+# (In sxiv library, press "C-x C-c" to copy the image into
+# clipboard. Request "xclip" installed) 
 super + x
     sxiv -t ~/Downloads/acfun_emoji/
 
