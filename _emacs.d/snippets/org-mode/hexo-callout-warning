@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: callout warning
+# key: callout
+# group: hexo
+# --
+{% note warning %}
+$0
+{% endnote %}

@@ -62,8 +62,8 @@
 (setcdr (assoc 'path org-html-mathjax-options)
         '("https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"))
 
-;; Markdown
-(eval-after-load "org" '(require 'ox-md nil t))
+;; Markdown (use ox-gfm)
+;; (eval-after-load "org" '(require 'ox-md nil t))
 
 ;; /Code Blocks and Babel/
 
@@ -106,6 +106,7 @@
 
 ;; Prettify UI
 (use-package org-bullets
+  :demand
   :if (char-displayable-p ?◉)
   :hook (org-mode . org-bullets-mode)
   ;; :init (setq org-bullets-bullet-list '("●" "◉" "⚫" "•"))
@@ -120,12 +121,15 @@
                  :actions '(insert wrap autoskip navigate escape)))
 
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
+;; note: it preserves soft line breaks.
 (use-package ox-gfm
+  :demand
   :config
   (eval-after-load "org" '(require 'ox-gfm nil t)))
 
 ;; /ox-reveal/: presentation via orgmode
 (use-package ox-reveal
+  :demand
   :config
   (if *use-css-local*
       (setq org-reveal-root (concat "file://" (getenv "HOME")
@@ -137,7 +141,11 @@
   (setq org-reveal-title-slide
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
+;; ------------------------------------------------------------
 ;; User-defined utility enhancement
+;; ------------------------------------------------------------
+
+;; Quick take screenshot and insert in .org
 (defun zyue/org-screenshot ()
   "Take a screenshot into a time stamped unique-named file in the
 same directory as the org-buffer and insert a link to this file."
@@ -164,7 +172,22 @@ same directory as the org-buffer and insert a link to this file."
   (if (file-exists-p filename)
       (insert (concat "[[file:" filename "]]")))
   (org-display-inline-images))
-(global-set-key (kbd "C-c s c") 'zyue/org-screenshot)
+;; (global-set-key (kbd "C-c s c") 'zyue/org-screenshot)
+
+;; writing Hexo blogs in orgmode
+(use-package hexo
+  :demand
+  :config
+  (defun zyue/hexo () (interactive)
+         (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
+(defun zyue/hexo-ox-gfm (&optional async subtreep visible-only)
+  "Automatically export the current .org to .md at the folder of
+Hexo blog."
+  (interactive)
+  (let ((outfile (org-export-output-file-name
+                  ".md" subtreep
+                  "~/Public/Dropbox/oracleyue/oracleyue.github.io/source/_posts")))
+    (org-export-to-file 'gfm outfile async subtreep visible-only)))
 
 
 (provide 'init-orgmode)

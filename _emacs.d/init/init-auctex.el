@@ -19,6 +19,7 @@
 
 (use-package tex
   :ensure auctex
+  :demand
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
@@ -35,12 +36,11 @@
                 auto-mode-alist))
 
   ;; Pairing
-  (setq TeX-insert-braces nil)
-  ;; disable AucTeX pair completion
+  (setq-default TeX-insert-braces nil)
   (setq-default LaTeX-electric-left-right-brace nil)
   ;; user-defined pairs via /smartparens/
   (require 'smartparens-latex)
-  (sp-with-modes 'latex-mode
+  (sp-with-modes '(latex-mode LaTeX-mode)
     (sp-local-pair "\\|" "\\|"
                    :trigger "\\|"
                    :unless '(sp-latex-point-after-backslash)
@@ -59,7 +59,11 @@
     (sp-local-pair "\\big[" "\\big]"
                    :trigger "\\b["
                    :when '(sp-in-math-p)
-                   :post-handlers '(sp-latex-insert-spaces-inside-pair)))
+                   :post-handlers '(sp-latex-insert-spaces-inside-pair))
+    (sp-local-pair "$" "$"
+                   :actions '(insert wrap navigate)))
+  ;; disable default TeX bindings to use smartparens functions
+  (eval-after-load "latex" '(define-key LaTeX-mode-map "$" nil))
 
   ;; More math-mode in LaTeX
   (setq LaTeX-math-list

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: more
+# key: more
+# group: hexo
+# --
+#+HTML: <!-- more -->

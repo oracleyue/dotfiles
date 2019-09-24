@@ -26,7 +26,7 @@
   (require 'company-dabbrev-code)
   (add-to-list 'company-dabbrev-code-modes 'matlab-mode)
 
-  ;; config /smartparens/ for matlab
+  ;; add /smartparens/ supports
   (sp-with-modes 'matlab-mode
     (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
                    :actions '(insert wrap autoskip navigate)))

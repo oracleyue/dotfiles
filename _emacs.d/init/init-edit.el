@@ -143,7 +143,7 @@ Uses `current-date-format' for the formatting the date/time."
   (insert (format-time-string "%d %b %Y" (current-time))))
 (defun insert-date-digits ()
   (interactive)
-  (insert (format-time-string "%Y/%m/%d" (current-time))))
+  (insert (format-time-string "%Y-%m-%d" (current-time))))
 (defun insert-time ()
   "insert the current time (1-week scope) into the current buffer."
   (interactive)

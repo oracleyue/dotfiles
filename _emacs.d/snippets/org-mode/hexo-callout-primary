@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: callout primary
+# key: callout
+# group: hexo
+# --
+{% note primary %}
+$0
+{% endnote %}

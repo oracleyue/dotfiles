@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: metadata (header)
+# key: hexo
+# group: hexo
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+STARTUP: showall indent
+#+OPTIONS: toc:nil \n:t
+title:
+date:
+updated:
+tags:
+  - tag1
+  - tag2
+categories:
+#+HTML: ---

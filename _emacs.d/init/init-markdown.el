@@ -84,18 +84,6 @@
        (define-key markdown-mode-map (kbd "C-c C-c l") 'livedown-preview)
        (define-key markdown-mode-map (kbd "C-c C-c k") 'livedown-kill))))
 
-;; OR use /flymd/ for live preview
-;; https://github.com/mola-T/flymd
-
-;;
-;; /hexo/: major mode to write blogs using .md
-;;
-(use-package hexo
-  :config
-  (defun blog ()
-    (interactive)
-    (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
-
 
 (provide 'init-markdown)
 ;; ================================================

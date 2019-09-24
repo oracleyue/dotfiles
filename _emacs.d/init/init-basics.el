@@ -115,7 +115,6 @@
 
 ;; startup Dired folders
 (defun zyue/dired-open-folders-startup ()
-  (interactive)
   "Setup the startup folders. Used in .emacs"
   (if *is-mac*
       (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
