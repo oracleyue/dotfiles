@@ -89,11 +89,11 @@ of the focused frame and AB is the unfocused."
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
-  ;; Specify font for all unicode characters
+  ;; Specify font for unicode symbols
   (catch 'loop
     (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
       (when (member font (font-family-list))
-        (set-fontset-font t 'unicode font nil 'prepend)
+        (set-fontset-font t 'symbol font nil 'prepend)
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
