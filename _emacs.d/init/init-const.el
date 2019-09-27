@@ -54,6 +54,7 @@
 
 ;; python
 (defconst *use-python-version* 3)
+(defconst *use-ipython* nil)
 
 ;; ECB IDE interface
 (defconst *enable-ecb* nil)

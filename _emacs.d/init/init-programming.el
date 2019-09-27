@@ -108,8 +108,9 @@
 ;; API reference support
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(when (string-equal system-type "darwin")
+(when *is-mac*
   (use-package dash-at-point
+    :demand
     :config
     (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
                                         ; specify docsets to search in different modes
@@ -121,8 +122,9 @@
            (sh-mode . "bash"))))
   )
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
-(when (string-equal system-type "gnu/linux")
+(when *is-linux*
   (use-package zeal-at-point
+    :demand
     :config
     (global-set-key (kbd "C-c d") 'zeal-at-point)
     (set 'dash-at-point-mode-alist

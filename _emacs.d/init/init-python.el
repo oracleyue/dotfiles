@@ -33,13 +33,13 @@
 (use-package python
   :ensure nil
   :config
-  (if (eq *use-python-version* 3)
-      (setq python-shell-interpreter "ipython3") ; use ipython; may slow down openning files
-    (setq python-shell-interpreter "ipython2")) ; or "python2"
-  (setq python-shell-interpreter-args "--simple-prompt -i") ; fix bugs of ipython5
-  ;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
-  ;; (setq python-shell-interpreter-args
-  ;;       "-i --pylab --simple-prompt --no-color-info")
+  (if *use-ipython*
+      (progn
+        ;; using ipython may slow down openning files
+        (setq python-shell-interpreter "ipython3")
+        (setq python-shell-interpreter-args "--simple-prompt -i"))
+    (setq python-shell-interpreter "python3")
+    (setq python-shell-interpreter-args "-i"))
 
   ;; Set GUD debugger
   ;; (setq gud-pdb-command-name "python -m pdb")
@@ -104,6 +104,10 @@
                         "Eval region")
 
   ;; Abo-abo's lpy (To-do)
+
+  ;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
+  ;; (setq python-shell-interpreter-args
+  ;;       "-i --pylab --simple-prompt --no-color-info")
 
 ) ;; End of use-package python
 
