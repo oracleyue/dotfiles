@@ -242,6 +242,7 @@ for_window [title="Save File" class="Chromium"] border pixel 4
 for_window [title="Open File" class="Chromium"] border pixel 4
 for_window [instance="Msgcompose" class="Thunderbird"] floating enable
 for_window [instance="Calendar" class="Thunderbird"] floating enable
+for_window [class="Matplotlib"] floating enable
 for_window [instance="Steam" class="Steam"] floating enable
 for_window [instance="sun-awt-X11-XFramePeer" title="Figure*" class="MATLAB*"] floating enable
 for_window [title="Remmina Remote Desktop Client" class="org.remmina.Remmina"] floating enable

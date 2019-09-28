@@ -4,6 +4,8 @@
 ! | |_| || |    http://www.gitlab.com/dwt1/
 ! |____/ |_|
 
+! updated by oracleyue
+! last updated: 28 Sep 2019
 
 Xft.dpi: 96
 Xft.antialias: true
@@ -13,6 +15,9 @@ Xft.autohint: true
 Xft.hintstyle: hintfull
 Xft.lcdfilter: lcdfilter
 
+!!
+!! XTerm
+!!
 XTerm*renderFont: true
 XTerm*faceName: xft:monospace
 XTerm*faceSize: 12
@@ -23,8 +28,8 @@ XTerm.vt100.translations: #override \n\
   Ctrl <Key> j: smaller-vt-font() \n\
   Ctrl <Key> k: larger-vt-font()
 
-
-! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+! Every shell is a login shell by default (for inclusion of all necessary
+! environment variables)
 XTerm*loginshell: true
 
 ! I like a LOT of scrollback...
@@ -33,13 +38,15 @@ XTerm*savelines: 16384
 ! double-click to select whole URLs :D
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 
+!!
+!! URxvt
+!!
 URxvt*imLocale: en_US.UTF-8
 URxvt*termName: rxvt-unicode-256color
 Urxvt*buffered: false
 URxvt.intensityStyles: false
 URxvt.font: \
     xft:RobotoMono:size=11, \
-    xft:Inconsolata:size=14, \
     xft:DejaVu Sans Mono:size=12, \
     xft:Noto Sans Mono:size=12, \
     xft:Droid Sans Mono:size=12, \
@@ -56,27 +63,32 @@ URxvt.iso14755_52: false
 !! Extensions
 URxvt.perl-ext-common: default,matcher,url-select,keyboard-select,clipboard
 URxvt.colorUL: #4682B4
-!! url-select
+
+! url-select
 URxvt.keysym.M-u: perl:url-select:select_next
-!URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
-URxvt.url-select.launcher: urxvt -e w3m
+URxvt.url-select.launcher: /usr/bin/chromium
+!URxvt.url-select.launcher: urxvt -e w3m
 URxvt.url-select.underline: true
-!! keyboard-select:
+
+! keyboard-select:
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
-!! resize-font (add "resize-font" to "URxvt.perl-ext-common")
+
+! resize-font (add "resize-font" to "URxvt.perl-ext-common")
 !URxvt.resize-font.smaller: C-j
 !URxvt.resize-font.bigger:  C-k
-!! Matcher
-URxvt.url-launcher:	urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
+
+! Matcher
+URxvt.url-launcher: /usr/bin/chromium
 URxvt.matcher.button: 1
-!!clipboard
+
+!clipboard
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt*depth: 32
 
-! Theme: eighties
-
-! special
+!!
+!! Theme: eighties
+!!
 URxvt*foreground:  #d3d0c8
 URxvt*background:  [90]#2d2d2d
 URxvt*cursorColor: #d3d0c8
