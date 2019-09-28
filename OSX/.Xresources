@@ -8,11 +8,11 @@ Xft.antialias: 1
 !----------xterm配置----------
 !外观
 xterm*termName: xterm-256color
-xterm*geometry: 80x27
+xterm*geometry: 90x32
 xterm*scrollBar: false
 xterm*loginshell: false
-!xterm*background: black
-!xterm*foreground: white
+xterm*background: black
+xterm*foreground: white
 xterm*cursorBlink: true
 xterm*cursorOffTime: 600
 xterm*cursorOnTime: 600
@@ -58,7 +58,7 @@ xterm*metaSendsEscape: true
 !    Shift <KeyRelease>:insert-seven-bit()
 
 !粘贴
-xterm*selectToClipboard: true 
+xterm*selectToClipboard: true
 !xterm*VT100.Translations: #override \n\
 !    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY,CLIPBOARD, CUT_BUFFER0)
 

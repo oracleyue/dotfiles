@@ -32,6 +32,7 @@ $sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
 # push updates to github.com
 cd $repopath
 git add -A
-git commit -m "update emacs config from mac"
+#git commit -m "update emacs config from mac"
+git commit
 git push
 cd ~

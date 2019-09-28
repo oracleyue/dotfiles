@@ -8,11 +8,11 @@
 
 
 # essential bash settings
-sync='/usr/bin/rsync -rlptD -P --exclude=.DS_Store'
+sync='/usr/bin/rsync -rlptD -P --exclude=.DS_Store --delete'
 repopath=$HOME'/Workspace/gitrepo/dotfiles'
 
 # push updates to github.com
-cd $repopath && git pull && cd ~
+cd $repopath && git pull origin master && cd
 
 # rsync .emacs or init.el
 $sync $repopath/_emacs.d/init.el ~/.emacs.d/init.el

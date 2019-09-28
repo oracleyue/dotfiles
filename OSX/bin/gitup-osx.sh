@@ -38,8 +38,7 @@ $sync ~/.ctags $repopath
 # ===========================================
 # template files
 # ===========================================
-$sync ~/.gitignore  $repopath/templates/_gitignore
-$sync ~/.projectile $repopath/templates/_projectile
+$sync ~/Workspace/templates $repopath
 
 # ===========================================
 # apps
@@ -58,6 +57,11 @@ $sync ~/.vimperator/colors/oracleyue-dark.vimp \
 sublpath="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
 cp "$sublpath/"*.sublime-keymap $repopath/apps/sublime-text/
 cp "$sublpath/"*.sublime-settings $repopath/apps/sublime-text/
+
+# vscode
+vscpath="$HOME/Library/Application Support/Code/User"
+cp $vscpath/settings.json $repopath/apps/vscode/
+$sync $vscpath/snippets $repopath/apps/vscode/
 
 # ===========================================
 # "~/bin" on OSX
