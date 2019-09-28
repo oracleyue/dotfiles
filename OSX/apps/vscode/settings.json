@@ -1,0 +1,11 @@
+{
+    // interface
+    "editor.fontSize": 14,
+    "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
+    "workbench.colorTheme": "Dracula",
+
+    // python
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.jediEnabled": false,
+    "python.linting.flake8Enabled": true,
+}
