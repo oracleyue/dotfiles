@@ -4,7 +4,8 @@
 export PATH=$PATH:$HOME/bin/i3cmds
 export EDITOR="vim"
 export TERMINAL="urxvt"  #konsole
-export BROWSER="chromium --password-store=kwallet5"
+#export BROWSER="chromium --password-store=kwallet5"
+export BROWSER="chromium"
 export VIEWER="zathura"
 export FILE="ranger"
 export WMEmacs="i3"  # help Emacs adjust its config

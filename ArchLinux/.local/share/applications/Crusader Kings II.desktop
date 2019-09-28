@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Crusader Kings II
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/203770
+Icon=steam_icon_203770
+Terminal=false
+Type=Application
+Categories=Game;
