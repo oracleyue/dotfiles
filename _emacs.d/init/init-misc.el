@@ -5,7 +5,7 @@
 
 ;; /goldendict/: use GoldenDict in Emacs
 (use-package goldendict
-  :bind ("M-g ." . goldendict-dwim)
+  :bind ("M-g d" . goldendict-dwim)
   :config
   (when *is-mac*
     (setq goldendict-cmd

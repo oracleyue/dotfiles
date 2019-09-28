@@ -50,6 +50,7 @@
   )
 
 (use-package counsel
+  :demand
   :after (ivy)
   :bind (([remap execute-extended-command] . counsel-M-x)
          ([remap find-file]                . counsel-find-file)
@@ -104,6 +105,7 @@
 
 (use-package swiper
   :defer 1
+  :demand
   :bind
   (;; current buffer
    ("C-s"   . swiper)         ;; swiper-isearch
@@ -112,8 +114,8 @@
    ;; all buffers
    ("C-S-s" . swiper-all)
    ;; git project
-   ("C-c g" . counsel-git)
-   ("C-c j" . counsel-git-grep)
+   ("C-x g" . counsel-git)
+   ("C-x j" . counsel-git-grep)
    ;; grep files recursively in the folder
    ("M-g a" . counsel-rg)     ;; counsel-ag, counsel-ack, counsel-rg
    ;; system-wide files
@@ -168,12 +170,13 @@
 (setenv "GTAGSLABEL" "pygments")
 (setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
 (use-package counsel-gtags
+  :demand
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
               ("C-c g ." . counsel-gtags-dwim)
               ("C-c g ," . counsel-gtags-go-backward)
-              ("M-."     . counsel-gtags-dwim)
-              ("M-,"     . counsel-gtags-go-backward)
+              ("M-g ."   . counsel-gtags-dwim)
+              ("M-g ,"   . counsel-gtags-go-backward)
               ("C-c g t" . counsel-gtags-find-definition)
               ("C-c g r" . counsel-gtags-find-reference)
               ("C-c g s" . counsel-gtags-find-symbol)
@@ -196,6 +199,7 @@
 ;; /Avy/: jump to char/words in tree-style
 ;; ---------------------------------------------------------------
 (use-package avy
+  :demand
   :bind (("C-'"     . avy-goto-char)   ;; C-:
          ("M-'"     . avy-goto-char-2) ;; C-'
          ("M-g c"   . avy-goto-char)
@@ -466,11 +470,8 @@
 ;; Ivy-based Packages
 ;; ---------------------------------------------------------------
 
-;; Ivy for Dash (Mac only)
-(use-package ivy-dash
-  :ensure nil
-  :load-path "git"
-  :bind (("M-g d" . dash-in-ivy)))
+;; Ivy for Dash (Mac only, provides "dash-in-ivy")
+(use-package ivy-dash :load-path "git")
 
 
 (provide 'init-ivy)

@@ -21,12 +21,8 @@
 ;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
-(use-package magit
-  :demand t
-  :config
-  (if *use-helm*
-      (global-set-key (kbd "C-c h g") 'magit-status)
-    (global-set-key (kbd "C-x g") 'magit-status)))
+(use-package magit :demand)
+;; use "M-x magit" or "magit-status"
 
 ;; ----------------------------------------------
 ;; line numbering

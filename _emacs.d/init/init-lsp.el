@@ -29,14 +29,13 @@
 
 (use-package lsp-ui
   ;; :demand
-  ;; :custom-face
-  ;; (lsp-ui-doc-background ((t (:background nil))))
+  ;; :custom-face (lsp-ui-doc-background ((t (:background nil))))
   :bind (:map lsp-ui-mode-map
               ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
               ([remap xref-find-references] . lsp-ui-peek-find-references)
               ("C-c u" . lsp-ui-imenu))
   :init (setq lsp-ui-doc-enable t
-              lsp-ui-doc-use-webkit t
+              lsp-ui-doc-use-webkit nil
               lsp-ui-doc-include-signature t
               lsp-ui-doc-position 'top
               lsp-ui-doc-border (face-foreground 'default)
