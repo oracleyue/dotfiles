@@ -72,6 +72,9 @@ $sync ~/.config/ncmpcpp/bindings $repopath/.config/ncmpcpp
 $sync ~/.config/ncmpcpp/config   $repopath/.config/ncmpcpp
 # aria2 for downloading
 $sync ~/.config/aria2    $repopath/.config
+# vscode
+$sync ~/.config/Code\ -\ OSS/User/settings.json $repopath/.config/Code\ -\ OSS/User/
+$sync ~/.config/Code\ -\ OSS/User/snippets $repopath/.config/Code\ -\ OSS/User/
 
 # gtk and kde/qt settings
 # use KDE's System Settings for Qt apps; one may also use it for gtk application styles

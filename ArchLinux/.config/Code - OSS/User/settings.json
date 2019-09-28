@@ -1,0 +1,11 @@
+{
+    // themes
+    "workbench.colorTheme": "Dracula",    
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "SF Mono, RobotoMono, monospace",
+    
+    // python
+    "python.jediEnabled": false,
+    "python.linting.flake8Enabled": true,
+    
+}
