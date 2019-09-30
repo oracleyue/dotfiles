@@ -104,24 +104,20 @@
   )
 
 (use-package swiper
-  :defer 1
   :demand
-  :bind
-  (;; current buffer
-   ("C-s"   . swiper)         ;; swiper-isearch
-   ("s-f"   . swiper-isearch)
-   ("M-g s" . counsel-grep)   ;; using rg
-   ;; all buffers
-   ("C-S-s" . swiper-all)
-   ;; git project
-   ("C-x g" . counsel-git)
-   ("C-x j" . counsel-git-grep)
-   ;; grep files recursively in the folder
-   ("M-g a" . counsel-rg)     ;; counsel-ag, counsel-ack, counsel-rg
-   ;; system-wide files
-   ("M-g f" . counsel-fzf)    ;; find
-   ("M-g l" . counsel-locate) ;; locate
-   ))
+  :bind (("C-s"   . swiper)           ;; swiper-isearch
+         ("s-f"   . swiper-isearch)
+         ("M-g s" . counsel-grep)     ;; using rg
+         ;; all buffers
+         ("C-S-s" . swiper-all)
+         ;; git project
+         ("C-x g" . counsel-git)
+         ("C-x j" . counsel-git-grep)
+         ;; grep files recursively in the folder
+         ("M-g a" . counsel-rg)       ;; counsel-ag, counsel-ack, counsel-rg
+         ;; system-wide files
+         ("M-g f" . counsel-fzf)      ;; find
+         ("M-g l" . counsel-locate))) ;; locate
 
 ;; ---------------------------------------------
 ;; User-Extension: open recent directories

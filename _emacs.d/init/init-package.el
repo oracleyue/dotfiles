@@ -29,13 +29,15 @@
 (eval-and-compile
   (setq use-package-always-ensure t)
   (setq use-package-always-defer t)
-  (setq use-package-always-demand nil))
+  ;; (setq use-package-expand-minimally t)
+  ;; (setq use-package-enable-imenu-support t)
+  )
+(eval-when-compile (require 'use-package))
 
 ;; ------------------------------------------------
-;; Customized functions for package installation
+;; User-defined functions for package installation
 ;; ------------------------------------------------
 
-;; Functions to check and install packages
 (defun custom/packages-installed-p (pkg-list)
   "Check whether certain packages have not yet been installed."
   (catch 'exit
@@ -64,10 +66,9 @@
 ;; (custom/install-packages YOUR_PACKAGE_LIST)
 
 ;; ------------------------------------------------
-;; Functions for elisp compilation
+;; User-defined functions for elisp compilation
 ;; ------------------------------------------------
 
-;; Easy compiling .el files
 (defun y/byte-compile-directory (directory)
   "Byte-compile all *.el in the directory if the corresponding
 .elc doesn't exist."
@@ -80,10 +81,9 @@
       (byte-compile-file (expand-file-name fname directory)))))
 
 ;; ------------------------------------------------
-;; Functions for init config in org-mode
+;; User-defined functions for init config in org-mode
 ;; ------------------------------------------------
 
-;; extracting .el from .org config files
 (require 'ob-tangle)
 (defun zyue/init-org2el-all ()
   "Use org-babel to extract elisp code blocks from all .org files

@@ -71,8 +71,8 @@
 (use-package nyan-mode
   :ensure nil
   :disabled
-  :init (setq nyan-bar-length 24)
-  (nyan-mode))
+  :init   (setq nyan-bar-length 24)
+  :config (nyan-mode))
 
 
 (provide 'init-modeline)
