@@ -59,8 +59,9 @@
     :init (company-prescient-mode 1))
 
   ;; Icons and quickhelp
-  (when (and emacs/>=26p *enable-all-the-icons*)
+  (when (and emacs/>=26p *enable-company-icons*)
     (use-package company-box
+      :load-path "git/company-box-20190311.1745"
       :demand
       :diminish
       :functions (my-company-box--make-line
@@ -118,6 +119,7 @@
 
       (when (and (or *is-server* (display-graphic-p))
                  (require 'all-the-icons nil t))
+        (setq company-box-scrollbar nil)
         (declare-function all-the-icons-faicon 'all-the-icons)
         (declare-function all-the-icons-material 'all-the-icons)
         (declare-function all-the-icons-octicon 'all-the-icons)

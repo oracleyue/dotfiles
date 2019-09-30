@@ -23,6 +23,7 @@
 
 ;; all-the-icons support for ivy, dired, company
 (defconst *enable-all-the-icons* t)
+(defconst *enable-company-icons* (and *enable-all-the-icons* nil))
 
 ;; select tree window manager
 (defconst *tree-manager* "neotree")  ;; neotree; treemacs
