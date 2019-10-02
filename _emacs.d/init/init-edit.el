@@ -136,15 +136,15 @@
 (global-set-key (kbd "C-x |") 'zyue/toggle-window-split)
 
 ;; insert date
-(defun insert-date ()
+(defun zyue/insert-date ()
   "insert the current date and time into current buffer.
 Uses `current-date-format' for the formatting the date/time."
   (interactive)
   (insert (format-time-string "%d %b %Y" (current-time))))
-(defun insert-date-digits ()
+(defun zyue/insert-date-digits ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d" (current-time))))
-(defun insert-time ()
+(defun zyue/insert-time ()
   "insert the current time (1-week scope) into the current buffer."
   (interactive)
   (insert (format-time-string "%H:%M:%S" (current-time))))

@@ -5,7 +5,7 @@
 
 
 ;; basics
-(setq inhibit-startup-screen t)
+;; (setq inhibit-startup-screen t)
 (column-number-mode t)
 (setq backup-inhibited t)
 (scroll-bar-mode -1)
@@ -100,6 +100,9 @@
   (setq mac-command-modifier 'control)  ; use command as control
   (setq mac-control-modifier 'super))   ; use control as super
 
+;; unset keys
+(global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer
+
 ;; show size of files (in modeline)
 (size-indication-mode t)
 
@@ -113,25 +116,15 @@
           (expand-file-name "~/bin/web-browser")) ;use Safari
   (setq browse-url-browser-function 'browse-url-firefox))
 
-;; startup Dired folders
-(defun zyue/dired-open-folders-startup ()
-  "Setup the startup folders. Used in .emacs"
-  (if *is-mac*
-      (dired (expand-file-name "~/Public/Dropbox/Academia/Seminars"))
-    (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote")))
-  (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
-  (find-file (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote/Research.org"))
-  (switch-to-buffer "*scratch*"))
-
 ;; quick start email editing
-(defun draft-email ()
+(defun zyue/draft-email ()
   (interactive)
   (find-file (expand-file-name "~/Documents/.email.tmp.md"))
   (auto-fill-mode 1)
   (setq-local fill-column *fill-column-mono*))
 
 ;; quick draft formulas in LaTeX
-(defun draft-formula ()
+(defun zyue/draft-formula ()
   (interactive)
   (split-window nil -8 'below)
   (other-window 1)

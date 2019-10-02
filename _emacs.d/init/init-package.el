@@ -69,7 +69,7 @@
 ;; User-defined functions for elisp compilation
 ;; ------------------------------------------------
 
-(defun y/byte-compile-directory (directory)
+(defun zyue/byte-compile-directory (directory)
   "Byte-compile all *.el in the directory if the corresponding
 .elc doesn't exist."
 

@@ -7,22 +7,29 @@
 ;; and run "./themes-dl.sh"
 
 
+;; Banner logo
+(defcustom zyue-logo
+  (expand-file-name "themes/logo.png" user-emacs-directory)
+  "Set banner logo in the splash screen. nil means official logo."
+  :type 'string)
+
 ;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
 (if *is-mac*
     (setq default-frame-alist '((width . 96) (height . 36)))
   (setq default-frame-alist '((width . 96) (height . 32))))
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
-;; Load paths
-(add-to-list 'load-path "~/.emacs.d/init/styles")
-(let ((base "~/.emacs.d/themes"))
-  (add-to-list 'custom-theme-load-path base)
-  (dolist (subfolder (directory-files base))
-    (let ((name (concat base "/" subfolder)))
-      (when (and (file-directory-p name)
-                 (not (equal subfolder ".."))
-                 (not (equal subfolder ".")))
-        (add-to-list 'custom-theme-load-path name)))))
+;; Paths: load-path, theme-load-path
+(add-to-list 'load-path
+             (expand-file-name "init/styles" user-emacs-directory))
+(dolist (subdir '("."
+                  "atom-one-dark-theme"
+                  "github/eclipse-theme"
+                  "github/emacs-doom-themes"))
+  (let ((theme-dir (expand-file-name (concat "themes/" subdir)
+                                     user-emacs-directory)))
+    (when (file-directory-p theme-dir)
+      (add-to-list 'custom-theme-load-path theme-dir))))
 
 ;; Variables
 (defvar zyue-theme nil
@@ -49,6 +56,9 @@
     (when *is-linux* (set-bg-alpha '(100 85)))
     ;; check and choose fonts
     (check-and-load-fonts frame)
+    ;; refresh dashboard
+    (when (get-buffer "*dashboard*")
+      (dashboard-refresh-buffer))
     ;; fix faces
     (fix-faces frame)))
 
@@ -142,6 +152,9 @@ of the focused frame and AB is the unfocused."
   ('eclipse (use-package eclipse-theme
               :load-path "themes/github/eclipse-theme"
               :demand)))
+
+;; Dashboard (alternative startup/splash screen)
+(require 'init-dashboard)
 
 ;; UI loading
 (if (daemonp)

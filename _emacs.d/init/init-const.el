@@ -10,20 +10,24 @@
 (defconst *is-mac* (string-equal system-type "darwin"))
 (defconst *is-linux* (string-equal system-type "gnu/linux"))
 (defconst *is-win* (string-equal system-type "windows-nt"))
-(defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
 (defconst *is-app* (and (display-graphic-p) (not (daemonp))))
 (defconst *is-server* (not (not (daemonp))))
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
+(defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
+(defconst *is-graphic* (and (display-graphic-p) (daemonp)))
 
 ;; desktop environment
 (if (getenv "WMEmacs")
     (setq linux-desktop-env (getenv "WMEmacs"))
   (setq linux-desktop-env "kde"))
 
+;; startup directory
+
+
 ;; all-the-icons support for ivy, dired, company
 (defconst *enable-all-the-icons* t)
-(defconst *enable-company-icons* (and *enable-all-the-icons* nil))
+(defconst *enable-company-icons* (and *enable-all-the-icons* t))
 
 ;; select tree window manager
 (defconst *tree-manager* "neotree")  ;; neotree; treemacs

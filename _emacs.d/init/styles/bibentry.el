@@ -6,4 +6,4 @@
                                   '((?\r . "\\cite{%l}")
                                     (?b . "\\bibentry{%l}")
                                     (?f . "\\footcite{%l}")
-                                    (?t . "\\textcite{%l}"))))))                      
+                                    (?t . "\\textcite{%l}"))))))

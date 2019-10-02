@@ -189,7 +189,12 @@
 ;; ---------------------------------------------------------------
 ;; /Hydra/: make Emacs bindings that stick around
 ;; ---------------------------------------------------------------
-(use-package hydra)
+(use-package hydra
+  :commands (hydra-default-pre
+             hydra-keyboard-quit
+             hydra--call-interactively-remap-maybe
+             hydra-show-hint
+             hydra-set-transient-map))
 
 ;; ---------------------------------------------------------------
 ;; /Avy/: jump to char/words in tree-style

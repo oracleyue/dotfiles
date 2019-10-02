@@ -5,9 +5,8 @@
   (error "This requires Emacs 25.1 and above!"))
 
 ;; load paths
-(add-to-list 'load-path "~/.emacs.d/init")
-(add-to-list 'load-path "~/.emacs.d/init/ext")
-(add-to-list 'load-path "~/.emacs.d/git")
+(dolist (folder '("init" "git"))
+  (add-to-list 'load-path (expand-file-name folder user-emacs-directory)))
 
 ;; stop emacs automatically editing .emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -20,7 +19,7 @@
 ;; constants
 (require 'init-const)             ;; enable/disable features
 
-;; UI (theme, modeline, etc.)
+;; UI (theme, modeline, dashboard, etc.)
 (require 'init-ui)
 
 ;; basics
@@ -79,8 +78,9 @@
 ;; Minority Languages
 (require 'init-lang)
 
-
 ;; ----------------------------------------------------------------
-;; Restore default configurations overwritten by other modes
+;; Private (You may delete the following.)
 ;; ----------------------------------------------------------------
-(require 'init-restore)
+(when (member (user-full-name)
+              '("oracleyue" "zyue" "zuogong.yue" "zuogong"))
+  (require 'init-private))

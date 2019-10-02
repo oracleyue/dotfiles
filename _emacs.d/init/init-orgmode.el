@@ -178,8 +178,10 @@ same directory as the org-buffer and insert a link to this file."
 (use-package hexo
   :demand
   :config
-  (defun zyue/hexo () (interactive)
-         (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
+  (defun zyue/hexo ()
+    (interactive)
+    (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
+
 (defun zyue/hexo-ox-gfm (&optional async subtreep visible-only)
   "Automatically export the current .org to .md at the folder of
 Hexo blog."

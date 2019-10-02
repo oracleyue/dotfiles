@@ -12,6 +12,9 @@
 ;; splitted windows
 (windmove-default-keybindings)
 
+;; Emacs in console or tty:
+;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
+
 ;; ----------------------------------------------
 ;; numbering windows
 ;; ----------------------------------------------
