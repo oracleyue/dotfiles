@@ -9,6 +9,8 @@
   :init (dashboard-setup-startup-hook)
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :bind (:map dashboard-mode-map
+              ("h" . widget-backward)
+              ("l" . widget-forward)
               ("q" . quit-window))
   :config
   (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
@@ -56,7 +58,7 @@
              (,(if *is-graphic*
                    (all-the-icons-faicon "question" :height 1.0 :v-adjust -0.1)
                  "?")
-              "" "Help (?/h)"
+              "" "Help (?)"
               (lambda (&rest _) (fancy-about-screen))
               font-lock-string-face)))))
   )
