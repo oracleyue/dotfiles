@@ -15,19 +15,21 @@
 (defconst *is-server-main* (string-equal "main" (daemonp)))
 (defconst *is-server-coding* (string-equal "coding" (daemonp)))
 (defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
-(defconst *is-graphic* (and (display-graphic-p) (daemonp)))
+(defconst *is-graphic* (or (display-graphic-p) (daemonp)))
 
 ;; desktop environment
 (if (getenv "WMEmacs")
     (setq linux-desktop-env (getenv "WMEmacs"))
   (setq linux-desktop-env "kde"))
 
-;; startup directory
-
+;; check owner for loading highly specialized config
+(defconst *is-zyue*
+   (member (user-full-name) '("oracleyue" "zyue" "zuogong.yue" "zuogong")))
 
 ;; all-the-icons support for ivy, dired, company
 (defconst *enable-all-the-icons* t)
-(defconst *enable-company-icons* (and *enable-all-the-icons* t))
+(defconst *enable-company-icons* (and *enable-all-the-icons*
+                                      t))
 
 ;; select tree window manager
 (defconst *tree-manager* "neotree")  ;; neotree; treemacs

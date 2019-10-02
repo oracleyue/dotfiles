@@ -81,6 +81,4 @@
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)
 ;; ----------------------------------------------------------------
-(when (member (user-full-name)
-              '("oracleyue" "zyue" "zuogong.yue" "zuogong"))
-  (require 'init-private))
+(when *is-zyue* (require 'init-private))
