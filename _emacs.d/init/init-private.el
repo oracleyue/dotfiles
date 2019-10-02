@@ -9,7 +9,7 @@
 ;; open default folders/files on startup
 (cond
  ((or *is-server-main* *is-app*)
-  (dired (expand-file-name "~/Public/Dropbox/oracleyue/OrgNote"))
+  (dired (expand-file-name "~/Public/Dropbox/Academia"))
   (find-file (expand-file-name "~/Public/Dropbox/Academia/ToDoList.org"))
   (cd (expand-file-name "~/Public/Dropbox/Academia/Manuscripts")))
  (*is-server-coding*
