@@ -24,7 +24,7 @@
 
 ;; check owner for loading highly specialized config
 (defconst *is-zyue*
-   (member (user-full-name) '("oracleyue" "zyue" "zuogong.yue" "zuogong")))
+   (member (user-login-name) '("oracleyue" "zyue" "zuogong.yue" "zuogong")))
 
 ;; all-the-icons support for ivy, dired, company
 (defconst *enable-all-the-icons* t)
