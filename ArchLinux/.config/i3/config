@@ -192,7 +192,7 @@ bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 5
 
 # Themes: eighties
 # go to https://thomashunter.name/i3-configurator/ to use color palletes
-# go to https://terminal.sexy for themes 
+# go to https://terminal.sexy for themes
 # class                 border  bground text    indicator child_border
 client.focused          #66CCCC #66CCCC #2D2D2D #3F3F3F   #4F4F4F
 client.focused_inactive #2D2D2D #3F3F3F #D3D0C8 #343434   #343434
@@ -229,7 +229,7 @@ bar {
 # Use =xprop= in bash (and click the target window) to determine class names
 # To move floating windows, hold $mod key and use mouse to drag
 for_window [class="GoldenDict"] floating enable resize set 800 550
-for_window [class="dolphin"] floating enable
+for_window [class="dolphin"] floating enable border pixel 4
 for_window [class="kate"] floating enable
 for_window [class="transmission"] floating enable
 for_window [class="okular"] floating enable resize set 850 1000
