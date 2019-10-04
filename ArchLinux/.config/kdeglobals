@@ -107,7 +107,7 @@ ForegroundVisited=127,140,141
 
 [DirSelect Dialog]
 DirSelectDialog Size=640,480
-History Items[$e]=file:$HOME/Books/HPLinuxLibrary,file:$HOME/Papers/MendeleyLibrary,file:$HOME/Books/DesktopLibrary,file:$HOME/Books,file:$HOME/Software/dicts
+History Items[$e]=file:$HOME/Workspace/qt,file:$HOME/Books/HPLinuxLibrary,file:$HOME/Papers/MendeleyLibrary,file:$HOME/Books/DesktopLibrary,file:$HOME/Books,file:$HOME/Software/dicts
 
 [General]
 BrowserApplication[$e]=chromium.desktop

@@ -75,6 +75,9 @@ $sync ~/.config/aria2    $repopath/.config
 # vscode
 $sync ~/.config/Code\ -\ OSS/User/settings.json $repopath/.config/Code\ -\ OSS/User/
 $sync ~/.config/Code\ -\ OSS/User/snippets $repopath/.config/Code\ -\ OSS/User/
+# qtcreator
+$sync ~/.config/QtProject/QtCreator.ini $repopath/.config/QtProject/
+$sync ~/.config/QtProject/qtcreator/styles $repopath/.config/QtProject/qtcreator/
 
 # gtk and kde/qt settings
 # use KDE's System Settings for Qt apps; one may also use it for gtk application styles
