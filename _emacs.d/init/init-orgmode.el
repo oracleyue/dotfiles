@@ -35,28 +35,25 @@
 (setq org-highlight-latex-and-related '(latex script entities))
 
 ;; set apps to open files in orgmode
-(setq org-file-apps
-      (quote ((auto-mode . emacs)
-              ("\\.mm\\'" . default)
-              ("\\.x?html?\\'" . default)
-              ("\\.pdf\\'" . default))))
+(setq org-file-apps (quote ((auto-mode       . emacs)
+                            ("\\.x?html?\\'" . default)
+                            ("\\.pdf\\'"     . default))))
 
 ;; /Export Settings/
 
 ;; HTML
-(setq org-html-head-include-default-style nil)
+(use-package htmlize)
 ;; local setting: add "#+HTML_HEAD" and "#+HTML_HEAD_EXTRA" in .org files
 ;; one can add "#+HTML_HEAD: " (leave empty) to disable global heads
-(if *use-css-local*
-    (progn
-      (setq org-html-head
-            "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/bootstrap.min.css\" />")
-      (setq org-html-head-extra
-            "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"/Users/oracleyue/.emacs.d/templates/css/style.css\" />"))
-  (setq org-html-head
-        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/bootstrap.min.css\" />")
-  (setq org-html-head-extra
-        "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/style.css\" />"))
+;; (setq org-html-head-include-default-style nil)
+(setq org-html-head
+      (concat "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\""
+              (getenv "HOME")
+              "/.emacs.d/templates/css/bootstrap.min.css\" />")
+      org-html-head-extra
+      (concat "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\""
+              (getenv "HOME")
+              "/.emacs.d/templates/css/style.css\" />"))
 ;; use newer Mathjax
 (require 'ox-html)
 (setcdr (assoc 'path org-html-mathjax-options)

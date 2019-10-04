@@ -38,7 +38,7 @@
 (defconst *use-golden-ratio* nil)
 
 ;; use css locally or in github
-(defconst *use-css-local* t)
+(defconst *use-css-local* nil)
 
 ;; completion system
 (defconst *use-ivy*  t)

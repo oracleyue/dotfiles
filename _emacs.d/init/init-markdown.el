@@ -51,12 +51,8 @@
     (setq markdown-command "/usr/bin/multimarkdown"))
 
   ;; configure markdown export styles
-  (if *use-css-local*
-      (setq css-default-path (expand-file-name "~/.emacs.d/templates/css/"))
-    (setq css-default-path  ;; css files on github.com
-          "https://rawgit.com/oracleyue/dotfiles/master/_emacs.d/templates/css/"))
   (add-to-list 'markdown-css-paths
-               (concat css-default-path "github.md.css"))
+               (concat (expand-file-name "~/.emacs.d/templates/css/") "github.md.css"))
   ;; using "style.md.css" requires "bootstrap.min.css"
 
   ;; use mathjax
@@ -72,7 +68,7 @@
 (use-package livedown
   :disabled
   :ensure nil
-  :load-path "~/.emacs.d/git"
+  :load-path "git/"
   :init
   (setq livedown-autostart nil) ; auto open preview when opening markdown files
   (setq livedown-open t)        ; auto open the browser window

@@ -67,7 +67,7 @@
 ;; ------------------------------------------------
 (require 'dired-x)
 (setq dired-omit-files
-      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls")
+      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git$\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls")
 (delete ".bbl" dired-omit-extensions)
 (add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
 ;; suppress errors due to no support of "ls --dired" on osx
@@ -80,9 +80,10 @@
 ;; directory explorer in tree: /neotree/
 (when (string-equal *tree-manager* "neotree")
   (use-package neotree
+    :demand
     :config
     (setq neo-theme 'arrow)
-    (global-set-key (kbd "C-x C-j") 'neotree-toggle)
+    ;; =M-x neotree-toggle= to start
     (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
     (setq neo-show-hidden-files nil)
     (eval-after-load "neotree"      ;; toggle by "H" in neotree
@@ -224,8 +225,8 @@
 ;; Integrations:
 ;;   - /markdown-mode/ to show headings
 (use-package imenu-list
+  :bind ("C-x C-'" . imenu-list-smart-toggle)
   :config
-  (global-set-key (kbd "C-x C-'") #'imenu-list-smart-toggle)
   ;; (setq imenu-list-auto-resize t)
   (setq imenu-list-focus-after-activation t))
 
