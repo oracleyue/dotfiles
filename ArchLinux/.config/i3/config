@@ -229,8 +229,9 @@ bar {
 # Use =xprop= in bash (and click the target window) to determine class names
 # To move floating windows, hold $mod key and use mouse to drag
 for_window [class="GoldenDict"] floating enable resize set 800 550
-for_window [class="dolphin"] floating enable border pixel 4
+for_window [class="dolphin"] floating enable border pixel 3
 for_window [class="kate"] floating enable
+for_window [class="systemsettings"] floating enable
 for_window [class="transmission"] floating enable
 for_window [class="okular"] floating enable
 for_window [class="gwenview"] floating enable
@@ -238,8 +239,8 @@ for_window [class="smplayer"] floating enable
 for_window [class="ark"] floating enable
 for_window [class="Emacs"] border pixel 0
 for_window [class="Chromium"] border pixel 0
-for_window [title="Save File" class="Chromium"] border pixel 4
-for_window [title="Open File" class="Chromium"] border pixel 4
+for_window [title="Save File" class="Chromium"] border pixel 3
+for_window [title="Open File" class="Chromium"] border pixel 3
 for_window [instance="Msgcompose" class="Thunderbird"] floating enable
 for_window [instance="Calendar" class="Thunderbird"] floating enable
 for_window [class="Matplotlib"] floating enable

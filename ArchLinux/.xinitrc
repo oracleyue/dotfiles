@@ -17,6 +17,7 @@ xrdb -merge ~/.Xresources
 
 # Themes
 export XDG_CURRENT_DESKTOP="KDE"
+export KDE_SESSION_VERSION="5"  # use "kde-open" instead of "kfmclient" for xdg-open
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 xwallpaper --zoom ~/.config/i3/wallpaper.jpg
 

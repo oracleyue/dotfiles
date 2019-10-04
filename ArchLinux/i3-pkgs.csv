@@ -9,6 +9,7 @@
 , conky, desktop widget to show help/info
 , xorg-xprop, tool to detect window properties
 , xclip, terminal tool for X-clipboard
+, perl-file-mimeinfo, determine file types for xdg-open
 
 , ranger, file manager
 , urxvt-perls, terminal
@@ -18,6 +19,9 @@
 , w3m, terminal browser for preview images in ranger
 , mpd, music player demo
 , ncmpcpp, mpd client
+
+, fsad, command-line productivity booster
+, fzf, command-line fuzzy finder
 
 , fcitx, chinese input tool
 , fcitx-libpinyin, pinyin library

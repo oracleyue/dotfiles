@@ -8,7 +8,13 @@ export GPG_TTY
 # add PATH
 export PATH=/home/zyue/bin:$PATH
 
-# alias
+# environment variables
+export EDITOR=vim
+# export EA_EDITOR='emacsclient --socket-name=any -nc'   # Emacs-Anywhere
+export GTAGSLABEL=pygments      # "gtags" in GNU global
+export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
+
+# aliases
 alias ls='ls --color=auto'
 alias ll='ls -Alh --color=auto'
 alias la='ls -a --color=auto'
@@ -29,32 +35,32 @@ alias grep='grep -i'
 #alias ack='ack -Hn --no-group --no-color'
 alias ack='ack -Hni'
 alias gitup='git add . && git ci -m "regular update" && git push'
-#function open() { dolphin $1; }
 alias open='mimeopen'  # from pkg "perl-file-mimeinfo"
+alias wine='env LC_CTYPE=en_US.UTF-8 wine'
+alias winecfg='env LC_CTYPE=en_US.UTF-8 winecfg'
+
+# use FASD
+eval "$(fasd --init auto)"
+# a: any; s: show/search/select; d: directory; f: file
+# sd: interactive directory selection; sf: interactive file selection
+# z: quick cd; zz: cd with interactive selection
+
+# use FZF
+# <CTRL+T> list files/folders in current directory
+# <Ctrl+R> search history of shell commands
+# <Esc+C>  fuzzy change directory
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
+
+# aliases for convenience
+alias matlab-tty='matlab -nosplash -nodesktop'
+alias blog="cd $BLOGPATH; hexo list post"
 alias youtube-dl-best="youtube-dl -f 'best[ext=mp4]' --playlist-items"
 alias youtube-dl-best480="youtube-dl -f 'best[ext=mp4][height<=480]' --playlist-items"
 alias youtube-dl-video480audioM4a="youtube-dl -f 'bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]' --playlist-items"
 alias youtube-dl-audio="youtube-dl -f 'bestaudio[ext=m4a]'"
 alias trim-youtube-names='prename "s/-[A-z0-9-]*.mp4/.mp4/"'
 alias wget-child='wget -r -np -R "index.html*"'
-alias wine='env LC_CTYPE=en_US.UTF-8 wine'
-alias winecfg='env LC_CTYPE=en_US.UTF-8 winecfg'
-
-# alias for FASD
-eval "$(fasd --init auto)"
-# a: any; s: show/search/select; d: directory; f: file
-# sd: interactive directory selection; sf: interactive file selection
-# z: quick cd; zz: cd with interactive selection
-
-# alias commands
-alias matlab-term='matlab -nosplash -nodesktop'
-alias blog="cd $BLOGPATH; hexo list post"
-
-# environment variables
-export EDITOR=vim
-# export EA_EDITOR='emacsclient --socket-name=any -nc'   # Emacs-Anywhere
-export GTAGSLABEL=pygments      # "gtags" in GNU global
-export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 
 # colorize the bash
 export CLICOLOR=1
