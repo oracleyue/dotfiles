@@ -233,6 +233,7 @@ for_window [class="GoldenDict"] floating enable resize set 800 550
 for_window [class="dolphin"] floating enable border pixel 3
 for_window [class="kate"] floating enable
 for_window [class="systemsettings"] floating enable
+for_window [class="kwalletmanager5"] floating enable
 for_window [class="transmission"] floating enable
 for_window [class="okular"] floating enable
 for_window [class="gwenview"] floating enable
