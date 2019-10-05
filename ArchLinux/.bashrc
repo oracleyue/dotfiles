@@ -34,7 +34,6 @@ alias tar='COPYFILE_DISABLE=1 tar'
 alias grep='grep -i'
 #alias ack='ack -Hn --no-group --no-color'
 alias ack='ack -Hni'
-alias gitup='git add . && git ci -m "regular update" && git push'
 alias open='mimeopen'  # from pkg "perl-file-mimeinfo"
 alias wine='env LC_CTYPE=en_US.UTF-8 wine'
 alias winecfg='env LC_CTYPE=en_US.UTF-8 winecfg'

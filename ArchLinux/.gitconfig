@@ -8,16 +8,19 @@
 	askpass = /usr/bin/ksshaskpass
 [color]
 	ui = true
+[diff]
+        tool = vimdiff
 [alias]
-	co = checkout
-	br = branch
 	ci = commit
 	st = status
-        uno = status -uno
 	up = remote update
+        # status
+        uno = status -uno
+	type = cat-file -t
+        # reset
 	unstage = reset HEAD --
         uncommit = reset --hard HEAD~1
-	type = cat-file -t
+        # log
 	graph = log --graph --oneline --decorate
 	last = log -1 HEAD -U1 --word-diff
 	oneline = log --pretty=oneline

@@ -35,8 +35,9 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf #D3D0C8 -nb #2D2D2D -sb #66CCCC -sf #2D2D2D"
 
-# integrate kde keyring
+# integrate kde keyring and setup ssh, git(via ssh)
 exec --no-startup-id /usr/bin/kwalletd5
+exec --no-startup-id $HOME/bin/i3cmds/ssh-add.sh
 
 # change focus
 bindsym $mod+h focus left

@@ -18,6 +18,7 @@ xrdb -merge ~/.Xresources
 # Themes
 export XDG_CURRENT_DESKTOP="KDE"
 export KDE_SESSION_VERSION="5"  # use "kde-open" instead of "kfmclient" for xdg-open
+export SSH_ASKPASS="/usr/bin/ksshaskpass"
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 xwallpaper --zoom ~/.config/i3/wallpaper.jpg
 
@@ -26,6 +27,7 @@ sxhkd &	                # Bind keys
 xset r rate 300 50 &	# Speed xrate up
 unclutter & 		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
+eval $(ssh-agent -s)
 
 # Autostart apps
 fcitx &
