@@ -5,7 +5,8 @@
 # --
 ---
 title: ${1:TITLE}
+date: `(zyue/insert-date-digits)`
+updated: `(zyue/insert-date-digits)`
 categories: $0
-date: 2018-04-28
 tags: [tag1, tag2]
 ---

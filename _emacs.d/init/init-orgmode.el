@@ -185,7 +185,8 @@ Hexo blog."
   (interactive)
   (let ((outfile (org-export-output-file-name
                   ".md" subtreep
-                  "~/Public/Dropbox/oracleyue/oracleyue.github.io/source/_posts")))
+                  "~/Public/Dropbox/oracleyue/oracleyue.github.io/source/_posts"))
+        (org-export-with-toc nil))
     (org-export-to-file 'gfm outfile async subtreep visible-only)))
 
 
