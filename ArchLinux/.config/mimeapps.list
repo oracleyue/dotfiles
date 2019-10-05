@@ -1,11 +1,13 @@
 [Added Associations]
 application/rtf=libreoffice-writer.desktop;org.kde.kate.desktop;okularApplication_txt.desktop;vim.desktop;emacsclient-code.desktop;emacsclient.desktop;gvim.desktop;code-oss.desktop;
+video/x-flv=smplayer.desktop;
 
 [Default Applications]
 application/chm=kchmviewer.desktop;
 application/html=chromium.desktop;
 application/pdf=org.kde.okular.desktop;
 application/rtf=libreoffice-writer.desktop;
+application/xhtml+xml=chromium.desktop;
 image/bmp=org.kde.gwenview.desktop;
 image/gif=org.kde.gwenview.desktop;
 image/jpeg=org.kde.gwenview.desktop;
@@ -18,8 +20,8 @@ text/plain=org.kde.kate.desktop;
 text/x-matlab=org.kde.kate.desktop;
 text/x-objcsrc=org.kde.kate.desktop;
 video/mp4=smplayer.desktop;
+video/x-flv=smplayer.desktop;
 x-scheme-handler/franz=Electron.desktop
 x-scheme-handler/http=chromium.desktop;
 x-scheme-handler/https=chromium.desktop;
 x-scheme-handler/mailto=thunderbird.desktop;
-application/xhtml+xml=chromium.desktop;

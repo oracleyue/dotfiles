@@ -247,6 +247,7 @@ for_window [class="Matplotlib"] floating enable
 for_window [instance="Steam" class="Steam"] floating enable
 for_window [instance="sun-awt-X11-XFramePeer" title="Figure*" class="MATLAB*"] floating enable
 for_window [title="Remmina Remote Desktop Client" class="org.remmina.Remmina"] floating enable
+for_window [title="MainWindow"] floating enable  # QtCreator helloworld app
 
 # Default workspace for applications
 assign [class="Thunderbird"] $ws1
