@@ -1,35 +1,37 @@
 [user]
-	name = oracleyue
-	email = oracleyue@gmail.com
+    name = oracleyue
+    email = oracleyue@gmail.com
 [credential]
-        # password for http/https remote only (ssh remote: use ssh-agent)
-	helper = cache --timeout=36000
+    # password for http/https remote only
+    # if using ssh remote, set up use ssh-agent
+    helper = cache --timeout=3600
 [core]
-	editor = vim
-        # password for http/https remote only (ssh remote: use ssh-agent)
-	askpass = /usr/bin/ksshaskpass
+    editor = vim
+    # password for http/https remote only
+    # NOT NEEDED, if setting env variable "GIT_ASKPASS"
+    # askpass = /usr/bin/ksshaskpass
 [color]
-	ui = true
+    ui = true
 [diff]
-        tool = vimdiff
+    tool = vimdiff
 [alias]
-	ci = commit
-	st = status
-	up = remote update
-        # status
-        uno = status -uno
-	type = cat-file -t
-        # reset
-	unstage = reset HEAD --
-        uncommit = reset --hard HEAD~1
-        # log
-	graph = log --graph --oneline --decorate
-	last = log -1 HEAD -U1 --word-diff
-	oneline = log --pretty=oneline
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    ci = commit
+    st = status
+    up = remote update
+    # status
+    uno = status -uno
+    type = cat-file -t
+    # reset
+    unstage = reset HEAD --
+    uncommit = reset --hard HEAD~1
+    # log
+    graph = log --graph --oneline --decorate
+    last = log -1 HEAD -U1 --word-diff
+    oneline = log --pretty=oneline
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [push]
-	default = matching
+    default = matching
 [pull]
-	default = matching
+    default = matching
 [merge]
-	tool = vimdiff
+    tool = vimdiff
