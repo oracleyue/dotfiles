@@ -9,20 +9,22 @@
 [color]
 	ui = true
 [alias]
-	graph = log --graph --oneline --decorate
 	co = checkout
 	br = branch
 	ci = commit
 	st = status
+        uno = status -uno
+	up = remote update
 	unstage = reset HEAD --
         uncommit = reset --hard HEAD~1
+	type = cat-file -t
+	graph = log --graph --oneline --decorate
 	last = log -1 HEAD -U1 --word-diff
 	oneline = log --pretty=oneline
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	up = remote update
-        uno = status -uno
 [push]
+	default = matching
+[pull]
 	default = matching
 [merge]
 	tool = vimdiff
