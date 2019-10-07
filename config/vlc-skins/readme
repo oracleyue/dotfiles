@@ -1,0 +1,11 @@
+Q: How to use these skins?
+
+(Skins do not work on Mac OS X!)
+
+Put the downloaded VLT files in the following folder:
+- On Windows: the skins folder in the VLC installation directory (e.g. C:\Program Files\VideoLAN\VLC\skins)
+- On Linux/Unix: ~/.local/share/vlc/skins2
+
+Then open your VLC settings and change your interface from native to skins. You can choose your desired skin already there or change it when you are in the skins mode by rightclicking somewhere on the skin and going to Interface>Choose Skin.
+
+VLC needs to be restarted to change to skins mode.

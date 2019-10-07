@@ -1,6 +1,8 @@
 [user]
 	name = oracleyue
 	email = oracleyue@gmail.com
+[credential]
+	helper = osxkeychain
 [core]
 	editor = vim
 [color]
@@ -22,7 +24,7 @@
 
 	last = log -1 HEAD -U1 --word-diff
 	graph = log --graph --oneline --decorate
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short 
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 	type = cat-file -t
 	up = remote update
@@ -32,8 +34,3 @@
 	default = matching
 [merge]
 	tool = vimdiff
-[user]
-        name = Zuogong Yue
-        email = zuogong.yue@uni.lu
-[credential]
-	helper = osxkeychain

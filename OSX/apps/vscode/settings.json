@@ -6,6 +6,6 @@
 
     // python
     "python.pythonPath": "/usr/local/bin/python",
-    "python.jediEnabled": false,
+    "python.jediEnabled": false,    // use Microsoft pyls
     "python.linting.flake8Enabled": true,
 }

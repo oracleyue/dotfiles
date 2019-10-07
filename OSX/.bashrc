@@ -9,6 +9,8 @@ export LANG=en_US.UTF-8
 GPG_TTY=`tty`
 export GPG_TTY
 
+# environment variables
+export EDITOR=vim
 # pathes
 export PATH=/Users/oracleyue/bin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
@@ -20,8 +22,11 @@ export PYTHONPATH=/Users/oracleyue/.local/lib/python3.7/site-packages
 export PATH=${PATH}:/Developer/NVIDIA/CUDA-9.0/bin
 export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-9.0/lib:$DYLD_LIBRARY_PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+# gtags
+export GTAGSLABEL=pygments          # "gtags" in GNU global
+export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 
-# alias
+# aliases
 alias ll='ls -Alh'
 alias la='ls -a'
 alias view='vim -R'
@@ -46,28 +51,28 @@ alias shred='gshred -n 5'
 alias trash='trash -v'
 alias lsblk='diskutil list'
 
-# alias for FASD
-eval "$(fasd --init auto)"
-# a: any; s: show/search/select; d: directory; f: file
-# sd: interactive directory selection; sf: interactive file selection
-# z: quick cd; zz: cd with interactive selection
-alias j='fasd_cd -d'  # same as "z"
-
 # alias commands for development
 alias gcc='gcc-7'
 alias g++='g++-7'
 alias gcc_stdlib_path='gcc -xc++ -E -v -'
 alias clang_complete="CXX='cc_args.py g++' cmake .. && make && mv .clang_complete .."
-alias matlab-term='matlab -nosplash -nodesktop'
 
-# environment variables
-export EDITOR=vim
-export GTAGSLABEL=pygments          # "gtags" in GNU global
-export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
+# use FASD
+eval "$(fasd --init auto)"
+# a: any; s: show/search/select; d: directory; f: file
+# sd: interactive directory selection; sf: interactive file selection
+# z: quick cd; zz: cd with interactive selection
 
-# env variables for shorthands of paths
-export BLOGPATH=${HOME}/Public/Dropbox/oracleyue/oracleyue.github.io
-alias  blog="cd $BLOGPATH; hexo list post"
+# use FZF
+source /usr/local/opt/fzf/shell/key-bindings.bash
+source /usr/local/opt/fzf/shell/completion.bash
+# CTRL-T: paste the selected files or directories onto the commandline
+# CTRL-R: paste the selected command from history onto the commandline
+# ALT-C:  cd into the selected directory
+
+# aliases for convenience
+alias matlab-tty='matlab -nosplash -nodesktop'
+alias blog="cd $BLOGPATH; hexo list post"
 
 # colorize the bash
 export CLICOLOR=1
