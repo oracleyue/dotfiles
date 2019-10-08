@@ -7,7 +7,7 @@
 #+TITLE:    ${1:Title}
 #+AUTHOR:   Zuogong Yue
 #+EMAIL:    oracleyue@gmail.com
-#+DATE:     ${2:Date}
+#+DATE:     `(zyue/insert-date)`
 #+STARTUP:  indent
 #+OPTIONS:  H:6 num:t toc:t ^:nil _:nil \n:nil LaTeX:t
 
