@@ -168,7 +168,7 @@
   (setq ibuffer-expert t)
 
   ;; Display buffer icons on GUI
-  (when (and (display-graphic-p)
+  (when (and *is-graphic*
              (require 'all-the-icons nil t))
     ;; For alignment, the size of the name field should be the width of an icon
     (define-ibuffer-column icon (:name "  ")

@@ -4,5 +4,7 @@
 # group: templates
 # --
 #+TITLE: ${1:Title}
+#+DATE:  `(zyue/insert-date)`
+
 
 $0
