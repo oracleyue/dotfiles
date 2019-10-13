@@ -63,6 +63,9 @@ vscpath="$HOME/Library/Application Support/Code/User"
 cp "$vscpath"/settings.json $repopath/apps/vscode/
 $sync "$vscpath"/snippets $repopath/apps/vscode/
 
+# mame
+cp $HOME/.mame/mame.ini $repopath/.mame/
+
 # ===========================================
 # "~/bin" on OSX
 # ===========================================
