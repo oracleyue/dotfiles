@@ -25,14 +25,18 @@ inoremap jk <Esc>
 inoremap <c-[> <Esc>
 
 " color schemes
-if ! has("gui_running")
+if !has("gui_running")
     colorscheme lucius
     LuciusDark
-else  " /gvim/
+else  " /gvim/ or /macvim/
     colorscheme lucius
-    LuciusLight
+    "LuciusLight
+    LuciusWhite
+    set guifont=SF\ Mono:h14
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
+    set lines=54 columns=90
+    set ro "read-only by default
 endif
 
 " status line

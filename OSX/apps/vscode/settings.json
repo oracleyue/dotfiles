@@ -8,4 +8,5 @@
     "python.pythonPath": "/usr/local/bin/python",
     "python.jediEnabled": false,    // use Microsoft pyls
     "python.linting.flake8Enabled": true,
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
 }
