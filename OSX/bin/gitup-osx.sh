@@ -81,6 +81,7 @@ $sync ~/Library/texmf $repopath/Library
 # ===========================================
 cd $repopath
 git add -A
-git commit -m "update config from mac"
+# git commit -m "updates of OS X configs"
+git commit
 git push
 cd ~

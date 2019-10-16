@@ -1,13 +1,15 @@
 " basics
 set nocompatible                            " be iMproved
-set nu                                      " set row number
+set encoding=utf-8                          " utf-8
+set nu                                      " show row number
+set numberwidth=4
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
-set encoding=utf-8                          " utf-8
 set laststatus=2                            " statusline
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
+set foldlevel=2                             " open folds up to level [N]
 set showcmd                                 " show commands that not finished
 set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
@@ -70,10 +72,14 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
   Plugin 'taglist.vim'
 " repos on github
+  " productivity
   Plugin 'scrooloose/nerdcommenter'
-  Plugin 'scrooloose/nerdtree'
+  " filetype supports
   Plugin 'jamessan/vim-gnupg'
+  " git
   Plugin 'airblade/vim-gitgutter'
+  " interface/theme/wm
+  Plugin 'scrooloose/nerdtree'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
