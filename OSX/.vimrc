@@ -4,6 +4,7 @@ set nu                                      " set row number
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
 set encoding=utf-8                          " utf-8
+set laststatus=2                            " statusline
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
@@ -26,22 +27,15 @@ inoremap <c-[> <Esc>
 
 " color schemes
 if !has("gui_running")
-    colorscheme lucius
-    LuciusDark
+    colorscheme dracula
 else  " /gvim/ or /macvim/
-    colorscheme lucius
-    "LuciusLight
-    LuciusWhite
-    set guifont=SF\ Mono:h14
+    colorscheme dracula
+    "colorscheme lucius | LuciusDark  "LuciusWhite
+    set guifont=Roboto\ Mono\ for\ Powerline:h15
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-    set lines=54 columns=90
-    set ro "read-only by default
+    set lines=48 columns=90
 endif
-
-" status line
-set laststatus=2
-set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
@@ -79,7 +73,9 @@ Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
-  "Plugin 'ervandew/supertab'
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,3 +98,18 @@ nnoremap <Leader>t :TlistToggle<CR>
 map <Leader>T :NERDTreeToggle<CR>
 " close vim if only NERDTree window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ---- vim-airline ----
+" require powerline-symbol patched font installed
+" install Roboto Mono given in .vim/fonts/
+let g:airline_powerline_fonts = 1
+" remove empty angle at the end
+let g:airline_skip_empty_sections = 1
+" set airline theme
+let g:airline_theme='deus'
+
+" ---- vim-gitgutter ----
+set updatetime=250
+" jump to next/prev change/chunk: "]c", "[c"
+" undo hanks: "<Leader>hu"
+" preview hunk: "<Leader>hp"
