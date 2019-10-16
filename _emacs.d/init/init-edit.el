@@ -196,12 +196,12 @@ Uses `current-date-format' for the formatting the date/time."
 ;; ----------- Settings of /text-mode/ ------------
 
 (setq-default major-mode 'text-mode)
-;; use "C-." to auto-correct words
 
 ;; default line wrapping
 (add-hook 'text-mode-hook 'visual-line-mode)
 
 ;; spell check for text modes
+;; auto-correct words: "C-." or "C-M-i"
 (add-hook 'text-mode-hook 'flyspell-mode)
 (defun zyue/toggle-dictionary ()
   "Toggle flyspell dictionary between the American and the British."

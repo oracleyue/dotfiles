@@ -171,8 +171,8 @@
               ;; basic jumps
               ("C-c g ." . counsel-gtags-dwim)
               ("C-c g ," . counsel-gtags-go-backward)
-              ("M-g ."   . counsel-gtags-dwim)
-              ("M-g ,"   . counsel-gtags-go-backward)
+              ("s-."     . counsel-gtags-dwim)
+              ("s-,"     . counsel-gtags-go-backward)
               ("C-c g t" . counsel-gtags-find-definition)
               ("C-c g r" . counsel-gtags-find-reference)
               ("C-c g s" . counsel-gtags-find-symbol)

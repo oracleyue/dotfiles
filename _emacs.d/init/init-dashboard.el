@@ -9,9 +9,9 @@
   :init (dashboard-setup-startup-hook)
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :bind (:map dashboard-mode-map
-              ("h" . widget-backward)
-              ("l" . widget-forward)
-              ("q" . quit-window))
+         ("h" . widget-backward)
+         ("l" . widget-forward)
+         ("q" . quit-window))
   :config
   (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
         dashboard-startup-banner (or zyue-logo 'official)
