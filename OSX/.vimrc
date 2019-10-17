@@ -5,7 +5,6 @@ set nu                                      " show row number
 set numberwidth=4
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
-set laststatus=2                            " statusline
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
@@ -38,6 +37,10 @@ else  " /gvim/ or /macvim/
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
     set lines=48 columns=90
 endif
+
+" status line
+set laststatus=2
+"set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
@@ -114,9 +117,8 @@ let g:airline_skip_empty_sections = 1
 " set airline theme
 let g:airline_theme='deus'
 " extension for tab line
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " ---- vim-gitgutter ----
