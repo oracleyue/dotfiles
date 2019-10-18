@@ -4,5 +4,5 @@
 # group: headers
 # expand-env: ((yas-indent-line 'fixed))
 # --
-% Copyright [201${1:7}] <${2:oracleyue}>
-% Last modified on $0
+% Copyright [`(insert (format-time-string "%Y"))`] <oracleyue>
+% Last modified on `(zyue/insert-date)`

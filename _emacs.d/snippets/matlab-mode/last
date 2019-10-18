@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: last modified date
+# key: last
+# group: headers
+# --
+% Last modified on `(zyue/insert-date)`
