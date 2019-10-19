@@ -96,9 +96,9 @@
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; keymap modification for OS X
-(when (string-equal system-type "darwin")
-  (setq mac-command-modifier 'control)  ; use command as control
-  (setq mac-control-modifier 'super))   ; use control as super
+;; (when (string-equal system-type "darwin")
+;;   (setq mac-command-modifier 'control)  ; use command as control
+;;   (setq mac-control-modifier 'super))   ; use control as super
 
 ;; unset keys
 (global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer

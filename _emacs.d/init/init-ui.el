@@ -119,9 +119,10 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
-  (setq face-font-rescale-alist
-        '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
-          ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2))))
+  ;; (setq face-font-rescale-alist
+  ;;       '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
+  ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
+  )
 
 ;; Fix faces that fail to display correctly in some themes, OS or monitors
 (defun fix-faces (&optional fram)
