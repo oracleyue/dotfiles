@@ -115,7 +115,9 @@ let g:airline_powerline_fonts = 1
 " remove empty angle at the end
 let g:airline_skip_empty_sections = 1
 " set airline theme
-let g:airline_theme='deus'
+if has("gui_running")
+    let g:airline_theme='deus'
+endif
 " extension for tab line
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
