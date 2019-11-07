@@ -28,10 +28,9 @@ inoremap <c-[> <Esc>
 
 " color schemes
 if !has("gui_running")
-    colorscheme dracula
+    colorscheme lucius | LuciusDark  "LuciusWhite
 else  " /gvim/ or /macvim/
     colorscheme dracula
-    "colorscheme lucius | LuciusDark  "LuciusWhite
     set guifont=Roboto\ Mono\ for\ Powerline:h15
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
@@ -115,9 +114,7 @@ let g:airline_powerline_fonts = 1
 " remove empty angle at the end
 let g:airline_skip_empty_sections = 1
 " set airline theme
-if has("gui_running")
-    let g:airline_theme='deus'
-endif
+"let g:airline_theme='deus'
 " extension for tab line
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
