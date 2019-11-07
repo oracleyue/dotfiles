@@ -2,7 +2,7 @@
 super + r
     $TERMINAL -e $FILE $HOME
 super + i
-    $TERMINAL -e htop
+    $TERMINAL -e htop -u nobody
 super + m
     $TERMINAL -e ncmpcpp
 super + p

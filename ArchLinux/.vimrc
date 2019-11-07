@@ -1,19 +1,19 @@
 " basics
 set nocompatible                            " be iMproved
-set nu                                      " set row number
+set encoding=utf-8                          " utf-8
+set nu                                      " show row number
+set numberwidth=4
 set t_Co=256                                " vim color scheme
 set cursorline                              " highlight the current line
-set encoding=utf-8                          " utf-8
 set showmatch                               " show mathced brackets
 set autoindent smartindent                  " smart auto-indent
 set foldmethod=indent                       " default indent mode
+set foldlevel=2                             " open folds up to level [N]
 set showcmd                                 " show commands that not finished
 set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
-set textwidth=0                             " no auto line wrapping
-set wrapmargin=0
 set expandtab smarttab                      " using 4 spaces to replace tab
 set shiftwidth=4
 set softtabstop=4
@@ -27,19 +27,19 @@ inoremap jk <Esc>
 inoremap <c-[> <Esc>
 
 " color schemes
-if ! has("gui_running")
-    colorscheme lucius
-    LuciusDark
-else  " /gvim/
-    colorscheme lucius
-    LuciusLight
+if !has("gui_running")
+    colorscheme lucius | LuciusDark  "LuciusWhite
+else  " /gvim/ or /macvim/
+    colorscheme dracula
+    set guifont=Roboto\ Mono\ for\ Powerline\ 11
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
+    "set lines=48 columns=90
 endif
 
 " status line
 set laststatus=2
-set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
+"set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "*y
@@ -74,10 +74,16 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
   Plugin 'taglist.vim'
 " repos on github
+  " productivity
   Plugin 'scrooloose/nerdcommenter'
-  Plugin 'scrooloose/nerdtree'
+  " filetype supports
   Plugin 'jamessan/vim-gnupg'
-  "Plugin 'ervandew/supertab'
+  " git
+  Plugin 'airblade/vim-gitgutter'
+  " interface/theme/wm
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -100,3 +106,22 @@ nnoremap <Leader>t :TlistToggle<CR>
 map <Leader>T :NERDTreeToggle<CR>
 " close vim if only NERDTree window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ---- vim-airline ----
+" require powerline-symbol patched font installed
+" install Roboto Mono given in .vim/fonts/
+let g:airline_powerline_fonts = 1
+" remove empty angle at the end
+let g:airline_skip_empty_sections = 1
+" set airline theme
+"let g:airline_theme='deus'
+" extension for tab line
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" ---- vim-gitgutter ----
+set updatetime=250
+" jump to next/prev change/chunk: "]c", "[c"
+" undo hanks: "<Leader>hu"
+" preview hunk: "<Leader>hp"

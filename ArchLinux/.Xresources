@@ -46,6 +46,7 @@ URxvt*termName: rxvt-unicode-256color
 Urxvt*buffered: false
 URxvt.intensityStyles: false
 URxvt.font: \
+    xft:Roboto Mono for Powerline:size=11, \
     xft:RobotoMono:size=11, \
     xft:DejaVu Sans Mono:size=12, \
     xft:Noto Sans Mono:size=12, \
@@ -89,6 +90,7 @@ URxvt*depth: 32
 !!
 !! Theme: eighties
 !!
+
 URxvt*foreground:  #d3d0c8
 URxvt*background:  [90]#2d2d2d
 URxvt*cursorColor: #d3d0c8

@@ -1,0 +1,75 @@
+# To use the theme for i3, copy and paste it into "~/.config/i3/config".
+
+
+# Themes: eighties
+# go to https://thomashunter.name/i3-configurator/ to use color palletes
+# go to https://terminal.sexy for themes
+# class                 border  bground text    indicator child_border
+client.focused          #66CCCC #66CCCC #2D2D2D #3F3F3F   #4F4F4F
+client.focused_inactive #2D2D2D #3F3F3F #D3D0C8 #343434   #343434
+client.unfocused        #2D2D2D #343434 #D3D0C8 #343434   #343434
+client.urgent           #2D2D2D #900000 #FFFFFF #900000   #900000
+client.placeholder      #2D2D2D #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
+client.background       #FFFFFF
+# start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+  i3bar_command  i3bar --transparency
+  status_command i3status
+  #status_command exec $HOME/bin/i3cmds/net-speed.sh
+  position bottom #top
+  # font pango:monospace 10
+  strip_workspace_numbers yes
+  colors {
+    background #2D2D2D
+    # add two more digits as the Alpha for bg transparency
+    #background #2D2D2D95
+    statusline #FFFFFF
+    separator  #3F3F3F
+    #                  border  backgr. text
+    focused_workspace  #2D2D2D #66CCCC #2D2D2D
+    active_workspace   #2D2D2D #3F3F3F #D3D0C8
+    inactive_workspace #2D2D2D #3F3F3F #D3D0C8
+    urgent_workspace   #2D2D2D #900000 #D3D0C8
+    binding_mode       #2D2D2D #900000 #D3D0C8
+  }
+}
+
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf #D3D0C8 -nb #2D2D2D -sb #66CCCC -sf #2D2D2D"
+
+
+
+
+# Themes: dracula
+# go to https://thomashunter.name/i3-configurator/ to use color palletes
+# go to https://terminal.sexy for themes
+# class                 border  bground text    indicator child_border
+client.focused          #82AAFF #82AAFF #292D3E #3F3F3F   #4F4F4F
+client.focused_inactive #292D3E #3F3F3F #D3D0C8 #343434   #343434
+client.unfocused        #292D3E #343434 #D3D0C8 #343434   #343434
+client.urgent           #292D3E #900000 #FFFFFF #900000   #900000
+client.placeholder      #292D3E #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
+client.background       #FFFFFF
+# start i3bar to display a workspace bar (plus the system information i3status if available)
+bar {
+  i3bar_command  i3bar --transparency
+  status_command i3status
+  #status_command exec $HOME/bin/i3cmds/net-speed.sh
+  position bottom #top
+  # font pango:monospace 10
+  strip_workspace_numbers yes
+  colors {
+    background #292D3E
+    # add two more digits as the Alpha for bg transparency
+    #background #292D3E95
+    statusline #FFFFFF
+    separator  #3F3F3F
+    #                  border  backgr. text
+    focused_workspace  #292D3E #82AAFF #292D3E
+    active_workspace   #292D3E #3F3F3F #D3D0C8
+    inactive_workspace #292D3E #3F3F3F #D3D0C8
+    urgent_workspace   #292D3E #900000 #D3D0C8
+    binding_mode       #292D3E #900000 #D3D0C8
+  }
+}
+
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn roboto-11 -nf #BBC5FF -nb #292D3E -sb #82AAFF -sf #292D3E"
