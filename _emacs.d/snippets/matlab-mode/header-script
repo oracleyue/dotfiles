@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
-# name: signature
-# key: sig
+# name: script header
+# key: head
 # group: headers
 # expand-env: ((yas-indent-line 'fixed))
 # --
+% ${1:A short descriptions of the function}
+
 % Copyright (c) `(insert (format-time-string "%Y"))`, Zuogong YUE
 % Author: Zuogong YUE <oracleyue@gmail.com>
 %         https://github.com/oracleyue

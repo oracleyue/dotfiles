@@ -4,5 +4,5 @@
 # group: oracleyue
 # expand-env: ((yas-indent-line 'fixed))
 # --
-# Copyright [${1:2017}] <oracleyue>
-# Last modified on $0
+% Copyright (c) `(insert (format-time-string "%Y"))`, Zuogong YUE
+% Last update on `(zyue/insert-date)`

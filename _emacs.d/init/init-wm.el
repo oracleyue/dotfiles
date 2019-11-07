@@ -22,7 +22,15 @@
   :demand
   :config
   (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
-  (winum-mode))
+  (winum-mode)
+  :bind (("s-1" . winum-select-window-1)
+         ("s-2" . winum-select-window-2)
+         ("s-3" . winum-select-window-3)
+         ("s-4" . winum-select-window-4)
+         ("s-5" . winum-select-window-5)
+         ("s-6" . winum-select-window-6)
+         ("s-7" . winum-select-window-7)
+         ("s-8" . winum-select-window-8)))
 ;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
 ;; =C-x w `=: select window by number, which is inserted in minibuffer
 

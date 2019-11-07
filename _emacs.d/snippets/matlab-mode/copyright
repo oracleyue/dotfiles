@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: copyright
-# key: cp
-# group: headers
-# expand-env: ((yas-indent-line 'fixed))
-# --
-% Copyright [`(insert (format-time-string "%Y"))`] <oracleyue>
-% Last modified on `(zyue/insert-date)`
