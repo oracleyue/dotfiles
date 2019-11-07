@@ -28,10 +28,10 @@ inoremap <c-[> <Esc>
 
 " color schemes
 if !has("gui_running")
-    colorscheme dracula
+    "colorscheme dracula
+    colorscheme lucius | LuciusDark  "LuciusWhite
 else  " /gvim/ or /macvim/
     colorscheme dracula
-    "colorscheme lucius | LuciusDark  "LuciusWhite
     set guifont=Roboto\ Mono\ for\ Powerline:h15
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
