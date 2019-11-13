@@ -1,18 +1,25 @@
-# Basic binds
+# Basic
 super + r
     $TERMINAL -e $FILE $HOME
 super + i
     $TERMINAL -e htop -u nobody
-super + m
-    $TERMINAL -e ncmpcpp
-super + p
-    mpc toggle >/dev/null 2>&1
-super + shift + a
-    $TERMINAL -e pulsemixer
-super + o
-    goldendict >/dev/null 2>&1
+# GUI window manager
 super + shift + p
     dolphin >/dev/null 2>&1
+# dictionary
+super + o
+    goldendict >/dev/null 2>&1
+# zeal (doc viewer)
+super + p
+    zeal >/dev/null 2>&1
+# music player and control
+super + shift + m
+    $TERMINAL -e ncmpcpp
+super + m
+    mpc toggle >/dev/null 2>&1
+# sound controller
+# super + shift + a
+#     $TERMINAL -e pulsemixer
 
 # Et cetera...
 # screen snapshot
@@ -20,7 +27,7 @@ super + Print
     gnome-screenshot -i
 # browse emoji
 # (In sxiv library, press "C-x C-c" to copy the image into
-# clipboard. Request "xclip" installed) 
+# clipboard. Request "xclip" installed)
 super + x
     sxiv -t ~/Downloads/acfun_emoji/
 

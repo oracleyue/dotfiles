@@ -1,11 +1,11 @@
 [Added Associations]
-application/rtf=libreoffice-writer.desktop;org.kde.kate.desktop;okularApplication_txt.desktop;vim.desktop;emacsclient-code.desktop;emacsclient.desktop;gvim.desktop;code-oss.desktop;
+application/rtf=libreoffice-writer.desktop;org.kde.kate.desktop;emacsclient.desktop;gvim.desktop;code-oss.desktop;
 video/x-flv=smplayer.desktop;
 
 [Default Applications]
 application/chm=kchmviewer.desktop;
 application/html=chromium.desktop;
-application/pdf=org.kde.okular.desktop;
+application/pdf=org.pwmt.zathura.desktop;org.kde.okular.desktop;
 application/rtf=libreoffice-writer.desktop;
 application/xhtml+xml=chromium.desktop;
 image/bmp=org.kde.gwenview.desktop;

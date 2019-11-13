@@ -129,6 +129,11 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 #bindsym $mod+Shift+0 move container to workspace $ws10
 
+# hide the focused (floating) window via scratchpad workspace
+bindsym $mod+Shift+minus move scratchpad
+# show the first scratchpad window (or toggle)
+bindsym $mod+minus scratchpad show
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -179,7 +184,7 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+#bindsym $mod+r mode "resize"
 
 # Direct resize
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left
@@ -203,18 +208,19 @@ client.placeholder      #2D2D2D #0C0C0C #FFFFFF #0C0C0C   #0C0C0C
 client.background       #FFFFFF
 # start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-  i3bar_command  i3bar --transparency
-  status_command i3status
-  #status_command exec $HOME/bin/i3cmds/net-speed.sh
-  position bottom #top
-  # font pango:monospace 10
+  i3bar_command    i3bar --transparency
+  status_command   i3status
+  #status_command  exec $HOME/bin/i3cmds/net-speed.sh
+  #font            pango:monospace 10
+  position         bottom         
   strip_workspace_numbers yes
+  tray_output      primary
+  tray_padding     2
   colors {
-    background #2D2D2D
-    # add two more digits as the Alpha for bg transparency
-    #background #2D2D2D95
-    statusline #FFFFFF
-    separator  #3F3F3F
+    background  #2D2D2D    
+    #background #2D2D2D95   # last two digits as the alpha value for transparency
+    statusline  #FFFFFF
+    separator   #3F3F3F
     #                  border  backgr. text
     focused_workspace  #2D2D2D #66CCCC #2D2D2D
     active_workspace   #2D2D2D #3F3F3F #D3D0C8
@@ -239,6 +245,7 @@ for_window [class="okular"] floating enable
 for_window [class="gwenview"] floating enable
 for_window [class="smplayer"] floating enable
 for_window [class="ark"] floating enable
+for_window [class="Zeal"] floating enable
 for_window [class="Emacs"] border pixel 0
 for_window [class="Chromium"] border pixel 0
 for_window [title="Save File" class="Chromium"] border pixel 3
