@@ -50,6 +50,7 @@ alias updatedb='/usr/libexec/locate.updatedb'
 alias shred='gshred -n 5'
 alias trash='trash -v'
 alias lsblk='diskutil list'
+alias htopi='htop -u nobody'
 
 # alias commands for development
 alias gcc='gcc-7'
