@@ -26,6 +26,7 @@ conky.text = [[
     ${color2}change layout - ${color}super+s/w/e
     ${color2}change gaps - ${color}super+shift+d/t
     ${color2}toggle floating - ${color}super+shift+SPC
+    ${color2}toggle scratchpad - ${color}super+(shift)+MINUS
     ${color2}exit (lock) - ${color}super+0 (super+ctrl+l)
 
     ${color}${font Bitstream Vera Sans:bold:size=9}app$font
