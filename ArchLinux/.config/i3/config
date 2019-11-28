@@ -212,12 +212,12 @@ bar {
   status_command   i3status
   #status_command  exec $HOME/bin/i3cmds/net-speed.sh
   #font            pango:monospace 10
-  position         bottom         
+  position         bottom
   strip_workspace_numbers yes
   tray_output      primary
   tray_padding     2
   colors {
-    background  #2D2D2D    
+    background  #2D2D2D
     #background #2D2D2D95   # last two digits as the alpha value for transparency
     statusline  #FFFFFF
     separator   #3F3F3F
@@ -248,8 +248,11 @@ for_window [class="ark"] floating enable
 for_window [class="Zeal"] floating enable
 for_window [class="Emacs"] border pixel 0
 for_window [class="Chromium"] border pixel 0
+for_window [class="firefox"] border pixel 0
 for_window [title="Save File" class="Chromium"] border pixel 3
 for_window [title="Open File" class="Chromium"] border pixel 3
+for_window [title="Save File" class="firefox"] border pixel 3
+for_window [title="Open File" class="firefox"] border pixel 3
 for_window [instance="Msgcompose" class="Thunderbird"] floating enable
 for_window [instance="Calendar" class="Thunderbird"] floating enable
 for_window [class="Matplotlib"] floating enable
@@ -261,6 +264,7 @@ for_window [title="MainWindow"] floating enable  # QtCreator helloworld app
 # Default workspace for applications
 assign [class="Thunderbird"] $ws1
 assign [class="Chromium"]    $ws2
+assign [class="firefox"]     $ws2
 
 # Screen snapshot
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
