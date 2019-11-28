@@ -1,0 +1,63 @@
+# -*- mode: snippet -*-
+# name: Author Response Letter
+# key: response
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper,11pt]{article}
+\usepackage[margin=30mm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times,helvet}    % charter; newtxtext/newtxmath
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts}
+\usepackage{enumitem}
+
+\usepackage{setspace}  \onehalfspacing
+\usepackage[parfill]{parskip}
+
+\usepackage{graphicx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
+\usepackage[round,sort]{natbib}
+
+\usepackage{comment}
+\usepackage{amsthm,thmtools,xcolor}
+\declaretheoremstyle[
+  headfont=\color{black}\normalfont\bfseries,
+  bodyfont=\color{blue}\normalfont\upshape,
+  headpunct=:,
+]{colored}
+\declaretheorem[style=colored, name=Response by authors]{response}
+\newcommand{\resp}{\textbf{Response by authors}}
+
+\begin{document}
+
+\title{Author's Response to Review Comments on \\\\
+  {\Large \it PAPER TITLE ...} }
+\author{}
+\date{\today}
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+\vspace*{10mm}
+% \thispagestyle{empty}
+
+% ----------------- MAIN --------------------
+
+
+
+
+
+
+% --------------- BIBLIOGRAPHY --------------
+\def\bibfont{\small}
+\bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; natbib
+\bibliography{./ref/library}
+
+\end{document}

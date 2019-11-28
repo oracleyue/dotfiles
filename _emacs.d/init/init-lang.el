@@ -22,6 +22,7 @@
 ;; major mode for /VimScript/ (e.g. ".vimrc")
 ;; ---------------------------------------------
 (use-package vimrc-mode
+  :demand
   :load-path "~/.emacs.d/git"
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
@@ -30,12 +31,14 @@
 ;; major mode for /AppleScript/
 ;; ---------------------------------------------
 (use-package apples-mode
+  :demand
   :mode "\\.\\(applescri\\|sc\\)pt\\'")
 
 ;; ---------------------------------------------
 ;; major mode for /YAML/ (*.yml)
 ;; ---------------------------------------------
 (use-package yaml-mode
+  :demand
   :load-path "~/.emacs.d/git"
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))

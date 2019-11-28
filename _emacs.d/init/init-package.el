@@ -11,7 +11,7 @@
 ;; setup package archives
 (require 'package)
 (setq package-archives
-      '(("gnu"   . "http://elpa.gnu.org/packages/")
+      '(;("gnu"   . "http://elpa.gnu.org/packages/")
         ("melpa" . "http://melpa.milkbox.net/packages/")
         ("org"   . "http://orgmode.org/elpa/")))
 
