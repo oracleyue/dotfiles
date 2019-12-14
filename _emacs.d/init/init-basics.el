@@ -135,7 +135,7 @@
 ;; Chinese
 ;; font set in "init-ui.el"
 ;; stop cursor blinking bug when typing Chinese/Japanese on OS X
-(setq redisplay-dont-pause nil)
+;(setq redisplay-dont-pause nil)
 
 ;; ----------------------------------------------
 ;; auto-save files when stop editing

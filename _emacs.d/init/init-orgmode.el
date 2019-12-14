@@ -5,9 +5,10 @@
 
 ;; /Basics/
 (global-font-lock-mode 1)
+
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
 ;; (global-set-key "\C-cl" 'org-store-link)
-;; (global-set-key "\C-cc" 'org-capture)
-;; (global-set-key "\C-ca" 'org-agenda)
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; startup styles
@@ -38,6 +39,37 @@
 (setq org-file-apps (quote ((auto-mode       . emacs)
                             ("\\.x?html?\\'" . default)
                             ("\\.pdf\\'"     . default))))
+
+;; /GTD Function Extensions/
+;; refer to http://doc.norang.ca/org-mode.html
+
+;; Todo keywords
+(setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD (h@/!)" "|" "CANCELLED(c@/!)" "MEETING"))))
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+              ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+              ("CANCELLED" :foreground "forest green" :weight bold)
+              ("MEETING" :foreground "forest green" :weight bold)
+              ("PHONE" :foreground "forest green" :weight bold))))
+
+;; Todo state triggers
+(setq org-use-fast-todo-selection t)  ;; allow =C-c C-t= to enter KEY
+(setq org-todo-state-tags-triggers
+      (quote (("CANCELLED" ("CANCELLED" . t))
+              ("WAITING" ("WAITING" . t))
+              ("HOLD" ("WAITING") ("HOLD" . t))
+              (done ("WAITING") ("HOLD"))
+              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
+;; Agenda
+(setq org-agenda-files (quote ("~/Public/Dropbox/oracleyue/OrgAgenda/ToDoList.org")))
 
 ;; /Export Settings/
 

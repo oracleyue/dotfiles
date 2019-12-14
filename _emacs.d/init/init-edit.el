@@ -6,6 +6,11 @@
 
 ;; ------------- Basic Editing Extensions ---------------
 
+;; kill sentence (default use doulbe space after the period)
+(setq sentence-end-double-space nil)
+;; kill-line: =C-k=; kill-sentence: =M-k=
+(global-set-key (kbd "C-S-k") 'kill-paragraph)
+
 ;; revert-buffer: update buffer if the file in disk has changed
 ;; default keybinding: "s-u" (s: super/win/command)
 (global-set-key (kbd "s-u") 'revert-buffer)
@@ -26,24 +31,15 @@
 (global-set-key (kbd "M-w") 'zyue/kill-ring-save)
 (global-set-key (kbd "C-w") 'zyue/kill-region)
 
-;; ;; mark the current line
-;; (defun zyue/mark-current-line ()
-;;   "Select the current line"
-;;   (interactive)
-;;   (end-of-line) ; move to end of line
-;;   (set-mark (line-beginning-position)))
-;; (global-set-key (kbd "C-S-SPC") 'zyue/mark-current-line)
-;; ;; "C-S-SPC" is bound to for =set-rectangular-region-anchor= in /multi-cursor/
-
-;; unfill paragraph: the opposite of fill-paragraph
+;; unfill paragraph or region: the opposite of fill-paragraph or fill-region
 (defun zyue/unfill-paragraph-or-region (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
   (let ((fill-column (point-max))
-        ;; This would override `fill-column' if it's an integer.
+        ;; override `fill-column' if it's an integer.
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
-(define-key global-map "\M-Q" 'zyue/unfill-paragraph-or-region)
+(global-set-key (kbd "M-Q") 'zyue/unfill-paragraph-or-region)
 
 ;; open a new line and jump there
 (require 'open-next-line)
