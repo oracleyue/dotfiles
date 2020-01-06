@@ -15,6 +15,10 @@ repopath=$HOME'/Workspace/gitrepo/dotfiles/ArchLinux'
 
 # List of rsync files
 
+# /etc config files
+# vsFTP
+$sync /etc/vsftpd.conf $repopath/etc/
+
 # bashrc
 $sync ~/.bashrc       $repopath
 $sync ~/.bash_profile $repopath
