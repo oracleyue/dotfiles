@@ -83,8 +83,11 @@ $sync ~/.config/Code\ -\ OSS/User/snippets $repopath/.config/Code\ -\ OSS/User/
 $sync ~/.config/QtProject/QtCreator.ini $repopath/.config/QtProject/
 $sync ~/.config/QtProject/qtcreator/styles $repopath/.config/QtProject/qtcreator/
 # smplayer
-$sync --exclude=file_settings ~/.config/smplayer $repopath/.config/
-
+$sync ~/.config/smplayer/smplayer.ini $repopath/.config/smplayer
+$sync ~/.config/smplayer/styles.ass $repopath/.config/smplayer
+$sync ~/.config/smplayer/player_info.ini $repopath/.config/smplayer
+$sync ~/.config/smplayer/device_info.ini $repopath/.config/smplayer
+$sync ~/.config/smplayer/hdpi.ini $repopath/.config/smplayer
 # gtk and kde/qt settings
 # use KDE's System Settings for Qt apps; one may also use it for gtk application styles
 $sync ~/.gtkrc-2.0         $repopath
