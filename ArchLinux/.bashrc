@@ -19,6 +19,8 @@ alias ls='ls --color=auto'
 alias ll='ls -Alh --color=auto'
 alias la='ls -a --color=auto'
 alias view='vim -R'
+alias svim='sudo -E vim'    # allow sudo vim to use local .vimrc
+#alias svim='sudo vim -u ~/.vimrc'
 alias enw='emacs -nw'
 source $HOME/bin/emacs-cmds-linux.sh
 alias rm='rm -i' # use =trash= more to delete files
@@ -55,11 +57,12 @@ source /usr/share/fzf/completion.bash
 alias matlab-tty='matlab -nosplash -nodesktop'
 alias blog="cd $BLOGPATH; hexo list post"
 alias youtube-dl-best="youtube-dl -f 'best[ext=mp4]' --playlist-items"
+alias youtube-dl-best720="youtube-dl -f 'best[ext=mp4][height>=480]' --playlist-items"
 alias youtube-dl-best480="youtube-dl -f 'best[ext=mp4][height<=480]' --playlist-items"
 alias youtube-dl-video480audioM4a="youtube-dl -f 'bestvideo[ext=mp4][height<=480]+bestaudio[ext=m4a]' --playlist-items"
 alias youtube-dl-audio="youtube-dl -f 'bestaudio[ext=m4a]'"
-alias trim-youtube-names='prename "s/-[A-z0-9-]*.mp4/.mp4/"'
-alias wget-child='wget -r -np -R "index.html*"'
+alias youtube-trim-suffix='prename "s/-[A-z0-9-]*.mp4/.mp4/"'
+alias wget-childsites='wget -r -np -R "index.html*"'
 
 # colorize the bash
 export CLICOLOR=1
