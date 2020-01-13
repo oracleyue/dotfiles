@@ -23,7 +23,8 @@
     type = cat-file -t
     # reset
     unstage = reset HEAD --
-    uncommit = reset --hard HEAD~1
+    #uncommit = reset --hard HEAD~1
+    uncommit = reset --soft HEAD~1
     # log
     graph = log --graph --oneline --decorate
     last = log -1 HEAD -U1 --word-diff

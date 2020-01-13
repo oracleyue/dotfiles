@@ -2,7 +2,7 @@
 Name=Mendeley Desktop
 GenericName=Research Paper Manager
 Comment=Mendeley Desktop is software for managing and sharing research papers
-Exec=env LD_LIBRARY_PATH=/opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforms /home/zyue/.local/share/mendeleydesktop %f
+Exec=env LD_LIBRARY_PATH=/opt/mendeleydesktop/lib/mendeleydesktop/plugins/platforms XDG_CONFIG_HOME=$HOME/.config.Mendeley_theme_override /home/zyue/.local/share/mendeleydesktop %f
 Icon=mendeleydesktop
 Terminal=false
 Type=Application

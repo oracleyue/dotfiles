@@ -10,12 +10,12 @@ super + shift + p
 super + o
     goldendict >/dev/null 2>&1
 # zeal (doc viewer)
-super + p
+super + control + p
     zeal >/dev/null 2>&1
 # music player and control
-super + shift + m
-    $TERMINAL -e ncmpcpp
 super + m
+    $TERMINAL -e ncmpcpp
+super + p
     mpc toggle >/dev/null 2>&1
 # sound controller
 # super + shift + a
