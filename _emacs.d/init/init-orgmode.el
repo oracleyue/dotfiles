@@ -46,16 +46,17 @@
 ;; Todo keywords
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD (h@/!)" "|" "CANCELLED(c@/!)" "MEETING"))))
-(setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "red" :weight bold)
-              ("NEXT" :foreground "blue" :weight bold)
-              ("DONE" :foreground "forest green" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
-              ("CANCELLED" :foreground "forest green" :weight bold)
-              ("MEETING" :foreground "forest green" :weight bold)
-              ("PHONE" :foreground "forest green" :weight bold))))
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "MEETING"))))
+(setq org-todo-keyword-faces '(("TODO"      . error)
+                               ("NEXT"      . warning)
+                               ("DONE"      . success)
+                               ("WAITING"   . warning)
+                               ("HOLD"      . default)
+                               ("CANCELLED" . success)
+                               ("MEETING"   . error))
+      org-priority-faces '((?A . error)
+                           (?B . warning)
+                           (?C . success)))
 
 ;; Todo state triggers
 (setq org-use-fast-todo-selection t)  ;; allow =C-c C-t= to enter KEY
