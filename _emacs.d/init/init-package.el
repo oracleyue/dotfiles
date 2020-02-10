@@ -11,9 +11,11 @@
 ;; setup package archives
 (require 'package)
 (setq package-archives
-      '(;("gnu"   . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.milkbox.net/packages/")
-        ("org"   . "http://orgmode.org/elpa/")))
+      '(("gnu"   . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
+;; other archives:
+;; ("melpa-stable" . "https://stable.melpa.org/packages/")
+;; ("org"   . "http://orgmode.org/elpa/")
 
 ;; initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
