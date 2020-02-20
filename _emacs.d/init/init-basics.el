@@ -1,19 +1,20 @@
 ;; ================================================================
 ;; Basic Configrations
 ;; ================================================================
-;; Last modified on 15 Sep 2017
+;; Last modified on 20 Feb 2020
 
 
-;; basics
+;; ----------------------------------------------
+;; Basics
+;; ----------------------------------------------
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(when (string= linux-desktop-env "i3") (menu-bar-mode -1))
 ;; (setq inhibit-startup-screen t)
 (column-number-mode t)
-(setq backup-inhibited t)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq backup-inhibited t)
 ;; (setq-default case-fold-search nil)  ;; case-sensitive search
-(when (string= linux-desktop-env "i3")
-  (menu-bar-mode -1))
 
 ;; encodings
 (set-language-environment "UTF-8")
@@ -62,6 +63,9 @@
 (setq-default indent-tabs-mode nil
               tab-stop-list ()
               tab-width 4)
+;; insert TAB: =C-q TAB= (=TAB= trigger complete or insert 4 spaces)
+;; insert 4-spaced TAB: =tab-to-tab-stop= or "M-i"
+;; converting TAB and 4-spaces of regions: =tabify= and =untabify=
 
 ;; enable clipboard in emacs  (only need for emacs in terminal)
 ;; (setq x-select-enable-clipboard t)
@@ -132,8 +136,6 @@
   (with-current-buffer ".formula.tex"
     (LaTeX-mode)))
 
-;; Chinese
-;; font set in "init-ui.el"
 ;; stop cursor blinking bug when typing Chinese/Japanese on OS X
 ;(setq redisplay-dont-pause nil)
 
@@ -145,7 +147,7 @@
 ;; (setq auto-save-slient t)
 
 ;; ----------------------------------------------
-;; /hl-sexp/: matching a pair of braces and hightlight the contents
+;; /hl-sexp/: matching pairs of braces and hightlight the contents
 ;; ----------------------------------------------
 ;; (require 'hl-sexp)
 ;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
@@ -156,7 +158,7 @@
 ;; ----------------------------------------------
 (use-package smartparens
   :demand
-  :diminish smartparens-mode
+  :diminish
   :bind (:map smartparens-mode-map
               ;; nativation
               ("C-M-f"   . sp-forward-sexp)
@@ -202,6 +204,26 @@
 ;; ----------------------------------------------
 (use-package bash-completion
   :config (bash-completion-setup))
+
+;; ----------------------------------------------
+;; /diminish/: remove minor mode names from modeline
+;; ----------------------------------------------
+(use-package diminish)
+
+;; ---------------------------------------------
+;; /flycheck/: modern syntax checking
+;; ---------------------------------------------
+;; Warning: ensure /epl/ package being up-to-date
+(use-package flycheck
+  :demand
+  :diminish "FlyC"
+  ;; enabled for specific modes in "init-text/-programming.el"
+  :bind (("M-g n" . flycheck-next-error)
+         ("M-g p" . flycheck-previous-error)
+         ("M-g l" . flycheck-list-errors))
+  :config
+  ;; check only when opening or saving files
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 
 (provide 'init-basics)

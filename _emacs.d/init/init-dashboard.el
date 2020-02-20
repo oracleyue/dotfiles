@@ -5,7 +5,7 @@
 
 
 (use-package dashboard
-  :diminish dashboard-mode
+  :diminish
   :init (dashboard-setup-startup-hook)
   :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :bind (:map dashboard-mode-map
@@ -17,9 +17,9 @@
         dashboard-startup-banner (or zyue-logo 'official)
         dashboard-center-content t
         dashboard-show-shortcuts nil
-        dashboard-items '((recents   . 8)
-                          (bookmarks . 5)
-                          (projects  . 5))
+        dashboard-items '((recents   . 6)
+                          (bookmarks . 4)
+                          (projects  . 4))
         dashboard-set-init-info t
         dashboard-set-file-icons t
         dashboard-set-heading-icons t
@@ -28,6 +28,7 @@
                                   (agenda    . "calendar")
                                   (projects  . "file-directory")
                                   (registers . "database")))
+  (diminish 'page-break-lines-mode)  ;; remove "PgLn" from modeline
   (use-package all-the-icons :demand
     ;; avoid slowing down performance
     :config (setq inhibit-compacting-font-caches t))

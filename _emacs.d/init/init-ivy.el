@@ -9,7 +9,7 @@
 ;; ---------------------------------------------
 (use-package ivy
   :demand
-  :diminish ivy-mode
+  :diminish
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
@@ -105,19 +105,19 @@
 
 (use-package swiper
   :demand
-  :bind (("C-s"   . swiper)           ;; swiper-isearch
-         ("s-f"   . swiper-isearch)
-         ("M-g s" . counsel-grep)     ;; using rg
+  :bind (("C-s"     . swiper)           ;; swiper-isearch
+         ("s-f"     . swiper-isearch)
+         ("M-g s"   . counsel-grep)     ;; using rg
          ;; all buffers
-         ("C-S-s" . swiper-all)
+         ("C-S-s"   . swiper-all)
          ;; git project
-         ("C-x g" . counsel-git)
-         ("C-x j" . counsel-git-grep)
+         ("C-x g"   . counsel-git)
+         ("C-x j"   . counsel-git-grep)
          ;; grep files recursively in the folder
-         ("M-g a" . counsel-rg)       ;; counsel-ag, counsel-ack, counsel-rg
+         ("M-g a"   . counsel-rg)       ;; counsel-ag, counsel-ack, counsel-rg
          ;; system-wide files
-         ("M-g f" . counsel-fzf)      ;; find
-         ("M-g l" . counsel-locate))) ;; locate
+         ("M-g f"   . counsel-fzf)      ;; find
+         ("M-g M-l" . counsel-locate))) ;;
 
 ;; ---------------------------------------------
 ;; User-Extension: open recent directories

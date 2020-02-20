@@ -39,6 +39,7 @@
 (require 'init-projectile)
 
 ;; major modes for document editing
+(require 'init-text)
 (require 'init-orgmode)           ;; org-mode
 (require 'init-markdown)          ;; markdown
 (require 'init-auctex)            ;; latex

@@ -20,7 +20,7 @@
 ;; /Company/ for code completion
 (use-package company
   :demand
-  :diminish company-mode
+  :diminish
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
   :bind (("C-<tab>" . company-complete)
          :map company-active-map
@@ -165,7 +165,7 @@
 ;; /Yasnippet/ A template system
 (use-package yasnippet
   :demand
-  :diminish yas-minor-mode
+  :diminish (yas-minor-mode yas-global-mode)
   :config
   (yas-global-mode 1)
   (setq-default mode-require-final-newline nil))

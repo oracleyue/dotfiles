@@ -14,7 +14,7 @@
 
 ;; /eldoc/: documentation for lisp family languages
 (use-package eldoc
-  :diminish eldoc-mode
+  :diminish
   :config
   (global-eldoc-mode -1)
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)

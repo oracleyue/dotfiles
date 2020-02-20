@@ -1,22 +1,36 @@
 ;; ===============================================================
 ;; General Programming Supports
 ;; ===============================================================
+;; Last modified on 20 Feb 2020
 
+
+;; ---------------------------------------------
+;; Basics of prog-mode
+;; ---------------------------------------------
+
+(defun zyue/toggle-line-spacing ()
+  "Toggle line spacing between no extra space to extra half line height."
+  (interactive)
+  (if line-spacing
+      (setq line-spacing nil)
+    (setq line-spacing 0.2))
+  (redraw-frame (selected-frame)))
+
+;; line wrapping
+;; note: "wrap at window edge" cause issues in company
+(add-hook 'prog-mode-hook
+          (lambda () (setq-default truncate-lines t)
+            (setq fill-column *fill-column-mono*)))
 
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking
 ;; ---------------------------------------------
-;; Warning: ensure /epl/ package being up-to-date
+;; loaded in "init-basic.el"; here add mode-hooks
 (use-package flycheck
-  :demand t
   :hook ((c-mode      . flycheck-mode)
          (c++-mode    . flycheck-mode)
          (ess-mode    . flycheck-mode)
-         (python-mode . flycheck-mode))
-  :config
-  ;; check only when opening or saving files
-  (setq flycheck-check-syntax-automatically
-        '(save mode-enabled)))
+         (python-mode . flycheck-mode)))
 
 ;; ---------------------------------------------
 ;; /magit/: version control
@@ -65,8 +79,8 @@
 ;; ----------------------------------------------
 (use-package symbol-overlay
   :demand
-  :diminish symbol-overlay-mode
-  :bind (("M-i" . symbol-overlay-put)
+  :diminish
+  :bind (("M-I" . symbol-overlay-put)
          ("M-n" . symbol-overlay-jump-next)
          ("M-p" . symbol-overlay-jump-prev)
          ("M-N" . symbol-overlay-switch-forward)

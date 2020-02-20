@@ -15,9 +15,12 @@
 
 ;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
 (if *is-mac*
-    (setq default-frame-alist '((width . 96) (height . 36)))
+    (setq default-frame-alist '((width . 87) (height . 50)))
   (setq default-frame-alist '((width . 96) (height . 32))))
+
+;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . light))
 
 ;; Paths: load-path, theme-load-path
 (add-to-list 'load-path
@@ -48,10 +51,8 @@
   (zyue-modeline-setup zyue-modeline)
   ;; loading after frame creations
   (when window-system
-    ;; transparent titlebar appearance
-    (if (eq (frame-parameter frame 'background-mode) 'light)
-        (add-to-list 'default-frame-alist '(ns-appearance . light))
-      (add-to-list 'default-frame-alist '(ns-appearance . dark)))
+    ;; update transparent titlebar textcolor wrt themes
+    (modify-frame-parameters frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
     ;; transparent background
     (when *is-linux* (set-bg-alpha '(100 85)))
     ;; check and choose fonts
@@ -142,17 +143,18 @@ of the focused frame and AB is the unfocused."
 ;; Themes (eclipse, doom-nord-light, doom-one, atom-one-dark)
 (setq zyue-theme 'doom-nord-light)
 (when *is-server-coding* (setq zyue-theme 'doom-one))
+(when *is-app* (setq zyue-theme 'eclipse))
 (when *is-terminal*
   (setq zyue-theme 'doom-one zyue-modeline 'plain))
 
 ;; Setup themes
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light) (require 'doom-theme-setup))
-  ((or 'spacemacs-dark 'spacemacs-light)
-   (use-package spacemacs-theme))
+  ((or 'spacemacs-dark 'spacemacs-light) (use-package spacemacs-theme))
   ('eclipse (use-package eclipse-theme
               :load-path "themes/github/eclipse-theme"
-              :demand)))
+              :demand)
+            (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
 (require 'init-dashboard)

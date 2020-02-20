@@ -1,6 +1,7 @@
 ;; ================================================================
 ;; Modeline Customizations
 ;; ================================================================
+;; Last modified on 20 Feb 2020
 
 
 ;; ---------------------------------------------
@@ -25,6 +26,7 @@
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
+    :ensure nil
     :demand
     :config
     (require 'spaceline-config)
@@ -43,7 +45,7 @@
   (use-package doom-modeline
     :demand
     :config
-    (setq doom-modeline-height 30)
+    (setq doom-modeline-height 35)
     ;; use buffer name; show the full-path file name when moving mouse over it
     ;; (setq doom-modeline-buffer-file-name-style 'buffer-name)
     (doom-modeline-init)))

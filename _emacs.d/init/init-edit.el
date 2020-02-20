@@ -101,7 +101,7 @@
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
 (use-package undo-tree
   :demand
-  :diminish undo-tree-mode
+  :diminish
   :config (global-undo-tree-mode))
 
 ;; toggle window split between horizontal-split and vertical-split
@@ -188,46 +188,6 @@ Uses `current-date-format' for the formatting the date/time."
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
-
-;; ----------- Settings of /text-mode/ ------------
-
-(setq-default major-mode 'text-mode)
-
-;; default line wrapping
-(add-hook 'text-mode-hook 'visual-line-mode)
-
-;; spell check for text modes
-;; auto-correct words: "C-." or "C-M-i"
-(add-hook 'text-mode-hook 'flyspell-mode)
-(defun zyue/toggle-dictionary ()
-  "Toggle flyspell dictionary between the American and the British."
-  (interactive)
-  (if (string-equal ispell-dictionary "british")
-      (setq ispell-dictionary "american")
-    (setq ispell-dictionary "british"))
-  (ispell-kill-ispell t)
-  (message "%s" ispell-dictionary))
-
-;; use /auto-fill mode/
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-
-;; ----------- Settings of /prog-mode/ ------------
-
-(defun zyue/toggle-line-spacing ()
-  "Toggle line spacing between no extra space to extra half line height."
-  (interactive)
-  (if line-spacing
-      (setq line-spacing nil)
-    (setq line-spacing 0.2))
-  (redraw-frame (selected-frame)))
-
-;; line wrapping
-;; note: "wrap at window edge" cause issues in company
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (setq-default truncate-lines t)
-            (setq fill-column *fill-column-mono*)))
 
 
 (provide 'init-edit)
