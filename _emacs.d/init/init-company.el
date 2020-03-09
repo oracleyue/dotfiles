@@ -1,6 +1,7 @@
 ;; ================================================================
 ;; /Company/ as the backend for code intelligent completion
 ;; ================================================================
+;; Last modified on 24 Feb 2020
 
 ;; Usage:
 ;; - =C-<tab>=: ~company-complete~
@@ -11,7 +12,6 @@
 ;; 2. "C-o" filtering the candidates
 ;; 3. "C-h" show doc buffer when the candidate list is on
 ;; 4. "C-w" see the source (partially support)
-;; (5.) "M-tab" calls "completion-at-point" which gives candidates in helm
 
 
 ;; Global settings for completion
@@ -61,7 +61,7 @@
   ;; Icons and quickhelp
   (when (and emacs/>=26p *enable-company-icons*)
     (use-package company-box
-      :load-path "git/company-box-20190311.1745"
+      :load-path "site-lisp/company-box-20190311.1745"
       :demand
       :diminish
       :functions (my-company-box--make-line

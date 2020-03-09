@@ -171,7 +171,7 @@
 ;; /ECB/: GUI interface of IDE
 ;; ----------------------------------------------
 (when *enable-ecb*
-  (add-to-list 'load-path "~/.emacs.d/git/ecb")
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/ecb")
   (require 'ecb)
   (require 'ecb-autoloads)
   (setq ecb-windows-width 0.16)

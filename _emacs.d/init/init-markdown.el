@@ -68,7 +68,7 @@
 (use-package livedown
   :disabled
   :ensure nil
-  :load-path "git/"
+  :load-path "site-lisp/"
   :init
   (setq livedown-autostart nil) ; auto open preview when opening markdown files
   (setq livedown-open t)        ; auto open the browser window

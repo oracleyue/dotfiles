@@ -47,8 +47,10 @@
 
 
 ;; /scheme/ (MIT/GNU)
-(setq scheme-program-name "/usr/local/bin/mit-scheme")
 (require 'xscheme)
+(if *is-mac*
+    (setq scheme-program-name "/usr/local/bin/mit-scheme")
+  (setq scheme-program-name "/usr/bin/mit-scheme"))
 ;; Usage:
 ;;  - "M-x run-scheme" to invoke the Scheme process
 ;;  - "M-o" to send the buffer to the Scheme process

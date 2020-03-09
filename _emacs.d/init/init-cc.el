@@ -59,7 +59,7 @@
   :after cc-mode
   :config
   (setq irony--server-executable (expand-file-name
-                                    "~/.emacs.d/bin/irony-server"))
+                                  "~/.emacs.d/bin/irony-server"))
   (add-to-list 'irony-additional-clang-options "-std=c++11")
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)

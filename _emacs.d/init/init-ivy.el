@@ -31,7 +31,7 @@
 (when *use-posframe*
   (use-package ivy-posframe
     :ensure nil
-    :load-path "git/ivy-posframe"
+    :load-path "site-lisp/ivy-posframe"
     :after (ivy)
     :config
     (setq ivy-fixed-height-minibuffer nil

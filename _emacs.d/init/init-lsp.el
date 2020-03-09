@@ -2,6 +2,7 @@
 ;; Emacs client for the Language Server Protocol
 ;; https://github.com/emacs-lsp/lsp-mode#supported-languages
 ;; ================================================================
+;; Last modified on 24 Feb 2020
 
 ;; Install LSP language servers
 ;; - Python: pip install python-language-server
@@ -20,12 +21,27 @@
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
   (setq flymake-fringe-indicator-position 'right-fringe)
   :config
-  ;; Configure LSP clients
+  ;; configure LSP clients
   (use-package lsp-clients
     :ensure nil
     :init
     (setq lsp-clients-python-library-directories
-          '("/usr/local/lib/" "/usr/lib/"))))
+          '("/usr/local/lib/" "/usr/lib/")))
+
+  ;; accelearate string concat in elisp
+  (setq read-process-output-max (* 1024 1024))
+
+  ;; enable log only for debug
+  (setq lsp-log-io nil)
+
+  ;; disable uncessary features for better performance
+  (setq lsp-enable-folding nil)
+  (setq lsp-enable-snippet nil)
+  ;; (setq lsp-enable-completion-at-point nil)  ;; use company-lsp instead
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-enable-links nil)
+  (push "[/\\\\]\\node_modules$" lsp-file-watch-ignored)
+  )
 
 (use-package lsp-ui
   ;; :demand
