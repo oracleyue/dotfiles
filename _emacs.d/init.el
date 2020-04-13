@@ -5,7 +5,7 @@
   (error "This requires Emacs 25.1 and above!"))
 
 ;; load paths
-(dolist (folder '("init" "git"))
+(dolist (folder '("init" "site-lisp"))
   (add-to-list 'load-path (expand-file-name folder user-emacs-directory)))
 
 ;; stop emacs automatically editing .emacs
