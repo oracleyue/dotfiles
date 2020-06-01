@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: python
+# key:py
+# group: src
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+BEGIN_SRC python
+$0
+#+END_SRC

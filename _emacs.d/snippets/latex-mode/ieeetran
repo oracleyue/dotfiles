@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: IEEE Transaction
+# name: IEEE Transactions
 # key: ieeetran
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))

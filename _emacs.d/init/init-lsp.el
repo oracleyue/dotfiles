@@ -6,9 +6,13 @@
 
 ;; Install LSP language servers
 ;; - Python: pip install python-language-server
-
+;;
 ;; Warning: you have to keep "dash" and "company" modes update-to-date
 ;; whenever update lsp packages.
+
+;; Usages:
+;; - use "projectile" to start a workspace or use "lsp-workspace-folders-add".
+;; - use "lsp-describe-sessions" to check status
 
 
 (use-package lsp-mode

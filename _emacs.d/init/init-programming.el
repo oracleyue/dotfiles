@@ -27,6 +27,7 @@
 ;; ---------------------------------------------
 ;; loaded in "init-basic.el"; here add mode-hooks
 (use-package flycheck
+  :diminish
   :hook ((c-mode      . flycheck-mode)
          (c++-mode    . flycheck-mode)
          (ess-mode    . flycheck-mode)

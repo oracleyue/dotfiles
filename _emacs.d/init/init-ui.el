@@ -116,7 +116,7 @@ of the focused frame and AB is the unfocused."
         (dolist (charset '(kana han cjk-misc bopomofo))  ;; remove "symbol"
           (set-fontset-font (frame-parameter nil 'font)
   		                    charset
-  		                    (font-spec :family font :size size-n)))
+  		                    (font-spec :family font )))
         (throw 'loop t))))
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)

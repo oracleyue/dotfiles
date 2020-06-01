@@ -56,6 +56,7 @@
           python-indent-guess-indent-offset nil))
   ;; detect using tab or spaces
   (use-package dtrt-indent
+    :diminish
     :init (add-hook 'python-mode-hook #'dtrt-indent-mode))
   ;; load tab display style
   (add-hook 'python-mode-hook #'zyue-py-indent-display-style)

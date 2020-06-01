@@ -40,6 +40,7 @@
 
 ;; flycheck interface for Grammarly
 (use-package flycheck
+  :diminish
   :hook ((text-mode   . flycheck-mode)
          (LaTeX-mode  . flycheck-mode))
   :config

@@ -26,11 +26,13 @@
 (defconst *is-zyue*
    (member (user-login-name) '("oracleyue" "zyue" "zuogong.yue" "zuogong")))
 
+;; fixed-width or variable-width fonts
+(defconst *use-sans-orgmode* nil)
+
 ;; all-the-icons support for ivy, dired, company
 (defconst *enable-all-the-icons* t)
 (defconst *enable-company-icons* (and *enable-all-the-icons*
                                       t))
-
 ;; select tree window manager
 (defconst *tree-manager* "neotree")  ;; neotree; treemacs
 

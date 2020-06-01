@@ -1,0 +1,218 @@
+# -*- mode: snippet -*-
+# name: IEEE Transactions (compsoc)
+# key: ieeetran
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+% OPTIONS: peerreview, draft
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[scaled=1]{inconsolata}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,
+            mathtools, amsthm}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{empheq}     % to deal with parentheses + subfunctions
+\usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
+
+\usepackage{algorithm, algpseudocode}
+\usepackage{float, graphicx, caption, subcaption}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
+            urlcolor=cyan,filecolor=red]{hyperref}
+% \usepackage{minted}
+%   \usemintedstyle{pastie}
+\usepackage[nocompress]{cite}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+% ---------------- END Preambles ----------------
+
+\begin{document}
+
+% Title and Authors
+\title{Clustering Multivariate Time Series with Vector k-ARs}
+
+\author{Zuogong~Yue,~\IEEEmembership{Member,~IEEE,}
+  and~Victor~Solo,~\IEEEmembership{Fellow,~IEEE}%
+  \IEEEcompsocitemizethanks{
+    \IEEEcompsocthanksitem Z. Yue and V. Solo are with
+    the School of Electrical Engineering and Telecommunications, UNSW,
+    Sydney, AUSTRALIA. \protect\\\\
+    E-mail: \texttt{\\{zuogong.yue, victor.solo\\}@unsw.edu.au}
+  }%
+  % \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
+}
+
+% Paper Headers
+% \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+% {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
+
+% Publisher's ID Mark (at the bottom of the page)
+%\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
+% or like this to get the Computer Society new two part style.
+%\IEEEpubid{\makebox[\columnwidth]{\hfill 0000--0000/00/\$00.00~\copyright~2015 IEEE}%
+%\hspace{\columnsep}\makebox[\columnwidth]{Published by the IEEE Computer Society\hfill}}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark (Computer Society jorunal
+% papers don't need this extra clearance.)
+
+% Special Paper Notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+% Abstract and Keywords
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+  The abstract goes here.
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+  Computer Society, IEEE, IEEEtran, journal, \LaTeX, paper, template.
+\end{IEEEkeywords}}
+
+% make the title area
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peer review papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+% ----------------- MAIN --------------------
+\IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
+% Computer Society journal (but not conference!) papers do something unusual
+% with the very first section heading (almost always called "Introduction").
+% They place it ABOVE the main text! IEEEtran.cls does not automatically do
+% this for you, but you can achieve this effect with the provided
+% \IEEEraisesectionheading{} command. Note the need to keep any \label that
+% is to refer to the section immediately after \section in the above as
+% \IEEEraisesectionheading puts \section within a raised box.
+
+% The very first letter is a 2 line initial drop letter followed
+% by the rest of the first word in caps (small caps for compsoc).
+% You must have at least 2 lines in the paragraph with the drop letter
+% (should never be an issue)
+%
+% form to use if the first word consists of a single letter:
+% \IEEEPARstart{A}{demo} file is ....
+%
+% form to use if you need the single drop letter followed by
+% normal text (unknown if ever used by the IEEE):
+% \IEEEPARstart{A}{}demo file is ....
+%
+% Some journals put the first two words in caps:
+% \IEEEPARstart{T}{his demo} file is ....
+
+\IEEEPARstart{T}{his} demo file is intended to serve as a starter file for
+IEEE Computer Society journal papers produced under \LaTeX\ using
+IEEEtran.cls version 1.8b and later.
+
+\subsection{Subsection Heading}
+Subsection text here.
+
+\section{More Section}
+
+\section{Conclusion}
+The conclusion goes here.
+
+
+
+
+% --------------- APPENDIX --------------
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+
+\appendices
+\section{Proof of the First Zonklar Equation}
+Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+\section{}
+Appendix two text goes here.
+
+
+% --------------- ACKNOWLEDGMENT --------------
+\section*{Acknowledgments}
+
+The authors would like to thank...
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+
+% --------------- REFERENCES --------------
+\bibliographystyle{IEEEtran}
+\bibliography{./ref/library}
+
+
+% --------------- BIOGRAPHY --------------
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+\begin{IEEEbiography}{Michael Shell}
+Biography text here.
+\end{IEEEbiography}
+
+% if you will not have a photo at all:
+\begin{IEEEbiographynophoto}{John Doe}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% insert where needed to balance the two columns on the last page with
+% biographies
+%\newpage
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+\end{document}

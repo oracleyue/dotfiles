@@ -167,6 +167,7 @@
 (setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
 (use-package counsel-gtags
   :demand
+  :diminish
   :bind (:map counsel-gtags-mode-map
               ;; basic jumps
               ("C-c g ." . counsel-gtags-dwim)

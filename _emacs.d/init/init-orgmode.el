@@ -20,7 +20,7 @@
   ;; line wraping
   (setq truncate-lines t)
   (turn-off-auto-fill)
-  (if *is-server-main*
+  (if *use-sans-orgmode*
       (progn
         ;; use sans-serif
         (require 'org-variable-pitch)
@@ -39,6 +39,11 @@
 (setq org-file-apps (quote ((auto-mode       . emacs)
                             ("\\.x?html?\\'" . default)
                             ("\\.pdf\\'"     . default))))
+
+;; diminish "Ind" keyword in Powerbar
+(use-package org-indent
+  :ensure nil
+  :diminish)
 
 ;; /GTD Function Extensions/
 ;; refer to http://doc.norang.ca/org-mode.html
