@@ -14,7 +14,7 @@
 
 ;; packages
 ;; (package-initialize)           ;; required to suppress warnings
-(require 'init-package)
+(require 'init-pkg)
 
 ;; constants
 (require 'init-const)             ;; enable/disable features
@@ -78,6 +78,13 @@
 
 ;; Minority Languages
 (require 'init-lang)
+
+;; ----------------------------------------------------------------
+;; Managing external applications in OS
+;; ----------------------------------------------------------------
+
+;; Calibre for ebook management
+(require 'init-calibre)
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

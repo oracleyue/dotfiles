@@ -112,6 +112,6 @@ file and export into ~/.emacs.d/init/ with the same file name."
       (org-babel-tangle-file file file-dest "emacs-lisp"))))
 
 
-(provide 'init-package)
+(provide 'init-pkg)
 ;; ================================================
-;; init-package.el ends here
+;; init-pkg.el ends here

@@ -32,6 +32,10 @@
     (setq-local fill-column *fill-column-mono*)))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
+;; show inline images
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width nil)  ;; try using width specified by #+attr_*
+
 ;; highlight latex fragments
 (setq org-highlight-latex-and-related '(latex script entities))
 

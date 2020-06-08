@@ -1,0 +1,84 @@
+# -*- mode: snippet -*-
+# name: Chinese Article Template
+# key: ctex
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+% rubber: module xelatex
+\documentclass[UTF8,a4paper,10pt]{ctexart}
+% \usepackage[margin=25mm,centering]{geometry}
+
+\usepackage{times}      % STHeiti, STFangsong, SimSun
+\setCJKmainfont[AutoFakeBold={2.4},AutoFakeSlant={0.2}]{STSong}
+% \setCJKmainfont[BoldFont={STHeiti},AutoFakeSlant={0.2}]{STSong}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,
+            mathtools, amsthm}
+\usepackage{arydshln}   % To support partitioned matrix with dashed lines
+\usepackage{empheq}     % to deal with parentheses + subfunctions
+\usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
+
+\usepackage{algorithm, algpseudocode}
+\makeatletter
+\renewcommand{\ALG@beginalgorithmic}{\small}
+\makeatother
+
+\usepackage{float, graphicx, caption, subcaption}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
+            urlcolor=cyan,filecolor=red]{hyperref}
+% \usepackage{minted}
+%   \usemintedstyle{pastie}
+\usepackage{cite}
+
+% theorem environment definitions
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% ---------------- END Preambles ----------------
+
+\title{CTeX简易文档}
+\author{无名氏}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% ---------------- ABSTRACT ----------------
+\begin{abstract}
+  这里是文章摘要。
+\end{abstract}
+
+% ---------------- TABLE OF CONTENTS ----------------
+% \setcounter{tocdepth}{3}
+% \tableofcontents
+
+% ----------------- MAIN --------------------
+\section{一级标题A}
+这是一行中文字。这是typerwriter的\texttt{中文字}。
+
+\section{一级标题B}
+这里引入一个中文文献\cite{song1985}。这里是另一个英文文献\cite{rudin1964}。
+
+
+% --------------- APPENDIX --------------
+\section*{附录}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+% \addcontentsline{toc}{section}{附录}
+
+\subsection{附录 1}
+Appendix here ...
+
+
+% --------------- BIBLIOGRAPHY --------------
+\bibliographystyle{plain}
+\bibliography{library}
+
+\end{document}

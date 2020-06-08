@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: ctex settings
-# key: ctex
+# name: ctex package
+# key: ctexpkg
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
 % rubber: module xelatex
 \usepackage[UTF8]{ctex}
-% \setCJKmainfont[BoldFont={STHeiti}]{SimSun}  % PingFang SC
+% \setCJKmainfont[BoldFont={STHeiti}]{SimSun}
