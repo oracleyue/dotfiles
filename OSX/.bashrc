@@ -12,10 +12,10 @@ export GPG_TTY
 # environment variables
 export EDITOR=vim
 # pathes
-export PATH=/Users/oracleyue/bin:${PATH}
+export PATH=$HOME/bin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
 # Python
-export PYTHONPATH=/Users/oracleyue/.local/lib/python3.7/site-packages
+export PYTHONPATH=$HOME/.local/lib/python3.7/site-packages
 # Latex
 # export BSTINPUTS=$(kpsepath bst)
 # CUDA

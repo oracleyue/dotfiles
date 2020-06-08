@@ -1,1 +1,1 @@
-/Users/oracleyue/Public/Dropbox/Academia/latex_templ/init-poster.sh
+/Users/zyue/Public/Dropbox/Academia/latex_templ/init-poster.sh

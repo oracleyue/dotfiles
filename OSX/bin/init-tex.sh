@@ -1,1 +1,1 @@
-/Users/oracleyue/Public/Dropbox/Academia/latex_templ/init-tex.sh
+/Users/zyue/Public/Dropbox/Academia/latex_templ/init-tex.sh

@@ -34,7 +34,7 @@ else  " /gvim/ or /macvim/
     set guifont=Roboto\ Mono\ for\ Powerline:h15
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-    set lines=48 columns=90
+    set lines=48 columns=85
 endif
 
 " status line
