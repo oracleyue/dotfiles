@@ -1,0 +1,114 @@
+################################################################################
+#    Author: Wenxuan Zhang                                                     #
+#     Email: wenxuangm@gmail.com                                               #
+#  HomePage: https://github.com/wfxr                                           #
+################################################################################
+
+if -b '[ "$SSH_CLIENT" ]' '         \
+    set -g status-position top;     \
+    set -g prefix M-q;              \
+    bind    M-q resize-pane -Z;     \
+    bind -r M-p previous-window;    \
+    bind -r M-n next-window;        \
+    ' '                             \
+    set -g status-position bottom;  \
+    set -g prefix C-q;              \
+    bind    C-q resize-pane -Z;     \
+    bind -r C-p previous-window;    \
+    bind -r C-n next-window;        \
+    '
+
+bind -r tab  select-pane -t :.+
+bind -r btab select-pane -t :.-
+
+# Select pane
+bind h select-pane -L
+bind l select-pane -R
+bind j select-pane -D
+bind k select-pane -U
+
+setw -g mode-keys vi
+
+set -g repeat-time 500
+
+# Split window
+# bind _ split-window -v
+# bind | split-window -h
+
+set -g repeat-time 1000
+
+# Move window
+bind -r < swap-window -t -1
+bind -r > swap-window -t +1
+
+# rename session
+bind . command-prompt -I "#S" "rename-session '%%'"
+
+# Resize panes like vim
+bind -r H resize-pane -L 4
+bind -r L resize-pane -R 4
+bind -r J resize-pane -D 4
+bind -r K resize-pane -U 4
+
+set -g  default-shell $SHELL
+
+# TrueColor
+set -g  default-terminal   "xterm-256color"
+set -sa terminal-overrides ',xterm-256color:RGB'
+# set -sa terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+
+set -g history-limit 102400 # boost history
+set -g status-keys   emacs
+
+# Copy
+setw -g mode-keys vi
+bind -T copy-mode-vi v      send -X begin-selection
+bind -T copy-mode-vi C-v    send -X rectangle-toggle
+bind -T copy-mode-vi y      send -X copy-selection-and-cancel
+bind -T copy-mode-vi Escape send -X cancel
+bind -T copy-mode-vi L      send -X end-of-line
+bind -T copy-mode-vi H      send -X start-of-line
+
+# Mouse support
+set -g mouse on # Tmux 2.1 and later
+
+# Index & Name
+set  -g base-index       1
+set  -g pane-base-index  1
+set  -g renumber-windows on
+setw -g automatic-rename on
+
+# Goyo
+bind G set status
+
+# Change default work dir
+bind m attach -c '#{pane_current_path}'
+
+#  tpm {{{ #
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'wfxr/tmux-fzf-url'
+# Note: Change the plugin order carefully!
+set -g @plugin 'wfxr/tmux-power'
+set -g @tmux_power_theme 'gold'
+# / / /
+set -g @tmux_power_show_upload_speed true
+set -g @tmux_power_show_download_speed true
+set -g @tmux_power_upload_speed_icon ''
+set -g @tmux_power_download_speed_icon ''
+set -g @tmux_power_prefix_highlight_pos 'LR'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @prefix_highlight_prefix_prompt 'Wait'
+set -g @prefix_highlight_copy_prompt 'Copy'
+set -g @prefix_highlight_sync_prompt 'Sync'
+set -g @plugin 'wfxr/tmux-net-speed'
+
+if -b '"$(uname)" = Darwin' 'source-file ~/.tmux_osx.conf'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+#  }}} tpm #

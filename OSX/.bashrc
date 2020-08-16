@@ -1,21 +1,22 @@
 # The system of OS X use .profile to configure its console. However, .bashrc in
 # Mac OS X will also be used by emacs for its term, xterm, etc.
 
-# set the locale
+# locale
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# set for gnupg for vim
-GPG_TTY=`tty`
-export GPG_TTY
+# editors
+export EDITOR=vim
+export GPG_TTY=`tty`  # gnupg for vim
+alias  view='vim -R'
+#alias em='emacs -nw'
+source $HOME/bin/emacs-cmds-osx.sh
 
 # environment variables
-export EDITOR=vim
-# pathes
 export PATH=$HOME/bin:${PATH}
 export MANPATH=${MANPATH}:/usr/local/man
 # Python
-export PYTHONPATH=$HOME/.local/lib/python3.7/site-packages
+#export PYTHONPATH=$HOME/.local/lib/python3.7/site-packages
 # Latex
 # export BSTINPUTS=$(kpsepath bst)
 # CUDA
@@ -29,9 +30,6 @@ export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
 # aliases
 alias ll='ls -Alh'
 alias la='ls -a'
-alias view='vim -R'
-#alias em='emacs -nw'
-source $HOME/bin/emacs-cmds-osx.sh
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
@@ -52,12 +50,6 @@ alias trash='trash -v'
 alias lsblk='diskutil list'
 alias htopi='htop -u nobody'
 
-# alias commands for development
-alias gcc='gcc-7'
-alias g++='g++-7'
-alias gcc_stdlib_path='gcc -xc++ -E -v -'
-alias clang_complete="CXX='cc_args.py g++' cmake .. && make && mv .clang_complete .."
-
 # use FASD
 eval "$(fasd --init auto)"
 # a: any; s: show/search/select; d: directory; f: file
@@ -70,10 +62,16 @@ source /usr/local/opt/fzf/shell/completion.bash
 # CTRL-T: paste the selected files or directories onto the commandline
 # CTRL-R: paste the selected command from history onto the commandline
 # ALT-C:  cd into the selected directory
+alias fzf='fzf --layout=reverse'
+
+# use tldr as alternative to man
+
+# alias commands for development
+alias gcc_stdlib_path='gcc -xc++ -E -v -'
+alias cc_args="CXX='cc_args.py g++' cmake .. && make && mv .clang_complete .."
 
 # aliases for convenience
 alias matlab-tty='matlab -nosplash -nodesktop'
-alias blog="cd $BLOGPATH; hexo list post"
 
 # colorize the bash
 export CLICOLOR=1

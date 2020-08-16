@@ -56,7 +56,7 @@ nnoremap <Leader>nl :nohlsearch<CR>
 
 " language spell checking
 autocmd FileType tex setlocal spell spelllang=en_us
-autocmd BufNewFile,BufRead *.txt setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
 
 " auto remove extra spaces
 autocmd BufWritePre * :%s/\s\+$//e

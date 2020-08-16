@@ -4,7 +4,7 @@ on run {input, parameters}
 	
 	set posixPath to POSIX path of input
 	
-	tell application "iTerm" to do shell script "/usr/local/bin/emacsclient -nc --socket-name=main " & quoted form of posixPath
+	tell application "iTerm" to do shell script "/usr/local/bin/emacsclient -nc --socket-name=coding " & quoted form of posixPath
 	
 	return input
 	

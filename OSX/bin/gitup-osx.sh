@@ -21,8 +21,6 @@ repopath=$HOME/Workspace/gitrepo/dotfiles/OSX
 $sync ~/.bashrc $repopath
 $sync ~/.bash_profile $repopath
 $sync ~/.profile $repopath
-$sync ~/.tmux.conf* $repopath
-$sync ~/.screenrc $repopath
 
 # ===========================================
 # config files under $HOME
@@ -35,6 +33,7 @@ $sync ~/.Renviron $repopath
 $sync ~/.Rprofile $repopath
 $sync ~/.jupyter $repopath
 $sync ~/.ctags $repopath
+$sync ~/.gdbinit $repopath
 
 # ===========================================
 # template files
@@ -48,6 +47,11 @@ $sync ~/Workspace/templates $repopath
 # VIM
 $sync ~/.vimrc $repopath
 $sync ~/.vim --exclude=bundle $repopath
+
+# Tmux & Screen
+$sync ~/.tmux.conf $repopath
+$sync ~/.tmux $repopath
+$sync ~/.screenrc $repopath
 
 # Vimperator for Firefox
 $sync ~/.vimperatorrc $repopath/apps/vimperator/_vimperatorrc
