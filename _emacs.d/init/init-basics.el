@@ -140,18 +140,50 @@
 ;(setq redisplay-dont-pause nil)
 
 ;; ----------------------------------------------
+;; /diminish/: remove minor mode names from modeline
+;; ----------------------------------------------
+(use-package diminish)
+
+;; ----------------------------------------------
+;; /saveplace/ (built-in): restore cursor position when reopen files
+;; ----------------------------------------------
+(use-package saveplace
+  :ensure nil
+  :hook (after-init . save-place-mode))
+
+;; ----------------------------------------------
 ;; auto-save files when stop editing
 ;; ----------------------------------------------
 ;; (require 'auto-save)
-;; (auto-save-enable)
 ;; (setq auto-save-slient t)
+;; (auto-save-enable)
 
 ;; ----------------------------------------------
-;; /hl-sexp/: matching pairs of braces and hightlight the contents
+;; /whitespace/ (built-in): show whitespaces, like space, \t, \v
 ;; ----------------------------------------------
-;; (require 'hl-sexp)
-;; (add-hook 'lisp-mode-hook 'hl-sexp-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+(use-package whitespace
+  :ensure nil
+  :diminish
+  :hook ((prog-mode markdown-mode conf-mode) . whitespace-mode)
+  :config
+  ;; show trailing whitespaces at lines
+  (setq whitespace-style '(face tabs trailing)))
+
+;; ----------------------------------------------
+;; /hl-line/ (built-in): highlight current line
+;; ----------------------------------------------
+(use-package hl-line
+  :ensure nil
+  :hook (after-init . global-hl-line-mode))
+
+;; ----------------------------------------------
+;; /beacon/: a colorful bar trailing to highlight cursor
+;; ----------------------------------------------
+(use-package beacon
+  :demand
+  :diminish
+  :config (beacon-mode 1))
+;; setting "beacon-color" in "fix-faces" function in "init-ui.el"
 
 ;; ----------------------------------------------
 ;; /smartparens/: insert pairs of parenthesis/brackets
@@ -204,11 +236,6 @@
 ;; ----------------------------------------------
 (use-package bash-completion
   :config (bash-completion-setup))
-
-;; ----------------------------------------------
-;; /diminish/: remove minor mode names from modeline
-;; ----------------------------------------------
-(use-package diminish)
 
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking

@@ -68,12 +68,11 @@
 (use-package livedown
   :disabled
   :ensure nil
-  :load-path "site-lisp/"
   :init
-  (setq livedown-autostart nil) ; auto open preview when opening markdown files
-  (setq livedown-open t)        ; auto open the browser window
-  (setq livedown-port 1337)     ; port for livedown server
-  (setq livedown-browser "safari")
+  (setq livedown-autostart nil ; auto open preview when opening markdown files
+        livedown-open t        ; auto open the browser window
+        livedown-port 1337     ; port for livedown server
+        livedown-browser "safari")
   :config
   ;; use livedown to preview markdown
   (add-hook 'markdown-mode-hook (lambda()

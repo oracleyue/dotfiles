@@ -36,17 +36,19 @@
 ;; ---------------------------------------------
 ;; /Grammarly/ for English checking
 ;; ---------------------------------------------
-(use-package grammarly)  ;; Grammarly API interface
-
-;; flycheck interface for Grammarly
-(use-package flycheck
-  :diminish
-  :hook ((text-mode   . flycheck-mode)
-         (LaTeX-mode  . flycheck-mode))
+(use-package grammarly  ;; Grammarly API interface
+  :disabled
   :config
-  (add-hook 'org-mode-hook (lambda () (flycheck-mode -1))))
-(use-package flycheck-grammarly :demand)
-;; grammarly available for: text, latex, org, markdown
+  (use-package flycheck
+    :diminish
+    :hook ((text-mode   . flycheck-mode)
+           (LaTeX-mode  . flycheck-mode))
+    :config
+    (add-hook 'org-mode-hook (lambda () (flycheck-mode -1))))
+  ;; flycheck interface for Grammarly
+  ;; grammarly available for: text, latex, org, markdown
+  (use-package flycheck-grammarly :demand))
+
 
 
 (provide 'init-text)

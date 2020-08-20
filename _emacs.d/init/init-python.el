@@ -79,11 +79,11 @@
        ((eq zyue-theme 'doom-nord-light)
         (setq highlight-indent-guides-auto-enabled nil)
         (set-face-foreground 'highlight-indent-guides-character-face
-                             "#B8C5DB"))
-       )
+                             "#B8C5DB")))
       (highlight-indent-guides-mode))
-    ;; highlight current line
-    (hl-line-mode t))
+    ;; highlight current line (enabled globally in "init-basics.el")
+    ;; (hl-line-mode t)
+    )
   (add-hook 'python-mode-hook 'zyue-edit-hl-config)
 
   ;; Send current line to interpreter and add menu entry

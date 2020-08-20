@@ -473,7 +473,8 @@
 ;; ---------------------------------------------------------------
 
 ;; Ivy for Dash (Mac only, provides "dash-in-ivy")
-(use-package ivy-dash :load-path "git")
+(use-package ivy-dash
+  :load-path "site-lisp")
 
 
 (provide 'init-ivy)

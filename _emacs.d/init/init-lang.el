@@ -23,7 +23,6 @@
 ;; ---------------------------------------------
 (use-package vimrc-mode
   :demand
-  :load-path "~/.emacs.d/git"
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
 
@@ -39,7 +38,6 @@
 ;; ---------------------------------------------
 (use-package yaml-mode
   :demand
-  :load-path "~/.emacs.d/git"
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 

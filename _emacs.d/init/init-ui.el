@@ -58,7 +58,8 @@
     ;; check and choose fonts
     (check-and-load-fonts frame)
     ;; refresh dashboard
-    (when (get-buffer "*dashboard*")
+    (when (and (get-buffer "*dashboard*")
+               (not (buffer-file-name))) ;; hide dashboard when edit files
       (dashboard-refresh-buffer))
     ;; fix faces
     (fix-faces frame)))
@@ -115,8 +116,8 @@ of the focused frame and AB is the unfocused."
         ;; since Chinese font names appear in (font-family-list) as unicode codes.
         (dolist (charset '(kana han cjk-misc bopomofo))  ;; remove "symbol"
           (set-fontset-font (frame-parameter nil 'font)
-  		                    charset
-  		                    (font-spec :family font )))
+                            charset
+                            (font-spec :family font )))
         (throw 'loop t))))
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
@@ -127,13 +128,16 @@ of the focused frame and AB is the unfocused."
 
 ;; Fix faces that fail to display correctly in some themes, OS or monitors
 (defun fix-faces (&optional fram)
-  ;; Fix face bugs in ivy-switch-buffer
+  ;; /ivy/: fix face bugs in ivy-switch-buffer
   (with-eval-after-load 'ivy
     (set-face-attribute 'ivy-org nil :font zyue-font :weight 'bold))
-  ;; Multiple-cursors (the other cursor bars are invisible in Linux)
+  ;; /multiple-cursors/ (the other cursor bars are invisible in Linux)
   (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
     (with-eval-after-load 'multiple-cursors
       (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF")))
+  ;; /beacon/: set beacon color
+  (with-eval-after-load 'beacon
+    (setq beacon-color (face-foreground 'font-lock-keyword-face)))
   )
 
 ;; Modeline (powerline, spaceline, doomline, plain)

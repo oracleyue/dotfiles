@@ -8,7 +8,7 @@
 
 % Serif
 \usepackage{lmodern}      % computer modern with enhancement
-\usepackage{times}        % use Times
+\usepackage{times}        % use Times; or "newtxtext" for new times
 \usepackage{fouriernc}    % use New Century Schoolbook
 
 \usepackage{charter}      % nice for regular texts (e.g. novel, blog)
@@ -24,9 +24,17 @@
 \usepackage[scaled=0.95]{inconsolata}
 \usepackage[scaled=.8]{DejaVuSansMono}
 
-% Math Fonts
-\usepackage{newtxtext,newtxmath}  % using new Times pkg
-\usepackage[lite,straightbraces]{mtpro2}    % non-free math fonts in Times
+% Math Fonts for Times
+\usepackage[varvw]{newtxmath}  % [varvw] gets rounded bottoms of "v, w"
+\usepackage[lite,straightbraces]{mtpro2}    % non-free math fonts
+\usepackage{mathptmx}
+\usepackage{txfonts}
+
+% Math Fonts for Charter
+\usepackage{charter,newtxmath}
+% OR
+\usepackage{XCharter}     % extended pkg for charter
+\usepackage[xcharter]{newtxmath}
 
 % Chinese
 % (Std.) STSong, STHeiti, STXihei, STKaiTi, STFangsong
@@ -42,7 +50,7 @@
 
 \usepackage[UTF8]{ctex}
 \setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti}]{SimSun}
-\setCJKsansfont{PingFang SC}  
+\setCJKsansfont{PingFang SC}
 
 
 % Nice fonts for Powerpoint or Keynote

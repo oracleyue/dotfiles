@@ -189,7 +189,6 @@ Uses `current-date-format' for the formatting the date/time."
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 
-
 (provide 'init-edit)
 ;; ================================================
 ;; init-edit.el ends here

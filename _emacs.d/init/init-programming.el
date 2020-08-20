@@ -43,32 +43,31 @@
 ;; line numbering
 ;; ----------------------------------------------
 ;; use built-in "display-line-number-mode" (require Emacs >= 26)
-(if *is-terminal*
-    ;; choose basic line numbering in ssh terminal
-    (setq linum-format "%4d ")
-  ;; graphic display
-  (use-package display-line-numbers
-    :init
-    (setq-default display-line-numbers-width 2)
-    ;; (setq-default display-line-numbers-type 'relative)
-    (setq display-line-numbers-current-absolute t)
-    ;; change line-number background
-    ;; (set-face-background 'line-number (face-background 'org-block))
-    ;; highlight current line
-    (set-face-foreground 'line-number-current-line "goldenrod")
-    (set-face-bold 'line-number-current-line t)
-    ;; enable line numbering (or "linum-mode")
-    (let ((hook-list '(sh-mode-hook
-                       cmake-mode-hook
-                       matlab-mode-hook
-                       python-mode-hook
-                       c-mode-common-hook
-                       makefile-gmake-mode-hook   ; Gnome
-                       makefile-bsdmake-mode-hook ; OS X
-                       ess-mode-hook)))  ; R
-      (dolist (hook-element hook-list)
-        (add-hook hook-element 'display-line-numbers-mode))))
-  )
+(use-package display-line-numbers
+  :init
+  (setq-default display-line-numbers-width 2)
+  ;; (setq-default display-line-numbers-type 'relative)
+  (setq display-line-numbers-current-absolute t)
+  ;; set line-number background
+  ;; (set-face-background 'line-number (face-background 'org-block))
+  ;; current line-number highlight
+  (set-face-foreground 'line-number-current-line "goldenrod")
+  (set-face-bold 'line-number-current-line t)
+  ;; enable line numbering (or "linum-mode")
+  (let ((hook-list '(sh-mode-hook
+                     cmake-mode-hook
+                     matlab-mode-hook
+                     python-mode-hook
+                     c-mode-common-hook
+                     makefile-gmake-mode-hook   ; Gnome
+                     makefile-bsdmake-mode-hook ; OS X
+                     ess-mode-hook)))  ; R
+    (dolist (hook-element hook-list)
+      (add-hook hook-element 'display-line-numbers-mode))))
+
+;; use another old built-in "linum-mode"
+;; (when *is-terminal*
+;;   (setq linum-format "%4d "))
 
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")

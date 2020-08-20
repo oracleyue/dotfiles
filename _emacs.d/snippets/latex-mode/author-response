@@ -5,14 +5,14 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[a4paper,11pt]{article}
-\usepackage[margin=30mm]{geometry}
+%\usepackage[margin=30mm]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}    % charter; newtxtext/newtxmath
+\usepackage{times,helvet,newtxmath}
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts}
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{enumitem}
 
 \usepackage{setspace}  \onehalfspacing
@@ -26,38 +26,48 @@
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
 \usepackage[round,sort]{natbib}
 
-\usepackage{comment}
+\let\openbox\undefined
 \usepackage{amsthm,thmtools,xcolor}
+\newenvironment{review}{\par\medskip\itshape\color{blue}}{}
 \declaretheoremstyle[
   headfont=\color{black}\normalfont\bfseries,
-  bodyfont=\color{blue}\normalfont\upshape,
+  bodyfont=\color{black}\normalfont\upshape,
   headpunct=:,
-]{colored}
-\declaretheorem[style=colored, name=Response by authors]{response}
+]{response}
+\declaretheorem[style=response, name=Response by authors]{response}
 \newcommand{\resp}{\textbf{Response by authors}}
 
 \begin{document}
 
-\title{Author's Response to Review Comments on \\\\
-  {\Large \it PAPER TITLE ...} }
+\title{Author's Response to Review Comments and Statement of Changes}
 \author{}
-\date{\today}
+\date{}
 \maketitle
-\setcounter{tocdepth}{1}
-\tableofcontents
-\vspace*{10mm}
-% \thispagestyle{empty}
+
+% adding toc if many pages
+% \setcounter{tocdepth}{1}
+% \tableofcontents
+% \vspace*{10mm}
 
 % ----------------- MAIN --------------------
 
+% Place review comments in the env. {review}
+\begin{review}
+    review comments here...
 
+\end{review}
 
+% Place author responses in the env. {response};
+\begin{response}\label{resp:XXX}
+    author's response here... referred by \resp~\ref{resp:XXX}
+
+\end{response}
 
 
 
 % --------------- BIBLIOGRAPHY --------------
-\def\bibfont{\small}
-\bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; natbib
-\bibliography{./ref/library}
+% \def\bibfont{\small}
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; natbib
+% \bibliography{./ref/library}
 
 \end{document}

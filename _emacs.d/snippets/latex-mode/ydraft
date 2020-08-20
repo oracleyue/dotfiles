@@ -8,10 +8,10 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet}    % charter; newtxtext/newtxmath
+\usepackage{helvet,times,newtxmath}   % charter
 \usepackage[scaled=0.95]{inconsolata}
 
-\usepackage{latexsym,amsmath,amssymb,amsfonts}
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{enumitem}
 
 \usepackage{setspace}  \onehalfspacing

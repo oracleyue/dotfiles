@@ -43,15 +43,7 @@
 % command definitions for math symbols
 \input{supports/userdef-mathsym.tex}
 
-\hypersetup{
-  pdftitle={},
-  pdfauthor={Zuogong YUE},
-  pdfsubject={Automatica preprint},
-  pdfcreator={Emacs version 25.1 + AUCTeX version 11.91}}
-
-
 \begin{document}
-
 \begin{frontmatter}
 
 \title{${1:your title}}
