@@ -19,5 +19,9 @@
     {
         "key": "alt+v",
         "command": "scrollPageUp"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "-deleteLeft"
     }
 ]

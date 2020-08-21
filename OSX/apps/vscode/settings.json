@@ -2,11 +2,16 @@
     // Interface
     "editor.fontSize": 14,
     "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Atom One Dark",
 
     // Python
     "python.linting.flake8Enabled": true,
     "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.languageServer": "Microsoft",
     "python.defaultInterpreterPath": "/usr/local/bin/python",
+
+    // Trailing Spaces
+    "trailing-spaces.trimOnSave": true,
+    "trailing-spaces.highlightCurrentLine": false,
+    "trailing-spaces.syntaxIgnore": ["markdown"],
 }
