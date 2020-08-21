@@ -60,13 +60,14 @@ $sync ~/.vimperator/colors/oracleyue-dark.vimp \
 
 # Sublime Text
 sublpath="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-cp "$sublpath"/*.sublime-keymap $repopath/apps/sublime-text/
+cp "$sublpath"/*.sublime-keymap   $repopath/apps/sublime-text/
 cp "$sublpath"/*.sublime-settings $repopath/apps/sublime-text/
 
 # vscode
 vscpath="$HOME/Library/Application Support/Code/User"
-cp "$vscpath"/settings.json $repopath/apps/vscode/
-$sync "$vscpath"/snippets $repopath/apps/vscode/
+cp    "$vscpath"/settings.json    $repopath/apps/vscode/
+cp    "$vscpath"/keybindings.json $repopath/apps/vscode/
+$sync "$vscpath"/snippets         $repopath/apps/vscode/
 
 # mame
 cp $HOME/.mame/mame.ini $repopath/.mame/

@@ -1,9 +1,10 @@
 {
-    // interface
+    // Interface
     "editor.fontSize": 14,
     "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
     "workbench.colorTheme": "Dracula",
-    "python.jediEnabled": false,    // use Microsoft pyls
+
+    // Python
     "python.linting.flake8Enabled": true,
     "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.languageServer": "Microsoft",
