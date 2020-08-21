@@ -11,5 +11,13 @@
     {
         "key": "alt+d",
         "command": "deleteWordRight"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "scrollPageDown"
+    },
+    {
+        "key": "alt+v",
+        "command": "scrollPageUp"
     }
 ]
