@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: biography (IEEE)
+# key: bio
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/zyue.png}}]
+  {Zuogong Yue} is currently a postdoctoral fellow at ...$0
+\end{IEEEbiography}

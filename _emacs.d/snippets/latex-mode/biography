@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: biography (general)
+# key: bio
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{wrapfigure}{l}{22mm}
+  \vspace{-.5\baselineskip}
+  \includegraphics[width=1in,height=1.25in,clip,keepaspectratio]
+  {biography/zyue}
+\end{wrapfigure}
+\textbf{Zuogong Yue} is currently a postdoctoral fellow at ...$0

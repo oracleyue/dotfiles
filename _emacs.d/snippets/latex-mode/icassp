@@ -39,7 +39,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
-% command definitions for math symbols
+% macros for math symbols
 % \input{userdef-mathsymb.tex}
 
 % ---------------- END Preambles ----------------

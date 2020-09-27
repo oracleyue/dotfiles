@@ -9,9 +9,6 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times, helvet}
-\usepackage[scaled=0.95]{inconsolata}
-
 \usepackage{latexsym, amsmath, amssymb, amsfonts,
             upgreek, mathrsfs, mathtools}
 \usepackage{arydshln}   % To support partitioned matrix with dashed lines
@@ -22,11 +19,10 @@
 \usepackage{algpseudocode}
 
 \usepackage{float, graphicx, caption, subcaption}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage{multirow,booktabs}
 \usepackage[usenames,dvipsnames]{xcolor}
-% \usepackage{mdframed}   % to box theorem statements
-%     \mdfdefinestyle{yue}{backgroundcolor=gray!10}
-% \usepackage{minted}
-% \usemintedstyle{pastie}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
 \usepackage{tikz}
@@ -40,7 +36,7 @@
 % {alg}{Algorithm},         {note}{Note},            {summ}{Summary},        {case}{Case}
 % {pf}{PROOF} + \qed        {pf*}{Proof of Theorem 2}
 
-% command definitions for math symbols
+% macros for math symbols
 \input{supports/userdef-mathsym.tex}
 
 \begin{document}

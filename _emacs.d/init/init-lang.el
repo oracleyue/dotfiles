@@ -41,6 +41,13 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
 
+;; ---------------------------------------------
+;; major mode for /TOML/ (*.toml)
+;; ---------------------------------------------
+(use-package toml-mode
+  :demand
+  :mode "\\.toml\\'")
+
 
 (provide 'init-lang)
 ;; ================================================

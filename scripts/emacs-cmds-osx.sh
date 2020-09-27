@@ -46,10 +46,6 @@ function es() {
                     kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
                                | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
-                a)
-                    kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
-                               | grep "ac-mode" | grep -v 'grep' | awk '{print $2}')
-                    ;;
                 *)
                     kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
                                | grep "$2" | grep -v 'grep' | awk '{print $2}')
@@ -68,9 +64,6 @@ function es() {
                     ;;
                 c)
                     $EMACS --daemon=coding
-                    ;;
-                a)
-                    $EMACS --daemon=ac-mode
                     ;;
                 n)
                     $EMACS --daemon

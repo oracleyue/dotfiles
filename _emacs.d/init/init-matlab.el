@@ -1,39 +1,38 @@
 ;; ================================================================
 ;; Programming Environment for /MATLAB/
 ;; ================================================================
+;; Last modified on 30 Aug 2020
 
 
-;; Configurations
 (use-package matlab-mode
   :config
   (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
   (add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
-  (setq matlab-indent-function t)
-  (setq matlab-shell-command "/usr/local/bin/matlab")
-  (setq matlab-shell-command-switches (quote ("-nodesktop -nosplash")))
+  (setq matlab-shell-command "/usr/local/bin/matlab"
+        matlab-shell-command-switches (quote ("-nodesktop -nosplash"))
+        matlab-indent-function t
+        matlab-fill-column fill-column)
   (load "matlab-load" t t)
 
   ;; enable CEDTE feature support
   ;; (matlab-cedet-setup)
 
-  ;; update/fix displays
-  (defun zyue-matlab-customize-display ()
-    (setq matlab-fill-column fill-column)
-    (set-face-attribute 'font-lock-type-face nil :slant 'normal))
-  (add-hook 'matlab-mode-hook 'zyue-matlab-customize-display)
+  ;; disable prompt for "end" completion
+  (setq-default matlab-functions-have-end nil)
 
   ;; enable /company-dabbrev-code/ for /matlab-mode/
   (require 'company-dabbrev-code)
   (add-to-list 'company-dabbrev-code-modes 'matlab-mode)
 
-  ;; add /smartparens/ supports
-  (sp-with-modes 'matlab-mode
-    (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                   :actions '(insert wrap autoskip navigate)))
 
   ;; ================================================================
   ;; Support Extensions for MATLAB
   ;; ================================================================
+
+  ;; Add /smartparens/ supports
+  (sp-with-modes 'matlab-mode
+    (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                   :actions '(insert wrap autoskip navigate)))
 
   ;; Add "align" supports for matlab: align both "=" and "%"
   ;; alternatively, use "align-regexp" ("C-x M-a" defined in "init-basic.el"),
@@ -52,7 +51,7 @@
                              (modes . '(matlab-mode))
                              (repeat . nil)))))
 
-  )
+  ) ;; END of use-package
 
 
 (provide 'init-matlab)
