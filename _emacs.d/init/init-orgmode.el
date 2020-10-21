@@ -1,6 +1,7 @@
 ;; ================================================================
 ;; Settings for /Org-mode/
 ;; ================================================================
+;; Last modified on 22 Oct 2020
 
 
 ;; /Basics/
@@ -52,6 +53,7 @@
   :ensure nil
   :diminish)
 
+
 ;; /GTD Function Extensions/
 ;; refer to http://doc.norang.ca/org-mode.html
 
@@ -84,6 +86,7 @@
 ;; Agenda
 (setq org-agenda-files (quote ("~/Public/Dropbox/oracleyue/OrgAgenda/ToDoList.org")))
 
+
 ;; /Export Settings/
 
 ;; HTML
@@ -107,10 +110,14 @@
 ;; Markdown (use ox-gfm)
 ;; (eval-after-load "org" '(require 'ox-md nil t))
 
+
 ;; /Code Blocks and Babel/
 
 ;; use syntax highlighting in org code blocks
 (setq org-src-fontify-natively t)
+
+;; use tab in .org to indent src blocks
+(setq org-src-tab-acts-natively t)
 
 ;; setup babel for programming languages
 (org-babel-do-load-languages
@@ -145,7 +152,12 @@
        '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
      ))
 
-;; /org-bullets/: prettify UI
+
+;; ------------------------------------------------------------
+;; External Minor Modes
+;; ------------------------------------------------------------
+
+;; /org-bullets/ to prettify UI
 (use-package org-bullets
   :demand
   :if (char-displayable-p ?◉)
@@ -198,6 +210,7 @@
   (setq org-reveal-progress t)
   (setq org-reveal-title-slide
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
+
 
 ;; ------------------------------------------------------------
 ;; User-defined utility enhancement
