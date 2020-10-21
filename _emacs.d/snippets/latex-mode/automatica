@@ -37,7 +37,7 @@
 % {pf}{PROOF} + \qed        {pf*}{Proof of Theorem 2}
 
 % macros for math symbols
-\input{supports/userdef-mathsym.tex}
+% \input{supports/userdef-mathsym.tex}
 
 \begin{document}
 \begin{frontmatter}
@@ -58,18 +58,15 @@ Fax +XXXIX-VI-mmmxxv.}
   L-4362, Luxembourg}
 \address[Swe]{Department of Electrical Engineering, Link\\"oping University, Link\\"oping, SE-58183, Sweden}
 
-
 \begin{keyword}                           % Five to ten keywords, chosen from the IFAC keyword list
     bala bala bala                        % or with the help of the Automatica keyword wizard
 \end{keyword}
-
 
 \begin{abstract}                          % Abstract of not more than 200 words.
     bala bala bala
 \end{abstract}
 
 \end{frontmatter}
-
 
 
 % -------------------- MAIN BODY ----------------------
@@ -80,7 +77,7 @@ $0
 
 
 
-% -------------------- BIBLIOGRAPHY ----------------------
+% -------------------- ACKNOWLEDGEMENT & BIBLIOGRAPHY ----------------------
 \begin{ack}                               % Place acknowledgements
 This work was supported by Fonds National de la Recherche Luxembourg (Ref.~AFR-9247977).
 \end{ack}
@@ -89,9 +86,13 @@ This work was supported by Fonds National de la Recherche Luxembourg (Ref.~AFR-9
 \bibliography{./ref/library}
 
 
-
 % -------------------- APPENDIX ----------------------
 % \appendix
 % \section{Appendix Name}
+
+
+% -------------------- BIOGRAPHY ----------------------
+% \input{biography/biography.tex}
+
 
 \end{document}

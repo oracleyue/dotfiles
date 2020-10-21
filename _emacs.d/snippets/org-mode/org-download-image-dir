@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org image dir
+# key: img
+# expand-env: ((yas-indent-line 'fixed))
+# group: config
+# --
+-*- mode: Org; org-download-image-dir: "~/Pictures/foo"; -*-

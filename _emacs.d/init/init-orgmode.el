@@ -4,7 +4,7 @@
 
 
 ;; /Basics/
-(global-font-lock-mode 1)
+(global-font-lock-mode t)
 
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -12,8 +12,8 @@
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; startup styles
-(setq org-startup-folded t)
-(setq org-startup-indented t)
+(setq org-startup-folded   t
+      org-startup-indented t)
 
 ;; view styles
 (defun y/set-view-style-orgmode ()
@@ -43,6 +43,9 @@
 (setq org-file-apps (quote ((auto-mode       . emacs)
                             ("\\.x?html?\\'" . default)
                             ("\\.pdf\\'"     . default))))
+
+;; use cdlatex for fast math typing
+;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 
 ;; diminish "Ind" keyword in Powerbar
 (use-package org-indent
@@ -129,8 +132,7 @@
       (cons '(:exports . "both")
              (assq-delete-all :exports org-babel-default-header-args)))
 
-;; /Easy-Templates for LaTeX macros/
-
+;; easy-templates for latex macros
 (eval-after-load 'org
   '(progn
      (add-to-list 'org-structure-template-alist
@@ -143,7 +145,7 @@
        '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
      ))
 
-;; Prettify UI
+;; /org-bullets/: prettify UI
 (use-package org-bullets
   :demand
   :if (char-displayable-p ?◉)
@@ -158,6 +160,23 @@
                  :actions '(insert wrap autoskip navigate escape))
   (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
                  :actions '(insert wrap autoskip navigate escape)))
+
+;; /org-download/ for image insertion
+(use-package org-download
+  :demand
+  :bind (:map org-mode-map
+              ("M-s s" . org-download-screenshot)
+              ("M-s M-s" . org-download-screenshot))
+  :config
+  (setq-default org-download-image-dir "./img")
+  (setq org-download-image-attr-list
+        '("#+ATTR_HTML: :width 480px :align center"))
+  (when *is-mac*
+    ;; allow "ruby" in OSX -> Preferences -> Security & Privacy -> Screen Recording
+    (setq org-download-screenshot-method "screencapture -i %s"))
+  ;; show inline image in posframe ("C-c C-x C-v" to toggle)
+  ;; (setq org-download-display-inline-images 'posframe)
+  )
 
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
 ;; note: it preserves soft line breaks.
@@ -183,35 +202,6 @@
 ;; ------------------------------------------------------------
 ;; User-defined utility enhancement
 ;; ------------------------------------------------------------
-
-;; Quick take screenshot and insert in .org
-(defun zyue/org-screenshot ()
-  "Take a screenshot into a time stamped unique-named file in the
-same directory as the org-buffer and insert a link to this file."
-  (interactive)
-  (org-display-inline-images)
-  (setq filename
-        (concat
-         (make-temp-name
-          (concat (file-name-nondirectory (buffer-file-name))
-                  "_imgs/"
-                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
-  (unless (file-exists-p (file-name-directory filename))
-    (make-directory (file-name-directory filename)))
-					; take screenshot
-  (if (eq system-type 'darwin)
-      (progn
-	(call-process-shell-command "screencapture" nil nil nil nil " -s " (concat
-									    "\"" filename "\"" ))
-	(call-process-shell-command "convert" nil nil nil nil (concat "\"" filename "\" -resize  \"50%\"" ) (concat "\"" filename "\"" ))
-	))
-  (if (eq system-type 'gnu/linux)
-      (call-process "import" nil nil nil filename))
-					; insert into file if correctly taken
-  (if (file-exists-p filename)
-      (insert (concat "[[file:" filename "]]")))
-  (org-display-inline-images))
-;; (global-set-key (kbd "C-c s c") 'zyue/org-screenshot)
 
 ;; writing Hexo blogs in orgmode
 (use-package hexo

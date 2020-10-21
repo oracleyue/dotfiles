@@ -109,7 +109,8 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("WenQuanYi Micro Hei" "Sarasa Mono SC"
+    (dolist (font '("Source Han Serif SC" "Source Han Serif TC" "Source Han Serif"  ; 思源宋体 (简中、繁中、日文)
+                    "WenQuanYi Micro Hei" "Sarasa Mono SC"
                     "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
         ;; Note: when LC_CTYPE=zh_CN.UTF-8, use (find-font (font-spec :name font))
@@ -121,9 +122,9 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
-  (setq face-font-rescale-alist
-        '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
-          ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
+  ;; (setq face-font-rescale-alist
+  ;;       '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
+  ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
   )
 
 ;; Fix faces that fail to display correctly in some themes, OS or monitors

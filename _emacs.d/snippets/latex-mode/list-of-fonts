@@ -14,7 +14,8 @@
 \usepackage{charter}      % nice for regular texts (e.g. novel, blog)
 \usepackage{cochineal}    % fork of crimson (12pt)
 \usepackage{baskervald}   % variant: "Baskervaldx"
-\usepackage{palatino}
+\usepackage{palatino}     % Palatino
+\usepackage{tgpagella}    % TeX Gyre Pagella
 
 % Sans
 \usepackage{lmodern}      % computer modern with enhancement on sans
@@ -35,6 +36,10 @@
 % OR
 \usepackage{XCharter}     % extended pkg for charter
 \usepackage[xcharter]{newtxmath}
+
+% Math Fonts for Palatino or TeX Gyre Pagella
+\usepackage[sc]{mathpazo}
+\linespread{1.05}         % Palladio needs more leading (space between lines)
 
 % Chinese
 % (Std.) STSong, STHeiti, STXihei, STKaiTi, STFangsong

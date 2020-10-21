@@ -20,25 +20,24 @@
 (use-package tex
   :ensure auctex
   :demand
+  :hook ((LaTeX-mode . LaTeX-math-mode)        ; math mode
+         (LaTeX-mode . turn-on-reftex)         ; reftex
+         ;; (LaTeX-mode . TeX-fold-mode)       ; source folding
+         ;; (LaTeX-mode . outline-minor-mode)  ; outlining TeX
+         )
   :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq reftex-plug-into-AUCTeX t)
-  (setq-default TeX-PDF-mode t)      ; default for pdf and forward search
-  (setq TeX-source-correlate-mode t) ; enable backward search PDF->LaTeX
-  ;; (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+  (setq TeX-auto-save           t
+        TeX-parse-self          t
+        reftex-plug-into-AUCTeX t)  ; when reftex is turned on
 
   ;; More extensions
   (setq auto-mode-alist
         (append '(("\\.tikz\\'" . latex-mode))
                 auto-mode-alist))
 
-  ;; Pairing
+  ;; Pairing (use /smartparens/ instead)
   (setq-default TeX-insert-braces nil)
   (setq-default LaTeX-electric-left-right-brace nil)
-  ;; user-defined pairs via /smartparens/
   (require 'smartparens-latex)
   (sp-with-modes '(latex-mode LaTeX-mode)
     (sp-local-pair "\\|" "\\|"
@@ -152,7 +151,6 @@
   ;;       '("bibliography" "nobibliography" "addbibresource"))
 
   ;; Customize Compilation
-
   ;; modifying commands
   (eval-after-load "tex"
     '(setcdr (assoc "LaTeX" TeX-command-list)
@@ -179,6 +177,9 @@
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("Clean (auto)" "rubber --pdf --clean %t; rm -rf auto/" TeX-run-command nil t) t))
   (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
   (eval-after-load "tex"
@@ -209,7 +210,9 @@
     '(add-to-list 'TeX-command-list
                   '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
-  ;; PDF Viewers
+  ;; PDF Viewing
+  (setq-default TeX-PDF-mode t)       ; default for pdf and forward search
+  (setq TeX-source-correlate-mode t)  ; enable backward search PDF->LaTeX
   (cond
    ((string-equal system-type "gnu/linux")
     ;; Enable TeX <-> PDF sync
@@ -242,6 +245,12 @@
      ;; refresh and fontify buffer: =font-lock-fontify-buffer=
      ;; macro completions (flushed by flyspell.el)
      (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
+
+;; Use /cdlatex/ to accelerate math typing
+(use-package cdlatex
+  :after tex
+  :diminish
+  :hook (LaTeX-mode . turn-on-cdlatex))
 
 ;; Utility definitions
 (defun zyue/latex-remove-comments ()
