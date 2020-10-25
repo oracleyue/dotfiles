@@ -182,8 +182,15 @@
 (use-package beacon
   :demand
   :diminish
-  :config (beacon-mode 1))
-;; setting "beacon-color" in "fix-faces" function in "init-ui.el"
+  :config
+  (beacon-mode 1)
+  ;; set beacon color
+  (defun zyue-fix-face-beacon (frame)
+    (with-selected-frame frame
+      (setq beacon-color (face-foreground 'font-lock-keyword-face))))
+  (if *is-app* (zyue-fix-face-beacon (selected-frame)))  ;; for app
+  (add-hook 'after-make-frame-functions #'zyue-fix-face-beacon) ;; for clients
+  )
 
 ;; ----------------------------------------------
 ;; /smartparens/: insert pairs of parenthesis/brackets

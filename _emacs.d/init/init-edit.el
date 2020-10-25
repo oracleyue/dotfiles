@@ -169,17 +169,25 @@ Uses `current-date-format' for the formatting the date/time."
 ;; /multiple-cursors/: edit with multiple cursors
 (use-package multiple-cursors
   :demand
+  :bind (;; mark many occurrences in region
+         ("C-S-l C-S-l"   . mc/edit-lines) ;; default (C-S-c C-S-c)
+         ;; mark one more occurrence by regexp match
+         ("C->"           . mc/mark-next-like-this)
+         ("C-<"           . mc/mark-previous-like-this)
+         ("C-c C-<"       . mc/mark-all-like-this)
+         ;; mouse events
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+         ;; others
+         ("C-S-SPC"       . set-rectangular-region-anchor))
   :config
-  ;; mark many occurrences in region
-  (global-set-key (kbd "C-S-l C-S-l") 'mc/edit-lines)  ;; default (C-S-c C-S-c)
-  ;; mark one more occurrence by regexp match
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-  ;; mouse events
-  (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
-  ;; others
-  (global-set-key (kbd "C-S-SPC") 'set-rectangular-region-anchor)
+  ;; fix face color (the other cursor bars are invisible in Linux)
+  (defun zyue-fix-face-multiple-cursors (frame)
+    (with-selected-frame frame
+      (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
+        (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF"))))
+  (if *is-app* (zyue-fix-face-multiple-cursors (selected-frame)))  ;; for app
+  (add-hook 'after-make-frame-functions
+            #'zyue-fix-face-multiple-cursors) ;; for clients
   )
 
 ;; /expand-region/: increase the selected region by semantic units

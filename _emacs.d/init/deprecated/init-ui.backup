@@ -55,14 +55,15 @@
     (modify-frame-parameters frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
     ;; transparent background
     (when *is-linux* (set-bg-alpha '(100 85)))
-    ;; choose and load fonts
+    ;; check and choose fonts
     (zyue-search-and-load-fonts frame)
     ;; refresh dashboard
     (when (and (get-buffer "*dashboard*")
                (not (buffer-file-name))) ;; hide dashboard when edit files
       (dashboard-refresh-buffer))
-    )
-  )
+    ;; fix faces
+    (fix-faces frame)
+    ))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -125,6 +126,21 @@ of the focused frame and AB is the unfocused."
   ;; (setq face-font-rescale-alist
   ;;       '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
   ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
+  )
+
+;; Fix faces that fail to display correctly in some themes, OS or monitors
+;; NOT used anymore!
+(defun fix-faces (&optional frame)
+  ;; /ivy/: fix face bugs in ivy-switch-buffer
+  (with-eval-after-load 'ivy
+    (set-face-attribute 'ivy-org nil :font zyue-font :weight 'bold))
+  ;; /multiple-cursors/ (the other cursor bars are invisible in Linux)
+  (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
+    (with-eval-after-load 'multiple-cursors
+      (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF")))
+  ;; /beacon/: set beacon color
+  (with-eval-after-load 'beacon
+    (setq beacon-color (face-foreground 'font-lock-keyword-face)))
   )
 
 ;; Modeline (powerline, spaceline, doomline, plain)

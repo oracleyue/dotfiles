@@ -10,6 +10,8 @@
 (use-package ivy
   :demand
   :diminish
+  :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
+         ("C-c C-r" . ivy-resume))
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
@@ -24,8 +26,14 @@
   (setq ivy-display-functions-alist nil)
   ;; enable Ivy
   (ivy-mode +1)
-  :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
-         ("C-c C-r" . ivy-resume))
+
+  ;; fix face in ivy-switch-buffer
+  (defun zyue-fix-face-ivy (&optional frame)
+    (with-selected-frame frame
+      (zyue-search-and-load-fonts frame)
+      (set-face-attribute 'ivy-org frame :font zyue-font :weight 'demibold)))
+  (if *is-app* (zyue-fix-face-ivy (selected-frame)))  ;; for app
+  (add-hook 'after-make-frame-functions #'zyue-fix-face-ivy) ;; for clients
   )
 
 (when *use-posframe*

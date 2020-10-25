@@ -179,7 +179,8 @@
                   '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("Clean (auto)" "rubber --pdf --clean %t; rm -rf auto/" TeX-run-command nil t) t))
+                  '("Clean (complete)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
+  ;; if also wanting to delete pdf, use "rubber --pdf --clean %t".
   (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
   (eval-after-load "tex"
@@ -196,7 +197,7 @@
 
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("backup tex (All)" "./supports/texbackup.sh" TeX-run-command nil t) t))
+                  '("backup tex (all)" "./supports/texbackup.sh" TeX-run-command nil t) t))
 
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
@@ -248,8 +249,8 @@
 
 ;; Use /cdlatex/ to accelerate math typing
 (use-package cdlatex
+  :disabled
   :after tex
-  :diminish
   :hook (LaTeX-mode . turn-on-cdlatex))
 
 ;; Utility definitions
