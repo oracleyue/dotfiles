@@ -2,7 +2,7 @@
 	name = oracleyue
 	email = oracleyue@gmail.com
 [credential]
-	helper = osxkeychain
+	helper = cache --timeout=3600
 [core]
 	editor = vim
 [color]

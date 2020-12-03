@@ -90,4 +90,7 @@ export LESS_TERMCAP_md=$(printf '\e[1;34m')
 export LESS_TERMCAP_us=$(printf '\e[1;32m')
 export LESS_TERMCAP_so=$(printf '\e[1;44;1m')
 # enable /less/ code syntax coloring
-export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
+# require: brew install source-highlight
+LESSPIPE=`which src-hilite-lesspipe.sh`
+export LESSOPEN="| ${LESSPIPE} %s"
+export LESS=' -R -X -F '
