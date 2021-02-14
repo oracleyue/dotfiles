@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: align image center
+# key: image
+# group: html
+# --
+<div style="padding-top:20px;padding-bottom:20px;">
+<center>
+  <img src="/images/image.jpg" style="width:50%;">
+</center>
+</div>

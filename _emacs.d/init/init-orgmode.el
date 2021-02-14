@@ -139,18 +139,21 @@
       (cons '(:exports . "both")
              (assq-delete-all :exports org-babel-default-header-args)))
 
-;; easy-templates for latex macros
-(eval-after-load 'org
-  '(progn
-     (add-to-list 'org-structure-template-alist
-       '("w" "#+BEGIN_WARNING\n?\n#+END_WARNING"))
-     (add-to-list 'org-structure-template-alist
-       '("tex" "#+BEGIN_LATEX\n?\n#+END_LATEX"))
-     (add-to-list 'org-structure-template-alist
-       '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
-     (add-to-list 'org-structure-template-alist
-       '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
-     ))
+;; structure templates
+(require 'org-tempo)
+
+;; NOT VALID after Emacs 27; to be fixed
+;; (eval-after-load 'org
+;;   '(progn
+;;      (add-to-list 'org-structure-template-alist
+;;        '("w" "#+BEGIN_WARNING\n?\n#+END_WARNING"))
+;;      (add-to-list 'org-structure-template-alist
+;;        '("tex" "#+BEGIN_LATEX\n?\n#+END_LATEX"))
+;;      (add-to-list 'org-structure-template-alist
+;;        '("fig" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: :width 2in :placement [H]"))
+;;      (add-to-list 'org-structure-template-alist
+;;        '("tbl" "#+CAPTION:?\n#+LABEL:\n#+ATTR_LaTeX: placement [H] :align |c|"))
+;;      ))
 
 
 ;; ------------------------------------------------------------
@@ -211,28 +214,6 @@
   (setq org-reveal-title-slide
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
-
-;; ------------------------------------------------------------
-;; User-defined utility enhancement
-;; ------------------------------------------------------------
-
-;; writing Hexo blogs in orgmode
-(use-package hexo
-  :demand
-  :config
-  (defun zyue/hexo ()
-    (interactive)
-    (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io")))
-
-(defun zyue/hexo-ox-gfm (&optional async subtreep visible-only)
-  "Automatically export the current .org to .md at the folder of
-Hexo blog."
-  (interactive)
-  (let ((outfile (org-export-output-file-name
-                  ".md" subtreep
-                  "~/Public/Dropbox/oracleyue/oracleyue.github.io/source/_posts"))
-        (org-export-with-toc nil))
-    (org-export-to-file 'gfm outfile async subtreep visible-only)))
 
 
 (provide 'init-orgmode)

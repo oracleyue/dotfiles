@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Chinese Article Template
-# key: ctex
+# name: Draft Template (Chinese)
+# key: draft
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
@@ -22,57 +22,39 @@
 \usepackage{empheq}     % to deal with parentheses + subfunctions
 \usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
 
-\usepackage{algorithm, algpseudocode}
-\makeatletter
-\renewcommand{\ALG@beginalgorithmic}{\small}
-\makeatother
-
 \usepackage{float, graphicx, caption, subcaption}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
-% \usepackage{minted}
-%   \usemintedstyle{pastie}
 \usepackage{cite}
 % ---------------- END Preambles ----------------
 
-\title{CTeX简易文档}
-\author{无名氏}
-\date{\today}
+\title{\sf XXXXXX}
+\author{}
+\date{}
 
 \begin{document}
 \maketitle
-%\thispagestyle{empty}
+\thispagestyle{empty}
 %\pagestyle{empty}
 
-% ---------------- ABSTRACT ----------------
-\begin{abstract}
-  这里是文章摘要。
-\end{abstract}
-
-% ---------------- TABLE OF CONTENTS ----------------
-% \setcounter{tocdepth}{3}
-% \tableofcontents
-
 % ----------------- MAIN --------------------
-\section{一级标题A}
-这是一行中文字。这是typerwriter的\texttt{中文字}。
+\noindent
+\textbf{尊敬的XXX}:\hfill \medskip
 
-\section{一级标题B}
-这里引入一个中文文献\cite{song1985}。这里是另一个英文文献\cite{rudin1964}。
+$0
 
+% ----------------- SIGNATURE --------------------
+\bigskip
+此致\\\\ 敬礼！
 
-% --------------- APPENDIX --------------
-\section*{附录}
-\renewcommand{\thesubsection}{\Alph{subsection}}
-% \addcontentsline{toc}{section}{附录}
+\bigskip
+\hfill 声请人：岳作功
 
-\subsection{附录 1}
-Appendix here ...
-
+\hfill\today
 
 % --------------- BIBLIOGRAPHY --------------
-\bibliographystyle{plain}
-\bibliography{library}
+% \bibliographystyle{plain}
+% \bibliography{library}
 
 \end{document}

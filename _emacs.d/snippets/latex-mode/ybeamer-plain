@@ -5,7 +5,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[9pt,aspectratio=54]{beamer}
-\usepackage{styles/zyuebeamerplain}  % serif, times; accent=blue,cyan,etc.
+\usepackage{styles/plainbeamer}  % serif, times; accent=blue,cyan,etc.
 
 % Packages
 \usepackage{latexsym, amsmath, amssymb, amsfonts,

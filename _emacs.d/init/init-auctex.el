@@ -151,42 +151,46 @@
   ;;       '("bibliography" "nobibliography" "addbibresource"))
 
   ;; Customize Compilation
-  ;; modifying commands
+  ;; modifying built-in commands
   (eval-after-load "tex"
     '(setcdr (assoc "LaTeX" TeX-command-list)
              '("%`%l%(mode) -shell-escape%' %t"
                TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
-
   (eval-after-load 'latex
     '(setq LaTeX-clean-intermediate-suffixes
            (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk" "\\.tdo"))))
 
-  ;; adding commands
+  ;; indexing nomenclature and word index
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("Index (nomencl)" "makeindex %s.nlo -s nomencl.ist -o %s.nls"
                     TeX-run-TeX nil t :help "Run MakeIndex with nomencl")))
 
+  ;; Xelatex
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("XeLaTeX" "xelatex -shell-escape %t" TeX-run-command nil t) t))
+                  '("XeLaTeX" "xelatex -synctex=1 -pdf -shell-escape %t" TeX-run-command nil t) t))
 
+  ;; Rubber (python pkg)
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("Rubber" "rubber --synctex -d %t" TeX-run-command nil t) t))
+                  ;; '("Rubber" "rubber --synctex -d %t" TeX-run-command nil t) t))
+                  '("Rubber" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("Rubber (unsafe)" "rubber --synctex --unsafe -fd %t" TeX-run-command nil t) t))
+                  '("Rubber (xelatex)" "rubber --synctex --module xelatex %t" TeX-run-command nil t) t))
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("Clean (complete)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
+                  '("Clean (auto)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
   ;; if also wanting to delete pdf, use "rubber --pdf --clean %t".
   (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
+  ;; format conversion
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("pdf2png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
 
+  ;; other bash assistance
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("update bib" "./supports/bibupdate.sh" TeX-run-command nil t) t))

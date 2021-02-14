@@ -137,13 +137,19 @@
 Uses `current-date-format' for the formatting the date/time."
   (interactive)
   (insert (format-time-string "%d %b %Y" (current-time))))
-(defun zyue/insert-date-digits ()
+(defun zyue/insert-today ()
+  "insert today in the format 2020-01-31."
   (interactive)
   (insert (format-time-string "%Y-%m-%d" (current-time))))
 (defun zyue/insert-time ()
-  "insert the current time (1-week scope) into the current buffer."
+  "insert the current time (format e.g. 12:37:05) into the current buffer."
   (interactive)
   (insert (format-time-string "%H:%M:%S" (current-time))))
+(defun zyue/iso-8601-date-string ()
+  (concat
+   (format-time-string "%Y-%m-%dT%T")
+   ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
+    (format-time-string "%z"))))
 
 ;; adding incremental numbers to lines
 (require 'gse-number-rect)

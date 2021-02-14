@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: figure (single frame)
+# key: fig
+# group: beamer
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{frame}
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/$0}
+  \end{center}
+\end{frame}

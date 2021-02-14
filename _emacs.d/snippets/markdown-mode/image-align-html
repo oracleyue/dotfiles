@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: align image beside texts
+# key: image
+# group: html
+# --
+<div style="padding-top:20px;">
+  <hr><br>
+  <img src="/images/aacs/aacs-wechat-qrcode.jpeg"
+       style="width:120px; float:right; margin-left:20px;margin-top:-10px;">
+  <p>
+  扫码关注微信公众号 <br><br>
+  知乎ID：澳洲华人学者AACS <br>
+  新浪微博：@澳洲华人学者AACS <br><br>
+  </p>
+</div>

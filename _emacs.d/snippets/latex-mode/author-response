@@ -9,7 +9,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{times,helvet,newtxmath}
+\usepackage{times,helvet}  % newtxmath
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
@@ -39,7 +39,7 @@
 
 \begin{document}
 
-\title{Author's Response to Review Comments and Statement of Changes}
+\title{Author's Response to Review Comments and \\Statement of Changes}
 \author{}
 \date{}
 \maketitle
@@ -51,18 +51,39 @@
 
 % ----------------- MAIN --------------------
 
-% Place review comments in the env. {review}
+% Section: List of Changes
+
+\section{Statement of Changes}
+\label{sec:statement-changes}
+
+We sincerely thank the associate editor and the reviewers for their very
+careful evaluation of our paper. We are very grateful for their insightful
+comments that have allowed us to significantly improve the quality of our
+paper. A list of changes is summarised below:
+
+\begin{itemize}
+\item ...
+
+\item Minor improvements on clearance and clarity.
+\end{itemize}
+
+
+% Sections: Responses to Each Reviewer
+
+\section{ReviewXXXXXX(ReviewerX)}
+\label{sec:review-X}
+
+% place review comments in the env. {review}
 \begin{review}
     review comments here...
 
 \end{review}
 
-% Place author responses in the env. {response};
+% place author responses in the env. {response};
 \begin{response}\label{resp:XXX}
     author's response here... referred by \resp~\ref{resp:XXX}
 
 \end{response}
-
 
 
 % --------------- BIBLIOGRAPHY --------------

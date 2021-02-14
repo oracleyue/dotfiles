@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: notes in beamer
 # key: bnote
-# group: macros
+# group: beamer
 # --
 \note[itemize]{
 \item $0

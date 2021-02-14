@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: init for class
+# key: init
+# group: oracleyue
+# --
+def __init__(self):
+    super().__init__()

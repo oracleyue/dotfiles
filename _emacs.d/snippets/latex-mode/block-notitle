@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: block (no title)
+# key: block
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{center}
+  \begin{minipage}{.8\textwidth}
+    \begin{mdframed}[style=hl]
+      $0
+    \end{mdframed}
+  \end{minipage}
+\end{center}

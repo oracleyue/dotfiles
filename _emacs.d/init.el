@@ -44,6 +44,9 @@
 (require 'init-markdown)          ;; markdown
 (require 'init-auctex)            ;; latex
 
+;; writing blogs
+(require 'init-blog)
+
 ;; additional misc mode
 (require 'init-misc)
 

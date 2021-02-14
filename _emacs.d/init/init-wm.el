@@ -16,6 +16,18 @@
 ;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
 
 ;; ----------------------------------------------
+;; Call external software to open documents
+;; ----------------------------------------------
+(use-package openwith
+  :demand
+  :config
+  (openwith-mode t)
+  (if *is-mac*
+      (setq openwith-associations '(("\\.pdf\\'" "/usr/bin/open" (file))))
+    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file)))))
+  )
+
+;; ----------------------------------------------
 ;; numbering windows
 ;; ----------------------------------------------
 (use-package winum

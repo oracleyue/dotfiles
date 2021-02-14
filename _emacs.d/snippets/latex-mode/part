@@ -1,11 +1,11 @@
 # -*- mode: snippet -*-
-# name: frame with part title
+# name: single frame with huge title
 # key: part
-# group: macros
+# group: beamer
 # --
 \begin{frame}
   \begin{center}
-      \huge \sffamily \color{mColor}
+      \huge \sffamily \color{hlColor}
       $0
     \end{center}
 \end{frame}

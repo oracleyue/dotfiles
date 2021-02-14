@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
-# name: figure (beamer)
-# key: fig
+# name: centered minipage
+# key: minipage
 # group: beamer
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{center}
-  \includegraphics[width=.9\textwidth]{figures/${1:figname}}
+  \begin{minipage}{.9\textwidth}
+    $0
+  \end{minipage}
 \end{center}

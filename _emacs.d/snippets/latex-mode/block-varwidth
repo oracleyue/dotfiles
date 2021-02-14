@@ -1,13 +1,13 @@
 # -*- mode: snippet -*-
-# name: block with given width
+# name: block (variable width)
 # key: block
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \begin{center}
-    \begin{minipage}{.8\textwidth}
-      \begin{block}{}
+  \begin{minipage}{.8\textwidth}
+    \begin{block}{Theorem}
       $0
-      \end{block}
-    \end{minipage}
+    \end{block}
+  \end{minipage}
 \end{center}

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: titlepage (paper club)
+# key: title
+# group: beamer
+# --
+\title[]{${1:title}}
+\subtitle{${2:}}
+\author{Author: J.~Woude$^*$ \\\\ Presenter: Zuogong~Yue}
+\institute[]{
+    \begin{tabular}{ll}
+       $^*$Delft University of Technology
+    \end{tabular}}
+\date{02 Nov 2017 $\cdot$ Group Meeting $\cdot$ Belval}

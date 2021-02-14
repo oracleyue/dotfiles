@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: xelatex (rubber)
+# key: rubber
+# group: elisp
+# expand-env: ((yas-indent-line 'fixed))
+# --
+% rubber: module xelatex
+% (insert this line at the beginning of the .tex file)

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: insert image
+# key: hugo
+# group: hugo
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+CAPTION: ${2:caption here}
+[[${1:image here}]]

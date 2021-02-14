@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: institue logos
+# key: logo
+# group: beamer
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\titlegraphic{
+  \begin{tikzpicture}[overlay, remember picture]
+    \node[xshift=-5mm, yshift=-5mm, anchor=north east]
+    at (current page.north east) {%
+      \includegraphics[height=.06\textwidth]{styles/logos/unsw}      \quad
+      \includegraphics[height=.06\textwidth]{styles/logos/lcsb-long} \quad
+      \includegraphics[height=.06\textwidth]{styles/logos/halmstad}  \quad
+      \includegraphics[height=.06\textwidth]{styles/logos/linkoping} \quad
+      \includegraphics[height=.06\textwidth]{styles/logos/cambridge}
+    };
+  \end{tikzpicture}
+}

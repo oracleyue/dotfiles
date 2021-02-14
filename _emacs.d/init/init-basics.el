@@ -39,7 +39,7 @@
 
 ;; fill-column
 (defconst *fill-column-sans* 90)
-(defconst *fill-column-mono* 75)
+(defconst *fill-column-mono* 72)
 (setq-default fill-column *fill-column-mono*)
 
 ;; fix PATH for emacs in Mac OS X

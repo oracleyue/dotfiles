@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: insert youtube
+# key: youtube
+# group: hugo
+# --
+<!-- youtube embedding test -->
+{{< youtube ${1:Ac7G7xOG2Ag} >}}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: insert image
+# key: img
+# group: hugo
+# --
+![Caption here](/images/image.jpg)

@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: master
-# key: master
+# name: texinputs
+# key: env
 # group: elisp
 # --
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: t
+%%% eval: (setenv "TEXINPUTS" "./styles::")
 %%% End:

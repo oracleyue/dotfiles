@@ -171,8 +171,7 @@
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
-(setenv "GTAGSLABEL" "pygments")
-(setenv "GTAGSLIBPATH" (concat (getenv "HOME") "/.gtags/")) ;; if tag system libs
+(setenv "GTAGSLIBPATH" (expand-file-name "$HOME/.gtags/")) ;; if tag system libs
 (use-package counsel-gtags
   :demand
   :diminish
@@ -185,6 +184,7 @@
               ("C-c g t" . counsel-gtags-find-definition)
               ("C-c g r" . counsel-gtags-find-reference)
               ("C-c g s" . counsel-gtags-find-symbol)
+              ("C-c g f" . counsel-gtags-find-file)
               ;; create/update tags
               ("C-c g c" . counsel-gtags-create-tags)
               ("C-c g u" . counsel-gtags-update-tags)
@@ -194,6 +194,8 @@
   :hook ((c-mode c++-mode python-mode matlab-mode) . counsel-gtags-mode)
   ;; :config (setq counsel-gtags-auto-update t)
   )
+;; If you like to skip folders for tagging, add folders to the list
+;; ":skip=" in ~/.globalrc.
 
 ;; ---------------------------------------------------------------
 ;; /Hydra/: make Emacs bindings that stick around

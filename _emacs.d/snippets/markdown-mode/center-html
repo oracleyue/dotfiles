@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: centering texts
 # key: center
-# group: macros
+# group: html
 # --
 <center> $0 </center>

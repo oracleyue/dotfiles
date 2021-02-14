@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: hugo header
+# key: head
+# group: hugo
+# --
+---
+title: "${1:TITLE}"
+date: `(zyue/insert-date-digits)`
+lastmod: `(zyue/insert-date-digits)`
+draft: false
+tags: ["tag1", "tag2", "tag3"]
+categories: ["cat-1", "cat-2"]
+
+weight: 0
+contentCopyright: MIT
+mathjax: false
+autoCollapseToc: true
+---

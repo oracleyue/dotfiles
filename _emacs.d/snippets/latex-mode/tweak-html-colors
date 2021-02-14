@@ -10,8 +10,10 @@
 \usepackage[parfill]{parskip}
 
 \usepackage[rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
 
-% Theme: Tomorrow Day
+% Theme: tomorrow day
 \definecolor{twd-color01}{HTML}{ffffff}
 \definecolor{twd-color02}{HTML}{efefef}
 \definecolor{twd-color03}{HTML}{d6d6d6}
@@ -25,12 +27,13 @@
 \definecolor{twd-color11}{HTML}{4271ae}
 \definecolor{twd-color12}{HTML}{8959a8}
 
-\usepackage{tikz}
-\usetikzlibrary{shapes}
+% Background color
+\usepackage{pagecolor}
+\pagecolor{white}
 
 \begin{document}
 
-Theme: Tomorrow Day
+Theme: tomorrow day
 
 \tikz \filldraw[fill=twd-color01, draw=black] (0,0) circle (.5) node{01};
 \tikz \filldraw[fill=twd-color02, draw=black] (0,0) circle (.5) node{02};
