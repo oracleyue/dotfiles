@@ -16,14 +16,14 @@
 
 
 (use-package lsp-mode
-  ;; :demand
+  :demand
   :hook ((python-mode . lsp))
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
   :init
-  (setq lsp-auto-guess-root t)       ; Detect project root
-  (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
-  (setq flymake-fringe-indicator-position 'right-fringe)
+  (setq lsp-auto-guess-root t          ; detect project root
+        lsp-prefer-flymake nil         ; use lsp-ui and flycheck
+        lsp-completion-provider :none) ; diable add company-capf, set by myself
   :config
   ;; configure LSP clients
   (use-package lsp-clients
@@ -38,10 +38,14 @@
   ;; enable log only for debug
   (setq lsp-log-io nil)
 
+  ;; call signature help
+  ;; (setq lsp-signature-auto-activate nil)  ;; use =C-S-SPC=
+  (setq lsp-signature-render-documentation nil)  ;; keep tip, hide doc
+  (setq lsp-signature-doc-lines 3)
+
   ;; disable uncessary features for better performance
   (setq lsp-enable-folding nil)
   (setq lsp-enable-snippet nil)
-  ;; (setq lsp-enable-completion-at-point nil)  ;; use company-lsp instead
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-links nil)
   (push "[/\\\\]\\node_modules$" lsp-file-watch-ignored)
@@ -53,23 +57,36 @@
   :bind (:map lsp-ui-mode-map
               ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
               ([remap xref-find-references] . lsp-ui-peek-find-references)
-              ("C-c u" . lsp-ui-imenu))
-  :init (setq lsp-ui-doc-enable t
-              lsp-ui-doc-use-webkit nil
-              lsp-ui-doc-include-signature t
-              lsp-ui-doc-position 'top
-              lsp-ui-doc-border (face-foreground 'default)
+              ("C-c u" . lsp-ui-imenu)
+              ("M-RET" . lsp-ui-doc-focus-frame))
+  :config (setq
+           ;; lsp-ui-doc
+           lsp-ui-doc-include-signature t
+           lsp-ui-doc-position 'top   ;; at-point
+           lsp-ui-doc-max-height 15
+           ;; (lsp-ui-doc-border (face-foreground 'default))
 
-              lsp-ui-sideline-enable nil
-              lsp-ui-sideline-ignore-duplicate t)
+           ;; lsp-ui-imenu
+           lsp-ui-imenu-auto-refresh t
+
+           ;; lsp-ui-sideline
+           lsp-ui-sideline-show-code-actions t
+           lsp-ui-sideline-show-hover nil
+           lsp-ui-sideline-show-diagnostics nil
+           lsp-ui-sideline-ignore-duplicate t)
   :config
+  (setq lsp-ui-doc-enable      t
+        lsp-ui-imenu-enable    t
+        lsp-ui-sideline-enable nil
+        lsp-ui-peek-enable     nil)
+
   ;; WORKAROUND Hide mode-line of the lsp-ui-imenu buffer
   ;; https://github.com/emacs-lsp/lsp-ui/issues/243
   (defadvice lsp-ui-imenu (after hide-lsp-ui-imenu-mode-line activate)
     (setq mode-line-format nil)))
 
 (use-package company-lsp
-  ;; :demand
+  :disabled
   :init (setq company-lsp-cache-candidates 'auto))
 
 

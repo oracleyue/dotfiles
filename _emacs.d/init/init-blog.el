@@ -14,30 +14,8 @@
         easy-hugo-url "https://oracleyue.github.io")
   (setq easy-hugo-default-ext ".org")
   :config
-  ;; new post
-  (defun zyue/hugo-newpost (slug title tags categories)
-    (interactive "sSlug:
-sTitle:
-sTags:
-sCategories: ")
-    (easy-hugo-with-env
-     (let* ((now (current-time))
-		    (basename (concat (format-time-string "%Y-%m-%d-" now)
-							  slug easy-hugo-default-ext))
-		    (postdir (expand-file-name easy-hugo-postdir easy-hugo-basedir))
-		    (filename (expand-file-name basename postdir)))
-	   (when (file-exists-p filename)
-         (error "%s already exists!" filename))
-	   (find-file filename)
-	   (insert
-	    (format "#+TITLE: %s
-#+DATE: %s
-#+TAGS[]: %s
-#+CATEGORIES[]: %s
-
-" title (zyue/iso-8601-date-string) tags categories))
-	   (goto-char (point-max))
-	   (save-buffer))))
+  ;; use default org header, if nil (default), use templates in hugo's "archetypes/"
+  ;; (setq easy-hugo-org-header t)
   )
 
 
@@ -62,7 +40,6 @@ Hexo blog."
           (org-export-with-toc nil))
       (org-export-to-file 'gfm outfile async subtreep visible-only)))
   )
-
 
 
 (provide 'init-blog)

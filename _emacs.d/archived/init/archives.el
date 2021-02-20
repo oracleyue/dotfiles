@@ -740,3 +740,54 @@ See help of `format-time-string' for possible replacements")
       (browse-url (get-text-property 0 'quicklookurl x)))
     "browse url")))
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+(use-package ivy-posframe
+  :disabled
+  :ensure nil
+  :load-path "site-lisp/ivy-posframe"
+  :demand
+  :after (ivy)
+  :config
+  (setq ivy-fixed-height-minibuffer nil
+        ivy-posframe-parameters
+        `((min-width  . 70)
+          (min-height . ,ivy-height)
+          (internal-border-width . 10)))
+  (setq ivy-display-functions-alist nil)
+  (push '(t . ivy-posframe-display-at-point) ivy-display-functions-alist)
+  (push '(swiper . ivy-posframe-display-at-window-bottom-left)
+        ivy-display-functions-alist)
+  (ivy-posframe-enable))
+
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; easy-hugo
+
+  ;; new post
+  (defun zyue/hugo-newpost (slug title tags categories)
+    (interactive "sSlug:
+sTitle:
+sTags:
+sCategories: ")
+    (easy-hugo-with-env
+     (let* ((now (current-time))
+		    (basename (concat (format-time-string "%Y-%m-%d-" now)
+							  slug easy-hugo-default-ext))
+		    (postdir (expand-file-name easy-hugo-postdir easy-hugo-basedir))
+		    (filename (expand-file-name basename postdir)))
+	   (when (file-exists-p filename)
+         (error "%s already exists!" filename))
+	   (find-file filename)
+	   (insert
+	    (format "#+TITLE: %s
+#+DATE: %s
+#+TAGS[]: %s
+#+CATEGORIES[]: %s
+
+" title (zyue/iso-8601-date-string) tags categories))
+	   (goto-char (point-max))
+	   (save-buffer))))
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

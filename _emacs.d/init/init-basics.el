@@ -52,7 +52,7 @@
 
 ;; cursors
 (if *is-server-coding*
-    (setq-default cursor-type 'box)
+    (setq-default cursor-type 'bar)
   (setq-default cursor-type 'bar)) ; "bar", "box" (default)
 (blink-cursor-mode t)  ; -1 stops cursor blinking
 
@@ -142,7 +142,14 @@
 ;; ----------------------------------------------
 ;; /diminish/: remove minor mode names from modeline
 ;; ----------------------------------------------
-(use-package diminish)
+(use-package diminish
+  :demand
+  :after (org python)
+  :config
+  ;; "Ind" keyword in powerbar
+  (diminish 'org-indent-mode)
+  ;; "ARev" keyword in powerbar
+  (diminish 'auto-revert-mode))
 
 ;; ----------------------------------------------
 ;; /saveplace/ (built-in): restore cursor position when reopen files

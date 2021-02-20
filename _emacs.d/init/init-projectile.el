@@ -56,24 +56,22 @@
 ;; ---------------------------------------------
 ;; /counsel-projectile/: Ivy for projectile
 ;; ---------------------------------------------
-(when *use-ivy*
-  (use-package counsel-projectile
-    :after projectile
-    :commands (counsel-projectile-find-file
-               counsel-projectile-find-dir
-               counsel-projectile-switch-to-buffer
-               counsel-projectile-grep
-               counsel-projectile-ag
-               counsel-projectile-switch-project)
-    :init
-    :bind
-    (([remap projectile-find-file]        . counsel-projectile-find-file)
-     ([remap projectile-find-dir]         . counsel-projectile-find-dir)
-     ([remap projectile-switch-to-buffer] . counsel-projectile-switch-to-buffer)
-     ([remap projectile-grep]             . counsel-projectile-grep)
-     ([remap projectile-ag]               . counsel-projectile-ag)
-     ([remap projectile-switch-project]   . counsel-projectile-switch-project)))
-  )
+(use-package counsel-projectile
+  :after projectile
+  :commands (counsel-projectile-find-file
+             counsel-projectile-find-dir
+             counsel-projectile-switch-to-buffer
+             counsel-projectile-grep
+             counsel-projectile-ag
+             counsel-projectile-switch-project)
+  :init
+  :bind
+  (([remap projectile-find-file]        . counsel-projectile-find-file)
+   ([remap projectile-find-dir]         . counsel-projectile-find-dir)
+   ([remap projectile-switch-to-buffer] . counsel-projectile-switch-to-buffer)
+   ([remap projectile-grep]             . counsel-projectile-grep)
+   ([remap projectile-ag]               . counsel-projectile-ag)
+   ([remap projectile-switch-project]   . counsel-projectile-switch-project)))
 
 
 (provide 'init-projectile)

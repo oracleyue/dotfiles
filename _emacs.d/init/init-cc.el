@@ -43,13 +43,9 @@
     ;;   :config
     ;;   (push 'company-rtags company-backends))
     ;; integration with helm
-    (if *use-helm*
-        (use-package helm-rtags
-          :config
-          (setq rtags-display-result-backend 'helm))
-      (use-package ivy-rtags
-        :config
-        (setq rtags-display-result-backend 'ivy)))))
+    (use-package ivy-rtags
+      :config
+      (setq rtags-display-result-backend 'ivy))))
 
 ;; /irony/+/company-irony/: code completions
 (use-package irony
@@ -96,9 +92,7 @@
     ;; enable case-insensitive searching
     (set-default 'semantic-case-fold t)
     ;; set selection interface
-    (if *use-helm*
-        (setq moo-select-method 'helm)  ;; ivy, helm, helm-fuzzy
-      (setq moo-select-method 'ivy))
+    (setq moo-select-method 'ivy)
     ;; enable function-args
     (add-hook 'c-mode-hook 'fa-config-default)
     (add-hook 'c++-mode-hook 'fa-config-default)
@@ -128,17 +122,6 @@
             (lambda ()
               (setq compile-command "cd build/ && cmake .. && make")
               (define-key cmake-mode-map (kbd "C-c C-c") 'compile))))
-
-;; Compile commands in c/c++ and makefile modes using helm-make
-(when *use-helm*
-  (use-package helm-make
-    :bind (("C-c p c" . helm-make-projectile)
-           :map c-mode-base-map
-           ("C-c C-c" . helm-make)
-           :map makefile-gmake-mode-map   ;; makefile in Linux
-           ("C-c C-c" . helm-make)
-           :map makefile-bsdmake-mode-map ;; makefile in BSD
-           ("C-c C-c" . helm-make))))
 
 
 (provide 'init-cc)

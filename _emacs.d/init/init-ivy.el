@@ -36,26 +36,22 @@
   (add-hook 'after-make-frame-functions #'zyue-fix-face-ivy) ;; for clients
   )
 
-(when *use-posframe*
-  (use-package ivy-posframe
-    :ensure nil
-    :load-path "site-lisp/ivy-posframe"
-    :after (ivy)
-    :config
-    (setq ivy-fixed-height-minibuffer nil
-          ;; ivy-display-function #'ivy-posframe-display-at-point
-          ivy-posframe-parameters
-          `((min-width . 90)
-            (min-height . ,ivy-height)
-            (internal-border-width . 10)))
-    (setq ivy-display-functions-alist nil)
-    (push '(t . ivy-posframe-display-at-point) ivy-display-functions-alist)
-    ;; (push '(ivy-completion-in-region . ivy-posframe-display-at-point)
-    ;;       ivy-display-functions-alist)
-    (push '(swiper . ivy-posframe-display-at-window-bottom-left)
-          ivy-display-functions-alist)
-    (ivy-posframe-enable))
-  )
+(use-package ivy-posframe
+  :disabled
+  :demand
+  :diminish
+  :after  (ivy)
+  :init
+  (setq ivy-posframe-parameters `((min-width  . 75)
+                                  (min-height . 15)
+                                  (internal-border-width . 10)))
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((swiper          . ivy-display-function-fallback)
+          (complete-symbol . ivy-posframe-display-at-point)
+          (counsel-M-x     . ivy-posframe-display-at-window-bottom-left)
+          (t               . ivy-posframe-display)))
+  (ivy-posframe-mode 1))
 
 (use-package counsel
   :demand
@@ -171,29 +167,32 @@
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
-(setenv "GTAGSLIBPATH" (expand-file-name "$HOME/.gtags/")) ;; if tag system libs
 (use-package counsel-gtags
   :demand
   :diminish
+  :ensure nil
+  :load-path "site-lisp/"
+  :init
+  (setq counsel-gtags-auto-update t
+        counsel-gtags-custom-dbpath ".tags/")
+  :bind-keymap ("C-c g" . counsel-gtags-command-map)
+  ;; basic jumps
+  ;; ("C-c g ." . counsel-gtags-dwim)
+  ;; ("C-c g ," . counsel-gtags-go-backward)
+  ;; ("C-c g d" . counsel-gtags-find-definition)
+  ;; ("C-c g r" . counsel-gtags-find-reference)
+  ;; ("C-c g s" . counsel-gtags-find-symbol)
+  ;; ("C-c g f" . counsel-gtags-find-file)
+  ;; create/update tags
+  ;; ("C-c g c" . counsel-gtags-create-tags)
+  ;; ("C-c g u" . counsel-gtags-update-tags)
+  ;; go through stack/history
+  ;; ("C-c g n" . counsel-gtags-go-forward)
+  ;; ("C-c g p" . counsel-gtags-go-backward)
   :bind (:map counsel-gtags-mode-map
-              ;; basic jumps
-              ("C-c g ." . counsel-gtags-dwim)
-              ("C-c g ," . counsel-gtags-go-backward)
-              ("s-."     . counsel-gtags-dwim)
-              ("s-,"     . counsel-gtags-go-backward)
-              ("C-c g t" . counsel-gtags-find-definition)
-              ("C-c g r" . counsel-gtags-find-reference)
-              ("C-c g s" . counsel-gtags-find-symbol)
-              ("C-c g f" . counsel-gtags-find-file)
-              ;; create/update tags
-              ("C-c g c" . counsel-gtags-create-tags)
-              ("C-c g u" . counsel-gtags-update-tags)
-              ;; jump over stacks/history
-              ("C-c g [" . counsel-gtags-go-backward)
-              ("C-c g ]" . counsel-gtags-go-forward))
-  :hook ((c-mode c++-mode python-mode matlab-mode) . counsel-gtags-mode)
-  ;; :config (setq counsel-gtags-auto-update t)
-  )
+              ("M-."     . counsel-gtags-dwim)
+              ("M-,"     . counsel-gtags-go-backward))
+  :hook ((c-mode c++-mode matlab-mode) . counsel-gtags-mode))
 ;; If you like to skip folders for tagging, add folders to the list
 ;; ":skip=" in ~/.globalrc.
 

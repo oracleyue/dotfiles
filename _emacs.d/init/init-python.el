@@ -38,8 +38,8 @@
         ;; using ipython may slow down openning files
         (setq python-shell-interpreter "ipython3")
         (setq python-shell-interpreter-args "--simple-prompt -i"))
-    (setq python-shell-interpreter "python3")
-    (setq python-shell-interpreter-args "-i"))
+    (setq python-shell-interpreter "python3"
+          python-shell-interpreter-args "-i"))
 
   ;; Set GUD debugger
   ;; (setq gud-pdb-command-name "python -m pdb")

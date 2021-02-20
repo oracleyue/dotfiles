@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: bash
+# key:sh
+# group: src
+# expand-env: ((yas-indent-line 'fixed))
+# --
+#+BEGIN_SRC sh
+$0
+#+END_SRC

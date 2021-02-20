@@ -17,6 +17,7 @@
 ;; Global settings for completion
 (setq completion-ignore-case t) ;; filter candidate case-insensitive
 
+
 ;; /Company/ for code completion
 (use-package company
   :demand
@@ -44,11 +45,10 @@
 	    company-global-modes
 	    '(not comint-mode erc-mode message-mode help-mode gud-mode
               text-mode latex-mode org-mode markdown-mode)
-	    company-backends '((company-files          ; files & directory
-                            company-keywords       ; keywords
-                            company-capf
-                            company-dabbrev-code)
-                           (company-abbrev company-dabbrev)))
+        company-backends '((company-files company-capf
+                                          :with company-yasnippet)
+                           (company-dabbrev-code company-keywords company-files)
+                           company-dabbrev))
 
   ;; enable dabbrev-code for completion in string or comments
   ;; (require 'company-dabbrev-code)
@@ -155,12 +155,6 @@
 
   ) ;; END of use-package(company)
 
-;; use /posframe/ for company
-(when *use-posframe*
-  (use-package company-posframe
-    :if (display-graphic-p)
-    :after company
-    :hook (company-mode . company-posframe-mode)))
 
 ;; /Yasnippet/ A template system
 (use-package yasnippet

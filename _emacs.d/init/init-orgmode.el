@@ -48,11 +48,6 @@
 ;; use cdlatex for fast math typing
 ;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 
-;; diminish "Ind" keyword in Powerbar
-(use-package org-indent
-  :ensure nil
-  :diminish)
-
 
 ;; /GTD Function Extensions/
 ;; refer to http://doc.norang.ca/org-mode.html

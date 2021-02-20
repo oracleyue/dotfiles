@@ -103,7 +103,7 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify font for unicode symbols
   (catch 'loop
-    (dolist (font '("Symbola" "Apple Symbols" "Symbol"))
+    (dolist (font '("Apple Color Emoji" "Apple Symbols" "Symbola" "Symbol"))
       (when (member font (font-family-list))
         (set-fontset-font t 'unicode font nil 'prepend)
         (throw 'loop t))))

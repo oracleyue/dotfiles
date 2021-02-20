@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: minted for codes
+# key: minted
+# group: preambles
+# --
+\usepackage{minted}
+\usemintedstyle{pastie}

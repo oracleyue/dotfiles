@@ -42,13 +42,6 @@
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 
-;; completion system
-(defconst *use-ivy*  t)
-(defconst *use-helm* (not *use-ivy*))
-
-;; posframe
-(defconst *use-posframe* nil)
-
 ;; code intelligence
 (defconst *use-company* t) ;; auto-complete no longer supported
 (defconst *use-lsp* t)     ;; use LSP as a unified codeIntel
@@ -64,7 +57,7 @@
 
 ;; python
 (defconst *use-python-version* 3)
-(defconst *use-ipython* nil)
+(defconst *use-ipython* t)
 
 ;; ECB IDE interface
 (defconst *enable-ecb* nil)
