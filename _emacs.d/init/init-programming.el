@@ -167,25 +167,6 @@
 (define-key gud-mode-map (kbd "S-<f8>") #'gud-finish) ;; setp out
 
 
-;; ----------------------------------------------
-;; /ECB/: GUI interface of IDE
-;; ----------------------------------------------
-(when *enable-ecb*
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/ecb")
-  (require 'ecb)
-  (require 'ecb-autoloads)
-  (setq ecb-windows-width 0.16)
-  (setq ede-project-directories (quote ("~/Workspace/c")))
-  (setq ecb-source-path '("~/Workspace/c/src"
-                          "~/Workspace/c/include"))
-  (setq ecb-tip-of-the-day nil)
-  (setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
-
-  (add-hook 'c-mode-hook 'ecb-activate)
-  (add-hook 'c++-mode-hook 'ecb-activate)
-  (add-hook 'matlab-mode-hook 'ecb-activate))
-
-
 (provide 'init-programming)
 ;; ================================================
 ;; init-programming.el ends here

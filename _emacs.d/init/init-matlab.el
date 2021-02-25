@@ -24,6 +24,10 @@
   (require 'company-dabbrev-code)
   (add-to-list 'company-dabbrev-code-modes 'matlab-mode)
 
+  ;; "matlab function..end mode" in matlab-mode
+  (eval-after-load "matlab"
+    '(diminish 'matlab-functions-have-end-minor-mode))
+
 
   ;; ================================================================
   ;; Support Extensions for MATLAB

@@ -7,16 +7,10 @@
 ;; - Sarasa Mono SC;
 ;; - Iosevka;
 
-(setq xfu-doom-themes-gitrepo "~/.emacs.d/themes/github/emacs-doom-themes")
-(unless (file-directory-p xfu-doom-themes-gitrepo)
-  (shell-command "cd ~/.emacs.d/themes; ./themes-dl.sh"))
-
 (use-package doom-themes
-  :load-path "themes/github/emacs-doom-themes"
   :demand
   :config
   ;; global settings
-  (require 'doom-themes)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
@@ -34,7 +28,7 @@
           doom-neotree-line-spacing 0.5
           doom-neotree-folder-size 1.0
           doom-neotree-chevron-size 0.6)
-    (doom-themes-neotree-config)  ; /all-the-icons/ required!
+    (doom-themes-neotree-config)  ; /all-the-icons/ required
     (set-default 'neo-window-fixed-size nil)  ;; allow adjust window size
 
     ;; improves org-mode fontification.

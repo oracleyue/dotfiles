@@ -3,6 +3,9 @@
 ;; ================================================================
 
 
+;; /command-log/: show key-strokes/commands in demo
+(use-package command-log-mode)
+
 ;; /goldendict/: use GoldenDict in Emacs
 (use-package goldendict
   :bind ("M-g d" . goldendict-dwim)

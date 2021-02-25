@@ -12,8 +12,6 @@
 ;; line wrapping
 (add-hook 'text-mode-hook 'visual-line-mode)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(diminish 'visual-line-mode)
-(diminish 'auto-fill-function)
 
 ;; spell checking
 ;; auto-correct words: "C-." or "C-M-i"

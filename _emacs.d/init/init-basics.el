@@ -24,10 +24,7 @@
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
 ;;   - "coding"  for coding (dark-theme, startup folders)
-;;   - "ac-mode" for ac-complete (the rest as "coding")
-;; start emacs server (use =emacsclient -a "" -c= anywhere else)
-;; (server-start)
-;; alternatively, use systemd to start "emacs --daemon" on startup (better!)
+;; start emacs server: (server-start)
 ;; start daemon with name: "emacs --daemon=main"
 ;; connect to server: "emacsclient -nc --socket-name=main"
 ;; if using tcp: "emacsclient -nc --server-file=main"
@@ -124,7 +121,7 @@
 (defun zyue/draft-email ()
   (interactive)
   (find-file (expand-file-name "~/Documents/.email.tmp.md"))
-  (auto-fill-mode 1)
+  (auto-fill-mode -1)
   (setq-local fill-column *fill-column-mono*))
 
 ;; quick draft formulas in LaTeX
@@ -144,12 +141,16 @@
 ;; ----------------------------------------------
 (use-package diminish
   :demand
-  :after (org python)
   :config
-  ;; "Ind" keyword in powerbar
-  (diminish 'org-indent-mode)
   ;; "ARev" keyword in powerbar
-  (diminish 'auto-revert-mode))
+  (eval-after-load "autorevert"
+    '(diminish 'auto-revert-mode))
+  ;; line wrapping
+  (eval-after-load "simple"
+    '(progn
+       (diminish 'visual-line-mode)
+       (diminish 'auto-fill-function)))
+  )
 
 ;; ----------------------------------------------
 ;; /saveplace/ (built-in): restore cursor position when reopen files

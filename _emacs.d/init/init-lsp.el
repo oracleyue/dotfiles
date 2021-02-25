@@ -85,10 +85,6 @@
   (defadvice lsp-ui-imenu (after hide-lsp-ui-imenu-mode-line activate)
     (setq mode-line-format nil)))
 
-(use-package company-lsp
-  :disabled
-  :init (setq company-lsp-cache-candidates 'auto))
-
 
 (provide 'init-lsp)
 ;; ================================================

@@ -791,3 +791,19 @@ sCategories: ")
 	   (save-buffer))))
 
 ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  ;; fix face in ivy-switch-buffer
+  (defun zyue-fix-face-ivy (&optional frame)
+    (with-selected-frame frame
+      (zyue-search-and-load-fonts frame)
+      (set-face-attribute 'ivy-org frame :font zyue-font :weight 'bold)))
+  (if *is-app* (zyue-fix-face-ivy (selected-frame)))  ;; for app
+  (add-hook 'after-make-frame-functions #'zyue-fix-face-ivy) ;; for clients
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

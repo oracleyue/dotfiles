@@ -27,8 +27,7 @@
              (expand-file-name "init/styles" user-emacs-directory))
 (dolist (subdir '("."
                   "atom-one-dark-theme"
-                  "github/eclipse-theme"
-                  "github/emacs-doom-themes"))
+                  "github/eclipse-theme"))
   (let ((theme-dir (expand-file-name (concat "themes/" subdir)
                                      user-emacs-directory)))
     (when (file-directory-p theme-dir)
@@ -127,14 +126,25 @@ of the focused frame and AB is the unfocused."
   ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
   )
 
+;; Icons
+(defun font-installed-p (font-name)
+  "Check if font with FONT-NAME is available."
+  (find-font (font-spec :name font-name)))
+(use-package all-the-icons
+  :if *enable-all-the-icons*
+  :init (unless (or (font-installed-p "all-the-icons")
+                    (daemonp))
+          (all-the-icons-install-fonts t))
+  ;; avoid slowing down performance
+  :config (setq inhibit-compacting-font-caches t))
+
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
 (setq zyue-modeline 'doomline)
 
 ;; Themes (eclipse, doom-nord-light, doom-one, atom-one-dark)
-(setq zyue-theme 'doom-nord-light)
+(setq zyue-theme 'eclipse)
 (when *is-server-coding* (setq zyue-theme 'doom-one))
-(when *is-app* (setq zyue-theme 'eclipse))
 (when *is-terminal*
   (setq zyue-theme 'doom-one zyue-modeline 'plain))
 
@@ -148,7 +158,8 @@ of the focused frame and AB is the unfocused."
             (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
-(require 'init-dashboard)
+(when *enable-all-the-icons*
+  (require 'init-dashboard))
 
 ;; UI loading
 (if (daemonp)

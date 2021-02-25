@@ -22,30 +22,24 @@
 ;; major mode for /VimScript/ (e.g. ".vimrc")
 ;; ---------------------------------------------
 (use-package vimrc-mode
-  :demand
-  :config
-  (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
+  :mode "\\.vim\\(rc\\)?\\'")
 
 ;; ---------------------------------------------
 ;; major mode for /AppleScript/
 ;; ---------------------------------------------
 (use-package apples-mode
-  :demand
   :mode "\\.\\(applescri\\|sc\\)pt\\'")
 
 ;; ---------------------------------------------
 ;; major mode for /YAML/ (*.yml)
 ;; ---------------------------------------------
 (use-package yaml-mode
-  :demand
-  :init
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+  :mode "\\.yml\\'")
 
 ;; ---------------------------------------------
 ;; major mode for /TOML/ (*.toml)
 ;; ---------------------------------------------
 (use-package toml-mode
-  :demand
   :mode "\\.toml\\'")
 
 

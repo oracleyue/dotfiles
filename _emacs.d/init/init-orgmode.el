@@ -45,6 +45,10 @@
                             ("\\.x?html?\\'" . default)
                             ("\\.pdf\\'"     . default))))
 
+;; diminish minor ("Ind" keyword in powerbar)
+(eval-after-load "org-indent"
+  '(diminish 'org-indent-mode))
+
 ;; use cdlatex for fast math typing
 ;; (add-hook 'org-mode-hook 'turn-on-org-cdlatex)
 
