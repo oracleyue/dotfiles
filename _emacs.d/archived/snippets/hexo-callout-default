@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: callout default
-# key: callout
-# group: hexo
-# --
-{% note default %}
-$0
-{% endnote %}

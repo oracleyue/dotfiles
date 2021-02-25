@@ -72,6 +72,7 @@ alias cc_args="CXX='cc_args.py g++' cmake .. && make && mv .clang_complete .."
 
 # aliases for convenience
 alias matlab-tty='matlab -nosplash -nodesktop'
+alias ipython-qt='jupyter qtconsole --style=monokai &'
 
 # colorize the bash
 export CLICOLOR=1

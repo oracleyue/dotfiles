@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: callout danger
-# key: callout
-# group: hexo
-# --
-{% note danger %}
-$0
-{% endnote %}

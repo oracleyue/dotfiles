@@ -23,6 +23,8 @@ $sync --exclude="github" \
       ~/.emacs.d/themes $repopath/_emacs.d/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d/
 $sync ~/.emacs.d/templates $repopath/_emacs.d/
+# deprecated config files (init, snippets)
+#$sync ~/.emacs.d/archived $repopath/_emacs.d/
 
 # rsync important scripts
 $sync ~/bin/gitup-emacs.sh $repopath/scripts/

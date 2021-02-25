@@ -34,6 +34,7 @@ $sync ~/.Rprofile $repopath
 $sync ~/.jupyter $repopath
 $sync ~/.ctags $repopath
 $sync ~/.gdbinit $repopath
+$sync ~/.condarc $repopath
 
 # ===========================================
 # template files

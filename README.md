@@ -1,7 +1,14 @@
-List of configurations:
+# Repo for Linux/Unix Config. files and Emacs
 
-- Common configurations for Linux and Mac OS X, like bash, X, vim, $HOME/bin, etc.
+## Description
 
-- And my personalized Emacs :D
+- `ArchLinux/`: essential configs for `i3` on Arch Linux;
+
+- `OSX/`: configs for useful commandline tools (most installed by
+  `brew`) on Mac OS X;
+  
+- `_emacs.d`: my personalized Emacs :D
+
+## Snapshots
 
 ![Snapshot of Emacs](/img/emacs-snapshot.png)

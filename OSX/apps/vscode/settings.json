@@ -6,12 +6,13 @@
 
     // Python
     "python.linting.flake8Enabled": true,
-    "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.languageServer": "Microsoft",
-    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "python.defaultInterpreterPath": "/usr/local/bin/ipython",
 
     // Trailing Spaces
     "trailing-spaces.trimOnSave": true,
     "trailing-spaces.highlightCurrentLine": false,
-    "trailing-spaces.syntaxIgnore": ["markdown"],
+    "trailing-spaces.syntaxIgnore": [
+        "markdown"
+    ],
 }

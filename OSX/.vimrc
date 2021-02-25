@@ -31,10 +31,10 @@ if !has("gui_running")
     colorscheme lucius | LuciusDark  "LuciusWhite
 else  " /gvim/ or /macvim/
     colorscheme dracula
-    set guifont=Roboto\ Mono\ for\ Powerline:h15
+    set guifont=Roboto\ Mono\ for\ Powerline:h14
     set guioptions=a  "remove menus, using clipboard instead of primary
     set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-    set lines=48 columns=85
+    set lines=56 columns=96
 endif
 
 " status line
