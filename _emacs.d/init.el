@@ -1,8 +1,8 @@
-;; This file bootstraps the configuration, which is divided into a
-;; number of other files.
+;; This bootstraps user-defined configurations, which are provided by
+;; files in "init/".
 
-(when (version< emacs-version "25.1")
-  (error "This requires Emacs 25.1 and above!"))
+(when (version< emacs-version "26.1")
+  (error "This requires Emacs 26.1 and above!"))
 
 ;; load paths
 (dolist (folder '("init" "site-lisp"))
@@ -16,7 +16,9 @@
 ;; (package-initialize)           ;; required to suppress warnings
 (require 'init-pkg)
 
-;; constants
+;; ----------------------------------------------------------------
+;; Basics, Completion and Window Management
+;; ----------------------------------------------------------------
 (require 'init-const)             ;; enable/disable features
 
 ;; UI (theme, modeline, dashboard, etc.)
@@ -35,10 +37,14 @@
 ;; directory and buffer explorers
 (require 'init-wm)             ;; directory explorers
 
-;; project management
-(require 'init-projectile)
+;; better with hydra
+(when *use-hydra* (require 'init-hydra))
 
-;; major modes for document editing
+;; ----------------------------------------------------------------
+;; Text Editing (org, markdown, latex, blog)
+;; ----------------------------------------------------------------
+
+;; major text modes
 (require 'init-text)
 (require 'init-orgmode)           ;; org-mode
 (require 'init-markdown)          ;; markdown
@@ -54,12 +60,14 @@
 ;; Programming Environments
 ;; ----------------------------------------------------------------
 
-;; Supporting tools
-(require 'init-programming)          ;; edit, vc, debug, ui ...
-;; For tags, see /helm-gtags/ or /counsel-gtags/ in "init-helm.el" or "init-ivy.el"
+;; project management
+(require 'init-projectile)
 
-;; Language Server Protocol support
-(if *use-lsp* (require 'init-lsp))
+;; essential programming supports
+(require 'init-programming)          ;; edit, vc, debug, ui ...
+
+;; LSP
+(require 'init-lsp)
 
 ;; /Lisp/
 (require 'init-lisp)
@@ -79,15 +87,15 @@
 ;; /MATLAB/
 (require 'init-matlab)
 
-;; Minority Languages
+;; minority languages
 (require 'init-lang)
 
 ;; ----------------------------------------------------------------
-;; Managing external applications in OS
+;; External applications in OS
 ;; ----------------------------------------------------------------
 
-;; Calibre for ebook management
-(require 'init-calibre)
+;; calibre for ebook management
+;; (require 'init-calibre)
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

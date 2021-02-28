@@ -100,26 +100,6 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; ----------------------------------------------
-;; Semantic parsing and overview
-;; ----------------------------------------------
-;; /semantic/ (CEDET)
-;; required by ~helm/ivy-semantic-or-imenu~ and /stickyfunc/
-(when *enable-semantics*
-  (semantic-mode 1)
-  (semantic-default-elisp-setup)
-  ;; enable  minimal /semantic/ for /stickyfunc/ and /*-semantic-or-imenu/
-  ;; stop semantic parsing (huge,slow) elisp sys libraries
-  (setq-mode-local emacs-lisp-mode
-                   semanticdb-find-default-throttle
-                   (default-value 'semanticdb-find-default-throttle))
-
-  ;; /stickyfunc/ shows the function name on top of the buffer
-  (use-package stickyfunc-enhance
-    :config
-    (add-hook 'prog-mode-hook 'global-semantic-stickyfunc-mode))
-  )
-
-;; ----------------------------------------------
 ;; API reference support
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)

@@ -3,14 +3,14 @@
 ;; ================================================================
 ;; Last modified on 18 Jan 2019
 
-
 ;; ----------------------------------------------
 ;; Basic settings for window management
 ;; ----------------------------------------------
 ;; use "super-<left>", "super-<right>" to move between frames
-;; use "S-<left>", "S-<right>", "S-<up>", "S-<down>" to move between
-;; splitted windows
-(windmove-default-keybindings)
+;; use "S-<left>", "S-<right>", "S-<up>", "S-<down>" to move between windows
+;; (windmove-default-keybindings)  ;; enable
+
+;; alternative: better with /ace-window/+/hydra/ in "init-hydra.el"
 
 ;; Emacs in console or tty:
 ;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
@@ -24,8 +24,7 @@
   (openwith-mode t)
   (if *is-mac*
       (setq openwith-associations '(("\\.pdf\\'" "/usr/bin/open" (file))))
-    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file)))))
-  )
+    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))))
 
 ;; ----------------------------------------------
 ;; numbering windows

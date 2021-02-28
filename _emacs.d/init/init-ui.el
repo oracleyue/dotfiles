@@ -59,9 +59,7 @@
     ;; refresh dashboard
     (when (and (get-buffer "*dashboard*")
                (not (buffer-file-name))) ;; hide dashboard when edit files
-      (dashboard-refresh-buffer))
-    )
-  )
+      (dashboard-refresh-buffer))))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -130,6 +128,12 @@ of the focused frame and AB is the unfocused."
 (defun font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
   (find-font (font-spec :name font-name)))
+
+(defun icons-displayable-p ()
+  "Return non-nil if `all-the-icons' is displayable."
+  (and *enable-all-the-icons* *is-graphic*
+       (require 'all-the-icons nil t)))
+
 (use-package all-the-icons
   :if *enable-all-the-icons*
   :init (unless (or (font-installed-p "all-the-icons")
@@ -148,14 +152,10 @@ of the focused frame and AB is the unfocused."
 (when *is-terminal*
   (setq zyue-theme 'doom-one zyue-modeline 'plain))
 
-;; Setup themes
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light) (require 'doom-theme-setup))
   ((or 'spacemacs-dark 'spacemacs-light) (use-package spacemacs-theme))
-  ('eclipse (use-package eclipse-theme
-              :load-path "themes/github/eclipse-theme"
-              :demand)
-            (setq zyue-modeline 'powerline)))
+  ('eclipse (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
 (when *enable-all-the-icons*

@@ -3,7 +3,6 @@
 ;;
 ;; Last modified on 03 Jan 2019
 
-
 (require 'ivy)
 
 (defun dash-in-ivy ()

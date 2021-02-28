@@ -3,13 +3,12 @@
 ;; ===============================================================
 ;; Last modified on 31 Mar 2018
 
-
 ;; ---------------------------------------------
 ;; /Ivy + Counsel + Swiper/: by abo-abo
 ;; ---------------------------------------------
 (use-package counsel
   :demand
-  :diminish
+  :diminish (ivy-mode counsel-mode)
   :hook ((after-init . ivy-mode)
          (ivy-mode   . counsel-mode))
   :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
@@ -39,7 +38,7 @@
          ;; bookmark (Emacs default; =C-x r b= to create bookmark)
          ("M-g b"   . counsel-bookmark)
          ;; recent files
-         ("M-g h"   . counsel-recentf)  ;; or use "counsel-recent-directory" defined later
+         ;; ("M-g h"   . counsel-recentf)  ;; or use "counsel-recent-directory" defined later
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
@@ -103,16 +102,35 @@
           "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
   ) ;; End of Ivy
 
+;; ---------------------------------------------------------------
+;; /Ivy-rich /: all-the-icons for Ivy interface
+;; ---------------------------------------------------------------
+;; enable it before`ivy-rich-mode' for better performance
+(use-package all-the-icons-ivy-rich
+  :if (icons-displayable-p)
+  :hook (ivy-mode . all-the-icons-ivy-rich-mode))
+
+;; more friendly display transformer for Ivy
+(use-package ivy-rich
+  :hook ((counsel-mode . ivy-rich-mode)
+         ;; must load after `counsel-projectile'
+         (counsel-projectile-mode . ivy-rich-mode)
+         (ivy-rich-mode . (lambda ()
+                            "Use abbreviate in `ivy-rich-mode'."
+                            (setq ivy-virtual-abbreviate
+                                  (or (and ivy-rich-mode 'abbreviate) 'name)))))
+  :init
+  ;; For better performance
+  (setq ivy-rich-parse-remote-buffer nil))
+
 ;; ---------------------------------------------
 ;; Use posframe for Ivy
 ;; ---------------------------------------------
 (use-package ivy-posframe
-  :disabled
-  :diminish
-  :after  (ivy)
+  :demand
   :init
   (setq ivy-posframe-parameters `((min-width  . 75)
-                                  (min-height . 15)
+                                  ;; (min-height . 15)
                                   (internal-border-width . 10)))
   :config
   (setq ivy-posframe-display-functions-alist
@@ -161,7 +179,7 @@
               :keymap counsel-recent-dir-map
               :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
 
-;; (global-set-key (kbd "M-g h") 'counsel-recent-directory)
+(global-set-key (kbd "M-g h") 'counsel-recent-directory)
 
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
@@ -187,22 +205,11 @@
   ;; ("C-c g n" . counsel-gtags-go-forward)
   ;; ("C-c g p" . counsel-gtags-go-backward)
   :bind (:map counsel-gtags-mode-map
-              ("M-."     . counsel-gtags-dwim)
-              ("M-,"     . counsel-gtags-go-backward))
+              ("s-."     . counsel-gtags-dwim)
+              ("s-,"     . counsel-gtags-go-backward))
   :hook ((c-mode c++-mode matlab-mode) . counsel-gtags-mode))
 ;; If you like to skip folders for tagging, add folders to the list
 ;; ":skip=" in ~/.globalrc.
-
-;; ---------------------------------------------------------------
-;; /Hydra/: make Emacs bindings that stick around
-;; ---------------------------------------------------------------
-(use-package hydra
-  :disabled
-  :commands (hydra-default-pre
-             hydra-keyboard-quit
-             hydra--call-interactively-remap-maybe
-             hydra-show-hint
-             hydra-set-transient-map))
 
 ;; ---------------------------------------------------------------
 ;; /Avy/: jump to char/words in tree-style
@@ -218,40 +225,17 @@
          ;; ("M-g e"   . avy-goto-word-0)  ;; too many candiates
          ("M-g M-r" . avy-resume))
   :config
-  (avy-setup-default)
-  )
-
-;; ---------------------------------------------------------------
-;; /Ivy-rich /: all-the-icons for Ivy interface
-;; ---------------------------------------------------------------
-(defun icons-displayable-p ()
-  "Return non-nil if `all-the-icons' is displayable."
-  (and *enable-all-the-icons* *is-graphic*
-       (require 'all-the-icons nil t)))
-
-;; enable it before`ivy-rich-mode' for better performance
-(use-package all-the-icons-ivy-rich
-  :if (icons-displayable-p)
-  :hook (ivy-mode . all-the-icons-ivy-rich-mode))
-
-;; more friendly display transformer for Ivy
-(use-package ivy-rich
-  :hook ((counsel-mode . ivy-rich-mode)
-         ;; must load after `counsel-projectile'
-         (counsel-projectile-mode . ivy-rich-mode)
-         (ivy-rich-mode . (lambda ()
-                            "Use abbreviate in `ivy-rich-mode'."
-                            (setq ivy-virtual-abbreviate
-                                  (or (and ivy-rich-mode 'abbreviate) 'name)))))
-  :init
-  ;; For better performance
-  (setq ivy-rich-parse-remote-buffer nil))
+  (avy-setup-default))
 
 ;; ---------------------------------------------------------------
 ;; Ivy for Dash (Mac only, provides "dash-in-ivy")
 ;; ---------------------------------------------------------------
 (use-package ivy-dash
-  :load-path "site-lisp")
+  :if *is-mac*
+  :demand
+  :load-path "site-lisp"
+  :bind (("M-s s"   . dash-in-ivy)
+         ("M-s M-s" . dash-in-ivy)))
 
 
 (provide 'init-ivy)

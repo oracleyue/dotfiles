@@ -42,8 +42,13 @@
 (global-set-key (kbd "M-Q") 'zyue/unfill-paragraph-or-region)
 
 ;; open a new line and jump there
-(require 'open-next-line)
-(global-set-key (kbd "C-o") 'open-next-line)
+(use-package open-next-line
+  :ensure nil
+  :load-path "site-lisp"
+  :bind (("C-o" . open-next-line)
+         ("C-S-o" . open-previous-line))
+  :config
+  (global-unset-key (kbd "M-o")))
 
 ;; enable editing or replacing when region is active, e.g. yank
 (delete-selection-mode 1)

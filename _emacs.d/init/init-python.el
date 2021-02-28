@@ -3,14 +3,14 @@
 ;; ================================================================
 
 ;; Install required python packages
-;;    =pip install virtualenv jedi=
+;;    =pip install virtualenv=
 ;;    =pip install pyflakes=
 ;;    =pip install autopep8=
 
 ;; If you use default pyls in LSP mode, you need to install
 ;;    =pip install python-language-server=
 ;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
-;;    install "VSCode" and set its "jediEnable" to false to download mspyls.
+;;    install "VSCode" and set its "jediEnable" to false to enable downloading mspyls.
 
 ;; Usages:
 ;; *edit*
@@ -26,12 +26,12 @@
 ;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts;
 ;;     then evaluate buffer in iPython
 
-
 ;; ------------------------------------------------
 ;; Python Environment
 ;; ------------------------------------------------
 (use-package python
   :ensure nil
+  :hook (python-mode . lsp)
   :config
   (if *use-ipython*
       (progn
@@ -103,61 +103,36 @@
                         '(menu-item "Eval line" python-shell-send-line
                                     "Eval line in inferior Python session")
                         "Eval region")
-
-  ;; Abo-abo's lpy (To-do)
-
-  ;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
-  ;; (setq python-shell-interpreter-args
-  ;;       "-i --pylab --simple-prompt --no-color-info")
-
-) ;; End of use-package python
-
+  ) ;; End of python-mode
 
 ;; ------------------------------------------------
-;; Code Auto-completion: LSP (pyls/mspyls) or Jedi
+;; Auto-completion via LSP (pyls/mspyls)
 ;; ------------------------------------------------
-(if *use-lsp*
-    ;; use "pyls" by default
+;; LSP use "pyls" by default
+(eval-after-load "lsp"
+  '(setq lsp-clients-python-library-directories
+         '("/usr/local/lib/")))
 
-    (when *use-mspyls*
-      ;; use Microsoft Python Language Server for Auto-completion
-      (use-package lsp-python-ms
-        :demand t
-        :hook (python-mode . lsp)
-        :config
-        ;; set Microsfot language server; installing mspyls in VSCode by disabling jedi
-        (when *is-mac*   (setq vscode-path "~/.vscode/extensions "))
-        (when *is-linux* (setq vscode-path "~/.vscode-oss/extensions "))
-        (setq lsp-python-ms-executable
-              (string-trim (shell-command-to-string
-                            (concat "find " vscode-path "-name 'Microsoft.Python.LanguageServer' | tail -1"))))
-        (setq lsp-python-ms-dir
-              (file-name-directory lsp-python-ms-executable)))
-      )
-
-  ;; integration with /company-mode/
-  (use-package company-jedi
+;; use Microsoft Python Language Server for Auto-completion
+(when *use-mspyls*
+  (use-package lsp-python-ms
+    :after lsp-mode
     :config
-    ;; add jedi function to menus
-    (define-key python-mode-map "\C-ce" 'jedi:show-doc)
-    (define-key python-mode-map "\C-c\C-e" 'jedi:get-in-function-call)
-    (easy-menu-define-key python-menu [jedi-show-doc]
-                          '(menu-item "Jedi show doc" jedi:show-doc
-                                      "Get help on symbol at point by Jedi")
-                          "Complete symbol")
-    (easy-menu-define-key python-menu [jedi-call-tip]
-                          '(menu-item "Jedi show calltip"
-                                      jedi:get-in-function-call
-                                      "Get help on function call-tip at point by Jedi") "Complete symbol")
-    (easy-menu-remove-item python-mode-map '(menu-bar "Python") "Help on symbol")
+    ;; set mspyls that is built by vscode.app (open any .py file in vscode)
+    (when *is-mac*   (setq vscode-path "~/.vscode/extensions "))
+    (when *is-linux* (setq vscode-path "~/.vscode-oss/extensions "))
+    (setq lsp-python-ms-executable
+          (string-trim (shell-command-to-string
+                        (concat "find " vscode-path "-name 'Microsoft.Python.LanguageServer' | tail -1"))))
+    (setq lsp-python-ms-dir
+          (file-name-directory lsp-python-ms-executable))))
 
-    ;; setup company backends
-    (defun zyue/company-py-setup ()
-      (setq-local company-backends
-                  (append '(company-jedi) company-backends)))
-    (add-hook 'python-mode-hook 'zyue/company-py-setup))
-
-  ) ;; end of (if *use-lsp*)
+;; ------------------------------------------------
+;; Abo-abo's lpy (To-do)
+;; ------------------------------------------------
+;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
+;; (setq python-shell-interpreter-args
+;;       "-i --pylab --simple-prompt --no-color-info")
 
 
 (provide 'init-python)

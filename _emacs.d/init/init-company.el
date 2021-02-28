@@ -32,17 +32,17 @@
   :hook (after-init . global-company-mode)
   :config
   (setq company-idle-delay                  0.2  ;; nil to disable; 0.5
-	    company-tooltip-limit               10
+        company-tooltip-limit               10
         company-tooltip-align-annotations   t
         company-tooltip-minimum-width       32
-	    company-minimum-prefix-length       3
+        company-minimum-prefix-length       3
         company-show-numbers                t
-	    company-require-match               nil
-	    company-dabbrev-downcase            nil
-	    company-dabbrev-ignore-case         nil
-	    ;; company-dabbrev-code-other-buffers t
-	    company-global-modes
-	    '(not comint-mode erc-mode message-mode help-mode gud-mode
+        company-require-match               nil
+        company-dabbrev-downcase            nil
+        company-dabbrev-ignore-case         nil
+        ;; company-dabbrev-code-other-buffers t
+        company-global-modes
+        '(not comint-mode erc-mode message-mode help-mode gud-mode eshell-mode
               text-mode latex-mode org-mode markdown-mode)
         company-backends '((company-files company-capf
                                           :with company-yasnippet)
@@ -61,6 +61,7 @@
   (when (and emacs/>=26p *enable-all-the-icons*)
     (use-package company-box
       :diminish
+      :after company
       :defines company-box-icons-all-the-icons
       :hook (company-mode . company-box-mode)
       :init (setq company-box-enable-icon t

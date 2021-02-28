@@ -77,6 +77,11 @@
 (setq mark-ring-max 16)
 (setq global-mark-ring-max 32)
 
+;; recent files
+(setq recentf-max-saved-items 100)
+;; save to recentf every 5 mins (since we use KILL)
+;; (run-at-time "5 min" 300 'recentf-save-list)
+
 ;; srcolling control (move 3 lines each time)
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . 10)))
 (setq mouse-wheel-progressive-speed nil)
@@ -142,15 +147,17 @@
 (use-package diminish
   :demand
   :config
-  ;; "ARev" keyword in powerbar
+  ;; "ARev" keyword
   (eval-after-load "autorevert"
     '(diminish 'auto-revert-mode))
+  ;; "Abbrev"keyword
+  (eval-after-load "abbrev"
+    '(diminish 'abbrev-mode))
   ;; line wrapping
   (eval-after-load "simple"
     '(progn
        (diminish 'visual-line-mode)
-       (diminish 'auto-fill-function)))
-  )
+       (diminish 'auto-fill-function))))
 
 ;; ----------------------------------------------
 ;; /saveplace/ (built-in): restore cursor position when reopen files
