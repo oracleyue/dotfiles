@@ -25,13 +25,20 @@
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking
 ;; ---------------------------------------------
-;; loaded in "init-basic.el"; here add mode-hooks
+;; warning: ensure /epl/ package being up-to-date
 (use-package flycheck
-  :diminish
+  :demand
+  :diminish "FlyC"
   :hook ((c-mode      . flycheck-mode)
          (c++-mode    . flycheck-mode)
          (ess-mode    . flycheck-mode)
-         (python-mode . flycheck-mode)))
+         (python-mode . flycheck-mode))
+  :bind (("M-g n" . flycheck-next-error)
+         ("M-g p" . flycheck-previous-error)
+         ("M-g l" . flycheck-list-errors))
+  :config
+  ;; check only when opening or saving files
+  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
 ;; ---------------------------------------------
 ;; /magit/: version control
@@ -85,8 +92,7 @@
          ("M-p" . symbol-overlay-jump-prev)
          ("M-N" . symbol-overlay-switch-forward)
          ("M-P" . symbol-overlay-switch-backward)
-         ("M-C" . symbol-overlay-remove-all)
-         ([M-f3] . symbol-overlay-remove-all))
+         ("M-C" . symbol-overlay-remove-all))
   :hook ((prog-mode . symbol-overlay-mode)
          (iedit-mode . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode-end . symbol-overlay-mode)))

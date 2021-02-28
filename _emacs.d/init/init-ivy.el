@@ -65,7 +65,7 @@
   :init
   (setq enable-recursive-minibuffers t)
 
-  ;; disable popup windows for completion-at-point; use minibuffer
+  ;; disable complete-symbol showing popup window at point; use minibuffer
   (setq ivy-display-functions-alist nil)
 
   (setq ivy-initial-inputs-alist nil
@@ -77,7 +77,7 @@
         ivy-use-selectable-prompt t)  ;; make inputs selectable
 
   :config
-  (push '(counsel-yank-pop . 10) ivy-height-alist)
+  (push '(counsel-yank-pop . 15) ivy-height-alist)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
         "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)"
@@ -90,11 +90,6 @@
         ;; "rg -zS --no-heading --line-number --color never %s ."
         ;; counsel-ag-base-command "ag -zS --nocolor --nogroup %s"
         ;; counsel-pt-base-command "pt -zS --nocolor --nogroup -e %s"
-
-  ;; ensure recentf-list loaded on startup
-  ;; (with-eval-after-load 'counsel (recentf-mode))
-  ;; disable recentf-list loading via ivy-switch-buffer
-  ;; (setq recentf-initialize-file-name-history nil)
 
   ;; fix the bug for ivy-occur in OSX
   (when *is-mac*
@@ -128,15 +123,16 @@
 ;; ---------------------------------------------
 (use-package ivy-posframe
   :demand
+  :diminish
   :init
-  (setq ivy-posframe-parameters `((min-width  . 75)
-                                  ;; (min-height . 15)
+  (setq ivy-posframe-height 20
+        ivy-posframe-parameters '((min-width  . 75)
+                                  (min-height . 15)
                                   (internal-border-width . 10)))
   :config
   (setq ivy-posframe-display-functions-alist
         '((swiper          . ivy-display-function-fallback)
-          (complete-symbol . ivy-posframe-display-at-point)
-          (counsel-M-x     . ivy-posframe-display-at-window-bottom-left)
+          (ivy-completion-in-region . ivy-posframe-display-at-point)
           (t               . ivy-posframe-display)))
   (ivy-posframe-mode 1))
 

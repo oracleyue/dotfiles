@@ -259,21 +259,6 @@
 (use-package bash-completion
   :config (bash-completion-setup))
 
-;; ---------------------------------------------
-;; /flycheck/: modern syntax checking
-;; ---------------------------------------------
-;; Warning: ensure /epl/ package being up-to-date
-(use-package flycheck
-  :demand
-  :diminish "FlyC"
-  ;; enabled for specific modes in "init-text/-programming.el"
-  :bind (("M-g n" . flycheck-next-error)
-         ("M-g p" . flycheck-previous-error)
-         ("M-g l" . flycheck-list-errors))
-  :config
-  ;; check only when opening or saving files
-  (setq flycheck-check-syntax-automatically '(save mode-enabled)))
-
 
 (provide 'init-basics)
 ;; ================================================

@@ -13,10 +13,8 @@
 ;; 3. "C-h" show doc buffer when the candidate list is on
 ;; 4. "C-w" see the source (partially support)
 
-
 ;; Global settings for completion
 (setq completion-ignore-case t) ;; filter candidate case-insensitive
-
 
 ;; /Company/ for code completion
 (use-package company
@@ -52,10 +50,6 @@
   ;; enable dabbrev-code for completion in string or comments
   ;; (require 'company-dabbrev-code)
   ;; (setq company-dabbrev-code-everywhere t)
-
-  ;; Better sorting and filtering
-  (use-package company-prescient
-    :init (company-prescient-mode 1))
 
   ;; Icons and quickhelp
   (when (and emacs/>=26p *enable-all-the-icons*)
