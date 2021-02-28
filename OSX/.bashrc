@@ -13,19 +13,16 @@ alias  view='vim -R'
 source $HOME/bin/emacs-cmds-osx.sh
 
 # environment variables
-export PATH=$HOME/bin:${PATH}
-export MANPATH=${MANPATH}:/usr/local/man
-# Python
-#export PYTHONPATH=$HOME/.local/lib/python3.7/site-packages
-# Latex
-# export BSTINPUTS=$(kpsepath bst)
+export PATH="$HOME/bin:$PATH"
+export MANPATH="/usr/local/man:$MANPATH"
+# latex
+export BSTINPUTS=$(kpsepath bst)
+# texinfo (makeinfo)
+export PATH="/usr/local/opt/texinfo/bin:$PATH"
 # CUDA
-export PATH=${PATH}:/Developer/NVIDIA/CUDA-9.0/bin
-export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-9.0/lib:$DYLD_LIBRARY_PATH
-export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
-# gtags
-export GTAGSLABEL=pygments          # "gtags" in GNU global
-export GTAGSLIBPATH=$HOME/.gtags/   # "gtags" create tags for system libs
+#export PATH=${PATH}:/Developer/NVIDIA/CUDA-9.0/bin
+# llvm (clangd)
+export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 # aliases
 alias ll='ls -Alh'

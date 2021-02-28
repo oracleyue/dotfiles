@@ -1,4 +1,4 @@
-# Repo for Linux/Unix Config. files and Emacs
+# Repo for Linux/Unix config. files and Emacs
 
 ## Description
 
