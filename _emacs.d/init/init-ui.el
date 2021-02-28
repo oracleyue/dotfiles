@@ -2,11 +2,6 @@
 ;; Emacs Themes
 ;; ================================================================
 
-;; Download themes from github:
-;; If using "doom-themes" or "eclipse-themes", go to "~/.emacs.d/themes"
-;; and run "./themes-dl.sh"
-
-
 ;; Banner logo
 (defcustom zyue-logo
   (expand-file-name "themes/logo.png" user-emacs-directory)
@@ -26,8 +21,7 @@
 (add-to-list 'load-path
              (expand-file-name "init/styles" user-emacs-directory))
 (dolist (subdir '("."
-                  "atom-one-dark-theme"
-                  "github/eclipse-theme"))
+                  "atom-one-dark-theme"))
   (let ((theme-dir (expand-file-name (concat "themes/" subdir)
                                      user-emacs-directory)))
     (when (file-directory-p theme-dir)
