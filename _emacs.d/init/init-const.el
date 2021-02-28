@@ -12,10 +12,11 @@
 (defconst *is-win* (string-equal system-type "windows-nt"))
 
 (defconst *is-app* (and (display-graphic-p) (not (daemonp))))
-(defconst *is-server-main* (string-equal "main" (daemonp)))
-(defconst *is-server-coding* (string-equal "coding" (daemonp)))
-(defconst *is-terminal* (not (or (display-graphic-p) (daemonp))))
-(defconst *is-graphic* (or (display-graphic-p) (daemonp)))
+(defconst *is-server-m* (string-equal "main" (daemonp)))
+(defconst *is-server-c* (string-equal "coding" (daemonp)))
+(defconst *is-server-t* (string-equal "tty" (daemonp)))
+(defconst *is-graphic*  (or *is-app* *is-server-m* *is-server-c*))
+(defconst *is-terminal* (or (not *is-graphic*) *is-server-t*))
 
 ;; desktop environment
 (if (getenv "WMEmacs")

@@ -9,19 +9,18 @@
 ;; open default folders/files on startup
 (setq dropbox-path "~/Public/Dropbox")
 (cond
- ((or *is-server-main* *is-app*)
+ (*is-server-m*
   (dired (expand-file-name "Academia" dropbox-path))
   (find-file (expand-file-name "oracleyue/OrgAgenda/ToDoList.org" dropbox-path))
   (find-file (expand-file-name "oracleyue/OrgNote/Research.org" dropbox-path))
   (cd (expand-file-name "Academia/Manuscripts" dropbox-path))
-  (message "%s"   (cd (expand-file-name "Academia/Manuscripts" dropbox-path)))
-  )
- (*is-server-coding*
+  (message "%s"   (cd (expand-file-name "Academia/Manuscripts" dropbox-path))))
+ (*is-server-c*
   (cd (expand-file-name "Workspace/Matlab" dropbox-path))))
 
 ;; switch to default buffer
-(unless (get-buffer "*dashboard*")
-  (switch-to-buffer "*scratch*"))
+;; (unless (get-buffer "*dashboard*")
+;; (switch-to-buffer "*scratch*"))
 
 
 (provide 'init-private)

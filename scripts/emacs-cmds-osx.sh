@@ -50,6 +50,10 @@ function es() {
                     kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
                                | grep "coding" | grep -v 'grep' | awk '{print $2}')
                     ;;
+                t)
+                    kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
+                               | grep "tty" | grep -v 'grep' | awk '{print $2}')
+                    ;;
                 *)
                     kill $(ps aux | grep -i 'emacs.* --bg-daemon' \
                                | grep "$2" | grep -v 'grep' | awk '{print $2}')
@@ -69,8 +73,8 @@ function es() {
                 c)
                     $EMACS --daemon=coding
                     ;;
-                n)
-                    $EMACS --daemon
+                t)
+                    $EMACS --daemon=tty
                     ;;
                 *)
                     $EMACS --daemon="$2"
@@ -94,6 +98,9 @@ function es() {
                     ;;
                 c)
                     $EMACSCLIENT -nc --socket-name=coding -e '(kill-emacs)'
+                    ;;
+                t)
+                    $EMACSCLIENT -nc --socket-name=tty -e '(kill-emacs)'
                     ;;
                 *)
                     $EMACSCLIENT -nc --socket-name="$2" -e '(kill-emacs)'
@@ -128,7 +135,7 @@ function em() {
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "main" server;'
-        echo '  - 1: run emacsclient to open FILES you specified.'
+        echo '  - 1: run emacsclient to open FILES.'
     fi
 }
 
@@ -147,6 +154,25 @@ function ec() {
     else
         echo 'usage: 0 or 1 argument'
         echo '  - 0: connet "emacsclient -nc" to "coding" server;'
-        echo '  - 1: run emacsclient to open FILES you specified.'
+        echo '  - 1: run emacsclient to open FILES.'
+    fi
+}
+
+# emacsclient: tty (emacs in console)
+function ew() {
+    if [[ $(uname) == "Linux" ]]; then
+        EMACSCLIENT="/usr/bin/emacsclient"
+    else
+        EMACSCLIENT="/usr/local/bin/emacsclient"
+    fi
+
+    if [[ $# -eq 0 ]]; then
+        $EMACSCLIENT -nw --socket-name=tty
+    elif [[ -n $1 ]]; then
+        $EMACSCLIENT -nw --socket-name=tty $1
+    else
+        echo 'usage: 0 or 1 argument'
+        echo '  - 0: connet "emacsclient -nw" to "tty" server;'
+        echo '  - 1: run emacsclient to open FILES.'
     fi
 }

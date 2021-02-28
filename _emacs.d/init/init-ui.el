@@ -142,7 +142,7 @@ of the focused frame and AB is the unfocused."
 
 ;; Themes (eclipse, doom-nord-light, doom-one, atom-one-dark)
 (setq zyue-theme 'eclipse)
-(when *is-server-coding* (setq zyue-theme 'doom-one))
+(when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal*
   (setq zyue-theme 'doom-one zyue-modeline 'plain))
 
@@ -152,7 +152,7 @@ of the focused frame and AB is the unfocused."
   ('eclipse (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
-(when *enable-all-the-icons*
+(when (and *enable-all-the-icons* *is-graphic*)
   (require 'init-dashboard))
 
 ;; UI loading

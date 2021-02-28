@@ -48,7 +48,7 @@
   (exec-path-from-shell-initialize))
 
 ;; cursors
-(if *is-server-coding*
+(if *is-server-c*
     (setq-default cursor-type 'bar)
   (setq-default cursor-type 'bar)) ; "bar", "box" (default)
 (blink-cursor-mode t)  ; -1 stops cursor blinking
