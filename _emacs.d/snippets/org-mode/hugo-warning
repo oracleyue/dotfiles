@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: warning msg
+# key: warn
+# group: hugo
+# --
+#+BEGIN_QUOTE
+:warning: *Warning*: $0
+#+END_QUOTE

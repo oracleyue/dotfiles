@@ -16,6 +16,21 @@
 ;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
 
 ;; ----------------------------------------------
+;; numbering windows
+;; ----------------------------------------------
+(use-package winum
+  :disabled
+  :config
+  (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
+  (winum-mode)
+  :bind (("s-1" . winum-select-window-1)
+         ("s-2" . winum-select-window-2)
+         ("s-3" . winum-select-window-3)
+         ("s-4" . winum-select-window-4)))
+;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
+;; =C-x w `=: select window by number, which is inserted in minibuffer
+
+;; ----------------------------------------------
 ;; Call external software to open documents
 ;; ----------------------------------------------
 (use-package openwith
@@ -25,25 +40,6 @@
   (if *is-mac*
       (setq openwith-associations '(("\\.pdf\\'" "/usr/bin/open" (file))))
     (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))))
-
-;; ----------------------------------------------
-;; numbering windows
-;; ----------------------------------------------
-(use-package winum
-  :demand
-  :config
-  (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
-  (winum-mode)
-  :bind (("s-1" . winum-select-window-1)
-         ("s-2" . winum-select-window-2)
-         ("s-3" . winum-select-window-3)
-         ("s-4" . winum-select-window-4)
-         ("s-5" . winum-select-window-5)
-         ("s-6" . winum-select-window-6)
-         ("s-7" . winum-select-window-7)
-         ("s-8" . winum-select-window-8)))
-;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
-;; =C-x w `=: select window by number, which is inserted in minibuffer
 
 ;; ----------------------------------------------
 ;; /golden-ratio/: resize multiple windows

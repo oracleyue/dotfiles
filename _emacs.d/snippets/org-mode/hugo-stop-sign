@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: stop msg
+# key: stop
+# group: hugo
+# --
+#+BEGIN_QUOTE
+:stop_sign: *STOP*: $0
+#+END_QUOTE

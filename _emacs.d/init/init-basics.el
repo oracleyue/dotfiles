@@ -16,13 +16,24 @@
 (setq backup-inhibited t)
 ;; (setq-default case-fold-search nil)  ;; case-sensitive search
 
-;; encodings
-(set-language-environment "UTF-8")
-(prefer-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8-unix)
+;; encodings (utf-8 for everything)
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+
+(prefer-coding-system 'utf-8)
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+
+(set-buffer-file-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(modify-coding-system-alist 'process "*" 'utf-8)
 
 ;; display “lambda” as “λ”
-(global-prettify-symbols-mode 1)
+(global-prettify-symbols-mode t)
 
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
@@ -94,6 +105,17 @@
 
 ;; increase memeory for emacs to avoid garbage collections slow it down
 (setq gc-cons-threshold (* 20 1024 1024))   ; 20MB, default <0.8MB
+
+;; register
+;; "C-x r SPC": add point to register
+;; "C-x r j"  : jump to registered point
+;; ivy list support: "M-g r"
+(setq register-preview-delay 0) ; no delay
+
+;; bookmarks
+;; "C-x r b": create or jump to bookmarks
+;; "C-x r l": list and manage bookmarks
+;; ivy list support: "M-g b"
 
 ;; text scale amount (=C-x C-0=)
 (setq text-scale-mode-step 1.05)

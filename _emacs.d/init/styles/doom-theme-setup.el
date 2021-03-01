@@ -8,7 +8,6 @@
 ;; - Iosevka;
 
 (use-package doom-themes
-  :demand
   :config
   ;; global settings
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -21,16 +20,14 @@
   (defun theme-post-processing ()
     ;; enable flashing mode-line on errors
     (doom-themes-visual-bell-config)
-
     ;; enable custom neotree theme
     (setq doom-neotree-enable-variable-pitch t
           doom-neotree-project-size 1.2
           doom-neotree-line-spacing 0.5
           doom-neotree-folder-size 1.0
           doom-neotree-chevron-size 0.6)
-    (doom-themes-neotree-config)  ; /all-the-icons/ required
+    (doom-themes-neotree-config)              ;; require /all-the-icons/
     (set-default 'neo-window-fixed-size nil)  ;; allow adjust window size
-
     ;; improves org-mode fontification.
     (doom-themes-org-config))
   )

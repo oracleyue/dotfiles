@@ -173,6 +173,8 @@ Uses `current-date-format' for the formatting the date/time."
 ;; manually remove whitespaces (buffer or region)
 (global-set-key (kbd "M-s k") 'delete-trailing-whitespace)
 
+;; remote blank lines
+;; default "C-x C-o" to call "delete-blank-lines"
 
 ;; ----------- Powerful Minor Modes ------------
 

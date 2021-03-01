@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: tip msg
+# key: tipfont
+# group: hugo
+# --
+> 💡 **Tips**: $0

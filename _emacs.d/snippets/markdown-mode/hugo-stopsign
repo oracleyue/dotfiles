@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: stop msg
+# key: stopfont
+# group: hugo
+# --
+> 🛑 **STOP**: $0

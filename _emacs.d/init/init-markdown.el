@@ -40,8 +40,12 @@
   (set-face-background 'markdown-pre-face (face-background 'org-block))
 
   ;; outline view of headings
-  ;; use /imenu-list/ in "init-dired", toggled by "C-x C-'"
-  (use-package imenu-list)
+  ;; use /imenu-list/ in "init-dired", default toggled by "C-x C-'"
+  (use-package imenu-list
+    :bind ((:map markdown-mode-map
+                ("C-c =" . imenu-list-smart-toggle))
+           (:map imenu-list-major-mode-map
+                 ("C-c =" . imenu-list-smart-toggle))))
 
   ;; configure compile commands
   (if (string-equal system-type "darwin")

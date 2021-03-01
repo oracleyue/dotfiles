@@ -28,11 +28,12 @@
   (use-package spaceline
     :ensure nil
     :demand
+    :init (setq powerline-default-separator 'slant)
     :config
-    (require 'spaceline-config)
-    (spaceline-emacs-theme)
-    (when *is-mac*  ;; fix applet bug on OSX
-      (setq powerline-image-apple-rgb t))))  ;; OR spaceline-spacemacs-theme
+    (spaceline-spacemacs-theme)  ;(spaceline-emacs-theme)
+    ;; fix applet bug on OSX
+    (when *is-mac*
+      (setq powerline-image-apple-rgb t))))
 
 ;; ---------------------------------------------
 ;; Doomline
@@ -59,12 +60,11 @@
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
-    ('plain     (zyue-plain-modeline))
-    ('powerline (zyue-use-powerline))
-    ('spaceline (zyue-use-spaceline))
-    ('doomline  (zyue-use-doomline))
-    (_          (zyue-plain-modeline))
-    ))
+    ('plain       (zyue-plain-modeline))
+    ('powerline   (zyue-use-powerline))
+    ('spaceline   (zyue-use-spaceline))
+    ('doomline    (zyue-use-doomline))
+    (_            (zyue-plain-modeline))))
 
 ;; ---------------------------------------------
 ;; Misc for Modeline (e.g., Nyan cat, parrot)

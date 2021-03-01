@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: tip msg
+# key: tip
+# group: hugo
+# --
+#+BEGIN_QUOTE
+:bulb: *Tips*: $0
+#+END_QUOTE

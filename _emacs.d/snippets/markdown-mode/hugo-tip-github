@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: tip msg (github emoji)
+# key: tip
+# group: hugo
+# --
+> :bulb: **Tips**: $0

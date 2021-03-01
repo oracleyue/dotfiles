@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: stop msg (github emoji)
+# key: stop
+# group: hugo
+# --
+> :stop_sign: **STOP**: $0

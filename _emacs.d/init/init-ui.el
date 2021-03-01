@@ -92,12 +92,6 @@ of the focused frame and AB is the unfocused."
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
-  ;; Specify font for unicode symbols
-  (catch 'loop
-    (dolist (font '("Apple Color Emoji" "Apple Symbols" "Symbola" "Symbol"))
-      (when (member font (font-family-list))
-        (set-fontset-font t 'unicode font nil 'prepend)
-        (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
     (dolist (font '("Source Han Serif SC" "Source Han Serif TC" "Source Han Serif"  ; 思源宋体 (简中、繁中、日文)
@@ -106,11 +100,20 @@ of the focused frame and AB is the unfocused."
       (when (member font (font-family-list))
         ;; Note: when LC_CTYPE=zh_CN.UTF-8, use (find-font (font-spec :name font))
         ;; since Chinese font names appear in (font-family-list) as unicode codes.
-        (dolist (charset '(kana han cjk-misc bopomofo))  ;; remove "symbol"
+        (dolist (charset '(kana han cjk-misc bopomofo))  ;; symbol
           (set-fontset-font (frame-parameter nil 'font)
                             charset
                             (font-spec :family font )))
         (throw 'loop t))))
+  ;; Specify font for unicode symbols
+  (catch 'loop
+    (dolist (font '("Apple Color Emoji" "Apple Symbols" "Symbola"))
+      (when (member font (font-family-list))
+        (set-fontset-font t 'unicode font)  ; 4-5th arguments omitted: nil 'prepend
+        (throw 'loop t))))
+  ;; fixing specific glyghs, if needed
+  ;; (set-fontset-font t '(#x26A0 . #x274C) "Apple Color Emoji")
+
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
   ;; (setq face-font-rescale-alist
@@ -138,17 +141,18 @@ of the focused frame and AB is the unfocused."
 
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
-(setq zyue-modeline 'doomline)
 
-;; Themes (eclipse, doom-nord-light, doom-one, atom-one-dark)
+;; Themes (eclipse, doom-nord-light; doom-one, atom-one-dark, spacemacs-dark)
 (setq zyue-theme 'eclipse)
-(when *is-server-c* (setq zyue-theme 'doom-one))
-(when *is-terminal*
-  (setq zyue-theme 'doom-one zyue-modeline 'plain))
+(when *is-server-c* (setq zyue-theme 'spacemacs-dark))
+(when *is-terminal* (setq zyue-theme 'doom-one
+                          zyue-modeline 'plain))
 
 (pcase zyue-theme
-  ((or 'doom-one 'doom-nord-light) (require 'doom-theme-setup))
-  ((or 'spacemacs-dark 'spacemacs-light) (use-package spacemacs-theme))
+  ((or 'doom-one 'doom-nord-light)
+   (require 'doom-theme-setup)   (setq zyue-modeline 'doomline))
+  ((or 'spacemacs-dark 'spacemacs-light)
+   (use-package spacemacs-theme) (setq zyue-modeline 'spaceline))
   ('eclipse (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
