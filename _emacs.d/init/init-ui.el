@@ -125,7 +125,7 @@ of the focused frame and AB is the unfocused."
 
 (defun icons-displayable-p ()
   "Return non-nil if `all-the-icons' is displayable."
-  (and *enable-all-the-icons* *is-graphic*
+  (and *enable-all-the-icons*
        (require 'all-the-icons nil t)))
 
 (use-package all-the-icons

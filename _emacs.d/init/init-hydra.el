@@ -10,7 +10,6 @@
 ;; /ace-window/ with hydra: better window management
 ;; ----------------------------------------------------------------
 (use-package ace-window
-  :bind ("M-j" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq aw-scope 'frame))
@@ -18,7 +17,7 @@
 (use-package transpose-frame)
 
 ;; integrate with hydra
-(global-set-key (kbd "M-o") 'hydra-window/body)
+(global-set-key (kbd "M-j") 'hydra-window/body)
 (defhydra hydra-window ()
   "
 Movement^^      ^Split^         ^Switch^        ^Resize^

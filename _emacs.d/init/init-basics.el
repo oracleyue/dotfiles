@@ -21,6 +21,9 @@
 (prefer-coding-system 'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
 
+;; display “lambda” as “λ”
+(global-prettify-symbols-mode 1)
+
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
 ;;   - "coding"  for coding (dark-theme, startup folders)

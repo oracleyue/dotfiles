@@ -55,7 +55,6 @@
   (when (and emacs/>=26p *enable-all-the-icons*)
     (use-package company-box
       :diminish
-      :after company
       :defines company-box-icons-all-the-icons
       :hook (company-mode . company-box-mode)
       :init (setq company-box-enable-icon t
@@ -63,8 +62,8 @@
                   company-box-scrollbar nil
                   company-box-doc-delay 0.5)
       :config
+      ;; prettify icons
       (with-no-warnings
-        ;; Prettify icons
         (defun my-company-box-icons--elisp (candidate)
           (when (or (derived-mode-p 'emacs-lisp-mode) (derived-mode-p 'lisp-mode))
             (let ((sym (intern candidate)))

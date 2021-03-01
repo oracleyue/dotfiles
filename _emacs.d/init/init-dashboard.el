@@ -62,11 +62,6 @@
             font-lock-string-face))))
   )
 
-;; user-defined shortcut function
-(defun zyue/home ()
-  (interactive)
-  (dashboard-refresh-buffer))
-
 
 (provide 'init-dashboard)
 ;; ================================================================

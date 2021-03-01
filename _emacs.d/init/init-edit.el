@@ -46,9 +46,7 @@
   :ensure nil
   :load-path "site-lisp"
   :bind (("C-o" . open-next-line)
-         ("C-S-o" . open-previous-line))
-  :config
-  (global-unset-key (kbd "M-o")))
+         ("M-o" . open-previous-line)))
 
 ;; enable editing or replacing when region is active, e.g. yank
 (delete-selection-mode 1)
@@ -160,18 +158,19 @@ Uses `current-date-format' for the formatting the date/time."
 (require 'gse-number-rect)
 (global-set-key (kbd "C-x r N") 'gse-number-rectangle)
 
-;; remove all except 1 space between characters ("M-SPC" disabled due to Alfred)
-;; alternative to "M-SPC": "ESC SPC" (Emacs default)
+;; remove all except 1 following space (default "M-SPC" disabled due to Alfred)
+;; alternative way to "M-SPC": "Esc SPC", or use
+(global-set-key (kbd "M-s SPC") 'just-one-space)
 
 ;; removing trailing whitespace
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; mode-specific ws cleanup
+;; automatic whitespace cleanup
 (defun auto-cleanup-whitespace ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))
 (add-hook 'prog-mode-hook #'auto-cleanup-whitespace)
 (add-hook 'matlab-mode-hook #'auto-cleanup-whitespace)
 (add-hook 'LaTeX-mode-hook #'auto-cleanup-whitespace)
-;; manually remove whitespaces
+;; manually remove whitespaces (buffer or region)
 (global-set-key (kbd "M-s k") 'delete-trailing-whitespace)
 
 
@@ -196,9 +195,9 @@ Uses `current-date-format' for the formatting the date/time."
     (with-selected-frame frame
       (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
         (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF"))))
-  (if *is-app* (zyue-fix-face-multiple-cursors (selected-frame)))  ;; for app
-  (add-hook 'after-make-frame-functions
-            #'zyue-fix-face-multiple-cursors) ;; for clients
+  (if *is-app* (zyue-fix-face-multiple-cursors (selected-frame))  ;; for app
+    (add-hook 'after-make-frame-functions
+              #'zyue-fix-face-multiple-cursors)) ;; for clients
   )
 
 ;; /expand-region/: increase the selected region by semantic units

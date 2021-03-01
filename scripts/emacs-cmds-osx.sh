@@ -88,22 +88,22 @@ function es() {
                 | awk '{print $2 "\t" $9 "\tEmacs " $12}' > $tmpfile
             while read line; do
                 servername=$(echo "$line" | sed 's/\0123,4\012//' | sed 's/.*=//')
-                $EMACSCLIENT -nc --socket-name=$servername   -e '(kill-emacs)'
+                $EMACSCLIENT -n --socket-name=$servername   -e '(kill-emacs)'
             done < $tmpfile
             rm -f $tmpfile
         else
             case $2 in
                 m)
-                    $EMACSCLIENT -nc --socket-name=main   -e '(kill-emacs)'
+                    $EMACSCLIENT -n --socket-name=main   -e '(kill-emacs)'
                     ;;
                 c)
-                    $EMACSCLIENT -nc --socket-name=coding -e '(kill-emacs)'
+                    $EMACSCLIENT -n --socket-name=coding -e '(kill-emacs)'
                     ;;
                 t)
-                    $EMACSCLIENT -nc --socket-name=tty -e '(kill-emacs)'
+                    $EMACSCLIENT -n --socket-name=tty -e '(kill-emacs)'
                     ;;
                 *)
-                    $EMACSCLIENT -nc --socket-name="$2" -e '(kill-emacs)'
+                    $EMACSCLIENT -n --socket-name="$2" -e '(kill-emacs)'
                     ;;
             esac
         fi
