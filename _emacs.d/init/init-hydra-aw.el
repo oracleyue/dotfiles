@@ -1,24 +1,20 @@
 ;; ===============================================================
-;; Hydra - a system to simply your keybindings
+;; Hydra with ace-window: better window management
 ;; ===============================================================
 ;; Last modified on 28 Feb 2021
 
-(use-package hydra)
-(use-package ivy-hydra)
-
-;; ----------------------------------------------------------------
-;; /ace-window/ with hydra: better window management
-;; ----------------------------------------------------------------
+;; Comprehensive window management
 (use-package ace-window
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq aw-scope 'frame))
 
+;; Tranpose window layout in frame
 (use-package transpose-frame)
 
-;; integrate with hydra
+;; Integration with Hydra
 (global-set-key (kbd "M-j") 'hydra-window/body)
-(defhydra hydra-window ()
+(defhydra hydra-window (:hint nil)
   "
 Movement^^      ^Split^         ^Switch^        ^Resize^
 ----------------------------------------------------------------
@@ -71,6 +67,6 @@ _SPC_ cancel    _d_elete        _D_lt Other     _O_nly this
   ("SPC" nil))
 
 
-(provide 'init-hydra)
+(provide 'init-hydra-aw)
 ;; ================================================
-;; init-hydra.el ends here
+;; init-hydra-aw.el ends here

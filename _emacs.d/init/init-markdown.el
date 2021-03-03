@@ -65,23 +65,7 @@
                 "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"
                 "\"></script>"))
 
-  );End of use-package(markdown-mode)
-
-;; use /livedown.el/ for preview  (osx uses "Marked 2.app")
-;; Note: require "node + npm" in Bash; and "~$ npm install -g livedown"
-(use-package livedown
-  :disabled
-  :ensure nil
-  :init
-  (setq livedown-autostart nil ; auto open preview when opening markdown files
-        livedown-open t        ; auto open the browser window
-        livedown-port 1337     ; port for livedown server
-        livedown-browser "safari")
-  :config
-  ;; use livedown to preview markdown
-  (add-hook 'markdown-mode-hook (lambda()
-       (define-key markdown-mode-map (kbd "C-c C-c l") 'livedown-preview)
-       (define-key markdown-mode-map (kbd "C-c C-c k") 'livedown-kill))))
+  ) ;End of use-package(markdown-mode)
 
 
 (provide 'init-markdown)

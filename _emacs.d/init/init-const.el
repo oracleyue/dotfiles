@@ -38,12 +38,6 @@
 ;; install package "all-the-icons" and run "M-x all-the-icons-install-fonts"
 (defconst *enable-all-the-icons* t)
 
-;; select tree window manager
-(defconst *tree-manager* "neotree")  ;; neotree; treemacs
-
-;; use golden-ratio mode
-(defconst *use-golden-ratio* nil)
-
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 

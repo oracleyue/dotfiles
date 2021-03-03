@@ -35,34 +35,35 @@
         (append '(("\\.tikz\\'" . latex-mode))
                 auto-mode-alist))
 
-  ;; Pairing (use /smartparens/ instead)
+  ;; Disable default TeX pairing
   (setq-default TeX-insert-braces nil)
   (setq-default LaTeX-electric-left-right-brace nil)
-  (require 'smartparens-latex)
-  (sp-with-modes '(latex-mode LaTeX-mode)
-    (sp-local-pair "\\|" "\\|"
-                   :trigger "\\|"
-                   :unless '(sp-latex-point-after-backslash)
-                   :when '(sp-in-math-p))
-    (sp-local-pair "\\left|" "\\right|"
-                   :trigger "\\l|"
-                   :when '(sp-in-math-p))
-    (sp-local-pair "\\big(" "\\big)"
-                   :trigger "\\b("
-                   :when '(sp-in-math-p)
-                   :post-handlers '(sp-latex-insert-spaces-inside-pair))
-    (sp-local-pair "\\big\\{" "\\big\\}"
-                   :trigger "\\b{"
-                   :when '(sp-in-math-p)
-                   :post-handlers '(sp-latex-insert-spaces-inside-pair))
-    (sp-local-pair "\\big[" "\\big]"
-                   :trigger "\\b["
-                   :when '(sp-in-math-p)
-                   :post-handlers '(sp-latex-insert-spaces-inside-pair))
-    (sp-local-pair "$" "$"
-                   :actions '(insert wrap navigate)))
-  ;; disable default TeX bindings to use smartparens functions
   (eval-after-load "latex" '(define-key LaTeX-mode-map "$" nil))
+  ;; use /smartparens/ instead
+  (with-eval-after-load "smartparens"
+    (require 'smartparens-latex)
+    (sp-with-modes '(latex-mode LaTeX-mode)
+      (sp-local-pair "\\|" "\\|"
+                     :trigger "\\|"
+                     :unless '(sp-latex-point-after-backslash)
+                     :when '(sp-in-math-p))
+      (sp-local-pair "\\left|" "\\right|"
+                     :trigger "\\l|"
+                     :when '(sp-in-math-p))
+      (sp-local-pair "\\big(" "\\big)"
+                     :trigger "\\b("
+                     :when '(sp-in-math-p)
+                     :post-handlers '(sp-latex-insert-spaces-inside-pair))
+      (sp-local-pair "\\big\\{" "\\big\\}"
+                     :trigger "\\b{"
+                     :when '(sp-in-math-p)
+                     :post-handlers '(sp-latex-insert-spaces-inside-pair))
+      (sp-local-pair "\\big[" "\\big]"
+                     :trigger "\\b["
+                     :when '(sp-in-math-p)
+                     :post-handlers '(sp-latex-insert-spaces-inside-pair))
+      (sp-local-pair "$" "$"
+                     :actions '(insert wrap navigate))))
 
   ;; More math-mode in LaTeX
   (setq LaTeX-math-list
@@ -137,7 +138,7 @@
   ;; http://tex.stackexchange.com/questions/31966/setting-up-reftex-with-biblatex-citation-commands
   (eval-after-load 'reftex-vars
     '(progn
-       (add-to-list 'TeX-style-path "~/.emacs.d/init/styles")))
+       (add-to-list 'TeX-style-path "~/.emacs.d/init/misc")))
 
   ;; Set master files for multiple documents
   ;; use "C-c _" to query for master files

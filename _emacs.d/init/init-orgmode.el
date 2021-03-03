@@ -13,8 +13,9 @@
 ;; (global-set-key "\C-cb" 'org-iswitchb)
 
 ;; startup styles
-(setq org-startup-folded   t
-      org-startup-indented t)
+(setq org-startup-folded     t
+      org-startup-indented   t
+      org-hide-leading-stars t)
 
 ;; view styles
 (defun y/set-view-style-orgmode ()
@@ -159,21 +160,19 @@
 ;; External Minor Modes
 ;; ------------------------------------------------------------
 
-;; /org-bullets/ to prettify UI
-(use-package org-bullets
-  :demand
-  :if (char-displayable-p ?◉)
-  :hook (org-mode . org-bullets-mode)
-  ;; :init (setq org-bullets-bullet-list '("●" "◉" "⚫" "•"))
-  )
+;; /org-superstart/ for better UI
+(use-package org-superstar
+  :if   (char-displayable-p ?◉)
+  :hook (org-mode . org-superstar-mode))
 
 ;; /smartparens/ for org-mode
-(sp-with-modes 'org-mode
-  (sp-local-pair "$" "$"
-                 :unless '(sp-latex-point-after-backslash)
-                 :actions '(insert wrap autoskip navigate escape))
-  (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
-                 :actions '(insert wrap autoskip navigate escape)))
+(with-eval-after-load "smartparens"
+  (sp-with-modes 'org-mode
+    (sp-local-pair "$" "$"
+                   :unless '(sp-latex-point-after-backslash)
+                   :actions '(insert wrap autoskip navigate escape))
+    (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)
+                   :actions '(insert wrap autoskip navigate escape))))
 
 ;; /org-download/ for image insertion
 (use-package org-download
@@ -213,6 +212,11 @@
   (setq org-reveal-title-slide
         "<h1>%t</h1><h3>%a</h3><h4>%e</h4><h4>%d</h4>"))
 
+;; /ledger-mode/: financial accounting
+;; provides Babel in org-mode for ledger src blocks.
+(use-package ledger-mode
+  :disabled
+  :ensure nil)
 
 
 (provide 'init-orgmode)

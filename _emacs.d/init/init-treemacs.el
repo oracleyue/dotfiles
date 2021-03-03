@@ -1,7 +1,7 @@
 ;; ================================================================
-;; Treemacs: A tree layout file explorer.
+;; Treemacs: A tree-like file explorer.
 ;; ================================================================
-
+;; Last modified on 03 Mar 2021
 
 (use-package treemacs
   :commands (treemacs-follow-mode
@@ -26,7 +26,7 @@
         treemacs-silent-filewatch              t
         treemacs-silent-refresh                t
         treemacs-width                         30)
-
+  :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (pcase (cons (not (null (executable-find "git")))
@@ -35,21 +35,33 @@
      (treemacs-git-mode 'deferred))
     (`(t . _)
      (treemacs-git-mode 'simple)))
+  ) ; END of treemacs
 
-  ;; Projectile integration
-  (use-package treemacs-projectile
-    :after projectile
-    :bind (([M-f8] . treemacs-projectile)
-           :map projectile-command-map
-           ("h" . treemacs-projectile)))
+;; Integration for /projectile/
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :bind (([M-f8] . treemacs-projectile)
+         :map projectile-command-map
+         ("h" . treemacs-projectile)))
 
-  (use-package treemacs-magit
-    :after magit
-    :commands treemacs-magit--schedule-update
-    :hook ((magit-post-commit
-            git-commit-post-finish
-            magit-post-stage
-            magit-post-unstage) . treemacs-magit--schedule-update)))
+;; Integration for /magit/
+(use-package treemacs-magit
+  :after (treemacs magit)
+  :commands treemacs-magit--schedule-update
+  :hook ((magit-post-commit
+          git-commit-post-finish
+          magit-post-stage
+          magit-post-unstage) . treemacs-magit--schedule-update))
+
+;; Support all-the-icons in treemacs (default using PNG images)
+;; Note: doom-themes supports all-the-icons in its own way.
+(use-package treemacs-all-the-icons
+  :after (treemacs all-the-icons)
+  :demand
+  :if (and *enable-all-the-icons*
+           (member zyue-theme '(spacemacs-dark atom-one-dark)))
+  :config
+  (treemacs-load-theme "all-the-icons"))
 
 
 (provide 'init-treemacs)

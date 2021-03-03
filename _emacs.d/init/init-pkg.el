@@ -2,7 +2,6 @@
 ;; Emacs package management system
 ;; ------------------------------------------------
 
-
 ;; packages path using /homebrew/
 (when (string-equal system-type "darwin")
   (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
@@ -12,11 +11,12 @@
 (require 'package)
 (setq package-archives
       '(("gnu"   . "https://elpa.gnu.org/packages/")
-        ("melpa" . "https://melpa.org/packages/")
-        ;; other archives:
-        ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
         ;; ("org"   . "http://orgmode.org/elpa/")
-        ))
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")))
+
+;; ensure being up-to-date to update Emacs's GPG keyring for GNU ELPA
+;; (package-install 'gnu-elpa-keyring-update)
 
 ;; initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
@@ -31,10 +31,7 @@
 ;; set before loading /use-package/
 (eval-and-compile
   (setq use-package-always-ensure t)
-  (setq use-package-always-defer t)
-  ;; (setq use-package-expand-minimally t)
-  ;; (setq use-package-enable-imenu-support t)
-  )
+  (setq use-package-always-defer t))
 (eval-when-compile (require 'use-package))
 
 ;; ------------------------------------------------

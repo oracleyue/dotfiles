@@ -3,7 +3,6 @@
 ;; ===============================================================
 ;; Last modified on 20 Feb 2020
 
-
 ;; ---------------------------------------------
 ;; Basics of text-mode
 ;; ---------------------------------------------
@@ -32,6 +31,11 @@
     (message "%s" ispell-dictionary)))
 
 ;; ---------------------------------------------
+;; Show key strokes & commands in demo of Emacs
+;; ---------------------------------------------
+(use-package command-log-mode)
+
+;; ---------------------------------------------
 ;; /Grammarly/ for English checking
 ;; ---------------------------------------------
 (use-package grammarly  ;; Grammarly API interface
@@ -46,7 +50,6 @@
   ;; flycheck interface for Grammarly
   ;; grammarly available for: text, latex, org, markdown
   (use-package flycheck-grammarly :demand))
-
 
 
 (provide 'init-text)

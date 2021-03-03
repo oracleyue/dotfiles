@@ -3,7 +3,6 @@
 ;; ================================================================
 ;; Last modified on 20 Feb 2020
 
-
 ;; ---------------------------------------------
 ;; Powerline
 ;; ---------------------------------------------
@@ -19,21 +18,22 @@
         (setq powerline-image-apple-rgb t))
       (when (display-graphic-p)
         (powerline-default-theme)
-        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
+        (remove-hook 'focus-out-hook 'powerline-unset-selected-window))))
+  )
 
 ;; ---------------------------------------------
 ;; Spaceline
 ;; ---------------------------------------------
 (defun zyue-use-spaceline ()
   (use-package spaceline
-    :ensure nil
     :demand
     :init (setq powerline-default-separator 'slant)
     :config
     (spaceline-spacemacs-theme)  ;(spaceline-emacs-theme)
     ;; fix applet bug on OSX
     (when *is-mac*
-      (setq powerline-image-apple-rgb t))))
+      (setq powerline-image-apple-rgb t)))
+  )
 
 ;; ---------------------------------------------
 ;; Doomline
@@ -48,15 +48,18 @@
     (setq doom-modeline-height 32)
     ;; use buffer name; show the full-path file name when moving mouse over it
     ;; (setq doom-modeline-buffer-file-name-style 'buffer-name)
-    (doom-modeline-init)))
+    (doom-modeline-init))
+  )
 
 ;; ---------------------------------------------
-;; Customized modeline
+;; Plain/Native modeline
 ;; ---------------------------------------------
 (defun zyue-plain-modeline ()
   (require 'plain-modeline))
 
-;; Wraper function to load modeline
+;; ---------------------------------------------
+;; Wraper for loading modeline
+;; ---------------------------------------------
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
@@ -65,15 +68,6 @@
     ('spaceline   (zyue-use-spaceline))
     ('doomline    (zyue-use-doomline))
     (_            (zyue-plain-modeline))))
-
-;; ---------------------------------------------
-;; Misc for Modeline (e.g., Nyan cat, parrot)
-;; ---------------------------------------------
-(use-package nyan-mode
-  :ensure nil
-  :disabled
-  :init   (setq nyan-bar-length 24)
-  :config (nyan-mode))
 
 
 (provide 'init-modeline)

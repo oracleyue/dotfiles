@@ -1,22 +1,31 @@
 ;; ================================================================
 ;; Emacs client for the Language Server Protocol
-;; https://github.com/emacs-lsp/lsp-mode#supported-languages
 ;; ================================================================
 ;; Last modified on 24 Feb 2020
 
-;; Install LSP language servers
-;; - Python: pip install python-language-server
-;;
+;; System Dependencies:
+;; - install LSP language servers
+;;   - C++: clangd from "brew install llvm"
+;;   - Python: pyls from "pip install python-language-server"
+;;             mspyls from vscode (see "init-python.el")
+;; - install DAP language servers
+;;   - C++: lldb-vscode from "brew install llvm"
+;;   - Python: "pip install ptvsd"
+
 ;; Warning: you have to keep "dash" and "company" modes update-to-date
 ;; whenever update lsp packages.
 
-;; Features: https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off
+;; Features:
+;; LSP mode: https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off
+;; Dap mode: https://emacs-lsp.github.io/dap-mode
 
 ;; Usages:
 ;; - use "projectile" to start a workspace or use "lsp-workspace-folders-add".
 ;; - use "lsp-describe-sessions" to check status
 
 
+;; Programming supports via Language Server Protocol (LSP)
+;; Note: LSP mode are enabled in language-specific init el files.
 (use-package lsp-mode
   :demand
   :bind (:map lsp-mode-map
@@ -74,6 +83,25 @@
         lsp-ui-imenu-enable    t
         lsp-ui-sideline-enable t
         lsp-ui-peek-enable     nil))
+
+
+;; Debugging via Debug Adapter Protocol (DAP)
+(use-package dap-mode
+  :diminish
+  :after (lsp-mode)
+  :functions dap-hydra/nil
+  :bind (:map lsp-mode-map
+              ("<f5>"    . dap-debug)
+              ("M-<f5>"  . dap-hydra)
+              ("M-s d"   . dap-hydra))
+  :hook ((after-init     . dap-auto-configure-mode)
+         (dap-stopped    . (lambda (_args) (dap-hydra)))
+         (dap-terminated . (lambda (_args) (dap-hydra/nil)))
+
+         (python-mode . (lambda () (require 'dap-python)))
+         ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
+         (go-mode . (lambda () (require 'dap-go)))
+         ((js-mode js2-mode) . (lambda () (require 'dap-firefox)))))
 
 
 (provide 'init-lsp)

@@ -7,19 +7,20 @@
 ;; ----------------------------------------------
 ;; Basics
 ;; ----------------------------------------------
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(when (string= linux-desktop-env "i3") (menu-bar-mode -1))
-;; (setq inhibit-startup-screen t)
-(column-number-mode t)
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq backup-inhibited t)
-;; (setq-default case-fold-search nil)  ;; case-sensitive search
+(tool-bar-mode -1)                  ;; remove toolbar
+(scroll-bar-mode -1)                ;; remove scrolling bar
+(when (and *is-linux* (string= linux-desktop-env "i3"))
+           (menu-bar-mode -1))     ;; remove menus in i3
+(when *is-terminal*
+  (setq inhibit-startup-screen t))  ;; remove startup buffer
+(column-number-mode t)              ;; show column number
+(fset 'yes-or-no-p 'y-or-n-p)       ;; use y-n as yes-no
+(setq backup-inhibited t)           ;; stop backup
+;; (setq-default case-fold-search nil) ;; use case-sensitive search
 
 ;; encodings (utf-8 for everything)
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))
-
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -35,6 +36,10 @@
 ;; display “lambda” as “λ”
 (global-prettify-symbols-mode t)
 
+;; cursors
+(setq-default cursor-type 'bar) ; "bar", "box" (default)
+(blink-cursor-mode t)           ; -1 stops cursor blinking
+
 ;; daemons and clients
 ;;   - "main"    for general purpose (light-theme, startup folders)
 ;;   - "coding"  for coding (dark-theme, startup folders)
@@ -48,11 +53,6 @@
 ;; - If you kill emacs daemon process directly by system command "kill", the server file remains there, which will stop the next start of emacs daemon.
 ;; - The right way to kill the server is using ~kill-emacs~, which may be setup as =emacsclient -nc --server-file=main --eval "(kill-emacs)"=, which automatically delete the server file.
 
-;; fill-column
-(defconst *fill-column-sans* 90)
-(defconst *fill-column-mono* 72)
-(setq-default fill-column *fill-column-mono*)
-
 ;; fix PATH for emacs in Mac OS X
 (use-package exec-path-from-shell
   :demand
@@ -61,11 +61,13 @@
   (push "LANG" exec-path-from-shell-variables)
   (exec-path-from-shell-initialize))
 
-;; cursors
-(if *is-server-c*
-    (setq-default cursor-type 'bar)
-  (setq-default cursor-type 'bar)) ; "bar", "box" (default)
-(blink-cursor-mode t)  ; -1 stops cursor blinking
+;; fill-column
+(defconst *fill-column-sans* 90)
+(defconst *fill-column-mono* 72)
+(setq-default fill-column *fill-column-mono*)
+
+;; file should end with a newline
+(setq-default mode-require-final-newline t)
 
 ;; font size adjustment
 ;; use C-x C-0 first, then use +/- to tune the size.
@@ -139,13 +141,6 @@
 
 ;; line moving (bug on Mac: moving jaggly sometime)
 (setq line-move-visual nil)
-
-;; default browser
-(if (string-equal system-type "darwin")
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program
-          (expand-file-name "~/bin/web-browser")) ;use Safari
-  (setq browse-url-browser-function 'browse-url-firefox))
 
 ;; quick start email editing
 (defun zyue/draft-email ()
@@ -228,9 +223,8 @@
   (defun zyue-fix-face-beacon (frame)
     (with-selected-frame frame
       (setq beacon-color (face-foreground 'font-lock-keyword-face))))
-  (if *is-app* (zyue-fix-face-beacon (selected-frame)))  ;; for app
-  (add-hook 'after-make-frame-functions #'zyue-fix-face-beacon) ;; for clients
-  )
+  (if *is-app* (zyue-fix-face-beacon (selected-frame))
+    (add-hook 'after-make-frame-functions #'zyue-fix-face-beacon)))
 
 ;; ----------------------------------------------
 ;; /smartparens/: insert pairs of parenthesis/brackets

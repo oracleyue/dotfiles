@@ -42,14 +42,18 @@
         company-global-modes
         '(not comint-mode erc-mode message-mode help-mode gud-mode eshell-mode
               text-mode latex-mode org-mode markdown-mode)
-        company-backends '((company-files company-capf
-                                          :with company-yasnippet)
+        company-backends '((company-files company-capf)
+                           ;; (company-files company-capf :with company-yasnippet)
                            (company-dabbrev-code company-keywords company-files)
                            company-dabbrev))
 
   ;; enable dabbrev-code for completion in string or comments
   ;; (require 'company-dabbrev-code)
   ;; (setq company-dabbrev-code-everywhere t)
+
+  ;; Better sorting and filtering
+  (use-package company-prescient
+    :init (company-prescient-mode 1))
 
   ;; Icons and quickhelp
   (when (and emacs/>=26p *enable-all-the-icons*)
@@ -111,14 +115,17 @@
 
   ) ;; END of use-package(company)
 
-
 ;; /Yasnippet/ A template system
 (use-package yasnippet
-  :demand
-  :diminish (yas-minor-mode yas-global-mode)
+  :diminish yas-minor-mode
+  :hook (after-init . yas-global-mode)
   :config
-  (yas-global-mode 1)
-  (setq-default mode-require-final-newline nil))
+  ;; suppress warning
+  (require 'warnings)
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
 
 
 (provide 'init-company)

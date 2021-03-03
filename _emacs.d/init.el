@@ -17,7 +17,7 @@
 (require 'init-pkg)
 
 ;; ----------------------------------------------------------------
-;; Basics, Completion and Window Management
+;; Basics, Completion Systems and Window/Buffer Management
 ;; ----------------------------------------------------------------
 (require 'init-const)             ;; enable/disable features
 
@@ -35,26 +35,21 @@
 (require 'init-ivy)
 
 ;; directory and buffer explorers
-(require 'init-wm)             ;; directory explorers
+(require 'init-windows)
 
-;; better with hydra
-(when *use-hydra* (require 'init-hydra))
+;; remote access (ssh, etc.)
+(require 'init-remote)
 
 ;; ----------------------------------------------------------------
 ;; Text Editing (org, markdown, latex, blog)
 ;; ----------------------------------------------------------------
+(require 'init-text)              ;; generic text
 
-;; major text modes
-(require 'init-text)
 (require 'init-orgmode)           ;; org-mode
 (require 'init-markdown)          ;; markdown
 (require 'init-auctex)            ;; latex
 
-;; writing blogs
-(require 'init-blog)
-
-;; additional misc mode
-(require 'init-misc)
+(require 'init-blog)              ;; blog
 
 ;; ----------------------------------------------------------------
 ;; Programming Environments
@@ -93,9 +88,7 @@
 ;; ----------------------------------------------------------------
 ;; External applications in OS
 ;; ----------------------------------------------------------------
-
-;; calibre for ebook management
-;; (require 'init-calibre)
+(require 'init-external)
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

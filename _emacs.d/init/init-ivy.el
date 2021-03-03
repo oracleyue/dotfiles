@@ -61,9 +61,9 @@
          ("M-g f"   . counsel-fzf)      ;; find
          ("M-g M-l" . counsel-locate)
          :map swiper-map
-         ("M-s" . swiper-isearch-toggle)
+         ("M-s"     . swiper-isearch-toggle)
          :map isearch-mode-map
-         ("M-s" . swiper-isearch-toggle))
+         ("M-s"     . swiper-isearch-toggle))
 
   :init
   (setq enable-recursive-minibuffers t)
@@ -71,16 +71,22 @@
   ;; disable complete-symbol showing popup window at point; use minibuffer
   (setq ivy-display-functions-alist nil)
 
-  (setq ivy-initial-inputs-alist nil
-        ivy-wrap t
+  (setq ivy-wrap   t
         ivy-height 15
         ivy-fixed-height-minibuffer t
-        ivy-format-function #'ivy-format-function-line
-        ivy-use-virtual-buffers t ;; add recent files to ivy-switch-buffer
+        ivy-format-function       #'ivy-format-function-line
+        ivy-use-virtual-buffers   t ;; add recent files to ivy-switch-buffer
         ivy-use-selectable-prompt t)  ;; make inputs selectable
 
   :config
+  ;; auto prepend symbols in ivy commands
+  ;; (setq ivy-initial-inputs-alist nil)  ; nothing
+  (add-to-list 'ivy-initial-inputs-alist '(counsel-M-x . "^"))
+
+  ;; number of items in completion list
   (push '(counsel-yank-pop . 15) ivy-height-alist)
+
+  ;; file finding
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
         "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)"
@@ -100,9 +106,78 @@
           "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
   ) ;; End of Ivy
 
-;; ---------------------------------------------------------------
+;; ---------------------------------------------
+;; Better sorting for Ivy candidates
+;; ---------------------------------------------
+(use-package ivy-prescient
+  :commands ivy-prescient-re-builder
+  :init
+  (defun ivy-prescient-non-fuzzy (str)
+    "Generate an Ivy-formatted non-fuzzy regexp list for the given STR.
+This is for use in `ivy-re-builders-alist'."
+    (let ((prescient-filter-method '(literal regexp)))
+      (ivy-prescient-re-builder str)))
+
+  (setq ivy-prescient-retain-classic-highlighting t
+        ivy-re-builders-alist
+        '((counsel-ag . ivy-prescient-non-fuzzy)
+          (counsel-rg . ivy-prescient-non-fuzzy)
+          (counsel-pt . ivy-prescient-non-fuzzy)
+          (counsel-grep . ivy-prescient-non-fuzzy)
+          (counsel-imenu . ivy-prescient-non-fuzzy)
+          (counsel-yank-pop . ivy-prescient-non-fuzzy)
+          (swiper . ivy-prescient-non-fuzzy)
+          (swiper-isearch . ivy-prescient-non-fuzzy)
+          (swiper-all . ivy-prescient-non-fuzzy)
+          (lsp-ivy-workspace-symbol . ivy-prescient-non-fuzzy)
+          (lsp-ivy-global-workspace-symbol . ivy-prescient-non-fuzzy)
+          (insert-char . ivy-prescient-non-fuzzy)
+          (counsel-unicode-char . ivy-prescient-non-fuzzy)
+          (t . ivy-prescient-re-builder))
+        ivy-prescient-sort-commands
+        '(:not swiper swiper-isearch ivy-switch-buffer
+               lsp-ivy-workspace-symbol ivy-resume ivy--restore-session
+               counsel-grep counsel-git-grep counsel-rg counsel-ag
+               counsel-ack counsel-fzf counsel-pt counsel-imenu
+               counsel-org-capture counsel-load-theme counsel-yank-pop
+               counsel-recentf counsel-buffer-or-recentf
+               centaur-load-theme))
+
+  (ivy-prescient-mode 1))
+
+;; ---------------------------------------------
+;; Hydra support for Ivy
+;; ---------------------------------------------
+(use-package ivy-hydra
+  :commands ivy-hydra-read-action
+  :init (setq ivy-read-action-function #'ivy-hydra-read-action))
+
+;; ---------------------------------------------
+;; Ivy integration for projectile
+;; ---------------------------------------------
+(use-package counsel-projectile
+  :hook (counsel-mode . counsel-projectile-mode)
+  :init (setq counsel-projectile-grep-initial-input
+              '(ivy-thing-at-point)))
+
+;; ---------------------------------------------
+;; Ivy integration for yasnippet
+;; ---------------------------------------------
+(use-package ivy-yasnippet
+  :bind ("M-g y" . ivy-yasnippet))
+
+;; ---------------------------------------------
+;; Ivy integration for selecting xref candidates
+;; ---------------------------------------------
+(use-package ivy-xref
+  :init
+  (when (boundp 'xref-show-definitions-function)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs))
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+;; ---------------------------------------------
 ;; /Ivy-rich /: all-the-icons for Ivy interface
-;; ---------------------------------------------------------------
+;; ---------------------------------------------
 ;; enable it before`ivy-rich-mode' for better performance
 (use-package all-the-icons-ivy-rich
   :if (icons-displayable-p)
@@ -110,8 +185,7 @@
 
 ;; more friendly display transformer for Ivy
 (use-package ivy-rich
-  :hook ((counsel-mode . ivy-rich-mode)
-         ;; must load after `counsel-projectile'
+  :hook (;; must load after `counsel-projectile'
          (counsel-projectile-mode . ivy-rich-mode)
          (ivy-rich-mode . (lambda ()
                             "Use abbreviate in `ivy-rich-mode'."
@@ -144,8 +218,7 @@
 ;; ---------------------------------------------
 ;; http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html
 ;; https://emacs-china.org/t/topic/5948/3?u=et2010
-(defvar counsel-recent-dir-selected "~/")
-
+(defvar counsel-recent-dir-selected nil)
 (defvar counsel-recent-dir-map
   (let ((map (make-sparse-keymap)))
     (define-key map  (kbd "TAB") 'counsel-recent-dir-find-file)
@@ -155,12 +228,11 @@
 (defun counsel-recent-dir-find-file()
   (interactive)
   (ivy-exit-with-action
-   (lambda(c)
+   (lambda (c)
      (setq counsel-recent-dir-selected c)
      (run-at-time 0.05 nil
                   (lambda()
                     (let ((default-directory counsel-recent-dir-selected))
-                      ;; (find-file counsel-recent-dir-selected)
                       (counsel-find-file)))))))
 
 (defun counsel-recent-directory ()
@@ -211,28 +283,13 @@
 ;; ":skip=" in ~/.globalrc.
 
 ;; ---------------------------------------------------------------
-;; /Avy/: jump to char/words in tree-style
-;; ---------------------------------------------------------------
-(use-package avy
-  :demand
-  :bind (("C-'"     . avy-goto-char)   ;; C-:
-         ("M-'"     . avy-goto-char-2) ;; C-'
-         ("M-g g"   . avy-goto-line)
-         ("M-g M-g" . avy-goto-line)
-         ("M-g w"   . avy-goto-word-1) ;; avy-goto-word-0: too many candiates
-         ("M-g M-r" . avy-resume))
-  :config
-  (avy-setup-default))
-
-;; ---------------------------------------------------------------
-;; Ivy for Dash (Mac only, provides "dash-in-ivy")
+;; Ivy for Dash (Mac only, requires Dash and Alfred)
 ;; ---------------------------------------------------------------
 (use-package ivy-dash
+  :ensure nil
   :if *is-mac*
-  :demand
   :load-path "site-lisp"
-  :bind (("M-s s"   . dash-in-ivy)
-         ("M-s M-s" . dash-in-ivy)))
+  :bind ("M-s s"   . dash-in-ivy))
 
 
 (provide 'init-ivy)

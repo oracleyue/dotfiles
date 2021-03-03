@@ -19,7 +19,7 @@
 
 ;; Paths: load-path, theme-load-path
 (add-to-list 'load-path
-             (expand-file-name "init/styles" user-emacs-directory))
+             (expand-file-name "init/misc" user-emacs-directory))
 (dolist (subdir '("."
                   "atom-one-dark-theme"))
   (let ((theme-dir (expand-file-name (concat "themes/" subdir)
@@ -144,16 +144,30 @@ of the focused frame and AB is the unfocused."
 
 ;; Themes (eclipse, doom-nord-light; doom-one, atom-one-dark, spacemacs-dark)
 (setq zyue-theme 'eclipse)
-(when *is-server-c* (setq zyue-theme 'spacemacs-dark))
-(when *is-terminal* (setq zyue-theme 'doom-one
+(when *is-server-c* (setq zyue-theme 'doom-one))
+(when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
 
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light)
-   (require 'doom-theme-setup)   (setq zyue-modeline 'doomline))
+   (setq zyue-modeline 'doomline)
+   (use-package doom-themes
+     :custom-face
+     (doom-modeline-buffer-file ((t (:inherit (mode-line bold)))))
+     :custom
+     (doom-themes-treemacs-theme "doom-colors")
+     :config
+     ;; Enable flashing mode-line on errors
+     (doom-themes-visual-bell-config)
+     ;; Enable customized theme
+     ;; FIXME https://github.com/emacs-lsp/lsp-treemacs/issues/89
+     (with-eval-after-load 'lsp-treemacs
+       (doom-themes-treemacs-config))))
   ((or 'spacemacs-dark 'spacemacs-light)
-   (use-package spacemacs-theme) (setq zyue-modeline 'spaceline))
-  ('eclipse (setq zyue-modeline 'powerline)))
+   (setq zyue-modeline 'spaceline)
+   (use-package spacemacs-theme))
+  ('eclipse
+   (setq zyue-modeline 'powerline)))
 
 ;; Dashboard (alternative startup/splash screen)
 (when (and *enable-all-the-icons* *is-graphic*)
@@ -163,10 +177,6 @@ of the focused frame and AB is the unfocused."
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'zyue-reload-ui-in-daemon)
   (zyue-init-ui))
-
-;; Post-processing (if specific themes require)
-(when (functionp 'theme-post-processing)
-  (theme-post-processing))  ;; for doom-themes
 
 ;; Loop over transparent effects
 ;; (global-set-key [(f11)] 'loop-alpha)

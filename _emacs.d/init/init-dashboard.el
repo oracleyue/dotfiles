@@ -8,7 +8,9 @@
   :diminish (page-break-lines-mode)
   :after (all-the-icons)
   :init (dashboard-setup-startup-hook)
-  :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+  :custom-face
+  (dashboard-heading    ((t (:inherit (font-lock-string-face bold)))))
+  (dashboard-items-face ((t (:weight normal))))
   :bind (:map dashboard-mode-map
               ("h" . widget-backward)
               ("l" . widget-forward)
@@ -31,7 +33,7 @@
                                   (registers . "database")))
 
   (setq dashboard-set-footer t
-        dashboard-footer (format "Powered by oracleyue, %s" (format-time-string "%Y"))
+        dashboard-footer-messages (list (format "Powered by oracleyue, %s" (format-time-string "%Y")))
         dashboard-footer-icon
         (all-the-icons-faicon "heart" :height 1.1 :v-adjust -0.05 :face 'error))
 

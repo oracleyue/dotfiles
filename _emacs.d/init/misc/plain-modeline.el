@@ -1,5 +1,5 @@
-;; This provides a plain modeline customization.
-
+;; This provides a plain modeline.
+;; Last modified on 02 Mar 2021
 
 ;; faces
 (make-face 'y/mode-line-rownum-face)

@@ -15,67 +15,43 @@
 ;; Emacs in console or tty:
 ;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
 
+;; Much better window operations via Hydra+Ace-window
+(when *use-hydra* (require 'init-hydra-aw))
+
 ;; ----------------------------------------------
 ;; numbering windows
 ;; ----------------------------------------------
 (use-package winum
-  :disabled
+  :demand
   :config
   (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
   (winum-mode)
   :bind (("s-1" . winum-select-window-1)
          ("s-2" . winum-select-window-2)
          ("s-3" . winum-select-window-3)
-         ("s-4" . winum-select-window-4)))
+         ("s-4" . winum-select-window-4)
+         ("s-5" . winum-select-window-5)
+         ("s-6" . winum-select-window-6)
+         ("s-7" . winum-select-window-7)
+         ("s-8" . winum-select-window-8)
+         ("s-9" . winum-select-window-9)
+         ("s-0" . winum-select-window-10)))
 ;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
 ;; =C-x w `=: select window by number, which is inserted in minibuffer
 
-;; ----------------------------------------------
-;; Call external software to open documents
-;; ----------------------------------------------
-(use-package openwith
+;; ---------------------------------------------------------------
+;; /Avy/: jump to char/words in tree-style
+;; ---------------------------------------------------------------
+(use-package avy
   :demand
+  :bind (("C-'"     . avy-goto-char)   ;; C-:
+         ("M-'"     . avy-goto-char-2) ;; C-'
+         ("M-g g"   . avy-goto-line)
+         ("M-g M-g" . avy-goto-line)
+         ("M-g w"   . avy-goto-word-1) ;; avy-goto-word-0: too many candiates
+         ("M-g M-r" . avy-resume))
   :config
-  (openwith-mode t)
-  (if *is-mac*
-      (setq openwith-associations '(("\\.pdf\\'" "/usr/bin/open" (file))))
-    (setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))))
-
-;; ----------------------------------------------
-;; /golden-ratio/: resize multiple windows
-;; ----------------------------------------------
-(when *use-golden-ratio*
-  (use-package golden-ratio
-    :config
-    (golden-ratio-mode t)
-    (eval-after-load "golden-ratio"
-      '(progn ;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
-         (add-to-list 'golden-ratio-inhibit-functions 'pl/no-golden-ratio-popwin)
-         (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-         ;; (add-to-list 'golden-ratio-exclude-modes "direx:direx-mode")
-         (add-to-list 'golden-ratio-exclude-modes "emacs-lisp-mode")
-         (add-to-list 'golden-ratio-exclude-modes "c-mode")
-         (add-to-list 'golden-ratio-exclude-modes "c++-mode")
-         (add-to-list 'golden-ratio-exclude-modes "ess-mode")
-         (add-to-list 'golden-ratio-exclude-modes "python-mode")))
-    (defun pl/helm-alive-p () (and (boundp 'helm-alive-p)
-                                   (symbol-value 'helm-alive-p)))
-    (defun pl/no-golden-ratio-popwin ()
-      "Disable golden-ratio for popwin buffer."
-      (or (pl/no-golden-ratio-for-buffers " *guide-key*")
-          (pl/no-golden-ratio-for-buffers " *popwin-dummy*")
-          (pl/no-golden-ratio-for-buffers "*Ilist*")))
-    (defun pl/no-golden-ratio-for-buffers (bufname)
-      "Disable golden-ratio if BUFNAME is the name of a visible buffer."
-      (and (get-buffer bufname) (get-buffer-window bufname 'visible)))
-    ))
-
-;; ------------------------------------------------
-;; /popwin/: manage popup (temporary) buffers
-;; Bugs: it disables /neotree/ to create buffers.
-;; ------------------------------------------------
-(use-package popwin
-  :config (popwin-mode 1))
+  (avy-setup-default))
 
 ;; ------------------------------------------------
 ;; Directory explorer (regular, /dired/)
@@ -91,23 +67,7 @@
 ;; ------------------------------------------------
 ;; Directory explorers (tree)
 ;; ------------------------------------------------
-
-;; directory explorer in tree: /neotree/
-(when (string-equal *tree-manager* "neotree")
-  (use-package neotree
-    :demand
-    :config
-    (setq neo-theme 'arrow)
-    ;; =M-x neotree-toggle= to start
-    (define-key neotree-mode-map (kbd "<tab>") 'neotree-enter) ;;fix tab
-    (setq neo-show-hidden-files nil)
-    (eval-after-load "neotree"      ;; toggle by "H" in neotree
-      '(setq neo-hidden-regexp-list
-             '("^\\..*" "^#.*" "^Icon.*" ".DS_Store" ".dropbox" ".*~"))))
-  )
-;; directory explorer in tree: /treemacs/
-(when (string-equal *tree-manager* "treemacs")
-  (require 'init-treemacs))
+(require 'init-treemacs)
 
 ;; ------------------------------------------------
 ;; /ibuffer/: manage opened buffers
@@ -145,22 +105,36 @@
                                     (mode . c++-mode)
                                     (mode . cmake-mode)
                                     (name . ".dir-locals.el")
+                                    (name . ".gitignore")
+                                    (name . ".projectile")
                                     (name . "[mM]akefile")))
                  ("Web" (or (mode . html-mode)
                             (mode . css-mode)
                             (mode . json-mode)
                             (mode . js2-mode)))
-                 ("Notebook" (or (mode . hexo-mode)
+                 ("Notebook" (or (mode . easy-hugo-mode)
                                  (mode . deft-mode)))
                  ("Emacs" (or (mode . emacs-lisp-mode)
                               (name . "^\\*scratch\\*$")
                               (name . "^\\*Messages\\*$")
                               (name . "^\\*dashboard\\*$")))
-                 ;; ("tags viewer" (mode . direx:direx-mode))
-                 ("miscellany" (or (name . "^\\*Help\\*$")
+                 ("LSP"   (or (name . "^\\*lsp-log\\*$")
+                              (name . "^\\*mspyls\\*$")
+                              (name . "^\\*mspyls::stderr\\*$")
+                              (name . "^\\*pyls\\*$")
+                              (name . "^\\*clangd\\*$")
+                              (name . "^\\*clangd::stderr\\*$")
+                              ))
+                 ("Debugging" (or (mode . dap-server-log-mode)
+                                  (name . "^debug.el$")
+                                  (name . "^\\*dap-ui-breakpoints\\*$")
+                                  (name . "^\\*dap-ui-locals\\*$")
+                                  (name . "^\\*dap-ui-expressions\\*$")
+                                  (name . "^\\*dap-ui-sessions\\*$")
+                                  (name . "^\\*dap-ui-repl\\*$")))
+                 ("misc." (or (name . "^\\*Help\\*$")
                                    (name . "^\\*Warnings\\*$")
-                                   (name . "clang-complete")
-                                   (name . "[hH]elm.*")
+                                   (name . "^\\*Compile-Log*\\*$")
                                    (mode . TeX-output-mode)
                                    (mode . reftex-toc-mode)
                                    (mode . compilation-mode)))
@@ -233,8 +207,7 @@
                                       :v-adjust -0.05
                                       :height 1.2)
                " ")
-            "Project: ")))
-  )
+            "Project: "))))
 
 ;; ------------------------------------------------
 ;; /imenu-list/: show imenu entries in side bar
@@ -246,14 +219,6 @@
   :config
   ;; (setq imenu-list-auto-resize t)
   (setq imenu-list-focus-after-activation t))
-
-;; ------------------------------------------------
-;; /TRAMP/: manage ssh and remote access
-;; ------------------------------------------------
-(setq tramp-default-method "ssh")
-;; usages:
-;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
-;; - "C-x C-f /sudo::/etc/hosts"
 
 ;; ----------------------------------------------
 ;; /deft/: Organise and browse notes
@@ -267,35 +232,8 @@
         deft-directory  "~/Public/Dropbox/oracleyue/OrgNote")
   (setq deft-recursive t))
 
-;; ----------------------------------------------
-;; /engine-mode/: manage web search
-;; ----------------------------------------------
-(use-package engine-mode
-  :config
-  (engine-mode t)
-  (setq engine/browser-function 'browse-url-default-browser)
-  ;; (engine/set-keymap-prefix (kbd "C-c s"))  ;; change the defaul "C-x /"
-  (defengine duckduckgo "https://duckduckgo.com/?q=%s"
-    :keybinding "d")
-  (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
-    :keybinding "h")
-  (defengine amazon
-    "http://www.amazon.com/s/ref=nb_sb_noss2?url=search-alias%%3Daps&field-keywords=%s"
-    :keybinding "a")
-  (defengine google "http://www.google.lu/search?ie=utf-8&oe=utf-8&q=%s"
-    :keybinding "g")
-  (defengine wikipedia
-    "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
-    :keybinding "w")
-  (defengine google-scholar
-    "https://scholar.google.lu/scholar?hl=en&q=%s"
-    :keybinding "s")
-  (defengine stack-overflow "https://stackoverflow.com/search?q=%s"
-    :keybinding "o"))
-
 ;; ------------------------------------------------
-;; /all-the-icons-dired/: Icons for Dired
+;; All-the-icons supports for Dired
 ;; ------------------------------------------------
 (when *enable-all-the-icons*
   (use-package all-the-icons-dired
@@ -359,6 +297,6 @@
   )
 
 
-(provide 'init-wm)
+(provide 'init-windows)
 ;; ================================================
-;; init-wm.el ends here
+;; init-windows.el ends here

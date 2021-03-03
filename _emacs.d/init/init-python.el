@@ -41,14 +41,6 @@
     (setq python-shell-interpreter "python3"
           python-shell-interpreter-args "-i"))
 
-  ;; Set GUD debugger
-  ;; (setq gud-pdb-command-name "python -m pdb")
-  (defadvice pdb (before gud-query-cmdline activate)
-    "Provide a better default command line when called interactively."
-    (interactive (list (gud-query-cmdline
-                        'python (concat "-m pdb " (file-name-nondirectory
-                                                   buffer-file-name))))))
-
   ;; Indentation
   (defun zyue-py-indent-display-style ()
     (setq python-indent-offset 4
@@ -103,6 +95,18 @@
                         '(menu-item "Eval line" python-shell-send-line
                                     "Eval line in inferior Python session")
                         "Eval region")
+
+  ;; Debugging Supports
+  ;; use built-in GUD debugger
+  (defadvice pdb (before gud-query-cmdline activate)
+    "Provide a better default command line when called interactively."
+    (interactive (list (gud-query-cmdline
+                        'python (concat "-m pdb " (file-name-nondirectory
+                                                   buffer-file-name))))))
+  ;; use DAP-based debugger (enabled in "init-lsp.el")
+  ;; if need to set specific python:
+  ;; (setq dap-python-executable "python3"))
+
   ) ;; End of python-mode
 
 ;; ------------------------------------------------

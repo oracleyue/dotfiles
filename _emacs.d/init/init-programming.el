@@ -28,14 +28,14 @@
 ;; warning: ensure /epl/ package being up-to-date
 (use-package flycheck
   :demand
-  :diminish "FlyC"
+  :diminish
   :hook ((c-mode      . flycheck-mode)
          (c++-mode    . flycheck-mode)
          (ess-mode    . flycheck-mode)
          (python-mode . flycheck-mode))
-  :bind (("M-g n" . flycheck-next-error)
-         ("M-g p" . flycheck-previous-error)
-         ("M-g l" . flycheck-list-errors))
+  :bind (("M-g n"     . flycheck-next-error)
+         ("M-g p"     . flycheck-previous-error)
+         ("M-g l"     . flycheck-list-errors))
   :config
   ;; check only when opening or saving files
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
@@ -113,15 +113,14 @@
   (use-package dash-at-point
     :demand
     :config
-    (global-set-key (kbd "C-c d") 'dash-at-point) ;; "C-c d", conflicts with /doxyemacs/
-                                        ; specify docsets to search in different modes
+    (global-set-key (kbd "C-c d") 'dash-at-point)
+    ;; specify docsets to search in different modes
     (set 'dash-at-point-mode-alist
-         '((c-mode . "c,gsl,gl4")
-           (c++-mode . "cpp,eigen,boost,gsl")
-           (python-mode . "python,numpy,scipy,matplotlib,pandas")
-           (ess-mode . "r")
-           (sh-mode . "bash"))))
-  )
+         '((c-mode      . "c,gsl")
+           (c++-mode    . "cpp,eigen,boost")
+           (python-mode . "py,np,sp,plt,pd,pytorch")
+           (ess-mode    . "r")
+           (sh-mode     . "bash")))))
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
 (when *is-linux*
   (use-package zeal-at-point
@@ -132,8 +131,7 @@
          '((c-mode . "c,gsl,gl4")
            (c++-mode . "c++,eigen,boost,gsl")
            (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
-           (ess-mode . "r"))))
-  )
+           (ess-mode . "r")))))
 
 ;; ----------------------------------------------
 ;; /gud/: debug supports, e.g. gdb, pdb

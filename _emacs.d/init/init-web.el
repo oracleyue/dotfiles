@@ -23,18 +23,26 @@
 ;; Use /json-mode/ for json
 (use-package json-mode
   :config
-  ;; add json-path to popup window (if enabled in "init-wm.el")
-  ;; (require 'popwin)
-  ;; (defun popwin:json-mode-show-path ()
-  ;;   (interactive)
-  ;;   (json-mode-show-path)
-  ;;   (delete-windows-on "*json-path*")
-  ;;   (popwin:popup-buffer "*json-path*"))
-  ;; (push "*json-path*" popwin:special-display-config)  ;; not work, fix later
-  ;; (add-hook 'json-mode-hook
-  ;;           (lambda () (define-key json-mode-map
-  ;;                        (kbd "C-c C-p") 'popwin:json-mode-show-path)))
-  )
+  ;; /popwin/: manage popup (temporary) buffers
+  ;; BUG: it disables /neotree/ to create buffers.
+  (use-package popwin
+    :disabled
+    :config
+    (popwin-mode 1)
+
+    (defun popwin:json-mode-show-path ()
+      "Add json-path in json-mode to a popup window."
+      (interactive)
+      (json-mode-show-path)
+      (delete-windows-on "*json-path*")
+      (popwin:popup-buffer "*json-path*"))
+    (push "*json-path*" popwin:special-display-config)  ;; not work, fix later
+    (add-hook 'json-mode-hook
+              (lambda () (define-key json-mode-map
+                      (kbd "C-c C-p") 'popwin:json-mode-show-path)))
+    ) ;; END of use-package popwin
+  ) ;; END of use-package json-mode
+
 ;; Usages:
 ;; - "C-c C-f"   format the region/buffer with =json-reformat=
 ;; - "C-c C-p"   display a path to the object at point with =json-snatcher=
@@ -43,7 +51,6 @@
 ;; - "C-c C-k"   Replace the sexp at point with null
 ;; - "C-c C-i"   Increment the number at point
 ;; - "C-c C-d"   Decrement the number at point
-
 
 ;; ----------------------------------------------------------------
 ;; Use comprehensive mode /web-mode/ for web development

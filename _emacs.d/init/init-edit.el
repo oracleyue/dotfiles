@@ -3,7 +3,6 @@
 ;; ================================================================
 ;; Last modified on 15 Sep 2017
 
-
 ;; ------------- Basic Editing Extensions ---------------
 
 ;; kill sentence (default use doulbe space after the period)
@@ -61,8 +60,8 @@
 (global-set-key (kbd "C-<backspace>") 'zyue/backward-kill-line)
 
 ;; align-regexp keybinding
+;; one may prefix "C-u" for more arguments.
 (global-set-key (kbd "C-x M-a") 'align-regexp)
-
 
 ;; ------- More Editing-related Extensions ---------
 
