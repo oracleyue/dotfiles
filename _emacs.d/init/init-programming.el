@@ -93,8 +93,8 @@
          ("M-N" . symbol-overlay-switch-forward)
          ("M-P" . symbol-overlay-switch-backward)
          ("M-C" . symbol-overlay-remove-all))
-  :hook ((prog-mode . symbol-overlay-mode)
-         (iedit-mode . (lambda () (symbol-overlay-mode -1)))
+  :hook ((prog-mode      . symbol-overlay-mode)
+         (iedit-mode     . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode-end . symbol-overlay-mode)))
 
 ;; ----------------------------------------------
@@ -109,46 +109,55 @@
 ;; API reference support
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
-(when *is-mac*
-  (use-package dash-at-point
-    :demand
-    :config
-    (global-set-key (kbd "C-c d") 'dash-at-point)
-    ;; specify docsets to search in different modes
-    (set 'dash-at-point-mode-alist
-         '((c-mode      . "c,gsl")
-           (c++-mode    . "cpp,eigen,boost")
-           (python-mode . "py,np,sp,plt,pd,pytorch")
-           (ess-mode    . "r")
-           (sh-mode     . "bash")))))
+;; /ivy-dash/: use Ivy to search for Dash.app (requires Alfred)
+(use-package ivy-dash
+  :ensure nil
+  :if *is-mac*
+  :load-path "site-lisp"
+  :bind ("C-c d" . dash-in-ivy))
+;; /dash-at-point/: search symbol at point in Dash.app
+(use-package dash-at-point
+  :disabled
+  :if *is-mac*
+  :bind ("C-c d" . dash-at-point)
+  :config
+  ;; specify docsets to search in different modes
+  (set 'dash-at-point-mode-alist
+       '((c-mode      . "c,gsl")
+         (c++-mode    . "cpp,eigen,boost")
+         (python-mode . "py,np,sp,plt,pd,pytorch")
+         (elisp-mode  . "elisp")
+         (ess-mode    . "r")
+         (sh-mode     . "bash"))))
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
-(when *is-linux*
-  (use-package zeal-at-point
-    :demand
-    :config
-    (global-set-key (kbd "C-c d") 'zeal-at-point)
-    (set 'dash-at-point-mode-alist
-         '((c-mode . "c,gsl,gl4")
-           (c++-mode . "c++,eigen,boost,gsl")
-           (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
-           (ess-mode . "r")))))
+(use-package zeal-at-point
+  :if *is-linux*
+  :bind ("C-c d" . zeal-at-point)
+  :config
+  (set 'dash-at-point-mode-alist
+       '((c-mode      . "c,gsl,gl4")
+         (c++-mode    . "c++,eigen,boost,gsl")
+         (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
+         (ess-mode    . "r"))))
 
 ;; ----------------------------------------------
-;; /gud/: debug supports, e.g. gdb, pdb
+;; /gud/: debugging supports, e.g. gdb, pdb
 ;; ----------------------------------------------
-;; usages: "M-x pdb"
-;;           "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
+;; usages: "M-x pdb" for Python
+;;         "M-x gdb" then "M-x gdb-many-window", then "b main" "r"
 ;; notes: default keybindings
 ;; =C-c C-s= step in         =C-c C-n= next
 ;; =C-c C-f= step out        =C-c C-r= continue
 ;; =C-c C-b= set breakpoint  =C-c C-d= delete breakpoint
 
-(when (string-equal system-type "darwin")
-  (setq gdb-non-stop-setting nil))
-(require 'gud)
-(define-key gud-mode-map (kbd "<f7>") #'gud-next) ;; setp
-(define-key gud-mode-map (kbd "<f8>") #'gud-step) ;; setp in
-(define-key gud-mode-map (kbd "S-<f8>") #'gud-finish) ;; setp out
+(use-package gud
+  :bind (:map gud-mode-map
+              ("<f7>"   . gud-next)   ;; setp
+              ("<f8>"   . gud-step)   ;; setp in
+              ("S-<f8>" . gud-finish)) ;; setp out
+  :config
+  (when *is-mac*
+    (setq gdb-non-stop-setting nil)))
 
 
 (provide 'init-programming)

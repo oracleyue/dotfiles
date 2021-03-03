@@ -282,15 +282,6 @@ This is for use in `ivy-re-builders-alist'."
 ;; If you like to skip folders for tagging, add folders to the list
 ;; ":skip=" in ~/.globalrc.
 
-;; ---------------------------------------------------------------
-;; Ivy for Dash (Mac only, requires Dash and Alfred)
-;; ---------------------------------------------------------------
-(use-package ivy-dash
-  :ensure nil
-  :if *is-mac*
-  :load-path "site-lisp"
-  :bind ("M-s s"   . dash-in-ivy))
-
 
 (provide 'init-ivy)
 ;; ================================================

@@ -9,6 +9,7 @@
              treemacs-fringe-indicator-mode
              treemacs-git-mode)
   :bind (([f8]        . treemacs)
+         ("M-g t"     . treemacs)
          ("M-0"       . treemacs-select-window)
          ("C-x 1"     . treemacs-delete-other-windows)
          ("C-x t 1"   . treemacs-delete-other-windows)
@@ -25,7 +26,8 @@
         treemacs-is-never-other-window         t
         treemacs-silent-filewatch              t
         treemacs-silent-refresh                t
-        treemacs-width                         30)
+        treemacs-width                         30
+        treemacs-no-png-images                 *is-terminal*)
   :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
