@@ -157,12 +157,12 @@ of the focused frame and AB is the unfocused."
      :custom
      (doom-themes-treemacs-theme "doom-colors")
      :config
-     ;; Enable flashing mode-line on errors
-     (doom-themes-visual-bell-config)
+     (doom-themes-visual-bell-config) ;; enable flashing mode-line on errors
      ;; Enable customized theme
      ;; FIXME https://github.com/emacs-lsp/lsp-treemacs/issues/89
-     (with-eval-after-load 'lsp-treemacs
-       (doom-themes-treemacs-config))))
+     ;; (with-eval-after-load 'lsp-treemacs
+     ;;   (doom-themes-treemacs-config))
+     ))
   ((or 'spacemacs-dark 'spacemacs-light)
    (setq zyue-modeline 'spaceline)
    (use-package spacemacs-theme))

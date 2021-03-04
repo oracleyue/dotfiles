@@ -60,8 +60,8 @@
 (use-package treemacs-all-the-icons
   :after (treemacs all-the-icons)
   :demand
-  :if (and *enable-all-the-icons*
-           (member zyue-theme '(spacemacs-dark atom-one-dark)))
+  :if (and *enable-all-the-icons* *is-graphic*
+           (not (member zyue-theme '(eclipse))))
   :config
   (treemacs-load-theme "all-the-icons"))
 

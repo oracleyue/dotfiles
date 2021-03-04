@@ -43,7 +43,7 @@
 
 ;; python
 (defconst *use-ipython* t)
-(defconst *use-mspyls* t)  ;; use Microsoft pyls
+(defconst *py-language-server* 'pyright)  ;; pyls, mspyls, pyright
 
 
 (provide 'init-const)

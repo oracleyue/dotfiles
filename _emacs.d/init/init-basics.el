@@ -95,8 +95,8 @@
 
 ;; recent files
 (setq recentf-max-saved-items 100)
-;; save to recentf every 5 mins (since we use KILL)
-;; (run-at-time "5 min" 300 'recentf-save-list)
+;; clean non-exist recent files: "M-x recentf-cleanup"
+;; remove manually: "M-x recentf-edit-list"
 
 ;; srcolling control (move 3 lines each time)
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1) ((control) . 10)))
@@ -277,6 +277,14 @@
 ;; ----------------------------------------------
 (use-package bash-completion
   :config (bash-completion-setup))
+
+;; ------------------------------------------------
+;; /TRAMP/: manage ssh and remote access
+;; ------------------------------------------------
+(setq tramp-default-method "ssh")
+;; usages:
+;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
+;; - "C-x C-f /sudo::/etc/hosts"
 
 
 (provide 'init-basics)

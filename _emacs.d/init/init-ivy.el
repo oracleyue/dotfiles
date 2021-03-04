@@ -18,7 +18,7 @@
   ;; counsel
   :bind (([remap execute-extended-command] . counsel-M-x)
          ([remap find-file]                . counsel-find-file)
-         ([remap find-library]             . find-library)
+         ([remap find-library]             . counsel-find-library)
          ([remap imenu]                    . counsel-imenu)
          ([remap dired]                    . counsel-dired)
          ([remap recentf-open-files]       . counsel-recentf)
@@ -41,15 +41,16 @@
          ;; bookmark (Emacs default; =C-x r b= to create bookmark)
          ("M-g b"   . counsel-bookmark)
          ;; recent files
-         ;; ("M-g h"   . counsel-recentf)  ;; or use "counsel-recent-directory" defined later
+         ("M-g H"   . counsel-recentf)  ;; or "M-g h" for "counsel-recent-directory" (user-defined)
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
-  :bind (("C-s"     . swiper)           ;; swiper-isearch
+  :bind (("C-s"     . swiper)           ;; swiper, swiper-isearch
+         ("C-r"     . swiper-backward)
          ("s-f"     . swiper-isearch)
-         ([remap swiper] . counsel-grep-or-swiper) ;; grep for large files
-         ([remap swiper-backward] . counsel-grep-or-swiper-backward)
          ("M-g s"   . counsel-grep)     ;; using rg
+         ([remap swiper]          . counsel-grep-or-swiper) ;; for large files
+         ([remap swiper-backward] . counsel-grep-or-swiper-backward)
          ;; all buffers
          ("C-S-s"   . swiper-all)
          ;; grep files recursively in the folder
@@ -74,76 +75,31 @@
   (setq ivy-wrap   t
         ivy-height 15
         ivy-fixed-height-minibuffer t
-        ivy-format-function       #'ivy-format-function-line
-        ivy-use-virtual-buffers   t ;; add recent files to ivy-switch-buffer
-        ivy-use-selectable-prompt t)  ;; make inputs selectable
+        ivy-format-function         #'ivy-format-function-line
+        ivy-use-virtual-buffers     t ;; add recent files to ivy-switch-buffer
+        ivy-use-selectable-prompt   t)  ;; make inputs selectable
 
   :config
-  ;; auto prepend symbols in ivy commands
+  ;; auto prepend symbols in ivy commands (always set nil by "ivy-prescient")
   ;; (setq ivy-initial-inputs-alist nil)  ; nothing
-  (add-to-list 'ivy-initial-inputs-alist '(counsel-M-x . "^"))
 
   ;; number of items in completion list
   (push '(counsel-yank-pop . 15) ivy-height-alist)
 
-  ;; file finding
-  (setq counsel-find-file-at-point t)
-  (setq counsel-find-file-ignore-regexp
-        "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)"
-        counsel-grep-base-command
-        "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
-        counsel-git-cmd "rg --files"
-        counsel-rg-base-command
-        "rg -i -M 120 --no-heading --line-number --color never %s .")
-        ;; counsel-rg-base-command
-        ;; "rg -zS --no-heading --line-number --color never %s ."
-        ;; counsel-ag-base-command "ag -zS --nocolor --nogroup %s"
-        ;; counsel-pt-base-command "pt -zS --nocolor --nogroup -e %s"
+  ;; more file finding
+  (setq counsel-find-file-at-point t
+        counsel-find-file-ignore-regexp
+        "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)")
 
-  ;; fix the bug for ivy-occur in OSX
-  (when *is-mac*
-    (setq counsel-find-file-occur-cmd
-          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
+  ;; use the faster search tool: ripgrep ("rg")
+  (when (executable-find "rg")
+    (setq counsel-grep-base-command
+          "rg -S --no-heading --line-number --color never %s %s")
+    (when (and *is-mac* (executable-find "gls"))
+      (setq counsel-find-file-occur-use-find nil
+            counsel-find-file-occur-cmd
+            "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first")))
   ) ;; End of Ivy
-
-;; ---------------------------------------------
-;; Better sorting for Ivy candidates
-;; ---------------------------------------------
-(use-package ivy-prescient
-  :commands ivy-prescient-re-builder
-  :init
-  (defun ivy-prescient-non-fuzzy (str)
-    "Generate an Ivy-formatted non-fuzzy regexp list for the given STR.
-This is for use in `ivy-re-builders-alist'."
-    (let ((prescient-filter-method '(literal regexp)))
-      (ivy-prescient-re-builder str)))
-
-  (setq ivy-prescient-retain-classic-highlighting t
-        ivy-re-builders-alist
-        '((counsel-ag . ivy-prescient-non-fuzzy)
-          (counsel-rg . ivy-prescient-non-fuzzy)
-          (counsel-pt . ivy-prescient-non-fuzzy)
-          (counsel-grep . ivy-prescient-non-fuzzy)
-          (counsel-imenu . ivy-prescient-non-fuzzy)
-          (counsel-yank-pop . ivy-prescient-non-fuzzy)
-          (swiper . ivy-prescient-non-fuzzy)
-          (swiper-isearch . ivy-prescient-non-fuzzy)
-          (swiper-all . ivy-prescient-non-fuzzy)
-          (lsp-ivy-workspace-symbol . ivy-prescient-non-fuzzy)
-          (lsp-ivy-global-workspace-symbol . ivy-prescient-non-fuzzy)
-          (insert-char . ivy-prescient-non-fuzzy)
-          (counsel-unicode-char . ivy-prescient-non-fuzzy)
-          (t . ivy-prescient-re-builder))
-        ivy-prescient-sort-commands
-        '(:not swiper swiper-isearch ivy-switch-buffer
-               lsp-ivy-workspace-symbol ivy-resume ivy--restore-session
-               counsel-grep counsel-git-grep counsel-rg counsel-ag
-               counsel-ack counsel-fzf counsel-pt counsel-imenu
-               counsel-org-capture counsel-load-theme counsel-yank-pop
-               counsel-recentf counsel-buffer-or-recentf
-               centaur-load-theme))
-
-  (ivy-prescient-mode 1))
 
 ;; ---------------------------------------------
 ;; Hydra support for Ivy
@@ -151,6 +107,68 @@ This is for use in `ivy-re-builders-alist'."
 (use-package ivy-hydra
   :commands ivy-hydra-read-action
   :init (setq ivy-read-action-function #'ivy-hydra-read-action))
+
+;; ---------------------------------------------
+;; Better sorting for Ivy candidates
+;; ---------------------------------------------
+(use-package prescient)
+(use-package ivy-prescient
+  :demand
+  :init
+  (setq ivy-prescient-sort-commands
+        '(:not swiper swiper-isearch swiper-all ivy-switch-buffer
+               lsp-ivy-workspace-symbol ivy-resume ivy--restore-session
+               counsel-grep counsel-git-grep counsel-rg counsel-ag
+               counsel-ack counsel-pt counsel-imenu
+               counsel-org-capture counsel-yank-pop
+               counsel-recentf counsel-buffer-or-recentf
+               ivy-reverse-i-search counsel-recent-directory))
+  :config
+  (ivy-prescient-mode 1))
+
+;; ---------------------------------------------
+;; Support pinyin for Chinese in Ivy
+;; ---------------------------------------------
+;; Input prefix '!' to match pinyin
+;; For example: 你好 can be match by type !nh
+;; Refer to  https://github.com/abo-abo/swiper/issues/919 and
+;; https://github.com/pengpengxp/swiper/wiki/ivy-support-chinese-pinyin
+(use-package pinyinlib
+  :demand
+  :commands pinyinlib-build-regexp-string
+  :init
+  (defun re-builder-pinyin (str)
+    (or (pinyin-to-utf8 str)
+        (ivy--regex-plus str)
+        (ivy--regex-ignore-order)))
+
+  (setq ivy-re-builders-alist
+        (append '((counsel-rg        . re-builder-pinyin)
+                  (counsel-ag        . re-builder-pinyin)
+                  (swiper            . re-builder-pinyin)
+                  (swiper-isearch    . re-builder-pinyin)
+                  (swiper-all        . re-builder-pinyin)
+                  (counsel-find-file . re-builder-pinyin))
+         ivy-re-builders-alist))
+
+  (defun my-pinyinlib-build-regexp-string (str)
+    (progn (cond ((equal str ".*") ".*")
+                 (t (pinyinlib-build-regexp-string str t)))))
+
+  (defun my-pinyin-regexp-helper (str)
+    (cond ((equal str " ") ".*")
+          ((equal str "") nil)
+          (t str)))
+
+  (defun pinyin-to-utf8 (str)
+    (cond ((equal 0 (length str)) nil)
+          ((equal (substring str 0 1) "!")
+           (mapconcat 'my-pinyinlib-build-regexp-string
+                      (remove nil (mapcar 'my-pinyin-regexp-helper
+                                          (split-string (replace-regexp-in-string "!" "" str) ""))) ""))
+          nil)))
+;; To remove `pinyin' match, uncomment the following:
+;; (defun pinyin-to-utf8 (str) nil)
 
 ;; ---------------------------------------------
 ;; Ivy integration for projectile
@@ -208,9 +226,10 @@ This is for use in `ivy-re-builders-alist'."
                                   (internal-border-width . 10)))
   :config
   (setq ivy-posframe-display-functions-alist
-        '((swiper          . ivy-display-function-fallback)
+        '((swiper-isearch           . ivy-display-function-fallback)
+          (swiper                   . ivy-display-function-fallback)
           (ivy-completion-in-region . ivy-posframe-display-at-point)
-          (t               . ivy-posframe-display)))
+          (t                        . ivy-posframe-display)))
   (ivy-posframe-mode 1))
 
 ;; ---------------------------------------------
@@ -248,6 +267,7 @@ This is for use in `ivy-re-builders-alist'."
                        (shell-command-to-string "fasd -ld") "\n" t))))))
     (ivy-read "directories:" collection
               :keymap counsel-recent-dir-map
+              :caller 'counsel-recent-directory
               :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
 
 (global-set-key (kbd "M-g h") 'counsel-recent-directory)

@@ -1,38 +1,34 @@
 ;; ================================================================
 ;; Programming Environment for /Python/
 ;; ================================================================
-
-;; Install required python packages
-;;    =pip install virtualenv=
-;;    =pip install pyflakes=
-;;    =pip install autopep8=
+;; Last modified on 04 Mar 2021
 
 ;; If you use default pyls in LSP mode, you need to install
 ;;    =pip install python-language-server=
 ;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
-;;    install "VSCode" and set its "jediEnable" to false to enable downloading mspyls.
+;;    install "VSCode.app" and set its language server to "Microsoft" to donwload mypyls
 
-;; Usages:
-;; *edit*
-;;   - shift selected blocks "C-c >", "C-c <"
-;;   - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
-;;
-;; *source navigation*
-;;   - helm-semantic-or-imenu: "C-c h i"
-;;   - counsel-semantic-or-imenu: "M-g i"
-;;
-;; *debug*:
-;;   - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
-;;   - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts;
-;;     then evaluate buffer in iPython
+;; WARNING: a common mistake making pyls/mspyls fail to complete is due
+;; to lsp auto guess root, which make your whole Home as a project root.
+;; Set a project root neatly.
+
+;; EDIT:
+;; - shift selected blocks "C-c >", "C-c <"
+;; - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
+;; SOURCE OVERVIEW: (more with "lsp-mode")
+;; - counsel-semantic-or-imenu: "M-g i"
+;; DEBUG: (more with "dap-mode")
+;; - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
+;; - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts;
+;;   then evaluate buffer in iPython
 
 ;; ------------------------------------------------
 ;; Python Environment
 ;; ------------------------------------------------
 (use-package python
   :ensure nil
-  :hook (python-mode . lsp)
   :config
+  ;; ---------------- Interpreter ----------------
   (if *use-ipython*
       (progn
         ;; using ipython may slow down openning files
@@ -41,7 +37,8 @@
     (setq python-shell-interpreter "python3"
           python-shell-interpreter-args "-i"))
 
-  ;; Indentation
+  ;; ---------------- Editing ----------------
+  ;; indentation
   (defun zyue-py-indent-display-style ()
     (setq python-indent-offset 4
           tab-width 4
@@ -53,16 +50,14 @@
   ;; load tab display style
   (add-hook 'python-mode-hook #'zyue-py-indent-display-style)
 
-  ;; Editing enhancement
+  ;; editing enhancement
   (require 'epy-editing)
 
-  ;; Highlight indentation and current line
+  ;; highlight indentation and current line
   (defun zyue-edit-hl-config()
-    ;; highlight indentation
     (use-package highlight-indent-guides
       :config
       (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
-      ;; tweak colors
       (cond
        ((eq zyue-theme 'doom-one)
         (setq highlight-indent-guides-auto-enabled nil)
@@ -78,7 +73,12 @@
     )
   (add-hook 'python-mode-hook 'zyue-edit-hl-config)
 
-  ;; Send current line to interpreter and add menu entry
+  ;; ---------------- Linting ----------------
+  ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
+  ;; "python-flake8" or "python-pylint" are too solow
+
+  ;; ---------------- Running Interface ----------------
+  ;; send current line to interpreter and add menu entry
   (defun python-shell-send-line (&optional beg end)
     (interactive)
     (let ((beg (cond (beg beg)
@@ -96,7 +96,7 @@
                                     "Eval line in inferior Python session")
                         "Eval region")
 
-  ;; Debugging Supports
+  ;; ---------------- Debugging ----------------
   ;; use built-in GUD debugger
   (defadvice pdb (before gud-query-cmdline activate)
     "Provide a better default command line when called interactively."
@@ -113,23 +113,32 @@
 ;; Auto-completion via LSP (pyls/mspyls)
 ;; ------------------------------------------------
 ;; LSP use "pyls" by default
-(eval-after-load "lsp"
-  '(setq lsp-clients-python-library-directories
-         '("/usr/local/lib/")))
+;; install: "pip install python-language-server"
+(use-package lsp-pyls
+  :ensure nil
+  :if (eq *py-language-server* 'pyls)
+  :after lsp-mode
+  :hook (python-mode . lsp)
+  :config
+  (setq lsp-clients-python-library-directories '("/usr/local/lib/" "/usr/lib/")))
 
 ;; use Microsoft Python Language Server for Auto-completion
-(when *use-mspyls*
-  (use-package lsp-python-ms
-    :after lsp-mode
-    :config
-    ;; set mspyls that is built by vscode.app (open any .py file in vscode)
-    (when *is-mac*   (setq vscode-path "~/.vscode/extensions "))
-    (when *is-linux* (setq vscode-path "~/.vscode-oss/extensions "))
-    (setq lsp-python-ms-executable
-          (string-trim (shell-command-to-string
-                        (concat "find " vscode-path "-name 'Microsoft.Python.LanguageServer' | tail -1"))))
-    (setq lsp-python-ms-dir
-          (file-name-directory lsp-python-ms-executable))))
+;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
+(use-package lsp-python-ms
+  :if (eq *py-language-server* 'mspyls)
+  :after lsp-mode
+  :init
+  ;; auto download released executable mspyls from Miscrosoft
+  (setq lsp-python-ms-auto-install-server t
+        lsp-python-ms-cache "Library")        ;; cache parsing
+  :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
+
+;; use Microsoft Pyright language server
+;; install by "npm install -g pyright"
+(use-package lsp-pyright
+  :if (eq *py-language-server* 'pyright)
+  :after lsp-mode
+  :hook (python-mode . (lambda () (require 'lsp-pyright) (lsp))))
 
 ;; ------------------------------------------------
 ;; Abo-abo's lpy (To-do)

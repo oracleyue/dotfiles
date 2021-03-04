@@ -89,9 +89,9 @@
         (quote (("default"
                  ("Dired" (mode . dired-mode))
                  ("Org"   (name . "^.*org$"))
-                 ("Writing" (or (mode . text-mode)
-                                (mode . markdown-mode)
-                                (mode . latex-mode)))
+                 ("Writing" (or (mode . markdown-mode)
+                                (mode . latex-mode)
+                                (name . "^.*txt$")))
                  ("Shell" (or (mode . eshell-mode)
                               (name . "^\\*R\\*$")
                               (name . "^\\*ielm\\*$")

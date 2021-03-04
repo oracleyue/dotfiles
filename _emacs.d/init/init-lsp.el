@@ -33,7 +33,7 @@
               ("s-l l"   . lsp-ui-flycheck-list))
   :init
   (setq lsp-keymap-prefix "s-l")               ; set prefix for lsp-command-keymap
-  (setq lsp-auto-guess-root t                  ; detect project root
+  (setq lsp-auto-guess-root     nil            ; detect project root
         lsp-completion-provider :none          ; diable add company-capf, set later
         read-process-output-max (* 1024 1024)) ; accelearate string concat in elisp
 

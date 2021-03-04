@@ -39,23 +39,14 @@
 ;; Doomline
 ;; ---------------------------------------------
 (defun zyue-use-doomline ()
-  ;; dependencies
-  (use-package shrink-path)
-  (use-package eldoc-eval)
   (use-package doom-modeline
     :demand
-    :config
-    (setq doom-modeline-height 32)
-    ;; use buffer name; show the full-path file name when moving mouse over it
-    ;; (setq doom-modeline-buffer-file-name-style 'buffer-name)
-    (doom-modeline-init))
+    :init
+    (setq doom-modeline-height 30
+          ;; use buffer name; show the full-path name when mouse hovering
+          doom-modeline-buffer-file-name-style 'truncate-upto-root)
+    :config (doom-modeline-init))
   )
-
-;; ---------------------------------------------
-;; Plain/Native modeline
-;; ---------------------------------------------
-(defun zyue-plain-modeline ()
-  (require 'plain-modeline))
 
 ;; ---------------------------------------------
 ;; Wraper for loading modeline
@@ -63,11 +54,11 @@
 (defun zyue-modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
-    ('plain       (zyue-plain-modeline))
+    ('plain       (require 'plain-modeline))
     ('powerline   (zyue-use-powerline))
     ('spaceline   (zyue-use-spaceline))
     ('doomline    (zyue-use-doomline))
-    (_            (zyue-plain-modeline))))
+    (_            (require 'plain-modeline))))
 
 
 (provide 'init-modeline)

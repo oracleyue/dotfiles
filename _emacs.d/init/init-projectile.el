@@ -16,6 +16,9 @@
   :config
   ;; (projectile-update-mode-line)    ; update mode-line at the first time
 
+  ;; Ignore strange project roots
+  (setq projectile-ignored-projects '("~/" "~/Public/Dropbox/"))
+
   ;; Use the faster searcher to handle project files: ripgrep `rg'.
   (when (and (not (executable-find "fd"))
              (executable-find "rg"))

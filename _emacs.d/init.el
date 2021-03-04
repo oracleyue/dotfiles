@@ -10,7 +10,7 @@
 
 ;; stop emacs automatically editing .emacs
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-;;(load custom-file 'noerror 'nomessage)
+;; (load custom-file 'noerror 'nomessage)
 
 ;; packages
 ;; (package-initialize)           ;; required to suppress warnings
@@ -37,9 +37,6 @@
 ;; directory and buffer explorers
 (require 'init-windows)
 
-;; remote access (ssh, etc.)
-(require 'init-remote)
-
 ;; ----------------------------------------------------------------
 ;; Text Editing (org, markdown, latex, blog)
 ;; ----------------------------------------------------------------
@@ -61,13 +58,13 @@
 ;; essential programming supports
 (require 'init-programming)          ;; edit, vc, debug, ui ...
 
-;; LSP
+;; LSP & DAP
 (require 'init-lsp)
 
 ;; /Lisp/
 (require 'init-lisp)
 
-;; web development (html, css, js)
+;; web development (/html, css, js/)
 (require 'init-web)
 
 ;; /C C++/
