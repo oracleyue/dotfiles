@@ -118,6 +118,7 @@
 ;; "C-x r b": create or jump to bookmarks
 ;; "C-x r l": list and manage bookmarks
 ;; ivy list support: "M-g b"
+(setq bookmark-save-flag 1)  ;; auto-save it whenever changed
 
 ;; text scale amount (=C-x C-0=)
 (setq text-scale-mode-step 1.05)

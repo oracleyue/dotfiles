@@ -1,0 +1,10 @@
+# This lists files that will be ignored by "rg" in projectile.el.
+
+.DS_Store
+.directory
+Icon?
+
+TAGS
+GTAGS
+GRTAGS
+GPATH

@@ -20,9 +20,9 @@
         dashboard-startup-banner (or zyue-logo 'official)
         dashboard-center-content t
         dashboard-show-shortcuts nil
-        dashboard-items '((recents   . 5)
-                          (bookmarks . 5)
-                          (projects  . 4))
+        dashboard-items '((bookmarks . 12)
+                          (projects  . 6)
+                          (recents   . 4))
         dashboard-set-init-info t
         dashboard-set-file-icons t
         dashboard-set-heading-icons t
