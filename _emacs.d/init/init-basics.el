@@ -36,6 +36,10 @@
 ;; display “lambda” as “λ”
 (global-prettify-symbols-mode t)
 
+;; No sound
+;; (setq visible-bell t)
+;; (setq ring-bell-function 'ignore)
+
 ;; cursors
 (setq-default cursor-type 'bar) ; "bar", "box" (default)
 (blink-cursor-mode t)           ; -1 stops cursor blinking

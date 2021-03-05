@@ -7,7 +7,9 @@
   :diminish
   :bind (:map projectile-mode-map
               ("s-p"   . projectile-command-map)
-              ("C-c p" . projectile-command-map))
+              ("C-c p" . projectile-command-map)
+              ("C-c p C-a" . projectile-add-known-project)
+              ("C-c p C-d" . projectile-remove-known-project))
   :hook (after-init . projectile-mode)
   :init
   (setq projectile-mode-line-prefix ""

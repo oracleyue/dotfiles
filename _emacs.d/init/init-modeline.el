@@ -42,7 +42,7 @@
   (use-package doom-modeline
     :demand
     :init
-    (setq doom-modeline-height 30
+    (setq doom-modeline-height 25
           ;; use buffer name; show the full-path name when mouse hovering
           doom-modeline-buffer-file-name-style 'truncate-upto-root)
     :config (doom-modeline-init))
@@ -58,7 +58,7 @@
     ('powerline   (zyue-use-powerline))
     ('spaceline   (zyue-use-spaceline))
     ('doomline    (zyue-use-doomline))
-    (_            (require 'plain-modeline))))
+    (_            nil)))
 
 
 (provide 'init-modeline)

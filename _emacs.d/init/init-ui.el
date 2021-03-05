@@ -8,10 +8,8 @@
   "Set banner logo in the splash screen. nil means official logo."
   :type 'string)
 
-;; Frame   (note: [96,36] in Mac; 33 in Thinkpad)
-(if *is-mac*
-    (setq default-frame-alist '((width . 81) (height . 50)))
-  (setq default-frame-alist '((width . 96) (height . 32))))
+;; Frame   (note: [81, 50] in Mac; [96, 33] in Thinkpad)
+(setq default-frame-alist '((width . 76) (height . 50)))
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -21,7 +19,8 @@
 (add-to-list 'load-path
              (expand-file-name "init/misc" user-emacs-directory))
 (dolist (subdir '("."
-                  "atom-one-dark-theme"))
+                  "atom-one-dark-theme"
+                  "elegant-emacs"))
   (let ((theme-dir (expand-file-name (concat "themes/" subdir)
                                      user-emacs-directory)))
     (when (file-directory-p theme-dir)
@@ -142,8 +141,8 @@ of the focused frame and AB is the unfocused."
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
 
-;; Themes (eclipse, doom-nord-light; doom-one, atom-one-dark, spacemacs-dark)
-(setq zyue-theme 'eclipse)
+;; Themes (eclipse, doom-nord-light; doom-one, atom-one-dark, spacemacs-dark, tao-yang)
+(setq zyue-theme 'tao-yang)
 (when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
@@ -152,22 +151,24 @@ of the focused frame and AB is the unfocused."
   ((or 'doom-one 'doom-nord-light)
    (setq zyue-modeline 'doomline)
    (use-package doom-themes
-     :custom-face
-     (doom-modeline-buffer-file ((t (:inherit (mode-line bold)))))
-     :custom
-     (doom-themes-treemacs-theme "doom-colors")
-     :config
-     (doom-themes-visual-bell-config) ;; enable flashing mode-line on errors
-     ;; Enable customized theme
-     ;; FIXME https://github.com/emacs-lsp/lsp-treemacs/issues/89
-     ;; (with-eval-after-load 'lsp-treemacs
-     ;;   (doom-themes-treemacs-config))
-     ))
+     :custom (doom-themes-treemacs-theme "doom-colors")
+     :config (doom-themes-visual-bell-config)))
   ((or 'spacemacs-dark 'spacemacs-light)
    (setq zyue-modeline 'spaceline)
    (use-package spacemacs-theme))
   ('eclipse
-   (setq zyue-modeline 'powerline)))
+   (setq zyue-modeline 'powerline))
+  ((or 'tao-yang 'tao-ying)
+   (setq zyue-modeline 'doomline)
+   (use-package tao-theme
+     :custom-face
+     (mode-line ((t (:background "#ECE9E0"))))
+     (mode-line-inactive ((t (:background "#FFFFFF"))))
+     (doom-modeline-bar ((t (:background "#737063"))))
+     (doom-modeline-bar-inactive ((t (:background nil))))
+     :init
+     (add-to-list 'default-frame-alist '(internal-border-width . 24))))
+  )
 
 ;; Dashboard (alternative startup/splash screen)
 (when (and *enable-all-the-icons* *is-graphic*)
