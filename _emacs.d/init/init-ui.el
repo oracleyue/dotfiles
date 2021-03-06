@@ -19,8 +19,7 @@
 (add-to-list 'load-path
              (expand-file-name "init/misc" user-emacs-directory))
 (dolist (subdir '("."
-                  "atom-one-dark-theme"
-                  "elegant-emacs"))
+                  "atom-one-dark-theme"))
   (let ((theme-dir (expand-file-name (concat "themes/" subdir)
                                      user-emacs-directory)))
     (when (file-directory-p theme-dir)
@@ -168,6 +167,11 @@ of the focused frame and AB is the unfocused."
      (doom-modeline-bar-inactive ((t (:background nil))))
      :init
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
+  ((or 'elegant-light 'elegant-dark)
+   (use-package elegant
+     :ensure nil
+     :demand
+     :load-path "themes/elegant-theme"))
   )
 
 ;; Dashboard (alternative startup/splash screen)

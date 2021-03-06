@@ -19,8 +19,8 @@
   (cd (expand-file-name "Workspace/Matlab" dropbox-path))))
 
 ;; switch to default buffer
-;; (unless (get-buffer "*dashboard*")
-;; (switch-to-buffer "*scratch*"))
+(unless (get-buffer "*dashboard*")
+  (switch-to-buffer "*scratch*"))
 
 
 (provide 'init-private)

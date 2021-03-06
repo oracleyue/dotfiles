@@ -24,7 +24,7 @@
   ;; re-defining "rg" args
   (mapc (lambda (item)
           (add-to-list 'projectile-globally-ignored-directories item))
-        '("Backup" "backup" "auto" "archived"))
+        '("auto" "archived" "backup"))
   ;; files to be ignored should be listed in "~/.emacs.d/templates/rg_ignore"
 
   ;; Control project root additional guess (besides ".git", ".projectile")
@@ -33,8 +33,7 @@
           "TAGS" "GTAGS"))
 
   ;; Use the faster searcher to handle project files: ripgrep "rg"
-  (when (and (not (executable-find "fd"))
-             (executable-find "rg"))
+  (when (executable-find "rg")
     (setq projectile-generic-command
           (let ((rg-cmd ""))
             (dolist (dir projectile-globally-ignored-directories)

@@ -210,7 +210,7 @@
 
   ;; use latexmk
   (unless (file-exists-p (expand-file-name "~/.latexmkrc"))
-    (copy-file (expand-file-name "~/.emacs.d/init/config/_latexmkrc")
+    (copy-file (expand-file-name "~/.emacs.d/templates/_latexmkrc")
                (expand-file-name "~/.latexmkrc")))   ;; enable more functions
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list

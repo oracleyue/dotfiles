@@ -37,8 +37,8 @@
 (global-prettify-symbols-mode t)
 
 ;; No sound
-;; (setq visible-bell t)
-;; (setq ring-bell-function 'ignore)
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
 
 ;; cursors
 (setq-default cursor-type 'bar) ; "bar", "box" (default)
@@ -222,14 +222,7 @@
 (use-package beacon
   :demand
   :diminish
-  :config
-  (beacon-mode 1)
-  ;; set beacon color
-  (defun zyue-fix-face-beacon (frame)
-    (with-selected-frame frame
-      (setq beacon-color (face-foreground 'font-lock-keyword-face))))
-  (if *is-app* (zyue-fix-face-beacon (selected-frame))
-    (add-hook 'after-make-frame-functions #'zyue-fix-face-beacon)))
+  :config (beacon-mode 1))
 
 ;; ----------------------------------------------
 ;; /smartparens/: insert pairs of parenthesis/brackets
