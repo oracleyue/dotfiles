@@ -1,7 +1,7 @@
 ;; ================================================================
 ;; Programming Environment for /Python/
 ;; ================================================================
-;; Last modified on 04 Mar 2021
+;; Last modified on 06 Mar 2021
 
 ;; If you use default pyls in LSP mode, you need to install
 ;;    =pip install python-language-server=
@@ -30,55 +30,39 @@
   :config
   ;; ---------------- Interpreter ----------------
   (if *use-ipython*
-      (progn
-        ;; using ipython may slow down openning files
-        (setq python-shell-interpreter "ipython3")
-        (setq python-shell-interpreter-args "--simple-prompt -i"))
+      (progn (setq python-shell-interpreter "ipython3")
+             (setq python-shell-interpreter-args "--simple-prompt -i"))
     (setq python-shell-interpreter "python3"
           python-shell-interpreter-args "-i"))
 
   ;; ---------------- Editing ----------------
+  ;; efficient editing
+  (require 'epy-editing)
+
+  ;; tab/space detection
+  (use-package dtrt-indent
+    :diminish
+    :hook (python-mode . dtrt-indent-mode))
+
   ;; indentation
-  (defun zyue-py-indent-display-style ()
+  (defun zyue-py-indent-style ()
     (setq python-indent-offset 4
           tab-width 4
           python-indent-guess-indent-offset nil))
-  ;; detect using tab or spaces
-  (use-package dtrt-indent
-    :diminish
-    :init (add-hook 'python-mode-hook #'dtrt-indent-mode))
-  ;; load tab display style
-  (add-hook 'python-mode-hook #'zyue-py-indent-display-style)
+  (add-hook 'python-mode-hook #'zyue-py-indent-style)
 
-  ;; editing enhancement
-  (require 'epy-editing)
-
-  ;; highlight indentation and current line
-  (defun zyue-edit-hl-config()
-    (use-package highlight-indent-guides
-      :config
-      (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
-      (cond
-       ((eq zyue-theme 'doom-one)
-        (setq highlight-indent-guides-auto-enabled nil)
-        (set-face-foreground 'highlight-indent-guides-character-face
-                             "#3e6a44a85124"))
-       ((eq zyue-theme 'doom-nord-light)
-        (setq highlight-indent-guides-auto-enabled nil)
-        (set-face-foreground 'highlight-indent-guides-character-face
-                             "#B8C5DB")))
-      (highlight-indent-guides-mode))
-    ;; highlight current line (enabled globally in "init-basics.el")
-    ;; (hl-line-mode t)
-    )
-  (add-hook 'python-mode-hook 'zyue-edit-hl-config)
+  ;; highlight indentation
+  (use-package highlight-indent-guides
+    :init
+    (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
+    :hook
+    (python-mode . highlight-indent-guides-mode))
 
   ;; ---------------- Linting ----------------
   ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
   ;; "python-flake8" or "python-pylint" are too solow
 
   ;; ---------------- Running Interface ----------------
-  ;; send current line to interpreter and add menu entry
   (defun python-shell-send-line (&optional beg end)
     (interactive)
     (let ((beg (cond (beg beg)
@@ -90,7 +74,7 @@
                       (copy-marker (region-end)))
                      (t (line-end-position)))))
       (python-shell-send-region beg end)))
-  (define-key python-mode-map "\C-c\C-j" 'python-shell-send-line)
+  (define-key python-mode-map (kbd "C-c C-j") 'python-shell-send-line)
   (easy-menu-define-key python-menu [send-line]
                         '(menu-item "Eval line" python-shell-send-line
                                     "Eval line in inferior Python session")
@@ -104,7 +88,7 @@
                         'python (concat "-m pdb " (file-name-nondirectory
                                                    buffer-file-name))))))
   ;; use DAP-based debugger (enabled in "init-lsp.el")
-  ;; if need to set specific python:
+  ;; if not default "python", specify here:
   ;; (setq dap-python-executable "python3"))
 
   ) ;; End of python-mode
@@ -120,7 +104,8 @@
   :after lsp-mode
   :hook (python-mode . lsp)
   :config
-  (setq lsp-clients-python-library-directories '("/usr/local/lib/" "/usr/lib/")))
+  (setq lsp-clients-python-library-directories
+        '("/usr/local/lib/" "/usr/lib/")))
 
 ;; use Microsoft Python Language Server for Auto-completion
 ;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
