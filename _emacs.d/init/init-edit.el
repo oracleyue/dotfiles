@@ -189,17 +189,7 @@ Uses `current-date-format' for the formatting the date/time."
          ;; mouse events
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)
          ;; others
-         ("C-S-SPC"       . set-rectangular-region-anchor))
-  :config
-  ;; fix face color (the other cursor bars are invisible in Linux)
-  (defun zyue-fix-face-multiple-cursors (frame)
-    (with-selected-frame frame
-      (when (and *is-linux* (eq zyue-theme 'doom-nord-light))
-        (set-face-attribute 'mc/cursor-bar-face nil :background "#5272AF"))))
-  (if *is-app* (zyue-fix-face-multiple-cursors (selected-frame))  ;; for app
-    (add-hook 'after-make-frame-functions
-              #'zyue-fix-face-multiple-cursors)) ;; for clients
-  )
+         ("C-S-SPC"       . set-rectangular-region-anchor)))
 
 ;; /expand-region/: increase the selected region by semantic units
 (use-package expand-region

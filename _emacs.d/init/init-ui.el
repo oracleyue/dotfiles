@@ -165,6 +165,7 @@ of the focused frame and AB is the unfocused."
      (mode-line-inactive ((t (:background "#FFFFFF"))))
      (doom-modeline-bar ((t (:background "#737063"))))
      (doom-modeline-bar-inactive ((t (:background nil))))
+     (dashboard-items-face ((t (:weight normal :foreground "#4E4B3D"))))
      :init
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
   ((or 'elegant-light 'elegant-dark)

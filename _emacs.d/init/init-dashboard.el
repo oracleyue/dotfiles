@@ -5,12 +5,13 @@
 
 
 (use-package dashboard
-  :diminish (page-break-lines-mode)
-  :after (all-the-icons)
-  :init (dashboard-setup-startup-hook)
+  :diminish page-break-lines-mode
+  :after    all-the-icons
+  :init
+  (dashboard-setup-startup-hook)
+  (set-face-attribute 'dashboard-items-face nil :weight 'normal)
   :custom-face
   (dashboard-heading    ((t (:inherit (font-lock-string-face bold)))))
-  (dashboard-items-face ((t (:weight normal))))
   :bind (:map dashboard-mode-map
               ("h" . widget-backward)
               ("l" . widget-forward)
@@ -62,7 +63,8 @@
             "" "Help (?)"
             (lambda (&rest _) (fancy-about-screen))
             font-lock-string-face))))
-  )
+
+  ) ;END of use-package
 
 
 (provide 'init-dashboard)

@@ -210,8 +210,8 @@
 
   ;; use latexmk
   (unless (file-exists-p (expand-file-name "~/.latexmkrc"))
-    (copy-file (expand-file-name "~/.emacs.d/templates/_latexmkrc")
-               (expand-file-name "~/.latexmkrc")))   ;; enable more functions
+    (copy-file (expand-file-name "~/.emacs.d/templates/.latexmkrc")
+               (expand-file-name "~/.latexmkrc")))
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))

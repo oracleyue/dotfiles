@@ -34,6 +34,8 @@
              (setq python-shell-interpreter-args "--simple-prompt -i"))
     (setq python-shell-interpreter "python3"
           python-shell-interpreter-args "-i"))
+  ;; disable readline based native completion
+  ;; (setq python-shell-completion-native-enable nil)
 
   ;; ---------------- Editing ----------------
   ;; efficient editing
@@ -94,8 +96,9 @@
   ) ;; End of python-mode
 
 ;; ------------------------------------------------
-;; Auto-completion via LSP (pyls/mspyls)
+;; Auto-completion via LSP
 ;; ------------------------------------------------
+
 ;; LSP use "pyls" by default
 ;; install: "pip install python-language-server"
 (use-package lsp-pyls
