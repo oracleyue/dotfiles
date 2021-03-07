@@ -3,16 +3,15 @@
 ;; ===============================================================
 ;; Last modified on 20 Feb 2020
 
-;; ---------------------------------------------
-;; Basics of text-mode
-;; ---------------------------------------------
 (setq-default major-mode 'text-mode)
 
 ;; line wrapping
 (add-hook 'text-mode-hook 'visual-line-mode)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; spell checking
+;; ---------------------------------------------
+;; Spell checking
+;; ---------------------------------------------
 ;; auto-correct words: "C-." or "C-M-i"
 (use-package flyspell
   :ensure nil
@@ -29,6 +28,18 @@
       (setq ispell-dictionary "british"))
     (ispell-kill-ispell t)
     (message "%s" ispell-dictionary)))
+
+;; ---------------------------------------------
+;; Distraction-free writing
+;; ---------------------------------------------
+(use-package olivetti
+  :demand
+  :hook ((olivetti-mode . (lambda () (auto-fill-mode -1)))
+         (olivetti-mode . hide-mode-line-mode))
+  :init (setq olivetti-body-width 75)  ;; .618
+  :config
+  (use-package hide-mode-line)
+  (defalias 'writing-mode 'olivetti-mode))
 
 ;; ---------------------------------------------
 ;; Show key strokes & commands in demo of Emacs

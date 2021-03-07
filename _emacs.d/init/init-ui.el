@@ -17,13 +17,9 @@
 
 ;; Paths: load-path, theme-load-path
 (add-to-list 'load-path
-             (expand-file-name "init/misc" user-emacs-directory))
-(dolist (subdir '("."
-                  "atom-one-dark-theme"))
-  (let ((theme-dir (expand-file-name (concat "themes/" subdir)
-                                     user-emacs-directory)))
-    (when (file-directory-p theme-dir)
-      (add-to-list 'custom-theme-load-path theme-dir))))
+             (expand-file-name "init/misc/" user-emacs-directory))
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "themes/" user-emacs-directory))
 
 ;; Variables
 (defvar zyue-theme nil
@@ -140,7 +136,7 @@ of the focused frame and AB is the unfocused."
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
 
-;; Themes (eclipse, doom-nord-light; doom-one, atom-one-dark, spacemacs-dark, tao-yang)
+;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang)
 (setq zyue-theme 'tao-yang)
 (when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
@@ -155,23 +151,23 @@ of the focused frame and AB is the unfocused."
   ((or 'spacemacs-dark 'spacemacs-light)
    (setq zyue-modeline 'spaceline)
    (use-package spacemacs-theme))
-  ('eclipse
-   (setq zyue-modeline 'powerline))
+  ('eclipse  ;; clone from abo-abo's eclipse-theme
+   (setq zyue-modeline 'powerline)
+   (use-package eclipse-theme
+     :demand
+     :ensure nil
+     :load-path "themes/eclipse-theme/"
+     :init (require 'more-faces-eclipse-theme)))
   ((or 'tao-yang 'tao-ying)
    (setq zyue-modeline 'doomline)
    (use-package tao-theme
-     :custom-face
-     (mode-line ((t (:background "#ECE9E0"))))
-     (mode-line-inactive ((t (:background "#FFFFFF"))))
-     (doom-modeline-bar ((t (:background "#737063"))))
-     (doom-modeline-bar-inactive ((t (:background nil))))
-     (dashboard-items-face ((t (:weight normal :foreground "#4E4B3D"))))
      :init
+     (require 'more-faces-tao-theme)
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
   ((or 'elegant-light 'elegant-dark)
    (use-package elegant
-     :ensure nil
      :demand
+     :ensure nil
      :load-path "themes/elegant-theme"))
   )
 

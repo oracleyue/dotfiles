@@ -132,6 +132,8 @@
                                   (name . "^\\*dap-ui-expressions\\*$")
                                   (name . "^\\*dap-ui-sessions\\*$")
                                   (name . "^\\*dap-ui-repl\\*$")))
+                 ("Terms" (or (mode . term-mode)
+                              (mode . ansi-term-mode)))
                  ("misc." (or (name . "^\\*Help\\*$")
                                    (name . "^\\*Warnings\\*$")
                                    (name . "^\\*Compile-Log*\\*$")

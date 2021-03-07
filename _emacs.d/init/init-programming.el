@@ -159,6 +159,17 @@
   (when *is-mac*
     (setq gdb-non-stop-setting nil)))
 
+;; ----------------------------------------------
+;; term/ansi-term
+;; ----------------------------------------------
+;; mode switch: "C-c C-j" line mode; "C-c C-k" char mode
+;; send literal "C-c": "C-c C-c"
+;; jump to prompts ("C-c C-p" and "C-c C-n" in line mode)
+(use-package term
+  :ensure nil
+  :config
+  (setq-default term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+
 
 (provide 'init-programming)
 ;; ================================================

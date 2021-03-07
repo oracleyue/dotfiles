@@ -1,3 +1,6 @@
 [submodule "_emacs.d/themes/elegant-theme"]
 	path = _emacs.d/themes/elegant-theme
 	url = https://github.com/oracleyue/elegant-theme.git
+[submodule "_emacs.d/themes/eclipse-theme"]
+	path = _emacs.d/themes/eclipse-theme
+	url = https://github.com/abo-abo/eclipse-theme
