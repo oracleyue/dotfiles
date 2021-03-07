@@ -6,13 +6,18 @@
 
     // Python
     "python.linting.flake8Enabled": true,
-    "python.languageServer": "Microsoft",
-    "python.defaultInterpreterPath": "/usr/local/bin/ipython",
+    "python.languageServer": "Pylance",
 
     // Trailing Spaces
     "trailing-spaces.trimOnSave": true,
     "trailing-spaces.highlightCurrentLine": false,
     "trailing-spaces.syntaxIgnore": [
         "markdown"
+    ],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
     ],
 }
