@@ -137,7 +137,8 @@ of the focused frame and AB is the unfocused."
 (require 'init-modeline)
 
 ;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang)
-(setq zyue-theme 'tao-yang)
+(setq zyue-theme 'eclipse)
+(when *is-server-m* (setq zyue-theme 'tao-yang))
 (when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))

@@ -24,8 +24,9 @@
 ;; - use "lsp-describe-sessions" to check status
 
 
-;; Programming supports via Language Server Protocol (LSP)
-;; Note: LSP mode are enabled in language-specific init el files.
+;; ----------------------------------------------------------------
+;; lsp-mode as emacs LSP client
+;; ----------------------------------------------------------------
 (use-package lsp-mode
   :demand
   :bind (:map lsp-mode-map
@@ -85,7 +86,9 @@
         lsp-ui-peek-enable     nil))
 
 
+;; ----------------------------------------------------------------
 ;; Debugging via Debug Adapter Protocol (DAP)
+;; ----------------------------------------------------------------
 (use-package dap-mode
   :diminish
   :after (lsp-mode)
@@ -102,6 +105,59 @@
          ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
          (go-mode . (lambda () (require 'dap-go)))
          ((js-mode js2-mode) . (lambda () (require 'dap-firefox)))))
+
+
+;; ----------------------------------------------------------------
+;; Language servers
+;; ----------------------------------------------------------------
+
+;; C/C++/Objective-C support
+(use-package lsp-clangd
+  :ensure nil
+  :after lsp-mode
+  :init
+  (when (executable-find "clangd")
+    ;; set clangd-args to accelerate clangd parsing
+    (defconst clangd-args '("-j=2"
+                            "--background-index"
+                            "--clang-tidy"
+                            "--recovery-ast"
+                            "--cross-file-rename"
+                            "--completion-style=bundled"
+                            "--pch-storage=memory"
+                            "--suggest-missing-includes"
+                            "--header-insertion=iwyu"
+                            "--header-insertion-decorators"))
+    (setq lsp-clients-clangd-args clangd-args)))
+
+;; Python: use "pyls" by default in lsp-mode
+;; install: "pip install python-language-server"
+(use-package lsp-pyls
+  :ensure nil
+  :if (string-equal *py-langserver* "pyls")
+  :after lsp-mode
+  :hook (python-mode . lsp)
+  :config
+  (setq lsp-clients-python-library-directories
+        '("/usr/local/lib/" "/usr/lib/")))
+
+;; Python: use Microsoft Python Language Server for Auto-completion
+;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
+(use-package lsp-python-ms
+  :if (string-equal *py-langserver* "mspyls")
+  :after lsp-mode
+  :init
+  ;; auto download released executable mspyls from Miscrosoft
+  (setq lsp-python-ms-auto-install-server t
+        lsp-python-ms-cache "Library")        ;; cache parsing
+  :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
+
+;; Python: use Microsoft Pyright language server
+;; install by "npm install -g pyright"
+(use-package lsp-pyright
+  :if (string-equal *py-langserver* "pyright")
+  :after lsp-mode
+  :hook (python-mode . (lambda () (require 'lsp-pyright) (lsp))))
 
 
 (provide 'init-lsp)

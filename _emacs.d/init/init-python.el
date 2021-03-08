@@ -55,6 +55,7 @@
 
   ;; highlight indentation
   (use-package highlight-indent-guides
+    :diminish
     :init
     (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
     :hook
@@ -62,7 +63,7 @@
 
   ;; ---------------- Linting ----------------
   ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
-  ;; "python-flake8" or "python-pylint" are too solow
+  ;; nox supports "python-flake8" or "python-pylint"
 
   ;; ---------------- Running Interface ----------------
   (defun python-shell-send-line (&optional beg end)
@@ -82,6 +83,9 @@
                                     "Eval line in inferior Python session")
                         "Eval region")
 
+  ;; ---------------- Auto-completion ----------------
+  ;; use LSP to support: lsp-mode ("init-lsp.el") or nox ("init-nox.el")
+
   ;; ---------------- Debugging ----------------
   ;; use built-in GUD debugger
   (defadvice pdb (before gud-query-cmdline activate)
@@ -94,39 +98,6 @@
   ;; (setq dap-python-executable "python3"))
 
   ) ;; End of python-mode
-
-;; ------------------------------------------------
-;; Auto-completion via LSP
-;; ------------------------------------------------
-
-;; LSP use "pyls" by default
-;; install: "pip install python-language-server"
-(use-package lsp-pyls
-  :ensure nil
-  :if (eq *py-language-server* 'lsp-pyls)
-  :after lsp-mode
-  :hook (python-mode . lsp)
-  :config
-  (setq lsp-clients-python-library-directories
-        '("/usr/local/lib/" "/usr/lib/")))
-
-;; use Microsoft Python Language Server for Auto-completion
-;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
-(use-package lsp-python-ms
-  :if (eq *py-language-server* 'lsp-mspyls)
-  :after lsp-mode
-  :init
-  ;; auto download released executable mspyls from Miscrosoft
-  (setq lsp-python-ms-auto-install-server t
-        lsp-python-ms-cache "Library")        ;; cache parsing
-  :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
-
-;; use Microsoft Pyright language server
-;; install by "npm install -g pyright"
-(use-package lsp-pyright
-  :if (eq *py-language-server* 'lsp-pyright)
-  :after lsp-mode
-  :hook (python-mode . (lambda () (require 'lsp-pyright) (lsp))))
 
 ;; ------------------------------------------------
 ;; Abo-abo's lpy (To-do)

@@ -4,3 +4,9 @@
 [submodule "_emacs.d/themes/eclipse-theme"]
 	path = _emacs.d/themes/eclipse-theme
 	url = https://github.com/abo-abo/eclipse-theme
+[submodule "_emacs.d/site-lisp/go-translate"]
+	path = _emacs.d/site-lisp/go-translate
+	url = https://github.com/lorniu/go-translate
+[submodule "_emacs.d/site-lisp/nox"]
+	path = _emacs.d/site-lisp/nox
+	url = https://github.com/manateelazycat/nox

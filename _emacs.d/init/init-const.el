@@ -41,9 +41,12 @@
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 
+;; lsp client
+(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode, nox, eglot
+
 ;; python
 (defconst *use-ipython* t)
-(defconst *py-language-server* 'lsp-pyright)  ;; lsp-pyls, lsp-mspyls, lsp-pyright
+(defconst *py-langserver* "pyright")  ;; lsp-mode: pyls, mspyls, pyright
 
 
 (provide 'init-const)

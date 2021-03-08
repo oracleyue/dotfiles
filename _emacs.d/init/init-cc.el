@@ -27,25 +27,7 @@
   (use-package modern-cpp-font-lock
     :diminish (modern-c++-font-lock-mode)
     :init (modern-c++-font-lock-global-mode t))
-
-  ;; lsp with clangd
-  (if *is-mac*
-      (defconst clangd-bin "/usr/local/opt/llvm/bin/clangd")
-    (defconst clangd-bin "/usr/bin/clangd"))
-  (defconst clangd-args '("-j=2"
-                          "--background-index"
-                          "--clang-tidy"
-                          "--recovery-ast"
-                          "--cross-file-rename"
-                          "--completion-style=bundled"
-                          "--pch-storage=memory"
-                          "--suggest-missing-includes"
-                          "--header-insertion=iwyu"
-                          "--header-insertion-decorators"))
-  ;; set clangd-args to accelerate clangd parsing
-  (with-eval-after-load 'lsp-mode
-    (setq lsp-clients-clangd-executable clangd-bin
-          lsp-clients-clangd-args clangd-args)))
+  )
 
 ;; ================================================
 ;; Other editing supports

@@ -58,8 +58,11 @@
 ;; essential programming supports
 (require 'init-programming)          ;; edit, vc, debug, ui ...
 
-;; LSP & DAP
-(require 'init-lsp)
+;; LSP
+(pcase *lsp-client*
+  ('lsp-mode (require 'init-lsp))    ;; lsp-mode and dap-mode
+  ('eglot    (require 'init-eglot))
+  ('nox      (require 'init-nox)))
 
 ;; /Lisp/
 (require 'init-lisp)
