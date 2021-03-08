@@ -162,7 +162,12 @@
 
 ;; /org-superstart/ for better UI
 (use-package org-superstar
-  :if   (char-displayable-p ?◉)
+  :if (char-displayable-p ?⦿)
+  :config
+  (setq org-superstar-headline-bullets-list
+        '("☰" "☷" "⦿" "✿" "✸" "●" "◆"))
+  ;; avoid choosing unicode symbols intrinsically small
+  ;; "☰" "☷" "☲" "☵" "⦿" "✿" "✸" "●" "⟐" "◆" "►"
   :hook (org-mode . org-superstar-mode))
 
 ;; /smartparens/ for org-mode

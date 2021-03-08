@@ -103,7 +103,7 @@
 ;; install: "pip install python-language-server"
 (use-package lsp-pyls
   :ensure nil
-  :if (eq *py-language-server* 'pyls)
+  :if (eq *py-language-server* 'lsp-pyls)
   :after lsp-mode
   :hook (python-mode . lsp)
   :config
@@ -113,7 +113,7 @@
 ;; use Microsoft Python Language Server for Auto-completion
 ;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
 (use-package lsp-python-ms
-  :if (eq *py-language-server* 'mspyls)
+  :if (eq *py-language-server* 'lsp-mspyls)
   :after lsp-mode
   :init
   ;; auto download released executable mspyls from Miscrosoft
@@ -124,7 +124,7 @@
 ;; use Microsoft Pyright language server
 ;; install by "npm install -g pyright"
 (use-package lsp-pyright
-  :if (eq *py-language-server* 'pyright)
+  :if (eq *py-language-server* 'lsp-pyright)
   :after lsp-mode
   :hook (python-mode . (lambda () (require 'lsp-pyright) (lsp))))
 

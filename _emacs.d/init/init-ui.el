@@ -103,7 +103,7 @@ of the focused frame and AB is the unfocused."
   (catch 'loop
     (dolist (font '("Apple Color Emoji" "Apple Symbols" "Symbola"))
       (when (member font (font-family-list))
-        (set-fontset-font t 'unicode font)  ; 4-5th arguments omitted: nil 'prepend
+        (set-fontset-font t 'unicode font) ; 4-5th arguments omitted to force use Emoji: nil 'prepend
         (throw 'loop t))))
   ;; fixing specific glyghs, if needed
   ;; (set-fontset-font t '(#x26A0 . #x274C) "Apple Color Emoji")
@@ -160,8 +160,10 @@ of the focused frame and AB is the unfocused."
      :init (require 'more-faces-eclipse-theme)))
   ((or 'tao-yang 'tao-ying)
    (setq zyue-modeline 'doomline)
+   ;; (setq zyue-logo (expand-file-name "themes/logo-tao.png" user-emacs-directory))
    (use-package tao-theme
-     :init
+     :demand
+     :config
      (require 'more-faces-tao-theme)
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
   ((or 'elegant-light 'elegant-dark)

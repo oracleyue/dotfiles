@@ -141,6 +141,14 @@
 ;; unset keys
 (global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer
 
+;; /repeat-mode/ to derease key stroke
+;; e.g., "undo" via "C-x u" can be done by "C-x u u u" for 3 undo's
+(use-package repeat
+  :disabled     ;; bug: pause daemon
+  :ensure nil
+  :hook (after-init . repeat-mode)
+  :custom (repeat-exit-key (kbd "RET")))
+
 ;; show size of files (in modeline)
 (size-indication-mode t)
 

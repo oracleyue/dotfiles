@@ -83,9 +83,9 @@
 (require 'init-lang)
 
 ;; ----------------------------------------------------------------
-;; External applications in OS
+;; Utilities and External App Calls
 ;; ----------------------------------------------------------------
-(require 'init-external)
+(require 'init-utils)
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

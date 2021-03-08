@@ -45,10 +45,10 @@
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
-  :bind (("C-s"     . swiper-isearch)           ;; swiper, swiper-isearch
-         ("C-r"     . swiper-isearch-backward)
-         ("s-f"     . swiper)
-         ("M-g s"   . counsel-grep)             ;; using rg
+  :bind (("C-s"     . swiper)           ;; swiper, swiper-isearch
+         ("C-r"     . swiper-backward)
+         ("s-f"     . swiper-isearch)
+         ("M-g s"   . counsel-grep)     ;; using rg
          ([remap swiper]          . counsel-grep-or-swiper) ;; for large files
          ([remap swiper-backward] . counsel-grep-or-swiper-backward)
          ;; all buffers

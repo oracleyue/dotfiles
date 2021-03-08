@@ -43,7 +43,7 @@
 
 ;; python
 (defconst *use-ipython* t)
-(defconst *py-language-server* 'pyright)  ;; pyls, mspyls, pyright
+(defconst *py-language-server* 'lsp-pyright)  ;; lsp-pyls, lsp-mspyls, lsp-pyright
 
 
 (provide 'init-const)

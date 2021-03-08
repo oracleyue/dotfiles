@@ -1,7 +1,7 @@
 ;; ===============================================================
-;; External apps called by Emacs
+;; Utilities and Apps called by Emacs
 ;; ===============================================================
-;; Last modified on 02 Mar 2021
+;; Last modified on 08 Mar 2021
 
 ;; ----------------------------------------------
 ;; Default web browser
@@ -61,11 +61,36 @@
           "/Applications/GoldenDict.app/Contents/MacOS/GoldenDict")))
 
 ;; ----------------------------------------------
+;; /Go-Translate/ for Google Translate interface
+;; ----------------------------------------------
+(use-package go-translate
+  :ensure nil
+  :load-path "site-lisp/go-translate/"
+  :bind (("C-c t" . go-translate)
+         ("C-c T" . go-translate-popup))
+  :config
+  (setq go-translate-base-url "https://translate.google.cn"
+        go-translate-local-language "fr"
+        go-translate-target-language "en")
+  (setq go-translate-extra-directions
+        '(("jp" . "zh-CN")
+          ("ru" . "zh-CN")))
+  ;; fix token-key issue mismatch
+  (setq go-translate-token-current (cons 430675 2721866130))
+  )
+;; Usage (in result buffer):
+;; "g": refresh; "q": quit
+;; "x": exchange source and target and search again
+;; "M-n" and "M-p" goes to next (source-target) lang for search
+;; "Enter" or "C-Enter" in minibuffer to translate (the latter jumps to the result win)
+;; demo: "C-c t" -> "C-return" -> "C-x C-x" to select -> "M-w" -> "q" -> "C-y"
+
+;; ----------------------------------------------
 ;; Managing Ebooks via Calibre within Emacs
 ;; ----------------------------------------------
 ;; (require 'init-calibre)
 
 
-(provide 'init-external)
+(provide 'init-utils)
 ;; ================================================
-;; init-external.el ends here
+;; init-utils.el ends here
