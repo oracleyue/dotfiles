@@ -1,13 +1,10 @@
 # -*- mode: snippet -*-
-# name: save fig in pdf with auto resize
+# name: print figure in pdf (vector fig)
 # key: pdf
 # --
-fig_hl = ${1:figure_handle};
-filename = ['${2:filename}', '.pdf'];
-set(fig_hl,'Units','Inches');
-pos = get(fig_hl,'Position');
-set(fig_hl,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-print(fig_hl, filename, '-dpdf', '-r0')
-% For transparent, we need use the 3rd-party package: 'export_fig'
-% set(gca, 'Color', 'none');
-% export_fig -transparent NAME.pdf
+pos = [8.5417 11.7639 7.7778 2.3611];
+set(fig_hl, 'Units','Inches', 'Position', pos);
+set(fig_hl,'PaperPositionMode','Auto','PaperUnits','Inches',...
+            'PaperSize',[pos(3), pos(4)]);
+set(fig_hl, 'Renderer', 'Painters');  % enforce vector figure
+print(fig_hl, 'figure_name.pdf', '-dpdf', '-r0')

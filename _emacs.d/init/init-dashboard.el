@@ -5,8 +5,7 @@
 
 
 (use-package dashboard
-  :diminish page-break-lines-mode
-  :after    all-the-icons
+  :after all-the-icons
   :init
   (dashboard-setup-startup-hook)
   (set-face-attribute 'dashboard-items-face nil :weight 'normal)
@@ -16,6 +15,7 @@
               ("h" . widget-backward)
               ("l" . widget-forward)
               ("q" . quit-window))
+  :hook (dashboard-mode . (lambda () (diminish 'page-break-lines-mode)))
   :config
   (setq dashboard-banner-logo-title "EMACS - Enjoy Programming & Writing"
         dashboard-startup-banner (or zyue-logo 'official)
@@ -34,10 +34,13 @@
                                   (registers . "database")))
 
   (setq dashboard-set-footer t
-        dashboard-footer-messages (list (format "Powered by oracleyue, %s" (format-time-string "%Y")))
-        dashboard-footer-icon
-        (all-the-icons-faicon "heart" :height 1.1 :v-adjust -0.05 :face 'error))
-
+        dashboard-footer-messages (list (format "Powered by oracleyue, %s" (format-time-string "%Y"))))
+  (when *enable-all-the-icons*
+    (defface red-heart '((t :foreground "#A03F53" :background nil))
+      "Face for heart in dashboard."
+      :group 'dashboard)
+    (setq dashboard-footer-icon
+          (all-the-icons-faicon "heart" :height 1.1 :v-adjust -0.05 :face 'red-heart)))
   (setq dashboard-set-navigator t
         dropbox-root (expand-file-name "Public/Dropbox" "~")
         dashboard-navigator-buttons

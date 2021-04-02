@@ -159,7 +159,7 @@
                TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX")))
   (eval-after-load 'latex
     '(setq LaTeX-clean-intermediate-suffixes
-           (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk" "\\.tdo"))))
+           (append LaTeX-clean-intermediate-suffixes (list "\\.spl" "\\.pyg" "\\.nlo" "\\.nls" "\\.fdb_latexmk" "\\.tdo" "\\.rubbercache"))))
 
   ;; indexing nomenclature and word index
   (eval-after-load "tex"

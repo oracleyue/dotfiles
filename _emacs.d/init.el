@@ -56,13 +56,12 @@
 (require 'init-projectile)
 
 ;; essential programming supports
-(require 'init-programming)          ;; edit, vc, debug, ui ...
+(require 'init-programming)           ;; edit, vc, debug, ui ...
 
 ;; LSP
 (pcase *lsp-client*
-  ('lsp-mode (require 'init-lsp))    ;; lsp-mode and dap-mode
-  ('eglot    (require 'init-eglot))
-  ('nox      (require 'init-nox)))
+  ('lsp-mode (require 'init-lsp))     ;; lsp-mode and dap-mode
+  ('eglot    (require 'init-eglot)))  ;; eglot for lsp
 
 ;; /Lisp/
 (require 'init-lisp)

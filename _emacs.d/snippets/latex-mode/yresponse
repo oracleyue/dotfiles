@@ -1,0 +1,97 @@
+# -*- mode: snippet -*-
+# name: Responses to reviewers
+# key: response
+# group: templates
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=30mm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{times,helvet}  % newtxmath
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
+\usepackage{enumitem}
+
+\usepackage{setspace}  \onehalfspacing
+\usepackage[parfill]{parskip}
+
+\usepackage{graphicx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue]{hyperref}
+\usepackage[round,sort]{natbib}
+
+\let\openbox\undefined
+\usepackage{amsthm,thmtools,xcolor}
+\newenvironment{review}{
+  \par\medskip\noindent\textbf{Comment:}
+  \itshape\color{black}}{}
+\declaretheoremstyle[
+  headfont=\color{black}\normalfont\bfseries,
+  bodyfont=\color{black}\normalfont\upshape,
+  headpunct=:,
+]{response}
+\declaretheorem[style=response, name=Response]{response}
+
+\begin{document}
+
+\title{\Large Author's Responses to the Review Comments\vspace*{-15mm}}
+\author{}
+\date{\normalsize\today}
+\maketitle
+% \tableofcontents  % add toc if many pages
+\vspace*{5mm}
+
+% ----------------- MAIN --------------------
+
+Dear Associate Editor and Reviewers,
+
+We would like to deeply thank you for reviewing our paper and providing
+us with constructive comments and suggestions. We have carefully
+addressed all the comments and incorporated them into the revised
+manuscript. According to the reviewers’ suggestions, we omitted the
+section on the synthesis and its related case study in order to make the
+paper brief. We have also added some remarks and discussions on the
+issues mentioned by the reviewers, re-organized the paper, and brought
+the definition of the system we are dealing with into the very beginning
+of the paper. We present below a detailed discussion of all comments,
+questions, and concerns raised by the reviewers. The major modifications
+are highlighted in blue in the revised manuscript. We also use
+\textcolor{blue}{blue} and \textcolor{red}{red} colors in the response
+letter for referring to the current changes throughout the revised
+manuscript, and the previous version, respectively.
+
+With kind regards,\\
+AuthorName1, AuthorName2, AuthorName3
+
+\bigskip
+
+\section{Response to Reviewer~X (ReviewXXXXXXXX)}
+\label{sec:review-X}
+
+We thank the reviewer for the valuable comments. We have provided our
+responses to the raised comments together with the changes below.
+
+% place review comments in the env. {review}
+\begin{review}
+    review comments here...
+
+\end{review}
+
+% place author responses in the env. {response};
+\begin{response}\label{resp:XXX}
+  author's response here... referred by Response~\ref{resp:XXX}
+
+\end{response}
+
+% --------------- BIBLIOGRAPHY --------------
+% \def\bibfont{\small}
+% \bibliographystyle{abbrvnat}  % plainnat,abbrvnat,unsrtnat; natbib
+% \bibliography{./ref/library}
+
+\end{document}

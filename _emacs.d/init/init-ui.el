@@ -28,6 +28,8 @@
   "A symbol representing the modeline style to load.")
 (defvar zyue-font nil
   "The default font to use. Expects a `font-spec'.")
+(defvar font-userdefine-flag t
+  "Set nil if your theme specifies a font for `default'.")
 
 ;; Init or reload functions
 (defun zyue-init-ui (&optional frame)
@@ -64,25 +66,23 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
-(when *is-mac*   (setq height-n 150 height-s 140))
-(when *is-linux* (setq height-n 110 height-s 105))
-(setq size-n (/ height-n 10.0))
+(if *is-mac* (setq size-n 15.0) (setq size-n 11.0))
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
-    (dolist (font '("SF Mono" "DejaVu Sans Mono" "RobotoMono"
+    (dolist (font '("SF Mono" "RobotoMono" "DejaVu Sans Mono"
                     "Inconsolata" "Menlo" "Consolas"))
       (when (member font (font-family-list))
-        (setq zyue-font (font-spec :family font :size size-n)
-              ovp-font zyue-font) ;; used in /org-variable-pitch.el/
-        (set-face-attribute 'default frame :font zyue-font)
-        (set-face-attribute 'fixed-pitch frame :font zyue-font)
-        (set-face-attribute 'mode-line frame :height height-s)
-        (set-face-attribute 'mode-line-inactive frame :height height-s)
+        (setq zyue-font (font-spec :family font :size size-n))
+        (when font-userdefine-flag
+          (set-face-attribute 'default frame :font zyue-font)
+          (set-face-attribute 'fixed-pitch frame :font zyue-font))
+        ;; (set-face-attribute 'mode-line frame :height (* size-n 10))
+        ;; (set-face-attribute 'mode-line-inactive frame :height (* size-n 10))
         (throw 'loop t))))
   ;; Specify variable-width font
   (catch 'loop
-    (dolist (font '("SF Compact Display" "DejaVu Sans" "Roboto"))
+    (dolist (font '("IowanOldSt BT" "SF Compact Display" "DejaVu Sans" "Roboto"))
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
@@ -130,15 +130,17 @@ of the focused frame and AB is the unfocused."
   :init (unless (or (font-installed-p "all-the-icons")
                     (daemonp))
           (all-the-icons-install-fonts t))
+  :config
+  (setq all-the-icons-scale-factor 1.0)  ;; adjust size
   ;; avoid slowing down performance
-  :config (setq inhibit-compacting-font-caches t))
+  (setq inhibit-compacting-font-caches t))
 
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
 
-;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang)
-(setq zyue-theme 'eclipse)
-(when *is-server-m* (setq zyue-theme 'tao-yang))
+;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
+(setq zyue-theme 'elegant-light)
+(when *is-server-m* (setq zyue-theme 'elegant-light))
 (when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
@@ -156,27 +158,29 @@ of the focused frame and AB is the unfocused."
    (setq zyue-modeline 'powerline)
    (use-package eclipse-theme
      :demand
-     :ensure nil
      :load-path "themes/eclipse-theme/"
+     :ensure nil
      :init (require 'more-faces-eclipse-theme)))
   ((or 'tao-yang 'tao-ying)
    (setq zyue-modeline 'doomline)
-   ;; (setq zyue-logo (expand-file-name "themes/logo-tao.png" user-emacs-directory))
    (use-package tao-theme
      :demand
+     :load-path "themes/tao-theme-emacs/"
+     :ensure nil
      :config
-     (require 'more-faces-tao-theme)
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
   ((or 'elegant-light 'elegant-dark)
-   (use-package elegant
-     :demand
+   ;; (setq zyue-modeline 'doomline)
+   (use-package elegant-theme
      :ensure nil
-     :load-path "themes/elegant-theme"))
+     :demand
+     :load-path "themes/elegant-theme/"
+     :init   (setq elegant-modeline-disabled nil)
+     :config (setq font-userdefine-flag nil)))
   )
 
 ;; Dashboard (alternative startup/splash screen)
-(when (and *enable-all-the-icons* *is-graphic*)
-  (require 'init-dashboard))
+(require 'init-dashboard)
 
 ;; UI loading
 (if (daemonp)

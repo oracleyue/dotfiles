@@ -18,8 +18,7 @@
         (setq powerline-image-apple-rgb t))
       (when (display-graphic-p)
         (powerline-default-theme)
-        (remove-hook 'focus-out-hook 'powerline-unset-selected-window))))
-  )
+        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
 
 ;; ---------------------------------------------
 ;; Spaceline
@@ -32,8 +31,7 @@
     (spaceline-spacemacs-theme)  ;(spaceline-emacs-theme)
     ;; fix applet bug on OSX
     (when *is-mac*
-      (setq powerline-image-apple-rgb t)))
-  )
+      (setq powerline-image-apple-rgb t))))
 
 ;; ---------------------------------------------
 ;; Doomline
@@ -42,11 +40,10 @@
   (use-package doom-modeline
     :demand
     :init
-    (setq doom-modeline-height 25
+    (setq doom-modeline-height 28
           ;; use buffer name; show the full-path name when mouse hovering
           doom-modeline-buffer-file-name-style 'truncate-upto-root)
-    :config (doom-modeline-init))
-  )
+    :config (doom-modeline-init)))
 
 ;; ---------------------------------------------
 ;; Wraper for loading modeline

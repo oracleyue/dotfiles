@@ -6,11 +6,12 @@
 ;; ----------------------------------------------
 ;; Default web browser
 ;; ----------------------------------------------
-(if (string-equal system-type "darwin")
-    (setq browse-url-browser-function 'browse-url-generic
-          browse-url-generic-program
-          (expand-file-name "~/bin/web-browser"))  ; use Safari
-  (setq browse-url-browser-function 'browse-url-firefox))
+(setq browse-url-browser-function 'browse-url-default-browser)
+
+;; choose safari
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program
+;;       (expand-file-name "~/bin/web-browser"))
 
 ;; ----------------------------------------------
 ;; /engine-mode/: manage web search
@@ -34,7 +35,7 @@
     "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
     :keybinding "w")
   (defengine google-scholar
-    "https://scholar.google.lu/scholar?hl=en&q=%s"
+    "https://scholar.google.com/scholar?hl=en&q=%s"
     :keybinding "s")
   (defengine stack-overflow "https://stackoverflow.com/search?q=%s"
     :keybinding "o"))
@@ -64,10 +65,17 @@
   (define-key dired-mode-map "F" 'reveal-in-osx-finder))
 
 ;; ----------------------------------------------
-;; Call goldendict dictionary in Emacs
+;; Apple dictionary in Emacs (show in mini-buffer)
+;; ----------------------------------------------
+(use-package osx-dictionary
+  :if *is-mac*
+  :bind (("M-g d" . osx-dictionary-search-word-at-point)))
+
+;; ----------------------------------------------
+;; Goldendict in Emacs (show in external app)
 ;; ----------------------------------------------
 (use-package goldendict
-  :bind ("M-g d" . goldendict-dwim)
+  :bind ("M-g D" . goldendict-dwim)
   :config
   (when *is-mac*
     (setq goldendict-cmd

@@ -278,6 +278,7 @@
 (use-package counsel-gtags
   :ensure nil
   :load-path "site-lisp/"
+  :demand
   :init
   (setq counsel-gtags-auto-update t
         counsel-gtags-custom-dbpath ".tags/")

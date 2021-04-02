@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: today
+# key: today
+# group: hugo
+# --
+`(zyue/insert-today)`

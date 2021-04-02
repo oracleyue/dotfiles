@@ -3,8 +3,8 @@
 # key: t
 # group: templates
 # --
-#+TITLE: ${1:Title}
-#+DATE:  `(zyue/insert-date)`
-
+#+TITLE:     ${1:title here}
+#+AUTHOR:    Zuogong Yue
+#+STARTUP:   content
 
 $0

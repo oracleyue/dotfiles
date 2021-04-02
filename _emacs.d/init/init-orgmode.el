@@ -3,34 +3,28 @@
 ;; ================================================================
 ;; Last modified on 22 Oct 2020
 
-
 ;; /Basics/
 (global-font-lock-mode t)
 
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-;; (global-set-key "\C-cl" 'org-store-link)
-;; (global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c l") 'org-store-link) ;; "C-c C-l" to insert
+(global-set-key (kbd "C-c b") 'org-switchb)
 
 ;; startup styles
 (setq org-startup-folded     t
       org-startup-indented   t
       org-hide-leading-stars t)
 
-;; view styles
+;; view styles (line wraping, fill-column)
 (defun y/set-view-style-orgmode ()
-  ;; line wraping
   (setq truncate-lines t)
   (turn-off-auto-fill)
   (if *use-sans-orgmode*
-      (progn
-        ;; use sans-serif
-        (require 'org-variable-pitch)
-        (org-variable-pitch-minor-mode t)
-        ;; line spacing
-        (setq line-spacing '0.25)
-        ;; fill-column for sans
-        (setq-local fill-column *fill-column-sans*))
+      (progn (require 'org-variable-pitch)
+             (org-variable-pitch-minor-mode t)
+             (setq line-spacing '0.25)
+             (setq-local fill-column *fill-column-sans*))
     (setq-local fill-column *fill-column-mono*)))
 (add-hook 'org-mode-hook #'y/set-view-style-orgmode)
 
@@ -56,15 +50,61 @@
 
 ;; /GTD Function Extensions/
 ;; refer to http://doc.norang.ca/org-mode.html
+(setq orgnote-home (expand-file-name
+                    "~/Public/Dropbox/oracleyue/OrgNotes/"))
+(setq todo-file  (expand-file-name "ToDoList.org" orgnote-home))
+(setq today-file (expand-file-name "Today.org" orgnote-home))
+(setq event-file (expand-file-name "Events.org" orgnote-home))
+(setq idea-file  (expand-file-name "MindTracking.org" orgnote-home))
+(setq misc-file  (expand-file-name "misc.org" orgnote-home))
+(setq paper-file (expand-file-name "LiteratureReview.org" orgnote-home))
+
+(setq org-agenda-files (list todo-file event-file today-file)
+      org-default-notes-file misc-file)
+(setq org-capture-bookmark nil)  ;; disable auto-add bookmark
+
+;; Capture templates
+(setq org-capture-templates
+      '(("o" "TODO Today" entry (file+headline today-file "Scheduled")
+         "** TODO %?\n SCHEDULED: %^t Added on %U" :empty-lines 1)
+        ("i" "Research Ideas" entry (file+headline idea-file "Mind Tracking")
+         "* %?\n Added on %U\n" :empty-lines 1)
+        ("p" "Paper Reading" entry (file paper-file)
+         "* %?\n Added on %U\n" :empty-lines 1)
+        ("e" "Event" entry (file+datetree event-file)
+         "* %?\n SCHEDULED: %^t\n Added on %U\n" :empty-lines 1)
+        ("n" "Quick Notes" entry (file misc-file)
+         "* %?\n Added on %U\n" :empty-lines 1)
+
+        ("t" "TODO" entry (file+headline todo-file "Collecting")
+         "* TODO %? \n DEADLINE: %^t\n Added on %U" :empty-lines 1)
+        ("w" "Scheduled" entry (file+headline todo-file "Collecting")
+         "* NEXT %? %^G \n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
+        ("m" "Meeting" entry (file+headline todo-file "Collecting")
+         "* MEETING %? %^G \n %^t" :empty-lines 1)
+        ))
+(with-eval-after-load "counsel"
+  (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
+
+;; workday starting point
+(defun today ()
+  (interactive)
+  (progn (find-file today-file)
+         (goto-char (point-max))
+         (insert "*" ?\s (format-time-string "%Y-%m-%d %A") ?\n
+                 "** Scheduled\n"
+                 "** HandsOn\n"
+                 "** Notes\n"
+                 "** Review\n")))
 
 ;; Todo keywords
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
               (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "MEETING"))))
 (setq org-todo-keyword-faces '(("TODO"      . error)
-                               ("NEXT"      . warning)
-                               ("DONE"      . success)
                                ("WAITING"   . warning)
+                               ("DONE"      . success)
+                               ("NEXT"      . warning)
                                ("HOLD"      . default)
                                ("CANCELLED" . success)
                                ("MEETING"   . error))
@@ -82,9 +122,6 @@
               ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
               ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
               ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-
-;; Agenda
-(setq org-agenda-files (quote ("~/Public/Dropbox/oracleyue/OrgAgenda/ToDoList.org")))
 
 
 ;; /Export Settings/
@@ -184,13 +221,13 @@
   :demand
   :bind (:map org-mode-map
               ("M-s s" . org-download-screenshot)
-              ("M-s M-s" . org-download-screenshot))
+              ("M-s D" . org-download-delete))  ;; "C-c C-o" to open attached file
   :config
   (setq-default org-download-image-dir "./img")
   (setq org-download-image-attr-list
         '("#+ATTR_HTML: :width 480px :align center"))
   (when *is-mac*
-    ;; allow "ruby" in OSX -> Preferences -> Security & Privacy -> Screen Recording
+    ;; allow "ruby" in OSX: Preferences -> Security & Privacy -> Screen Recording
     (setq org-download-screenshot-method "screencapture -i %s"))
   ;; show inline image in posframe ("C-c C-x C-v" to toggle)
   ;; (setq org-download-display-inline-images 'posframe)

@@ -1,7 +1,7 @@
 ;; ================================================================
-;; Settings to write blogs
+;; Settings to Writing and Reding Blogs
 ;; ================================================================
-;; Last modified on 07 Dec 2020
+;; Last modified on 11 Mar 2021
 
 
 ;; ------------------------------------------------------------
@@ -15,31 +15,58 @@
   (setq easy-hugo-default-ext ".org")
   :config
   ;; use default org header, if nil (default), use templates in hugo's "archetypes/"
-  ;; (setq easy-hugo-org-header t)
-  )
+  (setq easy-hugo-org-header nil))
 
-
-;; ------------------------------------------------------------
-;; Hexo (DISABLED)
-;; ------------------------------------------------------------
-(use-package hexo
-  :disabled
-  :demand nil
+;; ----------------------------------------------
+;; /deft/: Organise and browse notes
+;; ----------------------------------------------
+(use-package deft
+  :commands (deft)
+  :bind (("C-x f" . deft-find-file))
   :config
-  (defun zyue/hexo ()
-    (interactive)
-    (hexo "~/Public/Dropbox/oracleyue/oracleyue.github.io"))
+  (setq deft-extensions '("org" "md")
+        deft-default-extension "org"
+        deft-directory  "~/Public/Dropbox/oracleyue/Notebooks")
+  (setq deft-recursive t))
 
-  (defun zyue/hexo-ox-gfm (&optional async subtreep visible-only)
-    "Automatically export the current .org to .md at the folder of
-Hexo blog."
-    (interactive)
-    (let ((outfile (org-export-output-file-name
-                    ".md" subtreep
-                    "~/Public/Dropbox/oracleyue/oracleyue.github.io/source/_posts"))
-          (org-export-with-toc nil))
-      (org-export-to-file 'gfm outfile async subtreep visible-only)))
+;; ------------------------------------------------------------
+;; RSS reader
+;; ------------------------------------------------------------
+(use-package elfeed
+  :demand
+  :hook ((elfeed-mode . visual-line-mode)
+         (elfeed-show-mode . (lambda () (setq-local line-spacing 0.1))))
+  :config
+  (setq elfeed-feeds
+        '(("https://www.technologyreview.com/feed/" TechReview)
+          ("https://deepmind.com/blog/basic/" AIBlog)
+          ("https://feeds.feedburner.com/blogspot/gJZg" AIBlog)
+          ("https://blogs.microsoft.com/ai/feed/" AIBlog)
+          ("https://quertle.com/feed/" BiomedAI)
+          ))
+  ;; add vi-style scrolling
+  (define-key elfeed-show-mode-map "k" (elfeed-expose #'scroll-down 20))
+  (define-key elfeed-show-mode-map "j" (elfeed-expose #'scroll-up 20))
+  (define-key elfeed-show-mode-map "h" 'elfeed-kill-buffer)
+  (define-key elfeed-search-mode-map "k" (elfeed-expose #'previous-line))
+  (define-key elfeed-search-mode-map "j" (elfeed-expose #'next-line))
+  (define-key elfeed-search-mode-map "l" 'elfeed-search-show-entry)
   )
+;; Database is cached in "~/.elfeed/"
+;; Init or update list:
+;; - M-x elfeed
+;; - g:   refresh view of the feed listing
+;; - G:   fetch feed updates from the servers
+;; - s:   update the search filter (see tags)
+;; - c:   clear the search filter
+;; Interacting with entries:
+;; - RET: view selected entry in a buffer
+;; - b:   open selected entries in your browser (browse-url)
+;; - y:   copy selected entries URL to the clipboard
+;; - r:   mark selected entries as read
+;; - u:   mark selected entries as unread
+;; - +:   add a specific tag to selected entries
+;; - -:   remove a specific tag from selected entries
 
 
 (provide 'init-blog)

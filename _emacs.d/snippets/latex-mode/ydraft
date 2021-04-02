@@ -5,6 +5,7 @@
 # expand-env: ((yas-indent-line 'fixed))
 # --
 \documentclass[a4paper,11pt]{article}
+%\usepackage[margin=30mm]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}

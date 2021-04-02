@@ -36,17 +36,19 @@
 
 ;; all-the-icons support for ivy, dired, company, dashboard
 ;; install package "all-the-icons" and run "M-x all-the-icons-install-fonts"
-(defconst *enable-all-the-icons* t)
+(if *is-graphic*
+    (defconst *enable-all-the-icons* t)
+  (defconst *enable-all-the-icons* nil))
 
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 
 ;; lsp client
-(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode, nox, eglot
+(defconst *lsp-client* 'eglot)  ;; lsp-mode, eglot
 
 ;; python
 (defconst *use-ipython* t)
-(defconst *py-langserver* "pyright")  ;; lsp-mode: pyls, mspyls, pyright
+(defconst *py-langserver* "mspyls")  ;; lsp-mode: pyls, mspyls, pyright
 
 
 (provide 'init-const)

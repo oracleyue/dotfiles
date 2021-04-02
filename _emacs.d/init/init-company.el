@@ -55,7 +55,9 @@
   (use-package company-prescient
     :init (company-prescient-mode 1))
 
-  ;; Icons and quickhelp
+  ;; Better icons and quickhelp
+  ;; Bug: Loading for *scratch* via server has an issue, while it works well
+  ;; for all other programming modes. Reloading *scratch* will load company-box.
   (when (and emacs/>=26p *enable-all-the-icons*)
     (use-package company-box
       :diminish
