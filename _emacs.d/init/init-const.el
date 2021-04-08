@@ -44,7 +44,7 @@
 (defconst *use-css-local* nil)
 
 ;; lsp client
-(defconst *lsp-client* 'eglot)  ;; lsp-mode, eglot
+(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode, eglot
 
 ;; python
 (defconst *use-ipython* t)

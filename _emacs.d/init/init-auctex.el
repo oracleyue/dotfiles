@@ -182,9 +182,15 @@
                   '("Rubber (xelatex)" "rubber --synctex --module xelatex %t" TeX-run-command nil t) t))
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("Clean (auto)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
+                  '("Clean (rubber)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
   ;; if also wanting to delete pdf, use "rubber --pdf --clean %t".
   (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
+
+  ;; Latexmk
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("Clean (latexmk)" "latexmk -pdf -c; rm -rf auto/" TeX-run-command nil t) t))
+  ;; use "-C" to also clean up pdf files
 
   ;; format conversion
   (eval-after-load "tex"

@@ -54,12 +54,11 @@
                     "~/Public/Dropbox/oracleyue/OrgNotes/"))
 (setq todo-file  (expand-file-name "ToDoList.org" orgnote-home))
 (setq today-file (expand-file-name "Today.org" orgnote-home))
-(setq event-file (expand-file-name "Events.org" orgnote-home))
 (setq idea-file  (expand-file-name "MindTracking.org" orgnote-home))
 (setq misc-file  (expand-file-name "misc.org" orgnote-home))
-(setq paper-file (expand-file-name "LiteratureReview.org" orgnote-home))
+(setq paper-file (expand-file-name "Literature.org" orgnote-home))
 
-(setq org-agenda-files (list todo-file event-file today-file)
+(setq org-agenda-files (list todo-file today-file)
       org-default-notes-file misc-file)
 (setq org-capture-bookmark nil)  ;; disable auto-add bookmark
 
@@ -71,8 +70,6 @@
          "* %?\n Added on %U\n" :empty-lines 1)
         ("p" "Paper Reading" entry (file paper-file)
          "* %?\n Added on %U\n" :empty-lines 1)
-        ("e" "Event" entry (file+datetree event-file)
-         "* %?\n SCHEDULED: %^t\n Added on %U\n" :empty-lines 1)
         ("n" "Quick Notes" entry (file misc-file)
          "* %?\n Added on %U\n" :empty-lines 1)
 

@@ -1,10 +1,8 @@
 ;; ================================================================
 ;; Private Settings
 ;; ================================================================
-
 ;; [Warning]: You shouldn't load this file, since it is highly specialized
 ;; for my own computer, such personal folders, files, etc.
-
 
 ;; open default folders/files on startup
 (setq dropbox-path "~/Public/Dropbox")
