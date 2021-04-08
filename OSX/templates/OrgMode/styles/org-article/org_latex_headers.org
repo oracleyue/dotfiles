@@ -1,0 +1,29 @@
+#+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+LATEX_CLASS: org-article
+#+LATEX_CLASS_OPTIONS: [times,a4paper,10pt]
+#+LaTeX_CLASS_OPTIONS: [captions=tableheading]
+
+# ----- [LaTeX headers] -----
+# #+LATEX_HEADER: \usemintedstyle{monokai}
+  # dark background; enable "bgcolor" option in .emacs for "mint"
+#+LATEX_HEADER: \usemintedstyle{pastie}
+  # white background for "mint"
+
+# ----- [LaTeX headers] -----
+#+LATEX_HEADER: \newtheorem{theorem}{Theorem}[section]
+#+LATEX_HEADER: \newtheorem{lemma}[theorem]{Lemma}
+#+LATEX_HEADER: \newtheorem{proposition}[theorem]{Proposition}
+#+LATEX_HEADER: \newtheorem{corollary}[theorem]{Corollary}
+#+LATEX_HEADER: \newtheorem{definition}[theorem]{Definition}
+#+LATEX_HEADER: \newtheorem{remark}[theorem]{Remark}
+
+# -----[LaTeX export]-----
+#+OPTIONS: tex:t
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+# -----[HTML export]-----
+#+HTML_HEAD:  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+#+HTML_HEAD_EXTRA:  <link href="css/org.css" rel="stylesheet" type="text/css"> 
+#+STYLE:   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+# #+STYLE:   <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+#+STYLE:   <link href="css/org.css" rel="stylesheet" type="text/css">

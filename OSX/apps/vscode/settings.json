@@ -4,16 +4,16 @@
     "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
     "workbench.colorTheme": "Atom One Dark",
 
-    // Python
-    "python.linting.flake8Enabled": true,
-    "python.languageServer": "Pylance",
-
     // Trailing Spaces
     "trailing-spaces.trimOnSave": true,
     "trailing-spaces.highlightCurrentLine": false,
     "trailing-spaces.syntaxIgnore": [
         "markdown"
     ],
+
+    // Python
+    "python.linting.flake8Enabled": true,
+    "python.languageServer": "Pylance",
     "workbench.editorAssociations": [
         {
             "viewType": "jupyter.notebook.ipynb",

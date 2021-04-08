@@ -33,6 +33,11 @@ source $HOME/bin/emacs-cmds-osx.sh
 PATH="$HOME/bin:$PATH"
 export MANPATH="/usr/local/share/man:/usr/local/man:$MANPATH"
 
+# development
+export C_INCLUDE_PATH=/usr/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH
+export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
+
 # latex
 export BSTINPUTS=$(kpsepath bst)
 
@@ -48,6 +53,9 @@ PATH="/usr/local/opt/llvm/bin:$PATH"
 # dotnet
 export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 
+# stardicts for sdcv
+export STARDICT_DATA_DIR="$HOME/Programs/stardicts"
+
 # -------------------------------------------------------------------
 # Aliases
 # -------------------------------------------------------------------
@@ -57,7 +65,9 @@ export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 # use /exa/ to replace ls
 # --------------------------------
 alias ls='exa --icons'
+alias ls1='exa --icons -1'
 alias lsd='exa --icons -D'
+alias la='exa --icons -a'
 alias ll='exa --icons --header --long --reverse --sort=cr'
 alias lh='exa --icons --header --long --reverse --sort=cr -ld .?*'
 alias lt='exa --icons -T -L'
@@ -299,7 +309,7 @@ __set_my_prompt() {
     # PS1="$(__colorized_exit_status) ${RESET_COLOR}${COLOR_USER}\u${RESET_COLOR}@${CYAN_UNDERLINE}\h${RESET_COLOR}(${PS1_EXTRAINFO}) ${BLUE}\W${RESET_COLOR}${GREEN}\$(__git_ps1 \" (%s)\")${RESET_COLOR}\$ "
 
     # Customized by zyue:
-    PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]$(scutil --get ComputerName)'; fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]${RED}\$(__git_ps1 \" (%s)\")${RESET_COLOR}\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]\$ "
+    PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]$(scutil --get ComputerName)'; fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]${RED}\$(__git_ps1 \" (%s)\")${RESET_COLOR}\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
 }
 
 # --------------------------------------------------------------------

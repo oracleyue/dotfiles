@@ -1,0 +1,188 @@
+#+TITLE: *An example to show how to write LaTeX using org-article*
+#+AUTHOR: Zuogong YUE
+#+EMAIL:  zuogong.yue@uni.lu
+#+SETUPFILE: "./org_latex_headers.org"
+
+\vspace{4em}
+#+BEGIN_ABSTRACT
+This is an *abstract* in Org-mode.
+#+END_ABSTRACT
+\vspace{2em}
+
+* Introduction
+    :PROPERTIES:
+    :CUSTOM_ID: sec:1:intro
+    :END:
+
+This is an example of *org-mode* to write latex, using *org-article*. It includes 
++ how to include figures, tables, and cross citations; refer to Section [[#sec:2:figtbl]];
++ how to export source code and configure *babel* evaluation;
++ how to literal program with *noweb*;
+
+The following sections show the examples.
+
+* Equations, Figures and Tables
+    :PROPERTIES:
+    :CUSTOM_ID: sec:2:figtbl
+    :END:
+
+** Equations
+The equation (\ref{eq:1}) is a direct equation written in LaTeX code. It can be used without the macro =#+BEGIN_LATEX .. #+END_LATEX=, which is helpful to fold to make codes clean. The inline equation could be preview inline, for instance, $x(t) = \frac{e^t}{1 + t^2}$, by hit =C-C C-X C-l= and =C-C C-C= to remove images.
+#+BEGIN_LaTeX
+\begin{equation}
+    \begin{bmatrix}
+        A_{11} & A_{12} \\ A_{21} & A_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1 \\ x_2
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        b_1 \\ b_2
+    \end{bmatrix}
+    \label{eq:1}
+\end{equation}
+#+END_LaTeX
+
+If expecting the LaTeX code to be colored in =.org= files, the LaTeX code can be included in the source code macro, as shown in (\ref{eq:2}) and its source codes. Set to export results only and evaluate the code block to generate LaTeX code.
+#+begin_src latex :exports both
+\begin{equation}
+    \bold{A} \mathbf{X} = \bold{b}
+    \label{eq:2}
+\end{equation}
+#+end_src
+#+RESULTS:
+#+BEGIN_LaTeX
+\begin{equation}
+    \bold{A} \mathbf{X} = \bold{b}
+    \label{eq:2}
+\end{equation}
+#+END_LaTeX
+
+** Figures
+Figure \ref{fig:PlotFoxp3} is cited in the format of *Org-Mode*.
+#+CAPTION: Plot of time series of Foxp3
+#+ATTR_LaTeX: scale=0.75
+#+LABEL: fig:PlotFoxp3
+[[file:img/plot_gene_20759.eps]]
+
+And Figure \ref{fig:hist} is cited in *LaTeX* style, with subfigures \ref{fig:hist:subfig1} and \ref{fig:hist:subfig2}.
+#+BEGIN_LaTeX
+\begin{figure}[!htbp]
+\centering
+\subfigure[sub-caption1]{
+\includegraphics[width=.45\textwidth]{./img/histin.png}
+\label{fig:hist:subfig1}
+}
+\quad
+\subfigure[sub-caption2]{
+\includegraphics[width=.45\textwidth]{./img/histout.png}
+\label{fig:hist:subfig2}
+}
+\caption{Distribution of fit values in histogram}
+\label{fig:hist}
+\end{figure}
+#+END_LaTeX
+
+** Tables
+The data is shown in Table \ref{tbl:fita3}.
+#+CAPTION: Fit scores for transfer functions with Node 3 as output
+#+ATTR_LaTeX: placement [H] :align |c|l|l|l|l|l|l|l| :font \sffamily \footnotesize 
+#+LABEL: tbl:fita3
+|--------+---------+---------+--------+---------+---------+---------+---------|
+|        |  Node 1 |  Node 2 | Node 3 |  Node 4 |  Node 5 |  Node 6 |  Node 7 |
+|--------+---------+---------+--------+---------+---------+---------+---------|
+| Table1 | 98.5871 | 98.5629 |      0 | 98.5492 | 98.6056 | 98.5657 | 98.5657 |
+| Table2 | 98.5778 | 98.6301 |      0 | 98.5805 | 98.5386 | 98.6038 | 98.6038 |
+|--------+---------+---------+--------+---------+---------+---------+---------|
+
+
+* Source Codes
+** Exporting code blocks
+The =:exports= header argument can be used to specify export behavior:
+Header arguments:
+
++ =:exports code=
+
+    The default in most languages. The body of the code block is exported, as described in Literal examples.
+
++ =:exports results=
+
+    The code block will be evaluated and the results will be placed in the Org mode buffer for export, either updating previous results of the code block located anywhere in the buffer or, if no previous results exist, placing the results immediately after the code block. The body of the code block will not be exported.
+
++ =:exports both=
+
+    Both the code block and its results will be exported.
+
++ =:exports none=
+
+    Neither the code block nor its results will be exported. 
+
+To evaluate the code block, move into the macro and hit =C-C C-C=.
+
+** Results of evaluation
++ =:results value=
+
+This is the default. Internally, the value is obtained by wrapping the code in a function definition in the external language, and evaluating that function. Therefore, code should be written as if it were the body of such a function. In particular, note that Python does not automatically return a value from a function unless a return statement is present, and so a ‘return’ statement will usually be required in Python.
+
+This is the only one of the four evaluation contexts in which the code is automatically wrapped in a function definition.
+
++ =:results output=
+
+The code is passed to the interpreter as an external process, and the contents of the standard output stream are returned as text. (In certain languages this also contains the error output stream; this is an area for future work.) 
+
+** Extracting source code
+Creating pure source code files by extracting code from source blocks is referred to as “tangling”—a term adopted from the literate programming community. During “tangling” of code blocks their bodies are expanded using org-babel-expand-src-block which can expand both variable and “noweb” style references (see Noweb reference syntax).
+
+\medskip
+\textsc{Header arguments:}
++ =:tangle no=
+
+    The default. The code block is not included in the tangled output.
+
++ =:tangle yes=
+
+    Include the code block in the tangled output. The output file name is the name of the org file with the extension ‘.org’ replaced by the extension for the block language.
+
++ =:tangle filename=
+
+    Include the code block in the tangled output to file ‘filename’. 
+
+\textsc{Functions:}
++ =org-babel-tangle=
+
+    Tangle the current file. Bound to =C-c C-v t=.
+
+    With prefix argument only tangle the current code block.
+
++ =org-babel-tangle-file=
+
+    Choose a file to tangle. Bound to =C-c C-v f=. 
+
+
+** Examples
+*** Python codes with codes and results exported
+#+begin_src python :results output :exports both
+#!/usr/bin/python2 -tt
+# Released at 25 Mar 2014
+
+import sys
+
+def Cat():
+    print "hello, world!"
+
+# Define a main() function that prints a little greeting
+def main():
+    Cat()
+
+#This is the standard boilerplate that calls the main() function
+if __name__ == '__main__':
+    main()
+#+end_src
+Here is the output of the above Python codes:
+#+RESULTS:
+: hello, world!
+
+*** Python codes imported from .py files
+Another example shows how to import codes from source code files. 
+#+INCLUDE: "./src/ex40.py" src python
+
