@@ -74,8 +74,8 @@ $sync "$vscpath"/snippets         $repopath/apps/vscode/
 cp $HOME/.mame/mame.ini $repopath/.mame/
 
 # clashX
-cp $HOME/.config/clash/rules.my $repopath/.config/.clash/
-cp $HOME/.config/clash/add-rules.sh $repopath/.config/.clash/
+cp $HOME/.config/clash/rules.my $repopath/.config/clash/
+cp $HOME/.config/clash/add-rules.sh $repopath/.config/clash/
 
 # ===========================================
 # "~/bin" on OSX
