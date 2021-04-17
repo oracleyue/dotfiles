@@ -11,4 +11,4 @@
 
 ## Snapshots
 
-![Snapshot of Emacs](/img/emacs-snapshot.png)
+<img src="/img/em-yang.png" width="45%"><img src="/img/em-yin.png" width="45%">
