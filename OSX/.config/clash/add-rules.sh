@@ -20,5 +20,8 @@ temp="$prepath/rules.temp"
 $SED 's/^/  - /' $rules > $temp
 $SED "/rules:/r $temp" $in > $out
 
+# allow ipv6 when proxy is on
+$SED -i 's/^ipv6: false/ipv6: true/' $out
+
 # remove temp files
 rm $temp

@@ -12,12 +12,6 @@
     ],
 
     // Python
-    "python.linting.flake8Enabled": true,
     "python.languageServer": "Pylance",
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "python.linting.pylintEnabled": true,  // default enable not working
 }

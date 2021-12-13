@@ -77,6 +77,9 @@ cp $HOME/.mame/mame.ini $repopath/.mame/
 cp $HOME/.config/clash/rules.my $repopath/.config/clash/
 cp $HOME/.config/clash/add-rules.sh $repopath/.config/clash/
 
+# aria2
+cp $HOME/.config/aria2/aria2.conf $repopath/.config/aria2/
+
 # ===========================================
 # "~/bin" on OSX
 # ===========================================

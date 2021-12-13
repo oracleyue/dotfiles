@@ -8,6 +8,11 @@
 # When using client, run server first by
 #   ~$ emacs --daemon=main
 #
+# Setup for Skim.app: "Preferences -> Sync: PDF-TEX Sync support"
+# - "Preset": Custom
+# - "Command": ~/bin/emacs-skim.sh
+# - "Arguments": --no-wait +%line "%file"
+#
 # Copyright (c) 2014-2017, Zuogong YUE
 # Licensed under the GNU General Public License
 #

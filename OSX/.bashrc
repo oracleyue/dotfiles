@@ -26,6 +26,9 @@ alias  view='vim -R'
 # emacs
 source $HOME/bin/emacs-cmds-osx.sh
 
+# install
+#alias brew="ALL_PROXY=socks5://127.0.0.1:7890 brew"
+
 # -------------------------------------------------------------------
 # PATH
 # -------------------------------------------------------------------
@@ -64,7 +67,7 @@ export STARDICT_DATA_DIR="$HOME/Programs/stardicts"
 
 # use /exa/ to replace ls
 # --------------------------------
-alias ls='exa --icons'
+alias lss='exa --icons'
 alias ls1='exa --icons -1'
 alias lsd='exa --icons -D'
 alias la='exa --icons -a'
@@ -75,6 +78,7 @@ alias lt='exa --icons -T -L'
 alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
+alias tree='tree -N'  # -N to allow print Chinese in UTF
 alias du='du -h -d 1'
 alias df='df -h'
 alias rsync='rsync -aP --exclude=.DS_Store'
@@ -83,10 +87,11 @@ alias rsync='rsync -aP --exclude=.DS_Store'
 alias zip='zip -r'
 alias tar='COPYFILE_DISABLE=1 tar'
 
-#alias grep='grep -Hn -i --colour=always'
 alias grep='grep -i'
-#alias ack='ack -Hn --no-group --no-color'
+alias sed='gsed'  # use GNU sed
 alias ack='ack -Hni'
+#alias grep='grep -Hn -i --colour=always'
+#alias ack='ack -Hn --no-group --no-color'
 
 alias updatedb='/usr/libexec/locate.updatedb'
 alias lsblk='diskutil list'
@@ -118,7 +123,9 @@ alias men='tldr'
 
 # apps aliases
 alias matlab-tty='matlab -nosplash -nodesktop'
-alias ipython-qt='screen -d -m jupyter qtconsole --style=monokai'
+alias ipy='screen -d -m jupyter qtconsole --style=monokai'
+# ssh server
+alias jp='ssh -NL 8888:localhost:1224 qiming &'
 
 # -------------------------------------------------------------------
 # Colorize bash

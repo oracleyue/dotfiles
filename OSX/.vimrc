@@ -37,6 +37,9 @@ else  " /gvim/ or /macvim/
     set lines=56 columns=96
 endif
 
+" press F12 to switch to gbk encoding
+nnoremap <F12> :e ++enc=gbk<CR>
+
 " status line
 set laststatus=2
 "set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
