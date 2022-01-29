@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: argmax
+# key: argmax
+# group: macros
+# --
+\underset{$1}{\mathrm{argmax}}\: $0

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Draft Template (Chinese)
-# key: draft
+# name: Chinese statement letter
+# key: letter
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --

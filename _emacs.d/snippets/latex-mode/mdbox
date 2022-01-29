@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: mdbox (set length)
+# key: mdbox
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{mdframed}[style=line,userdefinedwidth=130mm]
+  \centering
+  \begin{math} \displaystyle
+  $0
+  \end{math}
+\end{mdframed}

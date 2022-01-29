@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: ctex package
 # key: ctexpkg
-# group: templates
+# group: preambles
 # expand-env: ((yas-indent-line 'fixed))
 # --
 % rubber: module xelatex

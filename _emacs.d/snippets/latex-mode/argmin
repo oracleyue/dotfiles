@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: argmin
+# key: argmin
+# group: macros
+# --
+\underset{$1}{\mathrm{argmin}}\: $0

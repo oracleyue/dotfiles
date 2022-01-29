@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: one over two
+# key: 12
+# group: macros
+# --
+\frac{1}{2}

@@ -170,7 +170,7 @@
   ;; Xelatex
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
-                  '("XeLaTeX" "xelatex -synctex=1 -pdf -shell-escape %t" TeX-run-command nil t) t))
+                  '("XeLaTeX" "xelatex -synctex=1 -shell-escape %t" TeX-run-command nil t) t))
 
   ;; Rubber (python pkg)
   (eval-after-load "tex"
@@ -184,13 +184,18 @@
     '(add-to-list 'TeX-command-list
                   '("Clean (rubber)" "rubber --clean %t; rm -rf auto/" TeX-run-command nil t) t))
   ;; if also wanting to delete pdf, use "rubber --pdf --clean %t".
-  (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "Rubber")))
 
   ;; Latexmk
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
+                  '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
                   '("Clean (latexmk)" "latexmk -pdf -c; rm -rf auto/" TeX-run-command nil t) t))
   ;; use "-C" to also clean up pdf files
+
+  ;; default command
+  (add-hook 'TeX-mode-hook '(lambda() (setq TeX-command-default "Latexmk")))
 
   ;; format conversion
   (eval-after-load "tex"
@@ -213,14 +218,6 @@
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("update mathsym" "./supports/mathsym-update.sh" TeX-run-command nil t) t))
-
-  ;; use latexmk
-  (unless (file-exists-p (expand-file-name "~/.latexmkrc"))
-    (copy-file (expand-file-name "~/.emacs.d/templates/.latexmkrc")
-               (expand-file-name "~/.latexmkrc")))
-  (eval-after-load "tex"
-    '(add-to-list 'TeX-command-list
-                  '("Latexmk" "latexmk -quiet -pdf %t" TeX-run-command nil t) t))
 
   ;; PDF Viewing
   (setq-default TeX-PDF-mode t)       ; default for pdf and forward search

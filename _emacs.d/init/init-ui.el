@@ -8,8 +8,8 @@
   "Set banner logo in the splash screen. nil means official logo."
   :type 'string)
 
-;; Frame   (note: [81, 50] in Mac; [96, 33] in Thinkpad)
-(setq default-frame-alist '((width . 76) (height . 50)))
+;; Frame   (note: [81, 45] in Mac; [96, 33] in Thinkpad)
+(setq default-frame-alist '((width . 90) (height . 48)))
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -66,12 +66,14 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
-(if *is-mac* (setq size-n 15.0) (setq size-n 11.0))
+(if *is-mac* (setq size-n 14.0) (setq size-n 11.0))
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
-    (dolist (font '("SF Mono" "RobotoMono" "DejaVu Sans Mono"
-                    "Inconsolata" "Menlo" "Consolas"))
+    (dolist (font '("Roboto Mono" "Inconsolata" "Fira Code" "DM Mono"
+                    "SF Mono" ;; Mac only
+                    "Sarasa Mono SC Nerd"  ;; width compatible with Chinese
+                    "DejaVu Sans Mono" "Consolas"))
       (when (member font (font-family-list))
         (setq zyue-font (font-spec :family font :size size-n))
         (when font-userdefine-flag
@@ -82,14 +84,17 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify variable-width font
   (catch 'loop
-    (dolist (font '("IowanOldSt BT" "SF Compact Display" "DejaVu Sans" "Roboto"))
+    (dolist (font '("IowanOldSt BT"  ;; serif
+                    "SF Compact Display"  ;; Mac only
+                    "Roboto" "DejaVu Sans"))
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("Source Han Serif SC" "Source Han Serif TC" "Source Han Serif"  ; 思源宋体 (简中、繁中、日文)
-                    "WenQuanYi Micro Hei" "Sarasa Mono SC"
+    (dolist (font '("Source Han Serif SC" "Source Han Serif"  ;; 思源宋体 (简中、繁中、日文)
+                    "WenQuanYi Micro Hei"
+                    "Sarasa Mono SC Nerd"  ;; width compatible with Chinese
                     "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
         ;; Note: when LC_CTYPE=zh_CN.UTF-8, use (find-font (font-spec :name font))
@@ -111,7 +116,9 @@ of the focused frame and AB is the unfocused."
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
   ;; (setq face-font-rescale-alist
-  ;;       '(("WenQuanYi Micro Hei" . 1.2) ("Sarasa Mono SC" . 1.2)
+  ;;       '(("WenQuanYi Micro Hei" . 1.2)
+  ;;         ("Sarasa Mono SC" . 1.2)
+  ;;         ("Source Han Serif SC" . 1.2) ("Source Han Serif" . 1.2)
   ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
   )
 

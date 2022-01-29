@@ -3,6 +3,7 @@
 ;; ================================================================
 ;; Last modified on 22 Oct 2020
 
+
 ;; /Basics/
 (global-font-lock-mode t)
 
@@ -52,20 +53,21 @@
 ;; refer to http://doc.norang.ca/org-mode.html
 (setq orgnote-home (expand-file-name
                     "~/Public/Dropbox/oracleyue/OrgNotes/"))
-(setq todo-file  (expand-file-name "ToDoList.org" orgnote-home))
-(setq today-file (expand-file-name "Today.org" orgnote-home))
-(setq idea-file  (expand-file-name "MindTracking.org" orgnote-home))
-(setq misc-file  (expand-file-name "misc.org" orgnote-home))
-(setq paper-file (expand-file-name "Literature.org" orgnote-home))
+(setq todo-file    (expand-file-name "ToDoList.org" orgnote-home))
+(setq plan-file   (expand-file-name "MonthPlan.org" orgnote-home))
+(setq archive-file (expand-file-name "WorkDiary.org" orgnote-home))
+(setq idea-file    (expand-file-name "MindTracking.org" orgnote-home))
+(setq misc-file    (expand-file-name "misc.org" orgnote-home))
+(setq paper-file   (expand-file-name "Literature.org" orgnote-home))
 
-(setq org-agenda-files (list todo-file today-file)
+(setq org-agenda-files (list todo-file plan-file)
       org-default-notes-file misc-file)
 (setq org-capture-bookmark nil)  ;; disable auto-add bookmark
 
 ;; Capture templates
 (setq org-capture-templates
-      '(("o" "TODO Today" entry (file+headline today-file "Scheduled")
-         "** TODO %?\n SCHEDULED: %^t Added on %U" :empty-lines 1)
+      '(("o" "TODO Today" entry (file+headline plan-file "Scheduled")
+         "** TODO %?\n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
         ("i" "Research Ideas" entry (file+headline idea-file "Mind Tracking")
          "* %?\n Added on %U\n" :empty-lines 1)
         ("p" "Paper Reading" entry (file paper-file)
@@ -83,16 +85,30 @@
 (with-eval-after-load "counsel"
   (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
 
-;; workday starting point
-(defun today ()
+;; research diary: today/recent
+(defun zyue/plan ()
+  "Create a research diary for this month."
   (interactive)
-  (progn (find-file today-file)
+  (progn (find-file plan-file)
          (goto-char (point-max))
-         (insert "*" ?\s (format-time-string "%Y-%m-%d %A") ?\n
-                 "** Scheduled\n"
-                 "** HandsOn\n"
-                 "** Notes\n"
-                 "** Review\n")))
+         (insert "*" ?\s (format-time-string "%Y-%m %b") ?\n
+                 "** Projects\n"
+                 "** Research\n"
+                 "** School\n"
+                 "** Others\n"
+                 "** Weekly Reports\n"
+                 "** Monthly Minutes\n"
+                 "** Notes\n")))
+;; archive of research diaries
+(defun zyue/archive-plan ()
+  "Archive the research diary of this month."
+  (interactive)
+  (progn (find-file archive-file)
+         (goto-char (point-max))
+         (insert-file plan-file)
+         (save-buffer)
+         (delete-file plan-file)  ;; clean up "MonthPlan.org"
+         (kill-buffer "MonthPlan.org")))
 
 ;; Todo keywords
 (setq org-todo-keywords
@@ -229,6 +245,12 @@
   ;; show inline image in posframe ("C-c C-x C-v" to toggle)
   ;; (setq org-download-display-inline-images 'posframe)
   )
+
+;; /valign/: visual alignment for tables when using variable-pitch fonts
+;; or Chinese
+(use-package valign
+  :demand
+  :hook (org-mode . valign-mode))
 
 ;; /ox-gfm/: github flavored markdown (gfm) exporter
 ;; note: it preserves soft line breaks.

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hspace
+# key: h
+# group: macros
+# --
+\hspace*{$0}

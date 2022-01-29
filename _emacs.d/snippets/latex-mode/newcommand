@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: new math macro
+# key: new
+# group: macros
+# --
+\newcommand{$1}{\operatorname{$2}}$0

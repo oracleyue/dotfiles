@@ -102,7 +102,7 @@
                                     (mode . python-mode)
                                     (mode . ess-mode)
                                     (mode . sh-mode)
-                                    (mode . matlab-mode)
+                                    (mode . octave-mode)
                                     (mode . c-mode)
                                     (mode . c++-mode)
                                     (mode . cmake-mode)
@@ -233,6 +233,7 @@
 ;; ------------------------------------------------
 (when *enable-all-the-icons*
   (use-package all-the-icons-dired
+    :disabled
     :diminish
     :functions (dired-move-to-filename
                 dired-get-filename

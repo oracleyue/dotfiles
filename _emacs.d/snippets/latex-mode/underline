@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: underline
+# key: ul
+# group: macros
+# --
+\underline{$1}$0

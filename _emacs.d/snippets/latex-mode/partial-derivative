@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: partial derivative
+# key: pt
+# group: macros
+# --
+\frac{\partial $1}{\partial $2}$0

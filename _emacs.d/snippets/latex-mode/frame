@@ -1,9 +1,12 @@
 # -*- mode: snippet -*-
-# name: array (2 col)
-# key: array
+# name: frame
+# key: frame
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{array}{r@{\;}l}
+\begin{frame}
+  \frametitle{$1}
+  \small
+
   $0
-\end{array}
+\end{frame}

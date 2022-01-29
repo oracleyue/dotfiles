@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: bigskip+pause
+# key: bp
+# group: macros
+# --
+\bigskip \pause
+$0

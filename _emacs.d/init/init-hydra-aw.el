@@ -14,6 +14,7 @@
 
 ;; Integration with Hydra
 (global-set-key (kbd "M-j") 'hydra-window/body)
+(global-set-key (kbd "M-g j") 'hydra-window/body)
 (defhydra hydra-window (:hint nil)
   "
 Movement^^      ^Split^         ^Switch^        ^Resize^

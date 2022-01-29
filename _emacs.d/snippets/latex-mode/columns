@@ -4,7 +4,7 @@
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{columns}[t,onlytextwidth]
+\begin{columns}[c,onlytextwidth] %t
   \begin{column}{.5\textwidth}
       $0
   \end{column}

@@ -54,9 +54,18 @@
 % - LaTeX default sansfont: STXihei
 
 \usepackage[UTF8]{ctex}
+
 \setCJKmainfont[BoldFont={STHeiti},ItalicFont={STKaiti}]{SimSun}
+\setCJKsansfont{STKaiti}
+
+\setCJKmainfont[AutoFakeBold={2.4},AutoFakeSlant={0.2}]{Adobe Song Std}
 \setCJKsansfont{PingFang SC}
 
+\setCJKmainfont[BoldFont={STHeiti},AutoFakeSlant={0.2}]{STSong}
+\setCJKsansfont{STKaiti} % sans: STKaiti; mono: fangsong
+
+\setCJKmainfont[AutoFakeBold={4.2},AutoFakeSlant={0.2}]{STFangsong}
+\setCJKsansfont{STHeiti} % sans: STKaiti; mono: fangsong
 
 % Nice fonts for Powerpoint or Keynote
 % - Century Schoolbook

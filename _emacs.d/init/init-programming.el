@@ -22,6 +22,7 @@
           (lambda () (setq-default truncate-lines t)
             (setq fill-column *fill-column-mono*)))
 
+
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking
 ;; ---------------------------------------------
@@ -40,11 +41,43 @@
   ;; check only when opening or saving files
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
+
 ;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
 (use-package magit :demand)
 ;; use "M-x magit" or "magit-status"
+
+
+;; ---------------------------------------------
+;; /citre/: modern frontend for Universtal Ctags
+;; ---------------------------------------------
+;; Install by =brew install universal-ctags=
+;; To exclude a folder like "Backup", use "ctags --exclude=Backup ..."
+;; to create and update ctags.
+(use-package citre
+  :load-path "site-lisp/citre/"
+  :functions projectile-project-root
+  :bind (("M-s ." . citre-jump)
+         ("M-s ," . citre-jump-back)
+         ("s-."   . citre-jump)
+         ("s-,"   . citre-jump-back)
+         ("M-s p" . citre-peek)
+         ("M-s P" . citre-ace-peek)
+         ("M-s u" . citre-update-this-tags-file)
+         ("M-s c" . citre-create-tags-file)
+         ("M-s R" . citre-edit-tags-file-recipe))
+  ;; integrated with completion-at-point, xref, imenu
+  :hook (prog-mode . citre-auto-enable-citre-mode)
+  :init
+  (setq citre-tags-files '(".tags"))
+  (setq citre-imenu-create-tags-file-threshold 52428800) ;; 50MB for temp tags
+  :config
+  (with-eval-after-load 'projectile
+    (setq citre-project-root-function #'projectile-project-root))
+  (with-eval-after-load 'cc-mode (require 'citre-lang-c))
+  (with-eval-after-load 'dired (require 'citre-lang-fileref)))
+
 
 ;; ----------------------------------------------
 ;; line numbering
@@ -63,7 +96,7 @@
   ;; enable line numbering (or "linum-mode")
   (let ((hook-list '(sh-mode-hook
                      cmake-mode-hook
-                     matlab-mode-hook
+                     octave-mode-hook
                      python-mode-hook
                      c-mode-common-hook
                      makefile-gmake-mode-hook   ; Gnome
@@ -76,10 +109,12 @@
 ;; (when *is-terminal*
 ;;   (setq linum-format "%4d "))
 
+
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
 (use-package iedit :demand)
+
 
 ;; ----------------------------------------------
 ;; /symbol-overlay/: highlight symbols to improve readability
@@ -97,6 +132,7 @@
          (iedit-mode     . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode-end . symbol-overlay-mode)))
 
+
 ;; ----------------------------------------------
 ;; /ediff/: comparing two files
 ;; ----------------------------------------------
@@ -104,6 +140,7 @@
 ;; (setq ediff-diff-options "-w")  ;; ignore white spaces
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
+
 
 ;; ----------------------------------------------
 ;; API reference support
@@ -140,6 +177,7 @@
          (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
          (ess-mode    . "r"))))
 
+
 ;; ----------------------------------------------
 ;; /gud/: debugging supports, e.g. gdb, pdb
 ;; ----------------------------------------------
@@ -158,6 +196,7 @@
   :config
   (when *is-mac*
     (setq gdb-non-stop-setting nil)))
+
 
 ;; ----------------------------------------------
 ;; term/ansi-term

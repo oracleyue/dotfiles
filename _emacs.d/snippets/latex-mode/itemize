@@ -4,8 +4,8 @@
 # group: environments
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{itemize}[<+->]
-  \setlength\itemsep{.8em}
+\begin{itemize}%[<+->]
+  % \setlength\itemsep{.8em}
 \item $0
 \item
 \end{itemize}

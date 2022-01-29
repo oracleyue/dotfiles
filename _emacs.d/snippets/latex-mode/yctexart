@@ -8,17 +8,20 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage[margin=30mm,centering]{geometry}
 
-\usepackage{times}
-\usepackage[UTF8]{ctex}  % STHeiti, STFangsong, SimSun
-\setCJKmainfont[AutoFakeBold={2.4},AutoFakeSlant={0.2}]{Adobe Song Std}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage[UTF8]{ctex} % STHeiti, STFangsong, STSong; AutoFakeBold={2.4}
+\setCJKmainfont[AutoFakeBold={4.2},AutoFakeSlant={0.2}]{Adobe Song Std}
+\setCJKmonofont[AutoFakeBold={4.2},AutoFakeSlant={0.2}]{STFangsong}
 \setCJKsansfont{PingFang SC}
 
 \usepackage{setspace}
-\doublespacing
+\doublespacing % onehalfspacing, singlespacing
+\usepackage{sectsty}
+\allsectionsfont{\large\sffamily\mdseries}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs,
             mathtools, amsthm}
-\usepackage{arydshln}   % To support partitioned matrix with dashed lines
 \usepackage{empheq}     % to deal with parentheses + subfunctions
 \usepackage{enumitem}   % [noitemsep, topsep=-5pt], [label=\roman*]
 
@@ -31,14 +34,19 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}
-% \usepackage{minted}
-%   \usemintedstyle{pastie}
 \usepackage{cite}
+\usepackage{gbt7714}  % bib in Chinese
+
+% Abstract/Keywords macros
+\renewenvironment{abstract}{\noindent\textbf{\small 摘要:\quad}
+  \tt}{\bigskip}
+\providecommand{\keywords}[1]{\noindent\textbf{\small 关键字:\quad}
+  \texttt{#1} \vspace*{10mm}}
 % ---------------- END Preambles ----------------
 
-\title{CTeX简易文档}
-\author{无名氏}
-\date{\today}
+\title{\sf XXXXXXXX}
+\author{岳作功 \\\\ \small{华中科技大学人工智能与自动化学院}}
+\date{}
 
 \begin{document}
 \maketitle
@@ -47,8 +55,10 @@
 
 % ---------------- ABSTRACT ----------------
 \begin{abstract}
-  这里是文章摘要。
+  这里是文章摘要
 \end{abstract}
+
+\keywords{词一、词二、词三}
 
 % ---------------- TABLE OF CONTENTS ----------------
 % \setcounter{tocdepth}{3}
@@ -56,11 +66,23 @@
 
 % ----------------- MAIN --------------------
 \section{一级标题A}
-这是一行中文字。这是typerwriter的\texttt{中文字}。
+这是一行中文字。这是typerwriter的\texttt{中文字}。这是\textit{斜体
+  字}。 这是\textbf{加粗字}。
 
 \section{一级标题B}
-这里引入一个中文文献\cite{song1985}。这里是另一个英文文献\cite{rudin1964}。
 
+\noindent《高等教育法》第五十九条规定：
+\begin{quote}\tt
+  高等学校应当为毕业生、结业生提供就业指导和服务。\
+  国家鼓励高等学校毕业生到边远、艰苦地区工作。
+\end{quote}
+
+这里引入一个中文文献\cite{WangLin2001}。这里是另一个英文文
+献\cite{Goncalves2008}。
+
+% 这里是未被引用的文献
+\nocite{jyf}
+\nocite{gdjyf}
 
 % --------------- APPENDIX --------------
 \section*{附录}
@@ -70,9 +92,9 @@
 \subsection{附录 1}
 Appendix here ...
 
-
 % --------------- BIBLIOGRAPHY --------------
-\bibliographystyle{plain}
-\bibliography{library}
+\small
+\bibliographystyle{gbt7714-numerical}
+\bibliography{ref/library}
 
 \end{document}

@@ -79,7 +79,7 @@
 (require 'init-r)
 
 ;; /MATLAB/
-(require 'init-matlab)
+(require 'init-octave)
 
 ;; minority languages
 (require 'init-lang)

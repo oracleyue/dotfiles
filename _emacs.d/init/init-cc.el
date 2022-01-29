@@ -29,9 +29,9 @@
     :init (modern-c++-font-lock-global-mode t))
   )
 
-;; ================================================
+;; ------------------------------------------------
 ;; Other editing supports
-;; ================================================
+;; ------------------------------------------------
 
 ;; /smartparens/: insert pair of symbols
 ;; when you press RET, the curly braces automatically add another newline

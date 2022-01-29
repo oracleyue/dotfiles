@@ -4,8 +4,7 @@
 # group: beamer
 # --
 \begin{frame}
-  \begin{center}
-      \huge \sffamily \color{hlColor}
-      $0
-    \end{center}
+  \begin{secpage}
+    $0
+  \end{secpage}
 \end{frame}

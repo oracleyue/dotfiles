@@ -9,7 +9,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{helvet,times,newtxmath}   % charter
+\usepackage{helvet,times,newtxmath}   % charter, cochineal
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}
@@ -18,7 +18,7 @@
 \usepackage{setspace}  \onehalfspacing
 \usepackage[parfill]{parskip}
 
-\usepackage{graphicx}
+\usepackage{graphicx,float}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 

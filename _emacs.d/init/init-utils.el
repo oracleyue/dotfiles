@@ -94,17 +94,19 @@
         go-translate-local-language "fr"
         go-translate-target-language "en")
   (setq go-translate-extra-directions
-        '(("jp" . "zh-CN")
+        '(("de" . "en")
+          ("jp" . "zh-CN")
           ("ru" . "zh-CN")))
   ;; fix token-key issue mismatch
-  (setq go-translate-token-current (cons 430675 2721866130))
-  )
-;; Usage (in result buffer):
-;; "g": refresh; "q": quit
-;; "x": exchange source and target and search again
-;; "M-n" and "M-p" goes to next (source-target) lang for search
-;; "Enter" or "C-Enter" in minibuffer to translate (the latter jumps to the result win)
-;; demo: "C-c t" -> "C-return" -> "C-x C-x" to select -> "M-w" -> "q" -> "C-y"
+  (setq go-translate-token-current (cons 430675 2721866130)))
+;; (in minibuffer)
+;;  - "C-n" and "C-p" goes to next or prev. language for search
+;;  - "Enter" or "C-Enter" in minibuffer to translate (the latter jumps to the result win)
+;;  - demo: "C-c t" -> "C-return" -> "C-x C-x" to select -> "M-w" -> "q" -> "C-y"
+;; (in result buffer)
+;;  - "g": refresh; "q": quit
+;;  - "x": exchange source and target and search again
+;;  - "M-n" and "M-p" goes to next (source-target) lang for search
 
 ;; ----------------------------------------------
 ;; Managing Ebooks via Calibre within Emacs

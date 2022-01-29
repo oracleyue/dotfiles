@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: min
+# key: min
+# group: macros
+# --
+\underset{$1}{\min}\: $0

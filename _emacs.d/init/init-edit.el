@@ -167,7 +167,6 @@ Uses `current-date-format' for the formatting the date/time."
 (defun auto-cleanup-whitespace ()
   (add-hook 'before-save-hook 'delete-trailing-whitespace nil t))
 (add-hook 'prog-mode-hook #'auto-cleanup-whitespace)
-(add-hook 'matlab-mode-hook #'auto-cleanup-whitespace)
 (add-hook 'LaTeX-mode-hook #'auto-cleanup-whitespace)
 ;; manually remove whitespaces (buffer or region)
 (global-set-key (kbd "M-s k") 'delete-trailing-whitespace)

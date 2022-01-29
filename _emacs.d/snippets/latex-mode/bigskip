@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: bigskip
+# key: b
+# group: macros
+# --
+\bigskip
+$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: medskip
+# key: m
+# group: macros
+# --
+\medskip
+$0

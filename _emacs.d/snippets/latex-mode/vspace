@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: vspace
+# key: v
+# group: macros
+# --
+\vspace*{$0}

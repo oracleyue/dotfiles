@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: toc page
+# key: toc
+# group: macros
+# --
+\begin{frame}
+  \frametitle{目录}
+  % \frametitle{Outline}
+  \tableofcontents
+\end{frame}

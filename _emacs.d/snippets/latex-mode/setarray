@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: array spacing
-# key: seta
+# key: sep
 # group: macros
 # --
 \arraycolsep=1.4pt\def\arraystretch{1.8}

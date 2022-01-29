@@ -30,8 +30,8 @@
          ;; minibuffer history
          ;; "C-r" ivy-reverse-i-search acts as counsel-minibuffer-history in counsel-mode
          ;; enchance built-in functions
-         ("M-g u"   . counsel-unicode-char)
-         ("M-g c"   . counsel-colors-web)
+         ("M-g U"   . counsel-unicode-char)
+         ("M-g C"   . counsel-colors-web)
          ;; kill-ring
          ("M-y"     . counsel-yank-pop)
          ;; mark-ring
@@ -275,7 +275,9 @@
 ;; ---------------------------------------------
 ;; /counsel-gtags/: Ivy for gtags (GNU global)
 ;; ---------------------------------------------
+;; Note: outdated, use "Citre + Universtal CTags" instead
 (use-package counsel-gtags
+  :disabled
   :ensure nil
   :load-path "site-lisp/"
   :demand
@@ -299,7 +301,7 @@
   :bind (:map counsel-gtags-mode-map
               ("s-."     . counsel-gtags-dwim)
               ("s-,"     . counsel-gtags-go-backward))
-  :hook ((c-mode c++-mode matlab-mode) . counsel-gtags-mode))
+  :hook ((c-mode c++-mode octave-mode) . counsel-gtags-mode))
 ;; If you like to skip folders for tagging, add folders to the list
 ;; ":skip=" in ~/.globalrc.
 

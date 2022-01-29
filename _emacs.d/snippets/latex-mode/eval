@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: evaluated at
+# key: eval
+# group: macros
+# --
+\left. $0 \right|_{$1}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: beamer itemize skip
+# key: skip
+# group: macros
+# --
+\bigskip\pause
+$0

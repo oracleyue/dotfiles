@@ -2,6 +2,8 @@
 # name: print figure in pdf (vector fig)
 # key: pdf
 # --
+% export in pdf
+% set(fig_hl, 'Units','Inches');
 pos = [8.5417 11.7639 7.7778 2.3611];
 set(fig_hl, 'Units','Inches', 'Position', pos);
 set(fig_hl,'PaperPositionMode','Auto','PaperUnits','Inches',...
