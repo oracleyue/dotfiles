@@ -124,8 +124,11 @@ alias men='tldr'
 # apps aliases
 alias matlab-tty='matlab -nosplash -nodesktop'
 alias ipy='screen -d -m jupyter qtconsole --style=monokai'
+
 # ssh server
-alias jp='ssh -NL 8888:localhost:1224 qiming &'
+#alias jp='ssh -NL 8080:localhost:8888 mylab &'
+alias jp='tmux new -d -s jupyter "ssh -NL 8080:localhost:8888 mylab"'
+export remote='mylab:/home/lab8888'
 
 # -------------------------------------------------------------------
 # Colorize bash

@@ -13,5 +13,7 @@
 
     // Python
     "python.languageServer": "Pylance",
-    "python.linting.pylintEnabled": true,  // default enable not working
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
 }
