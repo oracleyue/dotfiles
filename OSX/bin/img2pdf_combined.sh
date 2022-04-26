@@ -57,4 +57,7 @@ case $ext in
     jpg)
         rm *.jpg.pdf
         ;;
+    jpeg)
+        rm *.jpeg.pdf
+        ;;
 esac

@@ -80,6 +80,10 @@ cp $HOME/.config/clash/add-rules.sh $repopath/.config/clash/
 # aria2
 cp $HOME/.config/aria2/aria2.conf $repopath/.config/aria2/
 
+# youtube-dl, yt-dlp (using aria2)
+cp $HOME/.config/youtube-dl/config $repopath/.config/youtube-dl/
+cp $HOME/.config/yt-dlp/config $repopath/.config/yt-dlp/
+
 # ===========================================
 # "~/bin" on OSX
 # ===========================================

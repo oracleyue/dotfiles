@@ -16,4 +16,7 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
+
+    // Matlab
+    "files.associations": {"*.m": "matlab"}
 }
