@@ -1,4 +1,7 @@
 {
+    // general
+    "security.workspace.trust.enabled": false,
+
     // Interface
     "editor.fontSize": 14,
     "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
@@ -18,5 +21,7 @@
     "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
 
     // Matlab
-    "files.associations": {"*.m": "matlab"}
+    "files.associations": {
+        "*.m": "matlab"
+    }
 }
