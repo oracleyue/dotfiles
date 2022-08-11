@@ -56,7 +56,7 @@
 ;; To exclude a folder like "Backup", use "ctags --exclude=Backup ..."
 ;; to create and update ctags.
 (use-package citre
-  :load-path "site-lisp/citre/"
+  ;; :load-path "site-lisp/citre/"
   :functions projectile-project-root
   :bind (("M-s ." . citre-jump)
          ("M-s ," . citre-jump-back)
@@ -67,12 +67,13 @@
          ("M-s u" . citre-update-this-tags-file)
          ("M-s c" . citre-create-tags-file)
          ("M-s R" . citre-edit-tags-file-recipe))
-  ;; integrated with completion-at-point, xref, imenu
+  ;; peek window: M-n/M-p to move down/up; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
   (setq citre-tags-files '(".tags"))
   (setq citre-imenu-create-tags-file-threshold 52428800) ;; 50MB for temp tags
   :config
+  (setq citre-peek-auto-restore-after-jump nil) ;; close peek window when jump to def
   (with-eval-after-load 'projectile
     (setq citre-project-root-function #'projectile-project-root))
   (with-eval-after-load 'cc-mode (require 'citre-lang-c))

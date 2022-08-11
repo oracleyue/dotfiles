@@ -31,6 +31,9 @@
 (defvar font-userdefine-flag t
   "Set nil if your theme specifies a font for `default'.")
 
+;; Modeline (powerline, spaceline, doomline, plain)
+(require 'init-modeline)
+
 ;; Init or reload functions
 (defun zyue-init-ui (&optional frame)
   ;; load theme
@@ -141,9 +144,6 @@ of the focused frame and AB is the unfocused."
   (setq all-the-icons-scale-factor 1.0)  ;; adjust size
   ;; avoid slowing down performance
   (setq inhibit-compacting-font-caches t))
-
-;; Modeline (powerline, spaceline, doomline, plain)
-(require 'init-modeline)
 
 ;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
 (setq zyue-theme 'elegant-light)

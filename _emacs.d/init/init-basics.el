@@ -92,6 +92,9 @@
   (insert (x-get-selection 'PRIMARY)))
 (global-set-key (kbd "S-<insert>") 'paste-primary-selection)
 
+;; <TAB> key
+(setq tab-always-indent 'complete)  ;; use TAB to indent or complete
+
 ;; configure mark-ring
 (setq set-mark-command-repeat-pop nil)
 (setq mark-ring-max 16)
@@ -134,7 +137,7 @@
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; keymap modification for OS X
-(when (string-equal system-type "darwin")
+(when (and (string-equal system-type "darwin") t)
   (setq mac-command-modifier 'control)  ; use command as control
   (setq mac-control-modifier 'super))   ; use control as super
 

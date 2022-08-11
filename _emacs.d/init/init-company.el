@@ -126,8 +126,8 @@
   (require 'warnings)
   (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
 
-(use-package yasnippet-snippets
-  :after yasnippet)
+;; (use-package yasnippet-snippets
+;;   :after yasnippet)
 
 
 (provide 'init-company)

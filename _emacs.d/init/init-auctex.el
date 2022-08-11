@@ -195,12 +195,20 @@
   ;; use "-C" to also clean up pdf files
 
   ;; default command
-  (add-hook 'TeX-mode-hook '(lambda() (setq TeX-command-default "Latexmk")))
+  (add-hook 'TeX-mode-hook #'(lambda() (setq TeX-command-default "Latexmk")))
 
   ;; format conversion
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("pdf2png" "convert -density 300 %s.pdf -quality 90 %s.png" TeX-run-command nil t) t))
+
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("pdfcrop" "pdfcrop %s.pdf" TeX-run-command nil t) t))
+
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("pdfcrop (margins)" "pdfcrop %s.pdf; pdfcrop --margins '2 0 2 0' %s-crop.pdf" TeX-run-command nil t) t))
 
   ;; other bash assistance
   (eval-after-load "tex"

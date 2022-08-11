@@ -29,6 +29,7 @@
   :ensure nil
   :config
   ;; ---------------- Interpreter ----------------
+  (defconst *use-ipython* t)
   (if *use-ipython*
       (progn (setq python-shell-interpreter "ipython3")
              (setq python-shell-interpreter-args "--simple-prompt -i"))
@@ -53,17 +54,15 @@
           python-indent-guess-indent-offset nil))
   (add-hook 'python-mode-hook #'zyue-py-indent-style)
 
-  ;; highlight indentation
+  ;; highlight indentation (buggy)
   (use-package highlight-indent-guides
+    :disabled
     :diminish
-    :init
-    (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
-    :hook
-    (python-mode . highlight-indent-guides-mode))
+    :init (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
+    :hook (python-mode . highlight-indent-guides-mode))
 
   ;; ---------------- Linting ----------------
   ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
-  ;; nox supports "python-flake8" or "python-pylint"
 
   ;; ---------------- Running Interface ----------------
   (defun python-shell-send-line (&optional beg end)
@@ -84,7 +83,7 @@
                         "Eval region")
 
   ;; ---------------- Auto-completion ----------------
-  ;; use LSP to support: lsp-mode ("init-lsp.el") or nox ("init-nox.el")
+  ;; use LSP to support: lsp-mode ("init-lsp.el") or lsp-bridge ("init-lsp-bridge.el")
 
   ;; ---------------- Debugging ----------------
   ;; use built-in GUD debugger

@@ -54,33 +54,31 @@
 (setq orgnote-home (expand-file-name
                     "~/Public/Dropbox/oracleyue/OrgNotes/"))
 (setq todo-file    (expand-file-name "ToDoList.org" orgnote-home))
-(setq plan-file   (expand-file-name "MonthPlan.org" orgnote-home))
-(setq archive-file (expand-file-name "WorkDiary.org" orgnote-home))
-(setq idea-file    (expand-file-name "MindTracking.org" orgnote-home))
-(setq misc-file    (expand-file-name "misc.org" orgnote-home))
-(setq paper-file   (expand-file-name "Literature.org" orgnote-home))
+(setq archive-file (expand-file-name "ArchivedDiary.org" orgnote-home))
+(setq idea-file    (expand-file-name "Research.org" orgnote-home))
+(setq paper-file   (expand-file-name "Papers.org" orgnote-home))
+(setq temp-todo-file    (expand-file-name "Marriage.org" orgnote-home))
 
-(setq org-agenda-files (list todo-file plan-file)
-      org-default-notes-file misc-file)
+(setq org-archive-location (concat archive-file "::")) ;; "C-c C-x C-a"
+
+(setq org-agenda-files (list todo-file idea-file archive-file temp-todo-file))
 (setq org-capture-bookmark nil)  ;; disable auto-add bookmark
 
 ;; Capture templates
 (setq org-capture-templates
-      '(("o" "TODO Today" entry (file+headline plan-file "Scheduled")
-         "** TODO %?\n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
-        ("i" "Research Ideas" entry (file+headline idea-file "Mind Tracking")
-         "* %?\n Added on %U\n" :empty-lines 1)
-        ("p" "Paper Reading" entry (file paper-file)
-         "* %?\n Added on %U\n" :empty-lines 1)
-        ("n" "Quick Notes" entry (file misc-file)
+      '(("t" "TODO (ToDoList)" entry (file+headline todo-file "Collecting")
+         "* TODO %? \n DEADLINE: %^t\n Added on %U" :empty-lines 1)
+        ("s" "Scheduled (ToDoList)" entry (file+headline todo-file "Collecting")
+         "* NEXT %? %^G \n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
+        ("m" "Meeting (ToDoList)" entry (file+headline todo-file "Collecting")
+         "* MEETING %? %^G \n %^t" :empty-lines 1)
+        ("n" "Quick Notes (ToDoList)" entry (file+headline todo-file "Notes")
          "* %?\n Added on %U\n" :empty-lines 1)
 
-        ("t" "TODO" entry (file+headline todo-file "Collecting")
-         "* TODO %? \n DEADLINE: %^t\n Added on %U" :empty-lines 1)
-        ("w" "Scheduled" entry (file+headline todo-file "Collecting")
-         "* NEXT %? %^G \n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
-        ("m" "Meeting" entry (file+headline todo-file "Collecting")
-         "* MEETING %? %^G \n %^t" :empty-lines 1)
+        ("i" "Research Ideas (Research)" entry (file+headline idea-file "Mind Tracking")
+         "* %?\n Added on %U\n" :empty-lines 1)
+        ("p" "Paper Reading (Papers)" entry (file paper-file)
+         "* %?\n Added on %U\n" :empty-lines 1)
         ))
 (with-eval-after-load "counsel"
   (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
@@ -89,26 +87,27 @@
 (defun zyue/plan ()
   "Create a research diary for this month."
   (interactive)
-  (progn (find-file plan-file)
+  (progn (find-file todo-file)
          (goto-char (point-max))
          (insert "*" ?\s (format-time-string "%Y-%m %b") ?\n
                  "** Projects\n"
                  "** Research\n"
                  "** School\n"
-                 "** Others\n"
+                 "** Misc.\n"
                  "** Weekly Reports\n"
-                 "** Monthly Minutes\n"
+                 "** Minutes\n"
                  "** Notes\n")))
+;; [Note]: use default org-archive command "C-c C-x C-a"
 ;; archive of research diaries
-(defun zyue/archive-plan ()
-  "Archive the research diary of this month."
-  (interactive)
-  (progn (find-file archive-file)
-         (goto-char (point-max))
-         (insert-file plan-file)
-         (save-buffer)
-         (delete-file plan-file)  ;; clean up "MonthPlan.org"
-         (kill-buffer "MonthPlan.org")))
+;; (defun zyue/archive-plan ()
+;;   "Archive the research diary of this month."
+;;   (interactive)
+;;   (progn (find-file archive-file)
+;;          (goto-char (point-max))
+;;          (insert-file todo-file)
+;;          (save-buffer)
+;;          (delete-file todo-file)  ;; clean up "ToDoList.org"
+;;          (kill-buffer "ToDoList.org")))
 
 ;; Todo keywords
 (setq org-todo-keywords
@@ -178,7 +177,7 @@
    (python . t)
    (R . t)
    (matlab . t)
-   (ledger . t)
+   ;; (ledger . t)
    (latex . t)))
 
 ;; stop asking evaluation codes when export

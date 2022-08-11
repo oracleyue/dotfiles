@@ -6,19 +6,20 @@
 (use-package cmake-mode
   :mode ("CMakeLists\\.txt\\'"
          "\\.cmake\\'")
-  :hook ((cmake-mode . zyue/company-cmake-setup)
-         (cmake-mode . zyue/cmake-setup-compile))
+  :hook (cmake-mode . zyue/cmake-setup-compile)
   :config
   ;; /cmake-font-lock/: better fontifying
   (use-package cmake-font-lock
     :hook (cmake-mode . cmake-font-lock-activate))
 
   ;; auto completion
-  (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
-  (defun zyue/company-cmake-setup ()
-    (setq-local company-backends
-                (append '((company-cmake company-dabbrev-code))
-                        company-backends)))
+  (when *use-company*
+    (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
+    (defun zyue/company-cmake-setup ()
+      (setq-local company-backends
+                  (append '((company-cmake company-dabbrev-code))
+                          company-backends)))
+    (add-hook 'cmake-mode-hook 'zyue/company-cmake-setup))
 
   ;; compile setup
   (defun zyue/link-compile-commands-json (buffer msg)

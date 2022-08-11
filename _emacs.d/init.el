@@ -29,7 +29,7 @@
 (require 'init-edit)
 
 ;; code completion engine
-(require 'init-company)
+(when *use-company* (require 'init-company))
 
 ;; completion systems (if prefer helm, load "init-helm.el")
 (require 'init-ivy)
@@ -60,8 +60,8 @@
 
 ;; LSP
 (pcase *lsp-client*
-  ('lsp-mode (require 'init-lsp))     ;; lsp-mode and dap-mode
-  ('eglot    (require 'init-eglot)))  ;; eglot for lsp
+  ('lsp-mode   (require 'init-lsp))          ;; lsp-mode and dap-mode
+  ('lsp-bridge (require 'init-lsp-bridge)))  ;; lsp-bridge mode (fastest)
 
 ;; /Lisp/
 (require 'init-lisp)

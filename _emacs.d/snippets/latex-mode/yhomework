@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Handout Template
-# key: handout
+# name: Homework Template
+# key: homework
 # group: templates
 # expand-env: ((yas-indent-line 'fixed))
 # --
@@ -73,12 +73,12 @@
 \def\@maketitle{%
   \begin{center}
   \bfseries
-  UNIVERSIT\\'{E} DU LUXEMBOURG
+  Huazhong University of Science and Technology
   \end{center}
   \vspace*{-10pt}
   \courseno \hfill \semester \par
   \vspace*{-2pt} \noindent
-  \session\ - \course\footnote{For correspondence \email.} \hfill \@date \par
+  \session\ - \course\footnote{Contacts: \email.} \hfill \@date \par
   \vspace*{-10pt}\noindent\rule{\textwidth}{0.4pt}
   \vspace*{4pt}
   \begin{center}
@@ -94,18 +94,6 @@
     \vspace*{8pt}
   \end{mdframed}
   \vspace*{12pt}}
-
-\newcommand{\makeheader}{%
-  \begin{center}
-  \bfseries
-  UNIVERSIT\\'{E} DU LUXEMBOURG
-  \end{center}
-  \vspace*{-10pt}
-  \courseno \hfill \semester \par
-  \vspace*{-2pt} \noindent
-  \session\ - \course\footnote{For correspondence \email.} \hfill \@date \par
-  \vspace*{-10pt}\noindent\rule{\textwidth}{0.4pt}
-  \vspace*{-2pt}}
 
 \ifproblemset
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
@@ -124,18 +112,17 @@
   \maketitle
   \maketoc}
 \newcommand{\makeproblemset}{%
-  % \makeheader
   \maketitle}
 
 
 %% user-defined information
-\title{${1:title}}
-%\newcommand{\email}{\texttt{zuogong.yue@uni.lu}}
-\newcommand{\email}{\texttt{jorge.goncalves@uni.lu; zuogong.yue@uni.lu}}
-\newcommand{\course}{Practical Bioinformatics}
-\newcommand{\courseno}{MAISB-26/ISB102}
-\newcommand{\semester}{Winter 2015}
-\newcommand{\session}{${2:Exercise 1}}
+\title{Homework 1 Due: 12:00 13 May 2022}
+\newcommand{\email}{\texttt{z\_yue@hust.edu.cn; c\_cheng@hust.edu.cn;
+    rzlu@hust.edu.cn}}
+\newcommand{\course}{Foundations of Data Science}
+\newcommand{\courseno}{AUT5951}
+\newcommand{\semester}{Spring 2022}
+\newcommand{\session}{Homework 1}
 \date{\today}
 
 %% document body
@@ -150,7 +137,7 @@
 %% starting solutions by "\begin{solution} ... \end{solution}"
 
 
-$0
+
 
 
 

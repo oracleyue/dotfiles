@@ -1,9 +1,8 @@
 # -*- mode: snippet -*-
 # name: equation number label
-# key: eq
+# key: eqn
 # group: macros
 # --
-% Equation #${1:number}:
+% Equation #${1:1}:
 % --------
-% & 
 $0

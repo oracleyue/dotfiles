@@ -8,6 +8,7 @@
 ;;   - C++: clangd from "brew install llvm"
 ;;   - Python: pyls from "pip install python-language-server"
 ;;             mspyls from vscode (see "init-python.el")
+;;             pyright from "pip install pyright"
 ;; - install DAP language servers
 ;;   - C++: lldb-vscode from "brew install llvm"
 ;;   - Python: "pip install ptvsd"
@@ -134,17 +135,17 @@
 ;; install: "pip install python-language-server"
 (use-package lsp-pyls
   :ensure nil
-  :if (string-equal *py-langserver* "pyls")
+  :if (string-equal *lsp-pyls* "pyls")
   :after lsp-mode
   :hook (python-mode . lsp)
   :config
   (setq lsp-clients-python-library-directories
         '("/usr/local/lib/" "/usr/lib/")))
 
-;; Python: use Microsoft Python Language Server for Auto-completion
+;; Python: use Microsoft C# Python Language Server
 ;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
 (use-package lsp-python-ms
-  :if (string-equal *py-langserver* "mspyls")
+  :if (string-equal *lsp-pyls* "mspyls")
   :after lsp-mode
   :init
   ;; auto download released executable mspyls from Miscrosoft
@@ -152,11 +153,16 @@
         lsp-python-ms-cache "Library")        ;; cache parsing
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
 
-;; Python: use Microsoft Pyright language server
-;; install by "npm install -g pyright"
+;; Python: use Microsoft Pyright Language Server
+;; install by "pip install pyright"
 (use-package lsp-pyright
-  :if (string-equal *py-langserver* "pyright")
-  :after lsp-mode
+  :if (string-equal *lsp-pyls* "pyright")
+  :init
+  (when (executable-find "python3")
+    (setq lsp-pyright-python-executable-cmd "python3"))
+  ;; pyright stubs
+  (setq lsp-pyright-use-library-code-for-types t)
+  (setq lsp-pyright-stub-path "~/Programs/python/python-type-stubs/")
   :hook (python-mode . (lambda () (require 'lsp-pyright) (lsp))))
 
 

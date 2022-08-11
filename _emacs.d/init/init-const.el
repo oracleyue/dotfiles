@@ -43,12 +43,15 @@
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 
-;; lsp client
-(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode, eglot
+;; auto-completion
+(defconst *use-company* t)
 
-;; python
-(defconst *use-ipython* t)
-(defconst *py-langserver* "mspyls")  ;; lsp-mode: pyls, mspyls, pyright
+;; lsp client
+(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
+(defconst *lsp-pyls* "pyright")    ;; pyls, mspyls, pyright
+
+;; (defconst *lsp-client* 'lsp-bridge)  ;; lsp-bridge
+;; (when (eq *lsp-client* 'lsp-bridge) (defconst *use-company* nil))
 
 
 (provide 'init-const)

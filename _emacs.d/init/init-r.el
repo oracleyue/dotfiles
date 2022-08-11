@@ -16,26 +16,27 @@
   ;; - using built-in "ess-indent-or-complete" (C-M-i)
   ;; - using /company/: "company-R-args", "company-R-objects"
   ;;   and dabbev-code for variable names
-  (setq ess-use-company t)
-  (use-package company-dabbrev-code
-    :ensure nil
-    :after company
-    :config
-    (add-to-list 'company-dabbrev-code-modes 'ess-mode)
-    (defun zyue/add-company-backend-ess ()
-      (pop company-backends)
-      (setq-local company-backends
-                  (append '((company-R-args company-R-objects company-R-library
-                                            company-dabbrev-code))
-                          company-backends)))
-    (add-hook 'ess-mode-hook 'zyue/add-company-backend-ess))
+  (when *use-company*
+    (setq ess-use-company t)
+    (use-package company-dabbrev-code
+      :ensure nil
+      :after company
+      :config
+      (add-to-list 'company-dabbrev-code-modes 'ess-mode)
+      (defun zyue/add-company-backend-ess ()
+        (pop company-backends)
+        (setq-local company-backends
+                    (append '((company-R-args company-R-objects company-R-library
+                                              company-dabbrev-code))
+                            company-backends)))
+      (add-hook 'ess-mode-hook #'zyue/add-company-backend-ess)))
   )
 
 ;; Quick operators by /key-combo/
 (use-package key-combo
   :init
-  (add-hook 'ess-mode-hook '(lambda() (key-combo-mode t)))
-  (add-hook 'inferior-ess-mode-hook '(lambda() (key-combo-mode t)))
+  (add-hook 'ess-mode-hook #'(lambda() (key-combo-mode t)))
+  (add-hook 'inferior-ess-mode-hook #'(lambda() (key-combo-mode t)))
 
   (defvar key-combo-ess-default
     '((">"  . (" > " " %>% " " %>>% "))

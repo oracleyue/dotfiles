@@ -70,7 +70,7 @@
   (setq enable-recursive-minibuffers t)
 
   ;; disable complete-symbol showing popup window at point; use minibuffer
-  (setq ivy-display-functions-alist nil)
+  ;; (setq ivy-display-functions-alist nil)
 
   (setq ivy-wrap   t
         ivy-height 15
@@ -220,10 +220,10 @@
   :demand
   :diminish
   :init
-  (setq ivy-posframe-height 20
-        ivy-posframe-parameters '((min-width  . 75)
-                                  (min-height . 15)
-                                  (internal-border-width . 10)))
+  (setq ivy-posframe-height 18
+        ivy-posframe-parameters '((min-width   . 75) (min-height   . 15)
+                                  (left-fringe . 10) (right-fringe . 10))
+        ivy-posframe-border-width 0)
   :config
   (setq ivy-posframe-display-functions-alist
         '((swiper-isearch           . ivy-display-function-fallback)
@@ -271,39 +271,6 @@
               :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
 
 (global-set-key (kbd "M-g h") 'counsel-recent-directory)
-
-;; ---------------------------------------------
-;; /counsel-gtags/: Ivy for gtags (GNU global)
-;; ---------------------------------------------
-;; Note: outdated, use "Citre + Universtal CTags" instead
-(use-package counsel-gtags
-  :disabled
-  :ensure nil
-  :load-path "site-lisp/"
-  :demand
-  :init
-  (setq counsel-gtags-auto-update t
-        counsel-gtags-custom-dbpath ".tags/")
-  :bind-keymap ("C-c g" . counsel-gtags-command-map)
-  ;; basic jumps
-  ;; ("C-c g ." . counsel-gtags-dwim)
-  ;; ("C-c g ," . counsel-gtags-go-backward)
-  ;; ("C-c g d" . counsel-gtags-find-definition)
-  ;; ("C-c g r" . counsel-gtags-find-reference)
-  ;; ("C-c g s" . counsel-gtags-find-symbol)
-  ;; ("C-c g f" . counsel-gtags-find-file)
-  ;; create/update tags
-  ;; ("C-c g c" . counsel-gtags-create-tags)
-  ;; ("C-c g u" . counsel-gtags-update-tags)
-  ;; go through stack/history
-  ;; ("C-c g n" . counsel-gtags-go-forward)
-  ;; ("C-c g p" . counsel-gtags-go-backward)
-  :bind (:map counsel-gtags-mode-map
-              ("s-."     . counsel-gtags-dwim)
-              ("s-,"     . counsel-gtags-go-backward))
-  :hook ((c-mode c++-mode octave-mode) . counsel-gtags-mode))
-;; If you like to skip folders for tagging, add folders to the list
-;; ":skip=" in ~/.globalrc.
 
 
 (provide 'init-ivy)
