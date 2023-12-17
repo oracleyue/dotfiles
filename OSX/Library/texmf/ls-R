@@ -1,6 +1,5 @@
 % ls-R -- filename database for kpathsea; do not change this line.
 ./:
-bibtex
 doc
 dvips
 fonts
@@ -8,15 +7,6 @@ ls-R
 source
 tex
 tpm
-
-./bibtex:
-bst
-
-./bibtex/bst:
-IEEEtran.bst
-IEEEtran.bst.orig
-IEEEtranS.bst
-natbib.bst
 
 ./doc:
 fonts
@@ -115,7 +105,6 @@ mt2xxxl.pfm
 
 
 ./source:
-.DS_Store
 latex
 
 ./source/latex:
@@ -130,16 +119,7 @@ latex
 plain
 
 ./tex/latex:
-.DS_Store
-bioinfo
-ieeeconf
 mtpro2
-
-./tex/latex/bioinfo:
-bioinfo.cls
-
-./tex/latex/ieeeconf:
-ieeeconf.cls
 
 ./tex/latex/mtpro2:
 mtpro2.sty

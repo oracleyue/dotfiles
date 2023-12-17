@@ -14,14 +14,20 @@
         "markdown"
     ],
 
-    // Python
-    "python.languageServer": "Pylance",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
-
     // Matlab
     "files.associations": {
         "*.m": "matlab"
-    }
+    },
+
+    // Python
+    "python.languageServer": "Pylance",
+    "python.linting.enabled": true,
+    "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
+    "python.linting.pylintPath": "/usr/local/bin/pylint",
+    "python.linting.pylintArgs": [
+        "--generated-members=torch.*"
+    ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
 }

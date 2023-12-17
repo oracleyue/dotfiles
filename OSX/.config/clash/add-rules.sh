@@ -13,7 +13,7 @@ prepath="$HOME/.config/clash"
 
 rules="$prepath/rules.my"
 in="$prepath/AmyTelecom.yaml"
-out="$prepath/my.yaml"
+out="$prepath/myAmy.yaml"
 temp="$prepath/rules.temp"
 
 # add rules

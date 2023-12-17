@@ -1,6 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
-    // Emacs-like editing keybindings
+    // Emacs-like editing
     {
         "key": "alt+b",
         "command": "cursorWordLeft"
@@ -12,6 +12,16 @@
     {
         "key": "alt+d",
         "command": "deleteWordRight"
+    },
+    {
+        "key": "alt+o",
+        "command": "editor.action.insertLineBefore",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "editor.action.insertLineAfter",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+v",
@@ -44,15 +54,16 @@
         "command": "workbench.action.files.save"
     },
     {
-        "key": "ctrl+;",
-        "command": "editor.action.blockComment",
-        "when": "textInputFocus"
+        "key": "ctrl+\\",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "alt+;",
-        "command": "editor.action.blockComment",
+        "key": "ctrl+=",
+        "command": "editor.action.smartSelect.expand",
         "when": "textInputFocus"
     },
+
 
     // Toggle between terminal and editor focus
     {
@@ -63,5 +74,11 @@
         "key":     "ctrl+`",
         "command": "workbench.action.focusActiveEditorGroup",
         "when":    "terminalFocus"
-    }
+    },
+
+    // Python
+    {
+        "key": "cmd+enter",
+        "command": "python.execInTerminal"
+    },
 ]

@@ -27,7 +27,9 @@ alias  view='vim -R'
 source $HOME/bin/emacs-cmds-osx.sh
 
 # install
-#alias brew="ALL_PROXY=socks5://127.0.0.1:7890 brew"
+alias set_proxy_sock="export ALL_PROXY=socks5://127.0.0.1:7890"
+alias set_proxy_http="export ALL_PROXY=http://127.0.0.1:7890"
+alias brew-proxy="ALL_PROXY=socks5://127.0.0.1:7890 brew"
 
 # -------------------------------------------------------------------
 # PATH
@@ -79,7 +81,8 @@ alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
 alias tree='tree -N'  # -N to allow print Chinese in UTF
-alias du='du -h -d 1'
+#alias du='du -h -d 1'
+alias du='du -h -d 1 . | sort -h'
 alias df='df -h'
 alias rsync='rsync -aP --exclude=.DS_Store'
 # alias rsync='rsync -rlptD -P --exclude=.DS_Store'
