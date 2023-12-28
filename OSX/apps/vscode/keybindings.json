@@ -24,56 +24,8 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+v",
-        "command": "scrollPageDown"
-    },
-    {
-        "key": "alt+v",
-        "command": "scrollPageUp"
-    },
-    {
-        "key": "ctrl+w",
-        "command": "editor.action.clipboardCutAction"
-    },
-    {
-        "key": "ctrl+y",
-        "command": "editor.action.clipboardPasteAction"
-    },
-    {
-        "key": "ctrl+/",
-        "command": "undo",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "ctrl+shift+/",
-        "command": "redo",
-        "when": "textInputFocus"
-    },
-    {
         "key": "ctrl+x ctrl+s",
         "command": "workbench.action.files.save"
-    },
-    {
-        "key": "ctrl+\\",
-        "command": "editor.action.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+=",
-        "command": "editor.action.smartSelect.expand",
-        "when": "textInputFocus"
-    },
-
-
-    // Toggle between terminal and editor focus
-    {
-        "key":     "ctrl+`",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key":     "ctrl+`",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when":    "terminalFocus"
     },
 
     // Python

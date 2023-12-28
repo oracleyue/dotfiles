@@ -49,6 +49,9 @@ $sync ~/Workspace/templates $repopath
 $sync ~/.vimrc $repopath
 $sync ~/.vim --exclude=bundle $repopath
 
+# NeoVim
+$sync ~/.config/nvim/lua/user $repopath/user_nvim
+
 # Tmux & Screen
 $sync ~/.tmux.conf $repopath
 $sync ~/.tmux $repopath

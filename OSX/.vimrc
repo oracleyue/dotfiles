@@ -14,6 +14,7 @@ set directory=/tmp                          " set directory for .swp files
 set autochdir                               " automatically change directory
 set incsearch hlsearch ignorecase smartcase " settings for search
 set title                                   " enable dynamic title
+set laststatus=2                            " status line
 set expandtab smarttab                      " using 4 spaces to replace tab
 set shiftwidth=4
 set softtabstop=4
@@ -22,40 +23,26 @@ set backup                                  " backup
 set backupdir=/tmp
 syntax on                                   " syntax
 
-" ESC
+" ESC and Leader key
+inoremap jj <Esc>
 inoremap jk <Esc>
-inoremap <c-[> <Esc>
+let mapleader = " "
 
 " color schemes
-if !has("gui_running")
-    colorscheme lucius | LuciusDark  "LuciusWhite
-else  " /gvim/ or /macvim/
-    colorscheme dracula
-    set guifont=Roboto\ Mono\ for\ Powerline:h16
-    set guioptions=a  "remove menus, using clipboard instead of primary
-    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "blink frequency
-    set lines=56 columns=88 "96
-endif
+colorscheme lucius | LuciusDark  "LuciusWhite
 
-" press F12 to switch to gbk encoding
-nnoremap <F12> :e ++enc=gbk<CR>
-
-" status line
-set laststatus=2
-"set statusline=%<%h%m%r\ %f%=[%{&filetype},%{&fileencoding},%{&fileformat}]%k\ %-14.(%l/%L,%c%V%)\ %P
+" keybindings
+nnoremap <Leader>nl :nohlsearch<CR>
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 " paste from clipboard without auto-indentation
 " enable by =:set paste= (to disable =:set nopaste=)
 set pastetoggle=<F2>
 
-" keybindings
-nnoremap <F8> :vertical wincmd gf<CR>
-nnoremap <Leader>nl :nohlsearch<CR>
+" press F12 to change file into gbk encoding
+nnoremap <F12> :e ++enc=gbk<CR>
 
 " language spell checking
 autocmd FileType tex setlocal spell spelllang=en_us
@@ -77,16 +64,12 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
   Plugin 'taglist.vim'
 " repos on github
-  " productivity
   Plugin 'scrooloose/nerdcommenter'
-  " filetype supports
+  "Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
-  " git
-  Plugin 'airblade/vim-gitgutter'
-  " interface/theme/wm
-  Plugin 'scrooloose/nerdtree'
+  "Plugin 'airblade/vim-gitgutter'
   Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
+  "Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -105,28 +88,6 @@ let Tlist_Show_One_File=1
 let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 nnoremap <Leader>t :TlistToggle<CR>
 
-" ---- NERDTree ----
-map <Leader>T :NERDTreeToggle<CR>
-" close vim if only NERDTree window left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " ---- vim-airline ----
-" require powerline-symbol patched font installed
-" install Roboto Mono given in .vim/fonts/
+" require powerline-symbol patched font, e.g. Roboto Mono in .vim/fonts/
 let g:airline_powerline_fonts = 1
-" remove empty angle at the end
-let g:airline_skip_empty_sections = 1
-" set airline theme
-if has("gui_running")
-    let g:airline_theme='deus'
-endif
-" extension for tab line
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-" ---- vim-gitgutter ----
-set updatetime=250
-" jump to next/prev change/chunk: "]c", "[c"
-" undo hanks: "<Leader>hu"
-" preview hunk: "<Leader>hp"

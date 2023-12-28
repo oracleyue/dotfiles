@@ -3,13 +3,12 @@
     "security.workspace.trust.enabled": false,
 
     // Interface
+    "workbench.colorTheme": "Dracula Soft",
     "editor.fontSize": 14,
     "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
-    "workbench.colorTheme": "Atom One Dark",
 
     // Trailing Spaces
     "trailing-spaces.trimOnSave": true,
-    "trailing-spaces.highlightCurrentLine": false,
     "trailing-spaces.syntaxIgnore": [
         "markdown"
     ],
@@ -20,14 +19,5 @@
     },
 
     // Python
-    "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
     "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
-    "python.linting.pylintPath": "/usr/local/bin/pylint",
-    "python.linting.pylintArgs": [
-        "--generated-members=torch.*"
-    ],
-    "[python]": {
-        "editor.formatOnType": true
-    },
 }

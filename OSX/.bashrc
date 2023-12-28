@@ -129,9 +129,9 @@ alias matlab-tty='matlab -nosplash -nodesktop'
 alias ipy='screen -d -m jupyter qtconsole --style=monokai'
 
 # ssh server
-#alias jp='ssh -NL 8080:localhost:8888 mylab &'
-alias jp='tmux new -d -s jupyter "ssh -NL 8080:localhost:8888 mylab"'
-export remote='mylab:/home/lab8888'
+alias start-tunnel='ssh -NL 8080:localhost:4096 gpu-server &'
+#alias jp='tmux new -d -s jupyter "ssh -NL 8080:localhost:4096 gpu-server"'
+export remote='gpu-server:/home/zyue'
 
 # -------------------------------------------------------------------
 # Colorize bash
