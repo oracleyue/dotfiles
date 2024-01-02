@@ -22,7 +22,9 @@
 \renewcommand{\ALG@beginalgorithmic}{\small}
 \makeatother
 
-\usepackage{float, graphicx, caption, subcaption}
+\usepackage{float, graphicx}
+% \usepackage{caption, subcaption}  % not compatible with IEEEtran for captions
+\usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks=true,linkcolor=magenta,citecolor=blue,
             urlcolor=cyan,filecolor=red]{hyperref}

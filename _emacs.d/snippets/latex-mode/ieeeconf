@@ -25,7 +25,9 @@
 \renewcommand{\ALG@beginalgorithmic}{\small}
 \makeatother
 
-\usepackage{float, graphicx, caption, subcaption}
+\usepackage{float, graphicx}
+% \usepackage{caption, subcaption}  % not compatible with IEEEtran for captions
+\usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage[usenames,dvipsnames]{xcolor}
 \makeatletter
 \let\NAT@parse\undefined

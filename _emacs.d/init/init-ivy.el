@@ -41,7 +41,7 @@
          ;; bookmark (Emacs default; =C-x r b= to create bookmark)
          ("M-g b"   . counsel-bookmark)
          ;; recent files
-         ("M-g H"   . counsel-recentf)  ;; or "M-g h" for "counsel-recent-directory" (user-defined)
+         ("M-g h"   . counsel-recentf)  ;; or "M-g H" for "counsel-recent-directory" (user-defined)
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
@@ -265,12 +265,12 @@
                   (if (executable-find "fasd")
                       (split-string
                        (shell-command-to-string "fasd -ld") "\n" t))))))
-    (ivy-read "directories:" collection
+    (ivy-read "directories: " collection
               :keymap counsel-recent-dir-map
               :caller 'counsel-recent-directory
               :action (lambda (x) (if (fboundp 'ranger) (ranger x) (dired x))))))
 
-(global-set-key (kbd "M-g h") 'counsel-recent-directory)
+(global-set-key (kbd "M-g H") 'counsel-recent-directory)
 
 
 (provide 'init-ivy)

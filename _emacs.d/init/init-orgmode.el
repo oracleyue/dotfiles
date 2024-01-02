@@ -57,11 +57,11 @@
 (setq archive-file (expand-file-name "ArchivedDiary.org" orgnote-home))
 (setq idea-file    (expand-file-name "Research.org" orgnote-home))
 (setq paper-file   (expand-file-name "Papers.org" orgnote-home))
-(setq temp-todo-file    (expand-file-name "Marriage.org" orgnote-home))
+(setq temp-todo-file    (expand-file-name "StudentPlan.org" orgnote-home))
 
 (setq org-archive-location (concat archive-file "::")) ;; "C-c C-x C-a"
 
-(setq org-agenda-files (list todo-file idea-file archive-file temp-todo-file))
+(setq org-agenda-files (list todo-file temp-todo-file))
 (setq org-capture-bookmark nil)  ;; disable auto-add bookmark
 
 ;; Capture templates
@@ -94,7 +94,6 @@
                  "** Research\n"
                  "** School\n"
                  "** Misc.\n"
-                 "** Weekly Reports\n"
                  "** Minutes\n"
                  "** Notes\n")))
 ;; [Note]: use default org-archive command "C-c C-x C-a"
@@ -110,16 +109,20 @@
 ;;          (kill-buffer "ToDoList.org")))
 
 ;; Todo keywords
+(defface org-doing
+  '((t :foreground "white" :background "#75B5AA" :underline t))
+  "Face for my own tag DOING."
+  :group 'oracleyue)
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "MEETING"))))
+      (quote ((sequence "TODO(t)" "NEXT(n)" "DOING(i)" "|" "DONE(d)")
+              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 (setq org-todo-keyword-faces '(("TODO"      . error)
                                ("WAITING"   . warning)
                                ("DONE"      . success)
                                ("NEXT"      . warning)
                                ("HOLD"      . default)
                                ("CANCELLED" . success)
-                               ("MEETING"   . error))
+                               ("DOING"     . org-doing))
       org-priority-faces '((?A . error)
                            (?B . warning)
                            (?C . success)))

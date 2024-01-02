@@ -30,8 +30,9 @@
 
 ;; code completion engine
 (when *use-company* (require 'init-company))
+(require 'init-snippets)
 
-;; completion systems (if prefer helm, load "init-helm.el")
+;; global completion systems
 (require 'init-ivy)
 
 ;; directory and buffer explorers

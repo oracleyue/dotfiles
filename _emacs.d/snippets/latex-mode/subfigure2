@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: subfigure (subfigure)
+# key: subfig
+# group: environments
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\begin{figure}[htbp]
+  \centering
+  \subfigure[subfig caption]{
+    \includegraphics[width=.48\textwidth]{}
+    \label{subfig:label}
+  }
+  ~
+  \subfigure[subfig caption]{
+    \includegraphics[width=.48\textwidth]{}
+    \label{subfig:label}
+  }
+  \caption{$0}
+  \label{fig:label}
+\end{figure}

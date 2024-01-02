@@ -129,9 +129,13 @@
                             "--suggest-missing-includes"
                             "--header-insertion=iwyu"
                             "--header-insertion-decorators"))
-    (setq lsp-clients-clangd-args clangd-args)))
+    (setq lsp-clients-clangd-args clangd-args))
+  :hook ((c-mode . lsp) (c++-mode . lsp))
+  )
 
-;; Python: use "pyls" by default in lsp-mode
+;; Python support
+(defconst *lsp-pyls* "pyright")  ;; pyls, mspyls, pyright
+;; [1] Opensource "pyls" by default
 ;; install: "pip install python-language-server"
 (use-package lsp-pyls
   :ensure nil
@@ -141,8 +145,7 @@
   :config
   (setq lsp-clients-python-library-directories
         '("/usr/local/lib/" "/usr/lib/")))
-
-;; Python: use Microsoft C# Python Language Server
+;; [2] Microsoft C# Python Language Server
 ;; use "M-x lsp-python-ms-update-server" to upgrade from Miscrosoft
 (use-package lsp-python-ms
   :if (string-equal *lsp-pyls* "mspyls")
@@ -152,8 +155,7 @@
   (setq lsp-python-ms-auto-install-server t
         lsp-python-ms-cache "Library")        ;; cache parsing
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
-
-;; Python: use Microsoft Pyright Language Server
+;; [3] Microsoft Pyright Language Server
 ;; install by "pip install pyright"
 (use-package lsp-pyright
   :if (string-equal *lsp-pyls* "pyright")

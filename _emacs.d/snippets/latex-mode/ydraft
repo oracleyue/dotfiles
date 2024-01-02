@@ -9,7 +9,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{helvet,times,newtxmath}   % charter, cochineal
+\usepackage{helvet,times} % charter, cochineal, newtxmath (must be after amssymb)
 \usepackage[scaled=0.95]{inconsolata}
 
 \usepackage{latexsym,amsmath,amssymb,amsfonts,mathrsfs}

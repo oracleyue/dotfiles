@@ -58,15 +58,14 @@
 (use-package citre
   ;; :load-path "site-lisp/citre/"
   :functions projectile-project-root
-  :bind (("M-s ." . citre-jump)
-         ("M-s ," . citre-jump-back)
-         ("s-."   . citre-jump)
-         ("s-,"   . citre-jump-back)
-         ("M-s p" . citre-peek)
-         ("M-s P" . citre-ace-peek)
-         ("M-s u" . citre-update-this-tags-file)
-         ("M-s c" . citre-create-tags-file)
-         ("M-s R" . citre-edit-tags-file-recipe))
+  :bind (:map prog-mode-map
+              ("s-."   . citre-jump)
+              ("s-,"   . citre-jump-back)
+              ("M-s p" . citre-peek)
+              ("M-s P" . citre-ace-peek)
+              ("M-s u" . citre-update-this-tags-file)
+              ("M-s c" . citre-create-tags-file)
+              ("M-s R" . citre-edit-tags-file-recipe))
   ;; peek window: M-n/M-p to move down/up; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
@@ -123,13 +122,15 @@
 (use-package symbol-overlay
   :demand
   :diminish
-  :bind (("M-I" . symbol-overlay-put)
-         ("M-n" . symbol-overlay-jump-next)
-         ("M-p" . symbol-overlay-jump-prev)
-         ("M-N" . symbol-overlay-switch-forward)
-         ("M-P" . symbol-overlay-switch-backward)
-         ("M-C" . symbol-overlay-remove-all))
+  :bind (:map prog-mode-map
+              ("M-I" . symbol-overlay-put)
+              ("M-n" . symbol-overlay-jump-next)
+              ("M-p" . symbol-overlay-jump-prev)
+              ("M-N" . symbol-overlay-switch-forward)
+              ("M-P" . symbol-overlay-switch-backward)
+              ("M-C" . symbol-overlay-remove-all))
   :hook ((prog-mode      . symbol-overlay-mode)
+         (LaTeX-mode     . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode     . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode-end . symbol-overlay-mode)))
 
@@ -149,15 +150,17 @@
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 ;; /ivy-dash/: use Ivy to search for Dash.app (requires Alfred)
 (use-package ivy-dash
+  :disabled
   :ensure nil
   :if *is-mac*
   :load-path "site-lisp"
-  :bind ("C-c d" . dash-in-ivy))
+  :bind (:map prog-mode-map
+              ("M-s d" . dash-in-ivy)))
 ;; /dash-at-point/: search symbol at point in Dash.app
 (use-package dash-at-point
-  :disabled
   :if *is-mac*
-  :bind ("C-c d" . dash-at-point)
+  :bind (:map prog-mode-map
+              ("M-s d" . dash-at-point))
   :config
   ;; specify docsets to search in different modes
   (set 'dash-at-point-mode-alist
@@ -170,7 +173,8 @@
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
 (use-package zeal-at-point
   :if *is-linux*
-  :bind ("C-c d" . zeal-at-point)
+  :bind (:map prog-mode-map
+              ("M-s d" . zeal-at-point))
   :config
   (set 'dash-at-point-mode-alist
        '((c-mode      . "c,gsl,gl4")

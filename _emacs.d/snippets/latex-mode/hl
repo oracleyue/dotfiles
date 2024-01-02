@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hl (beamer)
+# key: hl
+# group: macros
+# --
+\hl{$0}

@@ -10,15 +10,15 @@
   (when (image-type-available-p 'xpm)
     (use-package powerline
       :demand
+      :init
+      ;; (setq powerline-display-buffer-size nil)
+      ;; (setq powerline-display-mule-info nil)
+      ;; (setq powerline-display-hud nil)
       :config
-      (setq powerline-display-buffer-size nil)
-      (setq powerline-display-mule-info nil)
-      (setq powerline-display-hud nil)
-      (when *is-mac*  ;; fix applet bug on OSX
-        (setq powerline-image-apple-rgb t))
       (when (display-graphic-p)
         (powerline-default-theme)
-        (remove-hook 'focus-out-hook 'powerline-unset-selected-window)))))
+        ;; (remove-hook 'focus-out-hook 'powerline-unset-selected-window)
+        ))))
 
 ;; ---------------------------------------------
 ;; Spaceline
@@ -28,10 +28,11 @@
     :demand
     :init (setq powerline-default-separator 'slant)
     :config
-    (spaceline-spacemacs-theme)  ;(spaceline-emacs-theme)
+    (spaceline-emacs-theme) ;; (spaceline-spacemacs-theme)
     ;; fix applet bug on OSX
-    (when *is-mac*
-      (setq powerline-image-apple-rgb t))))
+    ;; (setq ns-use-srgb-colorspace nil)  ;; this fix dims colors
+    ;; (setq powerline-image-apple-rgb t) ;; better fix, but no longer working
+    ))
 
 ;; ---------------------------------------------
 ;; Doomline

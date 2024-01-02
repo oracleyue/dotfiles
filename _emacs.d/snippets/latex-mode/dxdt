@@ -3,4 +3,4 @@
 # key: dt
 # group: macros
 # --
-\displaystyle \frac{\mathrm{d}}{\mathrm{d}t}
+\frac{\mathrm{d}$0}{\mathrm{d}t}

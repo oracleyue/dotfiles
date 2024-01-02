@@ -18,7 +18,7 @@
   :demand
   :diminish
   :hook (text-mode . flyspell-mode)
-  :init (setq ispell-dictionary "american")
+  :init (setq ispell-dictionary "british")
   :config
   (defun zyue/toggle-dictionary ()
     "Toggle flyspell dictionary between the American and the British."

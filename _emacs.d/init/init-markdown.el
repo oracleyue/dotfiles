@@ -32,6 +32,10 @@
   (set-face-background 'markdown-code-face (face-background 'org-block))
   (set-face-background 'markdown-pre-face (face-background 'org-block))
 
+  ;; disable /smartparens/ to avoid markdown built-ins
+  (with-eval-after-load "smartparens"
+    (smartparens-mode -1))
+
   ;; outline view of headings
   ;; use /imenu-list/ in "init-dired", default toggled by "C-x C-'"
   (use-package imenu-list

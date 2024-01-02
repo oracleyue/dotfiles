@@ -15,13 +15,11 @@
 
 (use-package cc-mode
   :ensure nil
-  :after lsp-mode
-  :defines (lsp-clients-clangd-executable lsp-clients-clangd-args)
   :bind (:map c-mode-base-map
               ("C-c C-c" . compile))
-  :hook ((c-mode . lsp) (c++-mode . lsp))
-  :init (setq-default c-default-style "linux"  ;; "stroustrup"
-                      c-basic-offset 4)
+  :init
+  (setq-default c-default-style "linux"  ;; "stroustrup"
+                c-basic-offset 4)
   :config
   ;; code fontify
   (use-package modern-cpp-font-lock

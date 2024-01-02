@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: derivative
-# key: dt
-# group: macros
-# --
-\frac{\mathrm{d} $1}{\mathrm{d} $2}$0

@@ -117,18 +117,6 @@
 
   ) ;; END of use-package(company)
 
-;; /Yasnippet/ A template system
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :hook (after-init . yas-global-mode)
-  :config
-  ;; suppress warning
-  (require 'warnings)
-  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
-
-;; (use-package yasnippet-snippets
-;;   :after yasnippet)
-
 
 (provide 'init-company)
 ;; ================================================

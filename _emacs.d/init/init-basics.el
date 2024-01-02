@@ -34,7 +34,7 @@
 (modify-coding-system-alist 'process "*" 'utf-8)
 
 ;; display “lambda” as “λ”
-(global-prettify-symbols-mode t)
+(global-prettify-symbols-mode t)  ;; it also prettify Auctex, raise issues
 
 ;; No sound
 (setq visible-bell t)
@@ -137,9 +137,14 @@
 ;; (add-hook 'text-mode-hook 'y-variable-width-text-mode)
 
 ;; keymap modification for OS X
-(when (and (string-equal system-type "darwin") t)
+(when (and (string-equal system-type "darwin") nil)
   (setq mac-command-modifier 'control)  ; use command as control
   (setq mac-control-modifier 'super))   ; use control as super
+;; keymap modification for Linux
+(when (and (string-equal system-type "gnu/linux") t)
+  (setq x-ctrl-keysym 'super)
+  (setq x-meta-keysym 'ctrl)
+  (setq x-super-keysym 'meta))
 
 ;; unset keys
 (global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer

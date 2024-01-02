@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: while loop
+# key: while
+# expand-env: ((yas-indent-line 'fixed))
+# --
+while IFS= read -r line;
+do
+    echo $line
+    $0
+done < ${1:YourInputFile}

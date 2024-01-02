@@ -24,7 +24,7 @@
 (use-package winum
   :demand
   :config
-  (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
+  ;; (setq winum-auto-setup-mode-line nil) ;; avoid duplicate winnum in spaceline
   (winum-mode)
   :bind (("s-1" . winum-select-window-1)
          ("s-2" . winum-select-window-2)
@@ -56,13 +56,30 @@
 ;; ------------------------------------------------
 ;; Directory explorer (regular, /dired/)
 ;; ------------------------------------------------
+;; basic functions
+(setq dired-dwim-target         t
+      dired-recursive-copies    t
+      dired-recursive-copies    'always
+      dired-recursive-deletes   t)
+
+;; suppress errors due to no support of "ls --dired" on osx
+;; (when (string= system-type "darwin") (setq dired-use-ls-dired nil))
+
+;; hide file property columns in Dired
+(when (string= system-type "darwin")  ;; use "gls" for better supports
+  (setq dired-use-ls-dired t)
+  (setq insert-directory-program "/usr/local/bin/gls"))
+;; hide owner/group information via "ls" options (if more, turn on hide-details mode)
+(setq dired-listing-switches "-algGhv --group-directories-first")
+;; use "dired-hide-details-mode" to hide all (NOTE: use key "(" to toggle hiding)
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
+;; omitting special files
 (require 'dired-x)
 (setq dired-omit-files
       "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git$\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls")
 (delete ".bbl" dired-omit-extensions)
-(add-hook 'dired-mode-hook (lambda() (dired-omit-mode 1)))
-;; suppress errors due to no support of "ls --dired" on osx
-(when (string= system-type "darwin") (setq dired-use-ls-dired nil))
+(add-hook 'dired-mode-hook #'dired-omit-mode)
 
 ;; ------------------------------------------------
 ;; Directory explorers (tree)
@@ -87,9 +104,10 @@
   ;; Grouping buffers (overwritten if using /ibuffer-projectile/)
   (setq ibuffer-saved-filter-groups
         (quote (("default"
-                 ("Explorer" (or (mode . dired-mode)
-                                 (name . "^\\*dashboard*\\*$")))
-                 ("Org"   (name . "^.*org$"))
+                 ("Explorer" (mode . dired-mode))
+                 ("Home"    (or (name . "^\\*dashboard*\\*$")
+                                (name . "^\\*scratch\\*$")))
+                 ("Org"      (name . "^.*org$"))
                  ("Writing" (or (mode . markdown-mode)
                                 (mode . latex-mode)
                                 (name . "^.*txt$")))
@@ -118,9 +136,8 @@
                             (mode . magit-status-mode)
                             (mode . magit-diff-mode)
                             (mode . magit-process-mode)))
-                 ("Emacs" (or (name . "^.*\\.el$")
-                              ;;(mode . emacs-lisp-mode)
-                              (name . "^\\*scratch\\*$")))
+                 ("ELisp" (or (name . "^.*\\.el$")
+                              (mode . emacs-lisp-mode)))
                  ("LSP"   (or (name . "^\\*lsp-log\\*$")
                               (name . "^\\*mspyls\\*$")
                               (name . "^\\*mspyls::stderr\\*$")
@@ -231,9 +248,8 @@
 ;; ------------------------------------------------
 ;; All-the-icons supports for Dired
 ;; ------------------------------------------------
-(when *enable-all-the-icons*
+(when *enable-all-the-icons-dired*
   (use-package all-the-icons-dired
-    :disabled
     :diminish
     :functions (dired-move-to-filename
                 dired-get-filename

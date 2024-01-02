@@ -39,20 +39,21 @@
 (if *is-graphic*
     (defconst *enable-all-the-icons* t)
   (defconst *enable-all-the-icons* nil))
+(if *is-server-c*
+    (defconst *enable-all-the-icons-dired* nil)
+  (defconst *enable-all-the-icons-dired* t))
 
 ;; use css locally or in github
 (defconst *use-css-local* nil)
 
 ;; auto-completion
-(defconst *use-company* t)
+(defconst *use-company* nil)
 
-;; lsp client
-(defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
-(defconst *lsp-pyls* "pyright")    ;; pyls, mspyls, pyright
-
-;; (defconst *lsp-client* 'lsp-bridge)  ;; lsp-bridge
-;; (when (eq *lsp-client* 'lsp-bridge) (defconst *use-company* nil))
-
+;; LSP client
+(if *is-server-m*
+    (defconst *lsp-client* nil)
+  ;; (defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
+  (defconst *lsp-client* 'lsp-bridge))  ;; lsp-bridge
 
 (provide 'init-const)
 ;; ================================================

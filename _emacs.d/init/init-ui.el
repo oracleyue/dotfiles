@@ -8,7 +8,7 @@
   "Set banner logo in the splash screen. nil means official logo."
   :type 'string)
 
-;; Frame   (note: [81, 45] in Mac; [96, 33] in Thinkpad)
+;; Frame   (note: [96, 33] in Thinkpad)
 (setq default-frame-alist '((width . 90) (height . 48)))
 
 ;; Transparent titlebar for Mac OS X
@@ -73,10 +73,11 @@ of the focused frame and AB is the unfocused."
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
-    (dolist (font '("Roboto Mono" "Inconsolata" "Fira Code" "DM Mono"
-                    "SF Mono" ;; Mac only
-                    "Sarasa Mono SC Nerd"  ;; width compatible with Chinese
-                    "DejaVu Sans Mono" "Consolas"))
+    (dolist (font '("Roboto Mono"
+                    "DejaVu Sans Mono" ;; Linux default
+                    "SF Mono"  ;; Mac only
+                    "Consolas" ;; Windows default
+                    "Sarasa Mono SC Nerd"))  ;; width compatible with Chinese
       (when (member font (font-family-list))
         (setq zyue-font (font-spec :family font :size size-n))
         (when font-userdefine-flag
@@ -146,9 +147,10 @@ of the focused frame and AB is the unfocused."
   (setq inhibit-compacting-font-caches t))
 
 ;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
-(setq zyue-theme 'elegant-light)
+(setq zyue-theme 'doom-one)
 (when *is-server-m* (setq zyue-theme 'elegant-light))
-(when *is-server-c* (setq zyue-theme 'doom-one))
+;; (when *is-server-c* (setq zyue-theme 'doom-one))
+(when *is-server-c* (setq zyue-theme 'spacemacs-dark))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
 
@@ -159,7 +161,8 @@ of the focused frame and AB is the unfocused."
      :custom (doom-themes-treemacs-theme "doom-colors")
      :config (doom-themes-visual-bell-config)))
   ((or 'spacemacs-dark 'spacemacs-light)
-   (setq zyue-modeline 'spaceline)
+   (setq zyue-modeline 'powerline)
+   ;; (setq zyue-modeline 'spaceline)  ;; bugs on redisplay
    (use-package spacemacs-theme))
   ('eclipse  ;; clone from abo-abo's eclipse-theme
    (setq zyue-modeline 'powerline)

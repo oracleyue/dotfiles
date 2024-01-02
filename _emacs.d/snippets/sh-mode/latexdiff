@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: latexdiff script
+# key: diff
+# group: templates
+# --
+#!/bin/bash
+# -*- coding: utf-8 -*-
+
+oldFile="${1:old}.tex"
+newFile="${2:new}.tex"
+
+if [[ "$1" == "clean" ]]; then
+    latexmk -c diff.tex
+    rm -f diff.tex
+else
+    # using config (with env ignored)
+    latexdiff --encoding=ascii --math-markup=0 -c "$HOME/bin/latexdiff.cfg" \
+              $oldFile $newFile > diff.tex
+    # without math
+    # latexdiff --encoding=ascii --math-markup=0 $oldFile $newFile > diff.tex
+    # original
+    # latexdiff $oldFile $newFile > diff.tex
+
+    # compile
+    latexmk -f -silent diff.tex
+    latexmk -f -silent diff.tex
+fi

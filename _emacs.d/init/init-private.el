@@ -14,7 +14,7 @@
   ;; (find-file plan-file)
   )
  (*is-server-c*
-  (cd (expand-file-name "Workspace/Matlab" dropbox-path))))
+  (cd (expand-file-name "Workspace" dropbox-path))))
 
 ;; switch to default buffer
 (unless (get-buffer "*dashboard*")

@@ -20,10 +20,9 @@
 (use-package tex
   :ensure auctex
   :demand
-  :hook ((LaTeX-mode . LaTeX-math-mode)        ; math mode
-         (LaTeX-mode . turn-on-reftex)         ; reftex
-         ;; (LaTeX-mode . TeX-fold-mode)       ; source folding
-         ;; (LaTeX-mode . outline-minor-mode)  ; outlining TeX
+  :hook ((LaTeX-mode . LaTeX-math-mode)  ; math mode
+         (LaTeX-mode . turn-on-reftex)   ; reftex
+         (LaTeX-mode . (lambda() (prettify-symbols-mode -1)))  ; prettify-symbols off
          )
   :config
   (setq TeX-auto-save           t
@@ -226,6 +225,10 @@
   (eval-after-load "tex"
     '(add-to-list 'TeX-command-list
                   '("update mathsym" "./supports/mathsym-update.sh" TeX-run-command nil t) t))
+
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list
+                  '("LatexDiff" "./diff.sh" TeX-run-command nil t) t))
 
   ;; PDF Viewing
   (setq-default TeX-PDF-mode t)       ; default for pdf and forward search

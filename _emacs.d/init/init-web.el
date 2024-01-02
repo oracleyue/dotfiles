@@ -11,7 +11,7 @@
 (setq nxml-child-indent 4 nxml-attribute-indent 4)
 
 ;; Use /js2-mode/ for javescript
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 
 ;; /emmet-mode/ for zen-coding
 ;; useage: "C-j" to expand

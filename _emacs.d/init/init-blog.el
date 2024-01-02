@@ -27,7 +27,8 @@
   (setq deft-extensions '("org" "md")
         deft-default-extension "org"
         deft-directory  "~/Public/Dropbox/oracleyue/Notebooks")
-  (setq deft-recursive t))
+  (setq deft-recursive t
+        deft-filter-only-filenames t))
 
 ;; ------------------------------------------------------------
 ;; RSS reader
