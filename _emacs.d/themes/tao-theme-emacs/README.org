@@ -1,0 +1,80 @@
+#+BEGIN_QUOTE
+ 	Colors blind people's eyes;
+
+         -- Lao Tzu, Tao Te Ching, Ch. 12	Sentence 1
+#+END_QUOTE
+
+* Tao theme
+
+ Two uncoloured color themes for Emacs: tao-yin and tao-yang.
+
+** Installation
+
+Tao in [[https://melpa.org/#/tao-theme][MELPA]]
+
+`M-x package-install tao-theme`
+
+or alternatively:
+
+`M-x package-install-file tao-theme`
+
+** Customization
+
+ By default ~tao-theme-scale-fn~ is ~tao-theme-golden-scale~, and produce following colors:
+
+#+BEGIN_EXAMPLE
+ #FCFCFC #FAFAFA #F6F6F6 #F1F1F1 #E8E8E8 #DADADA #C3C3C3 #9E9E9E #616161 #3C3C3C #252525 #171717 #0E0E0E #090909 #050505
+#+END_EXAMPLE
+
+ You can change that: 
+
+ - ~tao-theme-scale-fn~ should return 16 2-digit numbers (/tao-theme-golden-scale/)
+ - ~tao-theme-scale-filter-fn~ scale filter (/by default filter (< it #x05) (> it #xFC)/)
+ - ~tao-theme-use-height~ (/nil/)
+ - ~tao-theme-use-sepia~ (/nil/)
+ - ~tao-theme-use-boxes~ (/t/)
+ - ~tao-theme-sepia-depth~ (/10/)
+ - ~tao-theme-sepia-saturation~ (/1.03/)
+
+** Integration 
+
+~(defun tao-palette () (tao-theme-golden-grayscale-yin-palette))~, then you can use ~tao-with-color-variables~ macro:
+
+#+BEGIN_SRC emacs-lisp 
+(tao-with-color-variables tao-palette
+  (progn
+    (setq
+      hl-paren-colors (list color-14 color-11 color-9 color-7 color-6)
+      hl-paren-background-colors (list color-4 color-4 color-4 color-4 color-4))))
+#+END_SRC
+
+** Screenshots 
+*** Yang
+[[https://i.imgur.com/ikdx7vl.png]]
+*** Yin
+[[https://i.imgur.com/KuUQoDM.png]]
+
+** Release Notes 
+*** 1.0.1
+  - [X] Fix and simplify original code
+  - [X] Remove dirty hacks
+  - [X] Add other hacks
+
+*** 1.1.0
+  - [X] Readability
+  - [X] Variable/Fixed pitch
+  - [X] Fix org headings size
+  - [X] Syntax improvement
+  - [X] :box-es
+  - [X] Good Markdown faces
+
+*** 1.1.1
+  - [X] Fix readability
+  - [X] Sepia scale (thank you @terlar)
+  - [X] Many new faces
+  - [X] New options
+
+** Roadmap [1/3]
+  - [ ] color scales: equal temperation, just intonation, etc;
+  - [ ] support for ~frame-background-mode~ and terminal
+  - [X] simplicity
