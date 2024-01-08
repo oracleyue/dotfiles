@@ -108,6 +108,7 @@
 
             ;; Ivy
             (ivy-posframe                  :inherit    elegant-subtle)
+            (swiper-match-face-2           :inherit    elegant-critical)
 
             ;; Documentation
             (info-menu-header   :inherit       elegant-strong)
