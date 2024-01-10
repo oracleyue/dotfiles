@@ -12,7 +12,7 @@
   :init
   (setq easy-hugo-basedir "~/Workspace/Websites/myblog-hugo/"
         easy-hugo-url "https://oracleyue.github.io")
-  (setq easy-hugo-default-ext ".org")
+  (setq easy-hugo-default-ext ".md")
   :config
   ;; use default org header, if nil (default), use templates in hugo's "archetypes/"
   (setq easy-hugo-org-header nil))

@@ -35,12 +35,8 @@
   ;; acm completion
   ;; (setq acm-backend-lsp-candidates-max-number 4000) ;; for large pkg like cv2
 
-  ;; LSP for Python
-  (setq lsp-bridge-python-command "/usr/local/bin/python")
-  ;; pyright stubPath: set "stubPath" in "lsp-bridge/langserver/pyright.json"
-  ;;    "stubPath": "/Users/zyue/Programs/python/python-type-stubs",
-
-  ;; Virtualenv supports
+  ;; Python virtualenv support
+  (setq lsp-bridge-python-command "/usr/local/bin/python") ;; which has /epc/ installed
   (defun local/lsp-bridge-get-single-lang-server-by-project (project-path filepath)
     (let* ((json-object-type 'plist)
            (custom-dir (expand-file-name ".cache/lsp-bridge/pyright" user-emacs-directory))
@@ -57,6 +53,12 @@
             (lambda () (setq-local lsp-bridge-get-single-lang-server-by-project 'local/lsp-bridge-get-single-lang-server-by-project)))
   (add-hook 'pyvenv-post-activate-hooks
             (lambda () (lsp-bridge-restart-process)))
+
+  ;; Add new language suports
+  ;; ---------------- MATLAB ----------------
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '(octave-mode . "matlab-ls"))
+  (add-to-list 'lsp-bridge-default-mode-hooks 'octave-mode-hook)
+  (add-to-list 'lsp-bridge-formatting-indent-alist '(octave-mode . octave-block-offset))
 
   ) ;; End of lsp-bridge
 

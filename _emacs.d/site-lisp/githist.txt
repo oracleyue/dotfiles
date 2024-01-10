@@ -1,0 +1,2 @@
+LAST Commit that works well: 
+- lsp-bridge: 23defdd
