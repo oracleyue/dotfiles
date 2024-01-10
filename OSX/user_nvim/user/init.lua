@@ -1,7 +1,7 @@
 return {
-  -- Set global colorscheme to use
+  -- Set colorscheme 
   -- colorscheme = "ayu",  -- require plugin "ayu-theme/ayu-vim"
-
+ 
   -- LSP
   lsp = {
     servers = { 
@@ -16,11 +16,25 @@ return {
     },
   },
 
-  -- Advanced configs for Neovide and tty
+  -- Polish for advanced configurations
   polish = function()
+    -- configs only for neovide
     if vim.g.neovide then
-      -- vim.cmd[[colorscheme astromars]]
+      -- vim.cmd[[colorscheme astrodark]]
       vim.cmd[[colorscheme ayu]]
-    end
+    end 
+
+    -- manage autocommands
+    vim.api.nvim_create_augroup("exec_code", { clear = true })
+    vim.api.nvim_create_autocmd("FileType", {
+      desc = "Run Python script",
+      group = "exec_code",
+      pattern = "python",
+      callback = function(opts)
+        vim.keymap.set("n", "<leader>r", 
+                       ":sp<CR> :term python %<CR> :startinsert<CR>",
+                       { desc="Run script" })
+      end
+    })
   end,
 }

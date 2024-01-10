@@ -1,5 +1,5 @@
 auto_activate_base: false
 channels:
-  - conda-forge
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
   - defaults
 channel_priority: strict

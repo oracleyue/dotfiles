@@ -98,11 +98,12 @@ $sync --exclude-from="$HOME/bin/exclude-list" --delete ~/bin $repopath
 $sync ~/Library/texmf $repopath/Library
 
 # ===========================================
-# push updates to github.com
+# conmmit update and push to github.com
 # ===========================================
-cd $repopath
+cd $repopath  # go to dotfile repo
 git add -A
-# git commit -m "updates of OS X configs"
 git commit
-git push
-cd ~
+if [[ "$1" == "push" || "$1" == "p" ]]; then
+    git push
+fi
+cd ~  # back to home dir
