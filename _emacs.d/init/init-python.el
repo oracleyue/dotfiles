@@ -3,24 +3,22 @@
 ;; ================================================================
 ;; Last modified on 06 Mar 2021
 
-;; If you use default pyls in LSP mode, you need to install
-;;    =pip install python-language-server=
-;; Alternatively, you can use Miscrosoft Python Language Server (mspyls):
-;;    install "VSCode.app" and set its language server to "Microsoft" to donwload mypyls
-
-;; WARNING: a common mistake making pyls/mspyls fail to complete is due
-;; to lsp auto guess root, which make your whole Home as a project root.
-;; Set a project root neatly.
+;; Install LSP langserver, like pyls, mspyls, pyright (default)
 
 ;; EDIT:
 ;; - shift selected blocks "C-c >", "C-c <"
 ;; - moving blocks/line: M-<left>, M-<right>, M-<up>, M-<down>
+;;
 ;; SOURCE OVERVIEW: (more with "lsp-mode")
 ;; - counsel-semantic-or-imenu: "M-g i"
+;;
 ;; DEBUG: (more with "dap-mode")
 ;; - "M-x pdb" then enter in minibuffer "pdb FILENAME.py"
 ;; - uncomment/insert "import pdb" "pdb.set_trace()" in python scripts;
 ;;   then evaluate buffer in iPython
+;;
+;; VENV:
+;; - "M-x pyvenv-workon" to activate miniconda envs, necessary for LSP well-working
 
 ;; ------------------------------------------------
 ;; Python Environment
@@ -29,16 +27,11 @@
   :ensure nil
   :config
   ;; ---------------- Interpreter ----------------
-  (defconst *use-ipython* t)
-  (if *use-ipython*
-      (progn (setq python-shell-interpreter "ipython3")
-             (setq python-shell-interpreter-args "--simple-prompt -i"))
-    (setq python-shell-interpreter "python3"
-          python-shell-interpreter-args "-i"))
-  ;; disable readline based native completion
-  ;; (setq python-shell-completion-native-enable nil)
+  ;; If use virtualenv, controlled by /pyvenv/
+  ;; (setq python-shell-interpreter "python"
+  ;;       python-shell-interpreter-args "-i")
 
-  ;; ---------------- Editing ----------------
+  ;; ------------------ Editing ------------------
   ;; efficient editing
   (require 'epy-editing)
 
@@ -63,6 +56,13 @@
 
   ;; ---------------- Linting ----------------
   ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
+
+  ;; ---------------- Virtual Environments ----------------
+  (use-package pyvenv
+    :ensure t
+    :config
+    (setenv "WORKON_HOME" "~/miniconda/envs")
+    (pyvenv-mode 1))
 
   ;; ---------------- Running Interface ----------------
   (defun python-shell-send-line (&optional beg end)
@@ -97,6 +97,7 @@
   ;; (setq dap-python-executable "python3"))
 
   ) ;; End of python-mode
+
 
 ;; ------------------------------------------------
 ;; Abo-abo's lpy (To-do)

@@ -24,6 +24,9 @@
 ;; - use "projectile" to start a workspace or use "lsp-workspace-folders-add".
 ;; - use "lsp-describe-sessions" to check status
 
+;; WARNING: a common mistake making pyls/mspyls fail to complete is due
+;; to lsp auto guess root, which make your whole Home as a project root.
+;; Set a project root neatly.
 
 ;; ----------------------------------------------------------------
 ;; lsp-mode as emacs LSP client
