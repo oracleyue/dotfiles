@@ -60,6 +60,10 @@
   ;; ---------------- Virtual Environments ----------------
   (use-package pyvenv
     :ensure t
+    :bind (:map python-mode-map
+                ("M-s C-a"  .  pyvenv-activate)  ;; venv at current folder
+                ("M-s C-d"  .  pyvenv-deactivate)
+                ("M-s C-e"  .  pyvenv-workon))   ;; select venv
     :config
     (setenv "WORKON_HOME" "~/miniconda/envs")
     (pyvenv-mode 1))

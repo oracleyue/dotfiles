@@ -18,16 +18,20 @@
   :hook ((prog-mode . lsp-bridge-mode))
   :bind (:map prog-mode-map
               ("C-." . lsp-bridge-find-def)
-              ("C-," . lsp-bridge-return-from-def)
-              ("M-s ." . lsp-bridge-find-def)
-              ("M-s ," . lsp-bridge-return-from-def)
+              ("C-," . lsp-bridge-find-def-return)
               ("M-s D" . lsp-bridge-find-def-other-window)
               ("M-s i" . lsp-bridge-find-impl)
               ("M-s I" . lsp-bridge-find-impl-other-window)
               ("M-s r" . lsp-bridge-find-references)
-              ("M-s h" . lsp-bridge-lookup-documentation)
+              ("M-s h" . lsp-bridge-show-documentation)
+              ("M-s c" . lsp-bridge-signature-help-fetch)  ;; function call tips
               ("M-s ;" . lsp-bridge-rename)
-              ("M-s l" . lsp-bridge-list-diagnostics))
+              ("M-s a" . lsp-bridge-code-action)
+              ("M-s F" . lsp-bridge-code-format)
+              ("M-s p" . lsp-bridge-peek)  ;; in peek, further "M-l j/b" jump/back
+              ;; use "M-S-n/-p" to select item; use "M-n/-p" scroll peek contents
+              ("M-s s" . lsp-bridge-workspace-list-symbols)
+              ("M-s l" . lsp-bridge-diagnostic-list))
   :config
   (yas-global-mode 1)
   ;; (global-lsp-bridge-mode)    ;; mode-specific enabled instead

@@ -15,8 +15,6 @@
 ;; Emacs in console or tty:
 ;; use "F10" to open menu bar or "M-`" to choose menu items in minibuffer
 
-;; Much better window operations via Hydra+Ace-window
-(when *use-hydra* (require 'init-hydra-aw))
 
 ;; ----------------------------------------------
 ;; numbering windows

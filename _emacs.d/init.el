@@ -91,6 +91,13 @@
 (require 'init-utils)
 
 ;; ----------------------------------------------------------------
+;; Hydra supports (be careful on dependencies)
+;; ----------------------------------------------------------------
+;; Window operations via Hydra + Ace-window
+(when *use-hydra* (require 'init-hydra-aw))
+(when *use-hydra* (require 'init-hydra-coding))
+
+;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)
 ;; ----------------------------------------------------------------
 (when *is-zyue* (require 'init-private))

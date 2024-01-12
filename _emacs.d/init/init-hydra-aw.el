@@ -5,16 +5,16 @@
 
 ;; Comprehensive window management
 (use-package ace-window
+  :bind ("M-j" . ace-window)
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (setq aw-scope 'frame))
 
 ;; Tranpose window layout in frame
 (use-package transpose-frame)
 
 ;; Integration with Hydra
-(global-set-key (kbd "M-j") 'hydra-window/body)
 (global-set-key (kbd "M-g j") 'hydra-window/body)
+;; (global-set-key (kbd "M-j") 'hydra-window/body)
 (defhydra hydra-window (:hint nil)
   "
 Movement^^      ^Split^         ^Switch^        ^Resize^
@@ -23,7 +23,7 @@ _h_ ←           _v_ertical      _b_uffer        _H_ horzontal↓
 _j_ ↓           _x_ horizontal  _f_ind files    _J_ vertical ↓
 _k_ ↑           _B_anlance      _a_ce           _K_ vertical ↑
 _l_ →           _T_ranspose     _s_wap          _L_ horzontal↑
-_SPC_ cancel    _d_elete        _D_lt Other     _O_nly this
+_SPC_ cancel     _d_elete        _D_lt Other     _O_nly this
 "
   ("h" windmove-left)
   ("j" windmove-down)

@@ -53,20 +53,21 @@
 ;; /citre/: modern frontend for Universtal Ctags
 ;; ---------------------------------------------
 ;; Install by =brew install universal-ctags=
-;; To exclude a folder like "Backup", use "ctags --exclude=Backup ..."
+;; To exclude a folder like "Backup", use "ctags --exclude=Backup/* ..."
 ;; to create and update ctags.
 (use-package citre
-  ;; :load-path "site-lisp/citre/"
+  :demand
+  :diminish
   :functions projectile-project-root
   :bind (:map prog-mode-map
-              ("s-."   . citre-jump)
-              ("s-,"   . citre-jump-back)
-              ("M-s p" . citre-peek)
-              ("M-s P" . citre-ace-peek)
-              ("M-s u" . citre-update-this-tags-file)
-              ("M-s c" . citre-create-tags-file)
-              ("M-s R" . citre-edit-tags-file-recipe))
-  ;; peek window: M-n/M-p to move down/up; M-l j to jump to definition
+              ("s-."     . citre-jump)
+              ("s-,"     . citre-jump-back)
+              ("M-s M-p" . citre-peek)
+              ("M-s M-a" . citre-ace-peek)
+              ("M-s M-u" . citre-update-this-tags-file)
+              ("M-s M-c" . citre-create-tags-file)
+              ("M-s M-r" . citre-edit-tags-file-recipe))
+  ;; peek window: M-n/-p to move down/up; "M-S-n/-p" to select item; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
   (setq citre-tags-files '(".tags"))

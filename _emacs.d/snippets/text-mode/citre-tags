@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: citre ctags cretation (matlab)
+# key: tag
+# group: citre
+# --
+ctags
+-o
+%TAGSFILE%
+--languages=MatLab,
+--kinds-all=*
+--fields=*
+--extras=*
+--exclude=${1:_backup}/*
+-R

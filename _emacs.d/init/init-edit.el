@@ -159,7 +159,7 @@ Uses `current-date-format' for the formatting the date/time."
 
 ;; remove all except 1 following space (default "M-SPC" disabled due to Alfred)
 ;; alternative way to "M-SPC": "Esc SPC", or use
-(global-set-key (kbd "M-s SPC") 'just-one-space)
+;; (global-set-key (kbd "M-s SPC") 'just-one-space)
 
 ;; removing trailing whitespace
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
