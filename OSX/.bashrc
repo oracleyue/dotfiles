@@ -35,7 +35,7 @@ alias brew-proxy="ALL_PROXY=socks5://127.0.0.1:7890 brew"
 # PATH
 # -------------------------------------------------------------------
 # environment (export PATH and MANPATH at the end of .bashrc)
-PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 export MANPATH="/usr/local/share/man:/usr/local/man:$MANPATH"
 
 # development
@@ -47,13 +47,10 @@ export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
 export BSTINPUTS=$(kpsepath bst)
 
 # texinfo (makeinfo)
-PATH="/usr/local/opt/texinfo/bin:$PATH"
-
-# CUDA
-#PATH=${PATH}:/Developer/NVIDIA/CUDA-9.0/bin
+export PATH="/usr/local/opt/texinfo/bin:$PATH"
 
 # llvm (clangd)
-PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 # dotnet
 export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
@@ -81,8 +78,9 @@ alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
 alias tree='tree -N'  # -N to allow print Chinese in UTF
-#alias du='du -h -d 1'
-alias du='du -h -d 1 . | sort -h'
+# instead of gnu du, you may use "gdu" for better display
+alias du='du -h -d 1'
+alias dus='du -h -d 1 . | sort -h'
 alias df='df -h'
 alias rsync='rsync -aP --exclude=.DS_Store'
 # alias rsync='rsync -rlptD -P --exclude=.DS_Store'
@@ -108,14 +106,20 @@ eval "$(fasd --init auto)"
 # a: any; s: show/search/select; d: directory; f: file
 # sd: interactive directory selection; sf: interactive file selection
 # z: quick cd; zz: cd with interactive selection
+# Examples:
+# $ vim `sf INPUTS`  OR  $ sf -e vim INPUTS
+# $ cd `sd INPUTS`
 
 # use FZF
-source /usr/local/opt/fzf/shell/key-bindings.bash
+alias fzf='fzf --layout=reverse'
 source /usr/local/opt/fzf/shell/completion.bash
+# Usage: cd/vim **<TAB>
+#
+# source /usr/local/opt/fzf/shell/key-bindings.bash
+# Keymap List:
 # CTRL-T: paste the selected files or directories onto the commandline
 # CTRL-R: paste the selected command from history onto the commandline
 # ALT-C:  cd into the selected directory
-alias fzf='fzf --layout=reverse'
 
 # use tldr as alternative to man ("npm install -g tldr")
 # e.g., $ tldr tar
@@ -131,7 +135,6 @@ alias ipy='screen -d -m jupyter qtconsole --style=monokai'
 # ssh server
 alias start-tunnel='ssh -NL 8080:localhost:4096 gpu-server &'
 #alias jp='tmux new -d -s jupyter "ssh -NL 8080:localhost:4096 gpu-server"'
-export remote='gpu-server:/home/zyue'
 
 # -------------------------------------------------------------------
 # colorize bash
@@ -140,12 +143,9 @@ export CLICOLOR=1
 
 # basic prompt setup
 source /usr/local/etc/bash_completion.d/git-prompt.sh
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
 # export PS1="\\w\$(__git_ps1 '(%s)') \$ "
-# export PS1="\[\033[0;34m\]\\u@\\h:\[\033[0;32m\]\\w\[\033[0m\] \[\033[0;31m\]\$(__git_ps1 '(%s)')\[\033[0m\]\$ "
-export PS1="\[\033[0;34m\]\\u@\\h:\[\033[0;32m\]\\w\[\033[0m\]\[\033[0;31m\]\$(parse_git_branch)\[\033[0m\] \$ "
+# export PS1="\[\033[1;34m\]\\u@\\h:\[\033[0;32m\]\\w\[\033[0m\] \[\033[0;31m\]\$(__git_ps1 '(%s)')\[\033[0m\]\$ "
+export PS1="\[\033[1;32m\]\\w\[\033[0m\]\[\033[1;31m\]\$(__git_ps1 ' (%s)')\[\033[0m\] \$ "
 
 # /less/ to colorize man page
 export LESS=-R

@@ -35,16 +35,24 @@ if has("gui_running")
     set lines=45 columns=81
 endif
 
-" better auto-complete with Omni complete
-" prefix ctrl+x, ctrl+f (filename), +i (path), +l (wholeline), +o (Omni)
+" default auto-complete by C-n/p
+" better auto-complete via omni-complete
+" [usage]: prefix ctrl+x, ctrl+f (filename), +i (path), +l (wholeline), +o (omni)
 "set omnifunc=syntaxcomplete#Complete
 
 " keybindings
+nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>nl :nohlsearch<CR>
-" use L-q instead of q for recording (avoid mistyping)
-nnoremap <Leader>q q
+" avoid mistyping q for recording
+nnoremap Q q
 nnoremap q <Nop>
 
+" locating (H/M/L to head/middle/bottom; zt/zz/zb to top/center/bottom this line)
+
+" buffers (use :b[NUM] to switch; :bd to close)
+set hidden
+nnoremap <Leader>b :buffers<CR>
+nnoremap <Leader>qb :bd<CR>
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "+y
@@ -65,31 +73,23 @@ autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
 autocmd BufWritePre * :%s/\s\+$//e
 
 " --------------------------------------------------------------------------
-" Plugins
+" Plugin Management
 " --------------------------------------------------------------------------
-
-" ---- Vundle ----
 filetype off				" required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " List of installed plugins:
-" vim-scripts repos
-  Plugin 'taglist.vim'
-" repos on github
+  "Plugin 'vim-scripts/taglist.vim'
   Plugin 'scrooloose/nerdcommenter'
-  "Plugin 'scrooloose/nerdtree'
+  Plugin 'scrooloose/nerdtree'
   Plugin 'jamessan/vim-gnupg'
-  "Plugin 'airblade/vim-gitgutter'
   Plugin 'vim-airline/vim-airline'
-  "Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" Help
 " :PluginList          - list configured bundles
 " :PluginInstall       - install(update) bundles
-" :PluginSearch foo    - search(or refresh cache first) for foo
 " :PluginClean         - confirm(or auto-approve) removal of unused bundles
 " see :h vundle for more details or wiki for FAQ
 
@@ -97,13 +97,16 @@ filetype plugin indent on    " required
 let g:NERDSpaceDelims=1  " add a space when comment
 nnoremap <Leader>/ :call nerdcommenter#Comment(0,"toggle")<CR>
 
-" ---- Taglist ----
-let Tlist_Enable_Fold_Column=0
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Show_One_File=1
-nnoremap <Leader>t :TlistToggle<CR>
-let g:tlist_tex_settings='tex;c:chapters;s:sections;u:subsections;b:subsubsections;l:labels'
+" ---- NerdTree ----
+nnoremap <Leader>e :NERDTreeToggle<CR>
 
 " ---- vim-airline ----
 " require powerline-symbol patched font, e.g. Roboto Mono in .vim/fonts/
 let g:airline_powerline_fonts = 1
+
+" ---- Taglist ----
+" let Tlist_Enable_Fold_Column=0
+" let Tlist_Exit_OnlyWindow=1
+" let Tlist_Show_One_File=1
+" nnoremap <Leader>t :TlistToggle<CR>
+" let g:tlist_tex_settings='tex;c:chapters;s:sections;u:subsections;b:subsubsections;l:labels'

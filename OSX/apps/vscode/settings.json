@@ -1,11 +1,11 @@
 {
     // general
-    "security.workspace.trust.enabled": false,
-
-    // Interface
-    "workbench.colorTheme": "Dracula Soft",
+    "workbench.colorTheme": "Dracula Soft", // default enable not working
     "editor.fontSize": 14,
-    "editor.fontFamily": "SF Mono, Menlo, Monaco, Courier New, monospace",
+    "editor.fontFamily": "SF Mono, Roboto Mono, Courier New, monospace",
+
+    // security
+    "security.workspace.trust.enabled": false,
 
     // Trailing Spaces
     "trailing-spaces.trimOnSave": true,
@@ -19,5 +19,5 @@
     },
 
     // Python
-    "python.defaultInterpreterPath": "/usr/local/bin/python", // default enable not working
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
 }
