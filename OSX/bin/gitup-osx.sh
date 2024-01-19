@@ -47,10 +47,14 @@ $sync ~/Workspace/templates $repopath
 
 # VIM
 $sync ~/.vimrc $repopath
-$sync ~/.vim --exclude=bundle $repopath
+$sync ~/.vim/colors --exclude=bundle $repopath/.vim/
+$sync ~/.vim/fonts --exclude=bundle $repopath/.vim/
 
 # NeoVim
-$sync ~/.config/nvim/lua/user $repopath/user_nvim
+$sync ~/.config/nvim --exclude=.git $repopath/.config/
+
+# Alacritty (terminal emulator)
+cp $HOME/.config/alacritty/alacritty.toml $repopath/.config/alacritty/
 
 # Tmux & Screen
 $sync ~/.tmux.conf $repopath
