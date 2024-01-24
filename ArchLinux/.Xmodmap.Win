@@ -1,16 +1,45 @@
-! Keymap for Windows standard keyboard
-! Swap Control and Super/Command
+! -------------------------------------
+! Swap Ctrl, Alt and Win keys
+! -------------------------------------
 
+! First clear all modifiers and control
 clear control
-!clear mod1
+clear mod1
 clear mod4
 
-! Swap Super and Control
+! Keys left keys: : Win Alt Ctrl <Space>
+keycode 64 = Control_L
+keycode 133 = Alt_L Meta_L
 keycode 37 = Super_L
-!keycode 105 = Super_R
-keycode 133 = Control_L
-keycode 134 = Control_R
 
+! Keys right keys: <Space> Ctrl Alt Win
+keycode 108 = Control_R
+keycode 134 = Alt_R Meta_R
+keycode 105 = Super_R
+
+! Add Caps_Lock as additional Control_L
+remove Lock = Caps_Lock
+keysym Caps_Lock = Control_L
+
+! Adds mod back
+add mod1 = Alt_L Alt_R Meta_L Meta_R
+add mod4 = Super_L Super_R
 add control = Control_L Control_R
-!add mod1 = Alt_L Alt_R Meta_L
-add mod4 = Super_L Super_R Super_L Hyper_L
+add Lock = Caps_Lock
+
+! -------------------------------------
+! Keycode List: use "xev" to print
+! -------------------------------------
+! Ctrl_L: 37
+! Ctrl_R: 105
+! Alt_L: 64
+! Alt_R: 108
+! Super_L: 133
+! Super_R: 134
+! CapsLock: 66
+
+! -------------------------------------
+! Help more
+! -------------------------------------
+! The 2nd run of xmodmap will assert errors, since Caps_Lock no longer exists.
+! Restore default keymaps: setxkbmap -layout us
