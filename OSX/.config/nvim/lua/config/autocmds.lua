@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = "exec_code",
   pattern = "python",
   callback = function()
-    -- vim.keymap.set("n", "<leader>r", ":sp<CR> :term python %<CR> :startinsert<CR>", { desc = "Run script" })
-    vim.keymap.set("n", "<leader>r", ":sp<CR> :term python %<CR>", { desc = "Run script" })
+    vim.keymap.set("n", "<leader>rr", ":sp<CR> :term python %<CR> :startinsert<CR>", { desc = "Run script in shell" })
+    -- vim.keymap.set("n", "<leader>r", ":sp<CR> :term python %<CR>", { desc = "Run script" })
   end,
 })
