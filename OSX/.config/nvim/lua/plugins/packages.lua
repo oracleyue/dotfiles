@@ -1,8 +1,13 @@
 return {
-  -- add matlab_ls to lspconfig
+  -- lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {
+      -- diagnostics
+      diagnostics = {
+        virtual_text = false,  -- remove inline error messages
+      },
+      -- add matlab_ls
       servers = {
         matlab_ls = {
           single_file_support = true,
@@ -17,7 +22,7 @@ return {
     },
   },
 
-  -- fix telescope symbol bug
+  -- telescope: fix symbol bug
   {
     "nvim-telescope/telescope.nvim",
     keys = {

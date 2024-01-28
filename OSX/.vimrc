@@ -13,8 +13,7 @@ set foldmethod=indent                       " default indent mode
 set foldlevel=2                             " open folds up to level [N]
 set backspace=indent,eol,start              " enable BACKSPACE on Mac
 set expandtab smarttab                      " using 4 spaces to replace tab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=4 softtabstop=4
 set showcmd                                 " show commands that not finished
 set autochdir                               " automatically change directory
 set backupdir=/tmp
@@ -96,6 +95,7 @@ filetype plugin indent on    " required
 " ---- NerdCommenter ----
 let g:NERDSpaceDelims=1  " add a space when comment
 nnoremap <Leader>/ :call nerdcommenter#Comment(0,"toggle")<CR>
+" comment: <Leader>cc     uncomment: <Leader>cu
 
 " ---- NerdTree ----
 nnoremap <Leader>e :NERDTreeToggle<CR>

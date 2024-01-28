@@ -1,27 +1,31 @@
 import = [
-    "~/.config/alacritty/themes/themes/zenburn.toml"
-    # "~/.config/alacritty/themes/themes/tokyo-night.toml"
+    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+    # "~/.config/alacritty/themes/themes/zenburn.toml"
 ]
 # more on https://github.com/alacritty/alacritty-theme
 
 [window]
-dimensions = { columns = 90, lines = 48 }
-dynamic_padding = true
-
-decorations = "Transparent"
-padding = { x = 8, y = 30 }
+dimensions = { columns = 88, lines = 50 }
+# dynamic_padding = true
+padding = { x = 4, y = 2 }
 opacity = 0.95
 blur = true
+
+# decorations = "Transparent"
+# padding = { x = 8, y = 30 }
 
 option_as_alt = "Both"
 
 [font]
 normal = { family = "RobotoMono Nerd Font", style = "Regular" }
-size = 14.5
-offset = { x = 0, y = 1 }
+size = 15
+# offset = { x = 0, y = 3 }
 
 [bell]
 duration = 2
 
 [selection]
 save_to_clipboard = true
+
+[env]
+TERM = "xterm-256color"
