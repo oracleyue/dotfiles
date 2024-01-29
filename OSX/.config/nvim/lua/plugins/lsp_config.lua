@@ -1,11 +1,21 @@
 return {
+  -- which-key management
+  {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>r"] = { name = "+run" }, -- group for repl_runner.lua
+        ["<leader>L"] = nil, -- remove default LazyVim changelog
+      },
+    },
+  },
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {
       -- diagnostics
       diagnostics = {
-        virtual_text = false,  -- remove inline error messages
+        virtual_text = false, -- remove inline error messages
       },
       -- add matlab_ls
       servers = {

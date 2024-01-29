@@ -3,7 +3,8 @@
 -- Add any additional options here
 
 -- Basics
-vim.o.guifont = "RobotoMono Nerd Font:h15"
+-- vim.o.guifont = "RobotoMono Nerd Font:h15"
+vim.o.guifont = "Iosevka Nerd Font:h17"
 vim.o.autochdir = true
 
 -- TAB

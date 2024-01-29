@@ -5,20 +5,21 @@ import = [
 # more on https://github.com/alacritty/alacritty-theme
 
 [window]
-dimensions = { columns = 88, lines = 50 }
+dimensions = { columns = 88, lines = 45 }
 # dynamic_padding = true
 padding = { x = 4, y = 2 }
 opacity = 0.95
 blur = true
 
 # decorations = "Transparent"
-# padding = { x = 8, y = 30 }
+# padding = { x = 4, y = 30 }
 
 option_as_alt = "Both"
 
 [font]
-normal = { family = "RobotoMono Nerd Font", style = "Regular" }
-size = 15
+# normal = { family = "RobotoMono Nerd Font", style = "Regular" }
+normal = { family = "IosevkaTerm Nerd Font", style = "Regular" }
+size = 17
 # offset = { x = 0, y = 3 }
 
 [bell]

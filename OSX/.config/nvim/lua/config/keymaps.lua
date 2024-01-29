@@ -7,4 +7,5 @@ vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 vim.keymap.set("i", "jk", "<ESC>", { silent = true })
 
 -- Disable keymaps
--- vim.keymap.del("n", "<leader><space>")
+vim.keymap.del("n", "<leader>L")
+

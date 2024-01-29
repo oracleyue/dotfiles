@@ -29,7 +29,7 @@ let mapleader = " "
 " color schemes
 colorscheme lucius | LuciusDark  "LuciusWhite
 if has("gui_running")
-    set guifont=Roboto\ Mono\ for\ Powerline\ 11
+    set guifont="RobotoMono Nerd Font:h15"
     set guioptions=a  "remove menus, using clipboard instead of primary
     set lines=45 columns=81
 endif
@@ -43,8 +43,8 @@ endif
 nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>nl :nohlsearch<CR>
 " avoid mistyping q for recording
-nnoremap Q q
-nnoremap q <Nop>
+" nnoremap Q q
+" nnoremap q <Nop>
 
 " locating (H/M/L to head/middle/bottom; zt/zz/zb to top/center/bottom this line)
 
@@ -94,7 +94,7 @@ filetype plugin indent on    " required
 
 " ---- NerdCommenter ----
 let g:NERDSpaceDelims=1  " add a space when comment
-nnoremap <Leader>/ :call nerdcommenter#Comment(0,"toggle")<CR>
+nnoremap gcc :call nerdcommenter#Comment(0,"toggle")<CR>
 " comment: <Leader>cc     uncomment: <Leader>cu
 
 " ---- NerdTree ----
