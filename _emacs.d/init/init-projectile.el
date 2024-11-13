@@ -1,7 +1,15 @@
 ;; ===============================================================
 ;; Project Management via /projectile/
 ;; ===============================================================
-;; Last modified on 02 Mar 2021
+;; Last modified on 13 Nov 2024
+
+;; Notes:
+;; - Create .projectile or .gitignore or .git/ to create make a project.
+;; - Use "C-c p p" to switch project; "C-c p f" to find files in the project
+;; - To ignore files/folders,
+;;   - ".projectile" only works for "native" indexing;
+;;   - we use "ripgrep" for "alien" indexing, which only obeys ".gitignore".
+;; - When caching enabled, use "C-c p i" to fore re-caching.
 
 (use-package projectile
   :diminish
@@ -12,26 +20,27 @@
               ("C-c p C-d" . projectile-remove-known-project))
   :hook (after-init . projectile-mode)
   :init
-  (setq projectile-mode-line-prefix ""
+  (setq projectile-indexing-method  'alien
+        projectile-enable-caching   t
+        ;; note: force to re-caching: "C-c p i" or "projectile-invalidate-cache"
         projectile-sort-order       'recentf
-        projectile-use-git-grep     t)
+        ;; projectile-use-git-grep     t
+        )
 
   :config
   ;; Ignore folders or files
-  (setq projectile-ignored-projects '("~/"
+  (setq projectile-ignored-projects '("~/" "~/tmp/"
                                       "~/Public/Dropbox/"))
-  ;; Due to "alien" indexing method, globally ignore folders/files by
-  ;; re-defining "rg" args
+
+  ;; Project root additional guess (besides ".git", ".projectile")
+  (setq projectile-project-root-files
+        '("CMakeLists.txt" "Makefile" ".gitignore"))
+
+  ;; Re-defining "rg" args to globally ignore folders/files in "alien" indexing
+  ;; Note: files to be ignored should be listed in "~/.emacs.d/templates/rg_ignore"
   (mapc (lambda (item)
           (add-to-list 'projectile-globally-ignored-directories item))
         '("auto" "archived" "backup"))
-  ;; files to be ignored should be listed in "~/.emacs.d/templates/rg_ignore"
-
-  ;; Control project root additional guess (besides ".git", ".projectile")
-  (setq projectile-project-root-files
-        '("CMakeLists.txt" "Makefile" "configure.ac" "configure.in"
-          "TAGS" "GTAGS"))
-
   ;; Use the faster searcher to handle project files: ripgrep "rg"
   (when (executable-find "rg")
     (setq projectile-generic-command

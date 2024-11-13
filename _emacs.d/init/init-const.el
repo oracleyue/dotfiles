@@ -54,6 +54,8 @@
     (defconst *lsp-client* nil)
   ;; (defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
   (defconst *lsp-client* 'lsp-bridge))  ;; lsp-bridge
+(defconst *enable-matlab-lsp* nil)
+
 
 (provide 'init-const)
 ;; ================================================

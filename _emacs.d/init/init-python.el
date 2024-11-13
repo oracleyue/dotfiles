@@ -100,6 +100,13 @@
   ;; if not default "python", specify here:
   ;; (setq dap-python-executable "python3"))
 
+  ;; ---------------- Running script in shell ----------------
+  (add-hook 'python-mode-hook
+            (lambda () (set (make-local-variable 'compile-command)
+                       (concat "python " buffer-file-name))))
+  :bind (:map python-mode-map
+              ("M-s R"  .  compile))
+
   ) ;; End of python-mode
 
 

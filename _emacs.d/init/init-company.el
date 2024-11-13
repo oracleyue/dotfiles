@@ -42,8 +42,8 @@
         company-global-modes
         '(not comint-mode erc-mode message-mode help-mode gud-mode eshell-mode
               text-mode latex-mode org-mode markdown-mode)
-        company-backends '((company-files company-capf)
-                           ;; (company-files company-capf :with company-yasnippet)
+        company-backends '(;; (company-files company-capf)
+                           (company-files company-capf :with company-yasnippet)
                            (company-dabbrev-code company-keywords company-files)
                            company-dabbrev))
 

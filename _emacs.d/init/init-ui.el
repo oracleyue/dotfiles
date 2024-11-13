@@ -69,11 +69,12 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
-(if *is-mac* (setq size-n 14.0) (setq size-n 11.0))
+(if *is-mac* (setq size-n 14.0) (setq size-n 10.5))
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
     (dolist (font '("Roboto Mono"
+                    ;; fix bug: remove/disable "medium"-type ttf files!
                     "DejaVu Sans Mono" ;; Linux default
                     "SF Mono"  ;; Mac only
                     "Consolas" ;; Windows default
@@ -88,9 +89,10 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify variable-width font
   (catch 'loop
-    (dolist (font '("IowanOldSt BT"  ;; serif
+    (dolist (font '("Times New Roman"
+                    "Roboto"
                     "SF Compact Display"  ;; Mac only
-                    "Roboto" "DejaVu Sans"))
+                    "DejaVu Sans"))
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
@@ -149,8 +151,8 @@ of the focused frame and AB is the unfocused."
 ;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
 (setq zyue-theme 'doom-one)
 (when *is-server-m* (setq zyue-theme 'elegant-light))
-;; (when *is-server-c* (setq zyue-theme 'doom-one))
-(when *is-server-c* (setq zyue-theme 'spacemacs-dark))
+(when *is-server-c* (setq zyue-theme 'doom-one))
+;; (when *is-server-c* (setq zyue-theme 'spacemacs-dark))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
 
@@ -180,7 +182,6 @@ of the focused frame and AB is the unfocused."
      :config
      (add-to-list 'default-frame-alist '(internal-border-width . 24))))
   ((or 'elegant-light 'elegant-dark)
-   ;; (setq zyue-modeline 'doomline)
    (use-package elegant-theme
      :ensure nil
      :demand

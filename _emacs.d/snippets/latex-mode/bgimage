@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: frame with an background image
+# key: bg
+# group: beamer
+# expand-env: ((yas-indent-line 'fixed))
+# --
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bg.png}}
+  \begin{frame}
+    $0
+  \end{frame}
+}

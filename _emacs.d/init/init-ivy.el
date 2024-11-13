@@ -35,7 +35,7 @@
          ;; kill-ring
          ("M-y"     . counsel-yank-pop)
          ;; mark-ring
-         ("M-g SPC" . counsel-mark-ring)
+         ("M-g m"   . counsel-mark-ring)
          ;; register
          ("M-g r"   . counsel-register)
          ;; bookmark (Emacs default; =C-x r b= to create bookmark)

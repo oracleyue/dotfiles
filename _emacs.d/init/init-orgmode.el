@@ -51,13 +51,15 @@
 
 ;; /GTD Function Extensions/
 ;; refer to http://doc.norang.ca/org-mode.html
-(setq orgnote-home (expand-file-name
-                    "~/Public/Dropbox/oracleyue/OrgNotes/"))
-(setq todo-file    (expand-file-name "ToDoList.org" orgnote-home))
-(setq archive-file (expand-file-name "ArchivedDiary.org" orgnote-home))
-(setq idea-file    (expand-file-name "Research.org" orgnote-home))
-(setq paper-file   (expand-file-name "Papers.org" orgnote-home))
-(setq temp-todo-file    (expand-file-name "StudentPlan.org" orgnote-home))
+(setq gtd-home (expand-file-name
+                "~/Public/Dropbox/oracleyue/GTD/"))
+(setq note-home (expand-file-name
+                 "~/Public/Dropbox/oracleyue/Notebooks/Research/"))
+(setq todo-file    (expand-file-name "ToDoList.org" gtd-home))
+(setq archive-file (expand-file-name "ArchivedDiary.org" gtd-home))
+(setq temp-todo-file    (expand-file-name "inbox.org" gtd-home)) ;; used by iOS app
+(setq idea-file    (expand-file-name "Ideas.org" note-home))
+(setq seminar-file   (expand-file-name "Seminars.org" note-home))
 
 (setq org-archive-location (concat archive-file "::")) ;; "C-c C-x C-a"
 
@@ -67,18 +69,16 @@
 ;; Capture templates
 (setq org-capture-templates
       '(("t" "TODO (ToDoList)" entry (file+headline todo-file "Collecting")
-         "* TODO %? \n DEADLINE: %^t\n Added on %U" :empty-lines 1)
+         "* TODO %? \nDEADLINE: %^t\nAdded on %U" :empty-lines 1)
         ("s" "Scheduled (ToDoList)" entry (file+headline todo-file "Collecting")
-         "* NEXT %? %^G \n SCHEDULED: %^t\n Added on %U" :empty-lines 1)
-        ("m" "Meeting (ToDoList)" entry (file+headline todo-file "Collecting")
-         "* MEETING %? %^G \n %^t" :empty-lines 1)
-        ("n" "Quick Notes (ToDoList)" entry (file+headline todo-file "Notes")
-         "* %?\n Added on %U\n" :empty-lines 1)
-
-        ("i" "Research Ideas (Research)" entry (file+headline idea-file "Mind Tracking")
-         "* %?\n Added on %U\n" :empty-lines 1)
-        ("p" "Paper Reading (Papers)" entry (file paper-file)
-         "* %?\n Added on %U\n" :empty-lines 1)
+         "* NEXT %? %^G \nSCHEDULED: %^t\nAdded on %U" :empty-lines 1)
+        ("n" "Quick notes (ToDoList)" entry (file+headline todo-file "Notes")
+         "* %?\nAdded on %U\n" :empty-lines 1)
+        ;; research notes
+        ("i" "Ideas (Research)" entry (file idea-file)
+         "* %?\nAdded on %U\n" :empty-lines 1)
+        ("m" "Seminar notes (Research)" entry (file seminar-file)
+         "* %?\nAdded on %U\n" :empty-lines 1)
         ))
 (with-eval-after-load "counsel"
   (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
@@ -92,9 +92,9 @@
          (insert "*" ?\s (format-time-string "%Y-%m %b") ?\n
                  "** Projects\n"
                  "** Research\n"
+                 "** Review\n"
                  "** School\n"
                  "** Misc.\n"
-                 "** Minutes\n"
                  "** Notes\n")))
 ;; [Note]: use default org-archive command "C-c C-x C-a"
 ;; archive of research diaries

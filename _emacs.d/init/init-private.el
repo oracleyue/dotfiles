@@ -9,9 +9,9 @@
 (cond
  (*is-server-m*
   (dired (expand-file-name "Academia" dropbox-path))
-  (dired (expand-file-name "oracleyue/OrgNotes" dropbox-path))
+  (dired (expand-file-name "oracleyue/GTD" dropbox-path))
+  (dired (expand-file-name "oracleyue/Notebooks/Research" dropbox-path))
   ;; (find-file todo-file)
-  ;; (find-file plan-file)
   )
  (*is-server-c*
   (cd (expand-file-name "Workspace" dropbox-path))))

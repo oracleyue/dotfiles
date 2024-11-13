@@ -238,7 +238,7 @@
 ;; Integrations:
 ;;   - /markdown-mode/ to show headings
 (use-package imenu-list
-  :bind ("C-x C-'" . imenu-list-smart-toggle)
+  :bind ("M-g M-i" . imenu-list-smart-toggle)
   :config
   ;; (setq imenu-list-auto-resize t)
   (setq imenu-list-focus-after-activation t))

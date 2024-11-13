@@ -1,26 +1,33 @@
 ;; ================================================================
 ;; Treemacs: A tree-like file explorer.
 ;; ================================================================
-;; Last modified on 03 Mar 2021
+;; Last modified on 13 Nov 2024
+
+;; Usage:
+;; - "C-c p h": add projectile project into treemacs
+;; - "M-0" or "C-c t t": open or close treemacs sidebar
+;; - editing in the sidebar:
+;;   - "C-c C-w a": treemacs-create-workspace
+;;   - "C-c C-w d": treemacs-remove-workspace
+;;   - "C-c C-w e": treemacs-edit-workspaces
 
 (use-package treemacs
   :commands (treemacs-follow-mode
              treemacs-filewatch-mode
              treemacs-fringe-indicator-mode
              treemacs-git-mode)
-  :bind (([f8]        . treemacs)
+  :bind (("M-0"       . treemacs-select-window)
          ("C-x t t"   . treemacs)
-         ("M-0"       . treemacs-select-window)
-         ("C-x 1"     . treemacs-delete-other-windows)
          ("C-x t 1"   . treemacs-delete-other-windows)
-         ("C-x t b"   . treemacs-bookmark)
+         ("C-x t d"   . treemacs-select-directory)
+         ("C-x t B"   . treemacs-bookmark)
          ("C-x t C-t" . treemacs-find-file)
          ("C-x t M-t" . treemacs-find-tag)
          :map treemacs-mode-map
          ([mouse-1]   . treemacs-single-click-expand-action))
   :config
   (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
-        treemacs-sorting                       'alphabetic-case-insensitive-desc
+        treemacs-sorting                       'alphabetic-asc
         treemacs-follow-after-init             t
         treemacs-is-never-other-window         t
         treemacs-silent-filewatch              t

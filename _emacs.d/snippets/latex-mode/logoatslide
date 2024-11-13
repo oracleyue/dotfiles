@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: add logo at every slide
+# key: logo
+# group: beamer
+# expand-env: ((yas-indent-line 'fixed))
+# --
+% \logo{\includegraphics[width=.3\textwidth]{templates/logo}}
+\setbeamertemplate{headline}{
+  \hfill
+  \includegraphics[width=4cm]{templates/logo.pdf}
+  \hspace{.5cm}\vspace{-1.2cm}}

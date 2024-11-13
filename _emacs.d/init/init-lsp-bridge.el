@@ -3,6 +3,9 @@
 ;; ================================================================
 ;; Last modified on 11 Aug 2022
 
+;; To-do's:
+;; - disable lsp-bridge to complete yas snippets for matlab-mode
+
 ;; System dependencies:
 ;; - Python package: "pip install epc"
 ;; - LSP for Python: "pip install pyright"
@@ -16,6 +19,8 @@
   :load-path "~/.emacs.d/site-lisp/lsp-bridge"
   :diminish " (LSP/g)"
   :hook ((prog-mode . lsp-bridge-mode))
+         ;; (emacs-lisp-mode . lsp-bridge-mode)
+         ;; (python-mode     . lsp-bridge-mode)
   :bind (:map prog-mode-map
               ("C-." . lsp-bridge-find-def)
               ("C-," . lsp-bridge-find-def-return)
@@ -39,6 +44,7 @@
   ;; acm completion
   ;; (setq acm-backend-lsp-candidates-max-number 4000) ;; for large pkg like cv2
 
+  ;; ---------------- Python ----------------
   ;; Python virtualenv support
   (setq lsp-bridge-python-command "/usr/local/bin/python") ;; which has /epc/ installed
   (defun local/lsp-bridge-get-single-lang-server-by-project (project-path filepath)
@@ -58,7 +64,6 @@
   (add-hook 'pyvenv-post-activate-hooks
             (lambda () (lsp-bridge-restart-process)))
 
-  ;; Add new language suports
   ;; ---------------- MATLAB ----------------
   (add-to-list 'lsp-bridge-single-lang-server-mode-list '(octave-mode . "matlab-ls"))
   (add-to-list 'lsp-bridge-default-mode-hooks 'octave-mode-hook)
@@ -66,11 +71,12 @@
 
   ) ;; End of lsp-bridge
 
-;; Avoid conflicting, if company-mode enabled
-(when *use-company*
-  (setcdr (last company-global-modes) '(python-mode emacs-lisp-mode)))
 
-;; Disable lsp-bridge for certain major modes
+;; Avoid conflicting, if company-mode enabled
+;; (when *use-company*
+;;   (setcdr (last company-global-modes) '(python-mode emacs-lisp-mode)))
+
+;; Disable lsp-bridge for certain major modes (if load for "prog-mode")
 ;; (add-hook 'octave-mode-hook (lambda () (lsp-bridge-mode -1)))
 
 

@@ -62,7 +62,8 @@
 ;; LSP
 (pcase *lsp-client*
   ('lsp-mode   (require 'init-lsp))          ;; lsp-mode and dap-mode
-  ('lsp-bridge (require 'init-lsp-bridge)))  ;; lsp-bridge mode (fastest)
+  ('lsp-bridge (require 'init-lsp-bridge))   ;; lsp-bridge mode (fastest)
+  ('nil nil))  ;; no load
 
 ;; /Lisp/
 (require 'init-lisp)
@@ -95,7 +96,8 @@
 ;; ----------------------------------------------------------------
 ;; Window operations via Hydra + Ace-window
 (when *use-hydra* (require 'init-hydra-aw))
-(when *use-hydra* (require 'init-hydra-coding))
+(when (and *use-hydra* (eq *lsp-client* 'lsp-bridge))
+  (require 'init-hydra-coding))
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

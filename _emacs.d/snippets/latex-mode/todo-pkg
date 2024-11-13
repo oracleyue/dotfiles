@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: todo list package
+# key: todolist
+# group: preambles
+# expand-env: ((yas-indent-line 'fixed))
+# --
+\usepackage{todonotes}  % use "disable" to remove todo notes
+% usages: \todo[inline,color=blue!10]{...}; \missingfigure{...}
+% note: add "colorinlistoftodos" to documentclass options to enable colorful boxes

@@ -31,9 +31,9 @@
   :demand
   :diminish
   :hook ((c-mode      . flycheck-mode)
-         (c++-mode    . flycheck-mode)
-         (ess-mode    . flycheck-mode)
-         (python-mode . flycheck-mode))
+         (c++-mode    . flycheck-mode)  ;; disable it if use LSP checker only
+         (python-mode . flycheck-mode)  ;; disable it if use LSP checker only
+         (ess-mode    . flycheck-mode))
   :bind (("M-g n"     . flycheck-next-error)
          ("M-g p"     . flycheck-previous-error)
          ("M-g l"     . flycheck-list-errors))
@@ -62,15 +62,16 @@
   :bind (:map prog-mode-map
               ("s-."     . citre-jump)
               ("s-,"     . citre-jump-back)
+              ;; citre-jump(-back) also reuses xref's "M-." and "M-,"
               ("M-s M-p" . citre-peek)
               ("M-s M-a" . citre-ace-peek)
               ("M-s M-u" . citre-update-this-tags-file)
               ("M-s M-c" . citre-create-tags-file)
-              ("M-s M-r" . citre-edit-tags-file-recipe))
+              ("M-s M-e" . citre-edit-tags-file-recipe))
   ;; peek window: M-n/-p to move down/up; "M-S-n/-p" to select item; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
-  (setq citre-tags-files '(".tags"))
+  (setq citre-tags-files '(".tags" "tags"))
   (setq citre-imenu-create-tags-file-threshold 52428800) ;; 50MB for temp tags
   :config
   (setq citre-peek-auto-restore-after-jump nil) ;; close peek window when jump to def

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: todo (add todo list)
+# key: todo
+# group: macros
+# --
+\todo[inline]{$0}

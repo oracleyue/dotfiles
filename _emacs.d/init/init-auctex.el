@@ -193,6 +193,10 @@
                   '("Clean (latexmk)" "latexmk -pdf -c; rm -rf auto/" TeX-run-command nil t) t))
   ;; use "-C" to also clean up pdf files
 
+  ;; use makefile
+  (eval-after-load "tex"
+    '(add-to-list 'TeX-command-list '("Makefile" "make" TeX-run-compile nil t)))
+
   ;; default command
   (add-hook 'TeX-mode-hook #'(lambda() (setq TeX-command-default "Latexmk")))
 
@@ -264,7 +268,10 @@
   '(progn
      ;; refresh and fontify buffer: =font-lock-fontify-buffer=
      ;; macro completions (flushed by flyspell.el)
-     (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)))
+     (define-key LaTeX-mode-map (kbd "M-<tab>") 'TeX-complete-symbol)
+     (define-key LaTeX-mode-map (kbd "C-M-a") 'LaTeX-find-matching-begin)
+     (define-key LaTeX-mode-map (kbd "C-M-e") 'LaTeX-find-matching-end)
+     ))
 
 ;; Use /cdlatex/ to accelerate math typing
 (use-package cdlatex

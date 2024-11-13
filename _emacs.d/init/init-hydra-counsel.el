@@ -1,25 +1,21 @@
 ;; ===============================================================
-;; Hydra support for programming facilities (lsp, jump, rename, etc)
+;; (TODO) Hydra support for daily facilities (ivy, counsel, etc.)
 ;; ===============================================================
-;; Last modified on 12 Jan 2024
+;; Last modified on 18 Jan 2024
 
 ;; trigger keymap
-;; (global-set-key (kbd "M-s SPC") 'hydra-coding/body)
-(require 'lsp-bridge)
-(require 'citre)
-(define-key prog-mode-map (kbd "M-s SPC") 'hydra-coding/body)
+(global-set-key (kbd "M-g SPC") 'hydra-counsel/body)
 
 ;; hydra definition
-(defhydra hydra-coding (:hint nil)
+(defhydra hydra-counsel (:hint nil)
   "
-Jump^^         ^Action^         ^Help^             |    ^Citre^
----------------------------------------------------------------
+Jump^^         ^Action^         ^Help^             |   ^Citre^
+----------------------------- -------------------------------
 _._def         _;_rename        _p_eek             |    _P_eek
 _,_return      _s_ymbol query   _l_ist diagnosis   |    _A_ce peek
 _i_mpl         _a_ction         _h_elp doc         |    _U_pdate tags
 _r_eferences   _F_ormatting     _c_all tips        |    _C_reate tags
-                            _d_ash at point    |    _E_dit recipe
-_SPC_ CANCEL   _R_un/Compile script
+_SPC_ CANCEL                  _d_ash at point    |    _R_ecipe edit
 "
   ("." lsp-bridge-find-def)
   ("," lsp-bridge-find-def-return)
@@ -43,12 +39,11 @@ _SPC_ CANCEL   _R_un/Compile script
   ("A" citre-ace-peek)
   ("U" citre-update-this-tags-file)
   ("C" citre-create-tags-file)
-  ("E" citre-edit-tags-file-recipe)
+  ("R" citre-edit-tags-file-recipe)
 
-  ("R" compile)
   ("SPC" nil))
 
 
-(provide 'init-hydra-coding)
+(provide 'init-hydra-counsel)
 ;; ================================================
-;; init-hydra-coding.el ends here
+;; init-hydra-counsel.el ends here

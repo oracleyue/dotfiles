@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: add a pdf page into beamer slides
+# key: pdf
+# group: beamer
+# expand-env: ((yas-indent-line 'fixed))
+# --
+{
+  \setbeamercolor{background canvas}{bg=}
+  \includepdf[pages=1-last]{templates/titlepage.pdf}
+}
