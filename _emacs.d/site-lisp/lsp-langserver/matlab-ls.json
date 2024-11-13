@@ -1,0 +1,18 @@
+{
+    "name": "matlab-ls",
+    "languageId": "matlab",
+    "command": [
+        "/usr/local/bin/node",
+        "/Users/zyue/Programs/LSP/MATLAB-language-server/out/index.js",
+        "--stdio"
+    ],
+    "single_file_support": true,
+    "settings": {
+        "MATLAB": {
+            "indexWorkspace": true,
+            "installPath": "/Applications/MATLAB_R2022b.app",
+            "matlabConnectionTiming": "onStart",
+            "telemetry": true
+        }
+    }
+}
