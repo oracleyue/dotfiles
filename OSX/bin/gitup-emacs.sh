@@ -19,6 +19,8 @@ $sync ~/.emacs.d/init.el $repopath/_emacs.d/init.el
 $sync ~/.emacs.d/init $repopath/_emacs.d/
 $sync --exclude-from="$HOME/.emacs.d/site-lisp/_exclude-list" \
       ~/.emacs.d/site-lisp $repopath/_emacs.d/
+$sync ~/.emacs.d/site-lisp/lsp-bridge/langserver/matlab-ls.json \
+      $repopath/_emacs.d/site-lisp/lsp-langserver/
 $sync --exclude="github" \
       ~/.emacs.d/themes $repopath/_emacs.d/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d/

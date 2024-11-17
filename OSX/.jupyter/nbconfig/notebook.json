@@ -1,0 +1,18 @@
+{
+  "keys": {
+    "command": {
+      "bind": {
+        "o,o": "jupyter-notebook:clear-cell-output",
+        "ctrl-o": "jupyter-notebook:clear-cell-output"
+      }
+    }
+  },
+  "Notebook": {
+    "Header": true
+  },
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": false
+    }
+  }
+}

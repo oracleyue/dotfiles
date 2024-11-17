@@ -3,16 +3,15 @@
 -- Add any additional options here
 
 -- Basics
--- vim.o.guifont = "RobotoMono Nerd Font:h15"
-vim.o.guifont = "Iosevka Nerd Font:h17"
+vim.o.guifont = "RobotoMono Nerd Font:h15"
+-- vim.o.guifont = "JetBrainsMono Nerd Font:h15"
 vim.o.autochdir = true
 
 -- TAB
 vim.o.expandtab = true
--- vim.o.tabstop = 4
--- vim.o.softtabstop = 4
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
 -- vim.o.shiftwidth = 4
 
 -- Autoformat
 vim.g.autoformat = false
-

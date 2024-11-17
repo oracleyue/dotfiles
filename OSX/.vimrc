@@ -18,7 +18,7 @@ set showcmd                                 " show commands that not finished
 set autochdir                               " automatically change directory
 set backupdir=/tmp
 set backup                                  " backup
-set tags=./tags                             " default ctag files
+set tags=./tags,./.tags                     " default ctag files
 syntax on                                   " syntax
 
 " ESC and Leader key
@@ -35,33 +35,39 @@ if has("gui_running")
 endif
 
 " default auto-complete by C-n/p
+set wildmenu    " tab-completion at command prompt
+set wildmode=full
 " better auto-complete via omni-complete
 " [usage]: prefix ctrl+x, ctrl+f (filename), +i (path), +l (wholeline), +o (omni)
 "set omnifunc=syntaxcomplete#Complete
 
 " keybindings
 nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>w  :w<CR>
 nnoremap <Leader>nl :nohlsearch<CR>
+" change to read-only mode
+nnoremap <Leader>ma :setl ma! ma?<CR>
 " avoid mistyping q for recording
 " nnoremap Q q
 " nnoremap q <Nop>
 
-" locating (H/M/L to head/middle/bottom; zt/zz/zb to top/center/bottom this line)
+" cursor locating
+" (H/M/L to head/middle/bottom; zt/zz/zb to top/center/bottom this line)
 
 " buffers (use :b[NUM] to switch; :bd to close)
 set hidden
-nnoremap <Leader>b :buffers<CR>
-nnoremap <Leader>qb :bd<CR>
+nnoremap <Leader>be :buffers<CR>
+nnoremap <Leader>bd :bd<CR>
+nnoremap [b :bprev<CR>
+nnoremap ]b :bnext<CR>
 
 " copy/paste via clipboard/primary (no diff on Win and OSX)
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 " paste from clipboard without auto-indentation
-" enable by =:set paste= (to disable =:set nopaste=)
-set pastetoggle=<F2>
+" enable by =:set paste= (disable =:set nopaste=, default)
 
-" press F12 to change file into gbk encoding
-"nnoremap <F12> :e ++enc=gbk<CR>
+" change file into gbk encoding
 :command SaveInGBK :e ++enc=gbk
 
 " language spell checking
@@ -71,6 +77,9 @@ autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
 " auto remove extra spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
+" code runner
+autocmd FileType python nnoremap <buffer> <Leader>r :w<CR> :!python %<CR>
+
 " --------------------------------------------------------------------------
 " Plugin Management
 " --------------------------------------------------------------------------
@@ -79,9 +88,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " List of installed plugins:
-  "Plugin 'vim-scripts/taglist.vim'
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
+  Plugin 'majutsushi/tagbar'
   Plugin 'jamessan/vim-gnupg'
   Plugin 'vim-airline/vim-airline'
 " All of your Plugins must be added before the following line
@@ -94,8 +103,9 @@ filetype plugin indent on    " required
 
 " ---- NerdCommenter ----
 let g:NERDSpaceDelims=1  " add a space when comment
-nnoremap gcc :call nerdcommenter#Comment(0,"toggle")<CR>
 " comment: <Leader>cc     uncomment: <Leader>cu
+nnoremap gcc :call nerdcommenter#Comment(0,"toggle")<CR>
+xnoremap gc  :call nerdcommenter#Comment(0,"toggle")<CR>
 
 " ---- NerdTree ----
 nnoremap <Leader>e :NERDTreeToggle<CR>
@@ -104,9 +114,5 @@ nnoremap <Leader>e :NERDTreeToggle<CR>
 " require powerline-symbol patched font, e.g. Roboto Mono in .vim/fonts/
 let g:airline_powerline_fonts = 1
 
-" ---- Taglist ----
-" let Tlist_Enable_Fold_Column=0
-" let Tlist_Exit_OnlyWindow=1
-" let Tlist_Show_One_File=1
-" nnoremap <Leader>t :TlistToggle<CR>
-" let g:tlist_tex_settings='tex;c:chapters;s:sections;u:subsections;b:subsubsections;l:labels'
+" ---- Tagbar ----
+nnoremap <Leader>t :TagbarToggle<CR>

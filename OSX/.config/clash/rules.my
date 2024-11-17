@@ -24,5 +24,8 @@ DOMAIN-SUFFIX,mendeley.com,DIRECT
 DOMAIN-SUFFIX,pnas.org,DIRECT
 DOMAIN-SUFFIX,aps.org,DIRECT
 DOMAIN-SUFFIX,zotero.org,DIRECT
-DOMAIN-SUFFIX,linkedin.com,AmyTelecom
-DOMAIN-SUFFIX,openreview.net,DIRECT
+DOMAIN-SUFFIX,cnki.net,DIRECT
+DOMAIN-SUFFIX,linkedin.com,Final
+DOMAIN-SUFFIX,onedrive.live.com,Final
+DOMAIN-SUFFIX,midjourney.com,DIRECT
+DOMAIN-SUFFIX,midjourney.ghost.io,DIRECT

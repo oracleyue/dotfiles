@@ -1,6 +1,6 @@
 {
     // general
-    "workbench.colorTheme": "Dracula Soft", // default enable not working
+    "workbench.colorTheme": "Dracula Theme", // default enable not working
     "editor.fontSize": 14,
     "editor.fontFamily": "SF Mono, Roboto Mono, Courier New, monospace",
 
@@ -20,4 +20,7 @@
 
     // Python
     "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "terminal.integrated.commandsToSkipShell": [
+        "matlab.interrupt"
+    ],
 }

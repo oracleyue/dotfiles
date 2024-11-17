@@ -50,14 +50,17 @@ pdftk *.pdf cat output $outfile
 
 # remove intermediate files
 case $ext in
-    png)
+    png | PNG)
         rm *.webp.png
         rm *.png.pdf
+        rm *.PNG.pdf
         ;;
-    jpg)
+    jpg | JPG)
         rm *.jpg.pdf
+        rm *.JPG.pdf
         ;;
-    jpeg)
+    jpeg | JPEG)
         rm *.jpeg.pdf
+        rm *.JPEG.pdf
         ;;
 esac

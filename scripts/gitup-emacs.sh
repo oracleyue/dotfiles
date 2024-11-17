@@ -19,6 +19,8 @@ $sync ~/.emacs.d/init.el $repopath/_emacs.d/init.el
 $sync ~/.emacs.d/init $repopath/_emacs.d/
 $sync --exclude-from="$HOME/.emacs.d/site-lisp/_exclude-list" \
       ~/.emacs.d/site-lisp $repopath/_emacs.d/
+$sync ~/.emacs.d/site-lisp/lsp-bridge/langserver/matlab-ls.json \
+      $repopath/_emacs.d/site-lisp/lsp-langserver/
 $sync --exclude="github" \
       ~/.emacs.d/themes $repopath/_emacs.d/
 $sync ~/.emacs.d/snippets $repopath/_emacs.d/
@@ -31,11 +33,11 @@ $sync ~/bin/gitup-emacs.sh $repopath/scripts/
 $sync ~/bin/gitpull-emacs.sh $repopath/scripts/
 $sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
 
-# push updates to github.com
-cd $repopath  # go to dotfile repo
-git add -A
-git commit
-if [[ "$1" == "push" || "$1" == "p" ]]; then
-    git push
-fi
+# # push updates to github.com
+# cd $repopath  # go to dotfile repo
+# git add -A
+# git commit
+# if [[ "$1" == "push" || "$1" == "p" ]]; then
+#     git push
+# fi
 cd ~  # back to home dir

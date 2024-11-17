@@ -48,7 +48,7 @@ $sync ~/Workspace/templates $repopath
 # VIM
 $sync ~/.vimrc $repopath
 $sync ~/.vim/colors --exclude=bundle $repopath/.vim/
-$sync ~/.vim/fonts --exclude=bundle $repopath/.vim/
+# $sync ~/.vim/fonts --exclude=bundle $repopath/.vim/
 
 # NeoVim
 $sync ~/.config/nvim --exclude=.git $repopath/.config/
