@@ -9,7 +9,9 @@
   :type 'string)
 
 ;; Frame   (note: [96, 33] in Thinkpad)
-(setq default-frame-alist '((width . 90) (height . 48)))
+(if *is-server-c*
+    (setq default-frame-alist '((width . 85) (height . 48)))
+  (setq default-frame-alist '((width . 90) (height . 48))))
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -69,7 +71,7 @@ of the focused frame and AB is the unfocused."
   (add-to-list 'default-frame-alist (cons 'alpha value)))
 
 ;; Fonts
-(if *is-mac* (setq size-n 14.0) (setq size-n 10.5))
+(if *is-mac* (setq size-n 15.0) (setq size-n 10.5))
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop

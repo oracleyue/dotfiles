@@ -19,8 +19,6 @@
   :load-path "~/.emacs.d/site-lisp/lsp-bridge"
   :diminish " (LSP/g)"
   :hook ((prog-mode . lsp-bridge-mode))
-         ;; (emacs-lisp-mode . lsp-bridge-mode)
-         ;; (python-mode     . lsp-bridge-mode)
   :bind (:map prog-mode-map
               ("C-." . lsp-bridge-find-def)
               ("C-," . lsp-bridge-find-def-return)
@@ -41,8 +39,9 @@
   (yas-global-mode 1)
   ;; (global-lsp-bridge-mode)    ;; mode-specific enabled instead
 
-  ;; acm completion
-  ;; (setq acm-backend-lsp-candidates-max-number 4000) ;; for large pkg like cv2
+  ;; completion interface
+  (setq acm-enable-yas t
+        acm-backend-yas-candidate-min-length 3)
 
   ;; ---------------- Python ----------------
   ;; Python virtualenv support

@@ -33,11 +33,11 @@ $sync ~/bin/gitup-emacs.sh $repopath/scripts/
 $sync ~/bin/gitpull-emacs.sh $repopath/scripts/
 $sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
 
-# # push updates to github.com
-# cd $repopath  # go to dotfile repo
-# git add -A
-# git commit
-# if [[ "$1" == "push" || "$1" == "p" ]]; then
-#     git push
-# fi
+# push updates to github.com
+cd $repopath  # go to dotfile repo
+git add -A
+git commit
+if [[ "$1" == "push" || "$1" == "p" ]]; then
+    git push
+fi
 cd ~  # back to home dir
