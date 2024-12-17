@@ -29,7 +29,8 @@ source $HOME/bin/emacs-cmds-osx.sh
 # install
 alias set_proxy_sock="export ALL_PROXY=socks5://127.0.0.1:7890"
 alias set_proxy_http="export ALL_PROXY=http://127.0.0.1:7890"
-alias brew-proxy="ALL_PROXY=socks5://127.0.0.1:7890 brew"
+# alias brew-proxy="ALL_PROXY=socks5://127.0.0.1:7890 brew"
+alias brew-proxy="ALL_PROXY=http://127.0.0.1:7890 brew"
 
 # -------------------------------------------------------------------
 # PATH
@@ -59,13 +60,27 @@ export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 export STARDICT_DATA_DIR="$HOME/Programs/stardicts"
 
 # -------------------------------------------------------------------
+# Alternative tools for better performance or display
+# -------------------------------------------------------------------
+# cd:       use "z" from fasd
+# cat:      use "bat"
+# find:     use "fd"
+# grep:     use "rg" (ripgrep)
+# du:       use "gdu" (gdu-go) or "dust"
+# top/htop: use "btm" (bottom)
+
+# cd/vim **<TAB>   use "fzf" to find files/directories
+# git with interactive interface: lazygit
+
+# having been aliased to replace original commands
+# ls:       use "exa"
+# men:      use "tldr"
+
+# -------------------------------------------------------------------
 # Aliases
 # -------------------------------------------------------------------
-# alias ll='ls -AlhB'
-# alias la='ls -ahB'
 
 # use /exa/ to replace ls
-# --------------------------------
 alias ls='exa --icons'
 alias ls1='exa --icons -1'
 alias lsd='exa --icons -D'
@@ -78,25 +93,20 @@ alias rm='rm -i' # use =trash= more to delete files
 alias mv='mv -i'
 alias cp='cp -r -i'
 alias tree='tree -N'  # -N to allow print Chinese in UTF
-# instead of gnu du, you may use "gdu" for better display
+# alternative of "du": use "gdu" or "dust" for better display
 alias du='du -h -d 1'
 alias dus='du -h -d 1 . | sort -h'
 alias df='df -h'
 alias rsync='rsync -aP --exclude=.DS_Store'
-# alias rsync='rsync -rlptD -P --exclude=.DS_Store'
 
 alias zip='zip -r'
 alias tar='COPYFILE_DISABLE=1 tar'
 
 alias grep='grep -i'
 alias sed='gsed'  # use GNU sed
-alias ack='ack -Hni'
-#alias grep='grep -Hn -i --colour=always'
-#alias ack='ack -Hn --no-group --no-color'
 
 alias updatedb='/usr/libexec/locate.updatedb'
 alias lsblk='diskutil list'
-alias htopMe='htop -u nobody'
 
 alias shred='gshred -n 5'
 alias trash='trash -v'
@@ -112,11 +122,13 @@ eval "$(fasd --init auto)"
 
 # use FZF
 alias fzf='fzf --layout=reverse'
+# use: cd/vim **<TAB>
 source /usr/local/opt/fzf/shell/completion.bash
-# Usage: cd/vim **<TAB>
-#
+# use "fd", which respect .gitignore or .fdignore
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
+# use default keybindings:
 # source /usr/local/opt/fzf/shell/key-bindings.bash
-# Keymap List:
+#
 # CTRL-T: paste the selected files or directories onto the commandline
 # CTRL-R: paste the selected command from history onto the commandline
 # ALT-C:  cd into the selected directory
@@ -142,6 +154,7 @@ alias start-tunnel='ssh -NL 8080:localhost:4096 gpu-server &'
 export CLICOLOR=1
 
 # basic prompt setup
+export PROMPT_DIRTRIM=3
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 # export PS1="\\w\$(__git_ps1 '(%s)') \$ "
 # export PS1="\[\033[1;34m\]\\u@\\h:\[\033[0;32m\]\\w\[\033[0m\] \[\033[0;31m\]\$(__git_ps1 '(%s)')\[\033[0m\]\$ "

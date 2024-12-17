@@ -6,41 +6,41 @@
         "command": "python.execInTerminal"
     },
 
-    // Emacs-like editing
-    {
-        "key": "alt+b",
-        "command": "cursorWordLeft"
-    },
-    {
-        "key": "alt+f",
-        "command": "cursorWordRight"
-    },
-    {
-        "key": "alt+d",
-        "command": "deleteWordRight"
-    },
-    {
-        "key": "alt+o",
-        "command": "editor.action.insertLineBefore",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+o",
-        "command": "editor.action.insertLineAfter",
-        "when": "editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+x ctrl+s",
-        "command": "workbench.action.files.save"
-    },
-    {
-        "key": "ctrl+v",
-        "command": "cursorPageDown",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "alt+v",
-        "command": "cursorPageUp",
-        "when": "textInputFocus"
-    },
+    // // Emacs-like editing
+    // {
+    //     "key": "alt+b",
+    //     "command": "cursorWordLeft"
+    // },
+    // {
+    //     "key": "alt+f",
+    //     "command": "cursorWordRight"
+    // },
+    // {
+    //     "key": "alt+d",
+    //     "command": "deleteWordRight"
+    // },
+    // {
+    //     "key": "alt+o",
+    //     "command": "editor.action.insertLineBefore",
+    //     "when": "editorTextFocus && !editorReadonly"
+    // },
+    // {
+    //     "key": "ctrl+o",
+    //     "command": "editor.action.insertLineAfter",
+    //     "when": "editorTextFocus && !editorReadonly"
+    // },
+    // {
+    //     "key": "ctrl+x ctrl+s",
+    //     "command": "workbench.action.files.save"
+    // },
+    // {
+    //     "key": "ctrl+v",
+    //     "command": "cursorPageDown",
+    //     "when": "textInputFocus"
+    // },
+    // {
+    //     "key": "alt+v",
+    //     "command": "cursorPageUp",
+    //     "when": "textInputFocus"
+    // },
 ]

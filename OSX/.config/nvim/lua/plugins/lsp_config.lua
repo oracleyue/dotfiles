@@ -2,12 +2,25 @@ return {
   -- add more lsp langservers
   {
     "neovim/nvim-lspconfig",
-    opts = function()
-      require("lspconfig").matlab_ls.setup({})
-      -- Temporary Fix: Due to matlab-language-server HEAD bug,
-      -- we link local matlab_ls (in ~/Programs/LSP) to
-      -- mason's folder (in ~/.local/share/nvim/mason/packages/)
-    end,
+    -- opts = function()
+    --   require("lspconfig").matlab_ls.setup({})
+    -- end,
+    opts = {
+      diagnostics = {
+        virtual_text = false, -- remove inline error messages
+      },
+      servers = {
+        matlab_ls = {
+          single_file_support = true,
+          settings = {
+            MATLAB = {
+              indexWorkspace = true,
+              installPath = "/Applications/MATLAB_R2022b.app",
+            },
+          },
+        },
+      },
+    },
   },
 
   -- telescope: fix symbol bug

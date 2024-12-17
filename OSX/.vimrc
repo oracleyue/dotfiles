@@ -44,7 +44,6 @@ set wildmode=full
 " keybindings
 nnoremap <Leader>qq :q<CR>
 nnoremap <Leader>w  :w<CR>
-nnoremap <Leader>nl :nohlsearch<CR>
 " change to read-only mode
 nnoremap <Leader>ma :setl ma! ma?<CR>
 " avoid mistyping q for recording

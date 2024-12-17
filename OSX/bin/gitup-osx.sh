@@ -75,6 +75,7 @@ cp "$sublpath"/*.sublime-settings $repopath/apps/sublime-text/
 vscpath="$HOME/Library/Application Support/Code/User"
 cp    "$vscpath"/settings.json    $repopath/apps/vscode/
 cp    "$vscpath"/keybindings.json $repopath/apps/vscode/
+cp    "$vscpath"/keybindings.emacs.json $repopath/apps/vscode/
 $sync "$vscpath"/snippets         $repopath/apps/vscode/
 
 # mame

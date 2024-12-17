@@ -44,5 +44,5 @@
 # proxy for http(s)://
 # proxy for git@github.com:xxx via ssh, set in .ssh/config
 [http]
-        # proxy = http://127.0.0.1:7890
+        #proxy = http://127.0.0.1:7890
         proxy = socks5://127.0.0.1:7890

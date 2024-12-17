@@ -1,26 +1,100 @@
 {
-    // general
-    "workbench.colorTheme": "Dracula Theme", // default enable not working
-    "editor.fontSize": 14,
-    "editor.fontFamily": "SF Mono, Roboto Mono, Courier New, monospace",
+  // basic
+  "workbench.colorTheme": "Dracula Theme",
+  "editor.fontSize": 15,
+  "editor.fontFamily": "Fira Code, LXGW WenKai Mono, Inconsolata, monospace",
+  "editor.lineNumbers": "relative",
 
-    // security
-    "security.workspace.trust.enabled": false,
+  // shell
+  "terminal.integrated.defaultProfile.osx": "bash",
 
-    // Trailing Spaces
-    "trailing-spaces.trimOnSave": true,
-    "trailing-spaces.syntaxIgnore": [
-        "markdown"
-    ],
+  // security
+  "security.workspace.trust.enabled": false,
 
-    // Matlab
-    "files.associations": {
-        "*.m": "matlab"
+  // Python
+  "python.defaultInterpreterPath": "/usr/local/bin/python",
+
+  // MATLAB
+  "files.associations": { "*.m": "matlab" },
+  "MATLAB.installPath": "/Applications/MATLAB_R2022b.app",
+  "MATLAB.telemetry": false,
+  "terminal.integrated.commandsToSkipShell": [ "matlab.interrupt" ],
+
+  // C++
+  // clangd
+  "clangd.arguments": [
+    // "--background-index",
+    "--compile-commands-dir=build",
+    "--query-driver=/usr/bin/clang++"
+  ],
+  // cmake
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ],
+  "cmake.showOptionsMovedNotification": false,
+
+  // Extension: Trailing Spaces
+  "trailing-spaces.trimOnSave": true,
+  "trailing-spaces.syntaxIgnore": [ "markdown" ],
+
+  // Extension: Vim
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+      "<C-a>": false, "<C-e>": false,
+      // "<C-f>": false, "<C-b>": false,
+  },
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [ ">" ],
+      "commands": [ "editor.action.indentLines" ]
     },
+    {
+      "before": [ "<" ],
+      "commands": [ "editor.action.outdentLines" ]
+    },
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["leader", "w"],
+      "commands": [ "workbench.action.files.save" ]
+    },
+    {
+      "before": ["leader", "q", "q"],
+      "commands": [ ":q" ]
+    },
+    // integration with Bookmarks (VSCode Extensions)
+    {
+      "before": ["<leader>", "m"],
+      "commands": [ "bookmarks.toggle" ]
+    },
+    {
+      "before": ["<leader>", "b"],
+      "commands": [ "bookmarks.list" ]
+    },
+  ],
 
-    // Python
-    "python.defaultInterpreterPath": "/usr/local/bin/python",
-    "terminal.integrated.commandsToSkipShell": [
-        "matlab.interrupt"
-    ],
+  // Extension: indent-rainbow
+  "indentRainbow.excludedLanguages": ["plaintext"],
+  // "indentRainbow.includedLanguages": ["python", "matlab"],
+  "indentRainbow.indicatorStyle": "light",
+  "indentRainbow.lightIndicatorStyleLineWidth": 1,
+  "indentRainbow.colors": [
+    "rgba(255,255,64,0.3)",
+    "rgba(127,255,127,0.3)",
+    "rgba(255,127,255,0.3)",
+    "rgba(79,236,236,0.3)"
+  ],
+
 }
