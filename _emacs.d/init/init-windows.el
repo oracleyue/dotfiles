@@ -75,9 +75,28 @@
 ;; omitting special files
 (require 'dired-x)
 (setq dired-omit-files
-      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git$\\|\\.dropbox\\|\\.directory\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls")
+      "^\\.?#\\|^#.*\\|\\.DS_Store$\\|^Icon.*\\|\\..*\\.cache$\\|\\.git$")
+;; apps aux files
+(setq dired-omit-files
+      (concat dired-omit-files
+              "\\|\\.obsidian$\\|\\.dropbox$\\|\\.directory$\\|\\.fdignore$"))
+;; LaTeX aux files
+(setq dired-omit-files
+      (concat dired-omit-files
+              "\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls"))
 (delete ".bbl" dired-omit-extensions)
-(add-hook 'dired-mode-hook #'dired-omit-mode)
+;; bug: turn on in hook fails dired open directories in emacs@30
+;; (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+;; Icons supports for Dired
+(if (string= *icons-type* "nerd-icons")
+    (use-package nerd-icons-dired
+      :demand
+      :hook (dired-mode . nerd-icons-dired-mode))
+  ;; use all-the-icons support
+  (use-package all-the-icons-dired
+    :demand
+    :hook (dired-mode . all-the-icons-dired-mode)))
 
 ;; ------------------------------------------------
 ;; Directory explorers (tree)
@@ -89,11 +108,6 @@
 ;; ------------------------------------------------
 (use-package ibuffer
   :ensure nil
-  :functions (all-the-icons-icon-for-file
-              all-the-icons-icon-for-mode
-              all-the-icons-auto-mode-match?
-              all-the-icons-faicon
-              my-ibuffer-find-file)
   :commands (ibuffer-find-file
              ibuffer-current-buffer)
   :bind ("C-x C-b" . ibuffer)
@@ -110,7 +124,7 @@
                                 (mode . latex-mode)
                                 (name . "^.*txt$")))
                  ("Blog/RSS" (or (mode . easy-hugo-mode)
-                                 (mode . deft-mode)
+                                 ;; (mode . deft-mode)
                                  (mode . elfeed-mode)
                                  (mode . elfeed-search-mode)
                                  (mode . elfeed-show-mode)))
@@ -179,29 +193,7 @@
   ;; Don't ask for confirmation to delete marked buffers
   (setq ibuffer-expert t)
 
-  ;; Display buffer icons on GUI
-  (when (and *is-graphic*
-             (require 'all-the-icons nil t))
-    ;; For alignment, the size of the name field should be the width of an icon
-    (define-ibuffer-column icon (:name "  ")
-      (let ((icon (if (and (buffer-file-name)
-                           (all-the-icons-auto-mode-match?))
-                      (all-the-icons-icon-for-file (file-name-nondirectory (buffer-file-name)) :v-adjust -0.05)
-                    (all-the-icons-icon-for-mode major-mode :v-adjust -0.05))))
-        (if (symbolp icon)
-            (setq icon (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0))
-          icon)))
-
-    (setq ibuffer-formats `((mark modified read-only ,(if emacs/>=26p 'locked "")
-                                  ;; Here you may adjust by replacing :right with :center or :left
-                                  ;; According to taste, if you want the icon further from the name
-                                  " " (icon 2 2 :left :elide)
-                                  ,(propertize " " 'display `(space :align-to 8))
-                                  (name 18 18 :left :elide)
-                                  " " (size 9 -1 :right)
-                                  " " (mode 16 16 :left :elide) " " filename-and-process)
-                            (mark " " (name 16 -1) " " filename))))
-
+  ;; Use counsel to find-file
   (with-eval-after-load 'counsel
     (defun my-ibuffer-find-file ()
       (interactive)
@@ -211,26 +203,17 @@
                                        default-directory)
                                    default-directory))))
         (counsel-find-file default-directory)))
-    (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
+    (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file)))
 
-  ;; Group ibuffer's list by project root
-  (use-package ibuffer-projectile
-    :disabled
-    :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
-    :hook ((ibuffer . (lambda ()
-                        (ibuffer-projectile-set-filter-groups)
-                        (unless (eq ibuffer-sorting-mode 'alphabetic)
-                          (ibuffer-do-sort-by-alphabetic)))))
-    :config
-    (setq ibuffer-projectile-prefix
-          (if (display-graphic-p)
-              (concat
-               (all-the-icons-octicon "file-directory"
-                                      :face ibuffer-filter-group-name-face
-                                      :v-adjust -0.05
-                                      :height 1.2)
-               " ")
-            "Project: "))))
+;; Icons support for ibuffer
+(if (string= *icons-type* "nerd-icons")
+    ;; /nerd-icons/ support
+    (use-package nerd-icons-ibuffer
+      :ensure t
+      :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+  ;; /all-the-icons/ support
+  (use-package all-the-icons-ibuffer
+    :hook (ibuffer-mode . all-the-icons-ibuffer-mode)))
 
 ;; ------------------------------------------------
 ;; /imenu-list/: show imenu entries in side bar
@@ -242,70 +225,6 @@
   :config
   ;; (setq imenu-list-auto-resize t)
   (setq imenu-list-focus-after-activation t))
-
-;; ------------------------------------------------
-;; All-the-icons supports for Dired
-;; ------------------------------------------------
-(when *enable-all-the-icons-dired*
-  (use-package all-the-icons-dired
-    :diminish
-    :functions (dired-move-to-filename
-                dired-get-filename
-                my-all-the-icons-dired--display)
-    :commands all-the-icons-dired--display
-    :custom-face (all-the-icons-dired-dir-face ((t (:foreground nil))))
-    :hook (dired-mode . all-the-icons-dired-mode)
-    :config
-    (declare-function all-the-icons-octicon 'all-the-icons)
-    (declare-function all-the-icons-match-to-alist 'all-the-icons)
-    (declare-function all-the-icons-dir-is-submodule 'all-the-icons)
-    (defun my-all-the-icons-dired--display ()
-      "Display the icons of files without colors in a dired buffer."
-      (when dired-subdir-alist
-        (let ((inhibit-read-only t)
-              (remote-p (and (fboundp 'tramp-tramp-file-p)
-                             (tramp-tramp-file-p default-directory))))
-          (save-excursion
-            ;; TRICK: Use TAB to align icons
-            (setq-local tab-width 1)
-            (goto-char (point-min))
-            (while (not (eobp))
-              (when (dired-move-to-filename nil)
-                (insert " ")
-                (let ((file (dired-get-filename 'verbatim t)))
-                  (unless (member file '("." ".."))
-                    (let ((filename (file-local-name (dired-get-filename nil t))))
-                      (if (file-directory-p filename)
-                          (let ((icon (cond
-                                       (remote-p
-                                        (all-the-icons-octicon "file-directory"
-                                                               :v-adjust all-the-icons-dired-v-adjust
-                                                               :face 'all-the-icons-dired-dir-face))
-                                       ((file-symlink-p filename)
-                                        (all-the-icons-octicon "file-symlink-directory"
-                                                               :v-adjust all-the-icons-dired-v-adjust
-                                                               :face 'all-the-icons-dired-dir-face))
-                                       ((all-the-icons-dir-is-submodule filename)
-                                        (all-the-icons-octicon "file-submodule"
-                                                               :v-adjust all-the-icons-dired-v-adjust
-                                                               :face 'all-the-icons-dired-dir-face))
-                                       ((file-exists-p (format "%s/.git" filename))
-                                        (all-the-icons-octicon "repo"
-                                                               :height 1.1
-                                                               :v-adjust all-the-icons-dired-v-adjust
-                                                               :face 'all-the-icons-dired-dir-face))
-                                       (t (let ((matcher (all-the-icons-match-to-alist
-                                                          file all-the-icons-dir-icon-alist)))
-                                            (apply (car matcher)
-                                                   (list (cadr matcher)
-                                                         :face 'all-the-icons-dired-dir-face
-                                                         :v-adjust all-the-icons-dired-v-adjust)))))))
-                            (insert icon))
-                        (insert (all-the-icons-icon-for-file file :v-adjust all-the-icons-dired-v-adjust))))
-                    (insert "\t "))))   ; Align and keep one space for refeshing after operations
-              (forward-line 1))))))
-    (advice-add #'all-the-icons-dired--display :override #'my-all-the-icons-dired--display))
-  )
 
 
 (provide 'init-windows)

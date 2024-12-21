@@ -41,10 +41,9 @@
   (use-package doom-modeline
     :demand
     :init
-    (setq doom-modeline-height 28
-          ;; use buffer name; show the full-path name when mouse hovering
-          doom-modeline-buffer-file-name-style 'truncate-upto-root)
-    :config (doom-modeline-init)))
+    (setq doom-modeline-height 32
+          doom-modeline-buffer-file-name-style 'auto)
+    (doom-modeline-mode 1)))
 
 ;; ---------------------------------------------
 ;; Wraper for loading modeline

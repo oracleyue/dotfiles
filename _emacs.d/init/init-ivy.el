@@ -46,13 +46,14 @@
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
   :bind (("C-s"     . swiper)           ;; swiper, swiper-isearch
-         ("C-r"     . swiper-backward)
+                                        ;; "C-r" triggers isearch
+         ("M-s ."   . swiper-thing-at-point)
+         ("C-S-s"   . swiper-all)       ;; search all buffers
          ("s-f"     . swiper-isearch)
+         ;; grep in large files
          ("M-g s"   . counsel-grep)     ;; using rg
          ([remap swiper]          . counsel-grep-or-swiper) ;; for large files
          ([remap swiper-backward] . counsel-grep-or-swiper-backward)
-         ;; all buffers
-         ("C-S-s"   . swiper-all)
          ;; grep files recursively in the folder
          ("M-g a"   . counsel-rg)       ;; counsel-ag, counsel-ack, counsel-rg
          ;; git project
@@ -86,7 +87,7 @@
   ;; number of items in completion list
   (push '(counsel-yank-pop . 15) ivy-height-alist)
 
-  ;; more file finding
+  ;; config find-file
   (setq counsel-find-file-at-point t
         counsel-find-file-ignore-regexp
         "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)\\|\\(.DS_Store\\)")
@@ -99,6 +100,13 @@
       (setq counsel-find-file-occur-use-find nil
             counsel-find-file-occur-cmd
             "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first")))
+
+  ;; use "fd" for fzf search (to respect .gitignore/.fdignore)
+  ;; set env in the ~/.bashrc for uniform fzf behavior
+  (setenv "FZF_DEFAULT_COMMAND"
+          (string-trim (shell-command-to-string
+                        ". ~/.bashrc; echo -n $FZF_DEFAULT_COMMAND")))
+
   ) ;; End of Ivy
 
 ;; ---------------------------------------------
@@ -194,24 +202,25 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; ---------------------------------------------
-;; /Ivy-rich /: all-the-icons for Ivy interface
+;; /Ivy-rich /: better display
 ;; ---------------------------------------------
-;; enable it before`ivy-rich-mode' for better performance
-(use-package all-the-icons-ivy-rich
-  :if (icons-displayable-p)
-  :hook (ivy-mode . all-the-icons-ivy-rich-mode))
-
-;; more friendly display transformer for Ivy
 (use-package ivy-rich
-  :hook (;; must load after `counsel-projectile'
-         (counsel-projectile-mode . ivy-rich-mode)
+  :init
+  (setq ivy-rich-parse-remote-buffer nil)
+  :hook ((counsel-projectile-mode . ivy-rich-mode) ;; must load after `counsel-projectile'
          (ivy-rich-mode . (lambda ()
                             "Use abbreviate in `ivy-rich-mode'."
                             (setq ivy-virtual-abbreviate
-                                  (or (and ivy-rich-mode 'abbreviate) 'name)))))
-  :init
-  ;; For better performance
-  (setq ivy-rich-parse-remote-buffer nil))
+                                  (or (and ivy-rich-mode 'abbreviate) 'name))))))
+
+;; icons support (need being enabled before ivy-rich-mode)
+(if (string= *icons-type* "all-the-icons")
+    (use-package all-the-icons-ivy-rich
+      :hook (ivy-mode . all-the-icons-ivy-rich-mode))
+  (use-package nerd-icons-ivy-rich
+    :init
+    (nerd-icons-ivy-rich-mode 1)
+    (ivy-rich-mode 1)))
 
 ;; ---------------------------------------------
 ;; Use posframe for Ivy

@@ -38,6 +38,9 @@
 ;; directory and buffer explorers
 (require 'init-windows)
 
+;; startup screen (dashboard)
+(require 'init-dashboard)
+
 ;; ----------------------------------------------------------------
 ;; Text Editing (org, markdown, latex, blog)
 ;; ----------------------------------------------------------------

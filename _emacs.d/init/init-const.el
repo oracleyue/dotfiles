@@ -34,17 +34,13 @@
 ;; hydra supports
 (defconst *use-hydra* t)
 
-;; all-the-icons support for ivy, dired, company, dashboard
-;; install package "all-the-icons" and run "M-x all-the-icons-install-fonts"
-(if *is-graphic*
-    (defconst *enable-all-the-icons* t)
-  (defconst *enable-all-the-icons* nil))
-(if *is-server-c*
-    (defconst *enable-all-the-icons-dired* nil)
-  (defconst *enable-all-the-icons-dired* t))
-
-;; use css locally or in github
-(defconst *use-css-local* nil)
+;; icons support
+(defconst *icons-type* "nerd-icons")
+;; /nerd-icons/ supports: dashboard, ivy, dired, ibuffer, treemacs
+;; run "M-x nerd-icons-install fonts" or install nerd fonts in your os
+;; (defconst *icons-type* "all-the-icons")
+;; /all-the-icons/ supports: ivy, dired, company, treemacs
+;; run "M-x all-the-icons-install-fonts"
 
 ;; auto-completion
 (defconst *use-company* nil)
@@ -54,7 +50,6 @@
     (defconst *lsp-client* nil)
   ;; (defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
   (defconst *lsp-client* 'lsp-bridge))  ;; lsp-bridge
-(defconst *enable-matlab-lsp* nil)
 
 
 (provide 'init-const)

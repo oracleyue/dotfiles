@@ -21,6 +21,8 @@
 ;; /deft/: Organise and browse notes
 ;; ----------------------------------------------
 (use-package deft
+  :disabled
+  :ensure nil
   :commands (deft)
   :bind (("C-x f" . deft-find-file))
   :config
@@ -29,6 +31,15 @@
         deft-directory  "~/Public/Dropbox/oracleyue/Notebooks")
   (setq deft-recursive t
         deft-filter-only-filenames t))
+
+;; /deft/ too slow, use fzf and ripgrep instead
+(defun zyue/deft ()
+  "Dired the notebook home directory."
+  (interactive)
+  (progn (dired "~/Public/Dropbox/oracleyue/Notebooks")
+         (dired-omit-mode)))
+;; use "M-g f" to search files
+;; use "M-g a" to search file contents
 
 ;; ------------------------------------------------------------
 ;; RSS reader

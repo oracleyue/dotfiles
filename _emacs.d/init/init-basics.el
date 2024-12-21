@@ -182,6 +182,12 @@
 ;; stop cursor blinking bug when typing Chinese/Japanese on OS X
 ;(setq redisplay-dont-pause nil)
 
+;; proxy (allowing github supports)
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+        ("http"  . "127.0.0.1:7890")
+        ("https" . "127.0.0.1:7890")))
+
 ;; ----------------------------------------------
 ;; /diminish/: remove minor mode names from modeline
 ;; ----------------------------------------------

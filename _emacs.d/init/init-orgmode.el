@@ -265,10 +265,10 @@
 (use-package ox-reveal
   :demand
   :config
-  (if *use-css-local*
-      (setq org-reveal-root (concat "file://" (getenv "HOME")
-                                    "/Workspace/github/reveal.js/"))
-    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"))
+  ;; use css locally or in github
+  ;; (setq org-reveal-root (concat "file://" (getenv "HOME")
+  ;;                                   "/Workspace/github/reveal.js/"))
+  ;; (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
   (setq org-reveal-theme "black")  ;; klu
   (setq org-reveal-plugins '(highlight))
   (setq org-reveal-progress t)

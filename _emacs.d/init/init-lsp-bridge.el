@@ -17,7 +17,7 @@
 (use-package lsp-bridge
   :ensure nil
   :load-path "~/.emacs.d/site-lisp/lsp-bridge"
-  :diminish " (LSP/g)"
+  :diminish " (LSP/b)"
   :hook ((prog-mode . lsp-bridge-mode))
   :bind (:map prog-mode-map
               ("C-." . lsp-bridge-find-def)

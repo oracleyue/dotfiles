@@ -58,7 +58,7 @@
   ;; Better icons and quickhelp
   ;; Bug: Loading for *scratch* via server has an issue, while it works well
   ;; for all other programming modes. Reloading *scratch* will load company-box.
-  (when (and emacs/>=26p *enable-all-the-icons*)
+  (when (and emacs/>=26p (all-the-icons-displayable-p))
     (use-package company-box
       :diminish
       :defines company-box-icons-all-the-icons
@@ -81,7 +81,7 @@
                     (t . nil)))))
         (advice-add #'company-box-icons--elisp :override #'my-company-box-icons--elisp))
 
-      (when (icons-displayable-p)
+      (when (all-the-icons-displayable-p)
         (declare-function all-the-icons-faicon 'all-the-icons)
         (declare-function all-the-icons-material 'all-the-icons)
         (declare-function all-the-icons-octicon 'all-the-icons)

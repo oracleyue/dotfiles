@@ -9,9 +9,7 @@
   :type 'string)
 
 ;; Frame   (note: [96, 33] in Thinkpad)
-(if *is-server-c*
-    (setq default-frame-alist '((width . 85) (height . 48)))
-  (setq default-frame-alist '((width . 90) (height . 48))))
+(setq default-frame-alist '((width . 85) (height . 52)))
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -48,13 +46,9 @@
     ;; update transparent titlebar textcolor wrt themes
     (modify-frame-parameters frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
     ;; transparent background
-    (when *is-linux* (set-bg-alpha '(100 85)))
-    ;; choose and load fonts
-    (zyue-search-and-load-fonts frame)
-    ;; refresh dashboard
-    (when (and (get-buffer "*dashboard*")
-               (not (buffer-file-name))) ;; hide dashboard when edit files
-      (dashboard-refresh-buffer))))
+    (set-bg-alpha '(100 90))
+    ;; load fonts
+    (zyue-search-and-load-fonts frame)))
 
 (defun zyue-reload-ui-in-daemon (frame)
   "Reload the theme (and font) in an daemon frame."
@@ -75,12 +69,12 @@ of the focused frame and AB is the unfocused."
 (defun zyue-search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
-    (dolist (font '("Roboto Mono"
-                    ;; fix bug: remove/disable "medium"-type ttf files!
-                    "DejaVu Sans Mono" ;; Linux default
-                    "SF Mono"  ;; Mac only
-                    "Consolas" ;; Windows default
-                    "Sarasa Mono SC Nerd"))  ;; width compatible with Chinese
+    (dolist (font '("FiraCode Nerd Font"
+                    "Roboto Mono" ;; fix bug by disable "medium"-type ttf files!
+                    "JetBrainsMono Nerd Font"
+                    "SF Mono"     ;; Mac only
+                    "Consolas"    ;; Windows only
+                    ))
       (when (member font (font-family-list))
         (setq zyue-font (font-spec :family font :size size-n))
         (when font-userdefine-flag
@@ -91,18 +85,15 @@ of the focused frame and AB is the unfocused."
         (throw 'loop t))))
   ;; Specify variable-width font
   (catch 'loop
-    (dolist (font '("Times New Roman"
-                    "Roboto"
-                    "SF Compact Display"  ;; Mac only
-                    "DejaVu Sans"))
+    (dolist (font '("Times New Roman" "Roboto"))
       (when (member font (font-family-list))
         (set-face-attribute 'variable-pitch frame :font font)
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("Source Han Serif SC" "Source Han Serif"  ;; 思源宋体 (简中、繁中、日文)
-                    "WenQuanYi Micro Hei"
-                    "Sarasa Mono SC Nerd"  ;; width compatible with Chinese
+    (dolist (font '("WenQuanYi Micro Hei Mono"
+                    "LXGW WenKai Mono"         ;; 霞鹜文楷
+                    "Source Han Serif SC"      ;; 思源宋体 (简、繁、日)
                     "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
         ;; Note: when LC_CTYPE=zh_CN.UTF-8, use (find-font (font-spec :name font))
@@ -123,41 +114,38 @@ of the focused frame and AB is the unfocused."
 
   ;; Rescale fonts; force equal widths (2 EN = 1 CHS)
   ;; (Warning: if LC_CTYPE=zh_CN.UTF-8 in "locale", this will not work)
-  ;; (setq face-font-rescale-alist
-  ;;       '(("WenQuanYi Micro Hei" . 1.2)
-  ;;         ("Sarasa Mono SC" . 1.2)
-  ;;         ("Source Han Serif SC" . 1.2) ("Source Han Serif" . 1.2)
-  ;;         ("PingFang SC" . 1.2)    ("Microsoft Yahei" . 1.2)))
+  (setq face-font-rescale-alist
+        '(("LXGW WenKai Mono" . 1.2)
+          ("WenQuanYi Micro Hei Mono" . 1.0)))
+  ) ;; Font Loading
+
+;; Icons supports
+(if (string= *icons-type* "nerd-icons")
+    ;; use /nerd-icons/
+    (use-package nerd-icons
+      :demand
+      :custom (nerd-icons-font-family "Symbols Nerd Font Mono"))
+  ;; use /all-the-icons/
+  (use-package all-the-icons
+    :init (unless (or (find-font (font-spec :name "all-the-icons"))
+                      (daemonp))
+            (all-the-icons-install-fonts t))
+    :config
+    (setq all-the-icons-scale-factor 1.0)  ;; adjust size
+    ;; avoid slowing down performance
+    (setq inhibit-compacting-font-caches t))
+  (defun all-the-icons-displayable-p ()
+    "Return non-nil if `all-the-icons' is displayable."
+    (require 'all-the-icons nil t))
   )
 
-;; Icons
-(defun font-installed-p (font-name)
-  "Check if font with FONT-NAME is available."
-  (find-font (font-spec :name font-name)))
-
-(defun icons-displayable-p ()
-  "Return non-nil if `all-the-icons' is displayable."
-  (and *enable-all-the-icons*
-       (require 'all-the-icons nil t)))
-
-(use-package all-the-icons
-  :if *enable-all-the-icons*
-  :init (unless (or (font-installed-p "all-the-icons")
-                    (daemonp))
-          (all-the-icons-install-fonts t))
-  :config
-  (setq all-the-icons-scale-factor 1.0)  ;; adjust size
-  ;; avoid slowing down performance
-  (setq inhibit-compacting-font-caches t))
-
-;; Themes (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
-(setq zyue-theme 'doom-one)
+;; Themes
+;; (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
 (when *is-server-m* (setq zyue-theme 'elegant-light))
 (when *is-server-c* (setq zyue-theme 'doom-one))
 ;; (when *is-server-c* (setq zyue-theme 'spacemacs-dark))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark
                           zyue-modeline 'plain))
-
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light)
    (setq zyue-modeline 'doomline)
@@ -190,10 +178,7 @@ of the focused frame and AB is the unfocused."
      :load-path "themes/elegant-theme/"
      :init   (setq elegant-modeline-disabled nil)
      :config (setq font-userdefine-flag nil)))
-  )
-
-;; Dashboard (alternative startup/splash screen)
-(require 'init-dashboard)
+  (_ nil))
 
 ;; UI loading
 (if (daemonp)

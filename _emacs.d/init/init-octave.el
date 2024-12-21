@@ -7,6 +7,8 @@
   :ensure nil
   :demand
   :mode ("\\.m$" . octave-mode)
+  :bind (:map octave-mode-map
+              ("C-c C-c" . align))
   :init
   ;; set up "run-octave" for matlab
   (setq inferior-octave-program "/usr/local/bin/matlab"

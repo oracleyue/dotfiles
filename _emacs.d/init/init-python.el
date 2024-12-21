@@ -32,9 +32,6 @@
   ;;       python-shell-interpreter-args "-i")
 
   ;; ------------------ Editing ------------------
-  ;; efficient editing
-  (require 'epy-editing)
-
   ;; tab/space detection
   (use-package dtrt-indent
     :diminish
@@ -46,13 +43,6 @@
           tab-width 4
           python-indent-guess-indent-offset nil))
   (add-hook 'python-mode-hook #'zyue-py-indent-style)
-
-  ;; highlight indentation (buggy)
-  (use-package highlight-indent-guides
-    :disabled
-    :diminish
-    :init (setq highlight-indent-guides-method 'character) ;; 'fill, 'column
-    :hook (python-mode . highlight-indent-guides-mode))
 
   ;; ---------------- Linting ----------------
   ;; lsp-mode uses "lsp" linter and sets "flycheck-checker" to disable others
@@ -87,15 +77,15 @@
                         "Eval region")
 
   ;; ---------------- Auto-completion ----------------
-  ;; use LSP to support: lsp-mode ("init-lsp.el") or lsp-bridge ("init-lsp-bridge.el")
+  ;; use LSP: lsp-mode ("init-lsp.el") or lsp-bridge ("init-lsp-bridge.el")
 
   ;; ---------------- Debugging ----------------
   ;; use built-in GUD debugger
-  (defadvice pdb (before gud-query-cmdline activate)
-    "Provide a better default command line when called interactively."
+  (define-advice pdb (:before (&optional arg) gud-query-cmdline)
     (interactive (list (gud-query-cmdline
                         'python (concat "-m pdb " (file-name-nondirectory
                                                    buffer-file-name))))))
+
   ;; use DAP-based debugger (enabled in "init-lsp.el")
   ;; if not default "python", specify here:
   ;; (setq dap-python-executable "python3"))
@@ -108,14 +98,6 @@
               ("M-s R"  .  compile))
 
   ) ;; End of python-mode
-
-
-;; ------------------------------------------------
-;; Abo-abo's lpy (To-do)
-;; ------------------------------------------------
-;; fix /lpy/ bug on plt.show(), which freezes emacs if not closing its window
-;; (setq python-shell-interpreter-args
-;;       "-i --pylab --simple-prompt --no-color-info")
 
 
 (provide 'init-python)

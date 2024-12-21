@@ -16,7 +16,8 @@
              treemacs-filewatch-mode
              treemacs-fringe-indicator-mode
              treemacs-git-mode)
-  :bind (("M-0"       . treemacs-select-window)
+  :init (setq treemacs-no-load-time-warnings t)  ;; suppress annoying warnings
+  :bind (("M-0"       . treemacs) ;; treemacs-select-window
          ("C-x t t"   . treemacs)
          ("C-x t 1"   . treemacs-delete-other-windows)
          ("C-x t d"   . treemacs-select-directory)
@@ -34,7 +35,6 @@
         treemacs-silent-refresh                t
         treemacs-width                         30
         treemacs-no-png-images                 *is-terminal*)
-  :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (pcase (cons (not (null (executable-find "git")))
@@ -61,15 +61,18 @@
           magit-post-stage
           magit-post-unstage) . treemacs-magit--schedule-update))
 
-;; Support all-the-icons in treemacs (default using PNG images)
-;; Note: doom-themes supports all-the-icons in its own way.
-(use-package treemacs-all-the-icons
-  :after (treemacs all-the-icons)
-  :demand
-  :if (and *enable-all-the-icons* *is-graphic*
-           (not (member zyue-theme '(eclipse))))
-  :config
-  (treemacs-load-theme "all-the-icons"))
+;; Icon supports for treemacs (default using PNG images from treemacs)
+(if (string= *icons-type* "nerd-icons")
+    ;; use /nerd-icons/
+    (use-package treemacs-nerd-icons
+      :demand
+      :config (treemacs-load-theme "nerd-icons"))
+  ;; use /all-the-icons/
+  ;; (note: doom-themes supports all-the-icons in its own way.)
+  (use-package treemacs-all-the-icons
+    :after (treemacs all-the-icons)
+    :demand
+    :config (treemacs-load-theme "all-the-icons")))
 
 
 (provide 'init-treemacs)
