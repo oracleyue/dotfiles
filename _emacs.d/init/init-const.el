@@ -42,10 +42,7 @@
 ;; /all-the-icons/ supports: ivy, dired, company, treemacs
 ;; run "M-x all-the-icons-install-fonts"
 
-;; auto-completion
-(defconst *use-company* nil)
-
-;; LSP client
+;; Lsp for code intelligence
 (if *is-server-m*
     (defconst *lsp-client* nil)
   ;; (defconst *lsp-client* 'lsp-mode)  ;; lsp-mode

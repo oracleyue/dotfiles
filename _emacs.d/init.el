@@ -28,8 +28,11 @@
 (require 'init-basics)
 (require 'init-edit)
 
-;; code completion engine
-(when *use-company* (require 'init-company))
+;; key cheetsheet
+(require 'init-hydra)
+
+;; code completion
+;; (require 'init-company)
 (require 'init-snippets)
 
 ;; global completion systems
@@ -59,14 +62,14 @@
 ;; project management
 (require 'init-projectile)
 
-;; essential programming supports
-(require 'init-programming)           ;; edit, vc, debug, ui ...
-
 ;; LSP
 (pcase *lsp-client*
   ('lsp-mode   (require 'init-lsp))          ;; lsp-mode and dap-mode
   ('lsp-bridge (require 'init-lsp-bridge))   ;; lsp-bridge mode (fastest)
   ('nil nil))  ;; no load
+
+;; DAP
+(require 'init-dap)
 
 ;; /Lisp/
 (require 'init-lisp)
@@ -89,18 +92,13 @@
 ;; minority languages
 (require 'init-lang)
 
+;; additional programming supports
+(require 'init-programming)           ;; edit, vc, debug, ui ...
+
 ;; ----------------------------------------------------------------
 ;; Utilities and External App Calls
 ;; ----------------------------------------------------------------
 (require 'init-utils)
-
-;; ----------------------------------------------------------------
-;; Hydra supports (be careful on dependencies)
-;; ----------------------------------------------------------------
-;; Window operations via Hydra + Ace-window
-(when *use-hydra* (require 'init-hydra-aw))
-(when (and *use-hydra* (eq *lsp-client* 'lsp-bridge))
-  (require 'init-hydra-coding))
 
 ;; ----------------------------------------------------------------
 ;; Private (You may delete the following.)

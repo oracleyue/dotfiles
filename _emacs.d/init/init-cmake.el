@@ -12,14 +12,7 @@
   (use-package cmake-font-lock
     :hook (cmake-mode . cmake-font-lock-activate))
 
-  ;; auto completion
-  (when *use-company*
-    (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
-    (defun zyue/company-cmake-setup ()
-      (setq-local company-backends
-                  (append '((company-cmake company-dabbrev-code))
-                          company-backends)))
-    (add-hook 'cmake-mode-hook 'zyue/company-cmake-setup))
+  ;; auto completion: use /company/ in init-company.el
 
   ;; compile setup
   (defun zyue/link-compile-commands-json (buffer msg)

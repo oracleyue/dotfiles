@@ -47,13 +47,34 @@
                            (company-dabbrev-code company-keywords company-files)
                            company-dabbrev))
 
-  ;; enable dabbrev-code for completion in string or comments
-  ;; (require 'company-dabbrev-code)
+  ;; Enable dabbrev-code for completion in string or comments
+  (require 'company-dabbrev-code)
   ;; (setq company-dabbrev-code-everywhere t)
 
   ;; Better sorting and filtering
   (use-package company-prescient
     :init (company-prescient-mode 1))
+
+  ;; Support for programming languages
+  ;; /MATLAB/: check init-octave.el
+  (add-to-list 'company-dabbrev-code-modes 'octave-mode)
+  ;; /CMake/: check init-cmake.el
+  (add-to-list 'company-dabbrev-code-modes 'cmake-mode)
+  (defun zyue/company-cmake-setup ()
+    (setq-local company-backends
+                  (append '((company-cmake company-dabbrev-code))
+                          company-backends)))
+  (add-hook 'cmake-mode-hook 'zyue/company-cmake-setup)
+  ;; /R/: check init-r.el
+  (setq ess-use-company t)
+  (add-to-list 'company-dabbrev-code-modes 'ess-mode)
+  (defun zyue/add-company-backend-ess ()
+    (pop company-backends)
+    (setq-local company-backends
+                (append '((company-R-args company-R-objects company-R-library
+                                          company-dabbrev-code))
+                        company-backends)))
+  (add-hook 'ess-mode-hook #'zyue/add-company-backend-ess)
 
   ;; Better icons and quickhelp
   ;; Bug: Loading for *scratch* via server has an issue, while it works well

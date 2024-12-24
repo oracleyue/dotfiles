@@ -228,11 +228,13 @@
 (use-package ivy-posframe
   :demand
   :diminish
+  :custom-face
+  (ivy-posframe-border ((t (:background "gray50"))))
   :init
-  (setq ivy-posframe-height 18
-        ivy-posframe-parameters '((min-width   . 75) (min-height   . 15)
-                                  (left-fringe . 10) (right-fringe . 10))
-        ivy-posframe-border-width 0)
+  (setq ivy-posframe-height 20
+        ivy-posframe-parameters '((min-width   . 65) (min-height   . 15)
+                                  (left-fringe . 12) (right-fringe . 12))
+        ivy-posframe-border-width 2)
   :config
   (setq ivy-posframe-display-functions-alist
         '((swiper-isearch           . ivy-display-function-fallback)

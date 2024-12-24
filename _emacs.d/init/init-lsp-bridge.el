@@ -1,5 +1,5 @@
 ;; ================================================================
-;; The Fastest Language Server Protocol
+;; Language Server Protocol (LSP) Supports
 ;; ================================================================
 ;; Last modified on 11 Aug 2022
 
@@ -52,7 +52,6 @@
            (custom-config (expand-file-name "pyright.json" custom-dir))
            (default-config (json-read-file (expand-file-name "site-lisp/lsp-bridge/langserver/pyright.json" user-emacs-directory)))
            (settings (plist-get default-config :settings)))
-
       (plist-put settings :pythonPath (executable-find "python"))
       (make-directory (file-name-directory custom-config) t)
       (with-temp-file custom-config
@@ -64,16 +63,16 @@
             (lambda () (lsp-bridge-restart-process)))
 
   ;; ---------------- MATLAB ----------------
-  (add-to-list 'lsp-bridge-single-lang-server-mode-list '(octave-mode . "matlab-ls"))
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list
+               '(octave-mode . "matlab-ls"))
   (add-to-list 'lsp-bridge-default-mode-hooks 'octave-mode-hook)
-  (add-to-list 'lsp-bridge-formatting-indent-alist '(octave-mode . octave-block-offset))
+  (add-to-list 'lsp-bridge-formatting-indent-alist
+               '(octave-mode . octave-block-offset))
+
+  ;; ---------------- R ----------------
+  ;; support by default for langserver (https://github.com/REditorSupport/languageserver)
 
   ) ;; End of lsp-bridge
-
-
-;; Avoid conflicting, if company-mode enabled
-;; (when *use-company*
-;;   (setcdr (last company-global-modes) '(python-mode emacs-lisp-mode)))
 
 ;; Disable lsp-bridge for certain major modes (if load for "prog-mode")
 ;; (add-hook 'octave-mode-hook (lambda () (lsp-bridge-mode -1)))

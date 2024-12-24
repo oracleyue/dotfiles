@@ -5,34 +5,23 @@
 ;; Install R packages: linter for R "lintr"
 
 
-;; ESS configrations
+;; ESS mode
 (use-package ess
-  :demand t
+  :init (require 'ess-site)
   :config
-  ;; syntax checking (use flycheck)
+  ;; syntax checking (use flycheck instead)
   (setq ess-use-flymake nil) ;; diable bulit-in flymake
 
-  ;; code completion (require R shell running)
+  ;; built-in code completion (require R shell running)
   ;; - using built-in "ess-indent-or-complete" (C-M-i)
-  ;; - using /company/: "company-R-args", "company-R-objects"
-  ;;   and dabbev-code for variable names
-  (when *use-company*
-    (setq ess-use-company t)
-    (use-package company-dabbrev-code
-      :ensure nil
-      :after company
-      :config
-      (add-to-list 'company-dabbrev-code-modes 'ess-mode)
-      (defun zyue/add-company-backend-ess ()
-        (pop company-backends)
-        (setq-local company-backends
-                    (append '((company-R-args company-R-objects company-R-library
-                                              company-dabbrev-code))
-                            company-backends)))
-      (add-hook 'ess-mode-hook #'zyue/add-company-backend-ess)))
+  ;; - using /company/: check "init-company.el"
+  ;;   (add "company-R-args", "company-R-objects" and dabbev-code to backends)
+  ;; (setq ess-use-company t)
+
+  ;; LSP for code completion (check init-lsp-bridge.el)
   )
 
-;; Quick operators by /key-combo/
+;; /key-combo/: quick operators
 (use-package key-combo
   :init
   (add-hook 'ess-mode-hook #'(lambda() (key-combo-mode t)))

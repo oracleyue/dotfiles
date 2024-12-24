@@ -3,25 +3,24 @@
 ;; ===============================================================
 ;; Last modified on 20 Feb 2020
 
-
 ;; ---------------------------------------------
 ;; Basics of prog-mode
 ;; ---------------------------------------------
 
+;; Adding little line spacing
 (defun zyue/toggle-line-spacing ()
   "Toggle line spacing between no extra space to extra half line height."
   (interactive)
   (if line-spacing
       (setq line-spacing nil)
-    (setq line-spacing 0.2))
+    (setq line-spacing 0.15))
   (redraw-frame (selected-frame)))
 
-;; line wrapping
+;; Line wrapping
 ;; note: "wrap at window edge" cause issues in company
 (add-hook 'prog-mode-hook
           (lambda () (setq-default truncate-lines t)
             (setq fill-column *fill-column-mono*)))
-
 
 ;; ---------------------------------------------
 ;; /flycheck/: modern syntax checking
@@ -41,13 +40,11 @@
   ;; check only when opening or saving files
   (setq flycheck-check-syntax-automatically '(save mode-enabled)))
 
-
 ;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
 (use-package magit :demand)
 ;; use "M-x magit" or "magit-status"
-
 
 ;; ---------------------------------------------
 ;; /citre/: modern frontend for Universtal Ctags
@@ -80,7 +77,6 @@
   (with-eval-after-load 'cc-mode (require 'citre-lang-c))
   (with-eval-after-load 'dired (require 'citre-lang-fileref)))
 
-
 ;; ----------------------------------------------
 ;; line numbering
 ;; ----------------------------------------------
@@ -111,12 +107,10 @@
 ;; (when *is-terminal*
 ;;   (setq linum-format "%4d "))
 
-
 ;; ----------------------------------------------
 ;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
 ;; ----------------------------------------------
 (use-package iedit :demand)
-
 
 ;; ----------------------------------------------
 ;; /symbol-overlay/: highlight symbols to improve readability
@@ -136,7 +130,6 @@
          (iedit-mode     . (lambda () (symbol-overlay-mode -1)))
          (iedit-mode-end . symbol-overlay-mode)))
 
-
 ;; ----------------------------------------------
 ;; /ediff/: comparing two files
 ;; ----------------------------------------------
@@ -144,7 +137,6 @@
 ;; (setq ediff-diff-options "-w")  ;; ignore white spaces
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
-
 
 ;; ----------------------------------------------
 ;; API reference support
@@ -184,7 +176,6 @@
          (python-mode . "python 2,numpy,scipy,matplotlib,pandas")
          (ess-mode    . "r"))))
 
-
 ;; ----------------------------------------------
 ;; /gud/: debugging supports, e.g. gdb, pdb
 ;; ----------------------------------------------
@@ -204,7 +195,6 @@
   (when *is-mac*
     (setq gdb-non-stop-setting nil)))
 
-
 ;; ----------------------------------------------
 ;; term/ansi-term
 ;; ----------------------------------------------
@@ -215,6 +205,43 @@
   :ensure nil
   :config
   (setq-default term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+
+;; ----------------------------------------------
+;; Hydra support for programming (lsp, jump, rename, etc)
+;; ----------------------------------------------
+(define-key prog-mode-map (kbd "M-s SPC") 'hydra-coding/body)
+
+(defvar hydra-coding--title
+  (pretty-hydra-title "Programming" 'octicon "nf-oct-code"))
+
+(pretty-hydra-define hydra-coding
+  (:foreign-keys warn :title hydra-coding--title :quit-key ("q" "SPC" "C-g"))
+  ("Action"
+   ((";" lsp-bridge-rename "rename")
+    ("s" lsp-bridge-workspace-list-symbols "symbol query")
+    ("a" lsp-bridge-code-action "action")
+    ("F" lsp-bridge-code-format "formatting")
+    ("R" compile "run/compile"))
+
+   "Jumping"
+   (("." lsp-bridge-find-def "definition")
+    ("i" lsp-bridge-find-impl "implementation")
+    ("r" lsp-bridge-find-references "references")
+    ("," lsp-bridge-find-def-return "return"))
+
+   "Help"
+   (("p" lsp-bridge-peek "peek")
+    ("l" lsp-bridge-diagnostic-list "diagnosis")
+    ("h" lsp-bridge-show-documentation "help doc")
+    ("c" lsp-bridge-signature-help-fetch "call tips")
+    ("d" dash-at-point "dash doc"))
+
+   "Citre"
+   (("P" citre-peek "peek")
+    ("A" citre-ace-peek "ace peek")
+    ("U" citre-update-this-tags-file "update")
+    ("C" citre-create-tags-file "create")
+    ("E" citre-edit-tags-file-recipe "recipe"))))
 
 
 (provide 'init-programming)

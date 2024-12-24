@@ -48,7 +48,7 @@
 ;; ---------------------------------------------
 ;; Wraper for loading modeline
 ;; ---------------------------------------------
-(defun zyue-modeline-setup (&optional theme)
+(defun zyue/modeline-setup (&optional theme)
   "Interface to load the theme for modeline."
   (pcase theme
     ('plain       (require 'plain-modeline))

@@ -9,7 +9,7 @@
   :type 'string)
 
 ;; Frame   (note: [96, 33] in Thinkpad)
-(setq default-frame-alist '((width . 85) (height . 52)))
+(setq default-frame-alist '((width . 85) (height . 54)))
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -34,43 +34,13 @@
 ;; Modeline (powerline, spaceline, doomline, plain)
 (require 'init-modeline)
 
-;; Init or reload functions
-(defun zyue-init-ui (&optional frame)
-  ;; load theme
-  (when zyue-theme
-    (load-theme zyue-theme t))
-  ;; load modeline style
-  (zyue-modeline-setup zyue-modeline)
-  ;; loading after frame creations
-  (when window-system
-    ;; update transparent titlebar textcolor wrt themes
-    (modify-frame-parameters frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
-    ;; transparent background
-    (set-bg-alpha '(100 90))
-    ;; load fonts
-    (zyue-search-and-load-fonts frame)))
-
-(defun zyue-reload-ui-in-daemon (frame)
-  "Reload the theme (and font) in an daemon frame."
-  (when (or (daemonp) (not (display-graphic-p)))
-    (with-selected-frame frame
-      (run-with-timer 0.1 nil #'zyue-init-ui))))
-
-;; Transparent effect (alpha < 1)
-(defun set-bg-alpha (value)
-  "This function set the Alpha value of frames to make background
-transparent. VALUE is a list (A, AB), where A is the Alpha value
-of the focused frame and AB is the unfocused."
-  (set-frame-parameter (selected-frame) 'alpha value)
-  (add-to-list 'default-frame-alist (cons 'alpha value)))
-
 ;; Fonts
 (if *is-mac* (setq size-n 15.0) (setq size-n 10.5))
-(defun zyue-search-and-load-fonts (&optional frame)
+(defun zyue/search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
     (dolist (font '("FiraCode Nerd Font"
-                    "Roboto Mono" ;; fix bug by disable "medium"-type ttf files!
+                    "RobotoMono Nerd Font" ;; fix: disable "medium" ttf!
                     "JetBrainsMono Nerd Font"
                     "SF Mono"     ;; Mac only
                     "Consolas"    ;; Windows only
@@ -139,18 +109,26 @@ of the focused frame and AB is the unfocused."
     (require 'all-the-icons nil t))
   )
 
+(defun icons-displayable-p ()
+  "Return non-nil if icons are displayable."
+  (and *icons-type*
+       (or (featurep 'nerd-icons)
+           (require 'nerd-icons nil t))))
+
 ;; Themes
 ;; (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
+;; (setq zyue-theme 'elegant-light)
 (when *is-server-m* (setq zyue-theme 'elegant-light))
 (when *is-server-c* (setq zyue-theme 'doom-one))
-;; (when *is-server-c* (setq zyue-theme 'spacemacs-dark))
-(when *is-terminal* (setq zyue-theme 'spacemacs-dark
-                          zyue-modeline 'plain))
+(when *is-terminal* (setq zyue-theme 'spacemacs-dark))
+
 (pcase zyue-theme
   ((or 'doom-one 'doom-nord-light)
    (setq zyue-modeline 'doomline)
    (use-package doom-themes
-     :custom (doom-themes-treemacs-theme "doom-colors")
+     :custom
+     (doom-themes-treemacs-theme "doom-colors")
+     (line-spacing '0.1)
      :config (doom-themes-visual-bell-config)))
   ((or 'spacemacs-dark 'spacemacs-light)
    (setq zyue-modeline 'powerline)
@@ -180,20 +158,65 @@ of the focused frame and AB is the unfocused."
      :config (setq font-userdefine-flag nil)))
   (_ nil))
 
+;; Transparent effect (alpha < 1)
+(defun zyue/set-bg-alpha (value)
+  "This function set the Alpha value of frames to make background
+transparent. VALUE is a list (A, AB), where A is the Alpha value
+of the focused frame and AB is the unfocused."
+  (set-frame-parameter (selected-frame) 'alpha value)
+  (add-to-list 'default-frame-alist (cons 'alpha value)))
+
+;; Init or reload functions
+(defun zyue/init-ui (&optional frame)
+  ;; load theme
+  (when zyue-theme
+    (load-theme zyue-theme t))
+  ;; load modeline style
+  (zyue/modeline-setup zyue-modeline)
+  ;; loading after frame creations
+  (when window-system
+    ;; update transparent titlebar textcolor wrt themes
+    (modify-frame-parameters
+     frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
+    ;; transparent background
+    (zyue/set-bg-alpha '(100 95))
+    ;; load fonts
+    (zyue/search-and-load-fonts frame)))
+
+(defun zyue/reload-ui-in-daemon (frame)
+  "Reload the theme (and font) in an daemon frame."
+  (when (or (daemonp) (not (display-graphic-p)))
+    (with-selected-frame frame
+      (run-with-timer 0.1 nil #'zyue/init-ui))))
+
 ;; UI loading
 (if (daemonp)
-    (add-hook 'after-make-frame-functions #'zyue-reload-ui-in-daemon)
-  (zyue-init-ui))
+    (add-hook 'after-make-frame-functions #'zyue/reload-ui-in-daemon)
+  (zyue/init-ui))
 
-;; Loop over transparent effects
-;; (global-set-key [(f11)] 'loop-alpha)
-(setq alpha-list '((100 100) (95 65) (85 55) (75 45) (65 35)))
-(defun loop-alpha ()
-  (interactive)
-  (let ((h (car alpha-list)))                ;; head value will set to
-    ((lambda (a ab) (set-bg-alpha (list a ab)))
-     (car h) (car (cdr h)))
-    (setq alpha-list (cdr (append alpha-list (list h))))))
+;; /Posframe/ for floating windows
+(use-package posframe
+  :demand
+  :hook (after-load-theme . posframe-delete-all)
+  :init
+  (defface posframe-border `((t (:background "gray50")))
+    "Face used by the `posframe' border."
+    :group 'posframe)
+  (defvar posframe-border-width 2
+    "Default posframe border width.")
+  :config
+  (with-no-warnings
+    (defun my-posframe--prettify-frame (&rest _)
+      (set-face-background 'fringe nil posframe--frame))
+    (advice-add #'posframe--create-posframe :after #'my-posframe--prettify-frame)
+
+    (defun posframe-poshandler-frame-center-near-bottom (info)
+      (cons (/ (- (plist-get info :parent-frame-width)
+                  (plist-get info :posframe-width))
+               2)
+            (/ (+ (plist-get info :parent-frame-height)
+                  (* 2 (plist-get info :font-height)))
+               2)))))
 
 
 (provide 'init-ui)

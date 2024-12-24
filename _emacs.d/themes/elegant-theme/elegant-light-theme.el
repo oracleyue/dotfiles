@@ -88,7 +88,9 @@
             (trailing-whitespace   :inherit    elegant-subtle)
             (show-paren-match      :inherit    elegant-popout)
             (show-paren-mismatch   :inherit           default)
-            (tooltip               :height               0.85)
+            ;; (tooltip               :height               0.85)
+            (tooltip               :inherit    elegant-subtle
+                                   :height               0.85)
 
             ;; Programming
             (font-lock-comment-face        :inherit     elegant-faded)
@@ -106,7 +108,7 @@
             (company-tooltip               :inherit    elegant-subtle)
             (company-tooltip-selection     :inherit            region)
 
-            ;; Ivy
+            ;; Ivy/Posframe
             (ivy-posframe                  :inherit    elegant-subtle)
             (swiper-match-face-2           :inherit    elegant-critical)
 

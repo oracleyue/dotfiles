@@ -29,11 +29,6 @@
                          )))
 
   ;; ----------- Additional supports for MATLAB -----------
-  ;; enable /company-dabbrev-code/ for matlab
-  (when *use-company*
-    (require 'company-dabbrev-code)
-    (add-to-list 'company-dabbrev-code-modes 'octave-mode))
-
   ;; use /citre/ for jump via universal ctags in "init-programming.el"
   ;; - most keybindings in "M-s", see "M-s C-h"
   ;; - start with touching ".tags" in root and updating by "M-s u"

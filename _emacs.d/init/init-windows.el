@@ -37,20 +37,6 @@
 ;; =C-x w <n>=: select window <n>, where <n> ranges from 0 to 9
 ;; =C-x w `=: select window by number, which is inserted in minibuffer
 
-;; ---------------------------------------------------------------
-;; /Avy/: jump to char/words in tree-style
-;; ---------------------------------------------------------------
-(use-package avy
-  :demand
-  :bind (("C-'"     . avy-goto-char)   ;; C-:
-         ("M-'"     . avy-goto-char-2) ;; C-'
-         ("M-g g"   . avy-goto-line)
-         ("M-g M-g" . avy-goto-line)
-         ("M-g w"   . avy-goto-word-1) ;; avy-goto-word-0: too many candiates
-         ("M-g M-r" . avy-resume))
-  :config
-  (avy-setup-default))
-
 ;; ------------------------------------------------
 ;; Directory explorer (regular, /dired/)
 ;; ------------------------------------------------
@@ -225,6 +211,53 @@
   :config
   ;; (setq imenu-list-auto-resize t)
   (setq imenu-list-focus-after-activation t))
+
+;; ------------------------------------------------
+;; Hydra with ace-window: better window management
+;; ------------------------------------------------
+;; Ace window management
+(use-package ace-window
+  :bind   ("M-j" . ace-window)
+  :config (setq aw-scope 'frame))
+
+;; Tranpose window layout in frame
+(use-package transpose-frame)
+
+;; Adjust window sizes
+(require 'move-border)
+
+;; Hydra integration
+(global-set-key (kbd "M-g j") 'hydra-jp-window/body)
+
+(defvar jp-window--title
+  (pretty-hydra-title "Window Management" 'mdicon "nf-md-dock_window"))
+(pretty-hydra-define hydra-jp-window
+  (:foreign-keys warn :title jp-window--title :quit-key ("q" "SPC" "C-g"))
+  ("Actions"
+   (("TAB" other-window "switch")
+    ("x" ace-delete-window "delete")
+    ("m" ace-delete-other-windows "maximize")
+    ("s" ace-swap-window "swap")
+    ("a" ace-select-window "select"))
+
+   "Resize"
+   (("h" move-border-left "←")
+    ("j" move-border-down "↓")
+    ("k" move-border-up "↑")
+    ("l" move-border-right "→")
+    ("n" balance-windows "balance")
+    ("f" toggle-frame-fullscreen "toggle fullscreen"))
+
+   "Split"
+   (("b" split-window-right "horizontally")
+    ("v" split-window-below "vertically")
+    ("t" transpose-frame "transpose layout"))
+
+   "Zoom"
+   (("+" text-scale-increase "in")
+    ("=" text-scale-increase nil)
+    ("-" text-scale-decrease "out")
+    ("0" text-scale-adjust "reset"))))
 
 
 (provide 'init-windows)

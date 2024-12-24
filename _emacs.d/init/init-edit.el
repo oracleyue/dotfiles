@@ -196,6 +196,18 @@ Uses `current-date-format' for the formatting the date/time."
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
+;; /Avy/: jump to char/words in tree-style
+(use-package avy
+  :demand
+  :bind (("C-'"     . avy-goto-char)   ;; C-:
+         ("M-'"     . avy-goto-char-2) ;; C-'
+         ("M-g g"   . avy-goto-line)
+         ("M-g M-g" . avy-goto-line)
+         ("M-g w"   . avy-goto-word-1) ;; avy-goto-word-0: too many candiates
+         ("M-g M-r" . avy-resume))
+  :config
+  (avy-setup-default))
+
 
 (provide 'init-edit)
 ;; ================================================
