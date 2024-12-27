@@ -24,15 +24,17 @@
 ;; UI (theme, modeline, dashboard, etc.)
 (require 'init-ui)
 
+;; cheetsheet UI
+(require 'init-hydra)
+
 ;; basics
 (require 'init-basics)
 (require 'init-edit)
 
-;; key cheetsheet
-(require 'init-hydra)
-
 ;; code completion
-;; (require 'init-company)
+(pcase *ac-engine*
+  ('company (require 'init-company))
+  ('corfu   (require 'init-corfu)))
 (require 'init-snippets)
 
 ;; global completion systems
@@ -40,6 +42,7 @@
 
 ;; directory and buffer explorers
 (require 'init-windows)
+(require 'init-treemacs)
 
 ;; startup screen (dashboard)
 (require 'init-dashboard)
@@ -66,6 +69,7 @@
 (pcase *lsp-client*
   ('lsp-mode   (require 'init-lsp))          ;; lsp-mode and dap-mode
   ('lsp-bridge (require 'init-lsp-bridge))   ;; lsp-bridge mode (fastest)
+  ('eglot      (require 'init-eglot))        ;; eglot
   ('nil nil))  ;; no load
 
 ;; DAP

@@ -17,13 +17,14 @@
              treemacs-fringe-indicator-mode
              treemacs-git-mode)
   :init (setq treemacs-no-load-time-warnings t)  ;; suppress annoying warnings
-  :bind (("M-0"       . treemacs) ;; treemacs-select-window
+  :bind (("M-0"       . treemacs-select-window)  ;; treemacs
          ("C-x t t"   . treemacs)
          ("C-x t 1"   . treemacs-delete-other-windows)
          ("C-x t d"   . treemacs-select-directory)
          ("C-x t B"   . treemacs-bookmark)
          ("C-x t C-t" . treemacs-find-file)
          ("C-x t M-t" . treemacs-find-tag)
+         ;; TAB on file in treemacs to see tags
          :map treemacs-mode-map
          ([mouse-1]   . treemacs-single-click-expand-action))
   :config
@@ -33,8 +34,7 @@
         treemacs-is-never-other-window         t
         treemacs-silent-filewatch              t
         treemacs-silent-refresh                t
-        treemacs-width                         30
-        treemacs-no-png-images                 *is-terminal*)
+        treemacs-width                         30)
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (pcase (cons (not (null (executable-find "git")))

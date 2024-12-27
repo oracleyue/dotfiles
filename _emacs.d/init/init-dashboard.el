@@ -7,7 +7,7 @@
   :after nerd-icons
   :init
   (setq initial-buffer-choice 'dashboard-open)
-  (add-hook 'window-setup-hook (lambda () (dashboard-refresh-buffer)))
+  ;; (add-hook 'window-setup-hook (lambda () (dashboard-refresh-buffer)))
   :bind (:map dashboard-mode-map
               ("h" . widget-backward)
               ("l" . widget-forward)
@@ -27,7 +27,7 @@
         dashboard-set-file-icons    t)
   ;; items
   (setq dashboard-projects-backend 'projectile)
-  (setq dashboard-items '((projects  . 5)
+  (setq dashboard-items '((projects  . 8)
                           (bookmarks . 5)
                           (recents   . 5)))
   (dashboard-modify-heading-icons '((projects  . "nf-oct-rocket")

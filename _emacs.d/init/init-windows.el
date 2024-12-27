@@ -72,7 +72,7 @@
               "\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls"))
 (delete ".bbl" dired-omit-extensions)
 ;; bug: turn on in hook fails dired open directories in emacs@30
-;; (add-hook 'dired-mode-hook #'dired-omit-mode)
+(add-hook 'dired-mode-hook #'dired-omit-mode)
 
 ;; Icons supports for Dired
 (if (string= *icons-type* "nerd-icons")
@@ -83,11 +83,6 @@
   (use-package all-the-icons-dired
     :demand
     :hook (dired-mode . all-the-icons-dired-mode)))
-
-;; ------------------------------------------------
-;; Directory explorers (tree)
-;; ------------------------------------------------
-(require 'init-treemacs)
 
 ;; ------------------------------------------------
 ;; /ibuffer/: manage opened buffers
@@ -138,6 +133,7 @@
                               (mode . emacs-lisp-mode)))
                  ("LSP"   (or (name . "^\\*lsp-log\\*$")
                               (name . "^\\*mspyls\\*$")
+                              (name . "^\\*EGLOT.*\\*$")
                               (name . "^\\*mspyls::stderr\\*$")
                               (name . "^\\*pyls\\*$")
                               (name . "^\\*clangd\\*$")
@@ -156,7 +152,7 @@
                               (name . "^\\*ielm\\*$")
                               (mode . inferior-python-mode)))
                  ("misc." (or (name . "^\\*Help\\*$")
-                              (name . "^\\*Messages*\\*$")
+                              (name . "^\\*Messages\\*$")
                               (name . "^\\*Compile-Log*\\*$")
                               (name . "^\\*osx-dictionary\\*$")
                               (name . "^\\*eldoc\\*$")
@@ -195,7 +191,6 @@
 (if (string= *icons-type* "nerd-icons")
     ;; /nerd-icons/ support
     (use-package nerd-icons-ibuffer
-      :ensure t
       :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
   ;; /all-the-icons/ support
   (use-package all-the-icons-ibuffer
@@ -227,7 +222,7 @@
 (require 'move-border)
 
 ;; Hydra integration
-(global-set-key (kbd "M-g j") 'hydra-jp-window/body)
+(global-set-key (kbd "M-g SPC") 'hydra-jp-window/body)
 
 (defvar jp-window--title
   (pretty-hydra-title "Window Management" 'mdicon "nf-md-dock_window"))

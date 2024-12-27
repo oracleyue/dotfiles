@@ -9,34 +9,45 @@
   :mode ("\\.m$" . octave-mode)
   :bind (:map octave-mode-map
               ("C-c C-c" . align))
-  :init
-  ;; set up "run-octave" for matlab
-  (setq inferior-octave-program "/usr/local/bin/matlab"
-        inferior-octave-startup-args (quote ("-nodesktop -nosplash")))
   :config
-  ;; ----------- Styles for MATLAB -----------
-  (add-hook 'octave-mode-hook
-            (lambda () (progn (setq comment-start "%"
-                               comment-add 0
-                               octave-block-offset 4)
-                         (defun octave-indent-comment ()
-                           "A function for `smie-indent-functions' (which see)."
-                           (save-excursion
-                             (back-to-indentation)
-                             (cond
-                              ((octave-in-string-or-comment-p) nil)
-                              ((looking-at-p "\\(\\s<\\)\\1\\{2,\\}") 0))))
-                         )))
+  ;; code completion
+  ;; - use /company/: check init-company.el
+  (when (eq *ac-engine* 'company)
+      (add-to-list 'company-dabbrev-code-modes 'octave-mode))
+  ;; - use capf: add dabbrev (check init-basics.el)
+  (when (eq *ac-engine* 'capf)
+    (add-hook 'octave-mode-hook
+              (lambda() (add-to-list 'completion-at-point-functions
+                                'dabbrev-complation-at-point))))
 
-  ;; ----------- Additional supports for MATLAB -----------
-  ;; use /citre/ for jump via universal ctags in "init-programming.el"
-  ;; - most keybindings in "M-s", see "M-s C-h"
-  ;; - start with touching ".tags" in root and updating by "M-s u"
+  ;; code completion (LSP)
+  ;; use /eglot/ or /lsp-bridge/ for intelligent completion
+
+  ;; style
+  (defun zyue/octave-code-style ()
+    (progn (setq comment-start "%"
+                 comment-add 0
+                 octave-block-offset 4)
+           (defun octave-indent-comment ()
+             "A function for `smie-indent-functions' (which see)."
+             (save-excursion
+               (back-to-indentation)
+               (cond
+                ((octave-in-string-or-comment-p) nil)
+                ((looking-at-p "\\(\\s<\\)\\1\\{2,\\}") 0))))))
+  (add-hook 'octave-mode-hook #'zyue/octave-code-style)
+
+  ;; ----------- Additional Supports for MATLAB -----------
+
+  ;; Tag support: /citre/ in "init-programming.el"
+  ;; - keys prefixed with "M-s"
+  ;; - hydra support: "M-s SPC"
+  ;; - start with adding ".tags" in root and updating by "M-s u"
   ;; - "citre-jump", "citre-jump-back" (or, xref "M-." "M-,")
   ;; - "citre-peek", "citre-ace-peek"
   ;; - completion via ctags in "completion-at-point" ("C-M-i")
 
-  ;; add /smartparens/ supports
+  ;; /smartparens/ supports
   (with-eval-after-load "smartparens"
     (sp-with-modes 'octave-mode
       (sp-local-pair "'" "'" :unless '(sp-point-after-word-p)

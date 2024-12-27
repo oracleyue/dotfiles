@@ -36,8 +36,7 @@
 (defun zyue/deft ()
   "Dired the notebook home directory."
   (interactive)
-  (progn (dired "~/Public/Dropbox/oracleyue/Notebooks")
-         (dired-omit-mode)))
+  (progn (dired "~/Public/Dropbox/oracleyue/Notebooks")))
 ;; use "M-g f" to search files
 ;; use "M-g a" to search file contents
 

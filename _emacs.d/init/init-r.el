@@ -16,9 +16,18 @@
   ;; - using built-in "ess-indent-or-complete" (C-M-i)
   ;; - using /company/: check "init-company.el"
   ;;   (add "company-R-args", "company-R-objects" and dabbev-code to backends)
-  ;; (setq ess-use-company t)
+  (when (eq *ac-engine* 'company)
+    (setq ess-use-company t)
+    (add-to-list 'company-dabbrev-code-modes 'ess-mode)
+    (defun zyue/add-company-backend-ess ()
+      (pop company-backends)
+      (setq-local company-backends
+                  (append '((company-R-args company-R-objects company-R-library
+                                            company-dabbrev-code))
+                          company-backends)))
+    (add-hook 'ess-mode-hook #'zyue/add-company-backend-ess))
 
-  ;; LSP for code completion (check init-lsp-bridge.el)
+  ;; lsp for code completion
   )
 
 ;; /key-combo/: quick operators

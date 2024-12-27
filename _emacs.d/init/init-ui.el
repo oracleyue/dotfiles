@@ -9,7 +9,7 @@
   :type 'string)
 
 ;; Frame   (note: [96, 33] in Thinkpad)
-(setq default-frame-alist '((width . 85) (height . 54)))
+(setq default-frame-alist '((width . 92) (height . 56))) ;; 85/52
 
 ;; Transparent titlebar for Mac OS X
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -39,12 +39,11 @@
 (defun zyue/search-and-load-fonts (&optional frame)
   ;; Specify default/fixed-width fonts
   (catch 'loop
-    (dolist (font '("FiraCode Nerd Font"
+    (dolist (font '("JetBrainsMono Nerd Font"
+                    "FiraCode Nerd Font"
                     "RobotoMono Nerd Font" ;; fix: disable "medium" ttf!
-                    "JetBrainsMono Nerd Font"
-                    "SF Mono"     ;; Mac only
-                    "Consolas"    ;; Windows only
-                    ))
+                    "SF Mono"              ;; Mac only
+                    "Consolas"))           ;; Windows only
       (when (member font (font-family-list))
         (setq zyue-font (font-spec :family font :size size-n))
         (when font-userdefine-flag
@@ -61,8 +60,8 @@
         (throw 'loop t))))
   ;; Specify font for Chinese
   (catch 'loop
-    (dolist (font '("WenQuanYi Micro Hei Mono"
-                    "LXGW WenKai Mono"         ;; 霞鹜文楷
+    (dolist (font '("LXGW WenKai Mono"         ;; 霞鹜文楷
+                    "WenQuanYi Micro Hei Mono"
                     "Source Han Serif SC"      ;; 思源宋体 (简、繁、日)
                     "PingFang SC" "Microsoft Yahei"))
       (when (member font (font-family-list))
@@ -109,15 +108,22 @@
     (require 'all-the-icons nil t))
   )
 
-(defun icons-displayable-p ()
+(defun icons-displayable-p (&optional type)
   "Return non-nil if icons are displayable."
-  (and *icons-type*
-       (or (featurep 'nerd-icons)
-           (require 'nerd-icons nil t))))
+  (let ((nerd-icons-p (or (featurep 'nerd-icons)
+                         (require 'nerd-icons nil t)))
+        (all-the-icons-p (or (featurep 'all-the-icons)
+                             (require 'all-the-icons nil t))))
+    (if type
+        (and (string= *icons-type* type)
+             (if (string= *icons-type* 'nerd-icons)
+                 nerd-icons-p
+               all-the-icons-p))
+      (or nerd-icons-p all-the-icons-p))))
 
 ;; Themes
 ;; (eclipse, doom-nord-light; doom-one, spacemacs-dark, tao-yang, elegant-light)
-;; (setq zyue-theme 'elegant-light)
+(setq zyue-theme 'doom-one)
 (when *is-server-m* (setq zyue-theme 'elegant-light))
 (when *is-server-c* (setq zyue-theme 'doom-one))
 (when *is-terminal* (setq zyue-theme 'spacemacs-dark))
@@ -128,7 +134,7 @@
    (use-package doom-themes
      :custom
      (doom-themes-treemacs-theme "doom-colors")
-     (line-spacing '0.1)
+     (line-spacing nil) ;; 0.1 for FiraCode
      :config (doom-themes-visual-bell-config)))
   ((or 'spacemacs-dark 'spacemacs-light)
    (setq zyue-modeline 'powerline)
@@ -202,8 +208,6 @@ of the focused frame and AB is the unfocused."
   (defface posframe-border `((t (:background "gray50")))
     "Face used by the `posframe' border."
     :group 'posframe)
-  (defvar posframe-border-width 2
-    "Default posframe border width.")
   :config
   (with-no-warnings
     (defun my-posframe--prettify-frame (&rest _)

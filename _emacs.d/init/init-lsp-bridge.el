@@ -3,9 +3,6 @@
 ;; ================================================================
 ;; Last modified on 11 Aug 2022
 
-;; To-do's:
-;; - disable lsp-bridge to complete yas snippets for matlab-mode
-
 ;; System dependencies:
 ;; - Python package: "pip install epc"
 ;; - LSP for Python: "pip install pyright"
@@ -31,13 +28,16 @@
               ("M-s ;" . lsp-bridge-rename)
               ("M-s a" . lsp-bridge-code-action)
               ("M-s F" . lsp-bridge-code-format)
-              ("M-s p" . lsp-bridge-peek)  ;; in peek, further "M-l j/b" jump/back
+              ("M-s P" . lsp-bridge-peek)  ;; in peek, further "M-l j/b" jump/back
               ;; use "M-S-n/-p" to select item; use "M-n/-p" scroll peek contents
               ("M-s s" . lsp-bridge-workspace-list-symbols)
               ("M-s l" . lsp-bridge-diagnostic-list))
   :config
   (yas-global-mode 1)
   ;; (global-lsp-bridge-mode)    ;; mode-specific enabled instead
+
+  ;; log for debug (disabled for performance)
+  (setq lsp-bridge-enable-log t)
 
   ;; completion interface
   (setq acm-enable-yas t
@@ -73,9 +73,6 @@
   ;; support by default for langserver (https://github.com/REditorSupport/languageserver)
 
   ) ;; End of lsp-bridge
-
-;; Disable lsp-bridge for certain major modes (if load for "prog-mode")
-;; (add-hook 'octave-mode-hook (lambda () (lsp-bridge-mode -1)))
 
 
 (provide 'init-lsp-bridge)

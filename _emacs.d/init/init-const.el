@@ -31,6 +31,9 @@
 ;; fixed-width or variable-width fonts
 (defconst *use-sans-orgmode* nil)
 
+;; auto-completion engine
+(defconst *ac-engine* 'corfu)  ; capf, company, corfu
+
 ;; hydra supports
 (defconst *use-hydra* t)
 
@@ -45,8 +48,7 @@
 ;; Lsp for code intelligence
 (if *is-server-m*
     (defconst *lsp-client* nil)
-  ;; (defconst *lsp-client* 'lsp-mode)  ;; lsp-mode
-  (defconst *lsp-client* 'lsp-bridge))  ;; lsp-bridge
+  (defconst *lsp-client* 'eglot))  ;; lsp-mode, lsp-bridge, eglot
 
 
 (provide 'init-const)

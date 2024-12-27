@@ -4,7 +4,7 @@
 ;; Last modified on 27 Feb 2021
 
 ;; Dependencies:
-;; - clangd: lsp C++ server, install by "brew install llvm"
+;; - clangd: lsp C++ server
 ;; - cmake, bear: generating build flags, install by brew
 ;;
 ;; Generating "compile_commands.json":
@@ -16,20 +16,7 @@
 (use-package cc-mode
   :ensure nil
   :bind (:map c-mode-base-map
-              ("C-c C-c" . compile))
-  :init
-  (setq-default c-default-style "linux"  ;; "stroustrup"
-                c-basic-offset 4)
-  :config
-  ;; code fontify
-  (use-package modern-cpp-font-lock
-    :diminish (modern-c++-font-lock-mode)
-    :init (modern-c++-font-lock-global-mode t))
-  )
-
-;; ------------------------------------------------
-;; Other editing supports
-;; ------------------------------------------------
+              ("C-c C-c" . compile)))
 
 ;; /smartparens/: insert pair of symbols
 ;; when you press RET, the curly braces automatically add another newline
@@ -38,7 +25,9 @@
     (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
     (sp-local-pair "/*" "*/" :post-handlers '(("| " "SPC") ("* ||\n[i]" "RET")))))
 
-;; CMake supports
+;; ------------------------------------------------
+;; supports for /cmake/
+;; ------------------------------------------------
 (require 'init-cmake)
 
 

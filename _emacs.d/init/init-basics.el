@@ -299,12 +299,35 @@
   :config (bash-completion-setup))
 
 ;; ------------------------------------------------
-;; /TRAMP/: manage ssh and remote access
+;; /tramp/: manage ssh and remote access
 ;; ------------------------------------------------
 (setq tramp-default-method "ssh")
 ;; usages:
 ;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
 ;; - "C-x C-f /sudo::/etc/hosts"
+
+;; ------------------------------------------------
+;; Integrate /dabbrev/ into completion-at-point (Capf)
+;; ------------------------------------------------
+(use-package dabbrev
+  :ensure nil
+  ;; swap M-/ and C-M-/
+  :bind (("M-/"   . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  ;; ignore buffers/modes
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode)
+  ;; inferface to add dabbrev into capf
+  (defun dabbrev-complation-at-point ()
+    "User-defined dabbrev function for `completetion-at-point-functions'."
+    (dabbrev--reset-global-variables)
+    (let* ((abbrev (dabbrev--abbrev-at-point))
+           (candidates (dabbrev--find-all-expansions abbrev t))
+           (bnd (bounds-of-thing-at-point 'symbol)))
+      (list (car bnd) (cdr bnd) candidates))))
 
 
 (provide 'init-basics)

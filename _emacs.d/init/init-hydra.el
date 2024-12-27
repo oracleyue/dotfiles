@@ -13,8 +13,8 @@
   (defun hydra-set-posframe-show-params ()
     "Set hydra-posframe style."
     (setq hydra-posframe-show-params
-          `(:left-fringe 12
-                         :right-fringe 12
+          `(:left-fringe 14
+                         :right-fringe 14
                          :internal-border-width 2
                          :internal-border-color ,(face-background 'posframe-border nil t)
                          :background-color ,(face-background 'tooltip nil t)

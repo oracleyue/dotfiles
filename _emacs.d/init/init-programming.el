@@ -60,7 +60,7 @@
               ("s-."     . citre-jump)
               ("s-,"     . citre-jump-back)
               ;; citre-jump(-back) also reuses xref's "M-." and "M-,"
-              ("M-s M-p" . citre-peek)
+              ("M-s p"   . citre-peek)
               ("M-s M-a" . citre-ace-peek)
               ("M-s M-u" . citre-update-this-tags-file)
               ("M-s M-c" . citre-create-tags-file)
@@ -80,8 +80,13 @@
 ;; ----------------------------------------------
 ;; line numbering
 ;; ----------------------------------------------
+;; Fringe (if not display line numbers, add margins)
+(setq-default left-margin-width  1
+              right-margin-width 1)
+(set-window-buffer nil (current-buffer))
 ;; use built-in "display-line-number-mode" (require Emacs >= 26)
 (use-package display-line-numbers
+  :disabled
   :init
   (setq-default display-line-numbers-width 2)
   ;; (setq-default display-line-numbers-type 'relative)
@@ -214,34 +219,65 @@
 (defvar hydra-coding--title
   (pretty-hydra-title "Programming" 'octicon "nf-oct-code"))
 
-(pretty-hydra-define hydra-coding
-  (:foreign-keys warn :title hydra-coding--title :quit-key ("q" "SPC" "C-g"))
-  ("Action"
-   ((";" lsp-bridge-rename "rename")
-    ("s" lsp-bridge-workspace-list-symbols "symbol query")
-    ("a" lsp-bridge-code-action "action")
-    ("F" lsp-bridge-code-format "formatting")
-    ("R" compile "run/compile"))
+(if (eq *lsp-client* 'lsp-bridge)
+    ;; use lsp-bridge + citre
+    (pretty-hydra-define hydra-coding
+      (:foreign-keys warn :title hydra-coding--title :quit-key ("q" "SPC" "C-g"))
+      ("Action"
+       ((";" lsp-bridge-rename "rename")
+        ("s" lsp-bridge-workspace-list-symbols "symbol query")
+        ("a" lsp-bridge-code-action "action")
+        ("F" lsp-bridge-code-format "formatting")
+        ("R" compile "run/compile"))
 
-   "Jumping"
-   (("." lsp-bridge-find-def "definition")
-    ("i" lsp-bridge-find-impl "implementation")
-    ("r" lsp-bridge-find-references "references")
-    ("," lsp-bridge-find-def-return "return"))
+       "Jumping"
+       (("." lsp-bridge-find-def "definition")
+        ("i" lsp-bridge-find-impl "implementation")
+        ("r" lsp-bridge-find-references "references")
+        ("," lsp-bridge-find-def-return "return"))
 
-   "Help"
-   (("p" lsp-bridge-peek "peek")
-    ("l" lsp-bridge-diagnostic-list "diagnosis")
-    ("h" lsp-bridge-show-documentation "help doc")
-    ("c" lsp-bridge-signature-help-fetch "call tips")
-    ("d" dash-at-point "dash doc"))
+       "Help"
+       (("e" lsp-bridge-peek "peek")
+        ("l" lsp-bridge-diagnostic-list "diagnosis")
+        ("h" lsp-bridge-show-documentation "help doc")
+        ("c" lsp-bridge-signature-help-fetch "call tips")
+        ("d" dash-at-point "dash doc"))
 
-   "Citre"
-   (("P" citre-peek "peek")
-    ("A" citre-ace-peek "ace peek")
-    ("U" citre-update-this-tags-file "update")
-    ("C" citre-create-tags-file "create")
-    ("E" citre-edit-tags-file-recipe "recipe"))))
+       "Citre"
+       (("p" citre-peek "peek")
+        ("A" citre-ace-peek "ace peek")
+        ("U" citre-update-this-tags-file "update")
+        ("C" citre-create-tags-file "create")
+        ("E" citre-edit-tags-file-recipe "recipe"))))
+  ;; use eglot + citre
+  (pretty-hydra-define hydra-coding
+      (:foreign-keys warn :title hydra-coding--title :quit-key ("q" "SPC" "C-g"))
+      ("Action"
+       ((";" eglot-rename "rename")
+        ("f" eglot-format "format")
+        ("a" eglot-code-action "action")
+        ("H" eglot-inlay-hints-mode "toggle hints"))
+
+       "Jumping"
+       (("." xref-find-definitions "definition")
+        ("t" eglot-find-typeDefinition "typeDefinition")
+        ("c" eglot-find-declaration "declaration")
+        ("i" eglot-find-implementation "implementation")
+        ("," xref-go-back "return"))
+
+       "Help"
+       (("b" flymake-show-buffer-diagnostics "diagnosis (buffer)")
+        ("l" flymake-show-project-diagnostics "diagnosis (project)")
+        ("h" eldoc "eldoc")
+        ("d" dash-at-point "dash doc"))
+
+       "Citre"
+       (("p" citre-peek "peek")
+        ("A" citre-ace-peek "ace peek")
+        ("U" citre-update-this-tags-file "update")
+        ("C" citre-create-tags-file "create")
+        ("E" citre-edit-tags-file-recipe "recipe"))))
+  ) ;End of hydra def
 
 
 (provide 'init-programming)
