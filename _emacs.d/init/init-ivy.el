@@ -13,8 +13,8 @@
          (ivy-mode   . counsel-mode))
   :bind (([remap switch-to-buffer] . #'ivy-switch-buffer)
          ("C-c C-r"  . ivy-resume)
-         :map ivy-minibuffer-map
-         ("C-SPC"    . ivy-mark))  ;; use M-o to call action
+         :map ivy-minibuffer-map   ;; use M-o to call action
+         ("C-SPC"    . ivy-mark))
   ;; counsel
   :bind (([remap execute-extended-command] . counsel-M-x)
          ([remap find-file]                . counsel-find-file)
@@ -45,23 +45,21 @@
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
-  :bind (("C-s"     . swiper)           ;; swiper, swiper-isearch
+  :bind (("C-s"     . swiper-thing-at-point)  ;; swiper, swiper-isearch, swiper-thing-at-point
                                         ;; "C-r" triggers isearch
-         ("M-s ."   . swiper-thing-at-point)
          ("C-S-s"   . swiper-all)       ;; search all buffers
          ("s-f"     . swiper-isearch)
          ;; grep in large files
-         ("M-g s"   . counsel-grep)     ;; using rg
          ([remap swiper]          . counsel-grep-or-swiper) ;; for large files
          ([remap swiper-backward] . counsel-grep-or-swiper-backward)
          ;; grep files recursively in the folder
-         ("M-g a"   . counsel-rg)       ;; counsel-ag, counsel-ack, counsel-rg
+         ("M-g a"   . counsel-rg)       ;; counsel-grep, counsel-ag, counsel-ack, counsel-rg
          ;; git project
-         ("C-x g"   . counsel-git)
-         ("C-x s"   . counsel-git-grep)
+         ;; ("M-g t"   . counsel-git)
+         ("M-g s"   . counsel-git-grep)
          ;; system-wide files
          ("M-g f"   . counsel-fzf)      ;; find
-         ("M-g M-l" . counsel-locate)
+         ;; ("M-g M-l" . counsel-locate)
          :map swiper-map
          ("M-s"     . swiper-isearch-toggle)
          :map isearch-mode-map

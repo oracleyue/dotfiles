@@ -149,13 +149,12 @@
 ;; unset keys
 (global-unset-key (kbd "s-k"))  ;; =super-k= kill current buffer
 
-;; /repeat-mode/ to derease key stroke
-;; e.g., "undo" via "C-x u" can be done by "C-x u u u" for 3 undo's
-(use-package repeat
-  :disabled     ;; bug: pause daemon
-  :ensure nil
-  :hook (after-init . repeat-mode)
-  :custom (repeat-exit-key (kbd "RET")))
+;; region or symbol at point (function for search)
+(defun selected-region-or-symbol-at-point ()
+  "Return the selected region, otherwise return the symbol at point."
+  (if (region-active-p)
+      (buffer-substring-no-properties (region-beginning) (region-end))
+    (thing-at-point 'symbol t)))
 
 ;; show size of files (in modeline)
 (size-indication-mode t)
@@ -311,7 +310,10 @@
 ;; ------------------------------------------------
 (use-package dabbrev
   :ensure nil
-  :demand
+  :init
+  ;; case-sensitive for search and completion
+  (setq dabbrev-case-fold-search nil)
+  (setq dabbrev-upcase-means-case-search t)  ;; only effect if case-fold-search t
   ;; swap M-/ and C-M-/
   :bind (("M-/"   . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
@@ -321,7 +323,7 @@
   (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode)
-  ;; use add-hook for major mode to integrate dabbrev into capf
+  ;; used for add-hook in major mode to add into capf
   (defun dabbrev-complation-at-point ()
     "User-defined dabbrev function for `completetion-at-point-functions'."
     (dabbrev--reset-global-variables)
