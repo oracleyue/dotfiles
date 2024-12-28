@@ -80,10 +80,11 @@
 ;; ----------------------------------------------
 ;; line numbering
 ;; ----------------------------------------------
-;; Fringe (if not display line numbers, add margins)
+;; fringe (if not display line numbers, add margins)
 (setq-default left-margin-width  1
               right-margin-width 1)
 (set-window-buffer nil (current-buffer))
+
 ;; use built-in "display-line-number-mode" (require Emacs >= 26)
 (use-package display-line-numbers
   :disabled
@@ -148,13 +149,14 @@
 ;; ----------------------------------------------
 ;; Integration with /Dash/ for quick refernce (only available for Mac OS X)
 ;; /ivy-dash/: use Ivy to search for Dash.app (requires Alfred)
-(use-package ivy-dash
-  :disabled
-  :ensure nil
-  :if *is-mac*
-  :load-path "site-lisp"
-  :bind (:map prog-mode-map
-              ("M-s d" . dash-in-ivy)))
+;; (use-package ivy-dash
+;;   :disabled
+;;   :ensure nil
+;;   :if *is-mac*
+;;   :load-path "site-lisp"
+;;   :bind (:map prog-mode-map
+;;               ("M-s d" . dash-in-ivy)))
+
 ;; /dash-at-point/: search symbol at point in Dash.app
 (use-package dash-at-point
   :if *is-mac*
@@ -169,6 +171,7 @@
          (elisp-mode  . "elisp")
          (ess-mode    . "r")
          (sh-mode     . "bash"))))
+
 ;; Integration with /Zeal/ for quick refernce (available for Linux)
 (use-package zeal-at-point
   :if *is-linux*

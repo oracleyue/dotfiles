@@ -31,14 +31,19 @@
 (require 'init-basics)
 (require 'init-edit)
 
-;; code completion
-(pcase *ac-engine*
-  ('company (require 'init-company))
-  ('corfu   (require 'init-corfu)))
+;; snippets
 (require 'init-snippets)
 
 ;; global completion systems
-(require 'init-ivy)
+(pcase *ac-system*
+  ('ivy (require 'init-ivy))
+  ('vertico (require 'init-vertico)))
+
+;; code completion
+(unless (eq *ac-system* 'vertico)
+  (pcase *ac-engine*
+    ('company (require 'init-company))
+    ('corfu   (require 'init-corfu))))
 
 ;; directory and buffer explorers
 (require 'init-windows)

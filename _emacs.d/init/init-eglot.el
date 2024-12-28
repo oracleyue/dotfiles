@@ -37,7 +37,7 @@
 
   ;; MATLAB
   ;; ------------------------------------------------
-  ;; Warning: eglot setup have flaws, fix to-do
+  ;; Warning: eglot setup seems buggy, fix to-do
   ;; (add-to-list 'eglot-server-programs
   ;;              '(octave-mode . ("matlab-ls" "--stdio")))  ;; from ~/bin/
   ;; (setq-default eglot-workspace-configuration

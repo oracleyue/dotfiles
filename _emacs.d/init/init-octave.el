@@ -14,14 +14,11 @@
   ;; - use /company/: check init-company.el
   (when (eq *ac-engine* 'company)
       (add-to-list 'company-dabbrev-code-modes 'octave-mode))
-  ;; - use capf: add dabbrev (check init-basics.el)
-  (when (eq *ac-engine* 'capf)
-    (add-hook 'octave-mode-hook
-              (lambda() (add-to-list 'completion-at-point-functions
-                                'dabbrev-complation-at-point))))
+  ;; - use capf: apply /citre/ to complete symbols
 
   ;; code completion (LSP)
-  ;; use /eglot/ or /lsp-bridge/ for intelligent completion
+  ;; /eglot/ or /lsp-bridge/ for intelligent completion
+  ;; using /corfu/, /company/, capf frontend; or /acm/ for lsp-bridge only
 
   ;; style
   (defun zyue/octave-code-style ()

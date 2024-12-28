@@ -54,15 +54,15 @@
 ;; ----------------------------------------------
 ;; Open folder in Finder
 ;; ----------------------------------------------
-(use-package reveal-in-osx-finder
-  :demand
-  :if *is-mac*
-  :after (ivy dired)
-  :config
-  (ivy-add-actions 'counsel-find-file
-                   '(("F" (lambda (str) (reveal-in-osx-finder-as str nil))
-                      "open in Finder")))
-  (define-key dired-mode-map "F" 'reveal-in-osx-finder))
+;; (use-package reveal-in-osx-finder
+;;   :demand
+;;   :if *is-mac*
+;;   :after (ivy dired)
+;;   :config
+;;   (ivy-add-actions 'counsel-find-file
+;;                    '(("F" (lambda (str) (reveal-in-osx-finder-as str nil))
+;;                       "open in Finder")))
+;;   (define-key dired-mode-map "F" 'reveal-in-osx-finder))
 
 ;; ----------------------------------------------
 ;; Apple dictionary in Emacs (show in mini-buffer)

@@ -31,8 +31,11 @@
 ;; fixed-width or variable-width fonts
 (defconst *use-sans-orgmode* nil)
 
+;; completion system
+(defconst *ac-system* 'ivy)   ; ivy, vertico
+
 ;; auto-completion engine
-(defconst *ac-engine* 'corfu)  ; capf, company, corfu
+(defconst *ac-engine* 'capf)  ; nil: capf, company, corfu
 
 ;; hydra supports
 (defconst *use-hydra* t)

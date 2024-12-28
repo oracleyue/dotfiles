@@ -34,7 +34,7 @@
         company-tooltip-limit               10
         company-tooltip-align-annotations   t
         company-tooltip-minimum-width       32
-        company-minimum-prefix-length       3
+        company-minimum-prefix-length       2
         company-show-numbers                t
         company-require-match               nil
         company-dabbrev-downcase            nil

@@ -307,10 +307,11 @@
 ;; - "C-x C-f /sudo::/etc/hosts"
 
 ;; ------------------------------------------------
-;; Integrate /dabbrev/ into completion-at-point (Capf)
+;; /dabbrev/ and its add-on to Capf
 ;; ------------------------------------------------
 (use-package dabbrev
   :ensure nil
+  :demand
   ;; swap M-/ and C-M-/
   :bind (("M-/"   . dabbrev-completion)
          ("C-M-/" . dabbrev-expand))
@@ -320,7 +321,7 @@
   (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
   (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode)
-  ;; inferface to add dabbrev into capf
+  ;; use add-hook for major mode to integrate dabbrev into capf
   (defun dabbrev-complation-at-point ()
     "User-defined dabbrev function for `completetion-at-point-functions'."
     (dabbrev--reset-global-variables)

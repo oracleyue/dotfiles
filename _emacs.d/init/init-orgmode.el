@@ -80,8 +80,8 @@
         ("m" "Seminar notes (Research)" entry (file seminar-file)
          "* %?\nAdded on %U\n" :empty-lines 1)
         ))
-(with-eval-after-load "counsel"
-  (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
+;; (with-eval-after-load "counsel"
+;;   (add-to-list 'ivy-initial-inputs-alist '(counsel-org-capture . "^")))
 
 ;; research diary: today/recent
 (defun zyue/plan ()
