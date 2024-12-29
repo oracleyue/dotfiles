@@ -8,7 +8,7 @@
 ;; kill sentence (default use doulbe space after the period)
 (setq sentence-end-double-space nil)
 ;; kill-line: =C-k=; kill-sentence: =M-k=
-(global-set-key (kbd "C-S-k") 'kill-paragraph)
+;; (global-set-key (kbd "C-S-k") 'kill-paragraph)
 
 ;; revert-buffer: update buffer if the file in disk has changed
 ;; default keybinding: "s-u" (s: super/win/command)
@@ -30,7 +30,7 @@
 (global-set-key (kbd "M-w") 'zyue/kill-ring-save)
 (global-set-key (kbd "C-w") 'zyue/kill-region)
 
-;; unfill paragraph or region: the opposite of fill-paragraph or fill-region
+;; unfill paragraph or region: the opposite of fill-paragraph or fill-region "M-q"
 (defun zyue/unfill-paragraph-or-region (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -65,7 +65,10 @@
 
 ;; ------- More Editing-related Extensions ---------
 
-;; key bindings for comment/uncomment
+;; Comment/Uncomment Functions:
+;; - "M-;" comment-dwim
+;; - "C-x C-;": comment-line
+;; enhancements for comment/uncomment (check also newcommenter.el)
 (defun zyue/comment-line-or-region (&optional beg end)
   (interactive)
   (let ((beg (cond (beg beg)
@@ -88,16 +91,8 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (uncomment-region beg end)))
-;; (defun zyue/comment-or-uncomment-region-or-line ()
-;;     "Comments or uncomments the region or the current line if there's no active region."
-;;     (interactive)
-;;     (let (beg end)
-;;         (if (region-active-p)
-;;             (setq beg (region-beginning) end (region-end))
-;;             (setq beg (line-beginning-position) end (line-end-position)))
-;;         (comment-or-uncomment-region beg end)))
 (global-set-key (kbd "C-\\") 'zyue/comment-line-or-region)
-(global-set-key (kbd "M-\\") 'zyue/uncomment-line-or-region)
+;; (global-set-key (kbd "M-\\") 'zyue/uncomment-line-or-region)
 (global-set-key (kbd "C-|") 'zyue/uncomment-line-or-region)   ;; invalid in terminals
 
 ;; fix undo/redo using /undo-tree.el/, if not using /Evil/
@@ -105,33 +100,6 @@
   :demand
   :diminish
   :config (global-undo-tree-mode))
-
-;; toggle window split between horizontal-split and vertical-split
-(defun zyue/toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
-             (next-win-edges (window-edges (next-window)))
-             (this-win-2nd (not (and (<= (car this-win-edges)
-                                         (car next-win-edges))
-                                     (<= (cadr this-win-edges)
-                                         (cadr next-win-edges)))))
-             (splitter
-              (if (= (car this-win-edges)
-                     (car (window-edges (next-window))))
-                  'split-window-horizontally
-                'split-window-vertically)))
-        (delete-other-windows)
-        (let ((first-win (selected-window)))
-          (funcall splitter)
-          (if this-win-2nd (other-window 1))
-          (set-window-buffer (selected-window) this-win-buffer)
-          (set-window-buffer (next-window) next-win-buffer)
-          (select-window first-win)
-          (if this-win-2nd (other-window 1))))))
-(global-set-key (kbd "C-x |") 'zyue/toggle-window-split)
 
 ;; insert date
 (defun zyue/insert-date ()
@@ -195,6 +163,10 @@ Uses `current-date-format' for the formatting the date/time."
   :demand
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
+
+;; /rainbow-delimiters/: highlight parentheses
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; /Avy/: jump to char/words in tree-style
 (use-package avy

@@ -70,7 +70,7 @@
         (dolist (charset '(kana han cjk-misc bopomofo))  ;; symbol
           (set-fontset-font (frame-parameter nil 'font)
                             charset
-                            (font-spec :family font )))
+                            (font-spec :family font :weight 'light)))
         (throw 'loop t))))
   ;; Specify font for unicode symbols
   (catch 'loop
@@ -89,7 +89,7 @@
   ) ;; Font Loading
 
 ;; Icons supports
-(if (string= *icons-type* "nerd-icons")
+(if (eq *icons-type* 'nerd-icons)
     ;; use /nerd-icons/
     (use-package nerd-icons
       :demand
@@ -102,23 +102,22 @@
     :config
     (setq all-the-icons-scale-factor 1.0)  ;; adjust size
     ;; avoid slowing down performance
-    (setq inhibit-compacting-font-caches t))
-  (defun all-the-icons-displayable-p ()
-    "Return non-nil if `all-the-icons' is displayable."
-    (require 'all-the-icons nil t))
-  )
+    (setq inhibit-compacting-font-caches t)))
 
 (defun icons-displayable-p (&optional type)
   "Return non-nil if icons are displayable."
   (let ((nerd-icons-p (or (featurep 'nerd-icons)
-                         (require 'nerd-icons nil t)))
+                          (require 'nerd-icons nil t)))
         (all-the-icons-p (or (featurep 'all-the-icons)
                              (require 'all-the-icons nil t))))
     (if type
-        (and (string= *icons-type* type)
-             (if (string= *icons-type* 'nerd-icons)
-                 nerd-icons-p
-               all-the-icons-p))
+        (and (eq *icons-type* type)
+             (or (if (eq *icons-type* 'nerd-icons)
+                     nerd-icons-p
+                   nil)
+                 (if (eq *icons-type* 'all-the-icons)
+                     all-the-icons-p
+                   nil)))
       (or nerd-icons-p all-the-icons-p))))
 
 ;; Themes

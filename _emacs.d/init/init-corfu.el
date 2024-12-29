@@ -20,14 +20,10 @@
   (corfu-popupinfo-delay '(0.4 . 0.2))
   :custom-face
   (corfu-border ((t (:inherit region :background unspecified))))
-  ;; :bind ("M-/" . completion-at-point)
+  :bind (:map corfu-mode-map
+              ("S-SPC" . corfu-insert-separator)) ; trigger to filter
   :hook ((after-init        . global-corfu-mode)
          (global-corfu-mode . corfu-popupinfo-mode)))
-
-;; Terminal support: ! be careful with daemon start
-;; (unless (display-graphic-p)
-;;   (use-package corfu-terminal
-;;     :hook (global-corfu-mode . corfu-terminal-mode)))
 
 ;; Icons support
 (use-package nerd-icons-corfu

@@ -68,7 +68,7 @@
   ;; peek window: M-n/-p to move down/up; "M-S-n/-p" to select item; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
-  (setq citre-tags-files '(".tags" "tags"))
+  (setq citre-tags-files '(".tags"))
   (setq citre-imenu-create-tags-file-threshold 52428800) ;; 50MB for temp tags
   :config
   (setq citre-peek-auto-restore-after-jump nil) ;; close peek window when jump to def
@@ -114,9 +114,14 @@
 ;;   (setq linum-format "%4d "))
 
 ;; ----------------------------------------------
-;; /iedit/: edit the same variable everywhere (keystroke "C-c ;")
+;; /iedit/: edit the same variable everywhere
 ;; ----------------------------------------------
-(use-package iedit :demand)
+(use-package iedit
+  :demand
+  :custom
+  ;; supress warning on default keybinding "C-;"
+  (iedit-toggle-key-default nil)
+  :bind   ("C-x ;" . iedit-mode))
 
 ;; ----------------------------------------------
 ;; /symbol-overlay/: highlight symbols to improve readability

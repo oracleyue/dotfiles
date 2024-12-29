@@ -40,10 +40,9 @@
   ('vertico (require 'init-vertico)))
 
 ;; code completion
-(unless (eq *ac-system* 'vertico)
-  (pcase *ac-engine*
-    ('company (require 'init-company))
-    ('corfu   (require 'init-corfu))))
+(pcase *ac-engine*
+  ('company (require 'init-company))
+  ('corfu   (require 'init-corfu)))
 
 ;; directory and buffer explorers
 (require 'init-windows)

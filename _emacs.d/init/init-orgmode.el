@@ -281,6 +281,45 @@
   :disabled
   :ensure nil)
 
+;; /org-ref/: citation and cross-reference
+(use-package org-ref
+  :demand
+  :after org
+  :init
+  ;; config bibtex-completion (the backend for "ivy-bibtex" in init-ivy.el)
+  (setq bibtex-completion-bibliography
+        '("~/Public/Dropbox/Academia/latex_templ/ref/library.bib")
+        bibtex-completion-pdf-field "file"  ;; pdf file from bibtex entry
+        bibtex-completion-notes-path "~/Public/Dropbox/oracleyue/Notebooks/Papers/"
+        bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+        ;; bibtex-completion-additional-search-fields '(keywords)
+
+        bibtex-completion-display-formats
+        '((article       . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:20} ${title:*}")
+          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:20} ${title:*}")
+          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:20} ${title:*}")
+          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:20} ${title:*}")
+          (t             . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:20} ${title:*}"))
+        bibtex-completion-pdf-symbol "⌘"
+        bibtex-completion-notes-symbol "✎"
+        bibtex-completion-pdf-open-function
+        (lambda (fpath) (call-process "open" nil 0 nil fpath)))
+  ;; config bibtex mode
+  (require 'bibtex)
+  (setq bibtex-autokey-year-length 4
+        bibtex-autokey-name-year-separator "-"
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-titleword-separator "-"
+        bibtex-autokey-titlewords 2
+        bibtex-autokey-titlewords-stretch 1
+        bibtex-autokey-titleword-length 5)
+  :bind (:map org-mode-map
+         ("C-c ]" . org-ref-insert-link)
+         ("s-]"   . org-ref-insert-link-hydra/body)
+         ;; "C-c C-o" on org-ref key triggers "org-ref-citation-hydra/body"
+         :map bibtex-mode-map
+         ("C-c C-o" . org-ref-bibtex-hydra/body)))
+
 
 (provide 'init-orgmode)
 ;; ================================================

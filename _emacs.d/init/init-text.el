@@ -14,7 +14,6 @@
 ;; ---------------------------------------------
 ;; auto-correct words: "C-." or "C-M-i"
 (use-package flyspell
-  :ensure nil
   :demand
   :diminish
   :hook (text-mode . flyspell-mode)

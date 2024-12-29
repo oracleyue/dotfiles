@@ -55,8 +55,8 @@
          ;; grep files recursively in the folder
          ("M-g a"   . counsel-rg)       ;; counsel-grep, counsel-ag, counsel-ack, counsel-rg
          ;; git project
-         ;; ("M-g t"   . counsel-git)
-         ("M-g s"   . counsel-git-grep)
+         ("M-s g"   . counsel-git)
+         ("M-s s"   . counsel-git-grep)
          ;; system-wide files
          ("M-g f"   . counsel-fzf)      ;; find
          ;; ("M-g M-l" . counsel-locate)
@@ -133,6 +133,82 @@
   (ivy-prescient-mode 1))
 
 ;; ---------------------------------------------
+;; /Ivy-rich /: better display
+;; ---------------------------------------------
+(use-package ivy-rich
+  :init
+  (setq ivy-rich-parse-remote-buffer nil)
+  :hook ((counsel-projectile-mode . ivy-rich-mode) ;; must load after `counsel-projectile'
+         (ivy-rich-mode . (lambda ()
+                            "Use abbreviate in `ivy-rich-mode'."
+                            (setq ivy-virtual-abbreviate
+                                  (or (and ivy-rich-mode 'abbreviate) 'name))))))
+
+;; icons support (need being enabled before ivy-rich-mode)
+(if (eq *icons-type* 'nerd-icons)
+    (use-package nerd-icons-ivy-rich
+      :init
+      (nerd-icons-ivy-rich-mode 1)
+      (ivy-rich-mode 1))
+  (use-package all-the-icons-ivy-rich
+    :hook (ivy-mode . all-the-icons-ivy-rich-mode)))
+
+;; ---------------------------------------------
+;; Use posframe for Ivy
+;; ---------------------------------------------
+(use-package ivy-posframe
+  :demand
+  :diminish
+  :custom-face
+  (ivy-posframe-border ((t (:inherit posframe-border))))
+  :init
+  (setq ;ivy-posframe-height       20
+        ivy-posframe-parameters  '((min-width   . 75) (min-height   . 15)
+                                   (left-fringe . 12) (right-fringe . 12))
+        ivy-posframe-border-width 1)
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((swiper-isearch           . ivy-display-function-fallback)
+          (swiper                   . ivy-display-function-fallback)
+          (ivy-completion-in-region . ivy-posframe-display-at-point)
+          (t                        . ivy-posframe-display)))
+  (ivy-posframe-mode 1))
+
+;; ---------------------------------------------
+;; Ivy integration for projectile
+;; ---------------------------------------------
+(use-package counsel-projectile
+  :hook (counsel-mode . counsel-projectile-mode)
+  :init (setq counsel-projectile-grep-initial-input
+              '(ivy-thing-at-point)))
+
+;; ---------------------------------------------
+;; Ivy integration for yasnippet
+;; ---------------------------------------------
+(use-package ivy-yasnippet
+  :bind ("M-g y" . ivy-yasnippet))
+
+;; ---------------------------------------------
+;; Ivy integration for selecting xref candidates
+;; ---------------------------------------------
+(use-package ivy-xref
+  :init
+  (when (boundp 'xref-show-definitions-function)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs))
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+;; ---------------------------------------------
+;; Ivy integration for yasnippet
+;; ---------------------------------------------
+(use-package ivy-bibtex
+  :bind ("M-g t" . ivy-bibtex)
+  :config
+  (ivy-set-actions
+   'ivy-bibtex
+   '(("p" ivy-bibtex-open-any "Open PDF, URL, or DOI" ivy-bibtex-open-any)
+     ("e" ivy-bibtex-edit-notes "Edit notes" ivy-bibtex-edit-notes))))
+
+;; ---------------------------------------------
 ;; Support pinyin for Chinese in Ivy
 ;; ---------------------------------------------
 ;; Input prefix '!' to match pinyin
@@ -175,71 +251,6 @@
           nil)))
 ;; To remove `pinyin' match, uncomment the following:
 ;; (defun pinyin-to-utf8 (str) nil)
-
-;; ---------------------------------------------
-;; Ivy integration for projectile
-;; ---------------------------------------------
-(use-package counsel-projectile
-  :hook (counsel-mode . counsel-projectile-mode)
-  :init (setq counsel-projectile-grep-initial-input
-              '(ivy-thing-at-point)))
-
-;; ---------------------------------------------
-;; Ivy integration for yasnippet
-;; ---------------------------------------------
-(use-package ivy-yasnippet
-  :bind ("M-g y" . ivy-yasnippet))
-
-;; ---------------------------------------------
-;; Ivy integration for selecting xref candidates
-;; ---------------------------------------------
-(use-package ivy-xref
-  :init
-  (when (boundp 'xref-show-definitions-function)
-    (setq xref-show-definitions-function #'ivy-xref-show-defs))
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-;; ---------------------------------------------
-;; /Ivy-rich /: better display
-;; ---------------------------------------------
-(use-package ivy-rich
-  :init
-  (setq ivy-rich-parse-remote-buffer nil)
-  :hook ((counsel-projectile-mode . ivy-rich-mode) ;; must load after `counsel-projectile'
-         (ivy-rich-mode . (lambda ()
-                            "Use abbreviate in `ivy-rich-mode'."
-                            (setq ivy-virtual-abbreviate
-                                  (or (and ivy-rich-mode 'abbreviate) 'name))))))
-
-;; icons support (need being enabled before ivy-rich-mode)
-(if (string= *icons-type* "all-the-icons")
-    (use-package all-the-icons-ivy-rich
-      :hook (ivy-mode . all-the-icons-ivy-rich-mode))
-  (use-package nerd-icons-ivy-rich
-    :init
-    (nerd-icons-ivy-rich-mode 1)
-    (ivy-rich-mode 1)))
-
-;; ---------------------------------------------
-;; Use posframe for Ivy
-;; ---------------------------------------------
-(use-package ivy-posframe
-  :demand
-  :diminish
-  :custom-face
-  (ivy-posframe-border ((t (:inherit posframe-border))))
-  :init
-  (setq ;ivy-posframe-height       20
-        ivy-posframe-parameters  '((min-width   . 75) (min-height   . 15)
-                                   (left-fringe . 12) (right-fringe . 12))
-        ivy-posframe-border-width 1)
-  :config
-  (setq ivy-posframe-display-functions-alist
-        '((swiper-isearch           . ivy-display-function-fallback)
-          (swiper                   . ivy-display-function-fallback)
-          (ivy-completion-in-region . ivy-posframe-display-at-point)
-          (t                        . ivy-posframe-display)))
-  (ivy-posframe-mode 1))
 
 ;; ---------------------------------------------
 ;; User-Extension: open recent directories

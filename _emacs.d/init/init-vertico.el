@@ -35,22 +35,22 @@
 (use-package marginalia
   :hook (after-init . marginalia-mode))
 
-
 ;; /Consult/: consulting completing-read
 (use-package consult
   :demand
   :bind (("C-x b"   . consult-buffer)                 ;; orig. switch-to-buffer
+         ("C-x M-x" . consult-mode-command)
 
          ;; isearch
          ([remap isearch-forward] . consult-line)     ;; C-s
          ("C-S-s"   . consult-line-multi)             ;; isearch over all buffers
 
          ;; search
-         ("M-g a"   . consult-ripgrep)    ;; consult-grep
-         ("M-g s"   . consult-git-grep)
+         ("M-g a"   . consult-ripgrep)    ;; alternative: consult-grep
+         ("M-s s"   . consult-git-grep)
 
          ;; find files
-         ("M-g f"   . consult-find)       ;; alternative: consult-fd
+         ("M-g f"   . consult-fd)         ;; alternative: consult-find
          ;; ("M-g M-l" . consult-locate)
 
          ;; goto line
@@ -137,6 +137,10 @@
   ;; Optionally make narrowing help available in the minibuffer.
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
+
+  ;; completion-at-point handled by vertico if using capf
+  (when (or (eq *ac-engine* nil) (eq *ac-engine* 'capf))
+    (setq completion-in-region-function #'consult-completion-in-region))
   )
 
 (use-package consult-flyspell
@@ -145,12 +149,12 @@
 (use-package consult-yasnippet
   :bind ("M-g y"   . consult-yasnippet))
 
-
 ;; /Embark/: minibuffer actions rooted in keymaps
 (use-package embark
-  :bind (("C-."   . embark-act)
-         ("M-."   . embark-dwim)        ; overrides `xref-find-definitions'
-         ([remap describe-bindings] . embark-bindings))  ;default: C-h b
+  :bind (("C-;"   . embark-act)
+         ("M-."   . embark-dwim)     ; overrides `xref-find-definitions'
+         ([remap describe-bindings] . embark-bindings) ;default: C-h b
+         ("M-g H" . embark-recentf-remove))
 
   :init
   ;; Optionally replace the key help with a completing-read interface
@@ -165,25 +169,6 @@
 
 (use-package embark-consult
   :hook (embark-collect-mode . consult-preview-at-point-mode))
-
-;; /Corfu/: auto-completion frontend
-(use-package corfu
-  :custom
-  (corfu-auto              t)
-  (corfu-auto-prefix       2)
-  (corfu-preview-current nil)
-  (corfu-auto-delay      0.2)
-  (corfu-popupinfo-delay '(0.4 . 0.2))
-  :custom-face
-  (corfu-border ((t (:inherit region :background unspecified))))
-  ;; :bind ("M-/" . completion-at-point)
-  :hook ((after-init        . global-corfu-mode)
-         (global-corfu-mode . corfu-popupinfo-mode)))
-
-;; Terminal support: ! be careful with daemon start
-;; (unless (display-graphic-p)
-;;   (use-package corfu-terminal
-;;     :hook (global-corfu-mode . corfu-terminal-mode)))
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -204,22 +189,16 @@
   ;; setting is useful beyond Corfu.
   (read-extended-command-predicate #'command-completion-default-include-p))
 
-;; Icons support
-(use-package nerd-icons-corfu
-  :after corfu
-  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
-;; /Cape/: extensive backends for Capf
-(use-package cape
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+;; /Consult-citre/: support for Citre tags
+;; In .emacs.d/site-lisp; From https://emacs-china.org/t/citre-ctags/17604/672
+(use-package consult-citre
+  :ensure nil
+  :bind ("M-g t" . consult-citre)
   :config
-  (when (eq *lsp-client* 'eglot)
-    (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)))
+  (consult-customize
+   consult-citre
+   :initial (selected-region-or-symbol-at-point)
+   :preview-key '(:debounce 0.5 any)))
 
 
 (provide 'init-vertico)

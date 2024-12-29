@@ -62,7 +62,7 @@
           magit-post-unstage) . treemacs-magit--schedule-update))
 
 ;; Icon supports for treemacs (default using PNG images from treemacs)
-(if (string= *icons-type* "nerd-icons")
+(if (eq *icons-type* 'nerd-icons)
     ;; use /nerd-icons/
     (use-package treemacs-nerd-icons
       :demand

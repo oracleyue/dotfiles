@@ -34,17 +34,17 @@
 ;; completion system
 (defconst *ac-system* 'vertico)   ; ivy, vertico
 
-;; auto-completion engine
-(defconst *ac-engine* 'capf)  ; capf, company, corfu (default in vertico)
+;; auto-completion engine (company/corfu)
+(defconst *ac-engine* 'corfu)  ; nil to use built-in capf
 
 ;; hydra supports
 (defconst *use-hydra* t)
 
 ;; icons support
-(defconst *icons-type* "nerd-icons")
+(defconst *icons-type* 'nerd-icons)
 ;; /nerd-icons/ supports: dashboard, ivy, dired, ibuffer, treemacs
 ;; run "M-x nerd-icons-install fonts" or install nerd fonts in your os
-;; (defconst *icons-type* "all-the-icons")
+;; (defconst *icons-type* 'all-the-icons)
 ;; /all-the-icons/ supports: ivy, dired, company, treemacs
 ;; run "M-x all-the-icons-install-fonts"
 

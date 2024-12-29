@@ -75,7 +75,7 @@
 (add-hook 'dired-mode-hook #'dired-omit-mode)
 
 ;; Icons supports for Dired
-(if (string= *icons-type* "nerd-icons")
+(if (eq *icons-type* 'nerd-icons)
     (use-package nerd-icons-dired
       :demand
       :hook (dired-mode . nerd-icons-dired-mode))
@@ -188,7 +188,7 @@
     (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file)))
 
 ;; Icons support for ibuffer
-(if (string= *icons-type* "nerd-icons")
+(if (eq *icons-type* 'nerd-icons)
     ;; /nerd-icons/ support
     (use-package nerd-icons-ibuffer
       :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
