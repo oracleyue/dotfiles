@@ -20,8 +20,8 @@ export LANG=en_US.UTF-8
 
 # vim
 export EDITOR=vim
-export GPG_TTY=`tty`    # gnupg for vim
 alias  view='vim -R'
+export GPG_TTY=`tty`    # gnupg for vim
 
 # emacs
 source $HOME/bin/emacs-cmds-osx.sh
@@ -36,7 +36,7 @@ alias brew-proxy="ALL_PROXY=http://127.0.0.1:7890 brew"
 # PATH
 # -------------------------------------------------------------------
 # environment (export PATH and MANPATH at the end of .bashrc)
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:/usr/local/man:$MANPATH"
 
 # development
@@ -44,17 +44,14 @@ export C_INCLUDE_PATH=/usr/local/include:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH
 export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
 
+# qt
+export PATH="/usr/local/opt/qt@5/bin:$PATH"
+
 # latex
 export BSTINPUTS=$(kpsepath bst)
 
 # texinfo (makeinfo)
 export PATH="/usr/local/opt/texinfo/bin:$PATH"
-
-# llvm (clangd)
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-
-# dotnet
-export DOTNET_ROOT="/usr/local/opt/dotnet/libexec"
 
 # stardicts for sdcv
 export STARDICT_DATA_DIR="$HOME/Programs/stardicts"
@@ -62,7 +59,7 @@ export STARDICT_DATA_DIR="$HOME/Programs/stardicts"
 # -------------------------------------------------------------------
 # Alternative tools for better performance or display
 # -------------------------------------------------------------------
-# cd:       use "z" from fasd
+# cd:       use "z" or "zz" from fasd
 # cat:      use "bat"
 # find:     use "fd"
 # grep:     use "rg" (ripgrep)
@@ -111,11 +108,11 @@ alias lsblk='diskutil list'
 alias shred='gshred -n 5'
 alias trash='trash -v'
 
-# use FASD
+# use FASD for recent files/directories/commands
 eval "$(fasd --init auto)"
-# a: any; s: show/search/select; d: directory; f: file
-# sd: interactive directory selection; sf: interactive file selection
+# a: any; d: directory; f: file; s: interactive select
 # z: quick cd; zz: cd with interactive selection
+# sd: interactive directory selection; sf: interactive file selection
 # Examples:
 # $ vim `sf INPUTS`  OR  $ sf -e vim INPUTS
 # $ cd `sd INPUTS`
@@ -127,11 +124,13 @@ source /usr/local/opt/fzf/shell/completion.bash
 # use "fd", which respect .gitignore or .fdignore
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
 # use default keybindings:
-# source /usr/local/opt/fzf/shell/key-bindings.bash
-#
-# CTRL-T: paste the selected files or directories onto the commandline
-# CTRL-R: paste the selected command from history onto the commandline
+source /usr/local/opt/fzf/shell/key-bindings.bash
+# CTRL-T: paste files or directories from search
+# CTRL-R: paste recent commands from history from search
 # ALT-C:  cd into the selected directory
+
+# fzf search then save result into clipboard
+alias fzfcopy='fzf | pbcopy'
 
 # use tldr as alternative to man ("npm install -g tldr")
 # e.g., $ tldr tar
@@ -192,3 +191,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# -------------------------------------------------------------------
+# autostart tmux
+# -------------------------------------------------------------------
+# if command -v tmux &> /dev/null && [[ -z "$TMUX" ]]; then
+    # tmux attach-session -t default || tmux new-session -s default
+    # exit
+# fi

@@ -5,6 +5,6 @@
     // *************************************
 
     // Selected Theme
-    // Application-level visual styling theme
-    "theme": "JupyterLab Dark"
+    // Application-level visual styling theme. Ignored when Adaptive Theme is enabled.
+    "theme": "JupyterLab Light"
 }

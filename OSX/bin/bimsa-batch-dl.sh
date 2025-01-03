@@ -5,12 +5,12 @@
 job="rename"
 
 # url
-baseURL="https://bimsa.net/bimsavideo.php?id="
-tempNamePrefix="bimsavideo-bimsavideo.phpid="
+baseURL="https://bimsa.net/class/postVideo.php?id="
+tempNamePrefix="postVideo-postVideo.phpid="
 
 # items
-dlList="list.csv"
-renamePrefix='sml-II-'
+dlList="list.csv"   # Format: id, date
+renamePrefix='bm-'
 
 ids=($(awk -F, '{print $1}' $dlList))
 names=($(awk -F, '{print $2}' $dlList))
@@ -33,8 +33,6 @@ case $job in
         echo ">>> [$((index+1))/$maxIndex]"
         youtube-dl -f "best" $url
         echo "${id}.mp4: done<<<"
-        # rename
-        # mv ${tempNamePrefix}${id}.php ${id}.mp4
         echo
 
         index=$((index+1))
@@ -44,6 +42,8 @@ case $job in
 # Update file names
 # -------------------------------------------
   "rename")
+    # append to the last downloading index
+    startIndex=8  # the last index; default: 0
     # list the old and new names
     echo "List of videos to be renamed: [OLD >>> NEW]"
     echo "--------------------------------------"
@@ -52,7 +52,7 @@ case $job in
     do
         id="${ids[$index]}"
         name="${names[$index]}"
-        echo "id: $id    >>>    p$((index+1)).$renamePrefix$name.mp4"
+        echo "id: $id    >>>    p$((startIndex+index+1)).$renamePrefix$name.mp4"
         index=$((index+1))
     done
 
@@ -65,11 +65,8 @@ case $job in
         do
             id="${ids[$index]}"
             name="${names[$index]}"
-            # renaming
-            # mv "${id}.mp4" "p$((index+1)).$renamePrefix$name.mp4"
-            # no renaming
             mv "${tempNamePrefix}${id}.php" \
-               "p$((index+1)).$renamePrefix$name.mp4"
+               "p$((startIndex+index+1)).$renamePrefix$name.mp4"
 
             index=$((index+1))
         done

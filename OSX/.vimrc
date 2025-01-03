@@ -89,7 +89,7 @@ Plugin 'VundleVim/Vundle.vim'
 " List of installed plugins:
   Plugin 'scrooloose/nerdcommenter'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'majutsushi/tagbar'
+  " Plugin 'majutsushi/tagbar'
   Plugin 'jamessan/vim-gnupg'
   Plugin 'vim-airline/vim-airline'
 " All of your Plugins must be added before the following line
@@ -113,5 +113,3 @@ nnoremap <Leader>e :NERDTreeToggle<CR>
 " require powerline-symbol patched font, e.g. Roboto Mono in .vim/fonts/
 let g:airline_powerline_fonts = 1
 
-" ---- Tagbar ----
-nnoremap <Leader>t :TagbarToggle<CR>

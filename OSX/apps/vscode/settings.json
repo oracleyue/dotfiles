@@ -23,9 +23,10 @@
   // C++
   // clangd
   "clangd.arguments": [
-    // "--background-index",
+    "--background-index",
+    "-j=12",
     "--compile-commands-dir=build",
-    "--query-driver=/usr/bin/clang++"
+    "--query-driver=/usr/bin/clang++",
   ],
   // cmake
   "cmake.pinnedCommands": [
