@@ -7,5 +7,5 @@
 - `OSX/`: configs for useful commandline tools (most installed by
   `brew`) on Mac OS X;
 
-- `_emacs.d`: **WARNING**: Emacs configurations is no longer maintained here. Check my new github repo `.emacs.d`.
+- `_emacs.d`: **WARNING**: Emacs configurations is no longer maintained here. Check my new github repo [.emacs.d](https://github.com/oracleyue/.emacs.d).
 
