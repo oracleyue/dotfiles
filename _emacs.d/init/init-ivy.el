@@ -42,6 +42,8 @@
          ("M-g b"   . counsel-bookmark)
          ;; recent files
          ("M-g h"   . counsel-recentf)  ;; or "M-g H" for "counsel-recent-directory" (user-defined)
+         ;; outline
+         ("M-g o"   . counsel-outline)
          ;; code overview
          ("M-g i"   . counsel-semantic-or-imenu))
   ;; swiper
@@ -133,7 +135,7 @@
   (ivy-prescient-mode 1))
 
 ;; ---------------------------------------------
-;; /Ivy-rich /: better display
+;; /Ivy-rich /: better UI display
 ;; ---------------------------------------------
 (use-package ivy-rich
   :init

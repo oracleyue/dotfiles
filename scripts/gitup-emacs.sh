@@ -36,8 +36,11 @@ $sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
 # push updates to github.com
 cd $repopath  # go to dotfile repo
 git add -A
-git commit
+git show --name-only
+git status
+if [[ "$1" == "commit" || "$1" == "ci" ]]; then
+    git commit
+fi
 if [[ "$1" == "push" || "$1" == "p" ]]; then
     git push
 fi
-cd ~  # back to home dir

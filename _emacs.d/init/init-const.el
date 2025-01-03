@@ -34,8 +34,8 @@
 ;; completion system
 (defconst *ac-system* 'vertico)   ; ivy, vertico
 
-;; auto-completion engine (company/corfu)
-(defconst *ac-engine* 'corfu)  ; nil to use built-in capf
+;; auto-completion engine (corfu, company, capf (taken over by Ivy/Vertico))
+(defconst *ac-engine* 'corfu)   ; nil to use built-in *Completion* buffer
 
 ;; hydra supports
 (defconst *use-hydra* t)

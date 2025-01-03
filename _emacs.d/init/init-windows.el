@@ -71,6 +71,8 @@
       (concat dired-omit-files
               "\\|.*\\.synctex.gz$\\|.*\\.out$\\|.*\\.fdb_latexmk\\|.*\\.fls\\|.*\\.ilg\\|.*\\.ind\\|.*\\.nlo\\|.*\\.nls"))
 (delete ".bbl" dired-omit-extensions)
+;; suppress omitting messages
+(setq dired-omit-verbose nil)
 ;; bug: turn on in hook fails dired open directories in emacs@30
 (add-hook 'dired-mode-hook #'dired-omit-mode)
 
@@ -138,25 +140,12 @@
                               (name . "^\\*pyls\\*$")
                               (name . "^\\*clangd\\*$")
                               (name . "^\\*clangd::stderr\\*$")))
-                 ("Debugging" (or (mode . dap-server-log-mode)
-                                  (name . "^debug.el$")
-                                  (name . "^\\*dap-ui-breakpoints\\*$")
-                                  (name . "^\\*dap-ui-locals\\*$")
-                                  (name . "^\\*dap-ui-expressions\\*$")
-                                  (name . "^\\*dap-ui-sessions\\*$")
-                                  (name . "^\\*dap-ui-repl\\*$")))
-                 ("Terms" (or (mode . term-mode)
+                 ("Shell" (or (mode . term-mode)
                               (mode . ansi-term-mode)
                               (mode . eshell-mode)
                               (name . "^\\*R\\*$")
                               (name . "^\\*ielm\\*$")
                               (mode . inferior-python-mode)))
-                 ("misc." (or (name . "^\\*Help\\*$")
-                              (name . "^\\*Messages\\*$")
-                              (name . "^\\*Compile-Log*\\*$")
-                              (name . "^\\*osx-dictionary\\*$")
-                              (name . "^\\*eldoc\\*$")
-                              (mode . compilation-mode)))
                  ))))
 
   ;; Automatically update ibuffer

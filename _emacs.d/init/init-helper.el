@@ -1,16 +1,40 @@
 ;; ===============================================================
-;; Hydra configurations
+;; Keybinding cheatsheet or accelerator
 ;; ===============================================================
-;; Last modified on 23 Dec 2024
+;; Last modified on 01 Jan 2025
 
-;; /hydra/ for quick keybinding
+;; /which-key/ for keybinding help
+(use-package which-key
+  :demand
+  :bind ("C-h M-m" . which-key-show-major-mode)
+  :init (setq which-key-max-description-length 30
+              which-key-lighter nil
+              which-key-show-remaining-keys t)
+  :hook (after-init . which-key-mode)
+
+  :config
+  ;; use posframe for which-key
+  (use-package which-key-posframe
+    :demand
+    :after which-key
+    :custom-face
+    (which-key-posframe ((t (:inherit tooltip))))
+    (which-key-posframe-border ((t (:inherit posframe-border))))
+    :config
+    (setq which-key-posframe-border-width 1
+          which-key-posframe-poshandler   #'posframe-poshandler-frame-center
+          which-key-posframe-parameters   '((left-fringe . 8) (right-fringe . 8)
+                                            (min-width   . 75)))
+    (which-key-posframe-mode 1)))
+
+;; /hydra/ for quicker keybinding
 (use-package hydra
   :demand
   :after posframe
   :init
   (setq hydra-hint-display-type 'posframe)
   ;; config hydra posframe window
-  (defun hydra-set-posframe-show-params ()
+  (defun hydra-set-posframe-show-params (origin-fun &rest args)
     "Set hydra-posframe style."
     (setq hydra-posframe-show-params
           `(:left-fringe 14
@@ -22,12 +46,7 @@
                          :lines-truncate t
                          :poshandler posframe-poshandler-frame-center-near-bottom
                          )))
-  ;; loading for daemon starting
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame) (with-selected-frame frame
-                             (hydra-set-posframe-show-params))))
-    (hydra-set-posframe-show-params)))
+  (advice-add 'hydra-posframe-show :before #'hydra-set-posframe-show-params))
 
 ;; /pretty-hydra/ for use-package integration
 (use-package pretty-hydra
@@ -49,6 +68,6 @@
        (propertize title 'face face)))))
 
 
-(provide 'init-hydra)
+(provide 'init-helper)
 ;; ================================================
-;; init-hydra.el ends here
+;; init-helper.el ends here

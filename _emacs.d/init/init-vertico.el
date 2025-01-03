@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; ===============================================================
 ;; Vertico+... - a generic completion mechanism for Emacs
 ;; ===============================================================
@@ -14,19 +15,27 @@
 (use-package vertico
   :custom (vertico-count 15)
   :bind (:map vertico-map
-         ("RET" . vertico-directory-enter)
-         ("DEL" . vertico-directory-delete-char)
-         ("M-DEL" . vertico-directory-delete-word))
+         ("RET"      . vertico-directory-enter)
+         ("DEL"      . vertico-directory-delete-char)
+         ("M-DEL"    . vertico-directory-delete-word))
   :hook ((after-init . vertico-mode)
-         (rfn-eshadow-update-overlay . vertico-directory-tidy)))
+         (rfn-eshadow-update-overlay . vertico-directory-tidy)
+         (minibuffer-setup . vertico-repeat-save))
+  :bind (("C-'"      . vertico-suspend)
+         ("M-g M-s"  . vertico-suspend)
+         ("M-g M-r"  . vertico-repeat)
+         ("M-g C-r"  . vertico-repeat-select)
+         :map vertico-map
+         ("M-r"      . vertico-repeat)))
 
 (use-package vertico-posframe
   :hook (vertico-mode . vertico-posframe-mode)
-  :init (setq vertico-posframe-poshandler
-              #'posframe-poshandler-frame-center-near-bottom
-              vertico-posframe-parameters
-              '((left-fringe  . 8) (right-fringe . 8)
-                (min-width    . 75))))
+  :init
+  (setq vertico-posframe-poshandler
+        #'posframe-poshandler-frame-center-near-bottom)
+  (setq vertico-posframe-parameters
+        '((left-fringe . 8)  (right-fringe . 8)
+          (min-width   . 75) (alpha . 95))))
 
 (use-package nerd-icons-completion
   :when (icons-displayable-p)
@@ -139,15 +148,15 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 
   ;; completion-at-point handled by vertico if using capf
-  (when (or (eq *ac-engine* nil) (eq *ac-engine* 'capf))
+  (when (eq *ac-engine* 'capf)
     (setq completion-in-region-function #'consult-completion-in-region))
-  )
+  ) ;End of consult
 
 (use-package consult-flyspell
-  :bind ("M-g M-s" . consult-flyspell))
+  :bind ("M-g s"  . consult-flyspell))
 
 (use-package consult-yasnippet
-  :bind ("M-g y"   . consult-yasnippet))
+  :bind ("M-g y"  . consult-yasnippet))
 
 ;; /Embark/: minibuffer actions rooted in keymaps
 (use-package embark
@@ -165,7 +174,74 @@
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
-                 (window-parameters (mode-line-format . none)))))
+                 (window-parameters (mode-line-format . none))))
+  ;; Choose display style for embark among: which-key, posframe, nil (use buffer)
+  (defconst *embark-frontend* 'which-key)
+  ;; Show Embark window in posframe
+  (when (eq *embark-frontend* 'posframe)
+    (defun posframe-display-buffer (buffer)
+      (let ((posframe-bg-color (face-attribute 'tooltip :background)))
+	    (when buffer (posframe-show
+		              buffer
+		              :position (point)
+		              :poshandler 'posframe-poshandler-frame-center
+                      :lines-truncate t
+		              :min-width 75
+		              :border-width 2
+		              :left-fringe  12
+		              :right-fringe 12
+		              :border-color "gray50"
+		              :background-color posframe-bg-color))))
+    (defun embark-get-buffer-pos-display (orig-fun)
+      (interactive)
+      (let* ((orig-result (funcall orig-fun)))
+	    (lambda (&optional keymap targets prefix)
+	      (let ((result (funcall orig-result keymap targets prefix)))
+	        (when (and result (windowp result))
+	          (posframe-display-buffer (window-buffer result))
+	          (delete-window result))))))
+    (advice-add #'embark-verbose-indicator :around #'embark-get-buffer-pos-display))
+  ;; Show Embark window in which-key
+  (when (eq *embark-frontend* 'which-key)
+    (with-eval-after-load 'which-key
+      (defun embark-which-key-indicator ()
+        "An embark indicator that displays keymaps using which-key.
+The which-key help message will show the type and value of the
+current target followed by an ellipsis if there are further
+targets."
+        (lambda (&optional keymap targets prefix)
+          (if (null keymap)
+              (which-key--hide-popup-ignore-command)
+            (which-key--show-keymap
+             (if (eq (plist-get (car targets) :type) 'embark-become)
+                 "Become"
+               (format "Act on %s '%s'%s"
+                       (plist-get (car targets) :type)
+                       (embark--truncate-target (plist-get (car targets) :target))
+                       (if (cdr targets) "…" "")))
+             (if prefix
+                 (pcase (lookup-key keymap prefix 'accept-default)
+                   ((and (pred keymapp) km) km)
+                   (_ (key-binding prefix 'accept-default)))
+               keymap)
+             nil nil t (lambda (binding)
+                         (not (string-suffix-p "-argument" (cdr binding))))))))
+
+      (setq embark-indicators
+            '(embark-which-key-indicator
+              embark-highlight-indicator
+              embark-isearch-highlight-indicator))
+
+      (defun embark-hide-which-key-indicator (fn &rest args)
+        "Hide the which-key indicator immediately when using the completing-read prompter."
+        (which-key--hide-popup-ignore-command)
+        (let ((embark-indicators
+               (remq #'embark-which-key-indicator embark-indicators)))
+          (apply fn args)))
+
+      (advice-add #'embark-completing-read-prompter
+                  :around #'embark-hide-which-key-indicator)))
+  ) ;End of embark
 
 (use-package embark-consult
   :hook (embark-collect-mode . consult-preview-at-point-mode))
@@ -173,6 +249,9 @@
 ;; A few more useful configurations...
 (use-package emacs
   :custom
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (enable-recursive-minibuffers t)      ;required by vertico-suspend
+
   ;; TAB cycle if there are only few candidates
   ;; (completion-cycle-threshold 3)
 

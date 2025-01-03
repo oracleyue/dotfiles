@@ -6,7 +6,10 @@
 ;; Usage:
 ;; - "C-c p h": add projectile project into treemacs
 ;; - "M-0" or "C-c t t": open or close treemacs sidebar
-;; - editing in the sidebar:
+;; - operations in sidebar:
+;;   - "C-c C-p a": add project to workspace
+;;   - "C-c C-p p": add project from projectile to workspace
+;;   - "C-c C-p d": remove project to workspace
 ;;   - "C-c C-w a": treemacs-create-workspace
 ;;   - "C-c C-w d": treemacs-remove-workspace
 ;;   - "C-c C-w e": treemacs-edit-workspaces

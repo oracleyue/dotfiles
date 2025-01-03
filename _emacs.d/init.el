@@ -24,12 +24,12 @@
 ;; UI (theme, modeline, dashboard, etc.)
 (require 'init-ui)
 
-;; cheetsheet UI
-(require 'init-hydra)
-
 ;; basics
 (require 'init-basics)
 (require 'init-edit)
+
+;; keybinding cheetsheet
+(require 'init-helper)
 
 ;; snippets
 (require 'init-snippets)

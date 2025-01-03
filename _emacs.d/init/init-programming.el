@@ -43,7 +43,8 @@
 ;; ---------------------------------------------
 ;; /magit/: version control
 ;; ---------------------------------------------
-(use-package magit :demand)
+(use-package magit
+  :demand)
 ;; use "M-x magit" or "magit-status"
 
 ;; ---------------------------------------------
@@ -62,20 +63,24 @@
               ;; citre-jump(-back) also reuses xref's "M-." and "M-,"
               ("M-s p"   . citre-peek)
               ("M-s M-a" . citre-ace-peek)
+              ("M-s q j" . citre-query-jump)
+              ("M-s q p" . citre-query-peek)
+              ("M-s q J" . citre-query-jump-to-reference)
+              ("M-s q P" . citre-query-peek-reference)
               ("M-s M-u" . citre-update-this-tags-file)
               ("M-s M-c" . citre-create-tags-file)
               ("M-s M-e" . citre-edit-tags-file-recipe))
   ;; peek window: M-n/-p to move down/up; "M-S-n/-p" to select item; M-l j to jump to definition
   :hook (prog-mode . citre-auto-enable-citre-mode)
   :init
-  (setq citre-tags-files '(".tags"))
+  (setq citre-tags-files '(".tags" "tags" "TAGS"))
   (setq citre-imenu-create-tags-file-threshold 52428800) ;; 50MB for temp tags
   :config
   (setq citre-peek-auto-restore-after-jump nil) ;; close peek window when jump to def
   (with-eval-after-load 'projectile
     (setq citre-project-root-function #'projectile-project-root))
   (with-eval-after-load 'cc-mode (require 'citre-lang-c))
-  (with-eval-after-load 'dired (require 'citre-lang-fileref)))
+  (with-eval-after-load 'dired   (require 'citre-lang-fileref)))
 
 ;; ----------------------------------------------
 ;; line numbering
@@ -253,7 +258,7 @@
 
        "Citre"
        (("p" citre-peek "peek")
-        ("A" citre-ace-peek "ace peek")
+        ("P" citre-ace-peek "ace peek")
         ("U" citre-update-this-tags-file "update")
         ("C" citre-create-tags-file "create")
         ("E" citre-edit-tags-file-recipe "recipe"))))
@@ -282,9 +287,10 @@
        "Citre"
        (("p" citre-peek "peek")
         ("A" citre-ace-peek "ace peek")
-        ("U" citre-update-this-tags-file "update")
-        ("C" citre-create-tags-file "create")
-        ("E" citre-edit-tags-file-recipe "recipe"))))
+        ("j" citre-query-jump "query jump (def)")
+        ("J" citre-query-jump-to-reference "query jump (ref)")
+        ("P" citre-query-peek-reference "query peek (ref)")
+        ("U" citre-update-this-tags-file "update/create tags"))))
   ) ;End of hydra def
 
 

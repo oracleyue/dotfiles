@@ -23,7 +23,13 @@
   :bind (:map corfu-mode-map
               ("S-SPC" . corfu-insert-separator)) ; trigger to filter
   :hook ((after-init        . global-corfu-mode)
-         (global-corfu-mode . corfu-popupinfo-mode)))
+         (global-corfu-mode . corfu-popupinfo-mode))
+  :config
+  ;; disable corfu ac in python shell, use vertico instead
+  (add-hook 'inferior-python-mode-hook
+            (lambda () (corfu-mode -1)
+              (when (and (eq *ac-system* 'vertico) nil)  ;fallback to vertico if t
+                (setq completion-in-region-function #'consult-completion-in-region)))))
 
 ;; Icons support
 (use-package nerd-icons-corfu

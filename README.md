@@ -1,14 +1,11 @@
-# Repo for Linux/Unix config. files and Emacs
+# Repo for my personal Linux/OSX config files
 
-## Description
+**Description**
 
 - `ArchLinux/`: essential configs for `i3` on Arch Linux;
 
 - `OSX/`: configs for useful commandline tools (most installed by
   `brew`) on Mac OS X;
-  
-- `_emacs.d`: my personalized Emacs :D
 
-## Snapshots
+- `_emacs.d`: **WARNING**: Emacs configurations is no longer maintained here. Check my new github repo `.emacs.d`.
 
-<img src="/img/em-yang.png" width="45%"><img src="/img/em-yin.png" width="45%">

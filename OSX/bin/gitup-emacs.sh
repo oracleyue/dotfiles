@@ -9,35 +9,34 @@
 
 # essential bash settings
 sync='/usr/bin/rsync -rlptD -P --delete --exclude=.DS_Store'
-repopath=$HOME'/Workspace/gitrepo/dotfiles'
+repopath=$HOME'/Workspace/gitrepo/_emacs.d'
 
 # rsync .emacs OR init.el
 # $sync ~/.emacs $repopath/_emacs.25.1.osx
-$sync ~/.emacs.d/init.el $repopath/_emacs.d/init.el
+$sync ~/.emacs.d/init.el $repopath/init.el
 
 # rsync .emacs.d (essential packages)
-$sync ~/.emacs.d/init $repopath/_emacs.d/
+$sync ~/.emacs.d/init $repopath/
 $sync --exclude-from="$HOME/.emacs.d/site-lisp/_exclude-list" \
-      ~/.emacs.d/site-lisp $repopath/_emacs.d/
+      ~/.emacs.d/site-lisp $repopath/
 $sync ~/.emacs.d/site-lisp/lsp-bridge/langserver/matlab-ls.json \
-      $repopath/_emacs.d/site-lisp/lsp-langserver/
+      $repopath/site-lisp/lsp-langserver/
 $sync --exclude="github" \
-      ~/.emacs.d/themes $repopath/_emacs.d/
-$sync ~/.emacs.d/snippets $repopath/_emacs.d/
-$sync ~/.emacs.d/templates $repopath/_emacs.d/
-# deprecated config files (init, snippets)
-#$sync ~/.emacs.d/archived $repopath/_emacs.d/
+      ~/.emacs.d/themes $repopath/
+$sync ~/.emacs.d/snippets $repopath/
+# $sync ~/.emacs.d/templates $repopath/
 
-# rsync important scripts
-$sync ~/bin/gitup-emacs.sh $repopath/scripts/
-$sync ~/bin/gitpull-emacs.sh $repopath/scripts/
-$sync ~/bin/emacs-cmds-osx.sh $repopath/scripts/
+# deprecated config files (init, snippets)
+#$sync ~/.emacs.d/archived $repopath/
 
 # push updates to github.com
 cd $repopath  # go to dotfile repo
 git add -A
-git commit
+git show --name-only
+git status
+if [[ "$1" == "commit" || "$1" == "ci" ]]; then
+    git commit
+fi
 if [[ "$1" == "push" || "$1" == "p" ]]; then
     git push
 fi
-cd ~  # back to home dir

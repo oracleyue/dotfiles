@@ -70,7 +70,7 @@
         (dolist (charset '(kana han cjk-misc bopomofo))  ;; symbol
           (set-fontset-font (frame-parameter nil 'font)
                             charset
-                            (font-spec :family font :weight 'light)))
+                            (font-spec :family font)))
         (throw 'loop t))))
   ;; Specify font for unicode symbols
   (catch 'loop
@@ -93,7 +93,11 @@
     ;; use /nerd-icons/
     (use-package nerd-icons
       :demand
-      :custom (nerd-icons-font-family "Symbols Nerd Font Mono"))
+      :custom (nerd-icons-font-family "Symbols Nerd Font Mono")
+      :config
+      ;; set ".m" as matlab filetype
+      (setf (alist-get "m" nerd-icons-extension-icon-alist nil nil #'equal)
+            '(nerd-icons-devicon "nf-dev-matlab")))
   ;; use /all-the-icons/
   (use-package all-the-icons
     :init (unless (or (find-font (font-spec :name "all-the-icons"))
@@ -164,12 +168,16 @@
   (_ nil))
 
 ;; Transparent effect (alpha < 1)
-(defun zyue/set-bg-alpha (value)
-  "This function set the Alpha value of frames to make background
-transparent. VALUE is a list (A, AB), where A is the Alpha value
-of the focused frame and AB is the unfocused."
-  (set-frame-parameter (selected-frame) 'alpha value)
-  (add-to-list 'default-frame-alist (cons 'alpha value)))
+(defun zyue/set-frame-alpha (active inactive)
+  "Set frame alpha values for active and inactive states.
+ACTIVE: opacity when frame is active (0-100)
+INACTIVE: opacity when frame is inactive (0-100)"
+  (interactive "nActive frame opacity (0-100): \nnInactive frame opacity (0-100): ")
+  (let ((values (cons active inactive)))
+    (add-to-list 'default-frame-alist `(alpha . ,values))
+    ;; Apply to existing frames
+    (dolist (frame (frame-list))
+      (set-frame-parameter frame 'alpha values))))
 
 ;; Init or reload functions
 (defun zyue/init-ui (&optional frame)
@@ -184,7 +192,7 @@ of the focused frame and AB is the unfocused."
     (modify-frame-parameters
      frame `((ns-appearance . ,(frame-parameter frame 'background-mode))))
     ;; transparent background
-    (zyue/set-bg-alpha '(100 95))
+    (zyue/set-frame-alpha 100 95)
     ;; load fonts
     (zyue/search-and-load-fonts frame)))
 

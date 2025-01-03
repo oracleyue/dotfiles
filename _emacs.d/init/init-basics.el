@@ -95,10 +95,13 @@
 ;; <TAB> key
 (setq tab-always-indent 'complete)  ;; use TAB to indent or complete
 
-;; configure mark-ring
+;; mark ring
+;; "C-SPC C-SPC": add a mark
+;; "C-u C-SPC": popup a mark (jump to the previous)
+;; ivy/vertico list support: "M-g m"
 (setq set-mark-command-repeat-pop nil)
-(setq mark-ring-max 16)
-(setq global-mark-ring-max 32)
+(setq mark-ring-max 20)
+(setq global-mark-ring-max 60)
 
 ;; recent files
 (setq recentf-max-saved-items 100)
@@ -118,13 +121,13 @@
 ;; register
 ;; "C-x r SPC": add point to register
 ;; "C-x r j"  : jump to registered point
-;; ivy list support: "M-g r"
+;; ivy/vertico list support: "M-g r"
 (setq register-preview-delay 0) ; no delay
 
 ;; bookmarks
 ;; "C-x r b": create or jump to bookmarks
-;; "C-x r l": list and manage bookmarks
-;; ivy list support: "M-g b"
+;; "C-x r l": list and edit bookmarks
+;; ivy/vertico list support: "M-g b"
 (setq bookmark-save-flag 1)  ;; auto-save it whenever changed
 
 ;; text scale amount (=C-x C-0=)
@@ -300,10 +303,14 @@
 ;; ------------------------------------------------
 ;; /tramp/: manage ssh and remote access
 ;; ------------------------------------------------
-(setq tramp-default-method "ssh")
-;; usages:
-;; - "C-x C-f /ssh:gaia:/home/users/zuogong.yue/..." or without "ssh:"
+;; Better connection: https://stackoverflow.com/questions/148578/using-emacs-tramp-vs-rsync-for-remote-development
+(use-package tramp
+  :config
+  (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto"))
+;; Usages:
+;; - "C-x C-f /ssh:gaia:/home/zyue/..." or without "ssh:"
 ;; - "C-x C-f /sudo::/etc/hosts"
+;; - if auto connection in startup, run "tramp-cleanup-all-buffers" and "tramp-cleanup-all-connections"
 
 ;; ------------------------------------------------
 ;; /dabbrev/ and its add-on to Capf
@@ -331,6 +338,15 @@
            (candidates (dabbrev--find-all-expansions abbrev t))
            (bnd (bounds-of-thing-at-point 'symbol)))
       (list (car bnd) (cdr bnd) candidates))))
+
+;; ------------------------------------------------
+;; Improving *Completion* buffer behaviors
+;; ------------------------------------------------
+(setq completion-auto-help     'always
+      completion-auto-select   'second-tab)
+;; select in *Completion* (use "C-f,b,n,p" to move around; <tab> also works)
+(define-key completion-list-mode-map (kbd "C-b") #'minibuffer-previous-completion)
+(define-key completion-list-mode-map (kbd "C-f") #'minibuffer-next-completion)
 
 
 (provide 'init-basics)

@@ -95,31 +95,16 @@
 ;; (global-set-key (kbd "M-\\") 'zyue/uncomment-line-or-region)
 (global-set-key (kbd "C-|") 'zyue/uncomment-line-or-region)   ;; invalid in terminals
 
-;; fix undo/redo using /undo-tree.el/, if not using /Evil/
-(use-package undo-tree
-  :demand
-  :diminish
-  :config (global-undo-tree-mode))
-
 ;; insert date
-(defun zyue/insert-date ()
+(defun zyue/insert-today ()
   "insert the current date and time into current buffer.
 Uses `current-date-format' for the formatting the date/time."
   (interactive)
   (insert (format-time-string "%d %b %Y" (current-time))))
-(defun zyue/insert-today ()
-  "insert today in the format 2020-01-31."
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d" (current-time))))
 (defun zyue/insert-time ()
-  "insert the current time (format e.g. 12:37:05) into the current buffer."
+  "insert current time in the format 12:37:05 2020-01-31."
   (interactive)
-  (insert (format-time-string "%H:%M:%S" (current-time))))
-(defun zyue/iso-8601-date-string ()
-  (concat
-   (format-time-string "%Y-%m-%dT%T")
-   ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
-    (format-time-string "%z"))))
+  (insert (format-time-string "%H:%M:%S %Y-%m-%d" (current-time))))
 
 ;; adding incremental numbers to lines
 (require 'gse-number-rect)
@@ -143,6 +128,19 @@ Uses `current-date-format' for the formatting the date/time."
 ;; default "C-x C-o" to call "delete-blank-lines"
 
 ;; ----------- Powerful Minor Modes ------------
+
+;; /undo-tree/: better undo/redo using tree visualizer
+(use-package undo-tree
+  :diminish
+  :init
+  (global-undo-tree-mode)
+  :config
+  (setq undo-tree-auto-save-history nil
+        undo-tree-visualizer-timestamps t
+        ;; show diff window (use "d" to toggle)
+        undo-tree-visualizer-diff t)
+  :bind (("C-x u" . undo-tree-visualize)))
+;; usage: "q" to quit, "C-q" to abort, "d" to toggle diff
 
 ;; /multiple-cursors/: edit with multiple cursors
 (use-package multiple-cursors
@@ -171,14 +169,15 @@ Uses `current-date-format' for the formatting the date/time."
 ;; /Avy/: jump to char/words in tree-style
 (use-package avy
   :demand
-  :bind (("C-'"     . avy-goto-char)   ;; C-:
-         ("M-'"     . avy-goto-char-2) ;; C-'
-         ("M-g g"   . avy-goto-line)
-         ("M-g M-g" . avy-goto-line)
-         ("M-g w"   . avy-goto-word-1) ;; avy-goto-word-0: too many candiates
-         ("M-g M-r" . avy-resume))
+  :bind (("M-g c"   . avy-goto-char)       ; default: C-:
+         ("M-g w"   . avy-goto-word-1)     ; avy-goto-word-0: too many candiates
+         ;("M-g M-r" . avy-resume)
+         ("M-g g"   . avy-goto-line)       ; overwritten by "consult-goto-line"
+         ("M-g M-g" . avy-goto-line))
   :config
-  (avy-setup-default))
+  (avy-setup-default)
+  ;; restore key overwritten by "Consult" (init-vertico.el)
+  :hook (after-init . (lambda () (global-set-key (kbd "M-g M-g") 'avy-goto-line))))
 
 
 (provide 'init-edit)

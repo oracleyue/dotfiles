@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: lexical binding
+# key: lex
+# expand-env: ((yas-indent-line 'fixed))
+# --
+;; -*- lexical-binding: t; -*-

@@ -20,6 +20,10 @@
   (setq dashboard-center-content t
         dashboard-vertically-center-content t
         dashboard-show-shortcuts nil)
+  ;; display width / truncate paths
+  (setq dashboard-path-style 'truncate-beginning
+        dashboard-shorten-by-window-width t
+        dashboard-shorten-path-offset 35)
   ;; icons
   (setq dashboard-display-icons-p t
         dashboard-icon-type 'nerd-icons)
@@ -28,7 +32,7 @@
   ;; items
   (setq dashboard-projects-backend 'projectile)
   (setq dashboard-items '((projects  . 8)
-                          (bookmarks . 5)
+                          (bookmarks . 8)
                           (recents   . 5)))
   (dashboard-modify-heading-icons '((projects  . "nf-oct-rocket")
                                     (recents   . "nf-oct-history")
@@ -40,17 +44,17 @@
         dashboard-footer-icon (nerd-icons-mdicon "nf-md-heart" :face 'nerd-icons-red))
 
   ;; navigator
-  (setq dropbox-root (expand-file-name "Public/Dropbox" "~"))
+  (setq dropbox (expand-file-name "Public/Dropbox" "~"))
   (setq dashboard-navigator-buttons
         `(((,(nerd-icons-sucicon "nf-custom-emacs")
             "Emacs" "Browse .emacs.d/init"
             (lambda (&rest _) (dired user-emacs-directory)))
            (,(nerd-icons-mdicon "nf-md-folder_file")
             "Academia" "Browse ..Dropbox/Academia"
-            (lambda (&rest _) (dired (expand-file-name "Academia" dropbox-root))))
+            (lambda (&rest _) (dired (expand-file-name "Academia" dropbox))))
            (,(nerd-icons-octicon "nf-oct-code")
             "Workspace" "Browse ..Dropbox/Workspace"
-            (lambda (&rest _) (dired (expand-file-name "Workspace" dropbox-root))))
+            (lambda (&rest _) (dired (expand-file-name "Workspace" dropbox))))
            (,(nerd-icons-faicon "nf-fa-dropbox")
             "Notebooks" "Browse .org/.md notes"
             (lambda (&rest _) (zyue/deft)))
